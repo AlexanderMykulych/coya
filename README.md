@@ -1,2 +1,2 @@
-# DrawArch
-DrawArch
+# COYA
+Code your architecture
