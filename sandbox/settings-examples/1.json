@@ -1,0 +1,39 @@
+{
+    "blocks": {
+        "B1": {
+            "label": "Block 1"
+        },
+        "B2": {
+            "label": "Block 2"
+        }
+    },
+    "lifePeriods": {
+        "period_1": [
+            //B1 connect to B2
+            {
+                "connect": "B1 to B2"
+            },
+            {
+                "id": "p1.1",
+                "action": "connect",
+                "from": "B1",
+                "to": "B2"
+            },
+            {
+                "send": "M1 from B1 to B2"
+            },
+            {
+                "action": "send",
+                "from": "B1",
+                "to": "B2",
+                "block": "M1"
+            }
+        ]
+    },
+    "animations": {
+        "p1.1": {
+            "duration": 2,
+            "delay": 0.5
+        }
+    }
+}
