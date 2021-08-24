@@ -447,7 +447,7 @@
     // },
     // 
     {
-      "packageName": "core",
+      "packageName": "@coya/core",
       "projectFolder": "libraries/core",
       "reviewCategory": "production"
     },
