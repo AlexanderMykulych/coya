@@ -1,6 +1,6 @@
 import { ArchitectureDescription } from "./descriptionTypes";
 import { Architecture } from "./types";
-import { architectureDescriptionToArchitecture } from "./Parser";
+import { transformDescriptionToArchitecture } from "./Parser";
 
 
 export function parseJson(json: string): Architecture | null {
@@ -10,5 +10,5 @@ export function parseJson(json: string): Architecture | null {
         return null;
     }
 
-    return architectureDescriptionToArchitecture(architectureDescription);
+    return transformDescriptionToArchitecture(architectureDescription);
 }

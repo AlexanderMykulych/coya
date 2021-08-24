@@ -3,8 +3,8 @@ export interface BlockElementDescription {
     label?: string;
 }
 
-export interface BlockDescriptions {
-    [name: string]: BlockDescriptions | BlockElementDescription | string | null
+export interface BlockGroupDescriptions {
+    [name: string]: BlockGroupDescriptions | BlockElementDescription | string | null
 }
 
 export interface PhaseStep {
@@ -12,9 +12,9 @@ export interface PhaseStep {
 }
 
 export type GraduallyPhaseSteps = PhaseStep[];
-export type GraduallyPhases = Phases[];
-export interface Phases {
-    [name: string]: Phases | GraduallyPhases | PhaseStep | GraduallyPhaseSteps;
+export type GraduallyPhases = Phase[];
+export interface Phase {
+    [name: string]: Phase | GraduallyPhases | PhaseStep | GraduallyPhaseSteps;
 }
 
 export interface AnimationDescription {
@@ -27,8 +27,15 @@ export interface StyleDescription {
     [name: string]: BlockStyle;
 }
 export interface ArchitectureDescription {
-    blocks: BlockDescriptions;
-    phases: Phases;
+    blocks: BlockGroupDescriptions;
+    phases: Phase;
     animation: AnimationDescription;
     style: StyleDescription;
 }
+
+export type ArchitectureDescriptionElement =
+    ArchitectureDescription
+    | BlockGroupDescriptions
+    | Phase
+    | AnimationDescription
+    | StyleDescription;

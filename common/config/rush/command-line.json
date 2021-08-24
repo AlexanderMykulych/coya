@@ -20,7 +20,13 @@
             "enableParallelism": true,
             // Enable "watch mode"
             "watchForChanges": true
-        }
+        }, {
+            "name": "test",
+            "commandKind": "bulk",
+            "summary": "Build projects and watch for changes",
+            "description": "For details, see the article \"Using watch mode\" on the Rush website: https://rushjs.io/",
+            "enableParallelism": true
+        },
         // {
         //   /**
         //    * (Required) Determines the type of custom command.
