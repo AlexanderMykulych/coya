@@ -5,11 +5,14 @@
             "name": "Debug Jest Tests",
             "type": "node",
             "request": "launch",
+            "cwd": "${workspaceFolder}/libraries/core",
             "runtimeArgs": [
                 "--inspect-brk",
-                "rush",
+                "node_modules/tsdx/dist/index.js",
                 "test",
-                "--runInBand"
+                "--runInBand",
+                "--testNamePattern",
+                "debug"
             ],
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen"
