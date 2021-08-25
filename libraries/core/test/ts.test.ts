@@ -1,10 +1,9 @@
-import "jest";
 import { BlockGroupDescriptionsToBlock } from "../src/Parser";
 
 
 describe("create architecture description", () => {
     it("result not null", () => {
-        expect(BlockGroupDescriptionsToBlock({
+        const result = BlockGroupDescriptionsToBlock({
             clients: {
                 mobile: "Mobile client",
                 web: {
@@ -14,7 +13,8 @@ describe("create architecture description", () => {
                     "label": "Desktop client"
                 }
             }
-        })).not.toBeNull();
+        });
+        expect(result.length).toEqual(4);
     });
     it("debug", () => {
         expect(BlockGroupDescriptionsToBlock({

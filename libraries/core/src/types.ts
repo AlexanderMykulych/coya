@@ -4,14 +4,10 @@ export interface Identifiable {
 }
 export interface BlockElement extends Identifiable {
     label: string;
+    parentId?: string;
 }
 
-export interface BlockGroup extends Identifiable {
-    label: string;
-    items: Block[];
-}
-
-export type Block = BlockElement | BlockGroup;
+export type Block = BlockElement;
 
 export interface Phase extends Identifiable {
 }

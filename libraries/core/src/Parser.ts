@@ -1,6 +1,6 @@
 import { ArchitectureDescription, BlockElementDescription, BlockGroupDescriptions } from "./descriptionTypes";
 import { isBlockElementDescription, isString } from "./typeGuards";
-import { Architecture, Block, BlockElement, BlockGroup } from "./types";
+import { Architecture, Block, BlockElement } from "./types";
 
 
 export function transformDescriptionToArchitecture(architectureDescription: ArchitectureDescription): Architecture {
@@ -16,7 +16,7 @@ export function transformDescriptionToArchitecture(architectureDescription: Arch
 
 export function BlockGroupDescriptionsToBlock(description: BlockGroupDescriptions): Block[] {
     const blocks = Object.keys(description)
-        .map<Block>(key => {
+        .flatMap<Block>(key => {
             const value = description[key];
             if (isString(value)) {
                 return createBlockElementByString(key, value);
@@ -28,11 +28,14 @@ export function BlockGroupDescriptionsToBlock(description: BlockGroupDescription
                 return createBlockElementByString(key, key);
             }
             const items = BlockGroupDescriptionsToBlock(value);
-            return {
-                id: key,
-                items,
-                label: key
-            } as BlockGroup;
+            items.forEach(x => x.parentId = x.parentId ?? key);
+            return [
+                {
+                    id: key,
+                    label: key
+                },
+                ...items
+            ];
         });
     return blocks;
 }
@@ -44,6 +47,6 @@ export function createBlockElementByString(id: string, label: string): BlockElem
     };
 }
 
-function createBlockElementByDescription(id: string, {label}: BlockElementDescription): any {
+function createBlockElementByDescription(id: string, { label }: BlockElementDescription): any {
     return createBlockElementByString(id, label ?? id);
 }
