@@ -14,7 +14,11 @@ describe("create architecture description", () => {
                 }
             }
         });
-        expect(result.length).toEqual(4);
+        expect(result).toHaveLength(4);
+        expect(result.some(x => x.id === "clients")).toBe(true);
+        expect(result.some(x => x.id === "mobile")).toBe(true);
+        expect(result.some(x => x.id === "web")).toBe(true);
+        expect(result.some(x => x.id === "Desktop")).toBe(true);
     });
     it("debug", () => {
         expect(BlockGroupDescriptionsToBlock({
