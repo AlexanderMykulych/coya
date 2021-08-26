@@ -452,6 +452,11 @@
       "reviewCategory": "production"
     },
     {
+      "packageName": "@coya/vue-component",
+      "projectFolder": "libraries/vue-component",
+      "reviewCategory": "production"
+    },
+    {
       "packageName": "demo",
       "projectFolder": "apps/demo",
       "reviewCategory": "apps"
