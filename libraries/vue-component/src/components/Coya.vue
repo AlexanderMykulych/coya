@@ -11,7 +11,10 @@ const rectPositions = computed(() => {
         const poses = arch.value.style?.positioning;
         return poses
             .filter(x => isRectPositioning(x.position))
-            .map(x => x.position as RectPositioning);
+            .map(x => ({
+                ...x.position as RectPositioning,
+                id: x.blockId
+            }));
     }
     return [];
 });
@@ -33,14 +36,15 @@ const rectPositions = computed(() => {
         >
             <!-- Rounded corner rectangle -->
             <rect
-                v-for="(pos, index) in rectPositions"
-                :key="index"
+                v-for="pos in rectPositions"
+                :id="pos.id"
+                :key="pos.id"
                 :x="pos.x.value"
-                :y="pos.y"
+                :y="pos.y.value"
                 :width="pos.width.value"
                 :height="pos.height.value"
                 stroke="black"
-                stroke-width="5"
+                stroke-width="1"
                 fill="none"
 
             />

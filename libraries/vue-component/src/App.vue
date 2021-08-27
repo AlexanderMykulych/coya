@@ -10,7 +10,17 @@ const config = ref(JSON.stringify({
             },
             "Desktop": {
                 "label": "Desktop client"
-            }
+            },
+            "test1": {
+                "test4": {
+                    "a1": null,
+                    "a2": null
+                }
+            },
+            "test2": {
+                "a3": null
+            },
+            "test3": null
         }
     }
 }));

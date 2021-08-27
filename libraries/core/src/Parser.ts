@@ -54,7 +54,7 @@ export function BlockGroupDescriptionsToBlock(description: BlockGroupDescription
                 {
                     id: key,
                     label: key,
-                    children: items
+                    children: items.filter(x => x.parentId === key)
                 },
                 ...items
             ];
