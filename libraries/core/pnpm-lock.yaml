@@ -3,20 +3,26 @@ lockfileVersion: 5.3
 specifiers:
   '@size-limit/preset-small-lib': ^5.0.3
   '@types/jest': ^27.0.1
+  '@types/lodash': ^4.14.172
   '@types/node': ^16.7.1
   '@typescript-eslint/eslint-plugin': ^4.29.3
   '@typescript-eslint/parser': ^4.29.3
+  '@vue/reactivity': ^3.2.6
   eslint: ^7.32.0
   husky: ^7.0.1
   jest: ^27.0.6
+  lodash: ^4.17.21
   size-limit: ^5.0.3
   tsdx: ^0.14.1
   tslib: ^2.3.1
   typescript: ^3.9.10
 
 dependencies:
+  '@types/lodash': 4.14.172
   '@types/node': 16.7.1
+  '@vue/reactivity': 3.2.6
   jest: 27.0.6
+  lodash: 4.17.21
 
 devDependencies:
   '@size-limit/preset-small-lib': 5.0.3_bd17d8d2a1a04999bd8cbf4a5154fc56
@@ -1844,6 +1850,10 @@ packages:
     resolution: {integrity: sha512-qcUXuemtEu+E5wZSJHNxUXeCZhAfXKQ41D+duX+VYPde7xyEVZci+/oXKJL13tnRs9lR2pr4fod59GT6/X1/yQ==}
     dev: true
 
+  /@types/lodash/4.14.172:
+    resolution: {integrity: sha512-/BHF5HAx3em7/KkzVKm3LrsD6HZAXuXO1AJZQ3cRRBZj4oHZDviWPYu0aEplAqDFNHZPW6d3G7KN+ONcCCC7pw==}
+    dev: false
+
   /@types/node/16.7.1:
     resolution: {integrity: sha512-ncRdc45SoYJ2H4eWU9ReDfp3vtFqDYhjOsKlFFUDEn8V1Bgr2RjYal8YT5byfadWIRluhPFU6JiDOl0H6Sl87A==}
 
@@ -2074,6 +2084,16 @@ packages:
       '@typescript-eslint/types': 4.29.3
       eslint-visitor-keys: 2.1.0
     dev: true
+
+  /@vue/reactivity/3.2.6:
+    resolution: {integrity: sha512-8vIDD2wpCnYisNNZjmcIj+Rixn0uhZNY3G1vzlgdVdLygeRSuFjkmnZk6WwvGzUWpKfnG0e/NUySM3mVi59hAA==}
+    dependencies:
+      '@vue/shared': 3.2.6
+    dev: false
+
+  /@vue/shared/3.2.6:
+    resolution: {integrity: sha512-uwX0Qs2e6kdF+WmxwuxJxOnKs/wEkMArtYpHSm7W+VY/23Tl8syMRyjnzEeXrNCAP0/8HZxEGkHJsjPEDNRuHw==}
+    dev: false
 
   /@webassemblyjs/ast/1.9.0:
     resolution: {integrity: sha512-C6wW5L+b7ogSDVqymbkkvuW9kruN//YisMED04xzeBBqjHa2FYnmvOlS6Xj68xWQRgWvI9cIglsjFowH/RJyEA==}

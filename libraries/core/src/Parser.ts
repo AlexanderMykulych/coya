@@ -1,15 +1,36 @@
+import { computed, Ref, isRef, ref } from "@vue/reactivity";
 import { ArchitectureDescription, BlockElementDescription, BlockGroupDescriptions } from "./descriptionTypes";
-import { isBlockElementDescription, isString } from "./typeGuards";
+import { autoPositioning } from "./positioning/autoPosition";
+import { isArchitectureDescription, isBlockElementDescription, isString } from "./typeGuards";
 import { Architecture, Block, BlockElement } from "./types";
 
+export function transformToArchitecture(description: Ref<unknown> | unknown): Ref<Architecture> {
+    const refDescription = isRef(description) ? description : ref(description);
+    return computed(() => {
+        const value = refDescription.value;
+        if (isArchitectureDescription(value)) {
+            return transformDescriptionToArchitecture(value);
+        }
+        return {
+            blocks: [],
+            animations: [],
+            phases: [],
+            style: null
+        };
+    });
+}
 
 export function transformDescriptionToArchitecture(architectureDescription: ArchitectureDescription): Architecture {
+    const blocks = BlockGroupDescriptionsToBlock(architectureDescription.blocks)
     return {
-        blocks: BlockGroupDescriptionsToBlock(architectureDescription.blocks),
+        blocks,
         phases: [],
         animations: [],
         style: {
-            id: "style"
+            id: "style",
+            positioning: autoPositioning({
+                blocks
+            })
         }
     }
 }
@@ -32,7 +53,8 @@ export function BlockGroupDescriptionsToBlock(description: BlockGroupDescription
             return [
                 {
                     id: key,
-                    label: key
+                    label: key,
+                    children: items
                 },
                 ...items
             ];
