@@ -12,6 +12,7 @@ specifiers:
   cross-env: ^7.0.3
   eslint: ^7.32.0
   pnpm: ^6.13.0
+  rollup-plugin-svg: ^2.0.0
   typescript: ^4.3.5
   unplugin-auto-import: ^0.0.6
   vite: ^2.5.0
@@ -26,6 +27,7 @@ specifiers:
 dependencies:
   '@headlessui/vue': 1.4.0
   '@vueuse/core': 6.0.0_vue@3.2.4
+  rollup-plugin-svg: 2.0.0
   vue: 3.2.4
   vue-demi: 0.11.3_vue@3.2.4
   vue-router: 4.0.11_vue@3.2.4
@@ -891,7 +893,6 @@ packages:
 
   /balanced-match/1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
-    dev: true
 
   /big.js/5.2.2:
     resolution: {integrity: sha512-vyL2OymJxmarO8gxMr0mhChsO9QGwhynfuu4+MHTAW6czfq9humCB7rKpUjDd9YUiDPU4mzpyupFSvOClAwbmQ==}
@@ -906,7 +907,6 @@ packages:
     dependencies:
       balanced-match: 1.0.2
       concat-map: 0.0.1
-    dev: true
 
   /braces/3.0.2:
     resolution: {integrity: sha512-b8um+L1RzM3WDSzvhm6gIz1yfTbBt6YTlcEKAvsmqCZZFw46z626lVj9j1yEPW33H5H+lBQpZMP1k8l+78Ha0A==}
@@ -1003,7 +1003,6 @@ packages:
 
   /concat-map/0.0.1:
     resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
-    dev: true
 
   /consolidate/0.16.0:
     resolution: {integrity: sha512-Nhl1wzCslqXYTJVDyJCu3ODohy9OfBMB5uD2BiBTzd7w+QY0lBzafkR8y8755yMYHAaMD4NuzbAw03/xzfw+eQ==}
@@ -1585,6 +1584,10 @@ packages:
     resolution: {integrity: sha512-BxbNGGNm0RyRYvUdHpIwv9IWzeM9XClbOxwoATuFdOE7ZE6wHL+HQ5T8hoPM+zHvmKzzsEqhgy0GrQ5X13afiQ==}
     engines: {node: '>=4.0'}
     dev: true
+
+  /estree-walker/0.2.1:
+    resolution: {integrity: sha1-va/oCVOD2EFNXcLs9MkXO225QS4=}
+    dev: false
 
   /estree-walker/2.0.2:
     resolution: {integrity: sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==}
@@ -2193,7 +2196,6 @@ packages:
     resolution: {integrity: sha512-yJHVQEhyqPLUTgt9B83PXu6W3rx4MvvHvSUvToogpwoGDOUQ+yDrR0HRot+yOCdCO7u4hX3pWft6kWBBcqh0UA==}
     dependencies:
       brace-expansion: 1.1.11
-    dev: true
 
   /minimist/1.2.5:
     resolution: {integrity: sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==}
@@ -2652,6 +2654,19 @@ packages:
     dependencies:
       glob: 7.1.7
     dev: true
+
+  /rollup-plugin-svg/2.0.0:
+    resolution: {integrity: sha512-DmE7dSQHo1SC5L2uH2qul3Mjyd5oV6U1aVVkyvTLX/mUsRink7f1b1zaIm+32GEBA6EHu8H/JJi3DdWqM53ySQ==}
+    dependencies:
+      rollup-pluginutils: 1.5.2
+    dev: false
+
+  /rollup-pluginutils/1.5.2:
+    resolution: {integrity: sha1-HhVud4+UtyVb+hs9AXi+j1xVJAg=}
+    dependencies:
+      estree-walker: 0.2.1
+      minimatch: 3.0.4
+    dev: false
 
   /rollup/2.56.2:
     resolution: {integrity: sha512-s8H00ZsRi29M2/lGdm1u8DJpJ9ML8SUOpVVBd33XNeEeL3NVaTiUcSBHzBdF3eAyR0l7VSpsuoVUGrRHq7aPwQ==}

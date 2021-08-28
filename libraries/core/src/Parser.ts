@@ -30,12 +30,17 @@ export function transformDescriptionToArchitecture(architectureDescription: Arch
             id: "style",
             positioning: autoPositioning({
                 blocks
-            })
+            }),
+            blocks: architectureDescription.style ? { ...architectureDescription.style } : {}
         }
     }
 }
 
 export function BlockGroupDescriptionsToBlock(description: BlockGroupDescriptions): Block[] {
+    return blockGroupDescriptionsToBlock({ main: description });
+}
+
+function blockGroupDescriptionsToBlock(description: BlockGroupDescriptions): Block[] {
     const blocks = Object.keys(description)
         .flatMap<Block>(key => {
             const value = description[key];
@@ -48,7 +53,7 @@ export function BlockGroupDescriptionsToBlock(description: BlockGroupDescription
             if (value === null) {
                 return createBlockElementByString(key, key);
             }
-            const items = BlockGroupDescriptionsToBlock(value);
+            const items = blockGroupDescriptionsToBlock(value);
             items.forEach(x => x.parentId = x.parentId ?? key);
             return [
                 {

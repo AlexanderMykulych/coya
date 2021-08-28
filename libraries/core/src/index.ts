@@ -7,7 +7,7 @@ export {
     transformDescriptionToArchitecture,
     transformToArchitecture,
     autoPositioning
-}
+} 
 
 export const sum = (a: number, b: number) => {
     return a + b;
