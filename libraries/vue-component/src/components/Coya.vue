@@ -12,8 +12,10 @@ const rectPositions = computed(() => {
         return poses
             .filter(x => isRectPositioning(x.position))
             .map(x => ({
-                ...x.position as RectPositioning,
-                id: x.blockId
+                pos: x.position as RectPositioning,
+                id: x.blockId,
+                block: arch.value.blocks.find(y => y.id === x.blockId),
+                style: arch.value.style?.blocks ? arch.value.style.blocks[x.blockId] : null
             }));
     }
     return [];
@@ -21,32 +23,18 @@ const rectPositions = computed(() => {
 </script>
 <template>
     <div>
-        {{ preparedConfig }}
-        <br />
-        arch1: {{ arch }}
-        <br />
-        <!-- arch: {{ arch?.blocks.map(x => x.label) }} -->
-        <br />
-        positions:
-        {{ arch.style?.positioning }}
         <svg
             viewBox="0 0 420 400"
             xmlns="http://www.w3.org/2000/svg"
             v-if="!!arch.style?.positioning"
         >
             <!-- Rounded corner rectangle -->
-            <rect
-                v-for="pos in rectPositions"
-                :id="pos.id"
-                :key="pos.id"
-                :x="pos.x.value"
-                :y="pos.y.value"
-                :width="pos.width.value"
-                :height="pos.height.value"
-                stroke="black"
-                stroke-width="1"
-                fill="none"
-
+            <CoyaNode
+                v-for="item in rectPositions"
+                :key="item.id"
+                :block="item.block"
+                :block-style="item.style"
+                :positioning="item.pos"
             />
         </svg>
     </div>

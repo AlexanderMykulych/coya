@@ -21,16 +21,17 @@ export interface AnimationDescription {
     [name: string]: {};
 }
 export interface BlockStyle {
-    
+    svg?: string;
+    svgUrl?: string;
 }
 export interface StyleDescription {
     [name: string]: BlockStyle;
 }
 export interface ArchitectureDescription {
     blocks: BlockGroupDescriptions;
-    phases: Phase;
-    animation: AnimationDescription;
-    style: StyleDescription;
+    phases?: Phase;
+    animation?: AnimationDescription;
+    style?: StyleDescription;
 }
 
 export type ArchitectureDescriptionElement =

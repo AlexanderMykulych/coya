@@ -1,9 +1,10 @@
 import { ComputedRef } from "@vue/reactivity";
+import { BlockStyle } from "./descriptionTypes";
 
 export type NumberValue = number | ComputedRef<number>;
 export type StringValue = string | ComputedRef<string>;
 
-type IdValue = string;
+type IdValue = string | "main";
 export interface Identifiable {
     id: IdValue;
 }
@@ -23,7 +24,11 @@ export interface Animation extends Identifiable {
 }
 export interface Style extends Identifiable {
     positioning: BlockPositioning[];
+    blocks: {
+        [name: string]: BlockStyle;
+    }
 }
+
 
 
 export interface RectPositioning {

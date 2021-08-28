@@ -7,6 +7,7 @@ import ViteComponents from 'vite-plugin-components'
 import WindiCSS from 'vite-plugin-windicss'
 import AutoImport from 'unplugin-auto-import/vite'
 
+
 export default defineConfig({
   resolve: {
     alias: {
@@ -47,7 +48,7 @@ export default defineConfig({
     ViteIcons(),
 
     // https://github.com/antfu/vite-plugin-windicss
-    WindiCSS(),
+    WindiCSS()
   ],
 
   server: {
