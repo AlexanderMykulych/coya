@@ -1,6 +1,6 @@
 import { AutoPositioningSetting, AutoPositioningSizeSetting } from "./types";
 import { computed, isRef } from "@vue/reactivity";
-import { BlockPositioning, NumberValue } from "../types";
+import { BlockPositioning, NumberValue, Positioning } from "../types";
 import { isNotNullOrUndefined, isParentBlockElement, isRectPositioning } from "../typeGuards";
 
 export function autoPositioning(setting: AutoPositioningSetting): BlockPositioning[] {
@@ -12,19 +12,19 @@ export function autoPositioning(setting: AutoPositioningSetting): BlockPositioni
         const parentPosComp = computed(() => parentBlockComp.value?.id ? getBlockPositioning(blocksPositioning, parentBlockComp.value.id) : null);
         const blockInParentIndexComp = computed(() => isParentBlockElement(parentBlockComp.value) ? parentBlockComp.value.children.indexOf(block) : -1);
         const columnIndexComp = computed(() => blockInParentIndexComp.value % sizeSetting.parentChildrenInRowCount);
-        const rowIndexComp = computed(() => Math.ceil(blockInParentIndexComp.value / sizeSetting.parentChildrenInRowCount));
+        const rowIndexComp = computed(() => Math.floor(blockInParentIndexComp.value / sizeSetting.parentChildrenInRowCount));
         const brotherLeftBlockComp = computed(() => isParentBlockElement(parentBlockComp.value) ? parentBlockComp.value.children[blockInParentIndexComp.value - 1] : null);
-        const brotherPosComp = computed(() => brotherLeftBlockComp.value?.id ? getBlockPositioning(blocksPositioning, brotherLeftBlockComp.value?.id) : null);
+        const brotherLeftPosComp = computed(() => brotherLeftBlockComp.value?.id ? getBlockPositioning(blocksPositioning, brotherLeftBlockComp.value?.id) : null);
 
         const x = computed(() => {
             if (block.parentId) {
                 const parentBlock = parentBlockComp.value;
-                const parentPos = parentPosComp.value;
+                const parentPos = parentPosComp.value; 
                 if (isParentBlockElement(parentBlock) && isRectPositioning(parentPos)) {
                     if (columnIndexComp.value === 0) {
                         return getNumber(parentPos.x) + sizeSetting.gap;
                     }
-                    const brotherPos = brotherPosComp.value;
+                    const brotherPos = brotherLeftPosComp.value;
                     if (isRectPositioning(brotherPos)) {
                         return getNumber(brotherPos.x) + getNumber(brotherPos.width) + sizeSetting.gap;
                     }
@@ -41,14 +41,22 @@ export function autoPositioning(setting: AutoPositioningSetting): BlockPositioni
                     if (rowIndexComp.value === 0) {
                         return getNumber(parentPos.y) + sizeSetting.gap;
                     }
-                    const brotherPos = brotherPosComp.value;
-                    if (isRectPositioning(brotherPos)) {
-                        if (columnIndexComp.value === 0) {
-                            return getNumber(brotherPos.y) + getNumber(brotherPos.height) + sizeSetting.gap;
-                        }
-                        return getNumber(brotherPos.y);
-                    }
-                    return getNumber(parentPos.y) + sizeSetting.gap;
+                    const previousRowIndex = rowIndexComp.value - 1;
+                    const startIndex = previousRowIndex * sizeSetting.parentChildrenInRowCount;
+                    let maxY = 0;
+                    parentBlock
+                        .children
+                        .slice(startIndex, startIndex + sizeSetting.parentChildrenInRowCount)
+                        .forEach(brotherBlock => {
+                            const pos = getBlockPositioning(blocksPositioning, brotherBlock.id);
+                            if (isRectPositioning(pos)) {
+                                const newY = getNumber(pos.y) + getNumber(pos.height);
+                                if (newY > maxY) {
+                                    maxY = newY;
+                                }
+                            }
+                        });
+                    return maxY + sizeSetting.gap;
                 }
             }
             return sizeSetting.gap;
@@ -108,6 +116,6 @@ function getNumber(obj: NumberValue) {
     return isRef(obj) ? obj.value : <number>obj;
 }
 
-function getBlockPositioning(blocksPositioning: BlockPositioning[], id: string) {
+function getBlockPositioning(blocksPositioning: BlockPositioning[], id: string): Positioning | undefined {
     return blocksPositioning.find(x => x.blockId === id)?.position;
 }
