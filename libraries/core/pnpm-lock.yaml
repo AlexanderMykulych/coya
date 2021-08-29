@@ -1,5 +1,10 @@
 lockfileVersion: 5.3
 
+overrides:
+  typescript: ^4.4.2
+  '@typescript-eslint/eslint-plugin': ^4.29.3
+  '@typescript-eslint/parser': ^4.29.3
+
 specifiers:
   '@size-limit/preset-small-lib': ^5.0.3
   '@types/jest': ^27.0.1
@@ -8,6 +13,7 @@ specifiers:
   '@typescript-eslint/eslint-plugin': ^4.29.3
   '@typescript-eslint/parser': ^4.29.3
   '@vue/reactivity': ^3.2.6
+  csstype: ^3.0.8
   eslint: ^7.32.0
   husky: ^7.0.1
   jest: ^27.0.6
@@ -21,6 +27,7 @@ dependencies:
   '@types/lodash': 4.14.172
   '@types/node': 16.7.1
   '@vue/reactivity': 3.2.6
+  csstype: 3.0.8
   jest: 27.0.6
   lodash: 4.17.21
 
@@ -3572,6 +3579,10 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       cssom: 0.3.8
+
+  /csstype/3.0.8:
+    resolution: {integrity: sha512-jXKhWqXPmlUeoQnF/EhTtTl4C9SnrxSH/jZUih3jmO6lBKr99rP3/+FmrMj4EFpOXzMtXHAZkd3x0E6h6Fgflw==}
+    dev: false
 
   /cyclist/1.0.1:
     resolution: {integrity: sha1-WW6WmP0MgOEgOMK4LW6xs1tiJNk=}

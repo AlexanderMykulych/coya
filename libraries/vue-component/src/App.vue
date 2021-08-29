@@ -28,7 +28,7 @@ const examples = [
         value: exampleStyle
     }
 ];
-const currentExampleIndex = ref(0);
+const currentExampleIndex = ref(4);
 
 const config = computed(() => JSON.stringify(examples[currentExampleIndex.value].value));
 

@@ -19,6 +19,20 @@ export default <ArchitectureDescription>{
         "t2": null
     },
     style: {
+        web: {
+            css: {
+                backgroundColor: "aliceblue",
+                margin: "10px",
+                fill: "red",
+                r: 7,
+                cx: 15,
+                cy: 10,
+                strokeWidth: "3",
+                stroke: "black",
+                strokeOpacity: 0.2,
+            },
+            svgTag: "circle"
+        },
         "t2": {
             svgUrl: imgUrl.href
         },

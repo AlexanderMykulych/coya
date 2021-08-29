@@ -19,17 +19,17 @@ export interface ParentBlockElement extends BlockElement {
 export type Block = BlockElement | ParentBlockElement;
 
 export interface Phase extends Identifiable {
+
 }
 export interface Animation extends Identifiable {
 }
+export interface BlocksStyle {
+    [name: string]: BlockStyle;
+}
 export interface Style extends Identifiable {
     positioning: BlockPositioning[];
-    blocks: {
-        [name: string]: BlockStyle;
-    }
+    blocks?: BlocksStyle;
 }
-
-
 
 export interface RectPositioning {
     x: NumberValue;
