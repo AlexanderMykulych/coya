@@ -1,22 +1,15 @@
 import { ArchitectureDescription } from "@coya/core/dist/descriptionTypes";
-import rect from './rectangle.svg?raw';
-import blackboard from './blackboard.svg?raw';
 import smartphone from './smartphone.svg?raw';
-const imgUrl = new URL('./rectangle.svg', import.meta.url)
 
 export default <ArchitectureDescription>{
     "blocks": {
-        "clients": {
-            "mobile": "Mobile client",
-            "web": {
-                "label": "Controller (Web client)"
-            },
-            "Desktop": {
-                "label": "Desktop client"
-            },
-            "t1": null
+        "mobile": "Mobile client",
+        "web": {
+            "label": "Controller (Web client)"
         },
-        "t2": null
+    },
+    phases: {
+        "connect": "mobile->web"
     },
     style: {
         web: {
@@ -34,17 +27,11 @@ export default <ArchitectureDescription>{
             },
             svgTag: "circle"
         },
-        "t2": {
-            svgUrl: imgUrl.href
-        },
         "mobile": {
             svg: smartphone,
             css: {
                 cursor: "grab"
             }
-        },
-        Desktop: {
-            svg: blackboard
         }
     }
 }

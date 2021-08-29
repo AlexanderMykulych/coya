@@ -5,6 +5,7 @@ import simpleExample2 from "./examples/2_simple";
 import example2 from "./examples/2";
 import example3 from "./examples/3";
 import exampleStyle from "./examples/4_simple_style";
+import exampleStylePhase from "./examples/4_simple_style_phase";
 
 const examples = [
     {
@@ -26,9 +27,13 @@ const examples = [
     {
         label: "example-style",
         value: exampleStyle
+    },
+    {
+        label: "example-style-phase",
+        value: exampleStylePhase
     }
 ];
-const currentExampleIndex = ref(4);
+const currentExampleIndex = ref(5);
 
 const config = computed(() => JSON.stringify(examples[currentExampleIndex.value].value));
 
