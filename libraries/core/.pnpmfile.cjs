@@ -33,9 +33,6 @@ function readPackage(packageJson, context) {
   //  context.log('Fixed up dependencies for @types/karma');
   //  packageJson.dependencies['log4js'] = '0.6.38';
   // }
-  if (!!packageJson.dependencies.typescript) {
-        packageJson.dependencies.typescript = "4.4.2";
-  }
 
   return packageJson;
 }

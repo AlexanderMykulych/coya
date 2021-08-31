@@ -22,7 +22,12 @@
             "ExternalResources": null
         },
         "Facade": null,
-        "Title": null
+        "Title": null,
+        "line": {
+            "type": "line",
+            "from": "web",
+            "to": "mobile"
+        }
     },
     // phases/steps. Valuable architecture steps
     "phases": {

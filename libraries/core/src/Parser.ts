@@ -5,34 +5,37 @@ import { isArchitectureDescription } from "./typeGuards";
 import { Architecture, Block } from "./types";
 import { styleDescriptionToArchitectureStyle } from "./style/styleDescriptionToArchitectureStyle";
 
+
 export function transformToArchitecture(description: Ref<unknown> | unknown): Ref<Architecture> {
     const refDescription = isRef(description) ? description : ref(description);
-    return computed(() => {
-        const value = refDescription.value;
-        if (isArchitectureDescription(value)) {
-            return transformDescriptionToArchitecture(value);
+    const value = refDescription.value;
+    
+    const transitionalArchitecture = ref(JSON.parse(JSON.stringify(value)));
+    const architecture = computed<Architecture>(() => {
+        if (isArchitectureDescription(transitionalArchitecture.value)) {
+            return transformDescriptionToArchitecture(transitionalArchitecture.value);
         }
         return {
-            blocks: [],
-            animations: [],
-            phases: [],
-            style: null
+            blocks: ref([]),
+            style: ref(null),
+            start: () => {}
         };
     });
+    return architecture;
 }
 
 export function transformDescriptionToArchitecture(architectureDescription: ArchitectureDescription): Architecture {
-    const blocks = BlockGroupDescriptionsToBlock(architectureDescription.blocks)
+    const blocks = computed(() => BlockGroupDescriptionsToBlock(architectureDescription.blocks))
     return {
         blocks,
-        phases: [],
-        animations: [],
-        style: styleDescriptionToArchitectureStyle(architectureDescription.style, blocks)
+        style: computed(() => styleDescriptionToArchitectureStyle(architectureDescription.style, blocks.value)),
+        start: () => {
+            console.log("start");
+        }
     }
 }
 
 export function BlockGroupDescriptionsToBlock(description: BlockGroupDescriptions): Block[] {
     return blockGroupDescriptionsToBlock({ main: description });
 }
-
 

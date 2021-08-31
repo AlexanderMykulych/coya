@@ -1,5 +1,6 @@
-import { ComputedRef } from "@vue/reactivity";
-import { BlockStyle } from "./descriptionTypes";
+
+import { ComputedRef, Ref } from "@vue/reactivity";
+import { ActionSetting, ArchitectureDescription, BlockStyle, LineBlockElementDescription } from "./descriptionTypes";
 
 export type NumberValue = number | ComputedRef<number>;
 export type StringValue = string | ComputedRef<string>;
@@ -12,15 +13,32 @@ export interface BlockElement extends Identifiable {
     label: StringValue;
     parentId?: IdValue;
 }
+
+export type ExcludeProp<T, U> = {
+    [Property in keyof T as Exclude<Property, U>]: T[Property]
+}
+export interface LineBlockElement extends ExcludeProp<LineBlockElementDescription, "label">, Identifiable {
+    label: StringValue;
+}
+
 export interface ParentBlockElement extends BlockElement {
     children: Block[];
 }
 
-export type Block = BlockElement | ParentBlockElement;
+export type ContainerBlock = BlockElement | ParentBlockElement;
+export type Block = ContainerBlock | LineBlockElement;
 
-export interface Phase extends Identifiable {
-
+export type ActionExecutor = (architecture: Architecture, actionSetting: Action) => Architecture;
+export interface Action {
+    name: "connect" | string;
+    value: ActionSetting;
+    executor: ActionExecutor
 }
+export interface Phase {
+    dependsOnPhaseId: IdValue | null;
+    action: Action;
+}
+export type Phases = Phase[];
 export interface Animation extends Identifiable {
 }
 export interface BlocksStyle {
@@ -43,16 +61,28 @@ export interface CirclePositioning {
     cy: NumberValue;
     radius: NumberValue;
 }
+export interface LinePositioning {
+    x1: NumberValue;
+    y1: NumberValue;
+    x2: NumberValue;
+    y2: NumberValue;
+}
 
-export type Positioning = RectPositioning | CirclePositioning;
+export type Positioning = RectPositioning | CirclePositioning | LinePositioning;
 export interface BlockPositioning {
     blockId: IdValue;
     position: Positioning;
 }
 
-export interface Architecture {
+export interface ArchitectureData {
     blocks: Block[];
-    phases: Phase[];
-    animations: Animation[]
     style?: Style | null;
+}
+export interface Architecture extends RefsType<ArchitectureData> {
+    start: () => void
+}
+export type RefsType<T> = {
+    [P in keyof T]?: Ref<T[P]>;
+}
+export interface TransitionalArchitecture extends ArchitectureDescription {
 }

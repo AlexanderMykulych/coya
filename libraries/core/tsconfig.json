@@ -1,13 +1,10 @@
 {
     // see https://www.typescriptlang.org/tsconfig to better understand tsconfigs
-    "include": ["src", "types"],
+    "include": ["src", "types", "test"],
     "compilerOptions": {
         "module": "esnext",
         "lib": ["dom", "esnext"],
         "importHelpers": true,
-        "incremental": true,
-        // "emitDeclarationOnly": true,
-        "outDir": ".cache/tsbuild",
         "skipLibCheck": true,
         // output .d.ts declaration files for consumers
         "declaration": true,

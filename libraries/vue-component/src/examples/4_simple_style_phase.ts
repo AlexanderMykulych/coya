@@ -7,6 +7,12 @@ export default <ArchitectureDescription>{
         "web": {
             "label": "Controller (Web client)"
         },
+        "con": {
+            type: "line",
+            "label": "line",
+            to: "web",
+            from: "mobile"
+        }
     },
     phases: {
         "connect": "mobile->web"

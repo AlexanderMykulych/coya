@@ -9,6 +9,6 @@ export function createBlockElementByString(id: string, label: string): BlockElem
     };
 }
 
-export function createBlockElementByDescription(id: string, { label }: BlockElementDescription): any {
+export function createBlockElementByDescription(id: string, { label }: BlockElementDescription): BlockElement {
     return createBlockElementByString(id, label ?? id);
 }

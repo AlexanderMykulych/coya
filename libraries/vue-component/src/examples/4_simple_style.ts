@@ -16,7 +16,13 @@ export default <ArchitectureDescription>{
             },
             "t1": null
         },
-        "t2": null
+        "t2": null,
+        "con": {
+            type: "line",
+            "label": "line",
+            to: "t2",
+            from: "mobile"
+        }
     },
     style: {
         web: {

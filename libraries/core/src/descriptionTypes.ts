@@ -1,14 +1,38 @@
 import {Properties} from "csstype";
-export interface BlockElementDescription {
-    label?: string;
+
+export enum BlockElementType {
+    Rect = "rect",
+    Line = "line"
 }
+export interface BaseBlockElementDescription {
+    label?: string;
+    type?: BlockElementType;
+}
+
+export interface LineBlockElementDescription extends BaseBlockElementDescription {
+    type: BlockElementType.Line;
+    from: string;
+    to: string;
+}
+
+export interface RectBlockElementDescription extends BaseBlockElementDescription {
+    type?: BlockElementType.Rect;
+}
+
+export type BlockElementDescription = LineBlockElementDescription | RectBlockElementDescription;
 
 export interface BlockGroupDescriptions {
     [name: string]: BlockGroupDescriptions | BlockElementDescription | string | null
 }
 
+export interface ConnectActionSetting {
+    from: string;
+    to: string;
+}
+export type ActionSetting = ConnectActionSetting;
+
 export interface PhaseAction {
-    [name: string]: string | string[];
+    [name: string]: string | string[] | ActionSetting | ActionSetting[];
 }
 
 export type GraduallyPhaseActions = PhaseAction[];
