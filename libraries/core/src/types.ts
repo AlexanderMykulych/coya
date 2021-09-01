@@ -1,6 +1,6 @@
 
 import { ComputedRef, Ref } from "@vue/reactivity";
-import { ActionSetting, ArchitectureDescription, BlockStyle, LineBlockElementDescription } from "./descriptionTypes";
+import { ActionSetting, ArchitectureDescription, BlockElementDescription, BlockGroupDescriptions, BlockStyle, LineBlockElementDescription } from "./descriptionTypes";
 
 export type NumberValue = number | ComputedRef<number>;
 export type StringValue = string | ComputedRef<string>;
@@ -29,10 +29,12 @@ export type ContainerBlock = BlockElement | ParentBlockElement;
 export type Block = ContainerBlock | LineBlockElement;
 
 export type ActionExecutor = (architecture: Architecture, actionSetting: Action) => Architecture;
+export enum ActionType {
+    Connect = "connect"
+}
 export interface Action {
-    name: "connect" | string;
+    name: ActionType | string;
     value: ActionSetting;
-    executor: ActionExecutor
 }
 export interface Phase {
     dependsOnPhaseId: IdValue | null;
@@ -85,4 +87,43 @@ export type RefsType<T> = {
     [P in keyof T]?: Ref<T[P]>;
 }
 export interface TransitionalArchitecture extends ArchitectureDescription {
+}
+
+export type PhaseId = string | (string | null)[] | null;
+export interface CurrentPhaseInfo {
+    current: PhaseId;
+}
+
+export enum ChangeType {
+    AddNewBlock = 0
+}
+export interface AddBlockChangeSetting {
+    blockSettings: string | BlockGroupDescriptions | BlockElementDescription | null;
+    newBlockId: string;
+}
+export type ChangeSetting = AddBlockChangeSetting;
+export interface Change {
+    setting: ChangeSetting;
+    type: ChangeType;
+}
+export interface PhaseIndex {
+    getPhaseById(current: PhaseId): PhaseIndexItem[] | undefined;
+}
+export interface PhaseIndexItem {
+    phaseId: string | null;
+    isStart: boolean;
+    nextPhaseId: string | null;
+    actions: PhaseIndexItemAction[];
+
+}
+
+export interface PhaseIndexItemAction {
+    action: Action;
+
+}
+
+export interface ActionExecutorContext {
+    indexItem: PhaseIndexItem;
+    architecture: ArchitectureDescription;
+    phaseIndex: PhaseIndex;
 }

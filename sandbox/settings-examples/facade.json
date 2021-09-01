@@ -1,6 +1,5 @@
 
 {
-    // diagram elements. Valuable architecture items
     "blocks": {
         "clients": {
             "mobile": "Mobile client",
@@ -29,12 +28,10 @@
             "to": "mobile"
         }
     },
-    // phases/steps. Valuable architecture steps
     "phases": {
         "phase_1": [
             {
                 "step-1.0": {
-                    // action. What we have to do at this moment
                     "appear": "clients"
                 }
             },

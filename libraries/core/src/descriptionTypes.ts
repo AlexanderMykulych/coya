@@ -35,8 +35,8 @@ export interface PhaseAction {
     [name: string]: string | string[] | ActionSetting | ActionSetting[];
 }
 
-export type GraduallyPhaseActions = PhaseAction[];
-export type GraduallyPhases = PhaseStep[];
+
+export type GraduallyPhases = (PhaseStep | PhaseAction)[];
 export interface ParallelPhase {
     [name: string]: PhaseStep;
 }
@@ -45,7 +45,6 @@ export type PhaseStep =
     | ParallelPhase
     | GraduallyPhases
     | PhaseAction
-    | GraduallyPhaseActions;
 
 export interface AnimationDescription {
     [name: string]: {};

@@ -24,19 +24,14 @@ export function phaseDescriptionToArchitecturePhase(phase?: PhaseStep): Phases {
     throw "Not implemented!";
 }
 function createAction(name: string, value: string | ConnectActionSetting): Action {
-    if (isConnectActionSetting(value)) {
-        return {
-            name,
-            value,
-            executor: getActionByName(name)
-        };
+    if (value && isConnectActionSetting(<ActionSetting>value)) {
     }
     throw `value is string. {value}`;
 }
 
 function getActionByName(name: string): ActionExecutor {
     if (name === "connect") {
-        return connectActionExecutor;
+        // return connectActionExecutor;
     }
     throw `Action ${name} is not found!`;
 }

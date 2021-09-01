@@ -73,6 +73,7 @@
     "dependencies": {
         "@types/lodash": "^4.14.172",
         "@types/node": "^16.7.1",
+        "@vue-reactivity/watch": "^0.1.6",
         "@vue/reactivity": "3.2.4",
         "csstype": "^3.0.8",
         "jest": "^27.0.6",

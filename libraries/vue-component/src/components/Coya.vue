@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { transformToArchitecture, isRectPositioning, startPhases } from "@coya/core";
-import { RectPositioning } from "@coya/core/dist/types";
+import { transformToArchitecture, RectPositioning } from "@coya/core";
 import { computed } from "vue";
 
 const props = defineProps<{ config: string | Object }>()
@@ -11,7 +10,7 @@ const rectPositions = computed(() => {
         const poses = arch.value.style.value?.positioning;
         return poses
             .map(x => ({
-                pos: x.position as RectPositioning,
+                pos: x.position as RectPositioning  ,
                 id: x.blockId,
                 block: arch.value.blocks.value.find(y => y.id === x.blockId),
                 style: arch.value.style.value?.blocks ? arch.value.style.value.blocks[x.blockId] : null
@@ -19,7 +18,7 @@ const rectPositions = computed(() => {
     }
     return [];
 });
-const start = () => startPhases(arch.value);
+const start = () => arch.value.start();
 </script>
 <template>
     <div>

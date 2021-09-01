@@ -8,20 +8,20 @@ export default <ArchitectureDescription>{
             "label": "Controller (Web client)"
         }
     },
-    phases: {
-        "p1": {
+    phases: [
+        {
             connect: {
                 from: "mobile",
                 to: "web"
             }
         },
-        "p2": {
+        {
             connect: {
                 from: "web",
                 to: "mobile"
             }
         }
-    },
+    ],
     style: {
         web: {
             css: {

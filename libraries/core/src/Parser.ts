@@ -2,8 +2,10 @@ import { computed, Ref, isRef, ref } from "@vue/reactivity";
 import { blockGroupDescriptionsToBlock } from "./block/blockGroupDescriptionsToBlock";
 import { ArchitectureDescription, BlockGroupDescriptions } from "./descriptionTypes";
 import { isArchitectureDescription } from "./typeGuards";
-import { Architecture, Block } from "./types";
+import { Architecture, Block, CurrentPhaseInfo } from "./types";
 import { styleDescriptionToArchitectureStyle } from "./style/styleDescriptionToArchitectureStyle";
+import { startPhases } from "./phase/startPhases";
+import { buildPhasesIndex } from "./phase/buildPhasesIndex";
 
 
 export function transformToArchitecture(description: Ref<unknown> | unknown): Ref<Architecture> {
@@ -26,11 +28,16 @@ export function transformToArchitecture(description: Ref<unknown> | unknown): Re
 
 export function transformDescriptionToArchitecture(architectureDescription: ArchitectureDescription): Architecture {
     const blocks = computed(() => BlockGroupDescriptionsToBlock(architectureDescription.blocks))
+    const currentPhase: CurrentPhaseInfo = {
+        current: null
+    };
+    const phaseIndex = buildPhasesIndex(architectureDescription.phases);
     return {
         blocks,
         style: computed(() => styleDescriptionToArchitectureStyle(architectureDescription.style, blocks.value)),
         start: () => {
-            console.log("start");
+            const nextPhaseId = startPhases(architectureDescription, phaseIndex, currentPhase);
+            currentPhase.current = nextPhaseId;
         }
     }
 }
@@ -38,4 +45,5 @@ export function transformDescriptionToArchitecture(architectureDescription: Arch
 export function BlockGroupDescriptionsToBlock(description: BlockGroupDescriptions): Block[] {
     return blockGroupDescriptionsToBlock({ main: description });
 }
+
 
