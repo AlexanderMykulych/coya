@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { transformToArchitecture, RectPositioning } from "@coya/core";
-import { computed } from "vue";
+import { computed, reactive, watch } from "vue";
 
 const props = defineProps<{ config: string | Object }>()
 const preparedConfig = computed(() => !!props.config && typeof props.config === "string" ? JSON.parse(props.config) : props.config);
@@ -19,6 +19,8 @@ const rectPositions = computed(() => {
     return [];
 });
 const start = () => arch.value.start();
+
+
 </script>
 <template>
     <div>
