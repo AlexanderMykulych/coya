@@ -26,6 +26,16 @@ const enter = (el) => {
         gsap.from(el, { duration: 1, attr: {x: 0, width: 0 }})
     }
 }
+const rect = ref(null);
+onMounted(() => {
+    if (isRect.value) {
+        watch(() => rectPosition.value.width, (newVal, old) => {
+            gsap.to(rect.value, { duration: 3, attr: {width: newVal }});
+        }, {
+            immediate: true
+        });
+    }
+})
 </script>
 
 <template>
@@ -80,12 +90,12 @@ const enter = (el) => {
             :id="block.id"
             :x="rectPosition.x"
             :y="rectPosition.y"
-            :width="rectPosition.width"
             :height="rectPosition.height"
             stroke="black"
             stroke-width="1"
             fill="none"
             :style="cssStyle"
+            ref="rect"
         />
     </transition>
 </template>
