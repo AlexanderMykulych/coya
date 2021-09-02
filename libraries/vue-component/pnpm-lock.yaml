@@ -11,6 +11,7 @@ specifiers:
   '@vueuse/core': ^6.0.0
   cross-env: ^7.0.3
   eslint: ^7.32.0
+  gsap: ^3.7.1
   pnpm: ^6.13.0
   rollup-plugin-svg: ^2.0.0
   typescript: ^4.3.5
@@ -27,6 +28,7 @@ specifiers:
 dependencies:
   '@headlessui/vue': 1.4.0
   '@vueuse/core': 6.0.0_vue@3.2.4
+  gsap: 3.7.1
   rollup-plugin-svg: 2.0.0
   vue: 3.2.4
   vue-demi: 0.11.3_vue@3.2.4
@@ -1754,6 +1756,10 @@ packages:
   /graceful-fs/4.2.8:
     resolution: {integrity: sha512-qkIilPUYcNhJpd33n0GBXTB1MMPp14TxEsEs0pTrsSVucApsYzW5V+Q8Qxhik6KU3evy+qkAAowTByymK0avdg==}
     dev: true
+
+  /gsap/3.7.1:
+    resolution: {integrity: sha512-4qxuaC2yFWRjMRof5tI/7c9/+L4xMsCoqHrZAmuh+IbOokTnZyoeF0VgvcVHq3uo+/VJZCs7PTvjrFasfGl+ww==}
+    dev: false
 
   /has-bigints/1.0.1:
     resolution: {integrity: sha512-LSBS2LjbNBTf6287JEbEzvJgftkF5qFkmCo9hDRpAzKhUOlJ+hx8dd4USs00SgsUNwc4617J9ki5YtEClM2ffA==}

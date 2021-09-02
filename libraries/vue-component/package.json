@@ -10,6 +10,7 @@
     "@coya/core": "~0.1.0",
     "@headlessui/vue": "^1.4.0",
     "@vueuse/core": "^6.0.0",
+    "gsap": "^3.7.1",
     "rollup-plugin-svg": "^2.0.0",
     "vue": "^3.2.4",
     "vue-demi": "^0.11.3",

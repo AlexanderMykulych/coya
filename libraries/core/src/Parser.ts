@@ -1,37 +1,43 @@
 import { computed, Ref, isRef, ref } from "@vue/reactivity";
-import { ArchitectureDescription, BlockElementDescription, BlockGroupDescriptions } from "./descriptionTypes";
-import { autoPositioning } from "./positioning/autoPosition";
-import { isArchitectureDescription, isBlockElementDescription, isString } from "./typeGuards";
-import { Architecture, Block, BlockElement } from "./types";
+import { blockGroupDescriptionsToBlock } from "./block/blockGroupDescriptionsToBlock";
+import { ArchitectureDescription, BlockGroupDescriptions } from "./descriptionTypes";
+import { isArchitectureDescription } from "./typeGuards";
+import { Architecture, Block, CurrentPhaseInfo } from "./types";
+import { styleDescriptionToArchitectureStyle } from "./style/styleDescriptionToArchitectureStyle";
+import { startPhases } from "./phase/startPhases";
+import { buildPhasesIndex } from "./phase/buildPhasesIndex";
+
 
 export function transformToArchitecture(description: Ref<unknown> | unknown): Ref<Architecture> {
     const refDescription = isRef(description) ? description : ref(description);
-    return computed(() => {
-        const value = refDescription.value;
-        if (isArchitectureDescription(value)) {
-            return transformDescriptionToArchitecture(value);
+    const value = refDescription.value;
+    
+    const transitionalArchitecture = ref(JSON.parse(JSON.stringify(value)));
+    const architecture = computed<Architecture>(() => {
+        if (isArchitectureDescription(transitionalArchitecture.value)) {
+            return transformDescriptionToArchitecture(transitionalArchitecture.value);
         }
         return {
-            blocks: [],
-            animations: [],
-            phases: [],
-            style: null
+            blocks: ref([]),
+            style: ref(null),
+            start: () => {}
         };
     });
+    return architecture;
 }
 
 export function transformDescriptionToArchitecture(architectureDescription: ArchitectureDescription): Architecture {
-    const blocks = BlockGroupDescriptionsToBlock(architectureDescription.blocks)
+    const blocks = computed(() => BlockGroupDescriptionsToBlock(architectureDescription.blocks))
+    const currentPhase: CurrentPhaseInfo = {
+        current: null
+    };
+    const phaseIndex = buildPhasesIndex(architectureDescription.phases);
     return {
         blocks,
-        phases: [],
-        animations: [],
-        style: {
-            id: "style",
-            positioning: autoPositioning({
-                blocks
-            }),
-            blocks: architectureDescription.style ? { ...architectureDescription.style } : {}
+        style: computed(() => styleDescriptionToArchitectureStyle(architectureDescription.style, blocks.value)),
+        start: () => {
+            const nextPhaseId = startPhases(architectureDescription, phaseIndex, currentPhase);
+            currentPhase.current = nextPhaseId;
         }
     }
 }
@@ -40,40 +46,4 @@ export function BlockGroupDescriptionsToBlock(description: BlockGroupDescription
     return blockGroupDescriptionsToBlock({ main: description });
 }
 
-function blockGroupDescriptionsToBlock(description: BlockGroupDescriptions): Block[] {
-    const blocks = Object.keys(description)
-        .flatMap<Block>(key => {
-            const value = description[key];
-            if (isString(value)) {
-                return createBlockElementByString(key, value);
-            }
-            if (isBlockElementDescription(value)) {
-                return createBlockElementByDescription(key, value);
-            }
-            if (value === null) {
-                return createBlockElementByString(key, key);
-            }
-            const items = blockGroupDescriptionsToBlock(value);
-            items.forEach(x => x.parentId = x.parentId ?? key);
-            return [
-                {
-                    id: key,
-                    label: key,
-                    children: items.filter(x => x.parentId === key)
-                },
-                ...items
-            ];
-        });
-    return blocks;
-}
 
-export function createBlockElementByString(id: string, label: string): BlockElement {
-    return {
-        id,
-        label
-    };
-}
-
-function createBlockElementByDescription(id: string, { label }: BlockElementDescription): any {
-    return createBlockElementByString(id, label ?? id);
-}

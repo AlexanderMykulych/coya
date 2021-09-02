@@ -1,4 +1,5 @@
 import {transformDescriptionToArchitecture, transformToArchitecture} from "./Parser";
+import { startPhases } from "./phase/startPhases";
 import { autoPositioning } from "./positioning/autoPosition";
 export * from "./typeGuards";
 export * from "./types";
@@ -6,7 +7,8 @@ export * from "./types";
 export {
     transformDescriptionToArchitecture,
     transformToArchitecture,
-    autoPositioning
+    autoPositioning,
+    startPhases
 } 
 
 export const sum = (a: number, b: number) => {
