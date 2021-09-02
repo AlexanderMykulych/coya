@@ -23,7 +23,7 @@ const enter = (el) => {
     if (isLine.value) {
         gsap.from(el, {duration: 2, attr: {x2: linePosition.value.x1, y2: linePosition.value.y1}});
     } else {
-        gsap.from(el, { duration: 1, x: 0, width: 0 })
+        gsap.from(el, { duration: 1, attr: {x: 0, width: 0 }})
     }
 }
 </script>

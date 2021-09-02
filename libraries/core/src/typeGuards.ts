@@ -1,5 +1,5 @@
-import { ActionSetting, ArchitectureDescription, BlockElementDescription, BlockElementType, ConnectActionSetting, GraduallyPhases, LineBlockElementDescription, ParallelPhase, PhaseAction, PhaseStep } from "./descriptionTypes";
-import { Block, BlockElement, ContainerBlock, LineBlockElement, ParentBlockElement, Positioning, RectPositioning } from "./types";
+import { ActionSetting, AddNewBlockActionSetting, ArchitectureDescription, BlockElementDescription, BlockElementType, ConnectActionSetting, GraduallyPhases, LineBlockElementDescription, ParallelPhase, PhaseAction, PhaseStep } from "./descriptionTypes";
+import { ActionType, Block, BlockElement, ContainerBlock, LineBlockElement, ParentBlockElement, Positioning, RectPositioning } from "./types";
 
 export function isNotNullOrUndefined<T>(obj: T | null | undefined): obj is T {
     return obj !== null && typeof obj !== "undefined";
@@ -49,7 +49,7 @@ export function isPhaseAction(obj?: PhaseStep | null): obj is PhaseAction {
                     if (Array.isArray(val)) {
                         return (<any[]>val).every(y => typeof y === "string" || isActionSetting(y));
                     }
-                    return isConnectActionSetting(val);
+                    return Object.values(ActionType).some(y => y === x);
                 });
     }
     return false;
@@ -75,8 +75,16 @@ export function isConnectActionSetting(obj?: ActionSetting): obj is ConnectActio
     }
     return false;
 }
-export function isActionSetting(obj?: ActionSetting): obj is ConnectActionSetting {
-    return isConnectActionSetting(obj);
+export function isAddNewBlockActionSetting(obj?: ActionSetting): obj is AddNewBlockActionSetting {
+    if (obj) {
+        const connect = <AddNewBlockActionSetting>obj;
+        return isBlockElementDescription(connect);
+    }
+    return false;
+}
+export function isActionSetting(obj?: unknown): obj is ActionSetting {
+    const action = <ActionSetting>obj;
+    return isConnectActionSetting(action) && isAddNewBlockActionSetting(action);
 }
 
 export function isArray<T>(obj: T | T[]): obj is T[] {

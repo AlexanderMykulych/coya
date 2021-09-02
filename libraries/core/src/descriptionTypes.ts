@@ -29,7 +29,9 @@ export interface ConnectActionSetting {
     from: string;
     to: string;
 }
-export type ActionSetting = ConnectActionSetting;
+export interface AddNewBlockActionSetting extends BlockGroupDescriptions {}
+
+export type ActionSetting = ConnectActionSetting | AddNewBlockActionSetting;
 
 export interface PhaseAction {
     [name: string]: string | string[] | ActionSetting | ActionSetting[];

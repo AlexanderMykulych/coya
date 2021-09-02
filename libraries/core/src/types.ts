@@ -30,7 +30,8 @@ export type Block = ContainerBlock | LineBlockElement;
 
 export type ActionExecutor = (architecture: Architecture, actionSetting: Action) => Architecture;
 export enum ActionType {
-    Connect = "connect"
+    Connect = "connect",
+    AddNewBlock = "newBlock"
 }
 export interface Action {
     name: ActionType | string;
