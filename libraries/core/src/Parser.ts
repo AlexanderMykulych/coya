@@ -12,10 +12,14 @@ export function transformToArchitecture(description: Ref<unknown> | unknown): Re
     const refDescription = isRef(description) ? description : ref(description);
     const value = refDescription.value;
     
-    const transitionalArchitecture = ref(JSON.parse(JSON.stringify(value)));
+    const transitionalArchitectureRef = ref(JSON.parse(JSON.stringify(value)));
+    const transitionalArchitecture: ArchitectureDescription = transitionalArchitectureRef.value;
+    transitionalArchitecture.blocks = {
+        main: transitionalArchitecture.blocks
+    };
     const architecture = computed<Architecture>(() => {
-        if (isArchitectureDescription(transitionalArchitecture.value)) {
-            return transformDescriptionToArchitecture(transitionalArchitecture.value);
+        if (isArchitectureDescription(transitionalArchitecture)) {
+            return transformDescriptionToArchitecture(transitionalArchitecture);
         }
         return {
             blocks: ref([]),
@@ -34,7 +38,7 @@ export function transformDescriptionToArchitecture(architectureDescription: Arch
     const phaseIndex = buildPhasesIndex(architectureDescription.phases);
     return {
         blocks,
-        style: computed(() => styleDescriptionToArchitectureStyle(architectureDescription.style, blocks.value)),
+        style: computed(() => styleDescriptionToArchitectureStyle(architectureDescription, blocks.value)),
         start: () => {
             const nextPhaseId = startPhases(architectureDescription, phaseIndex, currentPhase);
             currentPhase.current = nextPhaseId;
@@ -43,7 +47,7 @@ export function transformDescriptionToArchitecture(architectureDescription: Arch
 }
 
 export function BlockGroupDescriptionsToBlock(description: BlockGroupDescriptions): Block[] {
-    return blockGroupDescriptionsToBlock({ main: description });
+    return blockGroupDescriptionsToBlock(description);
 }
 
 

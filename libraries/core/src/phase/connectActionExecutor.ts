@@ -7,7 +7,7 @@ export function connectActionExecutor(context: ActionExecutorContext, action: Ac
         return [{
             type: ChangeType.AddNewBlock,
             setting: {
-                newBlockId: `line_${context.indexItem.phaseId}`,
+                newBlockId: action.value.name ?? `line_${context.indexItem.phaseId}`,
                 blockSettings: {
                     from: action.value.from,
                     to: action.value.to,

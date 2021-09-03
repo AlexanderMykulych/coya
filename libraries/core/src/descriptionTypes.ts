@@ -28,6 +28,7 @@ export interface BlockGroupDescriptions {
 export interface ConnectActionSetting {
     from: string;
     to: string;
+    name?: string;
 }
 export interface AddNewBlockActionSetting extends BlockGroupDescriptions {}
 
@@ -51,20 +52,38 @@ export type PhaseStep =
 export interface AnimationDescription {
     [name: string]: {};
 }
+
+export interface RectPosition {
+    x: number;
+    y: number;
+    w: number;
+    h: number;
+    indentX?: number;
+    indentY?: number;
+}
+
+export type Position = RectPosition;
 export interface BlockStyle {
     svg?: string;
     svgUrl?: string;
     svgTag?: keyof SVGElementTagNameMap;
     css?: Properties;
+    position?: Position;
 }
 export interface StyleDescription {
     [name: string]: BlockStyle;
+}
+
+export enum PositioningSystem {
+    Auto = "auto",
+    Grid = "grid"
 }
 export interface ArchitectureDescription {
     blocks: BlockGroupDescriptions;
     phases?: PhaseStep;
     animation?: AnimationDescription;
     style?: StyleDescription;
+    positioning?: PositioningSystem;
 }
 
 export type ArchitectureDescriptionElement =

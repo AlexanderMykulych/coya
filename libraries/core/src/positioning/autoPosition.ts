@@ -2,7 +2,7 @@ import { AutoPositioningSetting, AutoPositioningSizeSetting } from "./types";
 import { computed, ref, Ref } from "@vue/reactivity";
 import { BlockPositioning, Positioning } from "../types";
 import { isContainerBlock, isLineBlockElement, isNotNullOrUndefined, isParentBlockElement, isRectPositioning } from "../typeGuards";
-import { relativeBlockPosition } from "./relativeBlockPosition";
+import { lineBlockPosition } from "./relativeBlockPosition";
 import { getNumber } from "./getNumber";
 
 export function autoPositioning(setting: AutoPositioningSetting): BlockPositioning[] {
@@ -12,7 +12,7 @@ export function autoPositioning(setting: AutoPositioningSetting): BlockPositioni
     blocksPositioning.value = blocks.map<BlockPositioning | null>(block => {
         if (!isContainerBlock(block)) {
             if (isLineBlockElement(block)) {
-                return relativeBlockPosition(blocksPositioning, block);
+                return lineBlockPosition(blocksPositioning, block);
             }
             return null;
         }

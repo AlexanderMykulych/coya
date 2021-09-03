@@ -42,6 +42,7 @@ onMounted(() => {
     <transition @before-enter="beforeEnter" @enter="enter" appear>
         <line
             v-if="isLine"
+            :id="block.id"
             :x1="linePosition.x1"
             :y1="linePosition.y1"
             :x2="linePosition.x2"
