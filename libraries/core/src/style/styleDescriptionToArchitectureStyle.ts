@@ -1,16 +1,20 @@
-import { StyleDescription } from "../descriptionTypes";
+import { ArchitectureDescription, PositioningSystem, StyleDescription } from "../descriptionTypes";
 import { autoPositioning } from "../positioning/autoPosition";
 import { Block, BlocksStyle, Style } from "../types";
+import { gridPositioning } from "../positioning/gridPositioning";
 
 export function styleDescriptionToArchitectureStyle(
-        style: StyleDescription | null | undefined,
-        blocks: Block[]
-    ): Style {
-        return {
-                id: "style",
-                positioning: autoPositioning({ blocks }),
-                blocks: style ? generateBlocksStyle(style) : undefined
-            };
+    architectureDescription: ArchitectureDescription,
+    blocks: Block[]
+): Style {
+    const positioningSystem = architectureDescription.positioning;
+    return {
+        id: "style",
+        positioning: !positioningSystem || positioningSystem === PositioningSystem.Auto ?
+            autoPositioning({ architectureDescription, blocks }) :
+            gridPositioning({ architectureDescription, blocks }),
+        blocks: architectureDescription.style ? generateBlocksStyle(architectureDescription.style) : undefined
+    };
 }
 function generateBlocksStyle(style: StyleDescription): BlocksStyle {
     return style;

@@ -3,6 +3,7 @@ import { startPhases } from "./phase/startPhases";
 import { autoPositioning } from "./positioning/autoPosition";
 export * from "./typeGuards";
 export * from "./types";
+export * from "./descriptionTypes";
 
 export {
     transformDescriptionToArchitecture,
