@@ -21,6 +21,9 @@ export function buildPhasesIndex(phases: PhaseStep | undefined | null): PhaseInd
     };
 }
 function buildIndexObject(phase: PhaseStep | undefined | null, isStart: boolean = true, id: string = "start"): PhaseIndexItem[] {
+    if (!phase) {
+        return [];
+    }
     if (isPhaseAction(phase)) {
         const actions: PhaseIndexItemAction[] = Object
             .keys(phase)

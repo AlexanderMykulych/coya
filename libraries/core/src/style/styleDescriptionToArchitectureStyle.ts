@@ -7,7 +7,7 @@ export function styleDescriptionToArchitectureStyle(
     architectureDescription: ArchitectureDescription,
     blocks: Block[]
 ): Style {
-    const positioningSystem = architectureDescription.positioning;
+    const positioningSystem = architectureDescription.style?.positioning;
     return {
         id: "style",
         positioning: !positioningSystem || positioningSystem === PositioningSystem.Auto ?
@@ -16,7 +16,7 @@ export function styleDescriptionToArchitectureStyle(
         blocks: architectureDescription.style ? generateBlocksStyle(architectureDescription.style) : undefined
     };
 }
-function generateBlocksStyle(style: StyleDescription): BlocksStyle {
-    return style;
+function generateBlocksStyle(style: StyleDescription): BlocksStyle | undefined {
+    return style.blocks;
 }
 

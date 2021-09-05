@@ -1,4 +1,4 @@
-import { ActionSetting, AddNewBlockActionSetting, ArchitectureDescription, BlockElementDescription, BlockElementType, ConnectActionSetting, GraduallyPhases, LineBlockElementDescription, ParallelPhase, PhaseAction, PhaseStep } from "./descriptionTypes";
+import { ActionSetting, AddNewBlockActionSetting, ArchitectureDescription, BlockElementDescription, BlockElementType, ConnectActionSetting, FormulaValue, GraduallyPhases, LineBlockElementDescription, ParallelPhase, PhaseAction, PhaseStep } from "./descriptionTypes";
 import { ActionType, Block, BlockElement, ContainerBlock, LineBlockElement, ParentBlockElement, Positioning, RectPositioning } from "./types";
 
 export function isNotNullOrUndefined<T>(obj: T | null | undefined): obj is T {
@@ -113,6 +113,15 @@ export function isContainerBlock(obj?: Block): obj is ContainerBlock {
         if (!!container.parentId) return true;
         const blockEl = <any>obj;
         return !blockEl.type;
+    }
+    return false;
+}
+
+
+export function isFormulaValue(obj?: unknown): obj is FormulaValue {
+    if (!!obj) {
+        const formulaValue = <FormulaValue>obj;
+        return !!formulaValue.formula && typeof formulaValue.formula === "string";
     }
     return false;
 }

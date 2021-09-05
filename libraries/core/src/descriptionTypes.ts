@@ -53,14 +53,28 @@ export interface AnimationDescription {
     [name: string]: {};
 }
 
-export interface RectPosition {
-    x: number;
-    y: number;
-    w: number;
-    h: number;
-    indentX?: number;
-    indentY?: number;
+export interface FormulaValue {
+    formula: string;
 }
+export interface RectPosition {
+    x: number | FormulaValue;
+    y: number | FormulaValue;
+    w: number | FormulaValue;
+    h: number | FormulaValue;
+
+    x1: number | FormulaValue;
+    y1: number | FormulaValue;
+    x2: number | FormulaValue;
+    y2: number | FormulaValue;
+
+    indentX?: number | FormulaValue;
+    indentX1?: number | FormulaValue;
+    indentX2?: number | FormulaValue;
+    indentY?: number | FormulaValue;
+    indentY1?: number | FormulaValue;
+    indentY2?: number | FormulaValue;
+}
+
 
 export type Position = RectPosition;
 export interface BlockStyle {
@@ -71,7 +85,10 @@ export interface BlockStyle {
     position?: Position;
 }
 export interface StyleDescription {
-    [name: string]: BlockStyle;
+    blocks?: {
+        [name: string]: BlockStyle
+    }
+    positioning?: PositioningSystem;
 }
 
 export enum PositioningSystem {
@@ -83,7 +100,6 @@ export interface ArchitectureDescription {
     phases?: PhaseStep;
     animation?: AnimationDescription;
     style?: StyleDescription;
-    positioning?: PositioningSystem;
 }
 
 export type ArchitectureDescriptionElement =

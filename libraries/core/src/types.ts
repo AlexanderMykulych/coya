@@ -128,3 +128,8 @@ export interface ActionExecutorContext {
     architecture: ArchitectureDescription;
     phaseIndex: PhaseIndex;
 }
+
+export interface FormulaValueFuncContext {
+    blockNamesAsFuncParams: string;
+    blocksValues: Positioning[];
+}

@@ -1,8 +1,8 @@
-import {ArchitectureDescription, PositioningSystem} from "@coya/core";
+import { ArchitectureDescription, PositioningSystem } from "@coya/core";
 import smartphone from './smartphone.svg?raw';
 
 export default <ArchitectureDescription>{
-    positioning: PositioningSystem.Grid,
+
     "blocks": {
         "mobile": "Mobile client"
     },
@@ -44,56 +44,77 @@ export default <ArchitectureDescription>{
         },
     ],
     style: {
-        web: {
-            css: {
-                backgroundColor: "aliceblue",
-                margin: "10px",
-                fill: "red",
-                r: 7,
-                cx: 15,
-                cy: 10,
-                strokeWidth: "3",
-                stroke: "black",
-                strokeOpacity: 0.2,
-                cursor: "grabbing"
+        positioning: PositioningSystem.Grid,
+        blocks: {
+            web: {
+                css: {
+                    backgroundColor: "aliceblue",
+                    margin: "10px",
+                    fill: "red",
+                    r: 7,
+                    cx: 15,
+                    cy: 10,
+                    strokeWidth: "3",
+                    stroke: "black",
+                    strokeOpacity: 0.2,
+                    cursor: "grabbing"
+                },
+                svgTag: "circle",
+                position: {
+                    x: 17,
+                    y: 2,
+                    w: 2,
+                    h: 1
+                }
             },
-            svgTag: "circle",
-            position: {
-                x: 17,
-                y: 2,
-                w: 2,
-                h: 1
-            }
-        },
-        "mobile": {
-            svg: smartphone,
-            css: {
-                cursor: "grab"
+            "mobile": {
+                svg: smartphone,
+                css: {
+                    cursor: "grab"
+                },
+                position: {
+                    x: 2,
+                    y: 2,
+                    w: 3,
+                    h: 1
+                }
             },
-            position: {
-                x: 2,
-                y: 2,
-                w: 3,
-                h: 1
+            "web2": {
+                position: {
+                    x: 17,
+                    y: 4,
+                    w: 2,
+                    h: 1
+                }
+            },
+            "line_mob_web": {
+                position: {
+                    indentY1: {
+                        formula: "web.height / 3"
+                    },
+                    indentY2: {
+                        formula: "web.height / -3"
+                    },
+                }
+            },
+            "line_web_mob": {
+                position: {
+                    indentY1: {
+                        formula: "web.height / 3"
+                    },
+                    indentY2: {
+                        formula: "web.height / -3"
+                    },
+                }
+            },
+            "line1": {
+                position: {
+                    indentY1: {
+                        formula: "mobile.height / 3"
+                    },
+                    indentX2: -10
+                }
             }
-        },
-        "web2": {
-            position: {
-                x: 17,
-                y: 4,
-                w: 2,
-                h: 1
-            }
-        },
-        "line_mob_web": {
-            position: {
-                indentY: 3
-            }
-        },
-        "line_web_mob": {
-            position: {
-                indentY: -3
-            }
-        },
+        }
     }
 }
