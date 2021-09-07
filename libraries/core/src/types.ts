@@ -31,7 +31,8 @@ export type Block = ContainerBlock | LineBlockElement;
 export type ActionExecutor = (architecture: Architecture, actionSetting: Action) => Architecture;
 export enum ActionType {
     Connect = "connect",
-    AddNewBlock = "newBlock"
+    AddNewBlock = "newBlock",
+    ChangePosition = "changePosition"
 }
 export interface Action {
     name: ActionType | string;
@@ -96,13 +97,19 @@ export interface CurrentPhaseInfo {
 }
 
 export enum ChangeType {
-    AddNewBlock = 0
+    AddNewBlock = 0,
+    ChangeStyle = 1
 }
 export interface AddBlockChangeSetting {
     blockSettings: string | BlockGroupDescriptions | BlockElementDescription | null;
     newBlockId: string;
 }
-export type ChangeSetting = AddBlockChangeSetting;
+export interface ChangeBlockStyleSetting {
+    blockId: string;
+    newStyle: Partial<BlockStyle>
+}
+
+export type ChangeSetting = AddBlockChangeSetting | ChangeBlockStyleSetting;
 export interface Change {
     setting: ChangeSetting;
     type: ChangeType;

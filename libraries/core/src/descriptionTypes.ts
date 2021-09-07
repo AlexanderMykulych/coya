@@ -30,9 +30,12 @@ export interface ConnectActionSetting {
     to: string;
     name?: string;
 }
-export interface AddNewBlockActionSetting extends BlockGroupDescriptions {}
+export interface AddNewBlockActionSetting extends BlockGroupDescriptions { }
+export interface ChangeBlockPositionActionSetting {
+    [name: string]: Position;
+}
 
-export type ActionSetting = ConnectActionSetting | AddNewBlockActionSetting;
+export type ActionSetting = ConnectActionSetting | AddNewBlockActionSetting | ChangeBlockPositionActionSetting;
 
 export interface PhaseAction {
     [name: string]: string | string[] | ActionSetting | ActionSetting[];
@@ -57,15 +60,15 @@ export interface FormulaValue {
     formula: string;
 }
 export interface RectPosition {
-    x: number | FormulaValue;
-    y: number | FormulaValue;
-    w: number | FormulaValue;
-    h: number | FormulaValue;
+    x?: number | FormulaValue;
+    y?: number | FormulaValue;
+    w?: number | FormulaValue;
+    h?: number | FormulaValue;
 
-    x1: number | FormulaValue;
-    y1: number | FormulaValue;
-    x2: number | FormulaValue;
-    y2: number | FormulaValue;
+    x1?: number | FormulaValue;
+    y1?: number | FormulaValue;
+    x2?: number | FormulaValue;
+    y2?: number | FormulaValue;
 
     indentX?: number | FormulaValue;
     indentX1?: number | FormulaValue;

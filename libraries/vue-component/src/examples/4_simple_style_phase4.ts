@@ -2,11 +2,24 @@ import { ArchitectureDescription, PositioningSystem } from "@coya/core";
 import smartphone from './smartphone.svg?raw';
 
 export default <ArchitectureDescription>{
-
     "blocks": {
         "mobile": "Mobile client"
     },
     phases: [
+        {
+            newBlock: {
+                "rect": {
+                    label: "Web App"
+                }
+            }
+        },
+        {
+            newBlock: {
+                "img": {
+                    label: "Web App"
+                }
+            }
+        },
         {
             newBlock: {
                 "web": {
@@ -42,10 +55,66 @@ export default <ArchitectureDescription>{
                 name: "line1"
             }
         },
+        {
+            changePosition: {
+                "web": {
+                    y: {
+                        formula: "mobile.y"
+                    },
+                    x: {
+                        formula: "mobile.x + 260"
+                    }
+                }
+            }
+        },
+        {
+            changePosition: {
+                mobile: {
+                    indentX: 20
+                }
+            }
+        }
     ],
     style: {
         positioning: PositioningSystem.Grid,
         blocks: {
+            img: {
+                position: {
+                    x: {
+                        formula: "rect.x + 30"
+                    },
+                    y: {
+                        formula: "rect.y"
+                    },
+                    w: {
+                        formula: "rect.width"
+                    },
+                    h: {
+                        formula: "rect.height"
+                    }
+                },
+                svgUrl: "https://image.flaticon.com/icons/png/512/2972/2972316.png"
+            },
+            rect: {
+                position: {
+                    x: 4,
+                    y: 2,
+                    w: 1,
+                    h: 1
+                }
+            },
+            mobile: {
+                svg: smartphone,
+                css: {
+                    cursor: "grab"
+                },
+                position: {
+                    x: 2,
+                    y: 4,
+                    w: 3,
+                    h: 1
+                }
+            },
             web: {
                 css: {
                     backgroundColor: "aliceblue",
@@ -61,48 +130,39 @@ export default <ArchitectureDescription>{
                 },
                 svgTag: "circle",
                 position: {
-                    x: 17,
-                    y: 2,
+                    x: {
+                        formula: "mobile.x + 200"
+                    },
+                    y: {
+                        formula: "mobile.y - mobile.height * 2"
+                    },
                     w: 2,
-                    h: 1
-                }
-            },
-            "mobile": {
-                svg: smartphone,
-                css: {
-                    cursor: "grab"
-                },
-                position: {
-                    x: 2,
-                    y: 2,
-                    w: 3,
                     h: 1
                 }
             },
             "web2": {
                 position: {
-                    x: 17,
-                    y: 4,
+                    x: {
+                        formula: "web.x + web.width / 2"
+                    },
+                    y: {
+                        formula: "mobile.y + mobile.height * 2"
+                    },
                     w: 2,
-                    h: 1
+                    h: 1,
+                    indentX: -5
                 }
             },
             "line_mob_web": {
                 position: {
-                    indentY1: {
+                    indentY: {
                         formula: "web.height / 3"
-                    },
-                    indentY2: {
-                        formula: "web.height / -3"
                     },
                 }
             },
             "line_web_mob": {
                 position: {
-                    indentY1: {
-                        formula: "web.height / 3"
-                    },
-                    indentY2: {
+                    indentY: {
                         formula: "web.height / -3"
                     },
                 }

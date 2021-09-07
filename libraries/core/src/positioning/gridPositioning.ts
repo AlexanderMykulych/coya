@@ -1,6 +1,6 @@
 import { computed, Ref, ref } from "@vue/reactivity";
 import { FormulaValue } from "../descriptionTypes";
-import { isContainerBlock, isLineBlockElement, isNotNullOrUndefined } from "../typeGuards";
+import { isContainerBlock, isFormulaValue, isLineBlockElement, isNotNullOrUndefined } from "../typeGuards";
 import { BlockPositioning } from "../types";
 import { getFormulaValue } from "./getFormulaValue";
 import { lineBlockPosition } from "./relativeBlockPosition";
@@ -39,16 +39,22 @@ export function gridPositioning(option: AutoPositioningSetting): BlockPositionin
         if (blockStyle.position) {
             const pos = blockStyle.position;
             
-            const getValueByCtx = (x?: number | FormulaValue) => getFormulaValue(x, blocksPositioning);
+            const getValueByCtx = (x?: number | FormulaValue, multiplier: number = 1) => {
+                const res = getFormulaValue(x, blocksPositioning);
+                if (isFormulaValue(x)) {
+                    return res;
+                }
+                return ref(res.value * multiplier);
+            };
             const indentX = (getValueByCtx(pos.indentX) ?? 0);
             const indentY = (getValueByCtx(pos.indentY) ?? 0);
             return <BlockPositioning>{
                 blockId: block.id,
                 position: {
-                    x: computed(() => getValueByCtx(pos.x).value * gridSize.columnWidth + indentX.value),
-                    y: computed(() => getValueByCtx(pos.y).value * gridSize.rowHeight + indentY.value),
-                    width: computed(() => getValueByCtx(pos.w).value * gridSize.columnWidth + indentX.value),
-                    height: computed(() => getValueByCtx(pos.h).value * gridSize.rowHeight + indentY.value)
+                    x: computed(() => getValueByCtx(pos.x, gridSize.columnWidth).value + indentX.value),
+                    y: computed(() => getValueByCtx(pos.y, gridSize.rowHeight).value + indentY.value),
+                    width: computed(() => getValueByCtx(pos.w, gridSize.columnWidth).value + indentX.value),
+                    height: computed(() => getValueByCtx(pos.h, gridSize.rowHeight).value + indentY.value)
                 }
             };
         }

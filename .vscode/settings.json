@@ -1,6 +1,7 @@
 {
     "jest.jestCommandLine": "rush test",
     "cSpell.words": [
-        "formula"
+        "formula",
+        "multiplier"
     ]
 }
