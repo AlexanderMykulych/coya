@@ -1,5 +1,6 @@
 import { ArchitectureDescription, PositioningSystem } from "@coya/core";
 import smartphone from './smartphone.svg?raw';
+import computer from './computer.svg?raw';
 
 export default <ArchitectureDescription>{
     "blocks": {
@@ -8,22 +9,8 @@ export default <ArchitectureDescription>{
     phases: [
         {
             newBlock: {
-                "rect": {
-                    label: "Web App"
-                }
-            }
-        },
-        {
-            newBlock: {
-                "img": {
-                    label: "Web App"
-                }
-            }
-        },
-        {
-            newBlock: {
                 "web": {
-                    label: "Web App"
+                    label: "Web App 1"
                 }
             }
         },
@@ -31,20 +18,22 @@ export default <ArchitectureDescription>{
             connect: {
                 from: "mobile",
                 to: "web",
-                name: "line_mob_web"
+                name: "line_mob_web",
+                label: "Request 1"
             }
         },
         {
             connect: {
                 from: "web",
                 to: "mobile",
-                name: "line_web_mob"
+                name: "line_web_mob",
+                label: "Response 1"
             }
         },
         {
             newBlock: {
                 "web2": {
-                    label: "Web App"
+                    label: "Web App 2"
                 }
             }
         },
@@ -52,7 +41,8 @@ export default <ArchitectureDescription>{
             connect: {
                 from: "mobile",
                 to: "web2",
-                name: "line1"
+                name: "line1",
+                label: "Request 2"
             }
         },
         {
@@ -128,7 +118,7 @@ export default <ArchitectureDescription>{
                     strokeOpacity: 0.2,
                     cursor: "grabbing"
                 },
-                svgTag: "circle",
+                svgUrl: "https://image.flaticon.com/icons/png/512/2972/2972316.png",
                 position: {
                     x: {
                         formula: "mobile.x + 200"
@@ -151,7 +141,8 @@ export default <ArchitectureDescription>{
                     w: 2,
                     h: 1,
                     indentX: -5
-                }
+                },
+                svg: computer
             },
             "line_mob_web": {
                 position: {

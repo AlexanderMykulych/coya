@@ -29,6 +29,7 @@ export interface ConnectActionSetting {
     from: string;
     to: string;
     name?: string;
+    label?: string;
 }
 export interface AddNewBlockActionSetting extends BlockGroupDescriptions { }
 export interface ChangeBlockPositionActionSetting {
