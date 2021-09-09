@@ -4,15 +4,15 @@ import { Action, ActionExecutorContext, Change, ChangeType } from "../types";
 
 export function connectActionExecutor(context: ActionExecutorContext, action: Action): Change[] | null {
     if (isConnectActionSetting(action.value)) {
+        const newBlockId = action.value.name ?? `line_${context.indexItem.phaseId}`;
         return [{
             type: ChangeType.AddNewBlock,
             setting: {
-                newBlockId: action.value.name ?? `line_${context.indexItem.phaseId}`,
+                newBlockId,
                 blockSettings: {
-                    from: action.value.from,
-                    to: action.value.to,
+                    ...action.value,
                     type: BlockElementType.Line,
-                    label: "line"
+                    label: action.value.label ?? newBlockId
                 }
             }
         }];

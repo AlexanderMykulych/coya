@@ -1,11 +1,17 @@
-import {Properties} from "csstype";
+import { Properties } from "csstype";
 
 export enum BlockElementType {
     Rect = "rect",
     Line = "line"
 }
+
+export interface EnterSetting {
+    from: any;
+    to: any;
+}
 export interface BaseBlockElementDescription {
     label?: string;
+    enter?: EnterSetting;
     type?: BlockElementType;
 }
 
@@ -29,10 +35,21 @@ export interface ConnectActionSetting {
     from: string;
     to: string;
     name?: string;
+    label?: string;
+    enter?: EnterSetting;
 }
-export interface AddNewBlockActionSetting extends BlockGroupDescriptions {}
+export interface AddNewBlockActionSetting extends BlockGroupDescriptions { }
+export interface ChangeBlockPositionActionSetting {
+    [name: string]: Position;
+}
 
-export type ActionSetting = ConnectActionSetting | AddNewBlockActionSetting;
+export interface ChangeLabelActionSetting {
+    [name: string]: {
+        label: string;
+    }
+}
+
+export type ActionSetting = ConnectActionSetting | AddNewBlockActionSetting | ChangeBlockPositionActionSetting | ChangeLabelActionSetting;
 
 export interface PhaseAction {
     [name: string]: string | string[] | ActionSetting | ActionSetting[];
@@ -53,14 +70,30 @@ export interface AnimationDescription {
     [name: string]: {};
 }
 
-export interface RectPosition {
-    x: number;
-    y: number;
-    w: number;
-    h: number;
-    indentX?: number;
-    indentY?: number;
+export interface FormulaValue {
+    formula: string;
 }
+export interface RectPosition {
+    x?: number | FormulaValue;
+    y?: number | FormulaValue;
+    w?: number | FormulaValue;
+    h?: number | FormulaValue;
+
+    x1?: number | FormulaValue;
+    y1?: number | FormulaValue;
+    x2?: number | FormulaValue;
+    y2?: number | FormulaValue;
+
+    indentX?: number | FormulaValue;
+    indentX1?: number | FormulaValue;
+    indentX2?: number | FormulaValue;
+    indentY?: number | FormulaValue;
+    indentY1?: number | FormulaValue;
+    indentY2?: number | FormulaValue;
+
+    enter?: EnterSetting;
+}
+
 
 export type Position = RectPosition;
 export interface BlockStyle {
@@ -69,9 +102,13 @@ export interface BlockStyle {
     svgTag?: keyof SVGElementTagNameMap;
     css?: Properties;
     position?: Position;
+    label?: string;
 }
 export interface StyleDescription {
-    [name: string]: BlockStyle;
+    blocks?: {
+        [name: string]: BlockStyle
+    }
+    positioning?: PositioningSystem;
 }
 
 export enum PositioningSystem {
@@ -83,7 +120,6 @@ export interface ArchitectureDescription {
     phases?: PhaseStep;
     animation?: AnimationDescription;
     style?: StyleDescription;
-    positioning?: PositioningSystem;
 }
 
 export type ArchitectureDescriptionElement =

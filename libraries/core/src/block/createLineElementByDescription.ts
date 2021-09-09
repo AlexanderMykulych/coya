@@ -1,11 +1,11 @@
-import { LineBlockElementDescription } from "../descriptionTypes";
+import { BlockStyle, LineBlockElementDescription } from "../descriptionTypes";
 import { LineBlockElement } from "../types";
 
 
-export function createLineElementByDescription(id: string, value: LineBlockElementDescription): LineBlockElement {
+export function createLineElementByDescription(id: string, value: LineBlockElementDescription, blockStyle?: BlockStyle): LineBlockElement {
     return {
         id,
         ...value,
-        label: value.label ?? id
+        label: blockStyle?.label ?? value.label ?? id
     }
 }

@@ -1,6 +1,8 @@
 import { computed, Ref, ref } from "@vue/reactivity";
-import { isContainerBlock, isLineBlockElement, isNotNullOrUndefined } from "../typeGuards";
+import { FormulaValue } from "../descriptionTypes";
+import { isContainerBlock, isFormulaValue, isLineBlockElement, isNotNullOrUndefined } from "../typeGuards";
 import { BlockPositioning } from "../types";
+import { getFormulaValue } from "./getFormulaValue";
 import { lineBlockPosition } from "./relativeBlockPosition";
 import { AutoPositioningSetting } from "./types";
 
@@ -13,10 +15,10 @@ export function gridPositioning(option: AutoPositioningSetting): BlockPositionin
             }
             const styleBlock = option
                 .architectureDescription
-                .style?.[block.id];
+                .style?.blocks?.[block.id];
             return !styleBlock || !styleBlock.position;
         })
-    const style = option.architectureDescription.style;
+    const style = option.architectureDescription.style?.blocks;
     if (!style || notSettetBlocks.length > 0) {
         throw `Not every block has setting: [${notSettetBlocks.map(x => x.id)}]`;
     }
@@ -36,15 +38,23 @@ export function gridPositioning(option: AutoPositioningSetting): BlockPositionin
         }
         if (blockStyle.position) {
             const pos = blockStyle.position;
-            const indentX = (pos.indentX ?? 0);
-            const indentY = (pos.indentY ?? 0);
+            
+            const getValueByCtx = (x?: number | FormulaValue, multiplier: number = 1) => {
+                const res = getFormulaValue(x, blocksPositioning);
+                if (isFormulaValue(x)) {
+                    return res;
+                }
+                return ref(res.value * multiplier);
+            };
+            const indentX = (getValueByCtx(pos.indentX) ?? 0);
+            const indentY = (getValueByCtx(pos.indentY) ?? 0);
             return <BlockPositioning>{
                 blockId: block.id,
                 position: {
-                    x: computed(() => pos.x * gridSize.columnWidth + indentX),
-                    y: computed(() => pos.y * gridSize.rowHeight + indentY),
-                    width: computed(() => pos.w * gridSize.columnWidth + indentX),
-                    height: computed(() => pos.h * gridSize.rowHeight + indentY)
+                    x: computed(() => getValueByCtx(pos.x, gridSize.columnWidth).value + indentX.value),
+                    y: computed(() => getValueByCtx(pos.y, gridSize.rowHeight).value + indentY.value),
+                    width: computed(() => getValueByCtx(pos.w, gridSize.columnWidth).value + indentX.value),
+                    height: computed(() => getValueByCtx(pos.h, gridSize.rowHeight).value + indentY.value)
                 }
             };
         }
@@ -52,3 +62,4 @@ export function gridPositioning(option: AutoPositioningSetting): BlockPositionin
     }).filter(isNotNullOrUndefined);
     return blocksPositioning.value;
 }
+

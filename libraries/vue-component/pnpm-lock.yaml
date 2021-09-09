@@ -11,7 +11,7 @@ specifiers:
   '@vueuse/core': ^6.0.0
   cross-env: ^7.0.3
   eslint: ^7.32.0
-  gsap: ^3.7.1
+  gsap: file:gsap-bonus.tgz
   pnpm: ^6.13.0
   rollup-plugin-svg: ^2.0.0
   typescript: ^4.3.5
@@ -28,7 +28,7 @@ specifiers:
 dependencies:
   '@headlessui/vue': 1.4.0
   '@vueuse/core': 6.0.0_vue@3.2.4
-  gsap: 3.7.1
+  gsap: file:gsap-bonus.tgz
   rollup-plugin-svg: 2.0.0
   vue: 3.2.4
   vue-demi: 0.11.3_vue@3.2.4
@@ -1757,10 +1757,6 @@ packages:
     resolution: {integrity: sha512-qkIilPUYcNhJpd33n0GBXTB1MMPp14TxEsEs0pTrsSVucApsYzW5V+Q8Qxhik6KU3evy+qkAAowTByymK0avdg==}
     dev: true
 
-  /gsap/3.7.1:
-    resolution: {integrity: sha512-4qxuaC2yFWRjMRof5tI/7c9/+L4xMsCoqHrZAmuh+IbOokTnZyoeF0VgvcVHq3uo+/VJZCs7PTvjrFasfGl+ww==}
-    dev: false
-
   /has-bigints/1.0.1:
     resolution: {integrity: sha512-LSBS2LjbNBTf6287JEbEzvJgftkF5qFkmCo9hDRpAzKhUOlJ+hx8dd4USs00SgsUNwc4617J9ki5YtEClM2ffA==}
     dev: true
@@ -3216,3 +3212,9 @@ packages:
     resolution: {integrity: sha512-RbI2Tm3hl9AoHY4wWyWvGvJfFIbHOzuzaxum6ez1A0vve+uXgNor03Wys4t+2sgjJSVSe+B2xerd1/dnvqHlOA==}
     engines: {node: '>= 12'}
     dev: true
+
+  file:gsap-bonus.tgz:
+    resolution: {integrity: sha512-h4T2l63ppKGVEiYZB17jMHH5BRMVzC5CRzKHqk5ti4+Lby8lmMafzm1qa1IeUOETkzVmPU7Kz7Ls28A1ZPC9CQ==, tarball: file:gsap-bonus.tgz}
+    name: gsap
+    version: 3.4.2
+    dev: false

@@ -1,7 +1,10 @@
-import { ArchitectureDescription } from "../descriptionTypes";
+import { ArchitectureDescription, BlockStyle } from "../descriptionTypes";
 import { isNotNullOrUndefined } from "../typeGuards";
-import { ActionExecutorContext, ActionType, Change, ChangeType, CurrentPhaseInfo, PhaseId, PhaseIndex, PhaseIndexItemAction } from "../types";
+import { ActionExecutorContext, ActionType, AddBlockChangeSetting, Change, ChangeBlockStyleSetting, ChangeType, CurrentPhaseInfo, PhaseId, PhaseIndex, PhaseIndexItemAction } from "../types";
+import { deepAssign } from "../util/deepAssign";
 import { addNewBlockActionExecutor } from "./addNewBlockActionExecutor";
+import { changeBlockPositionActionExecutor } from "./changeBlockPositionActionExecutor";
+import { changeLabelActionExecutor } from "./changeLabelActionExecutor";
 import { connectActionExecutor } from "./connectActionExecutor";
 
 export function startPhases(architecture: ArchitectureDescription, phaseIndex: PhaseIndex, phaseInfo: CurrentPhaseInfo): PhaseId {
@@ -29,16 +32,29 @@ function executePhaseIndex(item: PhaseIndexItemAction, context: ActionExecutorCo
         return connectActionExecutor(context, item.action);
     } else if (item.action.name === ActionType.AddNewBlock) {
         return addNewBlockActionExecutor(context, item.action);
+    } else if (item.action.name === ActionType.ChangePosition) {
+        return changeBlockPositionActionExecutor(context, item.action);
+    } else if (item.action.name === ActionType.ChangeLabel) {
+        return changeLabelActionExecutor(context, item.action);
     }
     throw "Not implemented!";
 }
 
 function makeChange(architecture: ArchitectureDescription, change: Change): void {
     if (change.type === ChangeType.AddNewBlock) {
-        architecture.blocks[change.setting.newBlockId] = change.setting.blockSettings;
-        return;
+        const setting = change.setting as AddBlockChangeSetting;
+        if (setting) {
+            architecture.blocks[setting.newBlockId] = setting.blockSettings;
+        }
+    } else if (change.type === ChangeType.ChangeStyle) {
+        const setting = change.setting as ChangeBlockStyleSetting;
+        if (setting && architecture.style?.blocks) {
+            const currentSetting = architecture.style?.blocks?.[setting.blockId];
+            if (currentSetting) {
+                architecture.style.blocks[setting.blockId] = deepAssign<BlockStyle>({}, currentSetting, setting.newStyle);
+            }
+        }
+    } else {
+        throw new Error("Function not implemented.");
     }
-    throw new Error("Function not implemented.");
 }
-
-
