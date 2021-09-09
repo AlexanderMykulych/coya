@@ -1,5 +1,5 @@
 import { ActionSetting, AddNewBlockActionSetting, ArchitectureDescription, BlockElementDescription, BlockElementType, ConnectActionSetting, FormulaValue, GraduallyPhases, LineBlockElementDescription, ParallelPhase, PhaseAction, PhaseStep } from "./descriptionTypes";
-import { ActionType, Block, BlockElement, ContainerBlock, LineBlockElement, ParentBlockElement, Positioning, RectPositioning } from "./types";
+import { ActionType, Block, ContainerBlock, LineBlockElement, ParentBlockElement, Positioning, RectPositioning } from "./types";
 
 export function isNotNullOrUndefined<T>(obj: T | null | undefined): obj is T {
     return obj !== null && typeof obj !== "undefined";
@@ -99,7 +99,7 @@ export function isLineBlockElementDescription(obj?: BlockElementDescription): ob
     return false;
 }
 
-export function isLineBlockElement(obj?: BlockElement): obj is LineBlockElement {
+export function isLineBlockElement(obj?: any): obj is LineBlockElement {
     if (!!obj) {
         const line = <LineBlockElement>obj;
         return line.type === BlockElementType.Line;

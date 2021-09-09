@@ -4,13 +4,37 @@ import computer from './computer.svg?raw';
 
 export default <ArchitectureDescription>{
     "blocks": {
-        "mobile": "Mobile client"
+        "mobile": {
+            label: "Mobile client"
+        },
+        text: {
+            label: "Text block"
+        }
     },
     phases: [
         {
             newBlock: {
                 "web": {
-                    label: "Web App 1"
+                    label: "Web App 1",
+                    enter: {
+                        from: {
+                            opacity: 0
+                        },
+                        to: {
+                            opacity: 1,
+                            duration: 1,
+                            stagger: {
+                                each: 0.5,
+                                repeat: -1,
+                                yoyo: true
+                            }
+                        }
+                    }
+                }
+            },
+            changeLabel: {
+                text: {
+                    label: "Web app 1 - is the next architecture block"
                 }
             }
         },
@@ -20,6 +44,11 @@ export default <ArchitectureDescription>{
                 to: "web",
                 name: "line_mob_web",
                 label: "Request 1"
+            },
+            changeLabel: {
+                text: {
+                    label: "Mobile client makes the request to web server"
+                }
             }
         },
         {
@@ -28,12 +57,22 @@ export default <ArchitectureDescription>{
                 to: "mobile",
                 name: "line_web_mob",
                 label: "Response 1"
+            },
+            changeLabel: {
+                text: {
+                    label: "Web server gives the response to mobile"
+                }
             }
         },
         {
             newBlock: {
                 "web2": {
                     label: "Web App 2"
+                }
+            },
+            changeLabel: {
+                text: {
+                    label: "Web App 2 is another web app server"
                 }
             }
         },
@@ -85,9 +124,17 @@ export default <ArchitectureDescription>{
                 },
                 svgUrl: "https://image.flaticon.com/icons/png/512/2972/2972316.png"
             },
+            text: {
+                position: {
+                    x: 0,
+                    y: 0,
+                    h: 9,
+                    w: 4
+                }
+            },
             rect: {
                 position: {
-                    x: 4,
+                    x: 5,
                     y: 2,
                     w: 1,
                     h: 1
@@ -99,7 +146,7 @@ export default <ArchitectureDescription>{
                     cursor: "grab"
                 },
                 position: {
-                    x: 2,
+                    x: 5,
                     y: 4,
                     w: 3,
                     h: 1

@@ -10,6 +10,7 @@ const props = defineProps<{ block: Block, positioning: LinePositioning, blockSty
 const cssStyle = computed(() => props.blockStyle?.css ?? {});
 const el = ref(null);
 const textEl = ref(null);
+const gEl = ref(null);
 const lineTextX = computed(() => {
     const width = Math.abs(props.positioning.x2 - props.positioning.x1) / 2;
     const x = Math.min(props.positioning.x1, props.positioning.x2);
@@ -52,16 +53,16 @@ onMounted(() => {
     // }, {
     //     immediate: true
     // });
-    watch(() => lineTextX.value, newVal => {
-        gsap.to(textEl.value, { duration: 3, attr: { x: newVal } });
-    }, {
-        immediate: true
-    });
-    watch(() => lineTextY.value, newVal => {
-        gsap.to(textEl.value, { duration: 3, attr: { y: newVal } });
-    }, {
-        immediate: true
-    });
+    // watch(() => lineTextX.value, newVal => {
+    //     gsap.to(textEl.value, { duration: 3, attr: { x: newVal } });
+    // }, {
+    //     immediate: true
+    // });
+    // watch(() => lineTextY.value, newVal => {
+    //     gsap.to(textEl.value, { duration: 3, attr: { y: newVal } });
+    // }, {
+    //     immediate: true
+    // });
 });
 const textStyle = ref({
     fontSize: "4px"
@@ -85,6 +86,8 @@ const textStyle = ref({
         <text
             :style="textStyle"
             ref="textEl"
+            :x="lineTextX"
+            :y="lineTextY"
             dominant-baseline="middle"
             text-anchor="middle"
         >{{ block.label }}</text>

@@ -4,6 +4,7 @@ import { ActionExecutorContext, ActionType, AddBlockChangeSetting, Change, Chang
 import { deepAssign } from "../util/deepAssign";
 import { addNewBlockActionExecutor } from "./addNewBlockActionExecutor";
 import { changeBlockPositionActionExecutor } from "./changeBlockPositionActionExecutor";
+import { changeLabelActionExecutor } from "./changeLabelActionExecutor";
 import { connectActionExecutor } from "./connectActionExecutor";
 
 export function startPhases(architecture: ArchitectureDescription, phaseIndex: PhaseIndex, phaseInfo: CurrentPhaseInfo): PhaseId {
@@ -33,6 +34,8 @@ function executePhaseIndex(item: PhaseIndexItemAction, context: ActionExecutorCo
         return addNewBlockActionExecutor(context, item.action);
     } else if (item.action.name === ActionType.ChangePosition) {
         return changeBlockPositionActionExecutor(context, item.action);
+    } else if (item.action.name === ActionType.ChangeLabel) {
+        return changeLabelActionExecutor(context, item.action);
     }
     throw "Not implemented!";
 }
@@ -43,9 +46,7 @@ function makeChange(architecture: ArchitectureDescription, change: Change): void
         if (setting) {
             architecture.blocks[setting.newBlockId] = setting.blockSettings;
         }
-        return;
-    }
-    if (change.type === ChangeType.ChangeStyle) {
+    } else if (change.type === ChangeType.ChangeStyle) {
         const setting = change.setting as ChangeBlockStyleSetting;
         if (setting && architecture.style?.blocks) {
             const currentSetting = architecture.style?.blocks?.[setting.blockId];
@@ -53,9 +54,7 @@ function makeChange(architecture: ArchitectureDescription, change: Change): void
                 architecture.style.blocks[setting.blockId] = deepAssign<BlockStyle>({}, currentSetting, setting.newStyle);
             }
         }
-        return;
+    } else {
+        throw new Error("Function not implemented.");
     }
-    throw new Error("Function not implemented.");
 }
-
-

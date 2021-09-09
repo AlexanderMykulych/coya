@@ -1,11 +1,17 @@
-import {Properties} from "csstype";
+import { Properties } from "csstype";
 
 export enum BlockElementType {
     Rect = "rect",
     Line = "line"
 }
+
+export interface EnterSetting {
+    from: any;
+    to: any;
+}
 export interface BaseBlockElementDescription {
     label?: string;
+    enter?: EnterSetting;
     type?: BlockElementType;
 }
 
@@ -30,13 +36,20 @@ export interface ConnectActionSetting {
     to: string;
     name?: string;
     label?: string;
+    enter?: EnterSetting;
 }
 export interface AddNewBlockActionSetting extends BlockGroupDescriptions { }
 export interface ChangeBlockPositionActionSetting {
     [name: string]: Position;
 }
 
-export type ActionSetting = ConnectActionSetting | AddNewBlockActionSetting | ChangeBlockPositionActionSetting;
+export interface ChangeLabelActionSetting {
+    [name: string]: {
+        label: string;
+    }
+}
+
+export type ActionSetting = ConnectActionSetting | AddNewBlockActionSetting | ChangeBlockPositionActionSetting | ChangeLabelActionSetting;
 
 export interface PhaseAction {
     [name: string]: string | string[] | ActionSetting | ActionSetting[];
@@ -77,6 +90,8 @@ export interface RectPosition {
     indentY?: number | FormulaValue;
     indentY1?: number | FormulaValue;
     indentY2?: number | FormulaValue;
+
+    enter?: EnterSetting;
 }
 
 
@@ -87,6 +102,7 @@ export interface BlockStyle {
     svgTag?: keyof SVGElementTagNameMap;
     css?: Properties;
     position?: Position;
+    label?: string;
 }
 export interface StyleDescription {
     blocks?: {

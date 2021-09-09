@@ -1,5 +1,6 @@
 
 import { ComputedRef, Ref } from "@vue/reactivity";
+import { EnterSetting } from ".";
 import { ActionSetting, ArchitectureDescription, BlockElementDescription, BlockGroupDescriptions, BlockStyle, LineBlockElementDescription } from "./descriptionTypes";
 
 export type NumberValue = number | ComputedRef<number>;
@@ -12,6 +13,7 @@ export interface Identifiable {
 export interface BlockElement extends Identifiable {
     label: StringValue;
     parentId?: IdValue;
+    enter: EnterSetting;
 }
 
 export type ExcludeProp<T, U> = {
@@ -32,7 +34,8 @@ export type ActionExecutor = (architecture: Architecture, actionSetting: Action)
 export enum ActionType {
     Connect = "connect",
     AddNewBlock = "newBlock",
-    ChangePosition = "changePosition"
+    ChangePosition = "changePosition",
+    ChangeLabel = "changeLabel"
 }
 export interface Action {
     name: ActionType | string;
@@ -83,7 +86,8 @@ export interface ArchitectureData {
     style?: Style | null;
 }
 export interface Architecture extends RefsType<ArchitectureData> {
-    start: () => void
+    next: () => void
+    back: () => void
 }
 export type RefsType<T> = {
     [P in keyof T]?: Ref<T[P]>;
@@ -108,8 +112,11 @@ export interface ChangeBlockStyleSetting {
     blockId: string;
     newStyle: Partial<BlockStyle>
 }
-
-export type ChangeSetting = AddBlockChangeSetting | ChangeBlockStyleSetting;
+export interface ChangeBlockLabelSetting {
+    blockId: string;
+    label: string;
+}
+export type ChangeSetting = AddBlockChangeSetting | ChangeBlockStyleSetting | ChangeBlockLabelSetting;
 export interface Change {
     setting: ChangeSetting;
     type: ChangeType;
