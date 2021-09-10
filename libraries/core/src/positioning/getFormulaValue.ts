@@ -9,9 +9,10 @@ export function getFormulaValue(val: number | FormulaValue | undefined, position
         return ref(val);
     }
     if (isFormulaValue(val)) {
+        let formula = typeof val === "string" ? val : val.formula;
         return computed(() => {
             const context = getFormulaValueFuncContext(positioning);
-            const fn = Function(`"use strict";return (function(${context.blockNamesAsFuncParams}){return ${val.formula};})`)();
+            const fn = Function(`"use strict";return (function(${context.blockNamesAsFuncParams}){return ${formula};})`)();
             return fn.apply(null, context.blocksValues) || 0;
         });
     }

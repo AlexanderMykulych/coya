@@ -105,6 +105,7 @@ export default <ArchitectureDescription>{
         }
     ],
     style: {
+        debug: true,
         positioning: PositioningSystem.Grid,
         blocks: {
             img: {

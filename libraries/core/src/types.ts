@@ -1,10 +1,10 @@
 
-import { ComputedRef, Ref } from "@vue/reactivity";
+import { Ref } from "@vue/reactivity";
 import { EnterSetting } from ".";
 import { ActionSetting, ArchitectureDescription, BlockElementDescription, BlockGroupDescriptions, BlockStyle, LineBlockElementDescription } from "./descriptionTypes";
 
-export type NumberValue = number | ComputedRef<number>;
-export type StringValue = string | ComputedRef<string>;
+export type NumberValue = number | Ref<number>;
+export type StringValue = string | Ref<string>;
 
 type IdValue = string | "main";
 export interface Identifiable {

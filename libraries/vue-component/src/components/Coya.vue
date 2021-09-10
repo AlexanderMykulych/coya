@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { transformToArchitecture, RectPositioning, Architecture } from "@coya/core";
-import { computed, ref, watch } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 
 const props = defineProps<{ config: string | Object }>()
 const preparedConfig = computed(() => !!props.config && typeof props.config === "string" ? JSON.parse(props.config) : props.config);
 
 
 const arch = ref({});
+const coyaEl = ref<HTMLElement | null>(null);
 
 watch(() => preparedConfig.value, val => {
     arch.value = transformToArchitecture(val).value;
@@ -30,6 +31,15 @@ const rectPositions = computed(() => {
 const next = () => arch.value.next();
 const back = () => arch.value.back();
 
+onMounted(() => {
+    if (coyaEl.value) {
+        const realWidth = coyaEl.value.clientWidth;
+        const realHeight = coyaEl.value.clientHeight;
+        const width = 800;
+        const height = (width * realHeight) / realWidth
+        coyaEl.value.setAttribute("viewBox", `0 0 ${width} ${height}`);
+    }
+});
 
 </script>
 <template>
@@ -37,8 +47,9 @@ const back = () => arch.value.back();
         <button @click="back">back</button>
         <button @click="next">next</button>
         <svg
-            viewBox="0 0 420 400"
+            class="coya"
             xmlns="http://www.w3.org/2000/svg"
+            ref="coyaEl"
             v-if="!!arch.style?.positioning"
         >
             <defs>
@@ -76,10 +87,8 @@ const back = () => arch.value.back();
     font: bold 30px sans-serif;
 }
 
-/* Note that the color of the text is set with the    *
-     * fill property, the color property is for HTML only */
-.Rrrrr {
-    font: italic 40px serif;
-    fill: red;
+svg.coya {
+    height: 70vh;
+    width: 100vw;
 }
 </style>

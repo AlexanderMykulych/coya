@@ -6,10 +6,11 @@ import { gsap } from "gsap";
 const props = defineProps<{ block: Block, positioning: RectPositioning, blockStyle: BlockStyle }>();
 const cssStyle = computed(() => props.blockStyle?.css ?? {});
 const el = ref(null);
+const gEl = ref(null);
 const textEl = ref(null);
 
 const runEnter = (enter: EnterSetting) => {
-    gsap.fromTo(el.value, enter.from, enter.to);
+    gsap.fromTo(gEl.value, enter.from, enter.to);
 };
 
 const linePosX = computed(() => props.positioning.x + props.positioning.width / 2);
@@ -37,7 +38,7 @@ const textStyle = reactive({
 </script>
 
 <template>
-    <g >
+    <svg ref="gEl">
         <rect
             :id="block.id"
             stroke="black"
@@ -46,12 +47,6 @@ const textStyle = reactive({
             :style="cssStyle"
             ref="el"
         />
-        <!-- <text
-            :style="textStyle"
-            ref="textEl"
-            dominant-baseline="middle"
-            text-anchor="middle"
-        >{{ block.label }}</text> -->
         <foreignObject
             style="overflow: visible; text-align: left;"
             pointer-events="none"
@@ -70,5 +65,5 @@ const textStyle = reactive({
                 </div>
             </div>
         </foreignObject>
-    </g>
+    </svg>
 </template>

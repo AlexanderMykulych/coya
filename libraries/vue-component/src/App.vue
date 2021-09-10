@@ -9,6 +9,7 @@ import exampleStylePhase from "./examples/4_simple_style_phase";
 import exampleStylePhase2 from "./examples/4_simple_style_phase2";
 import exampleStylePhase3 from "./examples/4_simple_style_phase3";
 import exampleStylePhase4 from "./examples/4_simple_style_phase4";
+import upswot from "./examples/upswot";
 
 const examples = [
     {
@@ -46,9 +47,13 @@ const examples = [
     {
         label: "example-style-phase4",
         value: exampleStylePhase4
+    },
+    {
+        label: "upswot",
+        value: upswot
     }
 ];
-const currentExampleIndex = ref(8);
+const currentExampleIndex = ref(9);
 
 const config = computed(() => JSON.stringify(examples[currentExampleIndex.value].value));
 

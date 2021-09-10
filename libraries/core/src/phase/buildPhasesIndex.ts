@@ -32,6 +32,8 @@ function buildIndexObject(phase: PhaseStep | undefined | null, isStart: boolean 
                 let actions: (string | ActionSetting)[] = [];
                 if (!Array.isArray(action)) {
                     actions = [action];
+                } else {
+                    actions = action;
                 }
                 return actions.map<PhaseIndexItemAction>(y => ({
                     action: {
