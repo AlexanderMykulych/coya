@@ -70,9 +70,10 @@ export interface AnimationDescription {
     [name: string]: {};
 }
 
-export interface FormulaValue {
+export interface FormulaValueObj {
     formula: string;
 }
+export type FormulaValue = FormulaValueObj | string;
 export interface RectPosition {
     x?: number | FormulaValue;
     y?: number | FormulaValue;
