@@ -16,9 +16,17 @@ const style = reactive({
 </script>
 
 <template>
-    <svg :x="calcX" :y="calcY" :width="width" :height="height">
+    <svg :x="calcX" :y="calcY" :width="width" :height="height" pointer-events="none">
         <g>
-            <rect width="100%" height="100%" x="0" y="0" fill="#32b9f83d" stroke-width="0.2" stroke="black" />
+            <rect
+                width="100%"
+                height="100%"
+                x="0"
+                y="0"
+                fill="#32b9f83d"
+                stroke-width="0.2"
+                stroke="black"
+            />
             <foreignObject
                 style="overflow: visible; text-align: left;"
                 pointer-events="none"
@@ -28,7 +36,7 @@ const style = reactive({
             >
                 <div xmlns="http://www.w3.org/1999/xhtml">
                     <div class="pos-cnt" :style="style">
-                        <div >[{{ prepX }}; {{ prepY }}]</div>
+                        <div>[{{ prepX }}; {{ prepY }}]</div>
                     </div>
                 </div>
             </foreignObject>
