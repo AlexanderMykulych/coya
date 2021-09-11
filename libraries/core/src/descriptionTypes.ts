@@ -99,7 +99,7 @@ export interface RectPosition {
 export type Position = RectPosition;
 export interface BlockStyle {
     svg?: string;
-    svgUrl?: string;
+    svgUrl?: string | URL;
     svgTag?: keyof SVGElementTagNameMap;
     css?: Properties;
     position?: Position;
