@@ -17,7 +17,7 @@ const linePosX = computed(() => props.positioning.x + props.positioning.width / 
 const linePosY = computed(() => props.positioning.y + props.positioning.height);
 
 onMounted(() => {
-const enter = props.block.enter;
+    const enter = props.block.enter;
     const pos = props.positioning;
     if (enter && enter.from && enter.to) {
         runEnter(enter);
@@ -32,8 +32,8 @@ const textStyle = reactive({
     "justify-content": "unsafe center",
     width: computed(() => `${props.positioning.width - 2}px`),
     height: computed(() => `${props.positioning.height - 2}px`),
-    "padding-top": computed(() => `${props.positioning.x + 1}px`),
-    "margin-left": computed(() => `${props.positioning.y + 1}px`)
+    "padding-top": computed(() => `${props.positioning.y + 1}px`),
+    "margin-left": computed(() => `${props.positioning.x + 1}px`)
 });
 </script>
 
@@ -54,10 +54,7 @@ const textStyle = reactive({
             height="100%"
             requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
         >
-            <div
-                xmlns="http://www.w3.org/1999/xhtml"
-                :style="textStyle"
-            >
+            <div xmlns="http://www.w3.org/1999/xhtml" :style="textStyle">
                 <div style="box-sizing: border-box; text-align: center; ">
                     <div
                         style="display: inline-block; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "

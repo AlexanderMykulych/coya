@@ -125,10 +125,18 @@ export default <ArchitectureDescription>{
                 label: "test",
                 name: "line_kafka_worker"
             }]
+        },
+        {
+            newBlock: {
+                upswotZone: "Upswot zone"
+            }
         }
     ],
     style: {
         positioning: PositioningSystem.Grid,
+        debug: {
+            enable: true
+        },
         blocks: {
             text: {
                 position: {
@@ -318,6 +326,18 @@ export default <ArchitectureDescription>{
                     h: "client.height"
                 },
                 svg: worker
+            },
+            upswotZone: {
+                position: {
+                    x: "upswotAdmin.x - 10",
+                    y: "10",
+                    w: "upswotApi.x + upswotApi.width + 20 - upswotAdmin.x",
+                    h: "worker.y + worker.height"
+                },
+                css: {
+                    stroke: "red",
+                    "stroke-dasharray": 3
+                }
             }
         }
     }

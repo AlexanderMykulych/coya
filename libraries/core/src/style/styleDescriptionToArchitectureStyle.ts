@@ -2,6 +2,7 @@ import { ArchitectureDescription, PositioningSystem, StyleDescription } from "..
 import { autoPositioning } from "../positioning/autoPosition";
 import { Block, BlocksStyle, Style } from "../types";
 import { gridPositioning } from "../positioning/gridPositioning";
+import { deepCopy } from "../util/deepCopy";
 
 export function styleDescriptionToArchitectureStyle(
     architectureDescription: ArchitectureDescription,
@@ -13,6 +14,7 @@ export function styleDescriptionToArchitectureStyle(
         positioning: !positioningSystem || positioningSystem === PositioningSystem.Auto ?
             autoPositioning({ architectureDescription, blocks }) :
             gridPositioning({ architectureDescription, blocks }),
+        debug: deepCopy(architectureDescription.style?.debug),
         blocks: architectureDescription.style ? generateBlocksStyle(architectureDescription.style) : undefined
     };
 }

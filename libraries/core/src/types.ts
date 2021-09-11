@@ -1,6 +1,6 @@
 
 import { Ref } from "@vue/reactivity";
-import { EnterSetting } from ".";
+import { DebugSetting, EnterSetting } from ".";
 import { ActionSetting, ArchitectureDescription, BlockElementDescription, BlockGroupDescriptions, BlockStyle, LineBlockElementDescription } from "./descriptionTypes";
 
 export type NumberValue = number | Ref<number>;
@@ -54,6 +54,7 @@ export interface BlocksStyle {
 export interface Style extends Identifiable {
     positioning: BlockPositioning[];
     blocks?: BlocksStyle;
+    debug?: DebugSetting;
 }
 
 export interface RectPositioning {

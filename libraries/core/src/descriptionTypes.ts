@@ -105,10 +105,14 @@ export interface BlockStyle {
     position?: Position;
     label?: string;
 }
+export interface DebugSetting {
+    enable: boolean;
+}
 export interface StyleDescription {
     blocks?: {
         [name: string]: BlockStyle
     }
+    debug?: DebugSetting;
     positioning?: PositioningSystem;
 }
 

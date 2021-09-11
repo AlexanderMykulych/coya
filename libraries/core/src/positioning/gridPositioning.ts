@@ -3,7 +3,7 @@ import { FormulaValue } from "../descriptionTypes";
 import { isContainerBlock, isFormulaValue, isLineBlockElement, isNotNullOrUndefined } from "../typeGuards";
 import { BlockPositioning } from "../types";
 import { getFormulaValue } from "./getFormulaValue";
-import { lineBlockPosition } from "./relativeBlockPosition";
+import { lineBlockPosition } from "./lineBlockPosition";
 import { AutoPositioningSetting } from "./types";
 
 export function gridPositioning(option: AutoPositioningSetting): BlockPositioning[] {
