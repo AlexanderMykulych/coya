@@ -18,13 +18,18 @@ const linePosY = computed(() => props.positioning.y + props.positioning.height);
 
 onMounted(() => {
     const enter = props.block.enter;
-    const pos = props.positioning;
     if (enter && enter.from && enter.to) {
         runEnter(enter);
-        gsap.to(el.value, { duration: 0, attr: { x: pos.x, y: pos.y, width: pos.width, height: pos.height } });
-        gsap.to(textEl.value, { duration: 0, attr: { x: linePosX.value, y: linePosY.value } });
+        watch(() => props.positioning, (pos) => {
+            gsap.to(el.value, { duration: 0, attr: { x: pos.x, y: pos.y, width: pos.width, height: pos.height } });
+            gsap.to(textEl.value, { duration: 0, attr: { x: linePosX.value, y: linePosY.value } });
+        }, {
+            immediate: true,
+            deep: true
+        })
     }
 });
+
 const textStyle = reactive({
     fontSize: "4px",
     display: "flex",

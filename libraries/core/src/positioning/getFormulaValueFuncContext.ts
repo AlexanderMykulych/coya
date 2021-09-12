@@ -1,9 +1,22 @@
-import { Ref } from "@vue/reactivity";
+import { Ref, unref } from "@vue/reactivity";
+import { TransformSetting } from "..";
 import { BlockPositioning, FormulaValueFuncContext } from "../types";
 
-export function getFormulaValueFuncContext(blocksPositioning: Ref<BlockPositioning[]>): FormulaValueFuncContext {
+export function getFormulaValueFuncContext(blocksPositioning: Ref<BlockPositioning[]>,
+    setting: TransformSetting): FormulaValueFuncContext {
     return {
-        blockNamesAsFuncParams: blocksPositioning.value.map(x => x.blockId).join(", "),
-        blocksValues: blocksPositioning.value.map(x => x.position)
+        blockNamesAsFuncParams: `${blocksPositioning.value.map(x => x.blockId).join(", ")}, _`,
+        blocksValues:
+            [
+                ...blocksPositioning.value.map(x => x.position),
+                {
+                    viewBox: {
+                        x: unref(setting.viewBox.x),
+                        y: unref(setting.viewBox.y),
+                        w: unref(setting.viewBox.w),
+                        h: unref(setting.viewBox.h),
+                    }
+                }
+            ]
     };
 }

@@ -12,7 +12,7 @@ export function autoPositioning(setting: AutoPositioningSetting): BlockPositioni
     blocksPositioning.value = blocks.map<BlockPositioning | null>(block => {
         if (!isContainerBlock(block)) {
             if (isLineBlockElement(block)) {
-                return lineBlockPosition(blocksPositioning, block);
+                return lineBlockPosition(blocksPositioning, block, setting.setting);
             }
             return null;
         }

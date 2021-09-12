@@ -1,3 +1,4 @@
+import { Ref } from "@vue/reactivity";
 import { Properties } from "csstype";
 
 export enum BlockElementType {
@@ -133,3 +134,14 @@ export type ArchitectureDescriptionElement =
     | ParallelPhase
     | AnimationDescription
     | StyleDescription;
+
+export interface ViewBoxSetting {
+    x: Ref<number> | number;
+    y: Ref<number> | number;
+    w: Ref<number> | number;
+    h: Ref<number> | number;
+}
+
+export interface TransformSetting {
+    viewBox: ViewBoxSetting;
+}

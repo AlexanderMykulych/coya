@@ -1,6 +1,6 @@
 
 import { Ref } from "@vue/reactivity";
-import { DebugSetting, EnterSetting } from ".";
+import { DebugSetting, EnterSetting, ViewBoxSetting } from ".";
 import { ActionSetting, ArchitectureDescription, BlockElementDescription, BlockGroupDescriptions, BlockStyle, LineBlockElementDescription } from "./descriptionTypes";
 
 export type NumberValue = number | Ref<number>;
@@ -144,7 +144,10 @@ export interface ActionExecutorContext {
     phaseIndex: PhaseIndex;
 }
 
+export interface FormulaSystemContext {
+    viewBox: ViewBoxSetting;
+}
 export interface FormulaValueFuncContext {
     blockNamesAsFuncParams: string;
-    blocksValues: Positioning[];
+    blocksValues: (Positioning | FormulaSystemContext)[];
 }

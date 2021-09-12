@@ -1,6 +1,6 @@
 import { computed, Ref, isRef, ref } from "@vue/reactivity";
 import { blockGroupDescriptionsToBlock } from "./block/blockGroupDescriptionsToBlock";
-import { ArchitectureDescription } from "./descriptionTypes";
+import { ArchitectureDescription, TransformSetting } from "./descriptionTypes";
 import { isArchitectureDescription } from "./typeGuards";
 import { Architecture, Block, CurrentPhaseInfo } from "./types";
 import { styleDescriptionToArchitectureStyle } from "./style/styleDescriptionToArchitectureStyle";
@@ -11,7 +11,7 @@ import { deepCopy } from "./util/deepCopy";
 import { PhaseId } from ".";
 
 
-export function transformToArchitecture(description: Ref<unknown> | unknown): Ref<Architecture> {
+export function transformToArchitecture(description: Ref<unknown> | unknown, setting: TransformSetting): Ref<Architecture> {
     const refDescription = isRef(description) ? description : ref(description);
     const value = refDescription.value;
     
@@ -23,7 +23,7 @@ export function transformToArchitecture(description: Ref<unknown> | unknown): Re
 
     const architecture = computed<Architecture>(() => {
         if (isArchitectureDescription(transitionalArchitectureRef.value)) {
-            return transformDescriptionToArchitecture(transitionalArchitectureRef);
+            return transformDescriptionToArchitecture(transitionalArchitectureRef, setting);
         }
         return {
             blocks: ref([]),
@@ -35,7 +35,7 @@ export function transformToArchitecture(description: Ref<unknown> | unknown): Re
     return architecture;
 }
 
-export function transformDescriptionToArchitecture(transitionalArchitectureRef: Ref<ArchitectureDescription>): Architecture {
+export function transformDescriptionToArchitecture(transitionalArchitectureRef: Ref<ArchitectureDescription>, setting: TransformSetting): Architecture {
     const oldValues: { arch: ArchitectureDescription, phaseId: PhaseId }[] = [];
     let enableWatcher = true;
     const currentPhase: CurrentPhaseInfo = {
@@ -53,7 +53,7 @@ export function transformDescriptionToArchitecture(transitionalArchitectureRef: 
     const phaseIndex = buildPhasesIndex(transitionalArchitectureRef.value.phases);
     return {
         blocks,
-        style: computed(() => styleDescriptionToArchitectureStyle(transitionalArchitectureRef.value, blocks.value)),
+        style: computed(() => styleDescriptionToArchitectureStyle(transitionalArchitectureRef.value, blocks.value, setting)),
         next: () => {
             enableWatcher = true;
             const nextPhaseId = startPhases(transitionalArchitectureRef.value, phaseIndex, currentPhase);

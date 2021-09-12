@@ -28,24 +28,25 @@ export function gridPositioning(option: AutoPositioningSetting): BlockPositionin
     };
 
     const blocksPositioning: Ref<BlockPositioning[]> = ref([]);
+    const getValueByCtx = (x?: number | FormulaValue, multiplier: number = 1) => {
+        const res = getFormulaValue(x, blocksPositioning, option.setting);
+        if (isFormulaValue(x)) {
+            return res;
+        }
+        return ref(res.value * multiplier);
+    };
     blocksPositioning.value = blocks.map<BlockPositioning | null>(block => {
         const blockStyle = style[block.id];
         if (!isContainerBlock(block)) {
             if (isLineBlockElement(block)) {
-                return lineBlockPosition(blocksPositioning, block, blockStyle);
+                return lineBlockPosition(blocksPositioning, block, option.setting, blockStyle);
             }
             return null;
         }
         if (blockStyle.position) {
             const pos = blockStyle.position;
             
-            const getValueByCtx = (x?: number | FormulaValue, multiplier: number = 1) => {
-                const res = getFormulaValue(x, blocksPositioning);
-                if (isFormulaValue(x)) {
-                    return res;
-                }
-                return ref(res.value * multiplier);
-            };
+
             const indentX = (getValueByCtx(pos.indentX) ?? 0);
             const indentY = (getValueByCtx(pos.indentY) ?? 0);
             return <BlockPositioning>{

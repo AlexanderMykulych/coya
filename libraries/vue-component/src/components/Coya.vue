@@ -9,10 +9,26 @@ const preparedConfig = computed(() => !!props.config && typeof props.config === 
 
 
 const arch = ref<Architecture | null>(null);
-const coyaEl = ref<SVGSVGElement | null>(null);
-
+const coyaSvgEl = ref<SVGSVGElement | null>(null);
+const coyaEl = ref<HTMLElement | null>(null);
+const width = ref(260);
+const realHeight = computed(() => coyaSvgEl.value?.clientHeight ?? 0);
+const realWidth = computed(() => coyaSvgEl.value?.clientWidth ?? 0);
+const height = computed(() => {
+    if (coyaSvgEl.value) {
+        return (width.value * realHeight.value) / realWidth.value
+    }
+    return 0;
+});
 watch(() => preparedConfig.value, val => {
-    arch.value = transformToArchitecture(val).value;
+    arch.value = transformToArchitecture(val, {
+        viewBox: {
+            x: 0,
+            y: 0,
+            w: width,
+            h: height
+        }
+    }).value;
 }, {
     immediate: true
 });
@@ -32,27 +48,26 @@ const rectPositions = computed(() => {
 });
 const next = () => arch.value?.next();
 const back = () => arch.value?.back();
-const { x, y } = useMousePosition(coyaEl);
+const { x, y } = useMousePosition(coyaSvgEl);
 const debug = computed(() => arch.value?.style?.debug?.enable ?? false);
-onMounted(() => {
-    if (coyaEl.value) {
-        const realWidth = coyaEl.value.clientWidth;
-        const realHeight = coyaEl.value.clientHeight;
-        const width = 900;
-        const height = (width * realHeight) / realWidth
-        coyaEl.value.setAttribute("viewBox", `0 0 ${width} ${height}`);
-    }
+
+const viewBox = computed(() => {
+    return `0 0 ${width.value} ${height.value}`;
 });
 const res = useNodeDetails();
 </script>
 <template>
     <div class="grid grid-cols-5">
-        <div class="coya-container col-span-4" :class="{[`col-span-${debug ? 4 : 'full'}`]: true}">
+        
+        <div class="coya-container col-span-4"
+            ref="coyaEl"
+            :class="{[`col-span-${debug ? 4 : 'full'}`]: true}">
             <svg
                 class="coya"
                 xmlns="http://www.w3.org/2000/svg"
-                ref="coyaEl"
+                ref="coyaSvgEl"
                 overflow="auto"
+                :viewBox="viewBox"
                 v-if="!!arch.style?.positioning"
             >
                 <defs>
@@ -90,17 +105,20 @@ const res = useNodeDetails();
                         :block-style="item.style"
                         :positioning="item.pos"
                     />
-                    <rect
-                        :x="item.pos.x"
-                        :y="item.pos.y"
-                        :width="item.pos.width"
-                        :height="item.pos.height"
-                        fill="none"
-                        pointer-events="all"
-                        @mouseover="res.onMouseover(item)"
-                        @mouseout="res.onMouseleave"
-                        @click="res.onClick(item)"
-                    />
+                    <template v-if="debug">
+                        <rect
+                            :x="item.pos.x"
+                            :y="item.pos.y"
+                            :width="item.pos.width"
+                            :height="item.pos.height"
+                            fill="none"
+                            pointer-events="all"
+                            @mouseover="res.onMouseover(item)"
+                            @mouseout="res.onMouseleave"
+                            @click="res.onClick(item)"
+                        />
+                        <PointPosition v-if="item.pos.x && item.pos.y" :x="item.pos.x" :y="item.pos.y" />
+                    </template>
                 </template>
 
                 <PointPosition v-if="debug" :x="x" :y="y" />
@@ -112,6 +130,7 @@ const res = useNodeDetails();
             <!-- <NodeDetails class="coya-debug " nodeId="client" :architecture="arch"/> -->
         </div>
         <div class="col-span-full block text-gray-700 text-center bg-gray-200 px-4 py-2" >
+            <input type="number" v-model="width" step="20" />
             <button @click="back" class="btn btn-blue mr-4">Back</button>
             <button @click="next" class="btn btn-blue">Next</button>
         </div>
@@ -135,7 +154,7 @@ const res = useNodeDetails();
     overflow: auto;
 }
 .coya-container svg.coya {
-    height: 300%;
+    height: 100%;
     width: 100%;
 }
 .coya-debug {

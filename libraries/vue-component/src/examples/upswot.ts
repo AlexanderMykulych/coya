@@ -142,16 +142,16 @@ export default <ArchitectureDescription>{
                 position: {
                     x: 0,
                     y: 0,
-                    w: 4,
-                    h: 10
+                    w: "_.viewBox.w / 4",
+                    h: "_.viewBox.h"
                 }
             },
             client: {
                 position: {
                     x: "text.x + text.width + 5",
-                    y: 4,
-                    w: 1,
-                    h: 2
+                    y: "_.viewBox.h / 2 - (_.viewBox.h / 5) / 2",
+                    w: "_.viewBox.h / 5",
+                    h: "_.viewBox.h / 5"
                 },
                 svg: user
             },

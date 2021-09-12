@@ -4,9 +4,10 @@ import { isRectPositioning } from "../typeGuards";
 import { getNumber } from "./getNumber";
 import { BlockStyle, FormulaValue } from "../descriptionTypes";
 import { getFormulaValue } from "./getFormulaValue";
+import { TransformSetting } from "..";
 
 export function lineBlockPosition(blocksPositions: Ref<BlockPositioning[]>, block: LineBlockElement,
-    blockStyle?: BlockStyle): BlockPositioning {
+    setting: TransformSetting, blockStyle?: BlockStyle): BlockPositioning {
     const blockFromPos = computed(() => blocksPositions.value
         ?.find(x => x.blockId === block.from));
     const blockToPos = computed(() => blocksPositions.value
@@ -18,7 +19,7 @@ export function lineBlockPosition(blocksPositions: Ref<BlockPositioning[]>, bloc
         && isRectPositioning(blockToPos.value?.position)
         && blockFromPos.value.position.x < blockToPos.value.position.x
     );
-    const getValueByCtx = (x?: number | FormulaValue) => getFormulaValue(x, blocksPositions);
+    const getValueByCtx = (x?: number | FormulaValue) => getFormulaValue(x, blocksPositions, setting);
     const indentX1 = getValueByCtx(blockStyle?.position?.indentX1 ?? blockStyle?.position?.indentX);
     const indentX2 = getValueByCtx(blockStyle?.position?.indentX2 ?? blockStyle?.position?.indentX);
     const indentY1 = getValueByCtx(blockStyle?.position?.indentY1 ?? blockStyle?.position?.indentY);
