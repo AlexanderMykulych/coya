@@ -1,3 +1,4 @@
+import { RemoveBlocksSetting } from "..";
 import { ArchitectureDescription, BlockStyle } from "../descriptionTypes";
 import { isNotNullOrUndefined } from "../typeGuards";
 import { ActionExecutorContext, ActionType, AddBlockChangeSetting, Change, ChangeBlockStyleSetting, ChangeType, CurrentPhaseInfo, PhaseId, PhaseIndex, PhaseIndexItemAction } from "../types";
@@ -7,6 +8,7 @@ import { addNewBlockActionExecutor } from "./addNewBlockActionExecutor";
 import { changeBlockPositionActionExecutor } from "./changeBlockPositionActionExecutor";
 import { changeLabelActionExecutor } from "./changeLabelActionExecutor";
 import { connectActionExecutor } from "./connectActionExecutor";
+import { removeHighlightActionExecutor } from "./removeHighlightActionExecutor";
 
 export function startPhases(architecture: ArchitectureDescription, phaseIndex: PhaseIndex, phaseInfo: CurrentPhaseInfo): PhaseId {
     const indexItems = phaseIndex.getPhaseById(phaseInfo.current);
@@ -39,6 +41,8 @@ function executePhaseIndex(item: PhaseIndexItemAction, context: ActionExecutorCo
         return changeLabelActionExecutor(context, item.action);
     } else if (item.action.name === ActionType.Highlight) {
         return addHighlightActionExecutor(context, item.action);
+    } else if (item.action.name === ActionType.RemoveHighlight) {
+        return removeHighlightActionExecutor(context, item.action);
     }
     throw "Not implemented!";
 }
@@ -59,6 +63,13 @@ function makeChange(architecture: ArchitectureDescription, change: Change): void
                 architecture.style.blocks[setting.blockId] = deepAssign<BlockStyle>({}, setting.newStyle);
             }
         }
+    } else if (change.type === ChangeType.RemoveBlock) {
+        const setting = change.setting as RemoveBlocksSetting;
+        setting.blocks.forEach(x => {
+            delete architecture.blocks[x];
+            delete architecture.style?.blocks?.[x];
+        });
+
     } else {
         throw new Error("Function not implemented.");
     }

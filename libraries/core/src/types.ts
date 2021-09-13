@@ -36,7 +36,8 @@ export enum ActionType {
     AddNewBlock = "newBlock",
     ChangePosition = "changePosition",
     ChangeLabel = "changeLabel",
-    Highlight = "highlight"
+    Highlight = "highlight",
+    RemoveHighlight = "removeHighlight"
 }
 export interface Action {
     name: ActionType | string;
@@ -104,9 +105,11 @@ export interface CurrentPhaseInfo {
     current: PhaseId;
 }
 
+
 export enum ChangeType {
     AddNewBlock = 0,
-    ChangeStyle = 1
+    ChangeStyle = 1,
+    RemoveBlock = 2
 }
 export interface AddBlockChangeSetting {
     blockSettings: string | BlockGroupDescriptions | BlockElementDescription | null;
@@ -120,7 +123,10 @@ export interface ChangeBlockLabelSetting {
     blockId: string;
     label: string;
 }
-export type ChangeSetting = AddBlockChangeSetting | ChangeBlockStyleSetting | ChangeBlockLabelSetting;
+export interface RemoveBlocksSetting {
+    blocks: string[];
+}
+export type ChangeSetting = AddBlockChangeSetting | ChangeBlockStyleSetting | ChangeBlockLabelSetting | RemoveBlocksSetting;
 export interface Change {
     setting: ChangeSetting;
     type: ChangeType;

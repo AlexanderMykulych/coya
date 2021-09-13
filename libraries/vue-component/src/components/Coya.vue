@@ -48,6 +48,7 @@ const rectPositions = computed(() => {
     }
     return [];
 });
+const filteredRectPositions = computed(() => rectPositions.value.filter(x => !x?.style?.isHighlight));
 const next = () => arch.value?.next();
 const back = () => arch.value?.back();
 const { x, y } = useMousePosition(coyaSvgEl);
@@ -138,7 +139,7 @@ const highlights = computed(() => rectPositions.value.filter(x => x.style.isHigh
                 />
 
                 <!-- Rounded corner rectangle -->
-                <template v-for="item in rectPositions" :key="item.id">
+                <template v-for="item in filteredRectPositions" :key="item.id">
                     <CoyaNode
                         :block="item.block"
                         :block-style="item.style"
