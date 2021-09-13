@@ -77,6 +77,7 @@
         "@vue/reactivity": "3.2.4",
         "csstype": "^3.0.8",
         "jest": "^27.0.6",
-        "lodash": "^4.17.21"
+        "lodash": "^4.17.21",
+        "stylis": "^4.0.10"
     }
 }

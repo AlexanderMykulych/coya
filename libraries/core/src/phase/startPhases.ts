@@ -2,6 +2,7 @@ import { ArchitectureDescription, BlockStyle } from "../descriptionTypes";
 import { isNotNullOrUndefined } from "../typeGuards";
 import { ActionExecutorContext, ActionType, AddBlockChangeSetting, Change, ChangeBlockStyleSetting, ChangeType, CurrentPhaseInfo, PhaseId, PhaseIndex, PhaseIndexItemAction } from "../types";
 import { deepAssign } from "../util/deepAssign";
+import { addHighlightActionExecutor } from "./addHighlightActionExecutor";
 import { addNewBlockActionExecutor } from "./addNewBlockActionExecutor";
 import { changeBlockPositionActionExecutor } from "./changeBlockPositionActionExecutor";
 import { changeLabelActionExecutor } from "./changeLabelActionExecutor";
@@ -36,6 +37,8 @@ function executePhaseIndex(item: PhaseIndexItemAction, context: ActionExecutorCo
         return changeBlockPositionActionExecutor(context, item.action);
     } else if (item.action.name === ActionType.ChangeLabel) {
         return changeLabelActionExecutor(context, item.action);
+    } else if (item.action.name === ActionType.Highlight) {
+        return addHighlightActionExecutor(context, item.action);
     }
     throw "Not implemented!";
 }
@@ -52,6 +55,8 @@ function makeChange(architecture: ArchitectureDescription, change: Change): void
             const currentSetting = architecture.style?.blocks?.[setting.blockId];
             if (currentSetting) {
                 architecture.style.blocks[setting.blockId] = deepAssign<BlockStyle>({}, currentSetting, setting.newStyle);
+            } else {
+                architecture.style.blocks[setting.blockId] = deepAssign<BlockStyle>({}, setting.newStyle);
             }
         }
     } else {

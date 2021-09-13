@@ -1,7 +1,7 @@
 
 import { Ref } from "@vue/reactivity";
 import { DebugSetting, EnterSetting, ViewBoxSetting } from ".";
-import { ActionSetting, ArchitectureDescription, BlockElementDescription, BlockGroupDescriptions, BlockStyle, LineBlockElementDescription } from "./descriptionTypes";
+import { ActionSetting, ArchitectureDescription, BlockElementDescription, BlockGroupDescriptions, BlockStyle, LineBlockElementDescription, StyleCss } from "./descriptionTypes";
 
 export type NumberValue = number | Ref<number>;
 export type StringValue = string | Ref<string>;
@@ -35,7 +35,8 @@ export enum ActionType {
     Connect = "connect",
     AddNewBlock = "newBlock",
     ChangePosition = "changePosition",
-    ChangeLabel = "changeLabel"
+    ChangeLabel = "changeLabel",
+    Highlight = "highlight"
 }
 export interface Action {
     name: ActionType | string;
@@ -55,6 +56,7 @@ export interface Style extends Identifiable {
     positioning: BlockPositioning[];
     blocks?: BlocksStyle;
     debug?: DebugSetting;
+    css?: StyleCss;
 }
 
 export interface RectPositioning {
@@ -87,6 +89,7 @@ export interface ArchitectureData {
     style?: Style | null;
 }
 export interface Architecture extends RefsType<ArchitectureData> {
+    name: string;
     next: () => void
     back: () => void
 }

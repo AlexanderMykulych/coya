@@ -3,7 +3,8 @@ import { Properties } from "csstype";
 
 export enum BlockElementType {
     Rect = "rect",
-    Line = "line"
+    Line = "line",
+    Highlight = "highlight"
 }
 
 export interface EnterSetting {
@@ -40,17 +41,26 @@ export interface ConnectActionSetting {
     enter?: EnterSetting;
 }
 export interface AddNewBlockActionSetting extends BlockGroupDescriptions { }
+export interface HighlightActionSetting {
+    blocks: string[] | string;
+    gap?: number;
+}
 export interface ChangeBlockPositionActionSetting {
     [name: string]: Position;
 }
 
 export interface ChangeLabelActionSetting {
-    [name: string]: {
+    [name: string]: string | {
         label: string;
     }
 }
 
-export type ActionSetting = ConnectActionSetting | AddNewBlockActionSetting | ChangeBlockPositionActionSetting | ChangeLabelActionSetting;
+export type ActionSetting =
+    ConnectActionSetting
+    | AddNewBlockActionSetting
+    | ChangeBlockPositionActionSetting
+    | ChangeLabelActionSetting
+    | HighlightActionSetting;
 
 export interface PhaseAction {
     [name: string]: string | string[] | ActionSetting | ActionSetting[];
@@ -105,16 +115,19 @@ export interface BlockStyle {
     css?: Properties;
     position?: Position;
     label?: string;
+    isHighlight?: boolean;
 }
 export interface DebugSetting {
     enable: boolean;
 }
+export type StyleCss = string;
 export interface StyleDescription {
     blocks?: {
         [name: string]: BlockStyle
     }
     debug?: DebugSetting;
     positioning?: PositioningSystem;
+    css?: StyleCss;
 }
 
 export enum PositioningSystem {
@@ -122,6 +135,7 @@ export enum PositioningSystem {
     Grid = "grid"
 }
 export interface ArchitectureDescription {
+    name: string;
     blocks: BlockGroupDescriptions;
     phases?: PhaseStep;
     animation?: AnimationDescription;

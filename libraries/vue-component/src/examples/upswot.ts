@@ -9,18 +9,27 @@ import storage from './assets/storage.svg?raw';
 const kafkaUrl = new URL('./assets/queue.png', import.meta.url)
 
 export default <ArchitectureDescription>{
+    name: "upswot",
     "blocks": {
         client: {
             label: "SMB client"
         },
         text: {
-            label: "Text block"
+            label: "Upswot Architecture"
         }
     },
     phases: [
         {
+            changeLabel: {
+                text: "<span class='numb'>1</span>SMB client is our enter point"
+            }
+        },
+        {
             newBlock: {
                 "bankSite": "Bank website"
+            },
+            changeLabel: {
+                text: "<span class='numb'>2</span>He goes to bank web-site"
             }
         },
         {
@@ -33,19 +42,23 @@ export default <ArchitectureDescription>{
             newBlock: {
                 xeroIcon: "",
                 sageIcon: ""
+            },
+            changeLabel: {
+                text: "<span class='numb'>3</span>And start data sharing process"
             }
         },
         {
             newBlock: {
                 upswotAdmin: "Upswot Admin"
-            }
-        },
-        {
+            },
             connect: {
                 from: "bankSite",
                 to: "upswotAdmin",
                 label: "need data sharing",
                 name: "line_bank_admin"
+            },
+            changeLabel: {
+                text: "<span class='numb'>4</span>This request goes to <b>Upswot.Admin<b/>"
             }
         },
         {
@@ -57,6 +70,9 @@ export default <ArchitectureDescription>{
                 to: "upswotApi",
                 label: "need data sharing",
                 name: "line_admin_api"
+            },
+            changeLabel: {
+                text: "<span class='numb'>5</span>Then request goes to <b>Upswot.API</b>"
             }
         },
         {
@@ -74,7 +90,10 @@ export default <ArchitectureDescription>{
                 to: "sage",
                 label: "GetData",
                 name: "line_to_sage"
-            }]
+                }],
+            changeLabel: {
+                text: "<span class='numb'>6</span>API send <br>GetData<br>request to client`s external systems"
+            }
         },
         {
             connect: [{
@@ -129,6 +148,9 @@ export default <ArchitectureDescription>{
         {
             newBlock: {
                 upswotZone: "Upswot zone"
+            },
+            highlight: {
+                blocks: ["upswotZone", "text"]
             }
         }
     ],
@@ -137,21 +159,37 @@ export default <ArchitectureDescription>{
         debug: {
             enable: true
         },
+        css: `
+            .numb {
+                font-size: 30px;
+                color: white;
+                display: block;
+                background: black;
+                position: absolute;
+                top: 0;
+                width: 100%;
+            }
+        `,
         blocks: {
             text: {
                 position: {
-                    x: 0,
-                    y: 0,
+                    x: "_.viewBox.x",
+                    y: "_.viewBox.y",
                     w: "_.viewBox.w / 4",
                     h: "_.viewBox.h"
+                },
+                css: {
+                    fill: "#3a8a9b",
+                    fontSize: "20px",
+                    color: "white"
                 }
             },
             client: {
                 position: {
                     x: "text.x + text.width + 5",
-                    y: "_.viewBox.h / 2 - (_.viewBox.h / 5) / 2",
-                    w: "_.viewBox.h / 5",
-                    h: "_.viewBox.h / 5"
+                    y: "text.y + _.viewBox.h / 3 - (_.viewBox.h / 10)",
+                    w: "_.viewBox.h / 10",
+                    h: "_.viewBox.h / 10"
                 },
                 svg: user
             },

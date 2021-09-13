@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { transformToArchitecture, RectPositioning, Architecture } from "@coya/core";
-import { computed, onMounted, ref, watch } from "vue";
+import { computed, defineAsyncComponent, ref, watch } from "vue";
 import { useNodeDetails } from "../logic/useNodeDetails";
 import { useMousePosition } from "../logic/useSvgMousePosition";
 
@@ -11,9 +11,11 @@ const preparedConfig = computed(() => !!props.config && typeof props.config === 
 const arch = ref<Architecture | null>(null);
 const coyaSvgEl = ref<SVGSVGElement | null>(null);
 const coyaEl = ref<HTMLElement | null>(null);
-const width = ref(260);
+const width = ref(700);
 const realHeight = computed(() => coyaSvgEl.value?.clientHeight ?? 0);
 const realWidth = computed(() => coyaSvgEl.value?.clientWidth ?? 0);
+const vX = ref(0);
+const vY = ref(0);
 const height = computed(() => {
     if (coyaSvgEl.value) {
         return (width.value * realHeight.value) / realWidth.value
@@ -23,8 +25,8 @@ const height = computed(() => {
 watch(() => preparedConfig.value, val => {
     arch.value = transformToArchitecture(val, {
         viewBox: {
-            x: 0,
-            y: 0,
+            x: vX,
+            y: vY,
             w: width,
             h: height
         }
@@ -52,23 +54,39 @@ const { x, y } = useMousePosition(coyaSvgEl);
 const debug = computed(() => arch.value?.style?.debug?.enable ?? false);
 
 const viewBox = computed(() => {
-    return `0 0 ${width.value} ${height.value}`;
+    return `${vX.value} ${vY.value} ${width.value} ${height.value}`;
 });
 const res = useNodeDetails();
+
+const style = document.createElement('style');
+style.id = "coya"
+style.type = "text/css";
+document.head.append(style);
+watch(() => arch.value?.style?.css, css => {
+    if (css) {
+        style.textContent = css;
+    }
+}, {
+    immediate: true
+})
+
+const highlights = computed(() => rectPositions.value.filter(x => x.style.isHighlight));
 </script>
 <template>
     <div class="grid grid-cols-5">
-        
-        <div class="coya-container col-span-4"
+        <div
+            class="coya-container col-span-4"
             ref="coyaEl"
-            :class="{[`col-span-${debug ? 4 : 'full'}`]: true}">
+            :class="{ [`col-span-${debug ? 4 : 'full'}`]: true }"
+            :id="arch?.name"
+        >
             <svg
                 class="coya"
                 xmlns="http://www.w3.org/2000/svg"
                 ref="coyaSvgEl"
                 overflow="auto"
                 :viewBox="viewBox"
-                v-if="!!arch.style?.positioning"
+                v-if="!!arch?.style?.positioning"
             >
                 <defs>
                     <marker
@@ -94,9 +112,29 @@ const res = useNodeDetails();
                         <rect width="100" height="100" fill="url(#tenthGrid)" />
                         <path d="M 100 0 L 0 0 0 100" fill="none" stroke="gray" stroke-width="0.7" />
                     </pattern>
+                    <clipPath id="myClip">
+                        <circle cx="100" cy="100" r="40" />
+                        <circle cx="60" cy="60" r="40" />
+                    </clipPath>
+                    <mask id="hole" v-if="!!highlights && highlights.length > 0">
+                        <rect x="0" y="0" width="100%" height="100%" fill="white" />
+                        <rect v-for="item in highlights" :key="item.id"
+                            :x="item.pos.x"
+                            :y="item.pos.y"
+                            :width="item.pos.width"
+                            :height="item.pos.height"
+                            />
+                    </mask>
                 </defs>
 
-                <rect v-if="debug" width="100%" height="100%" fill="url(#grid)" />
+                <rect
+                    v-if="debug"
+                    x="-1000"
+                    y="-1000"
+                    width="10000"
+                    height="10000"
+                    fill="url(#grid)"
+                />
 
                 <!-- Rounded corner rectangle -->
                 <template v-for="item in rectPositions" :key="item.id">
@@ -117,20 +155,31 @@ const res = useNodeDetails();
                             @mouseout="res.onMouseleave"
                             @click="res.onClick(item)"
                         />
-                        <PointPosition v-if="item.pos.x && item.pos.y" :x="item.pos.x" :y="item.pos.y" />
+                        <PointPosition
+                            v-if="item.pos.x && item.pos.y"
+                            :x="item.pos.x"
+                            :y="item.pos.y"
+                        />
                     </template>
                 </template>
 
                 <PointPosition v-if="debug" :x="x" :y="y" />
+                <rect v-if="highlights?.length > 0"
+                    x="-10000" y="-10000" width="100000" height="100000" fill="#0000008a" mask="url(#hole)"
+                />
             </svg>
         </div>
         <div v-if="debug" class="col-span-1">
-            <NodeDetails v-if="res.item.value?.id" class="coya-debug " :nodeId="res.item.value?.id" :architecture="arch"/>
-            <DefaultDebug v-else/>
+            <NodeDetails
+                v-if="res.item.value?.id"
+                class="coya-debug"
+                :nodeId="res.item.value?.id"
+                :architecture="arch"
+            />
+            <DefaultDebug v-else />
             <!-- <NodeDetails class="coya-debug " nodeId="client" :architecture="arch"/> -->
         </div>
-        <div class="col-span-full block text-gray-700 text-center bg-gray-200 px-4 py-2" >
-            <input type="number" v-model="width" step="20" />
+        <div class="col-span-full block text-gray-700 text-center bg-gray-200 px-4 py-2">
             <button @click="back" class="btn btn-blue mr-4">Back</button>
             <button @click="next" class="btn btn-blue">Next</button>
         </div>
@@ -156,8 +205,5 @@ const res = useNodeDetails();
 .coya-container svg.coya {
     height: 100%;
     width: 100%;
-}
-.coya-debug {
-
 }
 </style>

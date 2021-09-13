@@ -26,6 +26,7 @@ export function transformToArchitecture(description: Ref<unknown> | unknown, set
             return transformDescriptionToArchitecture(transitionalArchitectureRef, setting);
         }
         return {
+            name: "",
             blocks: ref([]),
             style: ref(null),
             next: () => { },
@@ -52,6 +53,7 @@ export function transformDescriptionToArchitecture(transitionalArchitectureRef: 
     const blocks = computed(() => BlockGroupDescriptionsToBlock(transitionalArchitectureRef.value))
     const phaseIndex = buildPhasesIndex(transitionalArchitectureRef.value.phases);
     return {
+        name: transitionalArchitectureRef.value.name,
         blocks,
         style: computed(() => styleDescriptionToArchitectureStyle(transitionalArchitectureRef.value, blocks.value, setting)),
         next: () => {

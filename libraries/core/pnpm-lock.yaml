@@ -20,6 +20,7 @@ specifiers:
   jest: ^27.0.6
   lodash: ^4.17.21
   size-limit: ^5.0.3
+  stylis: ^4.0.10
   tsdx: ^0.14.1
   tslib: ^2.3.1
   typescript: ^4.4.2
@@ -32,6 +33,7 @@ dependencies:
   csstype: 3.0.8
   jest: 27.0.6
   lodash: 4.17.21
+  stylis: 4.0.10
 
 devDependencies:
   '@size-limit/preset-small-lib': 5.0.3_bd17d8d2a1a04999bd8cbf4a5154fc56
@@ -9077,6 +9079,10 @@ packages:
       postcss: 8.3.6
       postcss-selector-parser: 6.0.6
     dev: true
+
+  /stylis/4.0.10:
+    resolution: {integrity: sha512-m3k+dk7QeJw660eIKRRn3xPF6uuvHs/FFzjX3HQ5ove0qYsiygoAhwn5a3IYKaZPo5LrYD0rfVmtv1gNY1uYwg==}
+    dev: false
 
   /supports-color/5.5.0:
     resolution: {integrity: sha512-QjVjwdXIt408MIiAqCX4oUKsgU2EqAGzs2Ppkm4aQYbjm+ZEWEcW4SfFNTr4uMNZma0ey4f5lgLrkB0aX0QMow==}

@@ -125,3 +125,7 @@ export function isFormulaValue(obj?: unknown): obj is FormulaValue {
     }
     return false;
 }
+
+export function isHasLabel(obj: any): obj is { label: string } {
+    return !!obj && typeof obj.label === "string";
+}
