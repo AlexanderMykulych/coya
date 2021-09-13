@@ -118,12 +118,13 @@ const highlights = computed(() => rectPositions.value.filter(x => x.style.isHigh
                     </clipPath>
                     <mask id="hole" v-if="!!highlights && highlights.length > 0">
                         <rect x="0" y="0" width="100%" height="100%" fill="white" />
-                        <rect v-for="item in highlights" :key="item.id"
-                            :x="item.pos.x"
-                            :y="item.pos.y"
-                            :width="item.pos.width"
-                            :height="item.pos.height"
-                            />
+                        <CoyaNode
+                            v-for="item in highlights"
+                            :key="item.id"
+                            :block="item.block"
+                            :block-style="{ ...item.style, css: { fill: 'black' } }"
+                            :positioning="item.pos"
+                        />
                     </mask>
                 </defs>
 
@@ -164,8 +165,14 @@ const highlights = computed(() => rectPositions.value.filter(x => x.style.isHigh
                 </template>
 
                 <PointPosition v-if="debug" :x="x" :y="y" />
-                <rect v-if="highlights?.length > 0"
-                    x="-10000" y="-10000" width="100000" height="100000" fill="#0000008a" mask="url(#hole)"
+                <rect
+                    v-if="highlights?.length > 0"
+                    x="-10000"
+                    y="-10000"
+                    width="100000"
+                    height="100000"
+                    fill="#0000008a"
+                    mask="url(#hole)"
                 />
             </svg>
         </div>
