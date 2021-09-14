@@ -10,6 +10,7 @@ specifiers:
   '@vue/compiler-sfc': ^3.2.4
   '@vueuse/core': ^6.0.0
   cross-env: ^7.0.3
+  drauu: ^0.1.0
   eslint: ^7.32.0
   gsap: file:gsap-bonus.tgz
   pnpm: ^6.13.0
@@ -22,15 +23,18 @@ specifiers:
   vite-plugin-pages: ^0.17.3
   vite-plugin-windicss: ^1.2.7
   vue: ^3.2.4
+  vue-color-kit: ^1.0.5
   vue-demi: ^0.11.3
   vue-router: ^4.0.11
 
 dependencies:
   '@headlessui/vue': 1.4.0
   '@vueuse/core': 6.0.0_vue@3.2.4
+  drauu: 0.1.0
   gsap: file:gsap-bonus.tgz
   rollup-plugin-svg: 2.0.0
   vue: 3.2.4
+  vue-color-kit: 1.0.5
   vue-demi: 0.11.3_vue@3.2.4
   vue-router: 4.0.11_vue@3.2.4
 
@@ -365,6 +369,15 @@ packages:
       '@babel/helper-validator-identifier': 7.14.9
       to-fast-properties: 2.0.0
 
+  /@drauu/core/0.1.0:
+    resolution: {integrity: sha512-I8FnzXt7sVx+OfwzHfHvpKCK7G5ZR0Gf9pGe9w2QtRj9RBefEtskaY9eHgDHUCP5GeSoB1BIwWwFFGxMzq4kcQ==}
+    dependencies:
+      perfect-freehand: 0.5.3
+    transitivePeerDependencies:
+      - react
+      - react-dom
+    dev: false
+
   /@eslint/eslintrc/0.4.3:
     resolution: {integrity: sha512-J6KFFz5QCYUJq3pf0mjEcCJVERbzv71PUIDczuh9JkwGEzced6CO5ADLHB1rbf/+oPBtoPfMYNOpGDzCANlbXw==}
     engines: {node: ^10.12.0 || >=12.0.0}
@@ -440,6 +453,17 @@ packages:
       estree-walker: 2.0.2
       picomatch: 2.3.0
     dev: true
+
+  /@tldraw/core/0.0.53:
+    resolution: {integrity: sha512-hxZIUR3Sm320tvGW5lWEKfw1QJhe6mJu7IrG5ka5G3slusqaY3cQY9EafFqH07yEXul2MU2RENIQus7fh+Gwcg==}
+    peerDependencies:
+      react: ^17.0.2
+      react-dom: ^17.0.2
+    dependencies:
+      deepmerge: 4.2.2
+      ismobilejs: 1.1.1
+      react-use-gesture: 9.1.3
+    dev: false
 
   /@types/estree/0.0.48:
     resolution: {integrity: sha512-LfZwXoGUDo0C3me81HXgkBg5CTQYb6xzEl+fNmbO4JdRiSKQ8A0GD1OBBvKAIsbCUgoyAty7m99GqqMQe784ew==}
@@ -1094,6 +1118,11 @@ packages:
     resolution: {integrity: sha1-s2nW+128E+7PUk+RsHD+7cNXzzQ=}
     dev: true
 
+  /deepmerge/4.2.2:
+    resolution: {integrity: sha512-FJ3UgI4gIl+PHZm53knsuSFpE+nESMr7M4v9QcgB7S63Kj/6WqMiFQJpBBYz1Pt+66bZpP3Q7Lye0Oo9MPKEdg==}
+    engines: {node: '>=0.10.0'}
+    dev: false
+
   /define-properties/1.1.3:
     resolution: {integrity: sha512-3MqfYKj2lLzdMSf8ZIZE/V+Zuy+BgD6f164e8K2w7dgnpKArBDerGYpM46IYYcjnkdPNMjPk9A6VFB8+3SKlXQ==}
     engines: {node: '>= 0.4'}
@@ -1148,6 +1177,15 @@ packages:
       domelementtype: 2.2.0
       domhandler: 4.2.0
     dev: true
+
+  /drauu/0.1.0:
+    resolution: {integrity: sha512-/sCWL0RpjrSQwJuu0gEBpf9j6HTVOAjaD6IwLT3ISWxbT9bNegHJgiHOQENAFOW8SNOx/sskGLnx/LY7das8Ww==}
+    dependencies:
+      '@drauu/core': 0.1.0
+    transitivePeerDependencies:
+      - react
+      - react-dom
+    dev: false
 
   /electron-to-chromium/1.3.806:
     resolution: {integrity: sha512-AH/otJLAAecgyrYp0XK1DPiGVWcOgwPeJBOLeuFQ5l//vhQhwC9u6d+GijClqJAmsHG4XDue81ndSQPohUu0xA==}
@@ -1820,6 +1858,12 @@ packages:
       postcss: 8.3.6
     dev: true
 
+  /idb-keyval/5.1.5:
+    resolution: {integrity: sha512-J1utxYWQokYjy01LvDQ7WmiAtZCGUSkVi9EIBfUSyLOr/BesnMIxNGASTh9A1LzeISSjSqEPsfFdTss7EE7ofQ==}
+    dependencies:
+      safari-14-idb-fix: 1.0.6
+    dev: false
+
   /ignore/4.0.6:
     resolution: {integrity: sha512-cyFDKrqc/YdcWFniJhzI42+AzS+gNwmUzOSFcRCQYwySuBBBy/KjuxWLZ/FHEH6Moq1NizMOBWyTcv8O4OZIMg==}
     engines: {node: '>= 4'}
@@ -2004,6 +2048,10 @@ packages:
   /isexe/2.0.0:
     resolution: {integrity: sha1-6PvzdNxVb/iUehDcsFctYz8s+hA=}
     dev: true
+
+  /ismobilejs/1.1.1:
+    resolution: {integrity: sha512-VaFW53yt8QO61k2WJui0dHf4SlL8lxBofUuUmwBo0ljPk0Drz2TiuDW4jo3wDcv41qy/SxrJ+VAzJ/qYqsmzRw==}
+    dev: false
 
   /jiti/1.11.0:
     resolution: {integrity: sha512-/2c7e61hxxTIN34UeHBB0LCJ5Tq64kgJDV7GR+++e8XRxCKRIKmB8tH6ww1W+Z6Kgd6By+C3RSCu1lXjbPT68A==}
@@ -2419,6 +2467,16 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+  /perfect-freehand/0.5.3:
+    resolution: {integrity: sha512-WbMEf78Chx1APwGNoKQf64fbUa12fCAXziKUf2BWoeZ2upsKu5OirCzLnIgjeZYkIB6jOoOtQawCb7CZZ+t/Aw==}
+    dependencies:
+      '@tldraw/core': 0.0.53
+      rko: 0.5.25
+    transitivePeerDependencies:
+      - react
+      - react-dom
+    dev: false
+
   /picomatch/2.3.0:
     resolution: {integrity: sha512-lY1Q/PiJGC2zOv/z391WOTD+Z02bCgsFfvxoXXf6h7kv9o+WmsmzYqrAwY63sNgOxE4xEdq0WyUnXfKeBrSvYw==}
     engines: {node: '>=8.6'}
@@ -2563,6 +2621,12 @@ packages:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
     dev: true
 
+  /react-use-gesture/9.1.3:
+    resolution: {integrity: sha512-CdqA2SmS/fj3kkS2W8ZU8wjTbVBAIwDWaRprX7OKaj7HlGwBasGEFggmk5qNklknqk9zK/h8D355bEJFTpqEMg==}
+    peerDependencies:
+      react: '>= 16.8.0'
+    dev: false
+
   /read-pkg-up/3.0.0:
     resolution: {integrity: sha1-PtSWaF26D4/hGNBpHcUfSh/5bwc=}
     engines: {node: '>=4'}
@@ -2657,6 +2721,16 @@ packages:
       glob: 7.1.7
     dev: true
 
+  /rko/0.5.25:
+    resolution: {integrity: sha512-HU6M3PxK3VEqrr6QZKAsqO98juQX24kEgJkKSdFJhw8U/DBUGAnU/fgyxNIaTw7TCI7vjIy/RzBEXf5I4sijKg==}
+    peerDependencies:
+      react: ^17.0.2
+      react-dom: ^17.0.2
+    dependencies:
+      idb-keyval: 5.1.5
+      zustand: 3.5.10
+    dev: false
+
   /rollup-plugin-svg/2.0.0:
     resolution: {integrity: sha512-DmE7dSQHo1SC5L2uH2qul3Mjyd5oV6U1aVVkyvTLX/mUsRink7f1b1zaIm+32GEBA6EHu8H/JJi3DdWqM53ySQ==}
     dependencies:
@@ -2683,6 +2757,10 @@ packages:
     dependencies:
       queue-microtask: 1.2.3
     dev: true
+
+  /safari-14-idb-fix/1.0.6:
+    resolution: {integrity: sha512-oTEQOdMwRX+uCtWCKT1nx2gAeSdpr8elg/2gcaKUH00SJU2xWESfkx11nmXwTRHy7xfQoj1o4TTQvdmuBosTnA==}
+    dev: false
 
   /safe-buffer/5.1.2:
     resolution: {integrity: sha512-Gd2UZBJDkXlY7GbJxfsE8/nvKkUEU1G38c1siN6QP6a9PT9MmHB8GnpscSmMJSoF8LOIrt8ud/wPtojys4G6+g==}
@@ -3075,6 +3153,12 @@ packages:
       fsevents: 2.3.2
     dev: true
 
+  /vue-color-kit/1.0.5:
+    resolution: {integrity: sha512-PUQzqdpI7672YYuoHdTLENHldieVMis0u9g2n7NAxiLGdiaqCD/QaYtbDOvtASpN5oSIfKxQgPV+i45MOlkKnw==}
+    peerDependencies:
+      vue: ^3.0.5
+    dev: false
+
   /vue-demi/0.11.3_vue@3.2.4:
     resolution: {integrity: sha512-DpM0TTMpclRZDV6AIacgg837zrim/C9Zn+2ztXBs9hsESJN9vC83ztjTe4KC4HgJuVle8YUjPp7HTwWtwOHfmg==}
     engines: {node: '>=12'}
@@ -3212,6 +3296,15 @@ packages:
     resolution: {integrity: sha512-RbI2Tm3hl9AoHY4wWyWvGvJfFIbHOzuzaxum6ez1A0vve+uXgNor03Wys4t+2sgjJSVSe+B2xerd1/dnvqHlOA==}
     engines: {node: '>= 12'}
     dev: true
+
+  /zustand/3.5.10:
+    resolution: {integrity: sha512-upluvSRWrlCiExu2UbkuMIPJ9AigyjRFoO7O9eUossIj7rPPq7pcJ0NKk6t2P7KF80tg/UdPX6/pNKOSbs9DEg==}
+    peerDependencies:
+      react: '>=16.8'
+    peerDependenciesMeta:
+      react:
+        optional: true
+    dev: false
 
   file:gsap-bonus.tgz:
     resolution: {integrity: sha512-h4T2l63ppKGVEiYZB17jMHH5BRMVzC5CRzKHqk5ti4+Lby8lmMafzm1qa1IeUOETkzVmPU7Kz7Ls28A1ZPC9CQ==, tarball: file:gsap-bonus.tgz}

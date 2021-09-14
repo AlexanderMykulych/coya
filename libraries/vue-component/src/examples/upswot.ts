@@ -150,7 +150,7 @@ export default <ArchitectureDescription>{
                 upswotZone: "Upswot zone"
             },
             highlight: {
-                blocks: ["upswotZone", "text", "client"]
+                blocks: ["upswotZone", "text"]
             }
         },
         {

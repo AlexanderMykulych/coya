@@ -176,7 +176,7 @@
    * and set projectFolderMaxDepth to a large number.
    */
   // "projectFolderMinDepth": 2,
-  // "projectFolderMaxDepth": 2,
+   "projectFolderMaxDepth": 10,
 
   /**
    * Today the npmjs.com registry enforces fairly strict naming rules for packages, but in the early
@@ -460,12 +460,6 @@
       "packageName": "demo",
       "projectFolder": "apps/demo",
       "reviewCategory": "apps"
-    },
-    // 
-    // {
-    //   "packageName": "my-toolchain",
-    //   "projectFolder": "tools/my-toolchain",
-    //   "reviewCategory": "tools"
-    // }
+    }
   ]
 }

@@ -21,8 +21,8 @@ specifiers:
   critters: ^0.0.10
   cross-env: ^7.0.3
   csstype: ^3.0.8
+  drauu: ^0.1.0
   eslint: ^7.32.0
-  gsap: ^3.7.1
   https-localhost: ^4.6.5
   husky: ^7.0.1
   jest: ^27.0.6
@@ -35,6 +35,7 @@ specifiers:
   prism-theme-vars: ^0.2.2
   rollup-plugin-svg: ^2.0.0
   size-limit: ^5.0.3
+  stylis: ^4.0.10
   tsdx: ^0.14.1
   tslib: ^2.3.1
   unplugin-auto-import: ^0.0.6
@@ -73,8 +74,8 @@ dependencies:
   critters: 0.0.10
   cross-env: 7.0.3
   csstype: 3.0.8
+  drauu: 0.1.0
   eslint: 7.32.0
-  gsap: 3.7.1
   https-localhost: 4.6.5
   husky: 7.0.1
   jest: 27.0.6
@@ -87,6 +88,7 @@ dependencies:
   prism-theme-vars: 0.2.2
   rollup-plugin-svg: 2.0.0
   size-limit: 5.0.3
+  stylis: 4.0.10
   tsdx: 0.14.1
   tslib: 2.3.1
   unplugin-auto-import: 0.0.6
@@ -1441,6 +1443,15 @@ packages:
       minimist: 1.2.5
     dev: false
 
+  /@drauu/core/0.1.0:
+    resolution: {integrity: sha512-I8FnzXt7sVx+OfwzHfHvpKCK7G5ZR0Gf9pGe9w2QtRj9RBefEtskaY9eHgDHUCP5GeSoB1BIwWwFFGxMzq4kcQ==}
+    dependencies:
+      perfect-freehand: 0.5.3
+    transitivePeerDependencies:
+      - react
+      - react-dom
+    dev: false
+
   /@emmetio/abbreviation/2.2.2:
     resolution: {integrity: sha512-TtE/dBnkTCct8+LntkqVrwqQao6EnPAs1YN3cUgxOxTaBlesBCY37ROUAVZrRlG64GNnVShdl/b70RfAI3w5lw==}
     dependencies:
@@ -2291,6 +2302,17 @@ packages:
     dependencies:
       ejs: 2.7.4
       magic-string: 0.25.7
+    dev: false
+
+  /@tldraw/core/0.0.53:
+    resolution: {integrity: sha512-hxZIUR3Sm320tvGW5lWEKfw1QJhe6mJu7IrG5ka5G3slusqaY3cQY9EafFqH07yEXul2MU2RENIQus7fh+Gwcg==}
+    peerDependencies:
+      react: ^17.0.2
+      react-dom: ^17.0.2
+    dependencies:
+      deepmerge: 4.2.2
+      ismobilejs: 1.1.1
+      react-use-gesture: 9.1.3
     dev: false
 
   /@tootallnate/once/1.1.2:
@@ -5110,6 +5132,15 @@ packages:
       domhandler: 4.2.0
     dev: false
 
+  /drauu/0.1.0:
+    resolution: {integrity: sha512-/sCWL0RpjrSQwJuu0gEBpf9j6HTVOAjaD6IwLT3ISWxbT9bNegHJgiHOQENAFOW8SNOx/sskGLnx/LY7das8Ww==}
+    dependencies:
+      '@drauu/core': 0.1.0
+    transitivePeerDependencies:
+      - react
+      - react-dom
+    dev: false
+
   /duplexer/0.1.2:
     resolution: {integrity: sha512-jtD6YG370ZCIi/9GTaJKQxWTZD045+4R4hTk/x1UyoqadyJ9x9CgSi1RlVDQF8U2sxLLSnFkCaMihqljHIWgMg==}
     dev: false
@@ -6862,6 +6893,12 @@ packages:
       postcss: 8.3.6
     dev: false
 
+  /idb-keyval/5.1.5:
+    resolution: {integrity: sha512-J1utxYWQokYjy01LvDQ7WmiAtZCGUSkVi9EIBfUSyLOr/BesnMIxNGASTh9A1LzeISSjSqEPsfFdTss7EE7ofQ==}
+    dependencies:
+      safari-14-idb-fix: 1.0.6
+    dev: false
+
   /idb/6.1.2:
     resolution: {integrity: sha512-1DNDVu3yDhAZkFDlJf0t7r+GLZ248F5pTAtA7V0oVG3yjmV125qZOx3g0XpAEkGZVYQiFDAsSOnGet2bhugc3w==}
     dev: false
@@ -7327,6 +7364,10 @@ packages:
 
   /isexe/2.0.0:
     resolution: {integrity: sha1-6PvzdNxVb/iUehDcsFctYz8s+hA=}
+    dev: false
+
+  /ismobilejs/1.1.1:
+    resolution: {integrity: sha512-VaFW53yt8QO61k2WJui0dHf4SlL8lxBofUuUmwBo0ljPk0Drz2TiuDW4jo3wDcv41qy/SxrJ+VAzJ/qYqsmzRw==}
     dev: false
 
   /isobject/2.1.0:
@@ -9610,6 +9651,16 @@ packages:
       sha.js: 2.4.11
     dev: false
 
+  /perfect-freehand/0.5.3:
+    resolution: {integrity: sha512-WbMEf78Chx1APwGNoKQf64fbUa12fCAXziKUf2BWoeZ2upsKu5OirCzLnIgjeZYkIB6jOoOtQawCb7CZZ+t/Aw==}
+    dependencies:
+      '@tldraw/core': 0.0.53
+      rko: 0.5.25
+    transitivePeerDependencies:
+      - react
+      - react-dom
+    dev: false
+
   /performance-now/2.1.0:
     resolution: {integrity: sha1-Ywn04OX6kT7BxpMHrjZLSzd8nns=}
     dev: false
@@ -10432,6 +10483,12 @@ packages:
     resolution: {integrity: sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==}
     dev: false
 
+  /react-use-gesture/9.1.3:
+    resolution: {integrity: sha512-CdqA2SmS/fj3kkS2W8ZU8wjTbVBAIwDWaRprX7OKaj7HlGwBasGEFggmk5qNklknqk9zK/h8D355bEJFTpqEMg==}
+    peerDependencies:
+      react: '>= 16.8.0'
+    dev: false
+
   /read-pkg-up/3.0.0:
     resolution: {integrity: sha1-PtSWaF26D4/hGNBpHcUfSh/5bwc=}
     engines: {node: '>=4'}
@@ -10784,6 +10841,16 @@ packages:
       inherits: 2.0.4
     dev: false
 
+  /rko/0.5.25:
+    resolution: {integrity: sha512-HU6M3PxK3VEqrr6QZKAsqO98juQX24kEgJkKSdFJhw8U/DBUGAnU/fgyxNIaTw7TCI7vjIy/RzBEXf5I4sijKg==}
+    peerDependencies:
+      react: ^17.0.2
+      react-dom: ^17.0.2
+    dependencies:
+      idb-keyval: 5.1.5
+      zustand: 3.5.10
+    dev: false
+
   /rollup-plugin-sourcemaps/0.6.3_@types+node@16.7.1+rollup@1.32.1:
     resolution: {integrity: sha512-paFu+nT1xvuO1tPFYXGe+XnQvg4Hjqv/eIhG8i5EspfYYPBKL57X7iVbfv55aNVASg3dzWvES9dmWsL2KhfByw==}
     engines: {node: '>=10.0.0'}
@@ -10925,6 +10992,10 @@ packages:
     engines: {node: '>= 6'}
     dependencies:
       mri: 1.1.6
+    dev: false
+
+  /safari-14-idb-fix/1.0.6:
+    resolution: {integrity: sha512-oTEQOdMwRX+uCtWCKT1nx2gAeSdpr8elg/2gcaKUH00SJU2xWESfkx11nmXwTRHy7xfQoj1o4TTQvdmuBosTnA==}
     dev: false
 
   /safe-buffer/5.1.2:
@@ -11609,6 +11680,10 @@ packages:
       browserslist: 4.16.8
       postcss: 8.3.6
       postcss-selector-parser: 6.0.6
+    dev: false
+
+  /stylis/4.0.10:
+    resolution: {integrity: sha512-m3k+dk7QeJw660eIKRRn3xPF6uuvHs/FFzjX3HQ5ove0qYsiygoAhwn5a3IYKaZPo5LrYD0rfVmtv1gNY1uYwg==}
     dev: false
 
   /supports-color/5.5.0:
@@ -13613,8 +13688,17 @@ packages:
       yargs-parser: 20.2.9
     dev: false
 
+  /zustand/3.5.10:
+    resolution: {integrity: sha512-upluvSRWrlCiExu2UbkuMIPJ9AigyjRFoO7O9eUossIj7rPPq7pcJ0NKk6t2P7KF80tg/UdPX6/pNKOSbs9DEg==}
+    peerDependencies:
+      react: '>=16.8'
+    peerDependenciesMeta:
+      react:
+        optional: true
+    dev: false
+
   file:projects/core.tgz:
-    resolution: {integrity: sha512-RSsrf5tAoSkkkoIK6ZpUco675A3vaTDlzWlQc/Z5EAbrsV6nwhijSNBdmGSx092IKfhVSbCwgs3ovU1g43mQNw==, tarball: file:projects/core.tgz}
+    resolution: {integrity: sha512-0GrCCc0K++PADxCSABVx6dee7JUmmBfSLsqN/nQhHlUcgcOLFz5NKvMHaLZWUWNGldjSaQUMyW8FSpEn7ES1Eg==, tarball: file:projects/core.tgz}
     name: '@rush-temp/core'
     version: 0.0.0
     dependencies:
@@ -13632,6 +13716,7 @@ packages:
       jest: 27.0.6
       lodash: 4.17.21
       size-limit: 5.0.3
+      stylis: 4.0.10
       tsdx: 0.14.1_@types+node@16.7.1
       tslib: 2.3.1
       typescript: 4.4.2
@@ -13699,7 +13784,7 @@ packages:
     dev: false
 
   file:projects/vue-component.tgz_@typescript-eslint+parser@4.29.3:
-    resolution: {integrity: sha512-lIzS5s482FEUbbyBAWSxcEqVr11Sl1vCmsvQaqF/Q5kzyjile+xzYP49HuDAIqarhg6CygfPejfvznc4kzJUQg==, tarball: file:projects/vue-component.tgz}
+    resolution: {integrity: sha512-UjzwBBPgUCSe70Loe+4NTvsyalC9uv1mZ706o/3ybYxSuNqRcwxNJuMxUduBUmnmIldt3wmtIBjVF7A0vdTN+w==, tarball: file:projects/vue-component.tgz}
     id: file:projects/vue-component.tgz
     name: '@rush-temp/vue-component'
     version: 0.0.0
@@ -13713,6 +13798,7 @@ packages:
       '@vue/compiler-sfc': 3.2.4
       '@vueuse/core': 6.0.0_vue@3.2.4
       cross-env: 7.0.3
+      drauu: 0.1.0
       eslint: 7.32.0
       gsap: 3.7.1
       pnpm: 6.14.2
@@ -13725,11 +13811,13 @@ packages:
       vite-plugin-pages: 0.17.4_7fe3aad99197253b81205fb92dfdbad3
       vite-plugin-windicss: 1.2.7_vite@2.5.0
       vue: 3.2.4
-      vue-demi: 0.11.3_vue@3.2.4
+      vue-demi: 0.11.4_vue@3.2.4
       vue-router: 4.0.11_vue@3.2.4
     transitivePeerDependencies:
       - '@typescript-eslint/parser'
       - '@vue/composition-api'
+      - react
+      - react-dom
       - rollup
       - supports-color
       - vue-template-compiler

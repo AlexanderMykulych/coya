@@ -10,9 +10,11 @@
     "@coya/core": "~0.1.0",
     "@headlessui/vue": "^1.4.0",
     "@vueuse/core": "^6.0.0",
+    "drauu": "^0.1.0",
     "gsap": "file:gsap-bonus.tgz",
     "rollup-plugin-svg": "^2.0.0",
     "vue": "^3.2.4",
+    "vue-color-kit": "^1.0.5",
     "vue-demi": "^0.11.3",
     "vue-router": "^4.0.11"
   },

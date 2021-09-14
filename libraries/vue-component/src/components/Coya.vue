@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { transformToArchitecture, RectPositioning, Architecture } from "@coya/core";
-import { computed, defineAsyncComponent, ref, watch } from "vue";
+import { computed, ref, watch } from "vue";
 import { useNodeDetails } from "../logic/useNodeDetails";
 import { useMousePosition } from "../logic/useSvgMousePosition";
 
@@ -10,7 +10,9 @@ const preparedConfig = computed(() => !!props.config && typeof props.config === 
 
 const arch = ref<Architecture | null>(null);
 const coyaSvgEl = ref<SVGSVGElement | null>(null);
+const drawableSvgEl = ref<SVGSVGElement | null>(null);
 const coyaEl = ref<HTMLElement | null>(null);
+const enableDrawing = ref(false);
 const width = ref(700);
 const realHeight = computed(() => coyaSvgEl.value?.clientHeight ?? 0);
 const realWidth = computed(() => coyaSvgEl.value?.clientWidth ?? 0);
@@ -71,7 +73,8 @@ watch(() => arch.value?.style?.css, css => {
     immediate: true
 })
 
-const highlights = computed(() => rectPositions.value.filter(x => x.style.isHighlight));
+const highlights = computed(() => rectPositions.value.filter(x => x.style?.isHighlight));
+
 </script>
 <template>
     <div class="grid grid-cols-5">
@@ -129,14 +132,7 @@ const highlights = computed(() => rectPositions.value.filter(x => x.style.isHigh
                     </mask>
                 </defs>
 
-                <rect
-                    v-if="debug"
-                    x="-1000"
-                    y="-1000"
-                    width="10000"
-                    height="10000"
-                    fill="url(#grid)"
-                />
+                <rect v-if="debug" x="0" y="0" width="100%" height="100%" fill="url(#grid)" />
 
                 <!-- Rounded corner rectangle -->
                 <template v-for="item in filteredRectPositions" :key="item.id">
@@ -176,6 +172,7 @@ const highlights = computed(() => rectPositions.value.filter(x => x.style.isHigh
                     mask="url(#hole)"
                 />
             </svg>
+            <svg v-if="enableDrawing" class="drawableSvg" ref="drawableSvgEl" />
         </div>
         <div v-if="debug" class="col-span-1">
             <NodeDetails
@@ -188,8 +185,12 @@ const highlights = computed(() => rectPositions.value.filter(x => x.style.isHigh
             <!-- <NodeDetails class="coya-debug " nodeId="client" :architecture="arch"/> -->
         </div>
         <div class="col-span-full block text-gray-700 text-center bg-gray-200 px-4 py-2">
-            <button @click="back" class="btn btn-blue mr-4">Back</button>
-            <button @click="next" class="btn btn-blue">Next</button>
+            <CoyaControlPanel
+                :svgEl="drawableSvgEl"
+                @back="back"
+                @next="next"
+                @enable="val => enableDrawing = val"
+            />
         </div>
     </div>
 </template>
@@ -209,8 +210,17 @@ const highlights = computed(() => rectPositions.value.filter(x => x.style.isHigh
     height: 70vh;
     width: 100%;
     overflow: auto;
+    position: relative;
 }
 .coya-container svg.coya {
+    height: 100%;
+    width: 100%;
+    touch-action: none;
+}
+.drawableSvg {
+    position: absolute;
+    top: 0;
+    left: 0;
     height: 100%;
     width: 100%;
 }
