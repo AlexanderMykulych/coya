@@ -13,7 +13,9 @@ function prepareColor({r, g, b, a}: {r: number; g: number; b: number; a: number;
 
 <template>
     <div>
-        <button @click="open = !open">color</button>
+        <button class="btn bg-opacity-0 hover:bg-opacity-0" @click="open = !open">
+            <ic:twotone-border-color :color="modelValue" class="min-w-8 min-h-8"/>
+        </button>
         <div class="modal-mask" v-if="open" @click="open = false">
             <div class="modal-wrapper">
                 <div class="modal-container">
