@@ -1,7 +1,6 @@
-import { ArchitectureDescription } from "@coya/core/dist/descriptionTypes";
-import rect from './rectangle.svg?raw';
 import blackboard from './blackboard.svg?raw';
 import smartphone from './smartphone.svg?raw';
+import { ArchitectureDescription } from '@coya/core';
 const imgUrl = new URL('./rectangle.svg', import.meta.url)
 
 export default <ArchitectureDescription>{

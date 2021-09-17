@@ -3,7 +3,7 @@
   "name": "@coya/vue-component",
   "scripts": {
     "dev": "vite --port 3333 --open",
-    "build": "cross-env NODE_ENV=production vite build",
+    "build": "cross-env NODE_ENV=production vite build --debug",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -11,7 +11,7 @@
     "@headlessui/vue": "^1.4.0",
     "@vueuse/core": "^6.0.0",
     "drauu": "^0.1.0",
-    "gsap": "file:gsap-bonus.tgz",
+    "gsap": "latest",
     "rollup-plugin-svg": "^2.0.0",
     "vue": "^3.2.4",
     "vue-color-kit": "^1.0.5",

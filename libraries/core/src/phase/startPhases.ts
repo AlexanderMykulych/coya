@@ -24,7 +24,7 @@ export function startPhases(architecture: ArchitectureDescription, phaseIndex: P
                 .filter(isNotNullOrUndefined)
                 .forEach(change => makeChange(architecture, change));
             return indexItem.nextPhaseId;
-        });
+        })[0];
     }
     return null;
 }

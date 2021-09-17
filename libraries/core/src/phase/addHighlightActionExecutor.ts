@@ -1,5 +1,4 @@
-import { BlockElementType } from "..";
-import { HighlightActionSetting } from "../descriptionTypes";
+import { BlockElementType, HighlightActionSetting } from "../descriptionTypes";
 import { Action, ActionExecutorContext, Change, ChangeType } from "../types";
 
 export function addHighlightActionExecutor(context: ActionExecutorContext, action: Action): Change[] | null {

@@ -2,9 +2,9 @@
 import { Block, BlockStyle, LinePositioning } from "@coya/core";
 import { computed, onMounted, ref, watch } from "vue";
 import { gsap } from "gsap";
-import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
+// import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
 
-gsap.registerPlugin(DrawSVGPlugin);
+// gsap.registerPlugin(DrawSVGPlugin);
 
 const props = defineProps<{ block: Block, positioning: LinePositioning, blockStyle: BlockStyle }>();
 const cssStyle = computed(() => props.blockStyle?.css ?? {});

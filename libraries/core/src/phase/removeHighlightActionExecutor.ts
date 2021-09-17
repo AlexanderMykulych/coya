@@ -1,5 +1,4 @@
-import { ChangeType } from "..";
-import { Action, ActionExecutorContext, Change } from "../types";
+import { Action, ActionExecutorContext, Change, ChangeType } from "../types";
 
 export function removeHighlightActionExecutor(context: ActionExecutorContext, _: Action): Change[] | null {
     const blocks = context.architecture.style?.blocks || {};

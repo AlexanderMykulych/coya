@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { Block, isLineBlockElement, isRectPositioning, Positioning, RectPositioning } from "@coya/core";
-import { BlockStyle } from "@coya/core/dist/descriptionTypes";
+import { Block, BlockStyle, isLineBlockElement, isRectPositioning, Positioning, RectPositioning } from "@coya/core";
 import { computed } from "vue";
 
 const props = defineProps<{ block: Block, positioning: Positioning, blockStyle?: BlockStyle }>();

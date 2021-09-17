@@ -16,6 +16,27 @@
             ],
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen"
+        },
+        {
+            "name": "Run Extension",
+            "type": "extensionHost",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/libraries/vscode/coya",
+            "args": ["--extensionDevelopmentPath=${workspaceFolder}/libraries/vscode/coya"],
+            "outFiles": ["${workspaceFolder}/libraries/vscode/coya/out/**/*.js"],
+			"preLaunchTask": "pnpm watch"
+        },
+        {
+            "name": "Extension Tests",
+            "type": "extensionHost",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/libraries/vscode/coya",
+            "args": [
+                "--extensionDevelopmentPath=${workspaceFolder}",
+                "--extensionTestsPath=${workspaceFolder}/out/test/suite/index"
+            ],
+            "outFiles": ["${workspaceFolder}/out/test/**/*.js"],
+            "preLaunchTask": "${defaultBuildTask}"
         }
     ],
     "compounds": []

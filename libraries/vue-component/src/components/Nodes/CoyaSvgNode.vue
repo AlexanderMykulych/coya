@@ -41,7 +41,7 @@ onMounted(() => {
 });
 
 const textStyle = ref({
-    fontSize: "4px"
+    fontSize: ".6em"
 });
 </script>
 

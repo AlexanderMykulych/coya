@@ -7,7 +7,6 @@ import { useMousePosition } from "../logic/useSvgMousePosition";
 const props = defineProps<{ config: string | Object }>()
 const preparedConfig = computed(() => !!props.config && typeof props.config === "string" ? JSON.parse(props.config) : props.config);
 
-
 const arch = ref<Architecture | null>(null);
 const coyaSvgEl = ref<SVGSVGElement | null>(null);
 const drawableSvgEl = ref<SVGSVGElement | null>(null);
@@ -182,7 +181,8 @@ const highlights = computed(() => rectPositions.value.filter(x => x.style?.isHig
                 :architecture="arch"
             />
             <DefaultDebug v-else />
-            <!-- <NodeDetails class="coya-debug " nodeId="client" :architecture="arch"/> -->
+
+            <CoyaPhaseSelect :phases="arch?.phases" :modelValue="arch.currentPhase" @update:modelValue="arch?.toPhase"/>
         </div>
         <div class="col-span-full block text-gray-700 text-center bg-gray-200 px-4 py-2">
             <CoyaControlPanel

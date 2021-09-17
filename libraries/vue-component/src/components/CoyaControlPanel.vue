@@ -59,45 +59,47 @@ const setDashArray = (val?: string) => {
                 @click="enable"
                 class="btn btn-blue mr-4"
             >{{ isEnable ? 'Stop drawing' : "Draw" }}</button>
-            <button class="btn btn-blue" @click="drauu?.undo" >
-                <carbon-undo />
-            </button>
-            <button class="btn btn-blue" @click="drauu?.redo">
-                <carbon-redo  />
-            </button>
-            <button class="btn btn-blue" @click="drauu?.clear">
-                <carbon-clean  />
-            </button>
-            <button class="btn btn-blue" @click="activateBrush('stylus')">
-                <entypo-brush  />
-            </button>
-            <button class="btn btn-blue" @click="activateBrush('draw')">
-                <raphael-pensil  />
-            </button>
-            <button class="btn btn-blue" @click="activateBrush('line')">
-                <octicon:dash-16  />
-            </button>
-            <button class="btn btn-blue" @click="activateBrush('line', true)">
-                <bi:arrow-up-right  />
-            </button>
-            <button class="btn btn-blue" @click="activateBrush('rectangle', true)">
-                <gis:rectangle-o  />
-            </button>
-            <button class="btn btn-blue" @click="activateBrush('ellipse')">
-                <mdi:ellipse-outline  />
-            </button>
+            <template v-if="isEnable">
+                <button class="btn btn-blue" @click="drauu?.undo">
+                    <carbon-undo />
+                </button>
+                <button class="btn btn-blue" @click="drauu?.redo">
+                    <carbon-redo />
+                </button>
+                <button class="btn btn-blue" @click="drauu?.clear">
+                    <carbon-clean />
+                </button>
+                <button class="btn btn-blue" @click="activateBrush('stylus')">
+                    <entypo-brush />
+                </button>
+                <button class="btn btn-blue" @click="activateBrush('draw')">
+                    <raphael-pensil />
+                </button>
+                <button class="btn btn-blue" @click="activateBrush('line')">
+                    <octicon:dash-16 />
+                </button>
+                <button class="btn btn-blue" @click="activateBrush('line', true)">
+                    <bi:arrow-up-right />
+                </button>
+                <button class="btn btn-blue" @click="activateBrush('rectangle', true)">
+                    <gis:rectangle-o />
+                </button>
+                <button class="btn btn-blue" @click="activateBrush('ellipse')">
+                    <mdi:ellipse-outline />
+                </button>
 
-            <ColorPickerButton v-model="color" />
-            <input class="mr-4" type="range" min="0.5" max="30" step="0.5" v-model="size" />
-            <button class="btn btn-blue" @click="setDashArray()">
-                <octicon:dash-16  />
-            </button>
-            <button class="btn btn-blue" @click="setDashArray('14')">
-                <radix-icons:border-dashed  />
-            </button>
-            <button class="btn btn-blue" @click="setDashArray('1 7')">
-                <ant-design:small-dash-outlined  />
-            </button>
+                <ColorPickerButton v-model="color" />
+                <input class="mr-4" type="range" min="0.5" max="30" step="0.5" v-model="size" />
+                <button class="btn btn-blue" @click="setDashArray()">
+                    <octicon:dash-16 />
+                </button>
+                <button class="btn btn-blue" @click="setDashArray('14')">
+                    <radix-icons:border-dashed />
+                </button>
+                <button class="btn btn-blue" @click="setDashArray('1 7')">
+                    <ant-design:small-dash-outlined />
+                </button>
+            </template>
         </div>
         <button @click="$emit('back')" class="btn btn-blue mr-4">Back</button>
         <button @click="$emit('next')" class="btn btn-blue">Next</button>

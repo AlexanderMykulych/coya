@@ -17,7 +17,9 @@ export function buildPhasesIndex(phases: PhaseStep | undefined | null): PhaseInd
                 ids = [id]
             }
             return index.filter(x => x.phaseId && ids.indexOf(x.phaseId) > -1);
-        }
+        },
+        phases: index.map(x => x.phaseId),
+        getPhaseIndex: phase => index.findIndex(x => x.phaseId === phase)
     };
 }
 function buildIndexObject(phase: PhaseStep | undefined | null, isStart: boolean = true, id: string = "start"): PhaseIndexItem[] {

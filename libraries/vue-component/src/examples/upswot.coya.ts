@@ -163,6 +163,7 @@ export default <ArchitectureDescription>{
             enable: true
         },
         css: `
+            font-size: 20px;
             .numb {
                 font-size: 30px;
                 color: white;
@@ -260,7 +261,7 @@ export default <ArchitectureDescription>{
                     indentX1: "upswotApi.width / 2",
                     indentY1: "upswotApi.height / 2",
                     x2: "storage.x + storage.width / 2",
-                    y2: "storage.y + 5",
+                    y2: "storage.y - 5",
                 }
             },
             line_signal: {
@@ -268,7 +269,7 @@ export default <ArchitectureDescription>{
                     indentX1: "upswotApi.width / 2 - 5",
                     indentY1: "upswotApi.height / 2",
                     x2: "kafka.x + kafka.width / 2 + 5",
-                    y2: "kafka.y + 5",
+                    y2: "kafka.y - 5",
                 }
             },
             line_worker_kafka: {

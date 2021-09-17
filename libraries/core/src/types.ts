@@ -88,11 +88,15 @@ export interface BlockPositioning {
 export interface ArchitectureData {
     blocks: Block[];
     style?: Style | null;
+    
 }
 export interface Architecture extends RefsType<ArchitectureData> {
     name: string;
-    next: () => void
-    back: () => void
+    phases: string[];
+    currentPhase: Ref<PhaseId> | null;
+    next: () => PhaseId;
+    back: () => PhaseId;
+    toPhase: (phase: string) => void;
 }
 export type RefsType<T> = {
     [P in keyof T]?: Ref<T[P]>;
@@ -100,7 +104,7 @@ export type RefsType<T> = {
 export interface TransitionalArchitecture extends ArchitectureDescription {
 }
 
-export type PhaseId = string | (string | null)[] | null;
+export type PhaseId = string | null | undefined;
 export interface CurrentPhaseInfo {
     current: PhaseId;
 }
@@ -133,9 +137,11 @@ export interface Change {
 }
 export interface PhaseIndex {
     getPhaseById(current: PhaseId): PhaseIndexItem[] | undefined;
+    phases: string[];
+    getPhaseIndex(phase: PhaseId): number;
 }
 export interface PhaseIndexItem {
-    phaseId: string | null;
+    phaseId: string;
     isStart: boolean;
     nextPhaseId: string | null;
     actions: PhaseIndexItemAction[];

@@ -5,7 +5,7 @@ import { gsap } from "gsap";
 
 const props = defineProps<{ block: Block, positioning: RectPositioning, blockStyle: BlockStyle }>();
 const cssStyle = computed(() => ({
-    fontSize: "4px",
+    fontSize: "1em",
     color: "black",
     ...props.blockStyle?.css
 }) ?? {});

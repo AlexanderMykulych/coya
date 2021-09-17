@@ -9,7 +9,7 @@ import exampleStylePhase from "./examples/4_simple_style_phase";
 import exampleStylePhase2 from "./examples/4_simple_style_phase2";
 import exampleStylePhase3 from "./examples/4_simple_style_phase3";
 import exampleStylePhase4 from "./examples/4_simple_style_phase4";
-import upswot from "./examples/upswot";
+import upswot from "./examples/upswot.coya";
 
 const examples = [
     {
@@ -59,7 +59,7 @@ const config = computed(() => JSON.stringify(examples[currentExampleIndex.value]
 
 </script>
 <template>
-    <main class="px-4 py-10 text-center text-gray-700 dark:text-gray-200">
+    <main class="px-4 py-10 text-center text-gray-700 dark:text-gray-200 bg-white">
         <Select :items="examples" v-model="currentExampleIndex" item-text="label" label="Example"/>
         <Coya :config="config" />
     </main>

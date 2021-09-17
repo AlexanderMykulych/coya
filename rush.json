@@ -452,6 +452,16 @@
       "reviewCategory": "production"
     },
     {
+      "packageName": "@coya/gif",
+      "projectFolder": "libraries/gif",
+      "reviewCategory": "production"
+    },
+    {
+      "packageName": "@coya/vscode",
+      "projectFolder": "libraries/vscode/coya",
+      "reviewCategory": "production"
+    },
+    {
       "packageName": "@coya/vue-component",
       "projectFolder": "libraries/vue-component",
       "reviewCategory": "production"
