@@ -1,17 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.configEditor = void 0;
+exports.openEditor = void 0;
+const path = require("path");
 const vscode = require("vscode");
-function configEditor(context, file) {
-    var panel = vscode.window.createWebviewPanel("coya", `Coya - ${file.authority}`, vscode.ViewColumn.Two, {
+const startConnection_1 = require("./startConnection");
+function openEditor(context, file) {
+    var panel = vscode.window.createWebviewPanel("coya", `Coya - ${path.basename(file.path)}`, vscode.ViewColumn.Beside, {
         enableScripts: true
     });
-    var terminal = vscode.window.createTerminal("dev");
-    terminal.sendText("npx vite --port=5000", true);
-    terminal.show();
-    setTimeout(() => panel.webview.html = getWebviewContent("http://localhost:5000"), 2000);
+    setTimeout(() => {
+        panel.webview.html = getWebviewContent("http://localhost:5000");
+        (0, startConnection_1.startConnection)();
+    }, 2000);
 }
-exports.configEditor = configEditor;
+exports.openEditor = openEditor;
 function getWebviewContent(url) {
     return `
     <head>
@@ -23,7 +25,6 @@ function getWebviewContent(url) {
     <body>
       <script>
         window.addEventListener('load', () => {
-            debugger;
           location.replace(${JSON.stringify(url)})
         })
       </script>

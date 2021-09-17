@@ -65,3 +65,27 @@ common/autoinstallers/*/.npmrc
 **/.rush/temp/
 
 **/.history/
+libraries/vscode/coya/out/configEditor.js
+libraries/vscode/coya/out/configEditor.js.map
+libraries/vscode/coya/out/createState.js
+libraries/vscode/coya/out/createState.js.map
+libraries/vscode/coya/out/extension.js
+libraries/vscode/coya/out/extension.js.map
+libraries/vscode/coya/out/openEditor.js
+libraries/vscode/coya/out/openEditor.js.map
+libraries/vscode/coya/out/startConnection.js
+libraries/vscode/coya/out/startConnection.js.map
+libraries/vscode/coya/out/startViteDev.js
+libraries/vscode/coya/out/startViteDev.js.map
+libraries/vscode/coya/out/startViteDevServer.js
+libraries/vscode/coya/out/startViteDevServer.js.map
+libraries/vscode/coya/out/state.js
+libraries/vscode/coya/out/state.js.map
+libraries/vscode/coya/out/configEditor.js
+libraries/vscode/coya/out/configEditor.js.map
+libraries/vscode/coya/out/extension.js
+libraries/vscode/coya/out/extension.js.map
+libraries/vscode/coya/out/configEditor.js
+libraries/vscode/coya/out/configEditor.js.map
+libraries/vscode/coya/out/extension.js
+libraries/vscode/coya/out/extension.js.map

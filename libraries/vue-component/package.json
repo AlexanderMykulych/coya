@@ -9,6 +9,7 @@
   "dependencies": {
     "@coya/core": "~0.1.0",
     "@headlessui/vue": "^1.4.0",
+    "@types/ws": "^7.4.7",
     "@vueuse/core": "^6.0.0",
     "drauu": "^0.1.0",
     "gsap": "latest",
@@ -16,7 +17,8 @@
     "vue": "^3.2.4",
     "vue-color-kit": "^1.0.5",
     "vue-demi": "^0.11.3",
-    "vue-router": "^4.0.11"
+    "vue-router": "^4.0.11",
+    "ws": "^8.2.2"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.7.0",

@@ -1,21 +1,20 @@
-import * as path from 'path';
+import path = require('path');
 import * as vscode from 'vscode';
+import { startConnection } from './startConnection';
 
-export function configEditor(context: vscode.ExtensionContext, file: vscode.Uri) {
+export function openEditor(context: vscode.ExtensionContext, file: vscode.Uri) {
     var panel = vscode.window.createWebviewPanel(
         "coya",
-        `Coya - ${file.authority}`,
-        vscode.ViewColumn.Two,
+        `Coya - ${path.basename(file.path)}`,
+        vscode.ViewColumn.Beside,
         {
             enableScripts: true
         }
     );
-
-    var terminal = vscode.window.createTerminal("dev");
-    terminal.sendText("npx vite --port=5000", true);
-    terminal.show();
-
-    setTimeout(() => panel.webview.html = getWebviewContent("http://localhost:5000"), 2000);
+    setTimeout(() => {
+        panel.webview.html = getWebviewContent("http://localhost:5000");
+        startConnection();
+    }, 2000);
 }
 
 function getWebviewContent(url: string): string {
@@ -29,7 +28,6 @@ function getWebviewContent(url: string): string {
     <body>
       <script>
         window.addEventListener('load', () => {
-            debugger;
           location.replace(${JSON.stringify(url)})
         })
       </script>

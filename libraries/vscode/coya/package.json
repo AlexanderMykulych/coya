@@ -17,12 +17,8 @@
     "contributes": {
         "commands": [
             {
-                "command": "coya.helloWorld",
-                "title": "Hello World"
-            },
-            {
                 "command": "coya.open",
-                "title": "Open Coya editor"
+                "title": "Run coya"
             }
         ],
         "menus": {
@@ -64,6 +60,8 @@
         "vscode-test": "^1.5.2"
     },
     "dependencies": {
-        "child_process": "^1.0.2"
+        "@types/ws": "^7.4.7",
+        "child_process": "^1.0.2",
+        "ws": "^8.2.2"
     }
 }

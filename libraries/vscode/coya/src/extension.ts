@@ -1,20 +1,20 @@
 import * as vscode from 'vscode';
-import { configEditor } from './configEditor';
+import { openEditor } from './openEditor';
+import { startViteDevServer } from './startViteDevServer';
+import state from './state';
 
 export function activate(context: vscode.ExtensionContext) {
-	
-	console.log('Congratulations, your extension "coya" is now active!');
+	console.log('coya is now active!');
+    state.enabled = true;
 
-	let disposable = vscode.commands.registerCommand('coya.helloWorld', () => {
-		vscode.window.showInformationMessage('Hello World from coya 2!');
-	});
-	let disposable2 = vscode.commands.registerCommand('coya.open', (file: vscode.Uri) => {
-        vscode.window.showInformationMessage('Coya open!');
-        configEditor(context, file);
+    startViteDevServer(context);
+
+	let openDisposable = vscode.commands.registerCommand('coya.open', (file: vscode.Uri) => {
+        openEditor(context, file);
 	});
 
-	context.subscriptions.push(disposable);
-	context.subscriptions.push(disposable2);
+	context.subscriptions.push(openDisposable);
 }
 
 export function deactivate() {}
+

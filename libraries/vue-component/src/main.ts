@@ -9,6 +9,8 @@ import 'virtual:windi-base.css'
 import 'virtual:windi-components.css'
 import './styles/main.css'
 import 'virtual:windi-utilities.css'
+import { startSocketClient } from './socket'
+
 
 const app = createApp(App)
 const router = createRouter({
@@ -17,3 +19,6 @@ const router = createRouter({
 })
 app.use(router)
 app.mount('#app')
+
+
+startSocketClient();

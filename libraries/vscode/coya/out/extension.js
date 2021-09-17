@@ -2,18 +2,17 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deactivate = exports.activate = void 0;
 const vscode = require("vscode");
-const configEditor_1 = require("./configEditor");
+const openEditor_1 = require("./openEditor");
+const startViteDevServer_1 = require("./startViteDevServer");
+const state_1 = require("./state");
 function activate(context) {
-    console.log('Congratulations, your extension "coya" is now active!');
-    let disposable = vscode.commands.registerCommand('coya.helloWorld', () => {
-        vscode.window.showInformationMessage('Hello World from coya 2!');
+    console.log('coya is now active!');
+    state_1.default.enabled = true;
+    (0, startViteDevServer_1.startViteDevServer)(context);
+    let openDisposable = vscode.commands.registerCommand('coya.open', (file) => {
+        (0, openEditor_1.openEditor)(context, file);
     });
-    let disposable2 = vscode.commands.registerCommand('coya.open', (file) => {
-        vscode.window.showInformationMessage('Coya open!');
-        (0, configEditor_1.configEditor)(context, file);
-    });
-    context.subscriptions.push(disposable);
-    context.subscriptions.push(disposable2);
+    context.subscriptions.push(openDisposable);
 }
 exports.activate = activate;
 function deactivate() { }
