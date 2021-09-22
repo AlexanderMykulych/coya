@@ -1,5 +1,7 @@
 import { Ref } from "@vue/reactivity";
 import { Properties } from "csstype";
+import { DebugStateContainer } from ".";
+import { DebugSetting } from "./debugTypes";
 
 export enum BlockElementType {
     Rect = "rect",
@@ -15,6 +17,7 @@ export interface BaseBlockElementDescription {
     label?: string;
     enter?: EnterSetting;
     type?: BlockElementType;
+    debug?: DebugSetting;
 }
 
 export interface LineBlockElementDescription extends BaseBlockElementDescription {
@@ -117,7 +120,7 @@ export interface BlockStyle {
     label?: string;
     isHighlight?: boolean;
 }
-export interface DebugSetting {
+export interface GlobalDebugSetting {
     enable: boolean;
 }
 export type StyleCss = string;
@@ -125,7 +128,7 @@ export interface StyleDescription {
     blocks?: {
         [name: string]: BlockStyle
     }
-    debug?: DebugSetting;
+    debug?: GlobalDebugSetting;
     positioning?: PositioningSystem;
     css?: StyleCss;
 }
@@ -140,6 +143,7 @@ export interface ArchitectureDescription {
     phases?: PhaseStep;
     animation?: AnimationDescription;
     style?: StyleDescription;
+    debugState?: DebugStateContainer;
 }
 
 export type ArchitectureDescriptionElement =

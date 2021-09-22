@@ -6,14 +6,17 @@
         {
             "label": "pnpm watch",
             "type": "shell",
-            "command": "pnpm watch",
+            "command": "cd ./libraries/vscode/coya && pnpm watch",
             "isBackground": true,
             "presentation": {
                 "reveal": "never"
             },
-            "group": {
-                "kind": "build",
-                "isDefault": true
+            "problemMatcher": {
+                "background": {
+                    "activeOnStart": false,
+                    "beginsPattern": "^.*Starting compilation.*",
+                    "endsPattern": "^.*Watching for file changes.*"
+                }
             }
         },
         {

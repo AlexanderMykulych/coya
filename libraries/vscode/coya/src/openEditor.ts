@@ -1,8 +1,10 @@
+import { watch } from '@vue-reactivity/watch';
 import path = require('path');
 import * as vscode from 'vscode';
-import { startConnection } from './startConnection';
+import state from './state';
 
 export function openEditor(context: vscode.ExtensionContext, file: vscode.Uri) {
+    state.addFile(file);
     var panel = vscode.window.createWebviewPanel(
         "coya",
         `Coya - ${path.basename(file.path)}`,
@@ -13,7 +15,6 @@ export function openEditor(context: vscode.ExtensionContext, file: vscode.Uri) {
     );
     setTimeout(() => {
         panel.webview.html = getWebviewContent("http://localhost:5000");
-        startConnection();
     }, 2000);
 }
 

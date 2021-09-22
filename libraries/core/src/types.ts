@@ -1,7 +1,10 @@
 
 import { Ref } from "@vue/reactivity";
-import { DebugSetting, EnterSetting, ViewBoxSetting } from ".";
-import { ActionSetting, ArchitectureDescription, BlockElementDescription, BlockGroupDescriptions, BlockStyle, LineBlockElementDescription, StyleCss } from "./descriptionTypes";
+import { DebugSetting } from "./debugTypes";
+import {
+    GlobalDebugSetting, EnterSetting, ViewBoxSetting,
+    ActionSetting, ArchitectureDescription, BlockElementDescription, BlockGroupDescriptions, BlockStyle, LineBlockElementDescription, StyleCss
+} from "./descriptionTypes";
 
 export type NumberValue = number | Ref<number>;
 export type StringValue = string | Ref<string>;
@@ -14,6 +17,7 @@ export interface BlockElement extends Identifiable {
     label: StringValue;
     parentId?: IdValue;
     enter: EnterSetting;
+    debug?: DebugSetting;
 }
 
 export type ExcludeProp<T, U> = {
@@ -56,7 +60,7 @@ export interface BlocksStyle {
 export interface Style extends Identifiable {
     positioning: BlockPositioning[];
     blocks?: BlocksStyle;
-    debug?: DebugSetting;
+    debug?: GlobalDebugSetting;
     css?: StyleCss;
 }
 
@@ -96,6 +100,7 @@ export interface Architecture extends RefsType<ArchitectureData> {
     currentPhase: Ref<PhaseId> | null;
     next: () => PhaseId;
     back: () => PhaseId;
+    debugSelect: (select: SelectedProperties) => void;
     toPhase: (phase: string) => void;
 }
 export type RefsType<T> = {
@@ -165,4 +170,28 @@ export interface FormulaSystemContext {
 export interface FormulaValueFuncContext {
     blockNamesAsFuncParams: string;
     blocksValues: (Positioning | FormulaSystemContext)[];
+}
+
+export interface PropertiesConfig {
+    prop: string;
+    child: PropertiesConfig | null;
+}
+export interface SelectedProperties {
+    properties: PropertiesConfig;
+    file: string;
+}
+
+export enum MessageCommand {
+    Select = "select"
+}
+
+export declare type MessageData = SelectedProperties;
+
+export interface DebugMessage {
+    command: MessageCommand;
+    data: MessageData;
+}
+
+export interface DebugStateContainer {
+    selected?: SelectedProperties | null;
 }

@@ -10,6 +10,7 @@ const isCustomSvg = computed(() => !!props.blockStyle?.svg);
 const isCustomSvgUrl = computed(() => !!props.blockStyle?.svgUrl);
 const svgTag = computed(() => props.blockStyle?.svgTag);
 const isLine = computed(() => isLineBlockElement(props.block));
+const debug = computed(() => props.block.debug);
 
 </script>
 
@@ -40,6 +41,13 @@ const isLine = computed(() => isLineBlockElement(props.block));
     />
     <CoyaRectNode
         v-else-if="isRect"
+        :block="block"
+        :block-style="blockStyle"
+        :positioning="rectPosition"
+    />
+    <DebugNode
+        v-if="!!debug"
+        :value="debug"
         :block="block"
         :block-style="blockStyle"
         :positioning="rectPosition"

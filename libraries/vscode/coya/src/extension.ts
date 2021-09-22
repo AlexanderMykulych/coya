@@ -1,5 +1,8 @@
 import * as vscode from 'vscode';
+import { activateLogic } from './activateLogic';
 import { openEditor } from './openEditor';
+import { startConnection } from './startConnection';
+import { startTypescriptAnalizing } from './startTypescriptAnalizing';
 import { startViteDevServer } from './startViteDevServer';
 import state from './state';
 
@@ -8,13 +11,17 @@ export function activate(context: vscode.ExtensionContext) {
     state.enabled = true;
 
     startViteDevServer(context);
-
-	let openDisposable = vscode.commands.registerCommand('coya.open', (file: vscode.Uri) => {
+    startTypescriptAnalizing(context);
+    startConnection();
+    let openDisposable = vscode.commands.registerCommand('coya.open', (file: vscode.Uri) => {
         openEditor(context, file);
+        activateLogic(context, file);
 	});
 
-	context.subscriptions.push(openDisposable);
+    context.subscriptions.push(openDisposable);
 }
 
 export function deactivate() {}
+
+
 

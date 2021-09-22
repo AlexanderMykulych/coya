@@ -3,22 +3,28 @@ lockfileVersion: 5.3
 specifiers:
   '@types/glob': ^7.1.3
   '@types/mocha': ^8.2.2
-  '@types/node': 14.x
+  '@types/node': ~14.17.16
   '@types/vscode': ^1.60.0
   '@types/ws': ^7.4.7
   '@typescript-eslint/eslint-plugin': ^4.26.0
   '@typescript-eslint/parser': ^4.26.0
+  '@vue-reactivity/watch': ^0.1.6
+  '@vue/reactivity': ^3.2.12
   child_process: ^1.0.2
   eslint: ^7.27.0
   glob: ^7.1.7
   mocha: ^8.4.0
+  tsutils: ^3.21.0
   typescript: ^4.3.2
   vscode-test: ^1.5.2
   ws: ^8.2.2
 
 dependencies:
   '@types/ws': 7.4.7
+  '@vue-reactivity/watch': 0.1.6_@vue+reactivity@3.2.12
+  '@vue/reactivity': 3.2.12
   child_process: 1.0.2
+  tsutils: 3.21.0
   ws: 8.2.2
 
 devDependencies:
@@ -254,6 +260,25 @@ packages:
   /@ungap/promise-all-settled/1.1.2:
     resolution: {integrity: sha512-sL/cEvJWAnClXw0wHk85/2L0G6Sj8UB0Ctc1TEMbKSsmpRosqhwj9gWgFRZSrBr2f9tiXISwNhCPmlfqUqyb9Q==}
     dev: true
+
+  /@vue-reactivity/watch/0.1.6_@vue+reactivity@3.2.12:
+    resolution: {integrity: sha512-Se4D+1LAnn8B49MuRzWyZv2syb+9FTuxXKA8FF6gjZD08PdVwoVZG3ncZzqFFG2lVlzx03+rjOCtIJb+VkD3Qg==}
+    peerDependencies:
+      '@vue/reactivity': '>=3.0.0-rc.1'
+      '@vue/shared': '>=3.0.0-rc.1'
+    dependencies:
+      '@vue/reactivity': 3.2.12
+    dev: false
+
+  /@vue/reactivity/3.2.12:
+    resolution: {integrity: sha512-Lr5CTQjFm5mT/6DGnVNhptmba/Qg1DbD6eNWWmiHLMlpPt4q2ww9A2orEjVw0qNcdTJ04JLPEVAz5jhTZTCfIg==}
+    dependencies:
+      '@vue/shared': 3.2.12
+    dev: false
+
+  /@vue/shared/3.2.12:
+    resolution: {integrity: sha512-5CkaifUCJwcTuru7FDwKFacPJuEoGUTw0LKSa5bw40B23s0TS+MGlYR1285nbV/ju3QUGlA6d6PD+GJkWy7uFg==}
+    dev: false
 
   /acorn-jsx/5.3.2_acorn@7.4.1:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -1455,7 +1480,15 @@ packages:
 
   /tslib/1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
-    dev: true
+
+  /tsutils/3.21.0:
+    resolution: {integrity: sha512-mHKK3iUXL+3UF6xL5k0PEhKRUBKPBCv/+RkEOpjRWxxx27KKRBmmA60A9pgOUvMi8GKhRMPEmjBRPzs2W7O1OA==}
+    engines: {node: '>= 6'}
+    peerDependencies:
+      typescript: '>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta'
+    dependencies:
+      tslib: 1.14.1
+    dev: false
 
   /tsutils/3.21.0_typescript@4.4.3:
     resolution: {integrity: sha512-mHKK3iUXL+3UF6xL5k0PEhKRUBKPBCv/+RkEOpjRWxxx27KKRBmmA60A9pgOUvMi8GKhRMPEmjBRPzs2W7O1OA==}

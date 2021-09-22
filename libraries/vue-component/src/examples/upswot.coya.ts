@@ -11,7 +11,7 @@ const kafkaUrl = new URL('./assets/queue.png', import.meta.url)
 export default <ArchitectureDescription>{
     name: "upswot",
     "blocks": {
-        client: {
+        "client": {
             label: "SMB client"
         },
         text: {

@@ -23,8 +23,7 @@
             "request": "launch",
             "cwd": "${workspaceFolder}/libraries/vscode/coya",
             "args": ["--extensionDevelopmentPath=${workspaceFolder}/libraries/vscode/coya"],
-            "outFiles": ["${workspaceFolder}/libraries/vscode/coya/out/**/*.js"],
-			"preLaunchTask": "pnpm watch"
+            "outFiles": ["${workspaceFolder}/libraries/vscode/coya/out/**/*.js"]
         },
         {
             "name": "Extension Tests",

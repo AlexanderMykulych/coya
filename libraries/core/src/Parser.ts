@@ -2,13 +2,12 @@ import { computed, Ref, isRef, ref, reactive } from "@vue/reactivity";
 import { blockGroupDescriptionsToBlock } from "./block/blockGroupDescriptionsToBlock";
 import { ArchitectureDescription, TransformSetting } from "./descriptionTypes";
 import { isArchitectureDescription } from "./typeGuards";
-import { Architecture, Block, CurrentPhaseInfo } from "./types";
+import { PhaseId, SelectedProperties, Architecture, Block, CurrentPhaseInfo, DebugStateContainer } from "./types";
 import { styleDescriptionToArchitectureStyle } from "./style/styleDescriptionToArchitectureStyle";
 import { startPhases } from "./phase/startPhases";
 import { buildPhasesIndex } from "./phase/buildPhasesIndex";
 import { watch } from '@vue-reactivity/watch';
 import { deepCopy } from "./util/deepCopy";
-import { PhaseId } from ".";
 
 
 export function transformToArchitecture(description: Ref<unknown> | unknown, setting: TransformSetting): Ref<Architecture> {
@@ -19,6 +18,9 @@ export function transformToArchitecture(description: Ref<unknown> | unknown, set
     const transitionalArchitecture: ArchitectureDescription = transitionalArchitectureRef.value;
     transitionalArchitecture.blocks = {
         main: transitionalArchitecture.blocks
+    };
+    transitionalArchitectureRef.value.debugState = <DebugStateContainer>{
+        selected: null
     };
 
     const architecture = computed<Architecture>(() => {
@@ -33,6 +35,7 @@ export function transformToArchitecture(description: Ref<unknown> | unknown, set
             currentPhase: null,
             next: () => null,
             back: () => null,
+            debugSelect: () => {},
             toPhase: () => {}
         };
     });
@@ -87,6 +90,9 @@ export function transformDescriptionToArchitecture(transitionalArchitectureRef: 
             do {
                 curPhaseId = walkerFn();
             } while (!!curPhaseId && curPhaseId.length > 0 && curPhaseId.indexOf(phaseId) === -1);
+        },
+        debugSelect: (selected: SelectedProperties) => {
+            transitionalArchitectureRef.value.debugState!.selected = selected
         },
         phases: phaseIndex.phases,
         currentPhase: computed(() => currentPhase.current)

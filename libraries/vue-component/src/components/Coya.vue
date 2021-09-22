@@ -3,6 +3,7 @@ import { transformToArchitecture, RectPositioning, Architecture } from "@coya/co
 import { computed, ref, watch } from "vue";
 import { useNodeDetails } from "../logic/useNodeDetails";
 import { useMousePosition } from "../logic/useSvgMousePosition";
+import { useDebug } from "../state/useDebug";
 
 const props = defineProps<{ config: string | Object }>()
 const preparedConfig = computed(() => !!props.config && typeof props.config === "string" ? JSON.parse(props.config) : props.config);
@@ -73,6 +74,10 @@ watch(() => arch.value?.style?.css, css => {
 })
 
 const highlights = computed(() => rectPositions.value.filter(x => x.style?.isHighlight));
+
+const {state} = useDebug();
+
+watch(() => state.selected, val => arch.value?.debugSelect(val));
 
 </script>
 <template>
@@ -182,7 +187,11 @@ const highlights = computed(() => rectPositions.value.filter(x => x.style?.isHig
             />
             <DefaultDebug v-else />
 
-            <CoyaPhaseSelect :phases="arch?.phases" :modelValue="arch.currentPhase" @update:modelValue="arch?.toPhase"/>
+            <CoyaPhaseSelect
+                :phases="arch?.phases"
+                :modelValue="arch.currentPhase"
+                @update:modelValue="arch?.toPhase"
+            />
         </div>
         <div class="col-span-full block text-gray-700 text-center bg-gray-200 px-4 py-2">
             <CoyaControlPanel
