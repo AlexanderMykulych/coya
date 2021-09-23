@@ -1,4 +1,3 @@
-import { isBlockSelected } from "../debug/isBlockSelected";
 import { DebugType } from "../debugTypes";
 import { ArchitectureDescription, BlockGroupDescriptions } from "../descriptionTypes";
 import { isBlockElementDescription, isLineBlockElementDescription, isContainerBlock, isString } from "../typeGuards";
@@ -38,7 +37,9 @@ export function blockGroupDescriptionsToBlock(architecture: ArchitectureDescript
                 ];
             })
             .map(block => {
-                if (architecture.debugState && isBlockSelected(block.id, architecture.debugState)) {
+                if (architecture.debugState
+                    && architecture.debugState.selectedBlocks
+                    && architecture.debugState.selectedBlocks.indexOf(block.id) > -1) {
                     block.debug = {
                         type: DebugType.Select
                     };

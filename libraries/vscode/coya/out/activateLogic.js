@@ -5,7 +5,6 @@ const watch_1 = require("@vue-reactivity/watch");
 const reactivity_1 = require("@vue/reactivity");
 const vscode = require("vscode");
 const state_1 = require("./state");
-const ts = require("typescript");
 const getTokensAtPosition_1 = require("./tsutil/getTokensAtPosition");
 const core_1 = require("@coya/core");
 function activateLogic(context, file) {
@@ -27,20 +26,22 @@ function activateLogic(context, file) {
 }
 exports.activateLogic = activateLogic;
 function propsArrayToConfigObject(nodes, sourceFile) {
-    const properties = nodes.filter(x => ts.isPropertyAssignment(x))
-        .map(x => ts.isPropertyAssignment(x) ? x.name.getText(sourceFile) : null)
+    const properties = nodes
+        .map(x => x.node.name.getText(sourceFile))
         .filter(core_1.isNotNullOrUndefined);
     let config = {
         prop: "",
         child: null
     };
     const root = config;
-    properties
+    nodes
         .map((prop, index) => ({ prop, index }))
         .forEach(({ prop, index }) => {
-        config.prop = prop
+        const name = prop.node.name.getText(sourceFile);
+        config.prop = name
             .replaceAll("\"", "")
             .replaceAll("'", "");
+        config.index = prop.index;
         if (index < properties.length - 1) {
             config.child = {};
             config = config.child;

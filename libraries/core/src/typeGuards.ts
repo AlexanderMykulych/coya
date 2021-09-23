@@ -1,5 +1,15 @@
-import { ActionSetting, AddNewBlockActionSetting, ArchitectureDescription, BlockElementDescription, BlockElementType, ConnectActionSetting, FormulaValue, FormulaValueObj, GraduallyPhases, LineBlockElementDescription, ParallelPhase, PhaseAction, PhaseStep } from "./descriptionTypes";
-import { ActionType, Block, ContainerBlock, LineBlockElement, ParentBlockElement, Positioning, RectPositioning } from "./types";
+import {
+    ActionSetting, AddNewBlockActionSetting,
+    ArchitectureDescription, BlockElementDescription,
+    BlockElementType, ConnectActionSetting,
+    FormulaValue, FormulaValueObj,
+    LineBlockElementDescription
+} from "./descriptionTypes";
+import {
+    Block,
+    ContainerBlock, LineBlockElement, ParentBlockElement,
+    Positioning, RectPositioning
+} from "./types";
 
 export function isNotNullOrUndefined<T>(obj: T | null | undefined): obj is T {
     return obj !== null && typeof obj !== "undefined";
@@ -33,39 +43,6 @@ export function isRectPositioning(obj: Positioning | undefined | null): obj is R
         return isNotNullOrUndefined(rectPos.x) && isNotNullOrUndefined(rectPos.y) /* && isNotNullOrUndefined(rectPos.width)  && isNotNullOrUndefined(rectPos.height)*/;
     }
     return false;
-}
-
-export function isPhaseAction(obj?: PhaseStep | null): obj is PhaseAction {
-    if (obj) {
-        const action = <PhaseAction>obj;
-        return typeof action === "object"
-            && !Array.isArray(action)
-            && Object.keys(action)
-                .every(x => {
-                    const val = action[x];
-                    if (typeof val === "string") {
-                        return true;
-                    }
-                    if (Array.isArray(val)) {
-                        return (<any[]>val).every(y => typeof y === "string" || isActionSetting(y));
-                    }
-                    return Object.values(ActionType).some(y => y === x);
-                });
-    }
-    return false;
-}
-
-export function isParallelPhase(obj?: PhaseStep | null): obj is ParallelPhase {
-    if (obj) {
-        const phase = <ParallelPhase>obj;
-        return typeof phase === "object"
-            && !Array.isArray(phase)
-            && !isPhaseAction(phase);
-    }
-    return false;
-}
-export function isGraduallyPhases(obj?: PhaseStep | null): obj is GraduallyPhases {
-    return !!obj && Array.isArray(obj);
 }
 
 export function isConnectActionSetting(obj?: ActionSetting): obj is ConnectActionSetting {

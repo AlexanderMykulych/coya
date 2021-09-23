@@ -69,17 +69,6 @@ export interface PhaseAction {
     [name: string]: string | string[] | ActionSetting | ActionSetting[];
 }
 
-
-export type GraduallyPhases = (PhaseStep | PhaseAction)[];
-export interface ParallelPhase {
-    [name: string]: PhaseStep;
-}
-
-export type PhaseStep =
-    | ParallelPhase
-    | GraduallyPhases
-    | PhaseAction
-
 export interface AnimationDescription {
     [name: string]: {};
 }
@@ -140,18 +129,11 @@ export enum PositioningSystem {
 export interface ArchitectureDescription {
     name: string;
     blocks: BlockGroupDescriptions;
-    phases?: PhaseStep;
+    phases?: PhaseAction[];
     animation?: AnimationDescription;
     style?: StyleDescription;
     debugState?: DebugStateContainer;
 }
-
-export type ArchitectureDescriptionElement =
-    ArchitectureDescription
-    | BlockGroupDescriptions
-    | ParallelPhase
-    | AnimationDescription
-    | StyleDescription;
 
 export interface ViewBoxSetting {
     x: Ref<number> | number;

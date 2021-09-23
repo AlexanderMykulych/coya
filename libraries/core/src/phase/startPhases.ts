@@ -11,20 +11,18 @@ import { connectActionExecutor } from "./connectActionExecutor";
 import { removeHighlightActionExecutor } from "./removeHighlightActionExecutor";
 
 export function startPhases(architecture: ArchitectureDescription, phaseIndex: PhaseIndex, phaseInfo: CurrentPhaseInfo): PhaseId {
-    const indexItems = phaseIndex.getPhaseById(phaseInfo.current);
-    if (indexItems) {
-        return indexItems.map(indexItem => {
-            const actionContext = <ActionExecutorContext>{
-                indexItem,
-                architecture,
-                phaseIndex
-            };
-            var changes = indexItem.actions.flatMap(item => executePhaseIndex(item, actionContext));
-            changes
-                .filter(isNotNullOrUndefined)
-                .forEach(change => makeChange(architecture, change));
-            return indexItem.nextPhaseId;
-        })[0];
+    const indexItem = phaseIndex.getNextPhaseById(phaseInfo.current);
+    if (indexItem) {
+        const actionContext = <ActionExecutorContext>{
+            indexItem,
+            architecture,
+            phaseIndex
+        };
+        var changes = indexItem.actions.flatMap(item => executePhaseIndex(item, actionContext));
+        changes
+            .filter(isNotNullOrUndefined)
+            .forEach(change => makeChange(architecture, change));
+        return indexItem.hasNext ? indexItem.phaseId : null;
     }
     return null;
 }

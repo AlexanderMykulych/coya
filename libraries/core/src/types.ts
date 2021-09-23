@@ -96,12 +96,12 @@ export interface ArchitectureData {
 }
 export interface Architecture extends RefsType<ArchitectureData> {
     name: string;
-    phases: string[];
+    phases: PhaseId[];
     currentPhase: Ref<PhaseId> | null;
     next: () => PhaseId;
     back: () => PhaseId;
     debugSelect: (select: SelectedProperties) => void;
-    toPhase: (phase: string) => void;
+    toPhase: (phase: number) => void;
 }
 export type RefsType<T> = {
     [P in keyof T]?: Ref<T[P]>;
@@ -109,7 +109,7 @@ export type RefsType<T> = {
 export interface TransitionalArchitecture extends ArchitectureDescription {
 }
 
-export type PhaseId = string | null | undefined;
+export type PhaseId = number | null | undefined;
 export interface CurrentPhaseInfo {
     current: PhaseId;
 }
@@ -141,21 +141,19 @@ export interface Change {
     type: ChangeType;
 }
 export interface PhaseIndex {
-    getPhaseById(current: PhaseId): PhaseIndexItem[] | undefined;
-    phases: string[];
-    getPhaseIndex(phase: PhaseId): number;
+    getNextPhaseById(current: PhaseId): PhaseIndexItem | undefined;
+    phases: PhaseId[];
+    getPhaseIndex(phase?: number | string | null): number;
 }
 export interface PhaseIndexItem {
-    phaseId: string;
-    isStart: boolean;
-    nextPhaseId: string | null;
+    phaseId: number;
+    hasNext: boolean;
     actions: PhaseIndexItemAction[];
-
 }
 
 export interface PhaseIndexItemAction {
     action: Action;
-
+    actionId: number;
 }
 
 export interface ActionExecutorContext {
@@ -175,6 +173,7 @@ export interface FormulaValueFuncContext {
 export interface PropertiesConfig {
     prop: string;
     child: PropertiesConfig | null;
+    index: number;
 }
 export interface SelectedProperties {
     properties: PropertiesConfig;
@@ -193,5 +192,5 @@ export interface DebugMessage {
 }
 
 export interface DebugStateContainer {
-    selected?: SelectedProperties | null;
+    selectedBlocks?: string[] | null;
 }

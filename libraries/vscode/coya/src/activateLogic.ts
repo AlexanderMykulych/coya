@@ -3,7 +3,7 @@ import { computed } from '@vue/reactivity';
 import * as vscode from 'vscode';
 import state from './state';
 import * as ts from "typescript";
-import { getTokensAtPosition } from './tsutil/getTokensAtPosition';
+import { getTokensAtPosition, NodeWithIndex } from './tsutil/getTokensAtPosition';
 import { isNotNullOrUndefined, PropertiesConfig } from "@coya/core";
 
 export function activateLogic(context: vscode.ExtensionContext, file: vscode.Uri) {
@@ -23,21 +23,23 @@ export function activateLogic(context: vscode.ExtensionContext, file: vscode.Uri
         }
     });
 }
-function propsArrayToConfigObject(nodes: ts.Node[], sourceFile: ts.SourceFile): PropertiesConfig {
-    const properties = nodes.filter(x => ts.isPropertyAssignment(x))
-        .map(x => ts.isPropertyAssignment(x) ? x.name.getText(sourceFile) : null)
+function propsArrayToConfigObject(nodes: NodeWithIndex[], sourceFile: ts.SourceFile): PropertiesConfig {
+    const properties = nodes
+        .map(x => x.node.name.getText(sourceFile))
         .filter(isNotNullOrUndefined);
     let config: any = {
         prop: "",
         child: null
     };
     const root = config;
-    properties
+    nodes
         .map((prop, index) => ({prop, index}))
         .forEach(({ prop, index }) => {
-            config.prop = prop
+            const name = prop.node.name.getText(sourceFile);
+            config.prop = name
                 .replaceAll("\"", "")
                 .replaceAll("'", "");
+            config.index = prop.index;
             if (index < properties.length - 1) {
                 config.child = {};
                 config = config.child;

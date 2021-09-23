@@ -1,13 +1,15 @@
 import { computed, Ref, isRef, ref, reactive } from "@vue/reactivity";
 import { blockGroupDescriptionsToBlock } from "./block/blockGroupDescriptionsToBlock";
 import { ArchitectureDescription, TransformSetting } from "./descriptionTypes";
-import { isArchitectureDescription } from "./typeGuards";
+import { isArchitectureDescription, isNotNullOrUndefined } from "./typeGuards";
 import { PhaseId, SelectedProperties, Architecture, Block, CurrentPhaseInfo, DebugStateContainer } from "./types";
 import { styleDescriptionToArchitectureStyle } from "./style/styleDescriptionToArchitectureStyle";
 import { startPhases } from "./phase/startPhases";
 import { buildPhasesIndex } from "./phase/buildPhasesIndex";
 import { watch } from '@vue-reactivity/watch';
 import { deepCopy } from "./util/deepCopy";
+import { getDebugActions } from "./debug/getDebugActions";
+import { DebugType } from "./debugTypes";
 
 
 export function transformToArchitecture(description: Ref<unknown> | unknown, setting: TransformSetting): Ref<Architecture> {
@@ -76,24 +78,36 @@ export function transformDescriptionToArchitecture(transitionalArchitectureRef: 
         }
         return val?.phaseId;
     };
+    const toPhase = (phaseId: number | string) => {
+        const phaseInd = phaseIndex.getPhaseIndex(phaseId);
+        const currentPhaseInd = phaseIndex.getPhaseIndex(currentPhase.current);
+        if (phaseInd === currentPhaseInd) {
+            return;
+        }
+        const walkerFn = phaseInd > currentPhaseInd ? next : back;
+        let curPhaseId = null;
+        do {
+            curPhaseId = walkerFn();
+        } while (isNotNullOrUndefined(curPhaseId) && curPhaseId !== phaseInd);
+    };
+    const debugSelect = (selected: SelectedProperties) => {
+        const actions = getDebugActions(selected);
+        actions.forEach(x => {
+            if (x.type === DebugType.Select) {
+                transitionalArchitectureRef.value.debugState!.selectedBlocks = x.blockIds;
+            } else if (x.type === DebugType.StartPhase) {
+                toPhase(x.phaseId);
+            }
+        });
+    };
     return {
         name: transitionalArchitectureRef.value.name,
         blocks,
         style: computed(() => styleDescriptionToArchitectureStyle(transitionalArchitectureRef.value, blocks.value, setting)),
         next,
         back,
-        toPhase: (phaseId: string) => {
-            const phaseInd = phaseIndex.getPhaseIndex(phaseId);
-            const currentPhaseInd = phaseIndex.getPhaseIndex(currentPhase.current);
-            const walkerFn = phaseInd > currentPhaseInd ? next : back;
-            let curPhaseId = null;
-            do {
-                curPhaseId = walkerFn();
-            } while (!!curPhaseId && curPhaseId.length > 0 && curPhaseId.indexOf(phaseId) === -1);
-        },
-        debugSelect: (selected: SelectedProperties) => {
-            transitionalArchitectureRef.value.debugState!.selected = selected
-        },
+        toPhase,
+        debugSelect,
         phases: phaseIndex.phases,
         currentPhase: computed(() => currentPhase.current)
     }

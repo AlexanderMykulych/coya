@@ -1,35 +1,31 @@
-import { ActionSetting, ConnectActionSetting, PhaseStep } from "../descriptionTypes";
-import { isGraduallyPhases, isNotNullOrUndefined, isParallelPhase, isPhaseAction } from "../typeGuards";
+import { ActionSetting, ConnectActionSetting, PhaseAction } from "../descriptionTypes";
+import { isNullOrUndefined } from "../typeGuards";
 import { PhaseId, PhaseIndex, PhaseIndexItem, PhaseIndexItemAction } from "../types";
 
-export function buildPhasesIndex(phases: PhaseStep | undefined | null): PhaseIndex {
-
+export function buildPhasesIndex(phases?: PhaseAction[]): PhaseIndex {
     const index = buildIndexObject(phases);
     return {
-        getPhaseById: (id: PhaseId) => {
-            if (!id) {
-                return index.filter(x => x.isStart);
+        getNextPhaseById: (id: PhaseId) => {
+            if (isNullOrUndefined(id)) {
+                return index.find(x => x.phaseId === 0);
             }
-            let ids: string[] = [];
-            if (Array.isArray(id)) {
-                ids = id.filter(isNotNullOrUndefined);
-            } else {
-                ids = [id]
-            }
-            return index.filter(x => x.phaseId && ids.indexOf(x.phaseId) > -1);
+            return index.find(x => x.phaseId === id + 1);
         },
         phases: index.map(x => x.phaseId),
-        getPhaseIndex: phase => index.findIndex(x => x.phaseId === phase)
+        getPhaseIndex: phase => {
+            const id = typeof phase === "string" ? Number(phase) : phase;
+            return index.findIndex(x => x.phaseId === id);
+        }
     };
 }
-function buildIndexObject(phase: PhaseStep | undefined | null, isStart: boolean = true, id: string = "start"): PhaseIndexItem[] {
-    if (!phase) {
+function buildIndexObject(phases: PhaseAction[] | undefined | null): PhaseIndexItem[] {
+    if (!phases) {
         return [];
     }
-    if (isPhaseAction(phase)) {
+    return phases.map((phase, phaseIndex) => {
         const actions: PhaseIndexItemAction[] = Object
             .keys(phase)
-            .flatMap(key => {
+            .flatMap((key, actionIndex) => {
                 let action = phase[key];
                 let actions: (string | ActionSetting)[] = [];
                 if (!Array.isArray(action)) {
@@ -41,39 +37,15 @@ function buildIndexObject(phase: PhaseStep | undefined | null, isStart: boolean 
                     action: {
                         name: key,
                         value: y as ConnectActionSetting
-                    }
+                    },
+                    actionId: actionIndex
                 }));
             });
-        return [{
-            isStart: isStart,
-            nextPhaseId: null,
-            phaseId: `${id}`,
+        return <PhaseIndexItem>{
+            hasNext: phaseIndex < phases.length - 1,
+            phaseId: phaseIndex,
             actions: actions
-        }];
-    } else if (isParallelPhase(phase)) {
-        const items =
-            Object.keys(phase)
-                .flatMap(x => {
-                    const val = phase[x];
-                    return buildIndexObject(val, isStart, `${id}_${x}`);
-                });
-        return items;
-    } else if (isGraduallyPhases(phase)) {
-        const childId = `${id}_child`;
-        const items = phase.map((x, index) => buildIndexObject(x, isStart && index === 0, childId));
-        
-        items.forEach((group, index) => {
-            group.forEach(groupItem => {
-                if (groupItem.phaseId === childId) {
-                    groupItem.phaseId += `_${index}`;
-                    if (index + 1 < items.length) {
-                        groupItem.nextPhaseId = `${childId}_${index + 1}`;
-                    }
-                }
-            })
-        })
-        return items.flatMap(x => x);
-    }
-    throw "Not implemented!";
+        };
+    })
 }
 

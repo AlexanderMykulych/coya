@@ -1,21 +1,19 @@
-import { isArrayLiteralExpression, Node, SourceFile, SyntaxKind } from "typescript";
+import { isArrayLiteralExpression, isPropertyAssignment, Node, PropertyAssignment, SourceFile, SyntaxKind } from "typescript";
 
 export function getTokensAtPosition(sourceFile: SourceFile, position: number) {
-    const nodes: Node[] = [];
+    const nodes: NodeWithIndex[] = [];
     
-    const pushNode = (node: Node) => {
-        if (node.kind === SyntaxKind.ObjectLiteralExpression
-            || node.kind === SyntaxKind.PropertyAssignment
-            || node.kind === SyntaxKind.ArrayLiteralExpression) {
-            nodes.push(node);
-        }
-    };
+
     const getTokenAtPositionWorker = (sourceFile: SourceFile, position: number) => {
         let current: Node = sourceFile;
-        pushNode(current);
+        let index = 0;
         outer: while (true) {
+            const isArray = isArrayLiteralExpression(current);
             const curNodes = isArrayLiteralExpression(current) ? current.elements : current.getChildren(sourceFile);
             for (var _i = 0, _a = curNodes; _i < _a.length; _i++) {
+                if (isArray) {
+                    index = _i;
+                }
                 var child = _a[_i];
                 var start = child.getFullStart();
                 if (start > position) {
@@ -25,11 +23,13 @@ export function getTokensAtPosition(sourceFile: SourceFile, position: number) {
 
                 if (position < end || (position === end && child.kind === SyntaxKind.EndOfFileToken)) {
                     current = child;
-                    pushNode(current);
+                    if (isPropertyAssignment(child)) {
+                        nodes.push({
+                            node: child,
+                            index
+                        });
+                    }
                     continue outer;
-                }
-                if (current.kind === SyntaxKind.ArrayLiteralExpression) {
-                    pushNode(child);
                 }
             }
             return current;
@@ -37,4 +37,8 @@ export function getTokensAtPosition(sourceFile: SourceFile, position: number) {
     };
     getTokenAtPositionWorker(sourceFile, position);
     return nodes;
+}
+export interface NodeWithIndex {
+    node: PropertyAssignment;
+    index: number;
 }
