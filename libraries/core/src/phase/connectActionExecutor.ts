@@ -1,3 +1,5 @@
+import { ActionDebugInfo } from "..";
+import { DebugAction, DebugType } from "../debugTypes";
 import { BlockElementType } from "../descriptionTypes";
 import { isConnectActionSetting } from "../typeGuards";
 import { Action, ActionExecutorContext, Change, ChangeType } from "../types";
@@ -18,4 +20,18 @@ export function connectActionExecutor(context: ActionExecutorContext, action: Ac
         }];
     }
     return null;
+}
+
+export function connectActionDebugger(actionInfo: ActionDebugInfo): DebugAction[] {
+    switch (actionInfo.actionProperty) {
+        case "from":
+        case "to":
+        case "name":
+            return [{
+                type: DebugType.Select,
+                blockIds: [actionInfo.actionValue]
+            }];
+        default:
+            return [];
+    }
 }

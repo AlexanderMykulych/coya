@@ -6,7 +6,7 @@ const reactivity_1 = require("@vue/reactivity");
 const vscode = require("vscode");
 const state_1 = require("./state");
 const getTokensAtPosition_1 = require("./tsutil/getTokensAtPosition");
-const core_1 = require("@coya/core");
+const getNodeText_1 = require("./getNodeText");
 function activateLogic(context, file) {
     (0, watch_1.watch)(() => state_1.default.connectedCount, val => {
         vscode.window.showInformationMessage(`Connected: ${val}`);
@@ -26,27 +26,11 @@ function activateLogic(context, file) {
 }
 exports.activateLogic = activateLogic;
 function propsArrayToConfigObject(nodes, sourceFile) {
-    const properties = nodes
-        .map(x => x.node.name.getText(sourceFile))
-        .filter(core_1.isNotNullOrUndefined);
-    let config = {
-        prop: "",
-        child: null
-    };
-    const root = config;
-    nodes
-        .map((prop, index) => ({ prop, index }))
-        .forEach(({ prop, index }) => {
-        const name = prop.node.name.getText(sourceFile);
-        config.prop = name
+    return nodes.map(x => ({
+        name: (0, getNodeText_1.getNodeText)(x.node, sourceFile)
             .replaceAll("\"", "")
-            .replaceAll("'", "");
-        config.index = prop.index;
-        if (index < properties.length - 1) {
-            config.child = {};
-            config = config.child;
-        }
-    });
-    return root;
+            .replaceAll("'", ""),
+        index: x.index
+    }));
 }
 //# sourceMappingURL=activateLogic.js.map

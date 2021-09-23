@@ -160,7 +160,7 @@ export default <ArchitectureDescription>{
     style: {
         positioning: PositioningSystem.Grid,
         debug: {
-            enable: true
+            enable: false
         },
         css: `
             font-size: 20px;

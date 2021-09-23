@@ -22,11 +22,12 @@ function getTokensAtPosition(sourceFile, position) {
                 var end = child.getEnd();
                 if (position < end || (position === end && child.kind === typescript_1.SyntaxKind.EndOfFileToken)) {
                     current = child;
-                    if ((0, typescript_1.isPropertyAssignment)(child)) {
+                    if ((0, typescript_1.isPropertyAssignment)(child) || (0, typescript_1.isLiteralExpression)(child)) {
                         nodes.push({
                             node: child,
                             index
                         });
+                        index = 0;
                     }
                     continue outer;
                 }

@@ -1,6 +1,7 @@
+import { DebugAction, DebugType } from "../debugTypes";
 import { ChangeLabelActionSetting } from "../descriptionTypes";
 import { isHasLabel } from "../typeGuards";
-import { Action, ActionExecutorContext, Change, ChangeType } from "../types";
+import { Action, ActionDebugInfo, ActionExecutorContext, Change, ChangeType } from "../types";
 
 export function changeLabelActionExecutor(context: ActionExecutorContext, action: Action): Change[] | null {
     if (!context) {
@@ -21,4 +22,14 @@ export function changeLabelActionExecutor(context: ActionExecutorContext, action
                 }
             };
         });
+}
+
+export function changeLabelActionDebugger(actionInfo: ActionDebugInfo): DebugAction[] {
+    if (actionInfo.actionProperty) {
+        return [{
+            type: DebugType.Select,
+            blockIds: [actionInfo.actionProperty]
+        }];
+    }
+    return [];
 }

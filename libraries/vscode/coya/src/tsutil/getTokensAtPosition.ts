@@ -1,4 +1,9 @@
-import { isArrayLiteralExpression, isPropertyAssignment, Node, PropertyAssignment, SourceFile, SyntaxKind } from "typescript";
+import {
+    isArrayLiteralExpression, isLiteralExpression,
+    isPropertyAssignment, LiteralExpression,
+    Node, PropertyAssignment,
+    SourceFile, SyntaxKind
+} from "typescript";
 
 export function getTokensAtPosition(sourceFile: SourceFile, position: number) {
     const nodes: NodeWithIndex[] = [];
@@ -23,11 +28,12 @@ export function getTokensAtPosition(sourceFile: SourceFile, position: number) {
 
                 if (position < end || (position === end && child.kind === SyntaxKind.EndOfFileToken)) {
                     current = child;
-                    if (isPropertyAssignment(child)) {
+                    if (isPropertyAssignment(child) || isLiteralExpression(child)) {
                         nodes.push({
                             node: child,
                             index
                         });
+                        index = 0;
                     }
                     continue outer;
                 }
@@ -39,6 +45,6 @@ export function getTokensAtPosition(sourceFile: SourceFile, position: number) {
     return nodes;
 }
 export interface NodeWithIndex {
-    node: PropertyAssignment;
+    node: PropertyAssignment | LiteralExpression;
     index: number;
 }

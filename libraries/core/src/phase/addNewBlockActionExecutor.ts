@@ -1,3 +1,5 @@
+import { ActionDebugInfo } from "..";
+import { DebugAction, DebugType } from "../debugTypes";
 import { AddNewBlockActionSetting } from "../descriptionTypes";
 import { Action, ActionExecutorContext, Change, ChangeType } from "../types";
 
@@ -15,4 +17,13 @@ export function addNewBlockActionExecutor(context: ActionExecutorContext, action
                 blockSettings: val[key]
             }
         }));
+}
+export function addNewBlockActionDebugger(actionInfo: ActionDebugInfo): DebugAction[] {
+    if (actionInfo.actionProperty) {
+        return [{
+            type: DebugType.Select,
+            blockIds: [actionInfo.actionProperty]
+        }];
+    }
+    return [];
 }

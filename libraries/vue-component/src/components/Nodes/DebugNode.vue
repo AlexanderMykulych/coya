@@ -5,9 +5,9 @@ const props = defineProps<{ block: Block, positioning: RectPositioning, blockSty
 const el = ref(null);
 
 const style = reactive({
-    strokeWidth: 1.4,
+    strokeWidth: 0.6,
     stroke: "blue",
-    strokeDasharray: "3,7"
+    strokeDasharray: "1,2"
 });
 </script>
 

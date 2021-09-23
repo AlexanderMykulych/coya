@@ -1,14 +1,15 @@
-import { RemoveBlocksSetting } from "..";
 import { ArchitectureDescription, BlockStyle } from "../descriptionTypes";
 import { isNotNullOrUndefined } from "../typeGuards";
-import { ActionExecutorContext, ActionType, AddBlockChangeSetting, Change, ChangeBlockStyleSetting, ChangeType, CurrentPhaseInfo, PhaseId, PhaseIndex, PhaseIndexItemAction } from "../types";
+import {
+    ActionExecutorContext, AddBlockChangeSetting,
+    Change, ChangeBlockStyleSetting,
+    ChangeType, CurrentPhaseInfo,
+    PhaseId, PhaseIndex,
+    PhaseIndexItemAction,
+    RemoveBlocksSetting
+} from "../types";
 import { deepAssign } from "../util/deepAssign";
-import { addHighlightActionExecutor } from "./addHighlightActionExecutor";
-import { addNewBlockActionExecutor } from "./addNewBlockActionExecutor";
-import { changeBlockPositionActionExecutor } from "./changeBlockPositionActionExecutor";
-import { changeLabelActionExecutor } from "./changeLabelActionExecutor";
-import { connectActionExecutor } from "./connectActionExecutor";
-import { removeHighlightActionExecutor } from "./removeHighlightActionExecutor";
+import { actionExecutors } from "./actionExecutors";
 
 export function startPhases(architecture: ArchitectureDescription, phaseIndex: PhaseIndex, phaseInfo: CurrentPhaseInfo): PhaseId {
     const indexItem = phaseIndex.getNextPhaseById(phaseInfo.current);
@@ -29,18 +30,10 @@ export function startPhases(architecture: ArchitectureDescription, phaseIndex: P
 
 
 function executePhaseIndex(item: PhaseIndexItemAction, context: ActionExecutorContext): Change[] | null {
-    if (item.action.name === ActionType.Connect) {
-        return connectActionExecutor(context, item.action);
-    } else if (item.action.name === ActionType.AddNewBlock) {
-        return addNewBlockActionExecutor(context, item.action);
-    } else if (item.action.name === ActionType.ChangePosition) {
-        return changeBlockPositionActionExecutor(context, item.action);
-    } else if (item.action.name === ActionType.ChangeLabel) {
-        return changeLabelActionExecutor(context, item.action);
-    } else if (item.action.name === ActionType.Highlight) {
-        return addHighlightActionExecutor(context, item.action);
-    } else if (item.action.name === ActionType.RemoveHighlight) {
-        return removeHighlightActionExecutor(context, item.action);
+    const action = actionExecutors
+        .find(x => x.type === item.action.name)
+    if (action) {
+        return action.executor(context, item.action);
     }
     throw "Not implemented!";
 }

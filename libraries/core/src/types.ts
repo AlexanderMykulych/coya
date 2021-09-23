@@ -1,9 +1,12 @@
 
 import { Ref } from "@vue/reactivity";
-import { DebugSetting } from "./debugTypes";
+import { DebugAction, DebugSetting } from "./debugTypes";
 import {
     GlobalDebugSetting, EnterSetting, ViewBoxSetting,
-    ActionSetting, ArchitectureDescription, BlockElementDescription, BlockGroupDescriptions, BlockStyle, LineBlockElementDescription, StyleCss
+    ActionSetting, ArchitectureDescription,
+    BlockElementDescription, BlockGroupDescriptions,
+    BlockStyle, LineBlockElementDescription,
+    StyleCss
 } from "./descriptionTypes";
 
 export type NumberValue = number | Ref<number>;
@@ -172,12 +175,11 @@ export interface FormulaValueFuncContext {
 }
 
 export interface PropertiesConfig {
-    prop: string;
-    child: PropertiesConfig | null;
+    name: string;
     index: number;
 }
 export interface SelectedProperties {
-    properties: PropertiesConfig;
+    properties: PropertiesConfig[];
     file: string;
 }
 
@@ -194,4 +196,18 @@ export interface DebugMessage {
 
 export interface DebugStateContainer {
     selectedBlocks?: string[] | null;
+}
+
+
+export interface ActionItem {
+    type: ActionType;
+    executor: (context: ActionExecutorContext, action: Action) => Change[] | null;
+    debugger?: (debugInfo: any) => DebugAction[];
+}
+export type ActionList = ActionItem[];
+
+export interface ActionDebugInfo {
+    action: string;
+    actionProperty: string;
+    actionValue: string;
 }
