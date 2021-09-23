@@ -15,7 +15,10 @@ export function buildPhasesIndex(phases?: PhaseAction[]): PhaseIndex {
         getPhaseIndex: phase => {
             const id = typeof phase === "string" ? Number(phase) : phase;
             return index.findIndex(x => x.phaseId === id);
-        }
+        },
+        getPhaseById: (id: PhaseId) => {
+            return index.find(x => x.phaseId === id);
+        },
     };
 }
 function buildIndexObject(phases: PhaseAction[] | undefined | null): PhaseIndexItem[] {

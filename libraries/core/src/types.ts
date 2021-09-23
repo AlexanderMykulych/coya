@@ -142,6 +142,7 @@ export interface Change {
 }
 export interface PhaseIndex {
     getNextPhaseById(current: PhaseId): PhaseIndexItem | undefined;
+    getPhaseById(current: PhaseId): PhaseIndexItem | undefined;
     phases: PhaseId[];
     getPhaseIndex(phase?: number | string | null): number;
 }

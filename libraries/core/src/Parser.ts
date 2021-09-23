@@ -62,6 +62,10 @@ export function transformDescriptionToArchitecture(transitionalArchitectureRef: 
     const phaseIndex = buildPhasesIndex(transitionalArchitectureRef.value.phases);
     const next = () => {
         enableWatcher = true;
+        const phase = phaseIndex.getPhaseById(currentPhase.current);
+        if (isNotNullOrUndefined(currentPhase.current) && !phase?.hasNext) {
+            return;
+        }
         const nextPhaseId = startPhases(transitionalArchitectureRef.value, phaseIndex, currentPhase);
         currentPhase.current = nextPhaseId;
         return nextPhaseId;

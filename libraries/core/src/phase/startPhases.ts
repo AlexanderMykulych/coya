@@ -22,7 +22,7 @@ export function startPhases(architecture: ArchitectureDescription, phaseIndex: P
         changes
             .filter(isNotNullOrUndefined)
             .forEach(change => makeChange(architecture, change));
-        return indexItem.hasNext ? indexItem.phaseId : null;
+        return indexItem.phaseId;
     }
     return null;
 }
