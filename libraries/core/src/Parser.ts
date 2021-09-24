@@ -2,7 +2,7 @@ import { computed, Ref, isRef, ref, reactive } from "@vue/reactivity";
 import { blockGroupDescriptionsToBlock } from "./block/blockGroupDescriptionsToBlock";
 import { ArchitectureDescription, TransformSetting } from "./descriptionTypes";
 import { isArchitectureDescription, isNotNullOrUndefined } from "./typeGuards";
-import { PhaseId, SelectedProperties, Architecture, Block, CurrentPhaseInfo, DebugStateContainer } from "./types";
+import { PhaseId, SelectedProperties, Architecture, Block, CurrentPhaseInfo, DebugStateContainer, DebugSelectContext } from "./types";
 import { styleDescriptionToArchitectureStyle } from "./style/styleDescriptionToArchitectureStyle";
 import { startPhases } from "./phase/startPhases";
 import { buildPhasesIndex } from "./phase/buildPhasesIndex";
@@ -37,8 +37,8 @@ export function transformToArchitecture(description: Ref<unknown> | unknown, set
             currentPhase: null,
             next: () => null,
             back: () => null,
-            debugSelect: () => {},
-            toPhase: () => {}
+            debugSelect: () => { },
+            toPhase: () => { }
         };
     });
     return architecture;
@@ -60,6 +60,7 @@ export function transformDescriptionToArchitecture(transitionalArchitectureRef: 
     });
     const blocks = computed(() => BlockGroupDescriptionsToBlock(transitionalArchitectureRef.value))
     const phaseIndex = buildPhasesIndex(transitionalArchitectureRef.value.phases);
+    const style = computed(() => styleDescriptionToArchitectureStyle(transitionalArchitectureRef.value, blocks.value, setting));
     const next = () => {
         enableWatcher = true;
         const phase = phaseIndex.getPhaseById(currentPhase.current);
@@ -95,25 +96,43 @@ export function transformDescriptionToArchitecture(transitionalArchitectureRef: 
         } while (isNotNullOrUndefined(curPhaseId) && curPhaseId !== phaseInd);
     };
     const debugSelect = (selected: SelectedProperties) => {
-        const actions = getDebugActions(selected);
+        const debugContext: DebugSelectContext = {
+            style,
+            blocks,
+            phaseIndex,
+            transformSetting: setting
+        };
+        const actions = getDebugActions(selected, debugContext);
+        const debugState: DebugStateContainer = {
+            selectedBlocks: [],
+            lines: []
+        };
+        transitionalArchitectureRef.value.debugState = debugState;
         actions.forEach(x => {
             if (x.type === DebugType.Select) {
-                transitionalArchitectureRef.value.debugState!.selectedBlocks = x.blockIds;
+                x.blockIds.forEach(x => debugState.selectedBlocks!.push(x));
             } else if (x.type === DebugType.StartPhase) {
                 toPhase(x.phaseId);
+            } else if (x.type === DebugType.Line) {
+                debugState!.lines!.push({
+                    lineType: x.lineType,
+                    value: x.value,
+                    color: x.color
+                });
             }
         });
     };
     return {
         name: transitionalArchitectureRef.value.name,
         blocks,
-        style: computed(() => styleDescriptionToArchitectureStyle(transitionalArchitectureRef.value, blocks.value, setting)),
+        style,
         next,
         back,
         toPhase,
         debugSelect,
         phases: phaseIndex.phases,
-        currentPhase: computed(() => currentPhase.current)
+        currentPhase: computed(() => currentPhase.current),
+        debugState: computed(() => transitionalArchitectureRef.value.debugState)
     }
 }
 

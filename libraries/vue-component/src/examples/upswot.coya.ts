@@ -135,7 +135,7 @@ export default <ArchitectureDescription>{
             },
             connect: [{
                 from: "worker",
-                to: "kafka",
+                to: "fileStorage",
                 label: "Process message",
                 name: "line_worker_kafka"
             }, {
@@ -160,7 +160,7 @@ export default <ArchitectureDescription>{
     style: {
         positioning: PositioningSystem.Grid,
         debug: {
-            enable: false
+            enable: true
         },
         css: `
             font-size: 20px;

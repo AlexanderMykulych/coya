@@ -1,5 +1,6 @@
 export enum DebugType {
     Select = "select",
+    Line = "line",
     StartPhase = "start_phase"
 };
 export interface DebugSetting {
@@ -13,4 +14,10 @@ export interface StartPhaseDebugAction {
     type: DebugType.StartPhase;
     phaseId: number;
 }
-export type DebugAction = SelectBlockDebugAction | StartPhaseDebugAction;
+export interface LineDebugAction {
+    type: DebugType.Line;
+    lineType: "x" | "y";
+    value: number;
+    color: string;
+}
+export type DebugAction = SelectBlockDebugAction | StartPhaseDebugAction | LineDebugAction;

@@ -19,6 +19,10 @@ export function buildPhasesIndex(phases?: PhaseAction[]): PhaseIndex {
         getPhaseById: (id: PhaseId) => {
             return index.find(x => x.phaseId === id);
         },
+        findPhaseIdBy: (func: (_: PhaseIndexItem) => boolean) => {
+            const item = index.find(func);
+            return item?.phaseId;
+        }
     };
 }
 function buildIndexObject(phases: PhaseAction[] | undefined | null): PhaseIndexItem[] {

@@ -8,11 +8,15 @@ const state = reactive({
     terminalActive: false,
     connectedCount: 0,
     selectedProperties: {} as SelectedProperties,
-    files: [] as string[],
+    files: [] as {path: string, document: vscode.TextDocument, changes?: readonly vscode.TextDocumentContentChangeEvent[]}[],
     fileSources: [] as SourceFile[],
     addFile: (file: vscode.Uri) => {
-        if (!state.files.some(x => x === file.path)) {
-            state.files.push(file.path);
+        const document = vscode.workspace.textDocuments.find(x => x.uri.path === file.path);
+        if (!state.files.some(x => x.path === file.path) && document) {
+            state.files.push({
+                path: file.path,
+                document
+            });
         }
     }
 });

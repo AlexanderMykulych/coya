@@ -79,6 +79,8 @@ const {state} = useDebug();
 
 watch(() => state.selected, val => arch.value?.debugSelect(val));
 
+const debugLines = computed(() => arch.value?.debugState?.lines);
+
 </script>
 <template>
     <div class="grid grid-cols-5">
@@ -175,6 +177,8 @@ watch(() => state.selected, val => arch.value?.debugSelect(val));
                     fill="#0000008a"
                     mask="url(#hole)"
                 />
+
+                <DebugLines :lines="debugLines"/>
             </svg>
             <svg v-if="enableDrawing" class="drawableSvg" ref="drawableSvgEl" />
         </div>

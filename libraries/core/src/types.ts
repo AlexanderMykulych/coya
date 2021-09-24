@@ -1,5 +1,6 @@
 
 import { Ref } from "@vue/reactivity";
+import { TransformSetting } from ".";
 import { DebugAction, DebugSetting } from "./debugTypes";
 import {
     GlobalDebugSetting, EnterSetting, ViewBoxSetting,
@@ -105,6 +106,7 @@ export interface Architecture extends RefsType<ArchitectureData> {
     back: () => PhaseId;
     debugSelect: (select: SelectedProperties) => void;
     toPhase: (phase: number) => void;
+    debugState?: Ref<DebugStateContainer | undefined>;
 }
 export type RefsType<T> = {
     [P in keyof T]?: Ref<T[P]>;
@@ -148,6 +150,7 @@ export interface PhaseIndex {
     getPhaseById(current: PhaseId): PhaseIndexItem | undefined;
     phases: PhaseId[];
     getPhaseIndex(phase?: number | string | null): number;
+    findPhaseIdBy: (func: (phaseIndex: PhaseIndexItem) => boolean) => PhaseId;
 }
 export interface PhaseIndexItem {
     phaseId: number;
@@ -196,8 +199,14 @@ export interface DebugMessage {
 
 export interface DebugStateContainer {
     selectedBlocks?: string[] | null;
+    lines?: DebugLine[];
 }
 
+export interface DebugLine {
+    lineType: "x" | "y";
+    value: number;
+    color: string;
+}
 
 export interface ActionItem {
     type: ActionType;
@@ -210,4 +219,11 @@ export interface ActionDebugInfo {
     action: string;
     actionProperty: string;
     actionValue: string;
+}
+
+export interface DebugSelectContext {
+    style: Ref<Style>;
+    blocks: Ref<Block[]>;
+    phaseIndex: PhaseIndex;
+    transformSetting: TransformSetting;
 }
