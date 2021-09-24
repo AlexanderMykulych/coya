@@ -1,7 +1,7 @@
 import { Ref } from "@vue/reactivity";
 import { Properties } from "csstype";
-import { DebugStateContainer } from ".";
 import { DebugSetting } from "./debugTypes";
+import { BlockPositioning, DebugStateContainer, FormulaValueFuncContext } from "./types";
 
 export enum BlockElementType {
     Rect = "rect",
@@ -142,6 +142,8 @@ export interface ViewBoxSetting {
     h: Ref<number> | number;
 }
 
+export type CustomContextBuilderFunc = (blocksPositioning: Ref<BlockPositioning[]>, setting: TransformSetting) => FormulaValueFuncContext;
 export interface TransformSetting {
     viewBox: ViewBoxSetting;
+    customContextBuilderFunc?: CustomContextBuilderFunc;
 }

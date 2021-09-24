@@ -117,10 +117,10 @@ export default <ArchitectureDescription>{
                         formula: "rect.y"
                     },
                     w: {
-                        formula: "rect.width"
+                        formula: "rect.w"
                     },
                     h: {
-                        formula: "rect.height"
+                        formula: "rect.h"
                     }
                 },
                 svgUrl: "https://image.flaticon.com/icons/png/512/2972/2972316.png"
@@ -172,7 +172,7 @@ export default <ArchitectureDescription>{
                         formula: "mobile.x + 200"
                     },
                     y: {
-                        formula: "mobile.y - mobile.height * 2"
+                        formula: "mobile.y - mobile.h * 2"
                     },
                     w: 2,
                     h: 1
@@ -181,10 +181,10 @@ export default <ArchitectureDescription>{
             "web2": {
                 position: {
                     x: {
-                        formula: "web.x + web.width / 2"
+                        formula: "web.x + web.w / 2"
                     },
                     y: {
-                        formula: "mobile.y + mobile.height * 2"
+                        formula: "mobile.y + mobile.h * 2"
                     },
                     w: 2,
                     h: 1,
@@ -195,21 +195,21 @@ export default <ArchitectureDescription>{
             "line_mob_web": {
                 position: {
                     indentY: {
-                        formula: "web.height / 3"
+                        formula: "web.h / 3"
                     },
                 }
             },
             "line_web_mob": {
                 position: {
                     indentY: {
-                        formula: "web.height / -3"
+                        formula: "web.h / -3"
                     },
                 }
             },
             "line1": {
                 position: {
                     indentY1: {
-                        formula: "mobile.height / 3"
+                        formula: "mobile.h / 3"
                     },
                     indentX2: -10
                 }

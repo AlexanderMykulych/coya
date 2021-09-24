@@ -46,9 +46,9 @@ const pos = reactive<RectPositioning>({
                             <br />
                             y: {{ position?.y }}
                             <br />
-                            w: {{ position?.width }}
+                            w: {{ position?.w }}
                             <br />
-                            h: {{ position?.height }}
+                            h: {{ position?.h }}
                         </b>
                     </td>
                 </tr>

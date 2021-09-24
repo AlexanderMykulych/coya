@@ -14,7 +14,8 @@ export function getFormulaValue(val: number | FormulaValue | undefined,
     if (isFormulaValue(val)) {
         let formula = typeof val === "string" ? val : val.formula;
         return computed(() => {
-            const context = getFormulaValueFuncContext(positioning, setting);
+            const contextBuilderFunc = setting.customContextBuilderFunc ?? getFormulaValueFuncContext;
+            const context = contextBuilderFunc(positioning, setting);
             const fn = Function(`"use strict";return (function(${context.blockNamesAsFuncParams}){return ${formula};})`)();
             return fn.apply(null, context.blocksValues) || 0;
         });

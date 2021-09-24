@@ -160,10 +160,10 @@ export default <ArchitectureDescription>{
     style: {
         positioning: PositioningSystem.Grid,
         debug: {
-            enable: true
+            enable: false
         },
         css: `
-            font-size: 20px;
+            font-size: 0.5em;
             .numb {
                 font-size: 30px;
                 color: white;
@@ -190,7 +190,7 @@ export default <ArchitectureDescription>{
             },
             client: {
                 position: {
-                    x: "text.x + text.width + 5",
+                    x: "text.x + text.w + 5",
                     y: "text.y + _.viewBox.h / 3 - (_.viewBox.h / 10)",
                     w: "_.viewBox.h / 10",
                     h: "_.viewBox.h / 10"
@@ -199,10 +199,10 @@ export default <ArchitectureDescription>{
             },
             bankSite: {
                 position: {
-                    x: "client.x + client.width + 100",
+                    x: "client.x + client.w + 100",
                     y: "client.y",
-                    w: "client.width",
-                    h: "client.height"
+                    w: "client.w",
+                    h: "client.h"
                 },
                 svg: bank
             },
@@ -258,34 +258,34 @@ export default <ArchitectureDescription>{
             },
             line_api_storage: {
                 position: {
-                    indentX1: "upswotApi.width / 2",
-                    indentY1: "upswotApi.height / 2",
-                    x2: "storage.x + storage.width / 2",
+                    indentX1: "upswotApi.w / 2",
+                    indentY1: "upswotApi.h / 2",
+                    x2: "storage.x + storage.w / 2",
                     y2: "storage.y - 5",
                 }
             },
             line_signal: {
                 position: {
-                    indentX1: "upswotApi.width / 2 - 5",
-                    indentY1: "upswotApi.height / 2",
-                    x2: "kafka.x + kafka.width / 2 + 5",
+                    indentX1: "upswotApi.w / 2 - 5",
+                    indentY1: "upswotApi.h / 2",
+                    x2: "kafka.x + kafka.w / 2 + 5",
                     y2: "kafka.y - 5",
                 }
             },
             line_worker_kafka: {
                 position: {
-                    x1: "worker.x + worker.width / 2",
+                    x1: "worker.x + worker.w / 2",
                     y1: "worker.y",
-                    x2: "kafka.x + kafka.width / 2",
-                    y2: "kafka.y + kafka.height + 5"
+                    x2: "kafka.x + kafka.w / 2",
+                    y2: "kafka.y + kafka.h + 5"
                 }
             },
             line_kafka_worker: {
                 position: {
-                    x2: "worker.x + worker.width / 2 - 5",
+                    x2: "worker.x + worker.w / 2 - 5",
                     y2: "worker.y",
-                    x1: "kafka.x + kafka.width / 2 - 5",
-                    y1: "kafka.y + kafka.height + 5"
+                    x1: "kafka.x + kafka.w / 2 - 5",
+                    y1: "kafka.y + kafka.h + 5"
                 }
             },
             xeroIcon: {
@@ -299,55 +299,55 @@ export default <ArchitectureDescription>{
             },
             sageIcon: {
                 position: {
-                    x: "xeroIcon.x + xeroIcon.width",
+                    x: "xeroIcon.x + xeroIcon.w",
                     y: "xeroIcon.y",
-                    w: "xeroIcon.width",
-                    h: "xeroIcon.height"
+                    w: "xeroIcon.w",
+                    h: "xeroIcon.h"
                 },
                 svg: sage
             },
             upswotAdmin: {
                 position: {
-                    x: "bankSite.x + bankSite.width + 60",
+                    x: "bankSite.x + bankSite.w + 70",
                     y: "bankSite.y",
-                    w: "client.width",
-                    h: "client.height"
+                    w: "client.w",
+                    h: "client.h"
                 },
                 svg: upswot_admin
             },
             upswotApi: {
                 position: {
-                    x: "upswotAdmin.x + upswotAdmin.width + 60",
+                    x: "upswotAdmin.x + upswotAdmin.w + 60",
                     y: "upswotAdmin.y",
-                    w: "client.width",
-                    h: "client.height"
+                    w: "client.w",
+                    h: "client.h"
                 },
                 svg: upswot_admin
             },
             xero: {
                 position: {
-                    x: "upswotApi.x + upswotApi.width + 60",
+                    x: "upswotApi.x + upswotApi.w + 60",
                     y: "upswotApi.y - 50",
-                    w: "client.width",
-                    h: "client.height"
+                    w: "client.w",
+                    h: "client.h"
                 },
                 svg: xero
             },
             sage: {
                 position: {
-                    x: "upswotApi.x + upswotApi.width + 60",
+                    x: "upswotApi.x + upswotApi.w + 60",
                     y: "upswotApi.y + 50",
-                    w: "client.width",
-                    h: "client.height"
+                    w: "client.w",
+                    h: "client.h"
                 },
                 svg: sage
             },
             storage: {
                 position: {
                     x: "upswotApi.x",
-                    y: "upswotApi.y + upswotApi.height + 30",
-                    w: "client.width",
-                    h: "client.height"
+                    y: "upswotApi.y + upswotApi.h + 30",
+                    w: "client.w",
+                    h: "client.h"
                 },
                 svg: storage
             },
@@ -355,17 +355,17 @@ export default <ArchitectureDescription>{
                 position: {
                     x: "storage.x - 60",
                     y: "storage.y",
-                    w: "client.width",
-                    h: "client.height"
+                    w: "client.w",
+                    h: "client.h"
                 },
                 svgUrl: kafkaUrl
             },
             worker: {
                 position: {
                     x: "kafka.x + (storage.x - kafka.x) / 2",
-                    y: "kafka.y + kafka.height + 40",
-                    w: "client.width",
-                    h: "client.height"
+                    y: "kafka.y + kafka.h + 20",
+                    w: "client.w",
+                    h: "client.h"
                 },
                 svg: worker
             },
@@ -373,8 +373,8 @@ export default <ArchitectureDescription>{
                 position: {
                     x: "upswotAdmin.x - 10",
                     y: "10",
-                    w: "upswotApi.x + upswotApi.width + 20 - upswotAdmin.x",
-                    h: "worker.y + worker.height"
+                    w: "upswotApi.x + upswotApi.w + 20 - upswotAdmin.x",
+                    h: "worker.y + worker.h"
                 },
                 css: {
                     stroke: "red",

@@ -114,11 +114,7 @@ export function transformDescriptionToArchitecture(transitionalArchitectureRef: 
             } else if (x.type === DebugType.StartPhase) {
                 toPhase(x.phaseId);
             } else if (x.type === DebugType.Line) {
-                debugState!.lines!.push({
-                    lineType: x.lineType,
-                    value: x.value,
-                    color: x.color
-                });
+                debugState!.lines!.push(x);
             }
         });
     };

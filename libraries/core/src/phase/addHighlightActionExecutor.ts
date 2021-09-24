@@ -17,8 +17,8 @@ export function addHighlightActionExecutor(context: ActionExecutorContext, actio
                     position: {
                         x: `${block}.x - ${gap}`,
                         y: `${block}.y - ${gap}`,
-                        w: `${block}.width + ${gap * 2}`,
-                        h: `${block}.height + ${gap * 2}`,
+                        w: `${block}.w + ${gap * 2}`,
+                        h: `${block}.h + ${gap * 2}`,
                     },
                     isHighlight: true
                 }

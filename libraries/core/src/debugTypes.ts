@@ -19,5 +19,6 @@ export interface LineDebugAction {
     lineType: "x" | "y";
     value: number;
     color: string;
+    label?: string;
 }
 export type DebugAction = SelectBlockDebugAction | StartPhaseDebugAction | LineDebugAction;

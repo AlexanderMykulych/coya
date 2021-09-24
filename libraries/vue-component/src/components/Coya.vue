@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { transformToArchitecture, RectPositioning, Architecture } from "@coya/core";
-import { computed, ref, watch } from "vue";
+import { computed, provide, reactive, ref, watch } from "vue";
 import { useNodeDetails } from "../logic/useNodeDetails";
 import { useMousePosition } from "../logic/useSvgMousePosition";
 import { useDebug } from "../state/useDebug";
@@ -75,12 +75,21 @@ watch(() => arch.value?.style?.css, css => {
 
 const highlights = computed(() => rectPositions.value.filter(x => x.style?.isHighlight));
 
-const {state} = useDebug();
+const { state } = useDebug();
 
 watch(() => state.selected, val => arch.value?.debugSelect(val));
 
 const debugLines = computed(() => arch.value?.debugState?.lines);
-
+provide("svgInfo", reactive({
+    viewBox: {
+        vX,
+        vY,
+        width,
+        height
+    },
+    realHeight,
+    realWidth
+}))
 </script>
 <template>
     <div class="grid grid-cols-5">
@@ -151,8 +160,8 @@ const debugLines = computed(() => arch.value?.debugState?.lines);
                         <rect
                             :x="item.pos.x"
                             :y="item.pos.y"
-                            :width="item.pos.width"
-                            :height="item.pos.height"
+                            :width="item.pos.w"
+                            :height="item.pos.h"
                             fill="none"
                             pointer-events="all"
                             @mouseover="res.onMouseover(item)"
@@ -178,7 +187,7 @@ const debugLines = computed(() => arch.value?.debugState?.lines);
                     mask="url(#hole)"
                 />
 
-                <DebugLines :lines="debugLines"/>
+                <DebugLines :lines="debugLines" />
             </svg>
             <svg v-if="enableDrawing" class="drawableSvg" ref="drawableSvgEl" />
         </div>

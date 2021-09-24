@@ -54,8 +54,8 @@ export function gridPositioning(option: AutoPositioningSetting): BlockPositionin
                 position: {
                     x: computed(() => getValueByCtx(pos.x, gridSize.columnWidth).value + indentX.value),
                     y: computed(() => getValueByCtx(pos.y, gridSize.rowHeight).value + indentY.value),
-                    width: computed(() => getValueByCtx(pos.w, gridSize.columnWidth).value + indentX.value),
-                    height: computed(() => getValueByCtx(pos.h, gridSize.rowHeight).value + indentY.value)
+                    w: computed(() => getValueByCtx(pos.w, gridSize.columnWidth).value + indentX.value),
+                    h: computed(() => getValueByCtx(pos.h, gridSize.rowHeight).value + indentY.value)
                 }
             };
         }

@@ -1,7 +1,7 @@
 
 import { Ref } from "@vue/reactivity";
 import { TransformSetting } from ".";
-import { DebugAction, DebugSetting } from "./debugTypes";
+import { DebugAction, DebugSetting, LineDebugAction } from "./debugTypes";
 import {
     GlobalDebugSetting, EnterSetting, ViewBoxSetting,
     ActionSetting, ArchitectureDescription,
@@ -71,8 +71,8 @@ export interface Style extends Identifiable {
 export interface RectPositioning {
     x: NumberValue;
     y: NumberValue;
-    width: NumberValue;
-    height: NumberValue;
+    w: NumberValue;
+    h: NumberValue;
 }
 
 export interface CirclePositioning {
@@ -199,13 +199,7 @@ export interface DebugMessage {
 
 export interface DebugStateContainer {
     selectedBlocks?: string[] | null;
-    lines?: DebugLine[];
-}
-
-export interface DebugLine {
-    lineType: "x" | "y";
-    value: number;
-    color: string;
+    lines?: LineDebugAction[];
 }
 
 export interface ActionItem {

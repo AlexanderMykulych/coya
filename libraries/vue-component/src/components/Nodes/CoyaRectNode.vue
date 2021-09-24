@@ -17,16 +17,16 @@ const runEnter = (enter: EnterSetting) => {
     gsap.fromTo(gEl.value, enter.from, enter.to);
 };
 
-const linePosX = computed(() => props.positioning.x + props.positioning.width / 2);
-const linePosY = computed(() => props.positioning.y + props.positioning.height);
+const linePosX = computed(() => props.positioning.x + props.positioning.w / 2);
+const linePosY = computed(() => props.positioning.y + props.positioning.h);
 
 onMounted(() => {
     const enter = props.block.enter;
     if (enter && enter.from && enter.to) {
         runEnter(enter);
         watch(() => props.positioning, (pos) => {
-            gsap.to(el.value, { duration: 0, attr: { x: 0, y: 0, width: pos.width, height: pos.height } });
-            gsap.to(gEl.value, { duration: 0, attr: { x: pos.x, y: pos.y, width: pos.width, height: pos.height } });
+            gsap.to(el.value, { duration: 0, attr: { x: 0, y: 0, width: pos.w, height: pos.h } });
+            gsap.to(gEl.value, { duration: 0, attr: { x: pos.x, y: pos.y, width: pos.w, height: pos.h } });
             gsap.to(textEl.value, { duration: 0, attr: { x: linePosX.value, y: linePosY.value } });
         }, {
             immediate: true,
@@ -39,8 +39,8 @@ const textStyle = reactive({
     display: "flex",
     "align-items": "unsafe center",
     "justify-content": "unsafe center",
-    width: computed(() => `${props.positioning.width - 2}px`),
-    height: computed(() => `${props.positioning.height - 2}px`),
+    width: computed(() => `${props.positioning.w - 2}px`),
+    height: computed(() => `${props.positioning.h - 2}px`),
     "padding-top": computed(() => `0px`),
     "margin-left": computed(() => `0px`)
 });

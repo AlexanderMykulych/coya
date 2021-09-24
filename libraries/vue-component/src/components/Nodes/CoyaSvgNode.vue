@@ -12,8 +12,8 @@ const runEnter = (enter: EnterSetting) => {
     gsap.fromTo(el.value, enter.from, enter.to);
 };
 
-const linePosX = computed(() => props.positioning.x + props.positioning.width / 2);
-const linePosY = computed(() => props.positioning.y + props.positioning.height);
+const linePosX = computed(() => props.positioning.x + props.positioning.w / 2);
+const linePosY = computed(() => props.positioning.y + props.positioning.h);
 
 
 onMounted(() => {
@@ -21,21 +21,21 @@ onMounted(() => {
     const pos = props.positioning;
     if (enter && enter.from && enter.to) {
         runEnter(enter);
-        gsap.to(el.value, { duration: 0, attr: { x: pos.x, y: pos.y, width: pos.width, height: pos.height } });
+        gsap.to(el.value, { duration: 0, attr: { x: pos.x, y: pos.y, width: pos.w, height: pos.h } });
         gsap.to(textEl.value, { duration: 0, attr: { x: linePosX.value, y: linePosY.value } });
     }
     watch(() => props.positioning.x, newVal => {
         gsap.to(el.value, { duration: 3, attr: { x: newVal } });
-        gsap.to(textEl.value, { duration: 3, attr: { x: newVal + props.positioning.width / 2 } });
+        gsap.to(textEl.value, { duration: 3, attr: { x: newVal + props.positioning.w / 2 } });
     });
     watch(() => props.positioning.y, newVal => {
         gsap.to(el.value, { duration: 3, attr: { y: newVal } });
-        gsap.to(textEl.value, { duration: 3, attr: { y: newVal + props.positioning.height } });
+        gsap.to(textEl.value, { duration: 3, attr: { y: newVal + props.positioning.h } });
     });
-    watch(() => props.positioning.width, (newVal) => {
+    watch(() => props.positioning.w, (newVal) => {
         gsap.to(el.value, { duration: 3, attr: { width: newVal } });
     });
-    watch(() => props.positioning.height, newVal => {
+    watch(() => props.positioning.h, newVal => {
         gsap.to(el.value, { duration: 3, attr: { height: newVal } });
     });
 });

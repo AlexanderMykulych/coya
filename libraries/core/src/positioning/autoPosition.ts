@@ -33,7 +33,7 @@ export function autoPositioning(setting: AutoPositioningSetting): BlockPositioni
                     }
                     const brotherPos = brotherLeftPosComp.value;
                     if (isRectPositioning(brotherPos)) {
-                        return getNumber(brotherPos.x) + getNumber(brotherPos.width) + sizeSetting.gap;
+                        return getNumber(brotherPos.x) + getNumber(brotherPos.w) + sizeSetting.gap;
                     }
                     return getNumber(parentPos.x) + sizeSetting.gap;
                 }
@@ -57,7 +57,7 @@ export function autoPositioning(setting: AutoPositioningSetting): BlockPositioni
                         .forEach(brotherBlock => {
                             const pos = getBlockPositioning(blocksPositioning.value, brotherBlock.id);
                             if (isRectPositioning(pos)) {
-                                const newY = getNumber(pos.y) + getNumber(pos.height);
+                                const newY = getNumber(pos.y) + getNumber(pos.h);
                                 if (newY > maxY) {
                                     maxY = newY;
                                 }
@@ -68,13 +68,13 @@ export function autoPositioning(setting: AutoPositioningSetting): BlockPositioni
             }
             return sizeSetting.gap;
         });
-        const width = computed(() => {
+        const w = computed(() => {
             if (isParentBlockElement(block)) {
                 let maxX = 0;
                 block.children.forEach(child => {
                     const pos = blocksPositioning.value.find(x => x.blockId === child.id)?.position;
                     if (isRectPositioning(pos)) {
-                        const newX = getNumber(pos.x) + getNumber(pos.width);
+                        const newX = getNumber(pos.x) + getNumber(pos.w);
                         if (newX > maxX) {
                             maxX = newX;
                         }
@@ -85,13 +85,13 @@ export function autoPositioning(setting: AutoPositioningSetting): BlockPositioni
             }
             return sizeSetting.rectWidth;
         });
-        const height = computed(() => {
+        const h = computed(() => {
             if (isParentBlockElement(block)) {
                 let maxY = 0;
                 block.children.forEach(child => {
                     const pos = blocksPositioning.value.find(x => x.blockId === child.id)?.position;
                     if (isRectPositioning(pos)) {
-                        const newY = getNumber(pos.y) + getNumber(pos.height);
+                        const newY = getNumber(pos.y) + getNumber(pos.h);
                         if (newY > maxY) {
                             maxY = newY;
                         }
@@ -105,7 +105,7 @@ export function autoPositioning(setting: AutoPositioningSetting): BlockPositioni
 
         return {
             blockId: block.id,
-            position: { x, y, width, height }
+            position: { x, y, w, h }
         };
     }).filter(isNotNullOrUndefined);
     return blocksPositioning.value;

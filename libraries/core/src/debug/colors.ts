@@ -9,10 +9,6 @@ export const colors = [
     "f7ff58",
     "ff934f"
 ];
-let colorIndex = 0;
 export const getColor = () => {
-    if (colorIndex >= colors.length) {
-        colorIndex = 0;
-    }
-    return `#${colors[colorIndex++]}`;
+    return `#64B6AC`;
 }

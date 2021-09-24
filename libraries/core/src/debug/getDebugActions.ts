@@ -4,7 +4,8 @@ import {  isNotNullOrUndefined } from "../typeGuards";
 import { ActionType, DebugSelectContext, SelectedProperties } from "../types";
 import { getSelectedBlockId, isBlockSelected } from "./isBlockSelected";
 import { getActionInfo, getPhaseIndex, isPhaseSelected } from "./isPhaseSelected";
-import { getStyleBlockSelected, getStylePositionDebugActions, isStyleBlockSelected, isStylePositionSelected, isStyleSelected } from "./isStyleSelected";
+import { getStyleBlockSelected, isStyleBlockSelected, isStylePositionSelected, isStyleSelected } from "./isStyleSelected";
+import { getStylePositionDebugActions } from "./getStylePositionDebugActions";
 
 export function getDebugActions(selected: SelectedProperties, context: DebugSelectContext): DebugAction[] {
     if (isBlockSelected(selected)) {
@@ -51,7 +52,7 @@ export function getDebugActions(selected: SelectedProperties, context: DebugSele
                             .actions
                             .some(action =>
                                 action.action.name === ActionType.AddNewBlock &&
-                                !!(action.action.value as any)[blockId]
+                                isNotNullOrUndefined((action.action.value as any)[blockId])
                             )
                 );
                 if (phaseId) {

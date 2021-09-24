@@ -40,7 +40,7 @@ export function isArchitectureDescription(obj: unknown): obj is ArchitectureDesc
 export function isRectPositioning(obj: Positioning | undefined | null): obj is RectPositioning {
     if (!!obj) {
         const rectPos = <RectPositioning>obj;
-        return isNotNullOrUndefined(rectPos.x) && isNotNullOrUndefined(rectPos.y) /* && isNotNullOrUndefined(rectPos.width)  && isNotNullOrUndefined(rectPos.height)*/;
+        return isNotNullOrUndefined(rectPos.x) && isNotNullOrUndefined(rectPos.y);
     }
     return false;
 }
