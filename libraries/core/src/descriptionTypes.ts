@@ -1,4 +1,4 @@
-import { Ref } from "@vue/reactivity";
+import { Ref } from "vue";
 import { Properties } from "csstype";
 import { DebugSetting } from "./debugTypes";
 import { BlockPositioning, DebugStateContainer, FormulaValueFuncContext } from "./types";

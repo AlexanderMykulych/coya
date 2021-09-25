@@ -1,5 +1,5 @@
 import { AutoPositioningSetting, AutoPositioningSizeSetting } from "./types";
-import { computed, ref, Ref } from "@vue/reactivity";
+import { computed, ref, Ref } from "vue";
 import { BlockPositioning, Positioning } from "../types";
 import { isContainerBlock, isLineBlockElement, isNotNullOrUndefined, isParentBlockElement, isRectPositioning } from "../typeGuards";
 import { lineBlockPosition } from "./lineBlockPosition";

@@ -24,6 +24,7 @@ const height = computed(() => {
     }
     return 0;
 });
+watch(() => unref(height), h => console.log("newH: ", h), {immediate: true});
 watch(() => preparedConfig.value, val => {
     arch.value = transformToArchitecture(val, {
         viewBox: {
@@ -84,8 +85,8 @@ provide("svgInfo", reactive({
     viewBox: {
         vX,
         vY,
-        width,
-        height
+        w: width,
+        h: height
     },
     realHeight,
     realWidth
@@ -187,7 +188,7 @@ provide("svgInfo", reactive({
                     mask="url(#hole)"
                 />
 
-                <DebugLines :lines="debugLines" />
+                <DebugLines v-if="debugLines" :lines="debugLines" />
             </svg>
             <svg v-if="enableDrawing" class="drawableSvg" ref="drawableSvgEl" />
         </div>

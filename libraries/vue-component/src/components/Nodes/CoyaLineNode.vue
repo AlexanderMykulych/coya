@@ -1,10 +1,6 @@
 <script lang="ts" setup>
 import { Block, BlockStyle, LinePositioning } from "@coya/core";
-import { computed, onMounted, ref, watch } from "vue";
-import { gsap } from "gsap";
-// import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
-
-// gsap.registerPlugin(DrawSVGPlugin);
+import { computed, ref } from "vue";
 
 const props = defineProps<{ block: Block, positioning: LinePositioning, blockStyle: BlockStyle }>();
 const cssStyle = computed(() => props.blockStyle?.css ?? {});
@@ -20,49 +16,6 @@ const lineTextY = computed(() => {
     const height = Math.abs(props.positioning.y2 - props.positioning.y1) / 2;
     const y = Math.min(props.positioning.y1, props.positioning.y2);
     return y + height + 5;
-});
-onMounted(() => {
-    // watch(() => props.positioning.x1, newVal => {
-    //     gsap.to(el.value, { duration: 3, attr: { x1: newVal } });
-    // }, {
-    //     immediate: true
-    // });
-    // watch(() => props.positioning.y1, newVal => {
-    //     gsap.to(el.value, { duration: 3, attr: { y1: newVal } });
-    // }, {
-    //     immediate: true
-    // });
-    watch(() => props.positioning.x2, newVal => {
-        gsap
-            .fromTo(el.value,
-                { drawSVG: "0%", markerEnd: "" },
-                {
-                    duration: 2,
-                    drawSVG: "100%",
-                    ease: "Power2.easOut",
-                    onComplete: (...args) => {
-                        el.value?.setAttribute("marker-end", "url(#arrowhead)");
-                    }
-                }
-            );
-    }, {
-        immediate: true
-    });
-    // watch(() => props.positioning.y2, newVal => {
-    //     gsap.to(el.value, { duration: 3, attr: { y2: newVal } });
-    // }, {
-    //     immediate: true
-    // });
-    // watch(() => lineTextX.value, newVal => {
-    //     gsap.to(textEl.value, { duration: 3, attr: { x: newVal } });
-    // }, {
-    //     immediate: true
-    // });
-    // watch(() => lineTextY.value, newVal => {
-    //     gsap.to(textEl.value, { duration: 3, attr: { y: newVal } });
-    // }, {
-    //     immediate: true
-    // });
 });
 const textStyle = ref({
     fontSize: "4px"
@@ -80,6 +33,7 @@ const textStyle = ref({
             stroke="#000"
             stroke-width="0.5"
             :css="cssStyle"
+            marker-end="url(#arrowhead)"
             ref="el"
         />
 

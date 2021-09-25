@@ -1,5 +1,5 @@
 import { BlockPositioning, LineBlockElement } from "../types";
-import { computed, Ref } from "@vue/reactivity";
+import { computed, Ref } from "vue";
 import { isRectPositioning } from "../typeGuards";
 import { getNumber } from "./getNumber";
 import { BlockStyle, FormulaValue } from "../descriptionTypes";

@@ -1,4 +1,4 @@
-import { isRef, Ref } from "@vue/reactivity";
+import { isRef, Ref } from "vue";
 import { NumberValue } from "../types";
 
 export function getNumber(obj: NumberValue | Ref<number>): number {

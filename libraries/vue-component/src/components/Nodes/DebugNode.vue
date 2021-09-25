@@ -46,7 +46,6 @@ const text = computed(() => `${props.block.id}`);
             r="1.3"
         />
         <textSvg
-            
             :x="positioning.x"
             :y="positioning.y - 20"
         >

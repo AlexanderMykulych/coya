@@ -1,4 +1,4 @@
-import { computed, Ref, ref } from "@vue/reactivity";
+import { computed, Ref, ref } from "vue";
 import { FormulaValue } from "../descriptionTypes";
 import { isContainerBlock, isFormulaValue, isLineBlockElement, isNotNullOrUndefined } from "../typeGuards";
 import { BlockPositioning } from "../types";

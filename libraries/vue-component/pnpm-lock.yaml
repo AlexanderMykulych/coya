@@ -3149,19 +3149,6 @@ packages:
       - supports-color
     dev: true
 
-  /vite/2.5.0:
-    resolution: {integrity: sha512-Dn4B+g54PJsMG5WCc4QeFy1ygMXRdTtFrUPegqfk4+vzVQcbF/DqqmI/1bxezArzbujBJg/67QeT5wz8edfJVQ==}
-    engines: {node: '>=12.2.0'}
-    hasBin: true
-    dependencies:
-      esbuild: 0.12.20
-      postcss: 8.3.6
-      resolve: 1.20.0
-      rollup: 2.56.2
-    optionalDependencies:
-      fsevents: 2.3.2
-    dev: true
-
   /vue-color-kit/1.0.5:
     resolution: {integrity: sha512-PUQzqdpI7672YYuoHdTLENHldieVMis0u9g2n7NAxiLGdiaqCD/QaYtbDOvtASpN5oSIfKxQgPV+i45MOlkKnw==}
     peerDependencies:

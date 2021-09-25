@@ -452,11 +452,6 @@
       "reviewCategory": "production"
     },
     {
-      "packageName": "@coya/gif",
-      "projectFolder": "libraries/gif",
-      "reviewCategory": "production"
-    },
-    {
       "packageName": "@coya/vscode",
       "projectFolder": "libraries/vscode/coya",
       "reviewCategory": "production"

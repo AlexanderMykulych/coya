@@ -1,4 +1,3 @@
-import { computed, Ref, isRef, ref, reactive } from "@vue/reactivity";
 import { blockGroupDescriptionsToBlock } from "./block/blockGroupDescriptionsToBlock";
 import { ArchitectureDescription, TransformSetting } from "./descriptionTypes";
 import { isArchitectureDescription, isNotNullOrUndefined } from "./typeGuards";
@@ -6,7 +5,7 @@ import { PhaseId, SelectedProperties, Architecture, Block, CurrentPhaseInfo, Deb
 import { styleDescriptionToArchitectureStyle } from "./style/styleDescriptionToArchitectureStyle";
 import { startPhases } from "./phase/startPhases";
 import { buildPhasesIndex } from "./phase/buildPhasesIndex";
-import { watch } from '@vue-reactivity/watch';
+import { watch, computed, Ref, isRef, ref, reactive, unref } from 'vue';
 import { deepCopy } from "./util/deepCopy";
 import { getDebugActions } from "./debug/getDebugActions";
 import { DebugType } from "./debugTypes";
@@ -15,7 +14,9 @@ import { DebugType } from "./debugTypes";
 export function transformToArchitecture(description: Ref<unknown> | unknown, setting: TransformSetting): Ref<Architecture> {
     const refDescription = isRef(description) ? description : ref(description);
     const value = refDescription.value;
-
+    watch(() => unref(setting.viewBox.h), (h: any) => {
+        console.log("newHeight:", h);
+    }, {immediate: true})
     const transitionalArchitectureRef = ref(deepCopy(value));
     const transitionalArchitecture: ArchitectureDescription = transitionalArchitectureRef.value;
     transitionalArchitecture.blocks = {
@@ -50,7 +51,7 @@ export function transformDescriptionToArchitecture(transitionalArchitectureRef: 
     const currentPhase: CurrentPhaseInfo = reactive({
         current: null
     });
-    watch(() => deepCopy(transitionalArchitectureRef.value), (_, oldVal) => {
+    watch(() => deepCopy(transitionalArchitectureRef.value), (_: any, oldVal: any) => {
         if (enableWatcher) {
             oldValues.push({
                 arch: oldVal,

@@ -10,8 +10,8 @@ const position = computed(() => props.architecture?.style?.positioning?.find(x =
 const pos = reactive<RectPositioning>({
     x: 0,
     y: 0,
-    width: 100,
-    height: 100
+    w: 100,
+    h: 100
 });
 </script>
 

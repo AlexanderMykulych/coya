@@ -1,4 +1,4 @@
-import { ref, unref } from "@vue/reactivity";
+import { ref, unref } from "vue";
 import { DebugAction, DebugType, LineDebugAction } from "../debugTypes";
 import { CustomContextBuilderFunc } from "../descriptionTypes";
 import { getFormulaValue } from "../positioning/getFormulaValue";

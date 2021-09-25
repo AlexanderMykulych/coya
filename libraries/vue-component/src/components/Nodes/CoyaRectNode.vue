@@ -11,14 +11,10 @@ const cssStyle = computed(() => ({
 }) ?? {});
 const el = ref(null);
 const gEl = ref(null);
-const textEl = ref(null);
 
 const runEnter = (enter: EnterSetting) => {
     gsap.fromTo(gEl.value, enter.from, enter.to);
 };
-
-const linePosX = computed(() => props.positioning.x + props.positioning.w / 2);
-const linePosY = computed(() => props.positioning.y + props.positioning.h);
 
 onMounted(() => {
     const enter = props.block.enter;
@@ -27,7 +23,6 @@ onMounted(() => {
         watch(() => props.positioning, (pos) => {
             gsap.to(el.value, { duration: 0, attr: { x: 0, y: 0, width: pos.w, height: pos.h } });
             gsap.to(gEl.value, { duration: 0, attr: { x: pos.x, y: pos.y, width: pos.w, height: pos.h } });
-            gsap.to(textEl.value, { duration: 0, attr: { x: linePosX.value, y: linePosY.value } });
         }, {
             immediate: true,
             deep: true
