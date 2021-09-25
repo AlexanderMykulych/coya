@@ -14,12 +14,18 @@ const drawableSvgEl = ref<SVGSVGElement | null>(null);
 const coyaEl = ref<HTMLElement | null>(null);
 const enableDrawing = ref(false);
 const width = ref(700);
-const realHeight = computed(() => coyaSvgEl.value?.clientHeight ?? 0);
-const realWidth = computed(() => coyaSvgEl.value?.clientWidth ?? 0);
+const realHeight = ref(0);
+const realWidth = ref(0);
+onMounted(() => {
+    if (coyaSvgEl.value) {
+        realHeight.value = coyaSvgEl.value?.clientHeight ?? 0;
+        realWidth.value = coyaSvgEl.value?.clientWidth ?? 0;
+    }
+});
 const vX = ref(0);
 const vY = ref(0);
 const height = computed(() => {
-    if (coyaSvgEl.value) {
+    if (coyaSvgEl.value && realWidth.value !== 0) {
         return (width.value * realHeight.value) / realWidth.value
     }
     return 0;

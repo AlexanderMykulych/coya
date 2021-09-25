@@ -14,7 +14,8 @@ export function openEditor(context: vscode.ExtensionContext, file: vscode.Uri) {
         }
     );
     setTimeout(() => {
-        panel.webview.html = getWebviewContent("http://localhost:5000");
+        const fileName = path.basename(file.path).replaceAll(".", "_");
+        panel.webview.html = getWebviewContent(`http://localhost:5000/file/${fileName}`);
     }, 2000);
 }
 

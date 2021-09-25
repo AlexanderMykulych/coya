@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deactivate = exports.activate = void 0;
-const typescript_1 = require("typescript");
 const vscode = require("vscode");
 const activateLogic_1 = require("./activateLogic");
+const onTextChange_1 = require("./onTextChange");
 const openEditor_1 = require("./openEditor");
 const startConnection_1 = require("./startConnection");
 const startTypescriptAnalizing_1 = require("./startTypescriptAnalizing");
@@ -20,20 +20,7 @@ function activate(context) {
         (0, activateLogic_1.activateLogic)(context, file);
     });
     context.subscriptions.push(openDisposable);
-    vscode.workspace.onDidChangeTextDocument((e) => {
-        console.log("text change!");
-        const sourceFile = state_1.default.fileSources.find(x => x.fileName === e.document.fileName);
-        if (sourceFile) {
-            const text = e.document.getText();
-            sourceFile.hasBeenIncrementallyParsed = false;
-            const newSourceFile = sourceFile
-                .update(text, {
-                span: (0, typescript_1.createTextSpanFromBounds)(0, sourceFile.getText().length),
-                newLength: text.length
-            });
-            state_1.default.fileSources[state_1.default.fileSources.indexOf(sourceFile)] = newSourceFile;
-        }
-    });
+    (0, onTextChange_1.onTextChange)();
 }
 exports.activate = activate;
 function deactivate() { }

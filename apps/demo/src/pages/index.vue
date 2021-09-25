@@ -18,7 +18,7 @@ const { t } = useI18n()
 
 <template>
   <div>
-      <coya :config="config"/>
+      <coya style="height: 100%; width: 90vw;" :config="config"/>
     <p class="text-4xl">
       <carbon-campsite class="inline-block" />
     </p>

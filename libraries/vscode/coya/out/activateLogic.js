@@ -7,7 +7,9 @@ const vscode = require("vscode");
 const state_1 = require("./state");
 const getTokensAtPosition_1 = require("./tsutil/getTokensAtPosition");
 const getNodeText_1 = require("./getNodeText");
+const createViteFileSymlink_1 = require("./createViteFileSymlink");
 function activateLogic(context, file) {
+    (0, createViteFileSymlink_1.createViteFileSymlink)(context, file);
     (0, watch_1.watch)(() => state_1.default.connectedCount, val => {
         vscode.window.showInformationMessage(`Connected: ${val}`);
     });

@@ -72,21 +72,21 @@ export default defineConfig({
         ],
     },
     build: {
-        // rollupOptions: {
-        //     external: ['vue', "@vue-reactivity/watch"],
-        //     output: {
-        //         // Provide global variables to use in the UMD build
-        //         // for externalized deps
-        //         globals: {
-        //             vue: 'Vue'
-        //         }
-        //     }
-        // },
-        // lib: {
-        //     entry: path.resolve(__dirname, "/src/lib/libEntry.ts"),
-        //     name: "Coya",
-        //     fileName: (format) => `coya.${format}.js`
-        // },
-        // minify: false
+        rollupOptions: {
+            external: ['vue'],
+            output: {
+                // Provide global variables to use in the UMD build
+                // for externalized deps
+                globals: {
+                    vue: 'Vue'
+                }
+            }
+        },
+        lib: {
+            entry: path.resolve(__dirname, "/src/lib/libEntry.ts"),
+            name: "Coya",
+            fileName: (format) => `coya.${format}.js`
+        },
+        minify: false
     }
 })

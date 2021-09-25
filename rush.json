@@ -457,6 +457,11 @@
       "reviewCategory": "production"
     },
     {
+      "packageName": "@coya/vite-proj",
+      "projectFolder": "libraries/vscode/coya/vite-proj",
+      "reviewCategory": "production"
+    },
+    {
       "packageName": "@coya/vue-component",
       "projectFolder": "libraries/vue-component",
       "reviewCategory": "production"

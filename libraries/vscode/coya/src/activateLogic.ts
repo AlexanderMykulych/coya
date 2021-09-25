@@ -6,8 +6,10 @@ import * as ts from "typescript";
 import { getTokensAtPosition, NodeWithIndex } from './tsutil/getTokensAtPosition';
 import { PropertiesConfig } from "@coya/core";
 import { getNodeText } from './getNodeText';
+import { createViteFileSymlink } from './createViteFileSymlink';
 
 export function activateLogic(context: vscode.ExtensionContext, file: vscode.Uri) {
+    createViteFileSymlink(context, file);
     watch(() => state.connectedCount, val => {
         vscode.window.showInformationMessage(`Connected: ${val}`);
     });
@@ -32,5 +34,6 @@ function propsArrayToConfigObject(nodes: NodeWithIndex[], sourceFile: ts.SourceF
         index: x.index
     }));
 }
+
 
 

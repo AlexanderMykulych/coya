@@ -7,7 +7,7 @@ import worker from './assets/worker.svg?raw';
 import upswot_admin from './assets/upswot_admin.svg?raw';
 import storage from './assets/storage.svg?raw';
 const kafkaUrl = new URL('./assets/queue.png', import.meta.url)
-
+//test
 export default <ArchitectureDescription>{
     name: "upswot",
     "blocks": {
