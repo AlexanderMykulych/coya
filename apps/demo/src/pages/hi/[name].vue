@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
-import { useI18n } from 'vue-i18n'
 import { useUserStore } from '~/stores/user'
 
 const props = defineProps<{ name: string }>()
 const router = useRouter()
-const { t } = useI18n()
 const user = useUserStore()
+const { t } = useI18n()
 
 watchEffect(() => {
   user.setNewName(props.name)
@@ -30,9 +28,9 @@ watchEffect(() => {
       <p class="text-sm mt-4">
         <span class="opacity-75">{{ t('intro.aka') }}:</span>
         <ul>
-          <li v-for="name in user.otherNames" :key="name">
-            <router-link :to="`/hi/${name}`" replace>
-              {{ name }}
+          <li v-for="otherName in user.otherNames" :key="otherName">
+            <router-link :to="`/hi/${otherName}`" replace>
+              {{ otherName }}
             </router-link>
           </li>
         </ul>

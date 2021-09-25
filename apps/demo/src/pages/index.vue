@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
-import { useI18n } from 'vue-i18n'
 import { useUserStore } from '~/stores/user'
-import {sum} from "core";
+import coya from "@coya/vue-component";
+import "@coya/vue-component/dist/style.css";
+import config from "./upswot.coya";
 
 const user = useUserStore()
 const name = ref(user.savedName)
@@ -13,14 +13,12 @@ const go = () => {
     router.push(`/hi/${encodeURIComponent(name.value)}`)
 }
 
-// const sum = (a: number, b: number) => a+ b+ 1;
-
 const { t } = useI18n()
 </script>
 
 <template>
   <div>
-    {{sum(1, 2)}}
+      <coya :config="config"/>
     <p class="text-4xl">
       <carbon-campsite class="inline-block" />
     </p>
@@ -42,13 +40,13 @@ const { t } = useI18n()
       :aria-label="t('intro.whats-your-name')"
       type="text"
       autocomplete="false"
-      @keydown.enter="go"
       p="x-4 y-2"
       w="250px"
       text="center"
       bg="transparent"
       border="~ rounded gray-200 dark:gray-700"
       outline="none active:none"
+      @keydown.enter="go"
     >
     <label class="hidden" for="input">{{ t('intro.whats-your-name') }}</label>
 
