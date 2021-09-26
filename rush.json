@@ -296,7 +296,7 @@
      * The default branch name. This tells "rush change" which remote branch to compare against.
      * The default value is "master"
      */
-    // "defaultBranch": "master",
+    "defaultBranch": "main",
 
     /**
      * The default remote. This tells "rush change" which remote to compare against if the remote URL is
@@ -450,13 +450,15 @@
       "packageName": "@coya/core",
       "versionPolicyName": "main",
       "projectFolder": "libraries/core",
-      "reviewCategory": "production"
+      "reviewCategory": "production",
+      "shouldPublish": true
     },
     {
       "packageName": "coya",
       "versionPolicyName": "main",
       "projectFolder": "libraries/vscode/coya",
-      "reviewCategory": "production"
+      "reviewCategory": "production",
+      "shouldPublish": true
     },
     {
       "packageName": "@coya/vite-proj",
@@ -468,7 +470,8 @@
       "packageName": "@coya/vue-component",
       "versionPolicyName": "main",
       "projectFolder": "libraries/vue-component",
-      "reviewCategory": "production"
+      "reviewCategory": "production",
+      "shouldPublish": true
     },
     {
       "packageName": "demo",

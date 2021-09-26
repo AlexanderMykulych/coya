@@ -12,3 +12,8 @@
 </tbody>
 </table>
 </p>
+
+# Rush
+```bash
+rush change -b origin/main -v
+```
