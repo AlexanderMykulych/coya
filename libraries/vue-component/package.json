@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@coya/vue-component",
-  "version": "0.1.0",
+  "version": "0.4.0",
   "module": "dist/coya.es.js",
   "scripts": {
     "dev": "vite --port 3333 --open",
@@ -20,7 +20,7 @@
     "vue-demi": "^0.11.3",
     "vue-router": "^4.0.11",
     "ws": "^8.2.2",
-    "@coya/core": "~0.1.0"
+    "@coya/core": "~0.4.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.7.0",

@@ -1,6 +1,6 @@
 {
   "name": "demo",
-  "version": "0.1.0",
+  "version": "0.4.0",
   "scripts": {
     "dev": "vite --port 3333 --open",
     "build": "cross-env NODE_ENV=production vite-ssg build",
@@ -18,8 +18,8 @@
     "vue-demi": "^0.11.4",
     "vue-i18n": "^9.1.7",
     "vue-router": "^4.0.11",
-    "@coya/core": "~0.1.0",
-    "@coya/vue-component": "~0.1.0"
+    "@coya/core": "~0.4.0",
+    "@coya/vue-component": "~0.4.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.9.0",

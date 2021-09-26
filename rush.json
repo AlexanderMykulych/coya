@@ -150,7 +150,7 @@
    * version. In those cases, you will need to add an entry to the "allowedAlternativeVersions"
    * section of the common-versions.json.
    */
-  // "ensureConsistentVersions": true,
+  "ensureConsistentVersions": false,
 
   /**
    * Large monorepos can become intimidating for newcomers if project folder paths don't follow
@@ -448,26 +448,31 @@
     // 
     {
       "packageName": "@coya/core",
+      "versionPolicyName": "main",
       "projectFolder": "libraries/core",
       "reviewCategory": "production"
     },
     {
-      "packageName": "@coya/vscode",
+      "packageName": "coya",
+      "versionPolicyName": "main",
       "projectFolder": "libraries/vscode/coya",
       "reviewCategory": "production"
     },
     {
       "packageName": "@coya/vite-proj",
+      "versionPolicyName": "main",
       "projectFolder": "libraries/vscode/coya/vite-proj",
       "reviewCategory": "production"
     },
     {
       "packageName": "@coya/vue-component",
+      "versionPolicyName": "main",
       "projectFolder": "libraries/vue-component",
       "reviewCategory": "production"
     },
     {
       "packageName": "demo",
+      "versionPolicyName": "main",
       "projectFolder": "apps/demo",
       "reviewCategory": "apps"
     }

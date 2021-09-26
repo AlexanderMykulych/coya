@@ -99,9 +99,9 @@ provide("svgInfo", reactive({
 }))
 </script>
 <template>
-    <div class="grid grid-cols-5">
+    <div class="grid grid-cols-5 grid-rows-12 h-full">
         <div
-            class="coya-container col-span-4"
+            class="coya-container col-span-4 row-span-full"
             ref="coyaEl"
             :class="{ [`col-span-${debug ? 4 : 'full'}`]: true }"
             :id="arch?.name"
@@ -213,7 +213,7 @@ provide("svgInfo", reactive({
                 @update:modelValue="arch?.toPhase"
             />
         </div>
-        <div class="col-span-full block text-gray-700 text-center bg-gray-200 px-4 py-2">
+        <div class="col-span-full row-span-1 block text-gray-700 text-center bg-gray-200 px-4 py-2">
             <CoyaControlPanel
                 :svgEl="drawableSvgEl"
                 @back="back"
@@ -236,7 +236,7 @@ provide("svgInfo", reactive({
 }
 
 .coya-container {
-    height: 70vh;
+    height: 100%;
     width: 100%;
     overflow: auto;
     position: relative;

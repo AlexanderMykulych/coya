@@ -1,10 +1,14 @@
 {
-    "name": "@coya/vscode",
+    "name": "coya",
     "displayName": "coya",
     "description": "",
-    "version": "0.0.1",
+    "version": "0.4.0",
+    "publisher": "AlexMykulych",
     "engines": {
         "vscode": "^1.60.0"
+    },
+    "npm": {
+        "packageManager": "pnpm"
     },
     "categories": [
         "Other"
@@ -66,7 +70,7 @@
         "child_process": "^1.0.2",
         "tsutils": "^3.21.0",
         "ws": "^8.2.2",
-        "@coya/core": "~0.1.0",
-        "@coya/vue-component": "~0.1.0"
+        "@coya/core": "~0.4.0",
+        "@coya/vue-component": "~0.4.0"
     }
 }
