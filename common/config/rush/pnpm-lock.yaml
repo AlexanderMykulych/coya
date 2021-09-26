@@ -14310,7 +14310,7 @@ packages:
     dev: false
 
   file:projects/coya.tgz:
-    resolution: {integrity: sha512-UUrZ/AZdsKA44HvooYRQlAltAJH3fyVsAfmXyNOgH5sV1aVj1vtjM7CRnxlqq69eOcwLhh0pW+qDQ18TNL5E2g==, tarball: file:projects/coya.tgz}
+    resolution: {integrity: sha512-8OmlAuYPXM5tNi05TRWqgWfDzksLGoBlTM3Se+u3+zepMH2Iahe+4F4+B31BIfD8Ykus7rENlanXnMk9agt39Q==, tarball: file:projects/coya.tgz}
     name: '@rush-temp/coya'
     version: 0.0.0
     dependencies:
@@ -14339,7 +14339,7 @@ packages:
     dev: false
 
   file:projects/demo.tgz:
-    resolution: {integrity: sha512-74oL3lLSETps8qTVnaUkXoCeGiBvW6FkTMKW9mWLxhmS2lhMiGYM26NNRa7IzsTltSoXYjKZaGBhzcDppT1iyw==, tarball: file:projects/demo.tgz}
+    resolution: {integrity: sha512-JBU7ygbk1S7fExBlGrX/Nqg+kEFPRjFKuRkUM41+87tDveuiC5Cww/UZFvhevCHTJemJB/g4hTpLBvVwmUagwA==, tarball: file:projects/demo.tgz}
     name: '@rush-temp/demo'
     version: 0.0.0
     dependencies:
@@ -14396,7 +14396,7 @@ packages:
     dev: false
 
   file:projects/vite-proj.tgz:
-    resolution: {integrity: sha512-TY1zy+gnw4uE1M7Dg65PCOPLhuEP3BoOE7Ss19M8lz6Z6W+IlnTXj5nAj81hsStRBQX6OCcAFDfI3yN/zAKdpw==, tarball: file:projects/vite-proj.tgz}
+    resolution: {integrity: sha512-5zOGt+FakDX2A0N5WGAtaqHeWApp/3H1CpKJi8Vc0CyWhA0dPuorC+oQf8NgioUhBJ1ATXG5oj5kjtwf4W4j5A==, tarball: file:projects/vite-proj.tgz}
     name: '@rush-temp/vite-proj'
     version: 0.0.0
     dependencies:
@@ -14454,7 +14454,7 @@ packages:
     dev: false
 
   file:projects/vue-component.tgz:
-    resolution: {integrity: sha512-6mHAmOywueLlcQtHXa1tbqfilzcG0+mUnSVj2b9DKrJoEbaruuYV+E3o68JPwFgBzQRRWo6uSMNC0vpl4pD4Xg==, tarball: file:projects/vue-component.tgz}
+    resolution: {integrity: sha512-JtWlj0/e0nFTkciOGsQz4OhYaN6dybM0598SBAbqetk73On3oPxNuOQmLIbVOHneFnPy9Wzp9netvK+Tn4PacA==, tarball: file:projects/vue-component.tgz}
     name: '@rush-temp/vue-component'
     version: 0.0.0
     dependencies:
