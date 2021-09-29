@@ -46,7 +46,7 @@ const blockDebug = computed(() => props.block.debug);
         :positioning="rectPosition"
     />
     <DebugNode
-        v-if="!!debug"
+        v-if="!!blockDebug"
         :value="blockDebug"
         :block="block"
         :block-style="blockStyle"
