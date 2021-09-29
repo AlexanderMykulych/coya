@@ -1,7 +1,7 @@
 import { reactive } from "@vue/reactivity";
 import * as vscode from "vscode";
 import { SourceFile } from "typescript";
-import { SelectedProperties } from "@coya/core";
+import { SelectedProperties } from "coya-core";
 
 const state = reactive({
     enabled: false,

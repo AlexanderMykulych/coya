@@ -1,21 +1,21 @@
 {
-  "name": "@coya/core",
+  "name": "coya-core",
   "entries": [
     {
       "version": "0.4.0",
-      "tag": "@coya/core_v0.4.0",
+      "tag": "coya-core_v0.4.0",
       "date": "Sat, 25 Sep 2021 22:54:16 GMT",
       "comments": {}
     },
     {
       "version": "0.3.0",
-      "tag": "@coya/core_v0.3.0",
+      "tag": "coya-core_v0.3.0",
       "date": "Sat, 25 Sep 2021 22:51:25 GMT",
       "comments": {}
     },
     {
       "version": "0.2.0",
-      "tag": "@coya/core_v0.2.0",
+      "tag": "coya-core_v0.2.0",
       "date": "Sat, 25 Sep 2021 22:45:20 GMT",
       "comments": {}
     }

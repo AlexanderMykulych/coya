@@ -1,6 +1,6 @@
 import blackboard from './blackboard.svg?raw';
 import smartphone from './smartphone.svg?raw';
-import { ArchitectureDescription } from '@coya/core';
+import { ArchitectureDescription } from 'coya-core';
 const imgUrl = new URL('./rectangle.svg', import.meta.url)
 
 export default <ArchitectureDescription>{

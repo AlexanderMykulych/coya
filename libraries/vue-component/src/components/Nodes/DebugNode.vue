@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Block, BlockStyle, RectPositioning } from "@coya/core";
+import { Block, BlockStyle, RectPositioning } from "coya-core";
 
 const props = defineProps<{ block: Block, positioning: RectPositioning, blockStyle: BlockStyle }>();
 const el = ref(null);
@@ -10,11 +10,38 @@ const style = reactive({
 });
 
 const text = computed(() => `${props.block.id}`);
+const points = computed(() => {
+    const items = [{
+        pos: props.positioning,
+        text: `${props.block.id}<br/>`,
+        indentY: -15,
+        indentX: -10
+    }, {
+        pos: props.positioning.bottom,
+        text: "bottom",
+        indentY: 5
+    }, {
+        pos: props.positioning.top,
+        text: "top",
+        indentY: -12,
+        indentX: 5
+    }, {
+        pos: props.positioning.right,
+        text: "right",
+        indentY: -12,
+        indentX: 5
+    }, {
+        pos: props.positioning.left,
+        text: "left",
+        indentY: -12,
+        indentX: -25
+    }];
+    return items;
+});
 </script>
 
 <template>
     <g :style="style">
-        
         <line
             x1="-1000"
             :y1="positioning.y"
@@ -39,20 +66,22 @@ const text = computed(() => `${props.block.id}`);
             :x2="positioning.x + positioning.w"
             y2="1000"
         />
-        <circle 
-            :cx="positioning.x"
-            :cy="positioning.y"
-            fill="yellow"
-            r="1.3"
-        />
-        <textSvg
-            :x="positioning.x"
-            :y="positioning.y - 20"
-        >
-            <p class="text-left">
-            <b>{{block.id}}</b> <br/>
-            [x, y]
-            </p>
-        </textSvg>
+        <template v-for="(point, index) in points">
+            <circle 
+                v-if="point.pos"
+                :cx="point.pos.x"
+                :cy="point.pos.y"
+                fill="yellow"
+                r="1.3"
+            />
+            <textSvg
+                v-if="point.pos"
+                :x="point.pos.x + (point.indentX ?? 0)"
+                :y="point.pos.y + (point.indentY ?? -20)"
+            >
+                <p class="text-left" v-html="point.text">
+                </p>
+            </textSvg>
+        </template>
     </g>
 </template>

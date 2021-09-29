@@ -447,35 +447,35 @@
     // },
     // 
     {
-      "packageName": "@coya/core",
+      "packageName": "coya-core",
       "versionPolicyName": "main",
       "projectFolder": "libraries/core",
       "reviewCategory": "production",
-      "shouldPublish": true
+    //   "shouldPublish": true
     },
     {
       "packageName": "coya",
       "versionPolicyName": "main",
       "projectFolder": "libraries/vscode/coya",
       "reviewCategory": "production",
-      "shouldPublish": true
+    //   "shouldPublish": true
     },
     {
-      "packageName": "@coya/vite-proj",
-      "versionPolicyName": "main",
+      "packageName": "coya-vite-proj",
+      "versionPolicyName": "child",
       "projectFolder": "libraries/vscode/coya/vite-proj",
       "reviewCategory": "production"
     },
     {
-      "packageName": "@coya/vue-component",
+      "packageName": "coya-vue-component",
       "versionPolicyName": "main",
       "projectFolder": "libraries/vue-component",
       "reviewCategory": "production",
-      "shouldPublish": true
+    //   "shouldPublish": true
     },
     {
       "packageName": "demo",
-      "versionPolicyName": "main",
+      "versionPolicyName": "demo",
       "projectFolder": "apps/demo",
       "reviewCategory": "apps"
     }

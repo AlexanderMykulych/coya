@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import path from "path-browserify";
-import coya from "@coya/vue-component";
-import "@coya/vue-component/dist/style.css";
+import coya from "coya-vue-component";
+import "coya-vue-component/dist/style.css";
 const modules = import.meta.globEager('./../../../coya/**/*.coya.ts')
 
 const props = defineProps<{ name: string }>()
@@ -17,7 +17,7 @@ const config = computed(() => files.find(x => x.preparedName === props.name)?.co
 </script>
 
 <template>
-  <div>
+  <div class="h-full">
     <coya v-if="!!config" :config="config"/>
     <div v-else>
         config "{{name}}" doesn`t found. Available configs are: {{files.map(x => x.fileName)}}

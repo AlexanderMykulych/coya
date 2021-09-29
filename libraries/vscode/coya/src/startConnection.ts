@@ -3,7 +3,7 @@ import * as vscode from "vscode";
 import state from "./state";
 import { watch } from "@vue-reactivity/watch";
 import { IncomingMessage } from "http";
-import { DebugMessage } from "@coya/core";
+import { DebugMessage } from "coya-core";
 
 export function startConnection() {
     const wss = new Server({ port: 5001 });

@@ -1,4 +1,4 @@
-import { ArchitectureDescription, PositioningSystem } from "@coya/core";
+import { ArchitectureDescription, PositioningSystem } from "coya-core";
 
 export default <ArchitectureDescription>{
     name: "testing",

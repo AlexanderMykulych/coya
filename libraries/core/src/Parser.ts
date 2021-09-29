@@ -18,10 +18,6 @@ export function transformToArchitecture(description: Ref<unknown> | unknown, set
         console.log("newHeight:", h);
     }, {immediate: true})
     const transitionalArchitectureRef = ref(deepCopy(value));
-    const transitionalArchitecture: ArchitectureDescription = transitionalArchitectureRef.value;
-    transitionalArchitecture.blocks = {
-        main: transitionalArchitecture.blocks
-    };
     transitionalArchitectureRef.value.debugState = <DebugStateContainer>{
         selected: null
     };
@@ -47,28 +43,26 @@ export function transformToArchitecture(description: Ref<unknown> | unknown, set
 
 export function transformDescriptionToArchitecture(transitionalArchitectureRef: Ref<ArchitectureDescription>, setting: TransformSetting): Architecture {
     const oldValues: { arch: ArchitectureDescription, phaseId: PhaseId }[] = [];
-    let enableWatcher = true;
     const currentPhase: CurrentPhaseInfo = reactive({
         current: null
     });
-    watch(() => deepCopy(transitionalArchitectureRef.value), (_: any, oldVal: any) => {
-        if (enableWatcher) {
-            oldValues.push({
-                arch: oldVal,
-                phaseId: currentPhase.current
-            });
-        }
-    });
+ 
     const blocks = computed(() => BlockGroupDescriptionsToBlock(transitionalArchitectureRef.value))
     const phaseIndex = buildPhasesIndex(transitionalArchitectureRef.value.phases);
     const style = computed(() => styleDescriptionToArchitectureStyle(transitionalArchitectureRef.value, blocks.value, setting));
     const next = () => {
-        enableWatcher = true;
+        const oldVal = deepCopy(transitionalArchitectureRef.value);
         const phase = phaseIndex.getPhaseById(currentPhase.current);
         if (isNotNullOrUndefined(currentPhase.current) && !phase?.hasNext) {
             return;
         }
         const nextPhaseId = startPhases(transitionalArchitectureRef.value, phaseIndex, currentPhase);
+        if (currentPhase.current !== nextPhaseId) {
+            oldValues.push({
+                arch: oldVal,
+                phaseId: currentPhase.current
+            });
+        }
         currentPhase.current = nextPhaseId;
         return nextPhaseId;
     };
@@ -78,7 +72,6 @@ export function transformDescriptionToArchitecture(transitionalArchitectureRef: 
             val = oldValues.pop();
         }
         if (val) {
-            enableWatcher = false;
             transitionalArchitectureRef.value = val.arch;
             currentPhase.current = val.phaseId;
         }

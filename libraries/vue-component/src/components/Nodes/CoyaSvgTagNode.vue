@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Block, BlockStyle, RectPositioning } from "@coya/core";
+import { Block, BlockStyle, RectPositioning } from "coya-core";
 import { computed, onMounted, ref, watch } from "vue";
 import { gsap } from "gsap";
 

@@ -13,7 +13,7 @@ import {
 export type NumberValue = number | Ref<number>;
 export type StringValue = string | Ref<string>;
 
-type IdValue = string | "main";
+type IdValue = string;
 export interface Identifiable {
     id: IdValue;
 }
@@ -45,7 +45,8 @@ export enum ActionType {
     ChangePosition = "changePosition",
     ChangeLabel = "changeLabel",
     Highlight = "highlight",
-    RemoveHighlight = "removeHighlight"
+    RemoveHighlight = "removeHighlight",
+    HideBlock = "hide"
 }
 export interface Action {
     name: ActionType | string;
@@ -67,12 +68,19 @@ export interface Style extends Identifiable {
     debug?: GlobalDebugSetting;
     css?: StyleCss;
 }
-
+export interface PointPosition {
+    x: NumberValue;
+    y: NumberValue;
+}
 export interface RectPositioning {
     x: NumberValue;
     y: NumberValue;
     w: NumberValue;
     h: NumberValue;
+    top: PointPosition;
+    bottom: PointPosition;
+    right: PointPosition;
+    left: PointPosition;
 }
 
 export interface CirclePositioning {

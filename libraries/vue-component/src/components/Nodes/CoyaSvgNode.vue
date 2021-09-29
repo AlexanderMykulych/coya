@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Block, BlockStyle, EnterSetting, RectPositioning } from "@coya/core";
+import { Block, BlockStyle, EnterSetting, RectPositioning } from "coya-core";
 import { computed, onMounted, ref, watch } from "vue";
 import { gsap } from "gsap";
 
@@ -46,7 +46,7 @@ const textStyle = ref({
 </script>
 
 <template>
-    <g>
+    <g :style="cssStyle">
         <svg :id="block.id" v-html="blockStyle.svg" :style="cssStyle" ref="el" />
         <text
             :style="textStyle"

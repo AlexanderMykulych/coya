@@ -1,4 +1,4 @@
-import { ArchitectureDescription, PositioningSystem } from "@coya/core";
+import { ArchitectureDescription, PositioningSystem } from "coya-core";
 import user from './assets/user.svg?raw';
 import bank from './assets/bank.svg?raw';
 import xero from './assets/xero.svg?raw';
@@ -8,6 +8,8 @@ import upswot_admin from './assets/upswot_admin.svg?raw';
 import storage from './assets/storage.svg?raw';
 import db from './assets/db.svg?raw';
 import ch from './assets/clickhouse.svg?raw';
+import fake from './assets/fake.svg?raw';
+import test from './assets/test.svg?raw';
 const kafkaUrl = new URL('./assets/queue.png', import.meta.url)
 //test
 export default <ArchitectureDescription>{
@@ -165,12 +167,28 @@ export default <ArchitectureDescription>{
                 to: "ch",
                 name: "line_worker_ch"
             }]
+        },
+        {
+            hide: [
+                "client",
+                "xero",
+                "sage",
+                "bankSite",
+                "xeroIcon",
+                "sageIcon",
+                "line_client_bankSite"
+            ],
+            newBlock: {
+                xeroMock: "Xero mock",
+                sageMock: "Sage mock",
+                test: "Test"
+            }
         }
     ],
     style: {
         positioning: PositioningSystem.Grid,
         debug: {
-            enable: false
+            enable: true
         },
         css: `
             font-size: 0.5em;
@@ -377,6 +395,24 @@ export default <ArchitectureDescription>{
                 },
                 svg: sage
             },
+            xeroMock: {
+                position: {
+                    x: "xero.x",
+                    y: "xero.y",
+                    w: "xero.w",
+                    h: "xero.h"
+                },
+                svg: fake
+            },
+            sageMock: {
+                position: {
+                    x: "sage.x",
+                    y: "sage.y",
+                    w: "sage.w",
+                    h: "sage.h"
+                },
+                svg: fake
+            },
             storage: {
                 position: {
                     x: "upswotApi.x",
@@ -434,6 +470,15 @@ export default <ArchitectureDescription>{
                 },
                 svg: ch
             },
+            test: {
+                position: {
+                    x: "bankSite.x",
+                    y: "bankSite.y",
+                    w: "bankSite.w",
+                    h: "bankSite.h"
+                },
+                svg: test
+            }
         }
     }
 }

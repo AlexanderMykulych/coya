@@ -16,5 +16,8 @@
 # for example if the machine loses power.  A safer practice is to pass the token via an
 # environment variable, which can be referenced from .npmrc using ${} expansion.  For example:
 #
-registry.npmjs.org/:_authToken=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
+# //registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}
+# 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
 #
+registry=https://registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}
+always-auth=false

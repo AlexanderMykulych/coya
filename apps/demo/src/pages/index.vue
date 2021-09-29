@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useUserStore } from '~/stores/user'
-import coya from "@coya/vue-component";
-import "@coya/vue-component/dist/style.css";
+import coya from "coya-vue-component";
+import "coya-vue-component/dist/style.css";
 import config from "./upswot.coya";
 
 const user = useUserStore()

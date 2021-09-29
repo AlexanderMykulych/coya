@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { LineDebugAction } from "@coya/core";
+import { LineDebugAction } from "coya-core";
 
 const props = defineProps<{ lines: LineDebugAction[] }>()
 const style = reactive({

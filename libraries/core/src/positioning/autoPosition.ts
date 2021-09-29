@@ -5,11 +5,11 @@ import { isContainerBlock, isLineBlockElement, isNotNullOrUndefined, isParentBlo
 import { lineBlockPosition } from "./lineBlockPosition";
 import { getNumber } from "./getNumber";
 
-export function autoPositioning(setting: AutoPositioningSetting): BlockPositioning[] {
+export function autoPositioning(setting: AutoPositioningSetting): BlockPositioning[] | any {
     const sizeSetting = setting.sizeSetting ?? defaultSiseSettings;
     const blocks = setting.blocks;
     const blocksPositioning: Ref<BlockPositioning[]> = ref([]);
-    blocksPositioning.value = blocks.map<BlockPositioning | null>(block => {
+    blocksPositioning.value = blocks.map<BlockPositioning | any>(block => {
         if (!isContainerBlock(block)) {
             if (isLineBlockElement(block)) {
                 return lineBlockPosition(blocksPositioning, block, setting.setting);

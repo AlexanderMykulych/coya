@@ -4,6 +4,7 @@ import { addNewBlockActionDebugger, addNewBlockActionExecutor } from "./addNewBl
 import { changeBlockPositionActionExecutor } from "./changeBlockPositionActionExecutor";
 import { changeLabelActionDebugger, changeLabelActionExecutor } from "./changeLabelActionExecutor";
 import { connectActionDebugger, connectActionExecutor } from "./connectActionExecutor";
+import { hideBlocksActionDebugger, hideBlocksActionExecutor } from "./hideBlocksActionExecutor";
 import { removeHighlightActionExecutor } from "./removeHighlightActionExecutor";
 
 export const actionExecutors: ActionList = [{
@@ -27,4 +28,8 @@ export const actionExecutors: ActionList = [{
 }, {
     type: ActionType.RemoveHighlight,
     executor: removeHighlightActionExecutor
+}, {
+    type: ActionType.HideBlock,
+    executor: hideBlocksActionExecutor,
+    debugger: hideBlocksActionDebugger
 }];

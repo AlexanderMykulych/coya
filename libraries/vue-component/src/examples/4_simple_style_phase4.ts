@@ -1,4 +1,4 @@
-import { ArchitectureDescription, PositioningSystem } from "@coya/core";
+import { ArchitectureDescription, PositioningSystem } from "coya-core";
 import smartphone from './smartphone.svg?raw';
 import computer from './computer.svg?raw';
 

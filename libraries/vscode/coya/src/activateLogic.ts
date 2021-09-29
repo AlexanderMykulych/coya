@@ -4,7 +4,7 @@ import * as vscode from 'vscode';
 import state from './state';
 import * as ts from "typescript";
 import { getTokensAtPosition, NodeWithIndex } from './tsutil/getTokensAtPosition';
-import { PropertiesConfig } from "@coya/core";
+import { PropertiesConfig } from "coya-core";
 import { getNodeText } from './getNodeText';
 import { createViteFileSymlink } from './createViteFileSymlink';
 

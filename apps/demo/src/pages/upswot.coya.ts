@@ -1,4 +1,4 @@
-import { ArchitectureDescription, PositioningSystem } from "@coya/core";
+import { ArchitectureDescription, PositioningSystem } from "coya-core";
 import user from './assets/user.svg?raw';
 import bank from './assets/bank.svg?raw';
 import xero from './assets/xero.svg?raw';

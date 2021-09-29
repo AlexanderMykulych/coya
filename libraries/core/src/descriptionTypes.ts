@@ -43,6 +43,7 @@ export interface ConnectActionSetting {
     label?: string;
     enter?: EnterSetting;
 }
+export type HideBlocksActionSetting = string;
 export interface AddNewBlockActionSetting extends BlockGroupDescriptions { }
 export interface HighlightActionSetting {
     blocks: string[] | string;
@@ -63,7 +64,8 @@ export type ActionSetting =
     | AddNewBlockActionSetting
     | ChangeBlockPositionActionSetting
     | ChangeLabelActionSetting
-    | HighlightActionSetting;
+    | HighlightActionSetting
+    | HideBlocksActionSetting;
 
 export interface PhaseAction {
     [name: string]: string | string[] | ActionSetting | ActionSetting[];
@@ -77,11 +79,19 @@ export interface FormulaValueObj {
     formula: string;
 }
 export type FormulaValue = FormulaValueObj | string;
+export interface Point {
+    x: number | FormulaValue;
+    y: number | FormulaValue;
+}
 export interface RectPosition {
     x?: number | FormulaValue;
     y?: number | FormulaValue;
     w?: number | FormulaValue;
     h?: number | FormulaValue;
+    top?: Point;
+    bottom?: Point;
+    right?: Point;
+    left?: Point;
 
     x1?: number | FormulaValue;
     y1?: number | FormulaValue;

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Architecture, RectPositioning } from "@coya/core";
+import { Architecture, RectPositioning } from "coya-core";
 import { computed, reactive } from "vue";
 
 const props = defineProps<{ nodeId: string, architecture: Architecture | null }>();

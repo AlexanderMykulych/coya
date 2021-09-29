@@ -4,7 +4,7 @@ exports.startTypescriptAnalizing = void 0;
 const ts = require("typescript");
 const watch_1 = require("@vue-reactivity/watch");
 const state_1 = require("./state");
-const core_1 = require("@coya/core");
+const coya_core_1 = require("coya-core");
 function startTypescriptAnalizing(context) {
     const options = getOptions();
     const compilerHost = ts.createCompilerHost(options);
@@ -21,7 +21,7 @@ function startTypescriptAnalizing(context) {
         const files = state_1.default.files;
         const paths = files.map(x => x.path);
         var program = ts.createProgram(paths, options, compilerHost);
-        state_1.default.fileSources = paths.map(x => program.getSourceFile(x)).filter(core_1.isNotNullOrUndefined);
+        state_1.default.fileSources = paths.map(x => program.getSourceFile(x)).filter(coya_core_1.isNotNullOrUndefined);
     }, { deep: true });
 }
 exports.startTypescriptAnalizing = startTypescriptAnalizing;

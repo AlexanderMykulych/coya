@@ -21,7 +21,7 @@
         "build:watch": "tsdx build",
         "test": "tsdx test",
         "lint": "tsdx lint",
-        "prepare": "tsdx build",
+        "prepare": "tsdx build --transpileOnly",
         "version2": "tsdx --version",
         "size": "size-limit",
         "analyze": "size-limit --why"
@@ -37,16 +37,16 @@
         "singleQuote": true,
         "trailingComma": "es5"
     },
-    "name": "@coya/core",
-    "author": "AlexMykulych",
-    "module": "dist/core.esm.js",
+    "name": "coya-core",
+    "author": "alex.mykulych",
+    "module": "dist/coya-core.esm.js",
     "size-limit": [
         {
-            "path": "dist/core.cjs.production.min.js",
+            "path": "dist/core-core.cjs.production.min.js",
             "limit": "10 KB"
         },
         {
-            "path": "dist/core.esm.js",
+            "path": "dist/core-core.esm.js",
             "limit": "10 KB"
         }
     ],

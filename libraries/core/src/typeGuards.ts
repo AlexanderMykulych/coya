@@ -3,6 +3,7 @@ import {
     ArchitectureDescription, BlockElementDescription,
     BlockElementType, ConnectActionSetting,
     FormulaValue, FormulaValueObj,
+    HideBlocksActionSetting,
     LineBlockElementDescription
 } from "./descriptionTypes";
 import {
@@ -51,6 +52,10 @@ export function isConnectActionSetting(obj?: ActionSetting): obj is ConnectActio
         return !!connect.to && !!connect.from;
     }
     return false;
+}
+
+export function isHideBlocksActionSetting(obj?: any): obj is HideBlocksActionSetting {
+    return typeof obj === "string";
 }
 export function isAddNewBlockActionSetting(obj?: ActionSetting): obj is AddNewBlockActionSetting {
     if (obj) {

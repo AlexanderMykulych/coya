@@ -1,4 +1,4 @@
-import { SelectedProperties } from "@coya/core";
+import { SelectedProperties } from "coya-core";
 
 const state = reactive<DebugState>({
     selected: null

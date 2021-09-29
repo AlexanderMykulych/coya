@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { Block, BlockStyle, isLineBlockElement, isRectPositioning, Positioning, RectPositioning } from "@coya/core";
+import { Block, BlockStyle, isLineBlockElement, isRectPositioning, Positioning, RectPositioning } from "coya-core";
 import { computed } from "vue";
 
-const props = defineProps<{ block: Block, positioning: Positioning, blockStyle?: BlockStyle }>();
+const props = defineProps<{ block: Block, positioning: Positioning, blockStyle?: BlockStyle, debug: boolean }>();
 
 const rectPosition = computed(() => <RectPositioning>props.positioning);
 const isRect = computed(() => isRectPositioning(props.positioning));
@@ -10,7 +10,7 @@ const isCustomSvg = computed(() => !!props.blockStyle?.svg);
 const isCustomSvgUrl = computed(() => !!props.blockStyle?.svgUrl);
 const svgTag = computed(() => props.blockStyle?.svgTag);
 const isLine = computed(() => isLineBlockElement(props.block));
-const debug = computed(() => props.block.debug);
+const blockDebug = computed(() => props.block.debug);
 
 </script>
 
@@ -47,7 +47,7 @@ const debug = computed(() => props.block.debug);
     />
     <DebugNode
         v-if="!!debug"
-        :value="debug"
+        :value="blockDebug"
         :block="block"
         :block-style="blockStyle"
         :positioning="rectPosition"

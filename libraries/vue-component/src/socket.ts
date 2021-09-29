@@ -1,4 +1,4 @@
-import { DebugMessage, SelectedProperties, MessageCommand } from "@coya/core";
+import { DebugMessage, SelectedProperties, MessageCommand } from "coya-core";
 import { useDebug } from "./state/useDebug";
 
 export function startSocketClient() {

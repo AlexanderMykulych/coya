@@ -1,3 +1,4 @@
+import { ArchitectureDescription } from "coya-core";
 import user from './assets/user.svg?raw';
 import bank from './assets/bank.svg?raw';
 import xero from './assets/xero.svg?raw';
@@ -5,9 +6,10 @@ import sage from './assets/sage.svg?raw';
 import worker from './assets/worker.svg?raw';
 import upswot_admin from './assets/upswot_admin.svg?raw';
 import storage from './assets/storage.svg?raw';
-import { ArchitectureDescription } from "@coya/core";
+import db from './assets/db.svg?raw';
+import ch from './assets/clickhouse.svg?raw';
 const kafkaUrl = new URL('./assets/queue.png', import.meta.url)
-//test 2
+//test
 export default <ArchitectureDescription>{
     name: "upswot",
     "blocks": {
@@ -90,7 +92,7 @@ export default <ArchitectureDescription>{
                 to: "sage",
                 label: "GetData",
                 name: "line_to_sage"
-                }],
+            }],
             changeLabel: {
                 text: "<span class='numb'>6</span>API send <br>GetData<br>request to client`s external systems"
             }
@@ -135,7 +137,7 @@ export default <ArchitectureDescription>{
             },
             connect: [{
                 from: "worker",
-                to: "fileStorage",
+                to: "kafka",
                 label: "Process message",
                 name: "line_worker_kafka"
             }, {
@@ -143,18 +145,26 @@ export default <ArchitectureDescription>{
                 to: "worker",
                 label: "test",
                 name: "line_kafka_worker"
+            }, {
+                from: "worker",
+                to: "storage",
+                label: "get file",
+                name: "line_worker_storage"
             }]
-        },
-        {
+        }, {
             newBlock: {
-                upswotZone: "Upswot zone"
+                db: "MySql",
+                ch: "ClickHouse"
             },
-            highlight: {
-                blocks: ["upswotZone", "text"]
-            }
-        },
-        {
-            removeHighlight: null
+            connect: [{
+                from: "worker",
+                to: "db",
+                name: "line_worker_db"
+            }, {
+                from: "worker",
+                to: "ch",
+                name: "line_worker_ch"
+            }]
         }
     ],
     style: {
@@ -185,13 +195,14 @@ export default <ArchitectureDescription>{
                 css: {
                     fill: "#3a8a9b",
                     fontSize: "20px",
-                    color: "white"
+                    color: "white",
+                    display: "none"
                 }
             },
             client: {
                 position: {
-                    x: "text.x + text.w + 5",
-                    y: "text.y + _.viewBox.h / 3 - (_.viewBox.h / 10)",
+                    x: "5",
+                    y: "_.viewBox.h / 3 - (_.viewBox.h / 10)",
                     w: "_.viewBox.h / 10",
                     h: "_.viewBox.h / 10"
                 },
@@ -288,6 +299,30 @@ export default <ArchitectureDescription>{
                     y1: "kafka.y + kafka.h + 5"
                 }
             },
+            line_worker_storage: {
+                position: {
+                    x1: "worker.x + worker.w / 2 + 5",
+                    y1: "worker.y",
+                    x2: "storage.x + storage.w / 2 - 5",
+                    y2: "storage.y + storage.h + 5"
+                }
+            },
+            line_worker_db: {
+                position: {
+                    x1: "worker.x + worker.w / 2 - 5",
+                    y1: "worker.y + worker.h",
+                    x2: "db.x + (db.w - db.w / 4)",
+                    y2: "db.y - 10"
+                }
+            },
+            line_worker_ch: {
+                position: {
+                    x1: "worker.x + worker.w / 2 + 5",
+                    y1: "worker.y + worker.h",
+                    x2: "ch.x + ch.w / 4",
+                    y2: "ch.y - 10"
+                }
+            },
             xeroIcon: {
                 position: {
                     x: "line_client_bankSite.x1 + 20",
@@ -363,7 +398,7 @@ export default <ArchitectureDescription>{
             worker: {
                 position: {
                     x: "kafka.x + (storage.x - kafka.x) / 2",
-                    y: "kafka.y + kafka.h + 20",
+                    y: "kafka.y + kafka.h + 40",
                     w: "client.w",
                     h: "client.h"
                 },
@@ -380,7 +415,25 @@ export default <ArchitectureDescription>{
                     stroke: "red",
                     "stroke-dasharray": 3
                 }
-            }
+            },
+            db: {
+                position: {
+                    x: "worker.x - worker.w",
+                    y: "worker.y + worker.h + 30",
+                    w: "client.w",
+                    h: "client.h"
+                },
+                svg: db
+            },
+            ch: {
+                position: {
+                    x: "worker.x + worker.w",
+                    y: "worker.y + worker.h + 30",
+                    w: "client.w",
+                    h: "client.h"
+                },
+                svg: ch
+            },
         }
     }
 }

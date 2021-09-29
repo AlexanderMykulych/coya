@@ -14,7 +14,6 @@ export function getFormulaValue(val: number | FormulaValue | undefined,
     if (isFormulaValue(val)) {
         let formula = typeof val === "string" ? val : val.formula;
         return computed(() => {
-            console.log(`f: ${formula} setting: ${JSON.stringify(setting)}`);
             const contextBuilderFunc = setting.customContextBuilderFunc ?? getFormulaValueFuncContext;
             const context = contextBuilderFunc(positioning, setting);
             const fn = Function(`"use strict";return (function(${context.blockNamesAsFuncParams}){return ${formula};})`)();

@@ -16,4 +16,7 @@
 # Rush
 ```bash
 rush change -b origin/main -v
+
+ush publish --include-all --publish --set-access-level public --npm-auth-token <token> --version-policy main
 ```
+--j7idn4idrm3bzfqnwdg5oupwomstuk6j5zixtdh4d6ynt3pa4qgq

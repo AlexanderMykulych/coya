@@ -13,7 +13,7 @@ import './styles/main.css'
 import 'virtual:windi-utilities.css'
 // windicss devtools support (dev only)
 import 'virtual:windi-devtools'
-import { startDebugClient } from "@coya/vue-component";
+import { startDebugClient } from "coya-vue-component";
 
 const routes = setupLayouts(generatedRoutes)
 

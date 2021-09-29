@@ -1,4 +1,4 @@
-import {ArchitectureDescription} from "@coya/core";
+import {ArchitectureDescription} from "coya-core";
 import smartphone from './smartphone.svg?raw';
 
 export default <ArchitectureDescription>{

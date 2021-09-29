@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { transformToArchitecture, RectPositioning, Architecture } from "@coya/core";
+import { transformToArchitecture, RectPositioning, Architecture } from "coya-core";
 import { computed, provide, reactive, ref, watch } from "vue";
 import { useNodeDetails } from "../logic/useNodeDetails";
 import { useMousePosition } from "../logic/useSvgMousePosition";
@@ -30,7 +30,6 @@ const height = computed(() => {
     }
     return 0;
 });
-watch(() => unref(height), h => console.log("newH: ", h), {immediate: true});
 watch(() => preparedConfig.value, val => {
     arch.value = transformToArchitecture(val, {
         viewBox: {
@@ -162,6 +161,7 @@ provide("svgInfo", reactive({
                         :block="item.block"
                         :block-style="item.style"
                         :positioning="item.pos"
+                        :debug="debug"
                     />
                     <template v-if="debug">
                         <rect
@@ -174,11 +174,6 @@ provide("svgInfo", reactive({
                             @mouseover="res.onMouseover(item)"
                             @mouseout="res.onMouseleave"
                             @click="res.onClick(item)"
-                        />
-                        <PointPosition
-                            v-if="item.pos.x && item.pos.y"
-                            :x="item.pos.x"
-                            :y="item.pos.y"
                         />
                     </template>
                 </template>

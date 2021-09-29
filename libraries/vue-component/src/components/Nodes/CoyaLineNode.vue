@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Block, BlockStyle, LinePositioning } from "@coya/core";
+import { Block, BlockStyle, LinePositioning } from "coya-core";
 import { computed, ref } from "vue";
 
 const props = defineProps<{ block: Block, positioning: LinePositioning, blockStyle: BlockStyle }>();
@@ -23,7 +23,7 @@ const textStyle = ref({
 </script>
 
 <template>
-    <g>
+    <g :style="cssStyle">
         <line
             :id="block.id"
             :x1="positioning.x1"
@@ -32,7 +32,6 @@ const textStyle = ref({
             :y2="positioning.y2"
             stroke="#000"
             stroke-width="0.5"
-            :css="cssStyle"
             marker-end="url(#arrowhead)"
             ref="el"
         />

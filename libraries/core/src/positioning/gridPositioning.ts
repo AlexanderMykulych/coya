@@ -49,13 +49,30 @@ export function gridPositioning(option: AutoPositioningSetting): BlockPositionin
 
             const indentX = (getValueByCtx(pos.indentX) ?? 0);
             const indentY = (getValueByCtx(pos.indentY) ?? 0);
+            const blockId = block.id;
             return <BlockPositioning>{
-                blockId: block.id,
+                blockId: blockId,
                 position: {
                     x: computed(() => getValueByCtx(pos.x, gridSize.columnWidth).value + indentX.value),
                     y: computed(() => getValueByCtx(pos.y, gridSize.rowHeight).value + indentY.value),
                     w: computed(() => getValueByCtx(pos.w, gridSize.columnWidth).value + indentX.value),
-                    h: computed(() => getValueByCtx(pos.h, gridSize.rowHeight).value + indentY.value)
+                    h: computed(() => getValueByCtx(pos.h, gridSize.rowHeight).value + indentY.value),
+                    top: {
+                        x: computed(() => getValueByCtx(pos.top?.x ?? `${blockId}.x + ${blockId}.w / 2`, gridSize.columnWidth).value),
+                        y: computed(() => getValueByCtx(pos.top?.y ?? `${blockId}.y`, gridSize.columnWidth).value),
+                    },
+                    bottom: {
+                        x: computed(() => getValueByCtx(pos.top?.x ?? `${blockId}.top.x`, gridSize.columnWidth).value),
+                        y: computed(() => getValueByCtx(pos.top?.y ?? `${blockId}.y + ${blockId}.h`, gridSize.columnWidth).value),
+                    },
+                    right: {
+                        x: computed(() => getValueByCtx(pos.top?.x ?? `${blockId}.x + ${blockId}.w`, gridSize.columnWidth).value),
+                        y: computed(() => getValueByCtx(pos.top?.y ?? `${blockId}.y + ${blockId}.h / 2`, gridSize.columnWidth).value),
+                    },
+                    left: {
+                        x: computed(() => getValueByCtx(pos.top?.x ?? `${blockId}.x`, gridSize.columnWidth).value),
+                        y: computed(() => getValueByCtx(pos.top?.y ?? `${blockId}.right.y`, gridSize.columnWidth).value),
+                    }
                 }
             };
         }

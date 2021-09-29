@@ -1,4 +1,4 @@
-# Change Log - @coya/core
+# Change Log - coya-core
 
 This log was last generated on Sat, 25 Sep 2021 22:54:16 GMT and should not be manually modified.
 
