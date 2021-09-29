@@ -1,7 +1,8 @@
 {
   "name": "coya-vue-component",
-  "version": "0.4.0",
+  "version": "0.9.3",
   "module": "dist/coya.es.js",
+  "files": ["dist"],
   "scripts": {
     "dev": "vite --port 3333 --open",
     "build": "cross-env NODE_ENV=production vite build --debug",
@@ -19,7 +20,7 @@
     "vue-demi": "^0.11.3",
     "vue-router": "^4.0.11",
     "ws": "^8.2.2",
-    "coya-core": "~0.4.0"
+    "coya-core": "~0.9.3"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.7.0",

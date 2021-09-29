@@ -12,8 +12,8 @@
     {
         "policyName": "main",
         "definitionName": "lockStepVersion",
-        "version": "0.4.0",
-        "nextBump": "minor",
+        "version": "0.9.3",
+        "nextBump": "patch",
         "mainProject": "coya-core"
       }
   // {

@@ -2,6 +2,30 @@
   "name": "coya-core",
   "entries": [
     {
+      "version": "0.9.3",
+      "tag": "coya-core_v0.9.3",
+      "date": "Wed, 29 Sep 2021 18:20:49 GMT",
+      "comments": {}
+    },
+    {
+      "version": "0.9.2",
+      "tag": "coya-core_v0.9.2",
+      "date": "Wed, 29 Sep 2021 13:08:40 GMT",
+      "comments": {}
+    },
+    {
+      "version": "0.9.1",
+      "tag": "coya-core_v0.9.1",
+      "date": "Wed, 29 Sep 2021 12:53:12 GMT",
+      "comments": {}
+    },
+    {
+      "version": "0.9.0",
+      "tag": "coya-core_v0.9.0",
+      "date": "Wed, 29 Sep 2021 12:34:25 GMT",
+      "comments": {}
+    },
+    {
       "version": "0.4.0",
       "tag": "coya-core_v0.4.0",
       "date": "Sat, 25 Sep 2021 22:54:16 GMT",
