@@ -53,6 +53,8 @@ const textStyle = ref({
             ref="textEl"
             dominant-baseline="hanging"
             text-anchor="middle"
+            :x="linePosX"
+            :y="linePosY"
         >{{ block.label }}</text>
     </g>
 </template>

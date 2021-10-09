@@ -179,6 +179,9 @@ export interface ActionExecutorContext {
 
 export interface FormulaSystemContext {
     viewBox: ViewBoxSetting;
+    fn: {
+        [name: string]: any;
+    }
 }
 export interface FormulaValueFuncContext {
     blockNamesAsFuncParams: string;

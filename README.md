@@ -20,3 +20,18 @@ rush change -b origin/main -v
 ush publish --include-all --publish --set-access-level public --npm-auth-token <token> --version-policy main
 ```
 --j7idn4idrm3bzfqnwdg5oupwomstuk6j5zixtdh4d6ynt3pa4qgq
+
+# publish vscode
+```
+rush version --bump --version-policy main
+```
+
+```
+rush publish --include-all --publish --set-access-level public --npm-auth-token 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 --version-policy main
+```
+```
+npm i
+```
+```
+vsce publish
+```

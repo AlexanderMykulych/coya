@@ -1,6 +1,7 @@
 import { Ref, unref } from "vue";
 import { TransformSetting } from "..";
 import { BlockPositioning, FormulaValueFuncContext } from "../types";
+import { findClosestPoints } from "./alg/findClosestPoints";
 
 export function getFormulaValueFuncContext(blocksPositioning: Ref<BlockPositioning[]>,
     setting: TransformSetting): FormulaValueFuncContext {
@@ -15,6 +16,9 @@ export function getFormulaValueFuncContext(blocksPositioning: Ref<BlockPositioni
                         y: unref(setting.viewBox.y),
                         w: unref(setting.viewBox.w),
                         h: unref(setting.viewBox.h),
+                    },
+                    fn: {
+                        findClosestPoints
                     }
                 }
             ]

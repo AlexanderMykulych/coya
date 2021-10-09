@@ -236,25 +236,27 @@ export default <ArchitectureDescription>{
                 svg: bank
             },
             line_client_bankSite: {
-                position: {
-                    indentX1: 10,
-                    indentX2: -10
+                position2: {
+                    x1: "client.right.x + 10",
+                    y1: "client.right.y",
+                    x2: "bankSite.left.x - 10",
+                    y2: "bankSite.left.y"
                 }
             },
             line_bank_admin: {
-                position: {
+                position2: {
                     indentX1: 10,
                     indentX2: -10
                 }
             },
             line_admin_api: {
-                position: {
+                position2: {
                     indentX1: 10,
                     indentX2: -10
                 }
             },
             line_to_xero: {
-                position: {
+                position2: {
                     indentX1: 10,
                     indentY1: -5,
                     indentX2: -10,
@@ -262,7 +264,7 @@ export default <ArchitectureDescription>{
                 }
             },
             line_to_sage: {
-                position: {
+                position2: {
                     indentX1: 10,
                     indentY1: 5,
                     indentX2: -10,
@@ -270,7 +272,7 @@ export default <ArchitectureDescription>{
                 }
             },
             line_xero_api: {
-                position: {
+                position2: {
                     indentX1: -10,
                     indentY1: 5,
                     indentX2: 10,
@@ -278,7 +280,7 @@ export default <ArchitectureDescription>{
                 }
             },
             line_sage_api: {
-                position: {
+                position2: {
                     indentX1: -10,
                     indentY1: -5,
                     indentX2: 10,
@@ -286,7 +288,7 @@ export default <ArchitectureDescription>{
                 }
             },
             line_api_storage: {
-                position: {
+                position2: {
                     indentX1: "upswotApi.w / 2",
                     indentY1: "upswotApi.h / 2",
                     x2: "storage.x + storage.w / 2",
@@ -294,7 +296,7 @@ export default <ArchitectureDescription>{
                 }
             },
             line_signal: {
-                position: {
+                position2: {
                     indentX1: "upswotApi.w / 2 - 5",
                     indentY1: "upswotApi.h / 2",
                     x2: "kafka.x + kafka.w / 2 + 5",
@@ -302,7 +304,7 @@ export default <ArchitectureDescription>{
                 }
             },
             line_worker_kafka: {
-                position: {
+                position2: {
                     x1: "worker.x + worker.w / 2",
                     y1: "worker.y",
                     x2: "kafka.x + kafka.w / 2",
@@ -310,7 +312,7 @@ export default <ArchitectureDescription>{
                 }
             },
             line_kafka_worker: {
-                position: {
+                position2: {
                     x2: "worker.x + worker.w / 2 - 5",
                     y2: "worker.y",
                     x1: "kafka.x + kafka.w / 2 - 5",
@@ -318,7 +320,7 @@ export default <ArchitectureDescription>{
                 }
             },
             line_worker_storage: {
-                position: {
+                position2: {
                     x1: "worker.x + worker.w / 2 + 5",
                     y1: "worker.y",
                     x2: "storage.x + storage.w / 2 - 5",
@@ -326,7 +328,7 @@ export default <ArchitectureDescription>{
                 }
             },
             line_worker_db: {
-                position: {
+                position2: {
                     x1: "worker.x + worker.w / 2 - 5",
                     y1: "worker.y + worker.h",
                     x2: "db.x + (db.w - db.w / 4)",
@@ -334,7 +336,7 @@ export default <ArchitectureDescription>{
                 }
             },
             line_worker_ch: {
-                position: {
+                position2: {
                     x1: "worker.x + worker.w / 2 + 5",
                     y1: "worker.y + worker.h",
                     x2: "ch.x + ch.w / 4",

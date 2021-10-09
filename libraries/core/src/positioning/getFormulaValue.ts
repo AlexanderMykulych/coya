@@ -5,9 +5,11 @@ import { isFormulaValue } from "../typeGuards";
 import { BlockPositioning } from "../types";
 import { getFormulaValueFuncContext } from "./getFormulaValueFuncContext";
 
-export function getFormulaValue(val: number | FormulaValue | undefined,
-    positioning: Ref<BlockPositioning[]>, setting: TransformSetting
-): Ref<number> {
+export function getFormulaValue(
+    val: number | FormulaValue | undefined,
+    positioning: Ref<BlockPositioning[]>,
+    setting: TransformSetting
+): Ref<any> {
     if (typeof val === "number") {
         return ref(val);
     }
