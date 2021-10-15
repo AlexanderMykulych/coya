@@ -1,7 +1,7 @@
 # COYA
 
-![example workflow](https://github.com/AlexanderMykulych/coya/actions/workflows/main.yml/badge.svg)
-
+![Version](https://img.shields.io/badge/dynamic/json?color=green&label=version&query=version&url=https%3A%2F%2Fraw.githubusercontent.com%2FAlexanderMykulych%2Fcoya%2Febf7f54fd94986238e38bb3c14aadb1aad9725a2%2Flibraries%2Fcore%2Fpackage.json)
+![Build](https://github.com/AlexanderMykulych/coya/actions/workflows/main.yml/badge.svg)
 <p align="center">
 <table>
 <tbody>
@@ -15,25 +15,6 @@
 </table>
 </p>
 
-# Rush
-```bash
-rush change -b origin/main -v
-
-rush publish --include-all --publish --set-access-level public --npm-auth-token <token> --version-policy main
-```
---j7idn4idrm3bzfqnwdg5oupwomstuk6j5zixtdh4d6ynt3pa4qgq
-
-# publish vscode
-```
-rush version --bump --version-policy main
-```
-
-```
-rush publish --include-all --publish --set-access-level public --npm-auth-token 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 --version-policy main
-```
-```
-npm i
-```
 ```
 vsce publish
 ```
