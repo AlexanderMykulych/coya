@@ -51,6 +51,7 @@ jobs:
                 
             - name: Bump minor version
               run: rush version --bump --version-policy main
+              continue-on-error: true
 
             - name: Commit
               run: |
