@@ -37,8 +37,10 @@ jobs:
 
       - name: Install rush
         run: node common/scripts/install-run-rush.js install
-      - run: rush update
-      - run: rush install --no-link
+      - name: Rush update
+        run: rush update
+      - name: Rush install
+        run: rush install --no-link
       - run: rush link
 
       - name: Build core
