@@ -59,6 +59,6 @@ jobs:
                 git push
 
             - name: publish to npm
-              run: rush publish --include-all --publish --set-access-level public --version-policy main
-              env:
-                NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+              run: npm adduser 
+              run: rush publish --include-all --publish --set-access-level public --version-policy main -n ${{ secrets.NPM_TOKEN }}
+              
