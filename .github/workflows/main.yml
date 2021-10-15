@@ -4,47 +4,53 @@ name: CI
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    # Triggers the workflow on push or pull request events but only for the main branch
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+    # Allows you to run this workflow manually from the Actions tab
+    workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    # This workflow contains a single job called "build"
+    install:
+        # The type of runner that the job will run on
+        runs-on: ubuntu-latest
 
-    
-    strategy:
-      matrix:
-        node-version: [14.x]
+        strategy:
+            matrix:
+                node-version: [14.x]
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+        # Steps represent a sequence of tasks that will be executed as part of the job
+        steps:
+            # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+            - uses: actions/checkout@v2
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v2
+              with:
+                  node-version: ${{ matrix.node-version }}
 
-      - name: Install rush
-        run: node common/scripts/install-run-rush.js install
-      # - name: Rush CLI
-      #   run: npm install -g @microsoft/rush
-      
-      - name: Rush update
-        run: rush update
-      - name: Rush install
-        run: rush install --no-link
-      - run: rush link
+            - name: Install Rush
+              run: npm install -g @microsoft/rush
+            # - name: Install rush
+            #   run: node common/scripts/install-run-rush.js install
+            - name: Install pnpm
+              run: npm install -g pnpm
+            update 
+            - name: Rush update
+              run: rush update
+            - name: Rush install
+              run: rush install --no-link
+            - run: rush link
+    build:
+        runs-on: ubuntu-latest
 
-      - name: Build core
-        run: rush build --to coya-vue-component
+        needs: [install]
+
+        steps:
+            - name: Build core
+              run: rush build --to coya-vue-component
