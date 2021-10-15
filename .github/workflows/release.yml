@@ -22,20 +22,39 @@ jobs:
         steps:
             - uses: actions/checkout@v2
 
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v2
+              with:
+                  node-version: ${{ matrix.node-version }}
+
+            - name: Install Rush
+              run: npm install -g @microsoft/rush
+
+            - name: Install rush
+              run: node common/scripts/install-run-rush.js install
+            - name: Install pnpm
+              run: npm install -g pnpm
+
+            - name: Rush update
+              run: rush update
+            - name: Rush install
+              run: rush install --no-link
+            - run: rush link
+
             - name: Build
-              uses: AlexanderMykulych/coya/blob/main/.github/workflows/main.yml@main
+              run: rush build --to-version-policy main
 
-            # - name: Bump minor version
-            #   run: rush version --bump --version-policy main
+            - name: Bump minor version
+              run: rush version --bump --version-policy main
 
-            # - name: Commit
-            #   run: |
-            #     git config user.name github-actions
-            #     git config user.email github-actions@github.com
-            #     git commit -a -m 'Release by github actions' || echo "No changes to commit"
-            #     git push
+            - name: Commit
+              run: |
+                git config user.name github-actions
+                git config user.email github-actions@github.com
+                git commit -a -m 'Release by github actions' || echo "No changes to commit"
+                git push
 
-            # - name: publish to npm
-            #   run: rush publish --include-all --publish --set-access-level public --version-policy main
-            #   env:
-            #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+            - name: publish to npm
+              run: rush publish --include-all --publish --set-access-level public --version-policy main
+              env:
+                NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
