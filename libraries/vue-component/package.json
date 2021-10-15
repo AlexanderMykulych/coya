@@ -1,6 +1,6 @@
 {
   "name": "coya-vue-component",
-  "version": "0.9.10",
+  "version": "0.9.11",
   "module": "dist/coya.es.js",
   "files": ["dist"],
   "scripts": {
@@ -20,7 +20,7 @@
     "vue-demi": "^0.11.3",
     "vue-router": "^4.0.11",
     "ws": "^8.2.2",
-    "coya-core": "~0.9.10"
+    "coya-core": "~0.9.11"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.7.0",
