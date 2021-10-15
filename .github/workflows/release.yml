@@ -22,7 +22,7 @@ jobs:
         steps:
             # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
             - name: Build
-              uses: AlexanderMykulych/coya/blob/main/.github/workflows/main.yml@v1
+              uses: ./.github/workflows/main.yml@main
 
             - name: Bump minor version
               run: rush version --bump --version-policy main
