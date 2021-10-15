@@ -63,6 +63,10 @@ jobs:
 
             - name: install vsce
               run: pnpm i -g vsce
-              
-            - run: vsce publish -p ${{ secrets.VSCE_TOKEN }}
+
+            - name publish vscode extension
               working-directory: ./libraries/vscode/coya
+              run: |
+                rm ./node_modules
+                npm i
+                vsce publish -p ${{ secrets.VSCE_TOKEN }}
