@@ -455,7 +455,7 @@
     },
     {
       "packageName": "coya",
-      "versionPolicyName": "main",
+      "versionPolicyName": "vscode",
       "projectFolder": "libraries/vscode/coya",
       "reviewCategory": "production",
     //   "shouldPublish": true
