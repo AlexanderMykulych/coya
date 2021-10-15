@@ -44,13 +44,16 @@ jobs:
             - name: Build
               run: rush build --to-version-policy main
 
+            - name: Git set info
+              run: |
+                git config user.name github-actions
+                git config user.email github-actions@github.com
+                
             - name: Bump minor version
               run: rush version --bump --version-policy main
 
             - name: Commit
               run: |
-                git config user.name github-actions
-                git config user.email github-actions@github.com
                 git commit -a -m 'Release by github actions' || echo "No changes to commit"
                 git push
 
