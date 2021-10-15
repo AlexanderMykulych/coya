@@ -64,7 +64,7 @@ jobs:
             - name: install vsce
               run: pnpm i -g vsce
 
-            - name publish vscode extension
+            - name: publish vscode extension
               working-directory: ./libraries/vscode/coya
               run: |
                 rm ./node_modules
