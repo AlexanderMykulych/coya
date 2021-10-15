@@ -23,7 +23,7 @@ jobs:
             - uses: actions/checkout@v2
 
             - name: Build
-              uses: ./.github/workflows/main.yml@main
+              uses: AlexanderMykulych/coya/blob/main/.github/workflows/main.yml@main
 
             - name: Bump minor version
               run: rush version --bump --version-policy main
