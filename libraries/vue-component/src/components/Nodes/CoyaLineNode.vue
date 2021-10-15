@@ -3,7 +3,12 @@ import { Block, BlockStyle, LinePositioning } from "coya-core";
 import { computed, ref } from "vue";
 
 const props = defineProps<{ block: Block, positioning: LinePositioning, blockStyle: BlockStyle }>();
-const cssStyle = computed(() => props.blockStyle?.css ?? {});
+const cssStyle = computed(() => ({
+    stroke: "#000",
+    "stroke-width": "0.5",
+    "marker-end": "url(#arrowhead)",
+    ...(props.blockStyle?.css ?? {})
+}));
 const el = ref(null);
 const textEl = ref(null);
 const gEl = ref(null);
@@ -30,9 +35,6 @@ const textStyle = ref({
             :y1="positioning.y1"
             :x2="positioning.x2"
             :y2="positioning.y2"
-            stroke="#000"
-            stroke-width="0.5"
-            marker-end="url(#arrowhead)"
             ref="el"
         />
 

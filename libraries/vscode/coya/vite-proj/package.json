@@ -4,7 +4,7 @@
     "scripts": {
         "dev": "vite --open",
         "dev2": "vite --port 6001 --open",
-        "build": "cross-env NODE_ENV=production vite-ssg build",
+        "build": "cross-env NODE_ENV=production vite build",
         "preview": "vite preview",
         "preview-https": "serve dist",
         "lint": "eslint \"**/*.{vue,ts,js}\""

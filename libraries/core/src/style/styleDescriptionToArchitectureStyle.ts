@@ -3,6 +3,7 @@ import { Block, BlocksStyle, Style } from "../types";
 import { gridPositioning } from "../positioning/gridPositioning";
 import { deepCopy } from "../util/deepCopy";
 import { prepareCss } from "./prepareCss";
+import { deepAssign } from "../util/deepAssign";
 
 export function styleDescriptionToArchitectureStyle(
     architectureDescription: ArchitectureDescription,
@@ -19,5 +20,12 @@ export function styleDescriptionToArchitectureStyle(
     };
 }
 function generateBlocksStyle(style: StyleDescription): BlocksStyle | undefined {
-    return style.blocks;
+    if (!style.blocks) {
+        return style.blocks;
+    }
+    const defaultStyle = style.blocks?.["_"] ?? {};
+    return Object.fromEntries(
+        Object.entries(style.blocks)
+            .map(([key, value]) => [key, deepAssign({}, defaultStyle, value)])
+    );
 }

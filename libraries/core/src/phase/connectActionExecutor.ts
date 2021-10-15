@@ -14,7 +14,7 @@ export function connectActionExecutor(context: ActionExecutorContext, action: Ac
                 blockSettings: {
                     ...action.value,
                     type: BlockElementType.Line,
-                    label: action.value.label ?? newBlockId
+                    label: action.value.label ?? ""
                 }
             }
         }];
