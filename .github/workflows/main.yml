@@ -36,10 +36,12 @@ jobs:
 
             - name: Install Rush
               run: npm install -g @microsoft/rush
-            # - name: Install rush
-            #   run: node common/scripts/install-run-rush.js install
-            - name: Install pnpm
-              run: npm install -g pnpm
+
+            - name: Install rush
+              run: node common/scripts/install-run-rush.js install
+
+            # - name: Install pnpm
+            #   run: npm install -g pnpm
 
             - name: Rush update
               run: rush update
