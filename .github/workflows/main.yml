@@ -40,7 +40,7 @@ jobs:
             #   run: node common/scripts/install-run-rush.js install
             - name: Install pnpm
               run: npm install -g pnpm
-            update 
+
             - name: Rush update
               run: rush update
             - name: Rush install
