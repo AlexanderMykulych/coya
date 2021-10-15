@@ -20,13 +20,25 @@
             "enableParallelism": true,
             // Enable "watch mode"
             "watchForChanges": true
-        }, {
+        },
+        {
             "name": "test",
             "commandKind": "bulk",
             "summary": "Build projects and watch for changes",
             "description": "For details, see the article \"Using watch mode\" on the Rush website: https://rushjs.io/",
             "enableParallelism": true
         },
+        {
+            "commandKind": "bulk",
+            "name": "build",
+            "summary": "Build all projects that haven't been built, or have changed since they were last built",
+            "description": "This command is similar to \"rush rebuild\", except that \"rush build\" performs...",
+            "safeForSimultaneousRushProcesses": false,
+            "enableParallelism": true,
+            "ignoreDependencyOrder": false,
+            "ignoreMissingScript": false,
+            "allowWarningsInSuccessfulBuild": true
+        }
         // {
         //   /**
         //    * (Required) Determines the type of custom command.
