@@ -14299,7 +14299,7 @@ packages:
     dev: false
 
   file:projects/coya-vite-proj.tgz:
-    resolution: {integrity: sha512-BWiLhAskCU4wbpST1I3L/giegtPKLj9gi7qif8rcp1OLB5IvEs6H3hfSfhtp2mtHY8QZUfJuF/LJISpY9+VEkA==, tarball: file:projects/coya-vite-proj.tgz}
+    resolution: {integrity: sha512-B5eerOHN8SOV/AFU+L51adK6Z19E6wytwIkDHBAkkQER6JUj/vsHPeeuqvqdJawpv4Be0L189HhLuZ3aiBkdPw==, tarball: file:projects/coya-vite-proj.tgz}
     name: '@rush-temp/coya-vite-proj'
     version: 0.0.0
     dependencies:
