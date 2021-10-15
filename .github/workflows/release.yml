@@ -61,9 +61,8 @@ jobs:
             - name: publish to npm
               run: rush publish --include-all --publish --set-access-level public --version-policy main -n ${{ secrets.NPM_TOKEN }}
 
-            - name: publish vscode extension
+            - uses: lannonbr/vsce-action@master
               working-directory: ./libraries/vscode/coya
-              uses: lannonbr/vsce-action@master
               with:
                 args: "publish -p $VSCE_TOKEN"
               env:
