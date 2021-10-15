@@ -44,11 +44,11 @@
         }
     },
     "scripts": {
-        "vscode:prepublish": "pnpm compile",
-        "build": "pnpm compile",
+        "vscode:prepublish": "npm run compile",
+        "build": "npm run compile",
         "compile": "tsc -p ./",
         "watch": "tsc -watch -p ./",
-        "pretest": "pnpm compile && pnpm lint",
+        "pretest": "npm compile && npm lint",
         "lint": "eslint src --ext ts",
         "test": "node ./out/test/runTest.js"
     },

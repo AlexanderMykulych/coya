@@ -14,7 +14,3 @@
 </tbody>
 </table>
 </p>
-
-```
-vsce publish
-```
