@@ -2,7 +2,7 @@
     "name": "coya",
     "displayName": "coya",
     "description": "",
-    "version": "0.9.11",
+    "version": "0.9.12",
     "publisher": "AlexMykulych",
     "engines": {
         "vscode": "^1.60.0"
@@ -68,7 +68,7 @@
         "@vue-reactivity/watch": "^0.1.6",
         "@vue/reactivity": "^3.2.12",
         "child_process": "^1.0.2",
-        "coya-core": "~0.9.11",
+        "coya-core": "~0.9.12",
         "tsutils": "^3.21.0",
         "ws": "^8.2.2",
         "typescript": "^4.3.2"
