@@ -1,0 +1,40 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Release
+
+# Controls when the workflow will run
+on:
+    # Allows you to run this workflow manually from the Actions tab
+    workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+    # This workflow contains a single job called "build"
+    release:
+        # The type of runner that the job will run on
+        runs-on: ubuntu-latest
+
+        strategy:
+            matrix:
+                node-version: [14.x]
+
+        # Steps represent a sequence of tasks that will be executed as part of the job
+        steps:
+            # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+            - name: Build
+              uses: AlexanderMykulych/coya/blob/main/.github/workflows/main.yml
+
+            - name: Bump minor version
+              run: rush version --bump --version-policy main
+
+            - name: Commit
+              run: |
+                git config user.name github-actions
+                git config user.email github-actions@github.com
+                git commit -a -m 'Release by github actions' || echo "No changes to commit"
+                git push
+
+            - name: publish to npm
+              run: rush publish --include-all --publish --set-access-level public --version-policy main
+              env:
+                NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
