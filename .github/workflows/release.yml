@@ -22,8 +22,8 @@ jobs:
         steps:
             - uses: actions/checkout@v2
 
-            # - name: Build
-            #   uses: AlexanderMykulych/coya/blob/main/.github/workflows/main.yml@main
+            - name: Build
+              uses: AlexanderMykulych/coya/blob/main/.github/workflows/main.yml@main
 
             # - name: Bump minor version
             #   run: rush version --bump --version-policy main
