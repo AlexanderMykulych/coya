@@ -7,6 +7,7 @@
     <img width="2000" height="0"><br>
     Status: <b>Beta 🎉</b><br>
     <b>CO</b>de <b>Y</b>our <b>A</b>rchitecture
+    ![example workflow](https://github.com/AlexanderMykulych/coya/actions/workflows/main.yml/badge.svg)
     <img width="2000" height="0">
     </td>
 </tbody>
