@@ -5,6 +5,7 @@ specifiers:
   '@intlify/vite-plugin-vue-i18n': ^2.4.0
   '@rush-temp/coya': file:./projects/coya.tgz
   '@rush-temp/coya-core': file:./projects/coya-core.tgz
+  '@rush-temp/coya-editor': file:./projects/coya-editor.tgz
   '@rush-temp/coya-vite-proj': file:./projects/coya-vite-proj.tgz
   '@rush-temp/coya-vue-component': file:./projects/coya-vue-component.tgz
   '@rush-temp/demo': file:./projects/demo.tgz
@@ -64,6 +65,7 @@ dependencies:
   '@intlify/vite-plugin-vue-i18n': 2.4.0_vite@2.5.10+vue-i18n@9.1.7
   '@rush-temp/coya': file:projects/coya.tgz
   '@rush-temp/coya-core': file:projects/coya-core.tgz
+  '@rush-temp/coya-editor': file:projects/coya-editor.tgz
   '@rush-temp/coya-vite-proj': file:projects/coya-vite-proj.tgz
   '@rush-temp/coya-vue-component': file:projects/coya-vue-component.tgz
   '@rush-temp/demo': file:projects/demo.tgz
@@ -14298,8 +14300,14 @@ packages:
       - webpack-command
     dev: false
 
+  file:projects/coya-editor.tgz:
+    resolution: {integrity: sha512-o+Y7jJbZ3AbECvDdAxR70ZKwa9EzyKc6nbBwWHWZZySU5fquCLILiTewqaiCTHfqEpAmLgydfW8tpXM16Snvcg==, tarball: file:projects/coya-editor.tgz}
+    name: '@rush-temp/coya-editor'
+    version: 0.0.0
+    dev: false
+
   file:projects/coya-vite-proj.tgz:
-    resolution: {integrity: sha512-B5eerOHN8SOV/AFU+L51adK6Z19E6wytwIkDHBAkkQER6JUj/vsHPeeuqvqdJawpv4Be0L189HhLuZ3aiBkdPw==, tarball: file:projects/coya-vite-proj.tgz}
+    resolution: {integrity: sha512-JGShV06tSYCE1mPDBg7Lpa1RSgG6mu3plYG8claR9Zf7MWLvDWVcMFZcjqiV0tVfE5GOFpIRjF8GYhJdu2dm+A==, tarball: file:projects/coya-vite-proj.tgz}
     name: '@rush-temp/coya-vite-proj'
     version: 0.0.0
     dependencies:
@@ -14357,7 +14365,7 @@ packages:
     dev: false
 
   file:projects/coya-vue-component.tgz:
-    resolution: {integrity: sha512-aCJbEoMW+Rn8+2CVci6yKQYZQcHPopBa/A/76Wkdt1Qww3yRjcffa6SHNDh1E6X5q9soz/QXB5RqTm2oACHouQ==, tarball: file:projects/coya-vue-component.tgz}
+    resolution: {integrity: sha512-JkHUeoaBsXXIPqFe5K9XubI7nyFLjKM9Nmaska77JksMa8lFlo8gxAC2ApWmKRmMGmmKRp1gsJEnI3MFx3NFmw==, tarball: file:projects/coya-vue-component.tgz}
     name: '@rush-temp/coya-vue-component'
     version: 0.0.0
     dependencies:
@@ -14403,7 +14411,7 @@ packages:
     dev: false
 
   file:projects/coya.tgz:
-    resolution: {integrity: sha512-CDyBe0aGKrkgm8tXOdcjs7wpgbp/biUeTC+c6pi80afRss/9SymzqkGGGP6BqHVw3AMD+SQPGg8oESbdGFTidQ==, tarball: file:projects/coya.tgz}
+    resolution: {integrity: sha512-rYHitDZAhfNBlnaFX9yRQoLODRrN/9VQhGj3qNIotVNGbg57EzwSR8rcEKw9n5Jc89eu13DdktBMCIWdkAGSgQ==, tarball: file:projects/coya.tgz}
     name: '@rush-temp/coya'
     version: 0.0.0
     dependencies:
@@ -14432,7 +14440,7 @@ packages:
     dev: false
 
   file:projects/demo.tgz:
-    resolution: {integrity: sha512-BVx3RkqiIWjiA06f9CnZsDRhfJV0ZIC9ua+SvWxABG2nYoQFEVb0F5/xstuKCmjnPsnhTG7Qvz3efOmJI59XoQ==, tarball: file:projects/demo.tgz}
+    resolution: {integrity: sha512-Uf9hBvyNjOpzCZeYDb6p6QnUvsFGynNbJfvST0Q5ou+BBvWyVeC9RZWnfOaqNWO93poPz/nI1jyvCBcYfLEcDA==, tarball: file:projects/demo.tgz}
     name: '@rush-temp/demo'
     version: 0.0.0
     dependencies:

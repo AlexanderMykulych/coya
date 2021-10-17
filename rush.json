@@ -466,6 +466,12 @@
       "reviewCategory": "production"
     },
     {
+      "packageName": "coya-editor",
+      "projectFolder": "libraries/editor",
+      "versionPolicyName": "main",
+      "reviewCategory": "production"
+    },
+    {
       "packageName": "coya-vue-component",
       "versionPolicyName": "main",
       "projectFolder": "libraries/vue-component",
