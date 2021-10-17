@@ -1,3 +1,5 @@
-export const sum = (a: number, b: number) => {
-  return a + b;
-};
+import { provide } from "vue";
+
+export function enableEditor() {
+    provide("enable-editor", true);
+}

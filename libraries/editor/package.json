@@ -20,7 +20,6 @@
         "size": "size-limit",
         "analyze": "size-limit --why"
     },
-    "peerDependencies": {},
     "husky": {
         "hooks": {
             "pre-commit": "tsdx lint"
@@ -43,5 +42,8 @@
             "path": "dist/editor.esm.js",
             "limit": "10 KB"
         }
-    ]
+    ],
+    "dependencies": {
+        "vue": "^3.2.20"
+    }
 }
