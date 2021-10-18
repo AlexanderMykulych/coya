@@ -10,13 +10,14 @@ export function wrapEditorNode(editor: Editor, node: any) {
                 return h(node, attrs, context.slots);
             }
             const blockId = computed(() => (attrs as any)?.block?.id);
-            const isDragged = computed(() => editor.mouseState.pressed && (editor.state.drag?.nodeIds?.some(x => x === blockId.value) ?? false));
+            const isSelected = computed(() => editor.state.selectedNodeIds?.some(x => x === blockId.value) ?? false);
+            const isDragged = computed(() => editor.mouseState.pressed && isSelected.value && editor.state.drag);
             const overflowCoyaRectAttrs = computed(() => reactive({
                 x: attrs.positioning.x,
                 y: attrs.positioning.y,
                 width: attrs.positioning.w,
                 height: attrs.positioning.h,
-                fill: "red"
+                fill: "#00d0ff4a",
             }));
             watch(() => editor.mouseState.pressed, val => {
                 if (!val) {
@@ -35,6 +36,7 @@ export function wrapEditorNode(editor: Editor, node: any) {
                     "g",
                     {
                         onMousedown: (event: MouseEvent) => onMousedown(editor, context, event),
+                        onClick: (event: MouseEvent) => event.stopPropagation(),
                         class: {
                             "cursor-move": isDragged.value
                         },
@@ -42,7 +44,7 @@ export function wrapEditorNode(editor: Editor, node: any) {
                     },
                     [
                         h(node, attrs, context.slots),
-                        isDragged.value ? h("rect", overflowCoyaRectAttrs.value) : undefined
+                        isSelected.value ? h("rect", overflowCoyaRectAttrs.value) : undefined
                     ]
                 );
         }
@@ -53,12 +55,12 @@ function onMousedown(editor: EnabledEditor, { attrs }: { attrs: any }, event: Mo
     const clickPoint = getMousePosition(editor.svg, event);
     const originPos = attrs.positioning;
     editor.state.drag = {
-        nodeIds: [attrs.block.id],
         clickPoint,
         movePoint: clickPoint,
         clickDeltaPoint: {
             x: clickPoint.x - originPos.x,
             y: clickPoint.y - originPos.y
         }
-    }
+    };
+    editor.state.selectedNodeIds = [attrs.block.id];
 }

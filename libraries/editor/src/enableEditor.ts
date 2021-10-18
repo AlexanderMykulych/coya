@@ -1,18 +1,19 @@
 import { effectScope, onScopeDispose, provide, reactive, toRefs, watch } from "vue";
 import { getMousePosition } from "./getMousePosition";
-import { Editor, EditorSvg, MouseState } from "./types";
+import { EditorSvg, EnabledEditor, MouseState } from "./types";
 import { wrapEditorNode } from "./wrapEditorNode";
 
 export function enableEditor(svg: EditorSvg) {
     const scope = effectScope();
     const editor = scope.run(() => {
-        const editor: Editor = reactive<Editor>({
+        const editor: EnabledEditor = reactive<EnabledEditor>({
             enable: true,
             wrap: (node) => wrapEditorNode(editor, node),
             state: {},
             svg: svg as any,
             mouseState: useSvgMouse(svg),
         });
+        listenSvgEvents(editor);
         provide("coya-editor", editor);
         return editor;
     });
@@ -40,6 +41,9 @@ export function useSvgMouse(svg: EditorSvg) {
             const onMouseUpListener = (_: MouseEvent) => {
                 mouse.pressed = false;
             };
+
+           
+
             svgEl.addEventListener("mousemove", onMouseMoveListener);
             svgEl.addEventListener("mousedown", onMouseDownListener);
             svgEl.addEventListener("mouseup", onMouseUpListener);
@@ -53,4 +57,19 @@ export function useSvgMouse(svg: EditorSvg) {
         }
     }, { immediate: true });
     return mouse;
+}
+
+function listenSvgEvents(editor: EnabledEditor) {
+    watch(() => editor.svg, svgEl => {
+        if (svgEl) {
+            const onMouseClickListener = (_: MouseEvent) => {
+                editor.state.selectedNodeIds = undefined;
+            };
+            svgEl.addEventListener("click", onMouseClickListener);
+
+            onScopeDispose(() => {
+                svgEl.removeEventListener("click", onMouseClickListener);
+            });
+        }
+    }, {immediate: true});
 }

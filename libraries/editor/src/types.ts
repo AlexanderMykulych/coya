@@ -8,13 +8,13 @@ export interface Point {
     y: number;
 }
 export interface DragState {
-    nodeIds: string[];
     clickPoint: Point;
     movePoint: Point;
     clickDeltaPoint: Point;
 }
 export interface EnabledEditorState {
     drag?: DragState;
+    selectedNodeIds?: string[];
 }
 export type EditorSvg = Ref<SVGSVGElement | null>;
 export interface MouseState {
