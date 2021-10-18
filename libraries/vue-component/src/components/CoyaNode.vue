@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { Block, BlockStyle, isLineBlockElement, isRectPositioning, Positioning, RectPositioning } from "coya-core";
 import { computed } from "vue";
+import {getCurrentEditor} from "coya-editor";
+import coyaRectNode from "./Nodes/CoyaRectNode.vue";
 
 const props = defineProps<{ block: Block, positioning: Positioning, blockStyle?: BlockStyle, debug: boolean }>();
 
@@ -12,6 +14,8 @@ const svgTag = computed(() => props.blockStyle?.svgTag);
 const isLine = computed(() => isLineBlockElement(props.block));
 const blockDebug = computed(() => props.block.debug);
 
+const editor = getCurrentEditor();
+const CoyaRectNode = editor.wrap(coyaRectNode);
 </script>
 
 <template>

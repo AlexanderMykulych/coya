@@ -13,7 +13,9 @@
     },
     "scripts": {
         "start": "tsdx watch",
-        "build": "tsdx build",
+        "build": "pnpm tsc && pnpm tsdx:build",
+        "tsdx:watch": "tsdx watch --transpileOnly",
+        "tsdx:build": "tsdx build --transpileOnly",
         "test": "tsdx test",
         "lint": "tsdx lint",
         "prepare": "tsdx build",
@@ -31,19 +33,20 @@
         "singleQuote": true,
         "trailingComma": "es5"
     },
-    "author": "AlexMykulych",
-    "module": "dist/editor.esm.js",
+    "author": "alex.mykulych",
+    "module": "dist/coya-editor.esm.js",
     "size-limit": [
         {
-            "path": "dist/editor.cjs.production.min.js",
+            "path": "dist/coya-editor.cjs.production.min.js",
             "limit": "10 KB"
         },
         {
-            "path": "dist/editor.esm.js",
+            "path": "dist/coya-editor.esm.js",
             "limit": "10 KB"
         }
     ],
     "dependencies": {
+        "tsdx": "^0.14.1",
         "vue": "^3.2.20"
     }
 }

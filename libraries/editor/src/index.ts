@@ -1,5 +1,4 @@
-import { provide } from "vue";
-
-export function enableEditor() {
-    provide("enable-editor", true);
-}
+export * from "./enableEditor";
+export * from "./wrapEditorNode";
+export * from "./types";
+export * from "./getCurrentEditor";

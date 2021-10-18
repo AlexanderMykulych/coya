@@ -4,6 +4,7 @@ import { computed, provide, reactive, ref, watch } from "vue";
 import { useNodeDetails } from "../logic/useNodeDetails";
 import { useMousePosition } from "../logic/useSvgMousePosition";
 import { useDebug } from "../state/useDebug";
+import {enableEditor} from "coya-editor";
 
 const props = defineProps<{ config: string | Object }>()
 const preparedConfig = computed(() => !!props.config && typeof props.config === "string" ? JSON.parse(props.config) : props.config);
@@ -20,6 +21,7 @@ onMounted(() => {
     if (coyaSvgEl.value) {
         realHeight.value = coyaSvgEl.value?.clientHeight ?? 0;
         realWidth.value = coyaSvgEl.value?.clientWidth ?? 0;
+
     }
 });
 const vX = ref(0);
@@ -96,6 +98,9 @@ provide("svgInfo", reactive({
     realHeight,
     realWidth
 }))
+
+
+enableEditor(coyaSvgEl);
 </script>
 <template>
     <div class="grid grid-cols-5 grid-rows-12 h-full">
@@ -247,5 +252,8 @@ provide("svgInfo", reactive({
     left: 0;
     height: 100%;
     width: 100%;
+}
+.cursor-move {
+  cursor: move;
 }
 </style>
