@@ -1,9 +1,10 @@
-import { effectScope, onScopeDispose, provide, reactive, toRefs, watch } from "vue";
+import { ArchitectureDescription, Change, makeChange } from "coya-core";
+import { effectScope, onScopeDispose, provide, reactive, Ref, toRefs, watch } from "vue";
 import { getMousePosition } from "./getMousePosition";
 import { EditorSvg, EnabledEditor, MouseState } from "./types";
 import { wrapEditorNode } from "./wrapEditorNode";
 
-export function enableEditor(svg: EditorSvg) {
+export function enableEditor(svg: EditorSvg, config: Ref<ArchitectureDescription>) {
     const scope = effectScope();
     const editor = scope.run(() => {
         const editor: EnabledEditor = reactive<EnabledEditor>({
@@ -12,6 +13,8 @@ export function enableEditor(svg: EditorSvg) {
             state: {},
             svg: svg as any,
             mouseState: useSvgMouse(svg),
+            config: config as any,
+            makeChange: (change: Change) => makeChange(config.value, change)
         });
         listenSvgEvents(editor);
         provide("coya-editor", editor);
@@ -41,8 +44,6 @@ export function useSvgMouse(svg: EditorSvg) {
             const onMouseUpListener = (_: MouseEvent) => {
                 mouse.pressed = false;
             };
-
-           
 
             svgEl.addEventListener("mousemove", onMouseMoveListener);
             svgEl.addEventListener("mousedown", onMouseDownListener);

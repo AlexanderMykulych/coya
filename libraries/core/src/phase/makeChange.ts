@@ -29,6 +29,12 @@ export function makeChange(architecture: ArchitectureDescription, change: Change
             delete architecture.style?.blocks?.[x];
         });
 
+    } else if (change.type === ChangeType.ChangePosition) {
+        const currentSetting = architecture.style?.blocks?.[change.setting.blockId];
+        if (currentSetting) {
+            currentSetting.position!.x = change.setting.x;
+            currentSetting.position!.y = change.setting.y;
+        }
     } else {
         throw new Error("Function not implemented.");
     }

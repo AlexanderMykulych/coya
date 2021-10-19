@@ -1,3 +1,4 @@
+import { ArchitectureDescription, Change } from "coya-core";
 import { Ref } from "vue";
 
 export interface BaseEditor {
@@ -27,6 +28,8 @@ export interface EnabledEditor extends BaseEditor {
     state: EnabledEditorState;
     svg: SVGSVGElement | null;
     mouseState: MouseState;
+    config: ArchitectureDescription;
+    makeChange: (change: Change) => void;
 }
 export interface DisabledEditor extends BaseEditor {
     enable: false;

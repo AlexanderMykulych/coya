@@ -3,6 +3,7 @@ import { startPhases } from "./phase/startPhases";
 export * from "./typeGuards";
 export * from "./types";
 export * from "./descriptionTypes";
+export * from "./phase/makeChange";
 
 export {
     transformDescriptionToArchitecture,

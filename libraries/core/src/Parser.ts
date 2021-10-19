@@ -1,7 +1,7 @@
 import { blockGroupDescriptionsToBlock } from "./block/blockGroupDescriptionsToBlock";
 import { ArchitectureDescription, TransformSetting } from "./descriptionTypes";
 import { isArchitectureDescription, isNotNullOrUndefined } from "./typeGuards";
-import { PhaseId, SelectedProperties, Architecture, Block, CurrentPhaseInfo, DebugStateContainer, DebugSelectContext } from "./types";
+import { PhaseId, SelectedProperties, Architecture, Block, CurrentPhaseInfo, DebugStateContainer, DebugSelectContext, TransformationResult } from "./types";
 import { styleDescriptionToArchitectureStyle } from "./style/styleDescriptionToArchitectureStyle";
 import { startPhases } from "./phase/startPhases";
 import { buildPhasesIndex } from "./phase/buildPhasesIndex";
@@ -10,8 +10,7 @@ import { deepCopy } from "./util/deepCopy";
 import { getDebugActions } from "./debug/getDebugActions";
 import { DebugType } from "./debugTypes";
 
-
-export function transformToArchitecture(description: Ref<unknown> | unknown, setting: TransformSetting): Ref<Architecture> {
+export function transformToArchitecture(description: Ref<unknown> | unknown, setting: TransformSetting): TransformationResult {
     const refDescription = isRef(description) ? description : ref(description);
     const value = refDescription.value;
     watch(() => unref(setting.viewBox.h), (h: any) => {
@@ -38,7 +37,10 @@ export function transformToArchitecture(description: Ref<unknown> | unknown, set
             toPhase: () => { }
         };
     });
-    return architecture;
+    return {
+        architecture,
+        config: transitionalArchitectureRef
+    };
 }
 
 export function transformDescriptionToArchitecture(transitionalArchitectureRef: Ref<ArchitectureDescription>, setting: TransformSetting): Architecture {

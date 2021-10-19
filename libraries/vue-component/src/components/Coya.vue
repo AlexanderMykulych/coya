@@ -1,15 +1,21 @@
 <script setup lang="ts">
-import { transformToArchitecture, RectPositioning, Architecture } from "coya-core";
-import { computed, provide, reactive, ref, watch } from "vue";
+import { transformToArchitecture, RectPositioning, Architecture, ArchitectureDescription } from "coya-core";
+import { computed, provide, reactive, ref, toRef, watch } from "vue";
 import { useNodeDetails } from "../logic/useNodeDetails";
 import { useMousePosition } from "../logic/useSvgMousePosition";
 import { useDebug } from "../state/useDebug";
 import {enableEditor} from "coya-editor";
 
-const props = defineProps<{ config: string | Object }>()
-const preparedConfig = computed(() => !!props.config && typeof props.config === "string" ? JSON.parse(props.config) : props.config);
+const props = defineProps<{ config: string | Object }>();
+const preparedConfig = reactive({
+    config: null
+});
+watch(() => props.config, () => {
+    preparedConfig.config = !!props.config && typeof props.config === "string" ? JSON.parse(props.config) : props.config;
+}, { immediate: true });
 
 const arch = ref<Architecture | null>(null);
+const archConfig = ref<ArchitectureDescription | null>(null);
 const coyaSvgEl = ref<SVGSVGElement | null>(null);
 const drawableSvgEl = ref<SVGSVGElement | null>(null);
 const coyaEl = ref<HTMLElement | null>(null);
@@ -32,15 +38,19 @@ const height = computed(() => {
     }
     return 0;
 });
-watch(() => preparedConfig.value, val => {
-    arch.value = transformToArchitecture(val, {
-        viewBox: {
-            x: vX,
-            y: vY,
-            w: width,
-            h: height
-        }
-    }).value;
+watch(() => preparedConfig.config, val => {
+    if (val) {
+        const {architecture, config} = transformToArchitecture(val, {
+            viewBox: {
+                x: vX,
+                y: vY,
+                w: width,
+                h: height
+            }
+        });
+        arch.value = architecture.value;
+        archConfig.value = config.value;
+    }
 }, {
     immediate: true
 });
@@ -100,7 +110,7 @@ provide("svgInfo", reactive({
 }))
 
 
-enableEditor(coyaSvgEl);
+enableEditor(coyaSvgEl, archConfig);
 </script>
 <template>
     <div class="grid grid-cols-5 grid-rows-12 h-full">

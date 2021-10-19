@@ -1,13 +1,12 @@
 
 import { Ref } from "vue";
-import { TransformSetting } from ".";
 import { DebugAction, DebugSetting, LineDebugAction } from "./debugTypes";
 import {
     GlobalDebugSetting, EnterSetting, ViewBoxSetting,
     ActionSetting, ArchitectureDescription,
     BlockElementDescription, BlockGroupDescriptions,
     BlockStyle, LineBlockElementDescription,
-    StyleCss
+    StyleCss, FormulaValue, TransformSetting
 } from "./descriptionTypes";
 
 export type NumberValue = number | Ref<number>;
@@ -104,7 +103,7 @@ export interface BlockPositioning {
 export interface ArchitectureData {
     blocks: Block[];
     style?: Style | null;
-    
+
 }
 export interface Architecture extends RefsType<ArchitectureData> {
     name: string;
@@ -131,7 +130,8 @@ export interface CurrentPhaseInfo {
 export enum ChangeType {
     AddNewBlock = 0,
     ChangeStyle = 1,
-    RemoveBlock = 2
+    RemoveBlock = 2,
+    ChangePosition = 3,
 }
 export interface AddBlockChangeSetting {
     blockSettings: string | BlockGroupDescriptions | BlockElementDescription | null;
@@ -149,10 +149,30 @@ export interface RemoveBlocksSetting {
     blocks: string[];
 }
 export type ChangeSetting = AddBlockChangeSetting | ChangeBlockStyleSetting | ChangeBlockLabelSetting | RemoveBlocksSetting;
-export interface Change {
-    setting: ChangeSetting;
+export interface BaseChange {
     type: ChangeType;
 }
+export interface AddBlockChange extends BaseChange {
+    type: ChangeType.AddNewBlock;
+    setting: AddBlockChangeSetting;
+}
+export interface ChangeBlockStyle extends BaseChange {
+    type: ChangeType.ChangeStyle;
+    setting: ChangeBlockStyleSetting;
+}
+export interface RemoveBlocks extends BaseChange {
+    type: ChangeType.RemoveBlock;
+    setting: RemoveBlocksSetting;
+}
+export interface ChangePosition extends BaseChange {
+    type: ChangeType.ChangePosition;
+    setting: {
+        blockId: string;
+        x: number | FormulaValue;
+        y: number | FormulaValue;
+    };
+}
+export type Change = AddBlockChange | ChangeBlockStyle | RemoveBlocks | ChangePosition;
 export interface PhaseIndex {
     getNextPhaseById(current: PhaseId): PhaseIndexItem | undefined;
     getPhaseById(current: PhaseId): PhaseIndexItem | undefined;
@@ -231,4 +251,8 @@ export interface DebugSelectContext {
     blocks: Ref<Block[]>;
     phaseIndex: PhaseIndex;
     transformSetting: TransformSetting;
+}
+export interface TransformationResult {
+    architecture: Ref<Architecture>;
+    config: Ref<ArchitectureDescription>;
 }

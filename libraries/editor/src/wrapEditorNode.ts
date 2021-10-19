@@ -1,3 +1,4 @@
+import { ChangeType } from "coya-core";
 import { computed, h, reactive, SetupContext, watch } from "vue";
 import { getMousePosition } from "./getMousePosition";
 import { Editor, EnabledEditor } from "./types";
@@ -9,7 +10,7 @@ export function wrapEditorNode(editor: Editor, node: any) {
             if (!editor.enable) {
                 return h(node, attrs, context.slots);
             }
-            const blockId = computed(() => (attrs as any)?.block?.id);
+            const blockId = computed(() => attrs?.block?.id);
             const isSelected = computed(() => editor.state.selectedNodeIds?.some(x => x === blockId.value) ?? false);
             const isDragged = computed(() => editor.mouseState.pressed && isSelected.value && editor.state.drag);
             const overflowCoyaRectAttrs = computed(() => reactive({
@@ -23,13 +24,22 @@ export function wrapEditorNode(editor: Editor, node: any) {
                 if (!val) {
                     editor.state.drag = undefined;
                 }
-            })
-            const transform = computed(() => {
-                if (isDragged.value) {
-                    const drag = editor.state.drag;
-                    return `translate(${editor!.mouseState.position.x - drag!.clickPoint.x}, ${editor!.mouseState.position.y - drag!.clickPoint.y})`
+            });
+            const newPosition = computed(() => isDragged.value ? ({
+                x: editor!.mouseState.position.x - editor.state.drag!.clickDeltaPoint.x,
+                y: editor!.mouseState.position.y - editor.state.drag!.clickDeltaPoint.y
+            }) : null);
+            watch(() => newPosition.value, (val) => {
+                if (val) {
+                    editor.makeChange({
+                        type: ChangeType.ChangePosition,
+                        setting: {
+                            blockId: blockId.value,
+                            x: `${val?.x}`,
+                            y: `${val?.y}`,
+                        },
+                    });
                 }
-                return undefined;
             });
             return () =>
                 h(
@@ -40,7 +50,6 @@ export function wrapEditorNode(editor: Editor, node: any) {
                         class: {
                             "cursor-move": isDragged.value
                         },
-                        transform: transform.value
                     },
                     [
                         h(node, attrs, context.slots),
