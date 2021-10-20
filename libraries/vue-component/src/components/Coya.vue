@@ -5,17 +5,21 @@ import { useNodeDetails } from "../logic/useNodeDetails";
 import { useMousePosition } from "../logic/useSvgMousePosition";
 import { useDebug } from "../state/useDebug";
 import {enableEditor} from "coya-editor";
+import { saveConfig } from "../socket";
 
-const props = defineProps<{ config: string | Object }>();
+const props = defineProps<{ config: string | Object, id?: string }>();
+
 const preparedConfig = reactive({
     config: null
 });
+const initialConfig = ref(null);
 watch(() => props.config, () => {
     preparedConfig.config = !!props.config && typeof props.config === "string" ? JSON.parse(props.config) : props.config;
+    initialConfig.value = preparedConfig.config;
 }, { immediate: true });
 
 const arch = ref<Architecture | null>(null);
-const archConfig = ref<ArchitectureDescription | null>(null);
+let archConfig = ref<ArchitectureDescription | null>(null);
 const coyaSvgEl = ref<SVGSVGElement | null>(null);
 const drawableSvgEl = ref<SVGSVGElement | null>(null);
 const coyaEl = ref<HTMLElement | null>(null);
@@ -49,7 +53,13 @@ watch(() => preparedConfig.config, val => {
             }
         });
         arch.value = architecture.value;
-        archConfig.value = config.value;
+        archConfig = initialConfig;
+        enableEditor({
+            svg: coyaSvgEl,
+            config,
+            initialConfig,
+            id: props.id
+        });
     }
 }, {
     immediate: true
@@ -71,6 +81,7 @@ const rectPositions = computed(() => {
 const filteredRectPositions = computed(() => rectPositions.value.filter(x => !x?.style?.isHighlight));
 const next = () => arch.value?.next();
 const back = () => arch.value?.back();
+const save = () => saveConfig(props.id, initialConfig.value);
 const { x, y } = useMousePosition(coyaSvgEl);
 const debug = computed(() => arch.value?.style?.debug?.enable ?? false);
 
@@ -107,10 +118,7 @@ provide("svgInfo", reactive({
     },
     realHeight,
     realWidth
-}))
-
-
-enableEditor(coyaSvgEl, archConfig);
+}));
 </script>
 <template>
     <div class="grid grid-cols-5 grid-rows-12 h-full">
@@ -229,6 +237,7 @@ enableEditor(coyaSvgEl, archConfig);
                 @back="back"
                 @next="next"
                 @enable="val => enableDrawing = val"
+                @save="save"
             />
         </div>
     </div>

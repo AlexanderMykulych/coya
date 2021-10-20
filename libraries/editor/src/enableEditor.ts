@@ -1,20 +1,24 @@
-import { ArchitectureDescription, Change, makeChange } from "coya-core";
-import { effectScope, onScopeDispose, provide, reactive, Ref, toRefs, watch } from "vue";
+import { Change, makeChange } from "coya-core";
+import { effectScope, onScopeDispose, provide, reactive, toRefs, watch } from "vue";
 import { getMousePosition } from "./getMousePosition";
-import { EditorSvg, EnabledEditor, MouseState } from "./types";
+import { EditorSvg, EnabledEditor, MouseState, EnableEditorParameters } from "./types";
 import { wrapEditorNode } from "./wrapEditorNode";
 
-export function enableEditor(svg: EditorSvg, config: Ref<ArchitectureDescription>) {
+export function enableEditor({svg, config, id, initialConfig}: EnableEditorParameters) {
     const scope = effectScope();
     const editor = scope.run(() => {
         const editor: EnabledEditor = reactive<EnabledEditor>({
+            id,
             enable: true,
             wrap: (node) => wrapEditorNode(editor, node),
             state: {},
             svg: svg as any,
             mouseState: useSvgMouse(svg),
             config: config as any,
-            makeChange: (change: Change) => makeChange(config.value, change)
+            makeChange: (change: Change) => {
+                makeChange(config.value, change);
+                makeChange(initialConfig.value, change);
+            }
         });
         listenSvgEvents(editor);
         provide("coya-editor", editor);

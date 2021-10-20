@@ -1,8 +1,7 @@
-import { ActionDebugInfo } from "..";
 import { DebugAction, DebugType } from "../debugTypes";
 import { BlockElementType } from "../descriptionTypes";
 import { isConnectActionSetting } from "../typeGuards";
-import { Action, ActionExecutorContext, Change, ChangeType } from "../types";
+import { Action, ActionDebugInfo, ActionExecutorContext, Change, ChangeOwnerType, ChangeType } from "../types";
 
 export function connectActionExecutor(context: ActionExecutorContext, action: Action): Change[] | null {
     if (isConnectActionSetting(action.value)) {
@@ -16,6 +15,10 @@ export function connectActionExecutor(context: ActionExecutorContext, action: Ac
                     type: BlockElementType.Line,
                     label: action.value.label ?? ""
                 }
+            },
+            owner: {
+                type: ChangeOwnerType.Phase,
+                phaseId: context.indexItem.phaseId
             }
         }];
     }

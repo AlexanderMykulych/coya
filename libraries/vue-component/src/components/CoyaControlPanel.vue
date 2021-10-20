@@ -3,7 +3,7 @@ import { createDrauu, Drauu } from "drauu";
 import { ref, watch } from "vue";
 
 const props = defineProps<{ svgEl: SVGSVGElement | null }>();
-const emit = defineEmits(["back", "next", "enable"]);
+const emit = defineEmits(["back", "next", "enable", "save"]);
 
 const drauu = ref<Drauu | null>(null);
 const isEnable = ref(false);
@@ -103,6 +103,7 @@ const setDashArray = (val?: string) => {
         </div>
         <button @click="$emit('back')" class="btn btn-blue mr-4">Back</button>
         <button @click="$emit('next')" class="btn btn-blue">Next</button>
+        <button @click="$emit('save')" class="btn btn-blue">Save</button>
     </div>
 </template>
 

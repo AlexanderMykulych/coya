@@ -15,7 +15,7 @@ export function startPhases(architecture: ArchitectureDescription, phaseIndex: P
             architecture,
             phaseIndex
         };
-        var changes = indexItem.actions.flatMap(item => executePhaseIndex(item, actionContext));
+        const changes = indexItem.actions.flatMap(item => executePhaseIndex(item, actionContext));
         changes
             .filter(isNotNullOrUndefined)
             .forEach(change => makeChange(architecture, change));

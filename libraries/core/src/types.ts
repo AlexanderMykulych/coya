@@ -149,8 +149,25 @@ export interface RemoveBlocksSetting {
     blocks: string[];
 }
 export type ChangeSetting = AddBlockChangeSetting | ChangeBlockStyleSetting | ChangeBlockLabelSetting | RemoveBlocksSetting;
+
+export enum ChangeOwnerType {
+    Phase = 0,
+    Editor = 1
+}
+export interface BaseChangeOwner {
+    type: ChangeOwnerType;
+}
+export interface PhaseChangeOwner extends BaseChangeOwner {
+    type: ChangeOwnerType.Phase;
+    phaseId: number;
+}
+export interface EditorChangeOwner extends BaseChangeOwner {
+    type: ChangeOwnerType.Editor;
+}
+export type ChangeOwner = PhaseChangeOwner | EditorChangeOwner;
 export interface BaseChange {
     type: ChangeType;
+    owner: ChangeOwner;
 }
 export interface AddBlockChange extends BaseChange {
     type: ChangeType.AddNewBlock;
@@ -217,17 +234,24 @@ export interface SelectedProperties {
     file: string;
 }
 
+
 export enum MessageCommand {
-    Select = "select"
+    Select = "select",
+    Save = "save"
 }
-
-export declare type MessageData = SelectedProperties;
-
-export interface DebugMessage {
+export interface BaseDebugMessage {
     command: MessageCommand;
-    data: MessageData;
 }
-
+export interface SelectDebugMessage extends BaseDebugMessage {
+    command: MessageCommand.Select;
+    data: SelectedProperties;
+}
+export interface SaveDebugMessage extends BaseDebugMessage {
+    command: MessageCommand.Save;
+    data: ArchitectureDescription;
+    id?: string;
+}
+export type DebugMessage = SelectDebugMessage | SaveDebugMessage;
 export interface DebugStateContainer {
     selectedBlocks?: string[] | null;
     lines?: LineDebugAction[];

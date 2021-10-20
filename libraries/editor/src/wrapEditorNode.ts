@@ -1,4 +1,4 @@
-import { ChangeType } from "coya-core";
+import { ChangeType, ChangeOwnerType } from "coya-core";
 import { computed, h, reactive, SetupContext, watch } from "vue";
 import { getMousePosition } from "./getMousePosition";
 import { Editor, EnabledEditor } from "./types";
@@ -38,6 +38,9 @@ export function wrapEditorNode(editor: Editor, node: any) {
                             x: `${val?.x}`,
                             y: `${val?.y}`,
                         },
+                        owner: {
+                            type: ChangeOwnerType.Editor
+                        }
                     });
                 }
             });

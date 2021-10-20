@@ -32,11 +32,16 @@
                     "when": "resourceExtname == .ts && resourceFilename =~ /\\.coya\\./",
                     "command": "coya.open",
                     "group": "navigation"
+                },
+                {
+                    "when": "resourceExtname == .json && resourceFilename =~ /\\.coya\\./",
+                    "command": "coya.open",
+                    "group": "navigation"
                 }
             ],
             "explorer/context": [
                 {
-                    "when": "resourceExtname == .ts && resourceFilename =~ \\.coya\\.",
+                    "when": "(resourceExtname == .ts || resourceExtname == .json) && resourceFilename =~ \\.coya\\.",
                     "command": "coya.open",
                     "group": "navigation"
                 }
@@ -64,13 +69,13 @@
         "vscode-test": "^1.5.2"
     },
     "dependencies": {
-        "@types/ws": "^7.4.7",
+        "@types/ws": "^8.2.0",
         "@vue-reactivity/watch": "^0.1.6",
         "@vue/reactivity": "^3.2.12",
         "child_process": "^1.0.2",
         "coya-core": "~0.9.13",
         "tsutils": "^3.21.0",
-        "ws": "^8.2.2",
-        "typescript": "^4.4.2"
+        "typescript": "^4.4.2",
+        "ws": "^8.2.3"
     }
 }

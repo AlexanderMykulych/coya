@@ -1,8 +1,9 @@
 import { DebugMessage, SelectedProperties, MessageCommand } from "coya-core";
 import { useDebug } from "./state/useDebug";
 
+let socket: WebSocket | null = null;
 export function startSocketClient() {
-    const socket = new WebSocket('ws://localhost:5001');
+    socket = new WebSocket('ws://localhost:5001');
     const { selectEvent } = useDebug();
     socket.addEventListener('message', (event) => {
         const message = JSON.parse(event.data) as DebugMessage;
@@ -11,4 +12,16 @@ export function startSocketClient() {
         }
         console.log(message.command, message.data);
     });
+}
+export function saveConfig(id: string | undefined, config: any) {
+    if (socket) {
+        socket.send(JSON.stringify(<DebugMessage>{
+            command: MessageCommand.Save,
+            data: {
+                ...config,
+                debugState: undefined
+            },
+            id
+        }));
+    }
 }

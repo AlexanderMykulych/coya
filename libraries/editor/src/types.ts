@@ -24,6 +24,7 @@ export interface MouseState {
 }
 export interface EnabledEditor extends BaseEditor {
     enable: true;
+    id?: string;
     wrap: (node: any) => any;
     state: EnabledEditorState;
     svg: SVGSVGElement | null;
@@ -38,3 +39,10 @@ export interface DisabledEditor extends BaseEditor {
 export type Editor = EnabledEditor | DisabledEditor;
 
 export type PrivideKeys = "coya-editor";
+
+export interface EnableEditorParameters {
+    svg: EditorSvg;
+    config: Ref<ArchitectureDescription>;
+    initialConfig: Ref<ArchitectureDescription>;
+    id?: string
+}

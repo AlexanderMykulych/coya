@@ -1,5 +1,5 @@
 import { BlockElementType, HighlightActionSetting } from "../descriptionTypes";
-import { Action, ActionExecutorContext, Change, ChangeType } from "../types";
+import { Action, ActionExecutorContext, Change, ChangeOwnerType, ChangeType } from "../types";
 
 export function addHighlightActionExecutor(context: ActionExecutorContext, action: Action): Change[] | null {
     if (!context) {
@@ -22,6 +22,10 @@ export function addHighlightActionExecutor(context: ActionExecutorContext, actio
                     },
                     isHighlight: true
                 }
+            },
+            owner: {
+                type: ChangeOwnerType.Phase,
+                phaseId: context.indexItem.phaseId
             }
         }, {
             type: ChangeType.AddNewBlock,
@@ -31,6 +35,10 @@ export function addHighlightActionExecutor(context: ActionExecutorContext, actio
                     type: BlockElementType.Rect,
                     label: ""
                 }
+            },
+            owner: {
+                type: ChangeOwnerType.Phase,
+                phaseId: context.indexItem.phaseId
             }
         }]);
 }

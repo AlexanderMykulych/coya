@@ -1,14 +1,21 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
-const modules = Object.entries(import.meta.globEager('./examples/*.coya.ts'));
-const examples = modules
-    .map(([key, value]) => ({
-        label: value.default.name,
-        value: value.default
-    }));
-const currentExampleIndex = ref(modules.length - 1);
+const modulesTs = Object.entries(import.meta.globEager('./examples/*.coya.ts'));
+const modulesJs = Object.entries(import.meta.globEager('./examples/*.coya.json'));
+const examples = [
+    ...modulesTs
+        .map(([key, value]) => ({
+            label: value.default.name,
+            value: JSON.stringify(value.default)
+        })),
+    ...modulesJs.map(([key, value]) => ({
+            label: value.default.name,
+            value: value.default
+        }))
+];
+const currentExampleIndex = ref(examples.length - 1);
 
-const config = computed(() => JSON.stringify(examples[currentExampleIndex.value].value));
+const config = computed(() => examples[currentExampleIndex.value].value);
 
 </script>
 <template>

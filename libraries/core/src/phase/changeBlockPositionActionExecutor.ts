@@ -1,5 +1,5 @@
 import { ChangeBlockPositionActionSetting } from "../descriptionTypes";
-import { ActionExecutorContext, Action, Change, ChangeType } from "../types";
+import { ActionExecutorContext, Action, Change, ChangeType, ChangeOwnerType } from "../types";
 
 
 export function changeBlockPositionActionExecutor(context: ActionExecutorContext, action: Action): Change[] | null {
@@ -16,6 +16,10 @@ export function changeBlockPositionActionExecutor(context: ActionExecutorContext
                 newStyle: {
                     position: val[key]
                 }
+            },
+            owner: {
+                type: ChangeOwnerType.Phase,
+                phaseId: context.indexItem.phaseId
             }
         }));
 }

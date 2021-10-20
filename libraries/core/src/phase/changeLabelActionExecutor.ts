@@ -1,7 +1,7 @@
 import { DebugAction, DebugType } from "../debugTypes";
 import { ChangeLabelActionSetting } from "../descriptionTypes";
 import { isHasLabel } from "../typeGuards";
-import { Action, ActionDebugInfo, ActionExecutorContext, Change, ChangeType } from "../types";
+import { Action, ActionDebugInfo, ActionExecutorContext, Change, ChangeOwnerType, ChangeType } from "../types";
 
 export function changeLabelActionExecutor(context: ActionExecutorContext, action: Action): Change[] | null {
     if (!context) {
@@ -19,6 +19,10 @@ export function changeLabelActionExecutor(context: ActionExecutorContext, action
                     newStyle: {
                         label: isHasLabel(v) ? v.label : v
                     }
+                },
+                owner: {
+                    type: ChangeOwnerType.Phase,
+                    phaseId: context.indexItem.phaseId
                 }
             };
         });

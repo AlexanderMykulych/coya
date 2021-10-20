@@ -3,9 +3,8 @@ lockfileVersion: 5.3
 specifiers:
   '@types/glob': ^7.1.3
   '@types/mocha': ^8.2.2
-  '@types/node': ~14.17.16
   '@types/vscode': ^1.60.0
-  '@types/ws': ^7.4.7
+  '@types/ws': ^8.2.0
   '@typescript-eslint/eslint-plugin': ^4.26.0
   '@typescript-eslint/parser': ^4.26.0
   '@vue-reactivity/watch': ^0.1.6
@@ -17,27 +16,26 @@ specifiers:
   tsutils: ^3.21.0
   typescript: ^4.3.2
   vscode-test: ^1.5.2
-  ws: ^8.2.2
+  ws: ^8.2.3
 
 dependencies:
-  '@types/ws': 7.4.7
+  '@types/ws': 8.2.0
   '@vue-reactivity/watch': 0.1.6_@vue+reactivity@3.2.12
   '@vue/reactivity': 3.2.12
   child_process: 1.0.2
   tsutils: 3.21.0
-  ws: 8.2.2
+  typescript: 4.4.3
+  ws: 8.2.3
 
 devDependencies:
   '@types/glob': 7.1.4
   '@types/mocha': 8.2.3
-  '@types/node': 14.17.16
   '@types/vscode': 1.60.0
   '@typescript-eslint/eslint-plugin': 4.31.1_e2d3c88d378335c4183365c112128ce9
   '@typescript-eslint/parser': 4.31.1_eslint@7.32.0+typescript@4.4.3
   eslint: 7.32.0
   glob: 7.1.7
   mocha: 8.4.0
-  typescript: 4.4.3
   vscode-test: 1.6.1
 
 packages:
@@ -146,8 +144,8 @@ packages:
     resolution: {integrity: sha512-wZt3VTmzYrgZ0l/3QmEbCq4KAJ71K3/hmMQ/nfpv84oH8e81KKwPEoQ5v8dNCxfHFVJ1JabHKmCvqdYOoVm1Ow==}
     dev: true
 
-  /@types/ws/7.4.7:
-    resolution: {integrity: sha512-JQbbmxZTZehdc2iszGKs5oC3NFnjeay7mtAWrdt7qNtAVK0g19muApzAy4bm9byz79xa2ZnO/BOBC2R8RC5Lww==}
+  /@types/ws/8.2.0:
+    resolution: {integrity: sha512-cyeefcUCgJlEk+hk2h3N+MqKKsPViQgF5boi9TTHSK+PoR9KWBb/C5ccPcDyAqgsbAYHTwulch725DV84+pSpg==}
     dependencies:
       '@types/node': 14.17.16
     dev: false
@@ -1516,7 +1514,7 @@ packages:
     resolution: {integrity: sha512-4xfscpisVgqqDfPaJo5vkd+Qd/ItkoagnHpufr+i2QCHBsNYp+G7UAoyFl8aPtx879u38wPV65rZ8qbGZijalA==}
     engines: {node: '>=4.2.0'}
     hasBin: true
-    dev: true
+    dev: false
 
   /unzipper/0.10.11:
     resolution: {integrity: sha512-+BrAq2oFqWod5IESRjL3S8baohbevGcVA+teAIOYWM3pDVdseogqbzhhvvmiyQrUNKFUnDMtELW3X8ykbyDCJw==}
@@ -1595,8 +1593,8 @@ packages:
     resolution: {integrity: sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=}
     dev: true
 
-  /ws/8.2.2:
-    resolution: {integrity: sha512-Q6B6H2oc8QY3llc3cB8kVmQ6pnJWVQbP7Q5algTcIxx7YEpc0oU4NBVHlztA7Ekzfhw2r0rPducMUiCGWKQRzw==}
+  /ws/8.2.3:
+    resolution: {integrity: sha512-wBuoj1BDpC6ZQ1B7DWQBYVLphPWkm8i9Y0/3YdHjHKHiohOJ1ws+3OccDWtH+PoC9DZD5WOTrJvNbWvjS6JWaA==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
       bufferutil: ^4.0.1

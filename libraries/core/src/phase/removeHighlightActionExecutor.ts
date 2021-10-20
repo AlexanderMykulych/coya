@@ -1,4 +1,4 @@
-import { Action, ActionExecutorContext, Change, ChangeType } from "../types";
+import { Action, ActionExecutorContext, Change, ChangeOwnerType, ChangeType } from "../types";
 
 export function removeHighlightActionExecutor(context: ActionExecutorContext, _: Action): Change[] | null {
     const blocks = context.architecture.style?.blocks || {};
@@ -7,6 +7,10 @@ export function removeHighlightActionExecutor(context: ActionExecutorContext, _:
         setting: {
             blocks: Object.keys(blocks)
                 .filter(x => blocks[x].isHighlight)
+        },
+        owner: {
+            type: ChangeOwnerType.Phase,
+            phaseId: context.indexItem.phaseId
         }
     }];
 }

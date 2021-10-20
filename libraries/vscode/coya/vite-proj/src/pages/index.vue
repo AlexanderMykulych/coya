@@ -3,18 +3,26 @@ import path from "path-browserify";
 import coya from "coya-vue-component";
 import "coya-vue-component/dist/style.css";
 
-const modules = import.meta.globEager('./../../coya/**/*.coya.ts')
-const files = Object
-    .keys(modules)
-    .map(filePath => ({
+const modulesTs = import.meta.globEager('./../../coya/**/*.coya.ts')
+const modulesJson = import.meta.globEager('./../../coya/**/*.coya.json')
+const files = [
+    ...Object
+        .keys(modulesTs)
+        .map(filePath => ({
             fileName: path.basename(filePath),
-            config: modules[filePath].default
-        }));
+            config: modulesTs[filePath].default
+        })),
+    ...(Object
+        .keys(modulesJson)
+        .map(filePath => ({
+            fileName: path.basename(filePath),
+            config: modulesJson[filePath].default
+        })))];
 </script>
 
 <template>
-<div>
-    <coya v-for="item in files" :key="item.fileName" :config="item.config"/>
-</div>
+    <div>
+        <coya v-for="item in files" :key="item.fileName" :config="item.config" />
+    </div>
     <!-- <coya :config="config"/> -->
 </template>

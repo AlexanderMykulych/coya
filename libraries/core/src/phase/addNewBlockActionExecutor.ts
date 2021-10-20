@@ -1,7 +1,7 @@
 import { ActionDebugInfo } from "..";
 import { DebugAction, DebugType } from "../debugTypes";
 import { AddNewBlockActionSetting } from "../descriptionTypes";
-import { Action, ActionExecutorContext, Change, ChangeType } from "../types";
+import { Action, ActionExecutorContext, Change, ChangeOwnerType, ChangeType } from "../types";
 
 export function addNewBlockActionExecutor(context: ActionExecutorContext, action: Action): Change[] | null {
     if (!context) {
@@ -15,6 +15,10 @@ export function addNewBlockActionExecutor(context: ActionExecutorContext, action
             setting: {
                 newBlockId: key,
                 blockSettings: val[key]
+            },
+            owner: {
+                type: ChangeOwnerType.Phase,
+                phaseId: context.indexItem.phaseId
             }
         }));
 }
