@@ -123,13 +123,13 @@ provide("svgInfo", reactive({
 <template>
     <div class="grid grid-cols-5 grid-rows-12 h-full">
         <div
-            class="coya-container col-span-4 row-span-full p-7 bg-gray-300"
+            class="coya-container col-span-4 row-span-full p-7 bg-gray-200 bg-opacity-70"
             ref="coyaEl"
             :class="{ [`col-span-${debug ? 4 : 'full'}`]: true }"
             :id="arch?.name"
         >
             <svg
-                class="coya shadow-2xl shadow-black-500 bg-white"
+                class="coya bg-white"
                 xmlns="http://www.w3.org/2000/svg"
                 ref="coyaSvgEl"
                 overflow="auto"
@@ -264,6 +264,7 @@ provide("svgInfo", reactive({
     height: 100%;
     width: 100%;
     touch-action: none;
+    box-shadow: 0px 0px 2px 1px #d1d1d1;
 }
 .drawableSvg {
     position: absolute;
