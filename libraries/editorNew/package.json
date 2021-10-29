@@ -1,0 +1,20 @@
+{
+  "name": "coya-editor-new",
+  "version": "0.0.0",
+  "module": "dist/coya-editor.es.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "cross-env NODE_ENV=production vite build --debug",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.2.20",
+    "coya-core": "~0.9.13"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.9.3",
+    "typescript": "^4.4.3",
+    "vite": "^2.6.4",
+    "vue-tsc": "^0.3.0"
+  }
+}

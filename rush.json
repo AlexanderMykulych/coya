@@ -466,8 +466,8 @@
       "reviewCategory": "production"
     },
     {
-      "packageName": "coya-editor",
-      "projectFolder": "libraries/editor",
+      "packageName": "coya-editor-new",
+      "projectFolder": "libraries/editorNew",
       "versionPolicyName": "main",
       "reviewCategory": "production"
     },

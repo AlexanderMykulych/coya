@@ -4,7 +4,7 @@ import { computed, provide, reactive, ref, toRef, watch } from "vue";
 import { useNodeDetails } from "../logic/useNodeDetails";
 import { useMousePosition } from "../logic/useSvgMousePosition";
 import { useDebug } from "../state/useDebug";
-import {enableEditor} from "coya-editor";
+import {enableEditor} from "coya-editor-new";
 import { saveConfig } from "../socket";
 
 const props = defineProps<{ config: string | Object, id?: string }>();

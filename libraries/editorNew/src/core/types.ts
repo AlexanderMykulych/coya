@@ -31,6 +31,7 @@ export interface EnabledEditor extends BaseEditor {
     mouseState: MouseState;
     config: ArchitectureDescription;
     makeChange: (change: Change) => void;
+    components: any;
 }
 export interface DisabledEditor extends BaseEditor {
     enable: false;

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Block, BlockStyle, isLineBlockElement, isRectPositioning, Positioning, RectPositioning } from "coya-core";
 import { computed } from "vue";
-import {getCurrentEditor} from "coya-editor";
+import {getCurrentEditor} from "coya-editor-new";
 import coyaRectNode from "./Nodes/CoyaRectNode.vue";
 
 const props = defineProps<{ block: Block, positioning: Positioning, blockStyle?: BlockStyle, debug: boolean }>();
