@@ -1,15 +1,14 @@
 import { Change, makeChange } from "coya-core";
-import * as vue from "vue";
-// { effectScope, onScopeDispose, provide, reactive, toRefs, watch }
+import { effectScope, onScopeDispose, provide, reactive, toRefs, watch } from "vue";
 import { getMousePosition } from "./getMousePosition";
 import { EditorSvg, EnabledEditor, MouseState, EnableEditorParameters } from "./types";
 import { wrapEditorNode } from "./wrapEditorNode";
 import testComponent from "../components/test.vue";
 
 export function enableEditor({svg, config, id, initialConfig}: EnableEditorParameters) {
-    const scope = vue.effectScope();
+    const scope = effectScope();
     const editor = scope.run(() => {
-        const editor: EnabledEditor = vue.reactive<EnabledEditor>({
+        const editor: EnabledEditor = reactive<EnabledEditor>({
             id,
             enable: true,
             wrap: (node) => wrapEditorNode(editor, node),
@@ -26,21 +25,21 @@ export function enableEditor({svg, config, id, initialConfig}: EnableEditorParam
             }
         });
         listenSvgEvents(editor);
-        vue.provide("coya-editor", editor);
+        provide("coya-editor", editor);
         return editor;
     });
-    return editor ? vue.toRefs(editor) : undefined;
+    return editor;
 }
 
 export function useSvgMouse(svg: EditorSvg) {
-    const mouse = vue.reactive<MouseState>({
+    const mouse = reactive<MouseState>({
         position: {
             x: 0,
             y: 0
         },
         pressed: false
     });
-    vue.watch(() => svg.value, svgEl => {
+    watch(() => svg.value, svgEl => {
         if (svgEl) {
             const onMouseMoveListener = (event: MouseEvent) => {
                 const { x, y } = getMousePosition(svgEl, event)
@@ -58,7 +57,7 @@ export function useSvgMouse(svg: EditorSvg) {
             svgEl.addEventListener("mousedown", onMouseDownListener);
             svgEl.addEventListener("mouseup", onMouseUpListener);
             svgEl.addEventListener("mouseleave", onMouseUpListener);
-            vue.onScopeDispose(() => {
+            onScopeDispose(() => {
                 svgEl.removeEventListener("mousemove", onMouseMoveListener);
                 svgEl.removeEventListener("mousedown", onMouseDownListener);
                 svgEl.removeEventListener("mouseup", onMouseUpListener);
@@ -70,14 +69,14 @@ export function useSvgMouse(svg: EditorSvg) {
 }
 
 function listenSvgEvents(editor: EnabledEditor) {
-    vue.watch(() => editor.svg, svgEl => {
+    watch(() => editor.svg, svgEl => {
         if (svgEl) {
             const onMouseClickListener = (_: MouseEvent) => {
                 editor.state.selectedNodeIds = undefined;
             };
             svgEl.addEventListener("click", onMouseClickListener);
 
-            vue.onScopeDispose(() => {
+            onScopeDispose(() => {
                 svgEl.removeEventListener("click", onMouseClickListener);
             });
         }
