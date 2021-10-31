@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, onScopeDispose, ref, shallowRef } from 'vue'
 import { EnabledEditor } from '../core';
 import { enableEditor } from '../core/enableEditor';
 import test from "./test.vue";
@@ -22,21 +22,23 @@ const config = ref({
                 position: {
                     x: 10,
                     y: 10,
-                    w: 20,
-                    h: 20
+                    w: 100,
+                    h: 100
                 }
             }
         }
     }
 });
+let editor = shallowRef();
 onMounted(() => {
-    const editor = enableEditor({
+    editor.value = enableEditor({
         svg: svgEl,
         config,
         initialConfig: config,
         id: "test"
     });
-    testComponent.value = editor.wrap(test);
+    testComponent.value = editor.value.wrap(test);
+    
 });
 
 const block = {
@@ -45,9 +47,12 @@ const block = {
 </script>
 
 <template>
-    <svg width="2000" height="1000" ref="svgEl">
-        <testComponent v-if="testComponent" :positioning="config.style.blocks.test.position" :block="block" />
-    </svg>
+    <editor.component v-if="!!editor"/>
+    <div class="h-full relative">
+        <svg width="95%" height="700" ref="svgEl" class="rounded-lg border-3 shadow-3 ml-10">
+            <testComponent v-if="testComponent" :positioning="config.style.blocks.test.position" :block="block" />
+        </svg>
+    </div>
 </template>
 
 <style scoped>

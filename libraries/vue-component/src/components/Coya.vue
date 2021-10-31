@@ -4,7 +4,8 @@ import { computed, provide, reactive, ref, toRef, watch } from "vue";
 import { useNodeDetails } from "../logic/useNodeDetails";
 import { useMousePosition } from "../logic/useSvgMousePosition";
 import { useDebug } from "../state/useDebug";
-import {enableEditor} from "coya-editor-new";
+import { enableEditor } from "coya-editor-new";
+import "coya-editor-new/dist/style.css";
 import { saveConfig } from "../socket";
 
 const props = defineProps<{ config: string | Object, id?: string }>();
@@ -19,6 +20,7 @@ watch(() => props.config, () => {
 }, { immediate: true });
 
 const arch = ref<Architecture | null>(null);
+const editor = ref(null);
 let archConfig = ref<ArchitectureDescription | null>(null);
 const coyaSvgEl = ref<SVGSVGElement | null>(null);
 const drawableSvgEl = ref<SVGSVGElement | null>(null);
@@ -44,7 +46,7 @@ const height = computed(() => {
 });
 watch(() => preparedConfig.config, val => {
     if (val) {
-        const {architecture, config} = transformToArchitecture(val, {
+        const { architecture, config } = transformToArchitecture(val, {
             viewBox: {
                 x: vX,
                 y: vY,
@@ -54,7 +56,7 @@ watch(() => preparedConfig.config, val => {
         });
         arch.value = architecture.value;
         archConfig = initialConfig;
-        enableEditor({
+        editor.value = enableEditor({
             svg: coyaSvgEl,
             config,
             initialConfig,
@@ -122,6 +124,9 @@ provide("svgInfo", reactive({
 </script>
 <template>
     <div class="grid grid-cols-5 grid-rows-12 h-full">
+        <div>
+            <editor.component v-if="!!editor" />
+        </div>
         <div
             class="coya-container col-span-4 row-span-full p-7 bg-gray-200 bg-opacity-70"
             ref="coyaEl"
@@ -274,6 +279,6 @@ provide("svgInfo", reactive({
     width: 100%;
 }
 .cursor-move {
-  cursor: move;
+    cursor: move;
 }
 </style>

@@ -3,7 +3,7 @@ import { effectScope, onScopeDispose, provide, reactive, toRefs, watch } from "v
 import { getMousePosition } from "./getMousePosition";
 import { EditorSvg, EnabledEditor, MouseState, EnableEditorParameters } from "./types";
 import { wrapEditorNode } from "./wrapEditorNode";
-import testComponent from "../components/test.vue";
+import editorComponent from "../components/editorComponent.vue";
 
 export function enableEditor({svg, config, id, initialConfig}: EnableEditorParameters) {
     const scope = effectScope();
@@ -20,9 +20,7 @@ export function enableEditor({svg, config, id, initialConfig}: EnableEditorParam
                 makeChange(config.value, change);
                 makeChange(initialConfig.value, change);
             },
-            components: {
-                testComponent
-            }
+            component: editorComponent
         });
         listenSvgEvents(editor);
         provide("coya-editor", editor);

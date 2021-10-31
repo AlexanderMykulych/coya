@@ -8,8 +8,13 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.2.20",
-    "coya-core": "~0.9.13"
+    "@vueuse/core": "^6.5.3",
+    "coya-core": "~0.9.13",
+    "unplugin-auto-import": "^0.4.8",
+    "unplugin-icons": "^0.12.17",
+    "unplugin-vue-components": "^0.15.3",
+    "vite-plugin-windicss": "^1.4.5",
+    "vue": "^3.2.20"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.9.3",
