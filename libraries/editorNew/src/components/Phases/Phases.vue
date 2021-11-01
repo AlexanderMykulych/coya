@@ -17,11 +17,11 @@ onMounted(() => {
     }
 });
 const phaseRadious = computed(() => svgDim.h * 0.15);
-const onePhaseReservedWidth = computed(() => Math.max(svgDim.w / (phases.value.totalCount || 1), 100));
+const onePhaseReservedWidth = computed(() => svgDim.w / (phases.value.totalCount - 1 || 1));
 const timelineWidth = computed(() => phases.value.totalCount * onePhaseReservedWidth.value);
-
-const getIndentByGroupIndex = (index: number) => {
-    return index % 2 !== 0 ? -phaseRadious.value * 1 : 10;
+const getIsGroupUp = (groupIndex) => groupIndex % 2 !== 0;
+const getIndentByGroupIndex = (groupIndex: number) => {
+    return getIsGroupUp(groupIndex) ? -phaseRadious.value - 5 : phaseRadious.value + 5;
 };
 
 const getPathForPhase = (group, groupIndex, phaseIndex) => {
@@ -45,33 +45,50 @@ const getPathForPhaseGroup = (group, groupIndex) => {
             const npX = getPhaseX(nextPhase);
             const npY = getPhaseY(groupIndex + 1);
 
-            return groupIndex % 2 === 0 ?
+            return getIsGroupUp(groupIndex) ?
                 `M ${pX} ${pY} C ${pX + 100}, ${pY + 5} ${npX - 100}, ${npY - 5} ${npX}, ${npY}` :
                 `M ${pX} ${pY} C ${pX + 100}, ${pY - 5} ${npX - 100}, ${npY + 5} ${npX}, ${npY}`;
         }
     }
 };
 
-const getPhaseX = phase => onePhaseReservedWidth.value * (phase.index + 1);
+const getPhaseX = phase => onePhaseReservedWidth.value * (phase.index + 1) - onePhaseReservedWidth.value / 2;
 const getPhaseY = groupIndex => svgDim.h / 2 + getIndentByGroupIndex(groupIndex);
+const getPhaseColor = (groupIndex) => getIsGroupUp(groupIndex) ? "#f49914" : "#0982ec";
+
+const getPhaseTextY = (groupIndex) => {
+    if (!getIsGroupUp(groupIndex)) {
+        return 10;
+    }
+    return svgDim.h - 20;
+}
 </script>
 
 <template>
     <div class="flex justify-between border-2 rounded-md bg-white h-full">
-        <svg :width="timelineWidth" height="100%" ref="svgEl">
+        <svg width="100%" height="100%" ref="svgEl">
+             <defs>
+                <pattern id="grid" :width="onePhaseReservedWidth" height="100%" patternUnits="userSpaceOnUse">
+                    <path :d="`M ${onePhaseReservedWidth} 0 L 0 0 0 ${onePhaseReservedWidth}`" fill="none" stroke="gray" stroke-width="1"/>
+                </pattern>
+            </defs>
+             <rect width="100%" height="100%" fill="url(#grid)" />
             <g>
                 <g v-for="(group, index) in phases.items" :key="index" >
-                    <g v-for="(phase, phaseIndex) in group" :key="phase.phaseKey">
-                        <circle :cx="getPhaseX(phase)" :cy="getPhaseY(index)" :r="phaseRadious"/>
+                    <path class="animated" :d="getPathForPhaseGroup(group, index)" stroke-width="2" stroke="black" fill="none"/>
+                    <g v-for="(phase, phaseIndex) in group" :key="phase.phaseKey" class="cursor-pointer">
                         <path :d="getPathForPhase(group, index, phaseIndex)" stroke-width="1" stroke="black"/>
+                        <circle :cx="getPhaseX(phase)" :cy="getPhaseY(index)" :r="phaseRadious" :fill="getPhaseColor(index)" class="cursor-pointer"/>
+                        <text
+                            :x="getPhaseX(phase)"
+                            :y="getPhaseTextY(index)"
+                            dominant-baseline="hanging"
+                            text-anchor="middle"
+                        >
+                            {{phase.phaseKey}}
+                        </text>
                     </g>
-                    <path class="animated" :d="getPathForPhaseGroup(group, index)" stroke-width="1" stroke="black" fill="none"/>
                 </g>
-            </g>
-            <g fill="none" stroke="teal">
-                <path d="M-1,5 H580 M5,-1 V580" stroke-width="10" stroke-dasharray="1 49" />
-                <path d="M-1,2 H580 M2,-1 V580" stroke-width="5" stroke-dasharray="1 9" />
-                <rect width="100%" height="100%" stroke-width="2" />
             </g>
         </svg>
     </div>

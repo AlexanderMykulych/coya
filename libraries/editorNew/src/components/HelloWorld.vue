@@ -42,8 +42,32 @@ const config = ref({
 				"from": "init",
 				"to": "beforeCreate",
 				"name": "line_init_beforeCreate"
+			},
+            "connect1": {
+				"from": "init",
+				"to": "beforeCreate",
+				"name": "line_init_beforeCreate"
+			},
+            "connect2": {
+				"from": "init",
+				"to": "beforeCreate",
+				"name": "line_init_beforeCreate"
+			},
+            "connect3": {
+				"from": "init",
+				"to": "beforeCreate",
+				"name": "line_init_beforeCreate"
 			}
-		}
+		},
+        {
+			"newBlock": {
+				"initInject": "Init injections & reactivity"
+			},
+			"connect": {
+				"from": "init",
+				"to": "initInject"
+			}
+		},
 	],
 	"style": {
 		"blocks": {
