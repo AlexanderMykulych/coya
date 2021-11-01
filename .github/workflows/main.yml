@@ -45,6 +45,7 @@ jobs:
 
             - name: Rush update
               run: rush update
+              
             - name: Rush install
               run: rush install --no-link
             - run: rush link
