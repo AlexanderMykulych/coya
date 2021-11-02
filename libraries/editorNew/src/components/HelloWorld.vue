@@ -68,6 +68,30 @@ const config = ref({
 				"from": "init",
 				"to": "initInject"
 			}
+		},{
+			"newBlock": {
+				"initInject": "Init injections & reactivity"
+			},
+			"connect": {
+				"from": "init",
+				"to": "initInject"
+			}
+		},{
+			"newBlock": {
+				"initInject": "Init injections & reactivity"
+			},
+			"connect": {
+				"from": "init",
+				"to": "initInject"
+			}
+		},{
+			"newBlock": {
+				"initInject": "Init injections & reactivity"
+			},
+			"connect": {
+				"from": "init",
+				"to": "initInject"
+			}
 		},
 	],
 	"style": {
@@ -135,7 +159,8 @@ const config = ref({
 	}
 });
 const architecture = <Ref<Architecture>>(<any>ref({
-    currentPhase: ref(null)
+    currentPhase: ref(null),
+    toPhase: (index) => architecture.value.currentPhase = index
 }));
 let editor = shallowRef();
 onMounted(() => {
