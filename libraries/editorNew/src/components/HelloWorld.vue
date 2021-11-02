@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { onMounted, onScopeDispose, ref, shallowRef } from 'vue'
+import { Architecture } from 'coya-core';
+import { onMounted, onScopeDispose, Ref, ref, shallowRef } from 'vue'
 import { EnabledEditor } from '../core';
 import { enableEditor } from '../core/enableEditor';
 import test from "./test.vue";
@@ -133,12 +134,16 @@ const config = ref({
 		}
 	}
 });
+const architecture = <Ref<Architecture>>(<any>ref({
+    currentPhase: ref(null)
+}));
 let editor = shallowRef();
 onMounted(() => {
     editor.value = enableEditor({
         svg: svgEl,
         config,
         initialConfig: config,
+        architecture,
         id: "test"
     });
     testComponent.value = editor.value.wrap(test);

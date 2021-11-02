@@ -1,4 +1,4 @@
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { getCurrentEditor } from ".";
 
 export function useCurrentEditorState() {
@@ -20,7 +20,8 @@ export function useCurrentEditorState() {
                     }),
                     totalCount: index + 1
                 }
-            })
+            }),
+            architecture: editor.architecture
         };
     }
     return {
@@ -28,6 +29,8 @@ export function useCurrentEditorState() {
         phases: {
             items: [],
             totalCount: 0
-        }
+        },
+        currentPhase: ref(null),
+        architecture: null
     }
 }

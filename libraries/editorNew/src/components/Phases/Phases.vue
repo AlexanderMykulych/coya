@@ -1,14 +1,16 @@
 <script lang="ts" setup>
 import { computed, onMounted, reactive, ref } from 'vue';
 import { useCurrentEditorState } from '../../core/useCurrentEditorState';
+import { useSvgMouse } from '../../core/useSvgMouse';
 
-const { phases } = useCurrentEditorState();
+const { phases, architecture } = useCurrentEditorState();
 const svgDim = reactive({
     h: 0,
     w: 0
 });
 const svgEl = ref<SVGSVGElement | null>(null);
 
+const svgMouse = useSvgMouse(svgEl);
 onMounted(() => {
     if (svgEl.value) {
         const { width, height } = svgEl.value.getBoundingClientRect();
@@ -53,6 +55,7 @@ const getPathForPhaseGroup = (group, groupIndex) => {
 };
 
 const getPhaseX = phase => onePhaseReservedWidth.value * (phase.index + 1) - onePhaseReservedWidth.value / 2;
+const getPhaseStartX = phase => onePhaseReservedWidth.value * (phase.index);
 const getPhaseY = groupIndex => svgDim.h / 2 + getIndentByGroupIndex(groupIndex);
 const getPhaseColor = (groupIndex) => getIsGroupUp(groupIndex) ? "#f49914" : "#0982ec";
 
@@ -62,21 +65,40 @@ const getPhaseTextY = (groupIndex) => {
     }
     return svgDim.h - 20;
 }
+const hoveredPhaseIndex = computed(() => Math.trunc(svgMouse.position.x / onePhaseReservedWidth.value));
+
+const setCurrentPhase = (index: number) => architecture!.toPhase(index);
 </script>
 
 <template>
     <div class="flex justify-between border-2 rounded-md bg-white h-full">
         <svg width="100%" height="100%" ref="svgEl">
              <defs>
-                <pattern id="grid" :width="onePhaseReservedWidth" height="100%" patternUnits="userSpaceOnUse">
+                <pattern id="phase-grid" :width="onePhaseReservedWidth" height="100%" patternUnits="userSpaceOnUse">
                     <path :d="`M ${onePhaseReservedWidth} 0 L 0 0 0 ${onePhaseReservedWidth}`" fill="none" stroke="gray" stroke-width="1"/>
                 </pattern>
             </defs>
-             <rect width="100%" height="100%" fill="url(#grid)" />
+             <rect width="100%" height="100%" fill="url(#phase-grid)" />
             <g>
                 <g v-for="(group, index) in phases.items" :key="index" >
                     <path class="animated" :d="getPathForPhaseGroup(group, index)" stroke-width="2" stroke="black" fill="none"/>
-                    <g v-for="(phase, phaseIndex) in group" :key="phase.phaseKey" class="cursor-pointer">
+                    <rect
+                        v-if="index === architecture?.currentPhase"
+                        :x="getPhaseStartX(group[0])"
+                        y="0"
+                        :width="onePhaseReservedWidth * group.length"
+                        height="100%"
+                        fill="#5dc41663"
+                    />
+                    <g v-for="(phase, phaseIndex) in group" :key="phase.phaseKey" class="cursor-pointer" @click="setCurrentPhase(index)">
+                        <rect
+                            v-if="phase.index === hoveredPhaseIndex && !svgMouse.leave"
+                            :x="getPhaseStartX(phase)"
+                            y="0"
+                            :width="onePhaseReservedWidth"
+                            height="100%"
+                            fill="#afae065e"
+                        />
                         <path :d="getPathForPhase(group, index, phaseIndex)" stroke-width="1" stroke="black"/>
                         <circle :cx="getPhaseX(phase)" :cy="getPhaseY(index)" :r="phaseRadious" :fill="getPhaseColor(index)" class="cursor-pointer"/>
                         <text

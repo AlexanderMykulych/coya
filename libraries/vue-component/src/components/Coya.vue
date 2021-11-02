@@ -60,6 +60,7 @@ watch(() => preparedConfig.config, val => {
             svg: coyaSvgEl,
             config,
             initialConfig,
+            architecture: arch,
             id: props.id
         });
     }

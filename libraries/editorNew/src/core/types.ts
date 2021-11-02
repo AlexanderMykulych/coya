@@ -1,3 +1,4 @@
+import { Architecture } from "coya-core";
 import { ArchitectureDescription, Change } from "coya-core";
 import { Ref } from "vue";
 
@@ -17,10 +18,11 @@ export interface EnabledEditorState {
     drag?: DragState;
     selectedNodeIds?: string[];
 }
-export type EditorSvg = Ref<SVGSVGElement | null>;
+export type SvgRef = Ref<SVGSVGElement | null>;
 export interface MouseState {
     position: Point;
     pressed: boolean;
+    leave: boolean;
 }
 export interface EnabledEditor extends BaseEditor {
     enable: true;
@@ -30,6 +32,7 @@ export interface EnabledEditor extends BaseEditor {
     svg: SVGSVGElement | null;
     mouseState: MouseState;
     config: ArchitectureDescription;
+    architecture: Architecture;
     makeChange: (change: Change) => void;
     component: any
 }
@@ -42,8 +45,9 @@ export type Editor = EnabledEditor | DisabledEditor;
 export type PrivideKeys = "coya-editor";
 
 export interface EnableEditorParameters {
-    svg: EditorSvg;
+    svg: SvgRef;
     config: Ref<ArchitectureDescription>;
     initialConfig: Ref<ArchitectureDescription>;
+    architecture: Ref<Architecture>;
     id?: string
 }
