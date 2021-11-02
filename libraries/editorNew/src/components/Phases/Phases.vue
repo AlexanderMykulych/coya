@@ -20,11 +20,8 @@ onMounted(() => {
     }
 });
 const phaseRadious = computed(() => svgDim.h * 0.15);
-const onePhaseReservedWidth = computed(() => svgDim.w / (phases.value.totalCount || 1));
-const phasesIndent = reactive({
-    left: computed(() => onePhaseReservedWidth.value - 50),
-    right: 0
-});
+const onePhaseReservedWidth = computed(() => svgDim.w / (phases.value.totalCount - 1 || 1));
+const timelineWidth = computed(() => phases.value.totalCount * onePhaseReservedWidth.value);
 const getIsGroupUp = (groupIndex) => groupIndex % 2 !== 0;
 const getIndentByGroupIndex = (groupIndex: number) => {
     return getIsGroupUp(groupIndex) ? -phaseRadious.value - 5 : phaseRadious.value + 5;
@@ -58,8 +55,8 @@ const getPathForPhaseGroup = (group, groupIndex) => {
     }
 };
 
-const getPhaseX = phase => phasesIndent.left + onePhaseReservedWidth.value * (phase.index + 1) - onePhaseReservedWidth.value / 2;
-const getPhaseStartX = phase => phasesIndent.left + onePhaseReservedWidth.value * (phase.index);
+const getPhaseX = phase => onePhaseReservedWidth.value * (phase.index + 1) - onePhaseReservedWidth.value / 2;
+const getPhaseStartX = phase => onePhaseReservedWidth.value * (phase.index);
 const getPhaseY = groupIndex => svgDim.h / 2 + getIndentByGroupIndex(groupIndex);
 const getPhaseColor = (groupIndex) => getIsGroupUp(groupIndex) ? "#f49914" : "#0982ec";
 
@@ -69,29 +66,29 @@ const getPhaseTextY = (groupIndex) => {
     }
     return svgDim.h - 20;
 }
-const hoveredPhaseIndex = computed(() => Math.trunc((svgMouse.position.x - phasesIndent.left) / onePhaseReservedWidth.value));
+const hoveredPhaseIndex = computed(() => Math.trunc(svgMouse.position.x / onePhaseReservedWidth.value));
 
-const setCurrentPhase = (index: number) => architecture!.toPhase(index);
+const setCurrentPhase = (index: number | null) => architecture!.toPhase(index);
+
+const startButtonStyle = computed(() => ({
+    backgroundColor: architecture?.currentPhase === null ? '#5dc41663' : undefined
+}))
 </script>
 
 <template>
     <div class="flex justify-between border-2 rounded-md bg-white h-full">
+        <div class="w-9">
+            <button class="w-full h-full" @click="setCurrentPhase(null)" :style="startButtonStyle">
+                <i-gis:flag-start-b />
+            </button>
+        </div>
         <svg width="100%" height="100%" ref="svgEl">
              <defs>
-                <pattern id="phase-grid"
-                        viewBox="0,0,10,10" patternUnits="userSpaceOnUse">
-                    <path
-                        :d="`M 0 0 L 10 0 0 10`"
-                        fill="none"
-                        stroke="gray"
-                        stroke-width="1"
-                    />
+                <pattern id="phase-grid" :width="onePhaseReservedWidth" height="100%" patternUnits="userSpaceOnUse">
+                    <path :d="`M ${onePhaseReservedWidth} 0 L 0 0 0 ${onePhaseReservedWidth}`" fill="none" stroke="gray" stroke-width="1"/>
                 </pattern>
             </defs>
-             <rect :x="phasesIndent.left" width="100%" height="100%" fill="url(#phase-grid)" />
-            <g >
-                <rect :width="phasesIndent.left" height="100%"></rect>
-            </g>
+             <rect width="100%" height="100%" fill="url(#phase-grid)" />
             <g>
                 <g v-for="(group, index) in phases.items" :key="index">
                     <path class="animated" :d="getPathForPhaseGroup(group, index)" stroke-width="2" stroke="black" fill="none"/>

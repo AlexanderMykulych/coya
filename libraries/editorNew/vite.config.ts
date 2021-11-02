@@ -15,7 +15,7 @@ export default defineConfig({
         }),
         Icons({
             autoInstall: true,
-            compiler: "vue3",
+            compiler: "vue3"
         }),
         WindiCSS(),
     ],
