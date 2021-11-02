@@ -1,6 +1,6 @@
 {
   "name": "coya-editor-new",
-  "version": "0.0.0",
+  "version": "0.9.14",
   "module": "dist/coya-editor.es.js",
   "scripts": {
     "dev": "vite",
@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@vueuse/core": "^6.5.3",
-    "coya-core": "~0.9.13",
+    "coya-core": "~0.9.14",
     "unplugin-auto-import": "^0.4.8",
     "unplugin-icons": "^0.12.17",
     "unplugin-vue-components": "^0.15.3",
