@@ -19,9 +19,15 @@ export interface EnabledEditorState {
     selectedNodeIds?: string[];
 }
 export type SvgRef = Ref<SVGSVGElement | null>;
+
+export interface MousePaletteState {
+    pressed: boolean;
+    test?: number;
+}
 export interface MouseState {
     position: Point;
     pressed: boolean;
+    palette: MousePaletteState;
     leave: boolean;
 }
 export interface EnabledEditor extends BaseEditor {

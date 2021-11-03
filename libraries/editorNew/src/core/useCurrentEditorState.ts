@@ -21,7 +21,8 @@ export function useCurrentEditorState() {
                     totalCount: index + 1
                 }
             }),
-            architecture: editor.architecture
+            architecture: editor.architecture,
+            mouseState: editor.mouseState
         };
     }
     return {

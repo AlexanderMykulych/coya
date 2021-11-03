@@ -10,7 +10,10 @@ export function useSvgMouse(svg: SvgRef) {
             y: 0
         },
         pressed: false,
-        leave: true
+        leave: true,
+        palette: {
+            pressed: false,
+        }
     });
     watch(() => svg.value, svgEl => {
         if (svgEl) {
@@ -25,6 +28,7 @@ export function useSvgMouse(svg: SvgRef) {
             };
             const onMouseUpListener = (_: MouseEvent) => {
                 mouse.pressed = false;
+                mouse.palette.pressed = false;
             };
             const onMouseLeaveListener = (_: MouseEvent) => {
                 mouse.pressed = false;

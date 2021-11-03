@@ -58,8 +58,16 @@ const nodeSettingContainerStyle = computed(() => ({
     width: `${nodeSettingWidth.value}px`,
     height: `200px`
 }));
+const debugStyle = reactive({
+    x: `${svgPosition.w - 400}`,
+    y: "10",
+    width: "300",
+    height: "400"
+});
 
 const { isOneNodeSelected } = useCurrentEditorState();
+
+const {mouseState} = useCurrentEditorState();
 </script>
 
 <template>
@@ -78,6 +86,11 @@ const { isOneNodeSelected } = useCurrentEditorState();
             <foreignObject class="node" :style="nodeSettingContainerStyle" v-if="isOneNodeSelected">
                 <body xmlns="http://www.w3.org/1999/xhtml" class="h-full">
                     <NodeSetting />
+                </body>
+            </foreignObject>
+            <foreignObject class="node" :style="debugStyle">
+                <body xmlns="http://www.w3.org/1999/xhtml" class="h-full">
+                    {{mouseState}}
                 </body>
             </foreignObject>
         </Teleport>
