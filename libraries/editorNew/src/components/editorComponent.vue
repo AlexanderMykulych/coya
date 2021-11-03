@@ -39,19 +39,23 @@ if (editor.enable) {
 }
 
 const paletteContainerStyle = computed(() => ({
-    left: `${svgPosition.x + 5}px`,
-    top: `${svgPosition.y + svgPosition.h / 4}px`
+    x: `${10}px`,
+    y: `${svgPosition.h / 4}px`,
+    width: "10%",
+    height: "30%"
 }));
+const phasesMargin = ref(50);
 const phasesContainerStyle = computed(() => ({
-    left: `${svgPosition.x + 20}px`,
-    top: `${svgPosition.y + svgPosition.h - 90}px`,
-    width: `${svgPosition.w - svgPosition.x - 20}px`,
-    height: `${70}px`
+    x: `${phasesMargin.value}px`,
+    y: `${svgPosition.y + svgPosition.h - 90}px`,
+    width: `calc(100% - ${phasesMargin.value * 2}px)`,
+    height: `70px`
 }));
+const nodeSettingWidth = ref(300);
 const nodeSettingContainerStyle = computed(() => ({
-    left: `${svgPosition.x + svgPosition.w - 340}px`,
-    top: `${svgPosition.y + svgPosition.h / 2}px`,
-    width: `${300}px`,
+    x: `${svgPosition.w - nodeSettingWidth.value - phasesMargin.value}px`,
+    y: `${svgPosition.h / 2}px`,
+    width: `${nodeSettingWidth.value}px`,
     height: `200px`
 }));
 
@@ -60,16 +64,22 @@ const { isOneNodeSelected } = useCurrentEditorState();
 
 <template>
     <div>
-        <Teleport v-if="!!teleportEl" :to="teleportEl">
-            <div class="absolute m-1" :style="paletteContainerStyle">
-                <Palette />
-            </div>
-            <div class="absolute m-1" :style="phasesContainerStyle">
-                <Phases />
-            </div>
-            <div class="absolute m-1" :style="nodeSettingContainerStyle" v-if="isOneNodeSelected">
-                <NodeSetting />
-            </div>
+        <Teleport v-if="!!editor.enable && editor.svg" :to="editor.svg">
+            <foreignObject class="node" :style="phasesContainerStyle">
+                <body xmlns="http://www.w3.org/1999/xhtml" class="h-full">
+                    <Phases />
+                </body>
+            </foreignObject>
+            <foreignObject class="node" :style="paletteContainerStyle">
+                <body xmlns="http://www.w3.org/1999/xhtml" class="h-full">
+                    <Palette />
+                </body>
+            </foreignObject>
+            <foreignObject class="node" :style="nodeSettingContainerStyle" v-if="isOneNodeSelected">
+                <body xmlns="http://www.w3.org/1999/xhtml" class="h-full">
+                    <NodeSetting />
+                </body>
+            </foreignObject>
         </Teleport>
     </div>
 </template>

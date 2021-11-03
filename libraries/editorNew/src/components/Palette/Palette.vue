@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div class="border-2 rounded-md p-3 bg-white grid">
+    <div class="border-2 rounded-md p-3 bg-white grid h-full">
         palette
         <div class="">1</div>
         <div class="">2</div>
