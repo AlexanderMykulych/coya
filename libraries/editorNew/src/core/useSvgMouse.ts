@@ -12,7 +12,7 @@ export function useSvgMouse(svg: SvgRef) {
         pressed: false,
         leave: true,
         palette: {
-            pressed: false,
+            pressed: false
         }
     });
     watch(() => svg.value, svgEl => {

@@ -22,7 +22,7 @@ export type SvgRef = Ref<SVGSVGElement | null>;
 
 export interface MousePaletteState {
     pressed: boolean;
-    test?: number;
+    blockName?: string;
 }
 export interface MouseState {
     position: Point;

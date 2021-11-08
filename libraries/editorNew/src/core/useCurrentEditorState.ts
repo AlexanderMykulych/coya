@@ -22,7 +22,8 @@ export function useCurrentEditorState() {
                 }
             }),
             architecture: editor.architecture,
-            mouseState: editor.mouseState
+            mouseState: editor.mouseState,
+            svg: editor.svg
         };
     }
     return {

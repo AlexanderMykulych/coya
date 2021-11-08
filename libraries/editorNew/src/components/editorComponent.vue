@@ -41,7 +41,7 @@ if (editor.enable) {
 const paletteContainerStyle = computed(() => ({
     x: `${10}px`,
     y: `${svgPosition.h / 4}px`,
-    width: "10%",
+    width: "45px",
     height: "30%"
 }));
 const phasesMargin = ref(50);
