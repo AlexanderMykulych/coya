@@ -28,13 +28,15 @@ export default defineConfig({
                 globals: {
                     vue: 'Vue',
                     "coya-core": "coya-core"
-                }
+                },
+                format: 'es'
             }
         },
         lib: {
             entry: path.resolve(__dirname, "/src/libMain.ts"),
             name: "coya-editor",
-            fileName: (format) => `coya-editor.${format}.js`
+            fileName: (format) => `coya-editor.${format}.js`,
+            formats: ['es']
         },
     }
 })

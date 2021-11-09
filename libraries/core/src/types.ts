@@ -1,12 +1,13 @@
-
 import { Ref } from "vue";
+import { AddNewBlockActionSetting, ChangeBlockPositionActionSetting, ChangeLabelActionSetting, ConnectActionSetting, HideBlocksActionSetting, HighlightActionSetting } from ".";
 import { DebugAction, DebugSetting, LineDebugAction } from "./debugTypes";
 import {
     GlobalDebugSetting, EnterSetting, ViewBoxSetting,
     ActionSetting, ArchitectureDescription,
     BlockElementDescription, BlockGroupDescriptions,
     BlockStyle, LineBlockElementDescription,
-    StyleCss, FormulaValue, TransformSetting
+    StyleCss, FormulaValue, TransformSetting,
+    BlockStyleActionSetting
 } from "./descriptionTypes";
 
 export type NumberValue = number | Ref<number>;
@@ -45,12 +46,31 @@ export enum ActionType {
     ChangeLabel = "changeLabel",
     Highlight = "highlight",
     RemoveHighlight = "removeHighlight",
-    HideBlock = "hide"
+    HideBlock = "hide",
+    ChangeBlockStyle = "changeBlockStyle"
 }
-export interface Action {
-    name: ActionType | string;
-    value: ActionSetting;
+export interface BaseAction<TActionType extends ActionType, TActionValue extends ActionSetting> {
+    name: TActionType;
+    value: TActionValue;
 }
+export interface AddNewBlockAction extends BaseAction<ActionType.AddNewBlock, AddNewBlockActionSetting> {}
+
+export interface ChangeBlockStyleAction extends BaseAction<ActionType.ChangeBlockStyle, BlockStyleActionSetting> {}
+export interface ChangeLableAction extends BaseAction<ActionType.ChangeLabel, ChangeLabelActionSetting> {}
+export interface ChangeBlockPositionAction extends BaseAction<ActionType.ChangePosition, ChangeBlockPositionActionSetting> {}
+export interface ConnectAction extends BaseAction<ActionType.Connect, ConnectActionSetting> {}
+export interface HideBlockAction extends BaseAction<ActionType.HideBlock, HideBlocksActionSetting> {}
+export interface HighlightAction extends BaseAction<ActionType.Highlight, HighlightActionSetting> {}
+export interface RemoveHighlightAction extends BaseAction<ActionType.RemoveHighlight, HideBlocksActionSetting> {}
+export type Action = 
+    | AddNewBlockAction
+    | ChangeLableAction
+    | ChangeBlockPositionAction
+    | ConnectAction
+    | HideBlockAction
+    | HighlightAction
+    | ChangeBlockStyleAction
+    | RemoveHighlightAction;
 export interface Phase {
     dependsOnPhaseId: IdValue | null;
     action: Action;
@@ -146,7 +166,7 @@ export interface ChangeBlockLabelSetting {
     label: string;
 }
 export interface RemoveBlocksSetting {
-    blocks: string[];
+
 }
 export type ChangeSetting = AddBlockChangeSetting | ChangeBlockStyleSetting | ChangeBlockLabelSetting | RemoveBlocksSetting;
 
@@ -257,9 +277,10 @@ export interface DebugStateContainer {
     lines?: LineDebugAction[];
 }
 
+export type ActionItemExecutor = (phaseId: number, action: Action) => Change[] | null;
 export interface ActionItem {
     type: ActionType;
-    executor: (context: ActionExecutorContext, action: Action) => Change[] | null;
+    executor: ActionItemExecutor;
     debugger?: (debugInfo: any) => DebugAction[];
 }
 export type ActionList = ActionItem[];

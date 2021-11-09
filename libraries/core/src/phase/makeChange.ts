@@ -2,7 +2,7 @@ import { ArchitectureDescription, BlockStyle } from "../descriptionTypes";
 import {
     AddBlockChangeSetting,
     Change, ChangeBlockStyleSetting,
-    ChangeType, RemoveBlocksSetting
+    ChangeType
 } from "../types";
 import { deepAssign } from "../util/deepAssign";
 
@@ -23,11 +23,13 @@ export function makeChange(architecture: ArchitectureDescription, change: Change
             }
         }
     } else if (change.type === ChangeType.RemoveBlock) {
-        const setting = change.setting as RemoveBlocksSetting;
-        setting.blocks.forEach(x => {
-            delete architecture.blocks[x];
-            delete architecture.style?.blocks?.[x];
-        });
+        Object.keys(architecture.style?.blocks || {})
+            .forEach(x => {
+                if (architecture.style?.blocks?.[x].isHighlight) {
+                    delete architecture.blocks[x];
+                    delete architecture.style?.blocks?.[x];
+                }
+            });
 
     } else if (change.type === ChangeType.ChangePosition) {
         const currentSetting = architecture.style?.blocks?.[change.setting.blockId];

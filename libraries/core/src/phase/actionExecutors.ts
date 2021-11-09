@@ -6,6 +6,7 @@ import { changeLabelActionDebugger, changeLabelActionExecutor } from "./changeLa
 import { connectActionDebugger, connectActionExecutor } from "./connectActionExecutor";
 import { hideBlocksActionDebugger, hideBlocksActionExecutor } from "./hideBlocksActionExecutor";
 import { removeHighlightActionExecutor } from "./removeHighlightActionExecutor";
+import { changeBlockStyleExecutor } from "./changeBlockStyleExecutor";
 
 export const actionExecutors: ActionList = [{
     type: ActionType.Connect,
@@ -32,4 +33,7 @@ export const actionExecutors: ActionList = [{
     type: ActionType.HideBlock,
     executor: hideBlocksActionExecutor,
     debugger: hideBlocksActionDebugger
+}, {
+    type: ActionType.ChangeBlockStyle,
+    executor: changeBlockStyleExecutor
 }];

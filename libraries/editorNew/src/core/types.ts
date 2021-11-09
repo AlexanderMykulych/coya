@@ -1,4 +1,4 @@
-import { Architecture } from "coya-core";
+import { Action, ActionSetting, Architecture } from "coya-core";
 import { ArchitectureDescription, Change } from "coya-core";
 import { Ref } from "vue";
 
@@ -56,4 +56,20 @@ export interface EnableEditorParameters {
     initialConfig: Ref<ArchitectureDescription>;
     architecture: Ref<Architecture>;
     id?: string
+}
+
+export interface CurrentEditorState {
+    isOneNodeSelected: Ref<boolean>;
+    phases: Ref<{
+        items?: {
+            phaseKey: string;
+            config: string[] | ActionSetting | ActionSetting[];
+            index: number;
+        }[][];
+        totalCount: number;
+    }>;
+    architecture: Architecture;
+    mouseState: MouseState;
+    svg: SVGSVGElement | null;
+    makeChange: (action: Action | Action[]) => void;
 }

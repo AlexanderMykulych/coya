@@ -65,7 +65,8 @@ export type ActionSetting =
     | ChangeBlockPositionActionSetting
     | ChangeLabelActionSetting
     | HighlightActionSetting
-    | HideBlocksActionSetting;
+    | HideBlocksActionSetting
+    | BlockStyleActionSetting;
 
 export interface PhaseAction {
     [name: string]: string | string[] | ActionSetting | ActionSetting[];
@@ -118,6 +119,9 @@ export interface BlockStyle {
     position?: Position;
     label?: string;
     isHighlight?: boolean;
+}
+export interface BlockStyleActionSetting {
+    [name: string]: BlockStyle;
 }
 export interface GlobalDebugSetting {
     enable: boolean;

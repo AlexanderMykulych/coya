@@ -1,12 +1,9 @@
 import { DebugAction, DebugType } from "../debugTypes";
 import { ChangeLabelActionSetting } from "../descriptionTypes";
 import { isHasLabel } from "../typeGuards";
-import { Action, ActionDebugInfo, ActionExecutorContext, Change, ChangeOwnerType, ChangeType } from "../types";
+import { Action, ActionDebugInfo, Change, ChangeOwnerType, ChangeType } from "../types";
 
-export function changeLabelActionExecutor(context: ActionExecutorContext, action: Action): Change[] | null {
-    if (!context) {
-        return null;
-    }
+export function changeLabelActionExecutor(phaseId: number, action: Action): Change[] | null {
     const val = action.value as ChangeLabelActionSetting;
     return Object
         .keys(val)
@@ -22,7 +19,7 @@ export function changeLabelActionExecutor(context: ActionExecutorContext, action
                 },
                 owner: {
                     type: ChangeOwnerType.Phase,
-                    phaseId: context.indexItem.phaseId
+                    phaseId,
                 }
             };
         });

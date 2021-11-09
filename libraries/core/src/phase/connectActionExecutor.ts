@@ -1,11 +1,11 @@
 import { DebugAction, DebugType } from "../debugTypes";
 import { BlockElementType } from "../descriptionTypes";
 import { isConnectActionSetting } from "../typeGuards";
-import { Action, ActionDebugInfo, ActionExecutorContext, Change, ChangeOwnerType, ChangeType } from "../types";
+import { Action, ActionDebugInfo, Change, ChangeOwnerType, ChangeType } from "../types";
 
-export function connectActionExecutor(context: ActionExecutorContext, action: Action): Change[] | null {
+export function connectActionExecutor(phaseId: number, action: Action): Change[] | null {
     if (isConnectActionSetting(action.value)) {
-        const newBlockId = action.value.name ?? `line_${context.indexItem.phaseId}`;
+        const newBlockId = action.value.name ?? `line_${phaseId}`;
         return [{
             type: ChangeType.AddNewBlock,
             setting: {
@@ -18,7 +18,7 @@ export function connectActionExecutor(context: ActionExecutorContext, action: Ac
             },
             owner: {
                 type: ChangeOwnerType.Phase,
-                phaseId: context.indexItem.phaseId
+                phaseId
             }
         }];
     }

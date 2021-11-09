@@ -1,10 +1,11 @@
 <script lang="ts" setup>
-import { computed } from "vue";
+import { ActionType } from "coya-core";
+import { computed, watch } from "vue";
 import { useCurrentEditorState } from "../../core/useCurrentEditorState";
 import { PaletteBlocks } from "./PaletteBlocks";
 
-const {mouseState, svg} = useCurrentEditorState();
-const onMouseDown = ({name}: {name: string}) => {
+const { mouseState, svg, makeChange } = useCurrentEditorState()!;
+const onMouseDown = ({ name }: { name: string }) => {
     mouseState.palette.pressed = true;
     mouseState.palette.blockName = name;
 }
@@ -13,18 +14,45 @@ const drawDraggedElement = computed(() => !!svg && mouseState.palette.pressed &&
 const draggedComponentConfig = computed(() => drawDraggedElement.value ? PaletteBlocks.find(x => x.name === mouseState.palette.blockName)?.preview : null);
 const draggedComponentWidth = computed(() => draggedComponentConfig.value?.width || 100);
 const draggedComponentHeight = computed(() => draggedComponentConfig.value?.height || 100);
+
+watch(() => mouseState.palette.pressed, (val, oldVal) => {
+    if (!val && oldVal && mouseState.palette.blockName) {
+        makeChange([{
+            name: ActionType.AddNewBlock,
+            value: {
+                test: {
+                    label: "new palette block"
+                }
+            }
+        }, {
+            name: ActionType.ChangeBlockStyle,
+            value: {
+                test: {
+                    position: {
+                        x: `${mouseState.position.x - 50}`,
+                        y: `${mouseState.position.y - 50}`,
+                        w: "100",
+                        h: "100",
+                    },
+                    css: {
+                        fill: "#3e6b94"
+                    }
+                }
+            }
+        }]);
+    }
+});
 </script>
 
 <template>
     <div class="border-2 rounded-md p-3 bg-white grid h-full">
-        <div class="" @mousedown="onMouseDown(1)">
-            <i-cil:rectangle />
+        <div
+            v-for="block in PaletteBlocks"
+            :key="block.name"
+            @mousedown="onMouseDown({ name: block.name })"
+        >
+            <component :is="block.paletteComponent" />
         </div>
-        <div v-for="block in PaletteBlocks" :key="block.name" @mousedown="onMouseDown({name: block.name})">
-            <component :is="block.paletteComponent"/>
-        </div>
-        <div class="">3</div>
-        <div class="">4</div>
     </div>
     <Teleport v-if="drawDraggedElement" :to="svg">
         <component

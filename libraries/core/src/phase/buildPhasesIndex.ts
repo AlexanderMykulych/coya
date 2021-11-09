@@ -1,6 +1,6 @@
 import { ActionSetting, ConnectActionSetting, PhaseAction } from "../descriptionTypes";
-import { isNullOrUndefined } from "../typeGuards";
-import { PhaseId, PhaseIndex, PhaseIndexItem, PhaseIndexItemAction } from "../types";
+import { isNotNullOrUndefined, isNullOrUndefined } from "../typeGuards";
+import { PhaseId, PhaseIndex, PhaseIndexItem, PhaseIndexItemAction, ActionType } from "../types";
 
 export function buildPhasesIndex(phases?: PhaseAction[]): PhaseIndex {
     const index = buildIndexObject(phases);
@@ -33,6 +33,9 @@ function buildIndexObject(phases: PhaseAction[] | undefined | null): PhaseIndexI
         const actions: PhaseIndexItemAction[] = Object
             .keys(phase)
             .flatMap((key, actionIndex) => {
+                if (!(key in ActionType)) {
+                    return;
+                }
                 let action = phase[key];
                 let actions: (string | ActionSetting)[] = [];
                 if (!Array.isArray(action)) {
@@ -42,12 +45,13 @@ function buildIndexObject(phases: PhaseAction[] | undefined | null): PhaseIndexI
                 }
                 return actions.map<PhaseIndexItemAction>(y => ({
                     action: {
-                        name: key,
+                        name: key as ActionType.Connect,
                         value: y as ConnectActionSetting
                     },
                     actionId: actionIndex
                 }));
-            });
+            })
+            .filter(isNotNullOrUndefined);
         return <PhaseIndexItem>{
             hasNext: phaseIndex < phases.length - 1,
             phaseId: phaseIndex,

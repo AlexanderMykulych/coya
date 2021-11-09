@@ -4,7 +4,7 @@ export * from "./typeGuards";
 export * from "./types";
 export * from "./descriptionTypes";
 export * from "./phase/makeChange";
-
+export * from "./phase/executeActions";
 export {
     transformDescriptionToArchitecture,
     transformToArchitecture,
