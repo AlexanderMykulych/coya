@@ -60,14 +60,3 @@ jobs:
 
             - name: publish to npm
               run: rush publish --include-all --publish --set-access-level public --version-policy main -n ${{ secrets.NPM_TOKEN }}
-
-            - name: install vsce
-              run: pnpm i -g vsce
-
-            - name: publish vscode extension
-              working-directory: ./libraries/vscode/coya
-                # unlink ./node_modules
-              run: |
-                pwd
-                npm i
-                vsce publish -p ${{ secrets.VSCE_TOKEN }}
