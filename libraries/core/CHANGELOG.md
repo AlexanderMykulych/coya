@@ -1,6 +1,11 @@
 # Change Log - coya-core
 
-This log was last generated on Tue, 02 Nov 2021 17:07:51 GMT and should not be manually modified.
+This log was last generated on Wed, 10 Nov 2021 20:57:14 GMT and should not be manually modified.
+
+## 0.9.17
+Wed, 10 Nov 2021 20:57:14 GMT
+
+_Version update only_
 
 ## 0.9.16
 Tue, 02 Nov 2021 17:07:51 GMT
