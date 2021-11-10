@@ -139,7 +139,7 @@ provide("svgInfo", reactive({
                 xmlns="http://www.w3.org/2000/svg"
                 ref="coyaSvgEl"
                 overflow="auto"
-                :viewBox="viewBox"
+               
                 v-if="!!arch?.style?.positioning"
             >
                 <defs>

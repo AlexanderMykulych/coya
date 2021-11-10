@@ -1,4 +1,4 @@
-import { ActionSetting, ConnectActionSetting, PhaseAction } from "../descriptionTypes";
+import { ActionSetting, PhaseAction } from "../descriptionTypes";
 import { isNotNullOrUndefined, isNullOrUndefined } from "../typeGuards";
 import { PhaseId, PhaseIndex, PhaseIndexItem, PhaseIndexItemAction, ActionType } from "../types";
 
@@ -33,7 +33,7 @@ function buildIndexObject(phases: PhaseAction[] | undefined | null): PhaseIndexI
         const actions: PhaseIndexItemAction[] = Object
             .keys(phase)
             .flatMap((key, actionIndex) => {
-                if (!(key in ActionType)) {
+                if (!(Object.values(ActionType).some(x => x === key))) {
                     return;
                 }
                 let action = phase[key];
@@ -45,8 +45,8 @@ function buildIndexObject(phases: PhaseAction[] | undefined | null): PhaseIndexI
                 }
                 return actions.map<PhaseIndexItemAction>(y => ({
                     action: {
-                        name: key as ActionType.Connect,
-                        value: y as ConnectActionSetting
+                        name: key as ActionType,
+                        value: y as any
                     },
                     actionId: actionIndex
                 }));

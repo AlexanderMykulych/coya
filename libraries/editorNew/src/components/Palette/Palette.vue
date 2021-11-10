@@ -4,7 +4,7 @@ import { computed, watch } from "vue";
 import { useCurrentEditorState } from "../../core/useCurrentEditorState";
 import { PaletteBlocks } from "./PaletteBlocks";
 
-const { mouseState, svg, makeChange } = useCurrentEditorState()!;
+const { mouseState, svg, makeChange, getNewUniqBlockName } = useCurrentEditorState()!;
 const onMouseDown = ({ name }: { name: string }) => {
     mouseState.palette.pressed = true;
     mouseState.palette.blockName = name;
@@ -17,17 +17,18 @@ const draggedComponentHeight = computed(() => draggedComponentConfig.value?.heig
 
 watch(() => mouseState.palette.pressed, (val, oldVal) => {
     if (!val && oldVal && mouseState.palette.blockName) {
+        const blockName = getNewUniqBlockName();
         makeChange([{
             name: ActionType.AddNewBlock,
             value: {
-                test: {
+                [blockName]: {
                     label: "new palette block"
                 }
             }
         }, {
             name: ActionType.ChangeBlockStyle,
             value: {
-                test: {
+                [blockName]: {
                     position: {
                         x: `${mouseState.position.x - 50}`,
                         y: `${mouseState.position.y - 50}`,

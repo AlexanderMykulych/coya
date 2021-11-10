@@ -33,6 +33,13 @@ export function useCurrentEditorState(): CurrentEditorState | null {
                     actionId: index,
                     action: x
                 })), 0);
+            },
+            getNewUniqBlockName: () => {
+                let name = "block_new";
+                while (Object.keys(editor.architecture.style?.blocks || {}).some(x => x === name)) {
+                    name += "_new";
+                }
+                return name;
             }
         };
     }

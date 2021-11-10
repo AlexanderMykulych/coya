@@ -72,4 +72,5 @@ export interface CurrentEditorState {
     mouseState: MouseState;
     svg: SVGSVGElement | null;
     makeChange: (action: Action | Action[]) => void;
+    getNewUniqBlockName: () => string;
 }

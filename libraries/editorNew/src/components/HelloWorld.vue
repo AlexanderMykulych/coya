@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { Architecture } from 'coya-core';
-import { onMounted, onScopeDispose, Ref, ref, shallowRef } from 'vue'
+import { onMounted, onScopeDispose, reactive, Ref, ref, shallowRef } from 'vue'
 import { EnabledEditor } from '../core';
 import { enableEditor } from '../core/enableEditor';
 import test from "./test.vue";
 
 defineProps<{ msg: string }>()
 
-var svgEl = ref(null);
+var svgEl = ref<SVGSVGElement | null>(null);
 let testComponent = ref(null);
 const config = ref({
 	"name": "vue-lifecycle-json",
@@ -163,6 +163,12 @@ const architecture = <Ref<Architecture>>(<any>ref({
     toPhase: (index) => architecture.value.currentPhase = index
 }));
 let editor = shallowRef();
+const viewBox = reactive({
+    x: 0,
+    y: 0,
+    w: 0,
+    h: 0
+});
 onMounted(() => {
     editor.value = enableEditor({
         svg: svgEl,
@@ -172,9 +178,27 @@ onMounted(() => {
         id: "test"
     });
     testComponent.value = editor.value.wrap(test);
-    
-});
+    const svgSize = svgEl.value.getBoundingClientRect();
+    viewBox.w = svgSize.width;
+    viewBox.h = svgSize.height;
+    svgEl.value["onmousewheel"] = (e) => {
+        e.preventDefault();
+        var w = viewBox.w;
+        var h = viewBox.h;
+        var mx = e.offsetX;
+        var my = e.offsetY;    
+        var dw = w*Math.sign(e.deltaY)*0.05;
+        var dh = h*Math.sign(e.deltaY)*0.05;
+        var dx = dw*mx/svgSize.width;
+        var dy = dh*my/svgSize.height;
+        viewBox.x = viewBox.x+dx;
+        viewBox.y = viewBox.y+dy;
+        viewBox.w = viewBox.w-dw;
+        viewBox.h = viewBox.h-dh;
+        svgEl.value.dispatchEvent(new CustomEvent("onViewBoxChange", {detail: {viewBox}}));
+    }
 
+});
 const block = {
     id: "start"
 }
@@ -183,7 +207,7 @@ const block = {
 <template>
     <editor.component v-if="!!editor"/>
     <div class="h-full relative">
-        <svg width="95%" height="700" ref="svgEl" class="rounded-lg border-3 shadow-3 ml-10">
+        <svg width="95%" height="700" :viewBox="`${viewBox.x} ${viewBox.y} ${viewBox.w} ${viewBox.h}`" ref="svgEl" class="rounded-lg border-3 shadow-3 ml-10">
             <testComponent v-if="testComponent" :positioning="config.style.blocks.start.position" :block="block" />
         </svg>
     </div>
