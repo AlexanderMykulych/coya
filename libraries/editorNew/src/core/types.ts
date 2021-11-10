@@ -38,6 +38,7 @@ export interface EnabledEditor extends BaseEditor {
     svg: SVGSVGElement | null;
     mouseState: MouseState;
     config: ArchitectureDescription;
+    initialConfig: ArchitectureDescription;
     architecture: Architecture;
     makeChange: (change: Change) => void;
     component: any

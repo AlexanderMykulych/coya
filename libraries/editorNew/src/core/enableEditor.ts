@@ -16,6 +16,7 @@ export function enableEditor({svg, config, id, initialConfig, architecture}: Ena
             svg: svg as any,
             mouseState: useSvgMouse(svg),
             config: config as any,
+            initialConfig: initialConfig as any,
             architecture: architecture as any,
             makeChange: (change: Change) => {
                 makeChange(config.value, change);

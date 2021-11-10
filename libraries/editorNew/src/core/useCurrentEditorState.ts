@@ -30,12 +30,12 @@ export function useCurrentEditorState(): CurrentEditorState | null {
                 console.log(action);
                 const actions = isArray(action) ? action : [action];
                 if (editor.architecture?.currentPhase === null) {
-                    executeActions(editor.config, actions.map((x, index) => ({
+                    executeActions(editor.initialConfig, actions.map((x, index) => ({
                         actionId: index,
                         action: x
                     })), 0);
                 } else {
-                    const phaseConfig = editor.config.phases?.[editor.architecture.currentPhase];
+                    const phaseConfig = editor.initialConfig.phases?.[editor.architecture.currentPhase];
                     if (phaseConfig) {
                         actions.forEach(action => {
                             if (!!phaseConfig[action.name]) {

@@ -1,7 +1,7 @@
 import { blockGroupDescriptionsToBlock } from "./block/blockGroupDescriptionsToBlock";
 import { ArchitectureDescription, TransformSetting } from "./descriptionTypes";
 import { isArchitectureDescription, isNotNullOrUndefined } from "./typeGuards";
-import { PhaseId, SelectedProperties, Architecture, Block, CurrentPhaseInfo, DebugStateContainer, DebugSelectContext, TransformationResult } from "./types";
+import { SelectedProperties, Architecture, Block, CurrentPhaseInfo, DebugStateContainer, DebugSelectContext, TransformationResult } from "./types";
 import { styleDescriptionToArchitectureStyle } from "./style/styleDescriptionToArchitectureStyle";
 import { startPhases } from "./phase/startPhases";
 import { buildPhasesIndex } from "./phase/buildPhasesIndex";
@@ -16,7 +16,7 @@ export function transformToArchitecture(description: Ref<unknown> | unknown, set
     watch(() => unref(setting.viewBox.h), (h: any) => {
         console.log("newHeight:", h);
     }, {immediate: true})
-    const transitionalArchitectureRef = ref(deepCopy(value));
+    const transitionalArchitectureRef = computed(() => deepCopy(value));
     transitionalArchitectureRef.value.debugState = <DebugStateContainer>{
         selected: null
     };
@@ -44,7 +44,7 @@ export function transformToArchitecture(description: Ref<unknown> | unknown, set
 }
 
 export function transformDescriptionToArchitecture(transitionalArchitectureRef: Ref<ArchitectureDescription>, setting: TransformSetting): Architecture {
-    const oldValues: { arch: ArchitectureDescription, phaseId: PhaseId }[] = [];
+    const initState = deepCopy(transitionalArchitectureRef.value);
     const currentPhase: CurrentPhaseInfo = reactive({
         current: null
     });
@@ -53,39 +53,33 @@ export function transformDescriptionToArchitecture(transitionalArchitectureRef: 
     const phaseIndex = buildPhasesIndex(transitionalArchitectureRef.value.phases);
     const style = computed(() => styleDescriptionToArchitectureStyle(transitionalArchitectureRef.value, blocks.value, setting));
     const next = () => {
-        const oldVal = deepCopy(transitionalArchitectureRef.value);
         const phase = phaseIndex.getPhaseById(currentPhase.current);
         if (isNotNullOrUndefined(currentPhase.current) && !phase?.hasNext) {
             return;
         }
         const nextPhaseId = startPhases(transitionalArchitectureRef.value, phaseIndex, currentPhase);
-        if (currentPhase.current !== nextPhaseId) {
-            oldValues.push({
-                arch: oldVal,
-                phaseId: currentPhase.current
-            });
-        }
+
         currentPhase.current = nextPhaseId;
         return nextPhaseId;
     };
     const back = () => {
-        let val = oldValues.pop();
-        while (oldValues.length > 0 && oldValues[oldValues.length - 1].phaseId == val?.phaseId) {
-            val = oldValues.pop();
+        if (currentPhase.current != null) {
+            const nextPhase = currentPhase.current - 1;
+            toPhase(nextPhase);
+            return nextPhase;
         }
-        if (val) {
-            transitionalArchitectureRef.value = val.arch;
-            currentPhase.current = val.phaseId;
-        }
-        return val?.phaseId;
+        
+        return null;
     };
     const toPhase = (phaseId: number | string) => {
+        currentPhase.current = null;
+        transitionalArchitectureRef.value = deepCopy(initState);
         const phaseInd = phaseIndex.getPhaseIndex(phaseId);
         const currentPhaseInd = phaseIndex.getPhaseIndex(currentPhase.current);
         if (phaseInd === currentPhaseInd) {
             return;
         }
-        const walkerFn = phaseInd > currentPhaseInd ? next : back;
+        const walkerFn = next;
         let curPhaseId = null;
         do {
             curPhaseId = walkerFn();
