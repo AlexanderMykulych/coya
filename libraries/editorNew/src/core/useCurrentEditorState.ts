@@ -29,10 +29,24 @@ export function useCurrentEditorState(): CurrentEditorState | null {
             makeChange: (action: Action | Action[]) => {
                 console.log(action);
                 const actions = isArray(action) ? action : [action];
-                executeActions(editor.config, actions.map((x, index) => ({
-                    actionId: index,
-                    action: x
-                })), 0);
+                if (editor.architecture?.currentPhase === null) {
+                    executeActions(editor.config, actions.map((x, index) => ({
+                        actionId: index,
+                        action: x
+                    })), 0);
+                } else {
+                    const phaseConfig = editor.config.phases?.[editor.architecture.currentPhase];
+                    if (phaseConfig) {
+                        actions.forEach(action => {
+                            if (!!phaseConfig[action.name]) {
+                                Object.keys(action.value)
+                                    .forEach(key => phaseConfig[action.name][key] = action.value[key]);
+                            } else {
+                                phaseConfig[action.name] = action.value;
+                            }
+                        });
+                    }
+                }
             },
             getNewUniqBlockName: () => {
                 let name = "block_new";

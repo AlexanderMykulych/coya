@@ -55,7 +55,7 @@ watch(() => preparedConfig.config, val => {
             }
         });
         arch.value = architecture.value;
-        archConfig = initialConfig;
+        archConfig = config;
         editor.value = enableEditor({
             svg: coyaSvgEl,
             config,

@@ -1,26 +1,27 @@
+import { computed } from "vue";
 import { ActionSetting, PhaseAction } from "../descriptionTypes";
 import { isNotNullOrUndefined, isNullOrUndefined } from "../typeGuards";
 import { PhaseId, PhaseIndex, PhaseIndexItem, PhaseIndexItemAction, ActionType } from "../types";
 
 export function buildPhasesIndex(phases?: PhaseAction[]): PhaseIndex {
-    const index = buildIndexObject(phases);
+    const index = computed(() => buildIndexObject(phases));
     return {
         getNextPhaseById: (id: PhaseId) => {
             if (isNullOrUndefined(id)) {
-                return index.find(x => x.phaseId === 0);
+                return index.value.find(x => x.phaseId === 0);
             }
-            return index.find(x => x.phaseId === id + 1);
+            return index.value.find(x => x.phaseId === id + 1);
         },
-        phases: index.map(x => x.phaseId),
+        phases: index.value.map(x => x.phaseId),
         getPhaseIndex: phase => {
             const id = typeof phase === "string" ? Number(phase) : phase;
-            return index.findIndex(x => x.phaseId === id);
+            return index.value.findIndex(x => x.phaseId === id);
         },
         getPhaseById: (id: PhaseId) => {
-            return index.find(x => x.phaseId === id);
+            return index.value.find(x => x.phaseId === id);
         },
         findPhaseIdBy: (func: (_: PhaseIndexItem) => boolean) => {
-            const item = index.find(func);
+            const item = index.value.find(func);
             return item?.phaseId;
         }
     };
