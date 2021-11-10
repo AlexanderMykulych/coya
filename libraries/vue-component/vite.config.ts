@@ -85,7 +85,8 @@ export default defineConfig({
         lib: {
             entry: path.resolve(__dirname, "/src/lib/libEntry.ts"),
             name: "Coya",
-            fileName: (format) => `coya.${format}.js`
+            fileName: (format) => `coya.${format}.js`,
+            formats: ['es']
         },
         minify: false
     }
