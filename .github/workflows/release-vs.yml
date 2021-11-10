@@ -1,0 +1,66 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Release and Publish
+
+# Controls when the workflow will run
+on:
+    # Allows you to run this workflow manually from the Actions tab
+    workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+    # This workflow contains a single job called "build"
+    release:
+        # The type of runner that the job will run on
+        runs-on: ubuntu-latest
+
+        strategy:
+            matrix:
+                node-version: [14.x]
+
+        # Steps represent a sequence of tasks that will be executed as part of the job
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v2
+              with:
+                  node-version: ${{ matrix.node-version }}
+
+            - name: Install Rush
+              run: npm install -g @microsoft/rush
+
+            - name: Install rush
+              run: node common/scripts/install-run-rush.js install
+            - name: Install pnpm
+              run: npm install -g pnpm
+
+            - name: Rush update
+              run: rush update
+            - name: Rush install
+              run: rush install --no-link
+            - run: rush link
+
+            - name: Build
+              run: rush build --to-version-policy main
+
+            - name: Git set info
+              run: |
+                git config user.name github-actions
+                git config user.email github-actions@github.com
+
+            - name: Commit
+              run: |
+                git commit -a -m 'Release by github actions' || echo "No changes to commit"
+                git push
+
+            - name: install vsce
+              run: pnpm i -g vsce
+
+            - name: publish vscode extension
+              working-directory: ./libraries/vscode/coya
+                # unlink ./node_modules
+              run: |
+                pwd
+                npm i
+                vsce publish -p ${{ secrets.VSCE_TOKEN }}
