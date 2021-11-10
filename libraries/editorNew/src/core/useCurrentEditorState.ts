@@ -2,10 +2,31 @@ import { computed, ref } from "vue";
 import { CurrentEditorState, getCurrentEditor } from ".";
 import { Action, isArray } from "coya-core";
 import { executeActions } from "coya-core";
+import { ArchitectureDescription } from "coya-core";
 
 export function useCurrentEditorState(): CurrentEditorState | null {
     const editor = getCurrentEditor();
     if (editor.enable) {
+        const makeChangeToDiagram = (diagram: ArchitectureDescription, actions: Action[]) => {
+            if (editor.architecture?.currentPhase === null) {
+                executeActions(diagram, actions.map((x, index) => ({
+                    actionId: index,
+                    action: x
+                })), 0);
+            } else {
+                const phaseConfig = diagram.phases?.[editor.architecture.currentPhase];
+                if (phaseConfig) {
+                    actions.forEach(action => {
+                        if (!!phaseConfig[action.name]) {
+                            Object.keys(action.value)
+                                .forEach(key => phaseConfig[action.name][key] = action.value[key]);
+                        } else {
+                            phaseConfig[action.name] = action.value;
+                        }
+                    });
+                }
+            }
+        }
         return {
             isOneNodeSelected: computed(() => !!editor.state.selectedNodeIds?.[0]),
             phases: computed(() => {
@@ -29,24 +50,9 @@ export function useCurrentEditorState(): CurrentEditorState | null {
             makeChange: (action: Action | Action[]) => {
                 console.log(action);
                 const actions = isArray(action) ? action : [action];
-                if (editor.architecture?.currentPhase === null) {
-                    executeActions(editor.initialConfig, actions.map((x, index) => ({
-                        actionId: index,
-                        action: x
-                    })), 0);
-                } else {
-                    const phaseConfig = editor.initialConfig.phases?.[editor.architecture.currentPhase];
-                    if (phaseConfig) {
-                        actions.forEach(action => {
-                            if (!!phaseConfig[action.name]) {
-                                Object.keys(action.value)
-                                    .forEach(key => phaseConfig[action.name][key] = action.value[key]);
-                            } else {
-                                phaseConfig[action.name] = action.value;
-                            }
-                        });
-                    }
-                }
+                makeChangeToDiagram(editor.config, actions);
+                makeChangeToDiagram(editor.initialConfig, actions);
+                editor.architecture.toPhase(editor.architecture.currentPhase);
             },
             getNewUniqBlockName: () => {
                 let name = "block_new";

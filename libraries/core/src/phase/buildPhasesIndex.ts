@@ -1,10 +1,10 @@
-import { computed } from "vue";
-import { ActionSetting, PhaseAction } from "../descriptionTypes";
+import { computed, Ref } from "vue";
+import { ArchitectureDescription, ActionSetting, PhaseAction } from "../descriptionTypes";
 import { isNotNullOrUndefined, isNullOrUndefined } from "../typeGuards";
 import { PhaseId, PhaseIndex, PhaseIndexItem, PhaseIndexItemAction, ActionType } from "../types";
 
-export function buildPhasesIndex(phases?: PhaseAction[]): PhaseIndex {
-    const index = computed(() => buildIndexObject(phases));
+export function buildPhasesIndex(architectureDescription: Ref<ArchitectureDescription>): PhaseIndex {
+    const index = computed(() => buildIndexObject(architectureDescription.value.phases));
     return {
         getNextPhaseById: (id: PhaseId) => {
             if (isNullOrUndefined(id)) {

@@ -5,7 +5,7 @@ import { SelectedProperties, Architecture, Block, CurrentPhaseInfo, DebugStateCo
 import { styleDescriptionToArchitectureStyle } from "./style/styleDescriptionToArchitectureStyle";
 import { startPhases } from "./phase/startPhases";
 import { buildPhasesIndex } from "./phase/buildPhasesIndex";
-import { watch, computed, Ref, isRef, ref, reactive, unref } from 'vue';
+import { computed, Ref, isRef, ref, reactive } from 'vue';
 import { deepCopy } from "./util/deepCopy";
 import { getDebugActions } from "./debug/getDebugActions";
 import { DebugType } from "./debugTypes";
@@ -13,17 +13,14 @@ import { DebugType } from "./debugTypes";
 export function transformToArchitecture(description: Ref<unknown> | unknown, setting: TransformSetting): TransformationResult {
     const refDescription = isRef(description) ? description : ref(description);
     const value = refDescription.value;
-    watch(() => unref(setting.viewBox.h), (h: any) => {
-        console.log("newHeight:", h);
-    }, {immediate: true})
-    const transitionalArchitectureRef = computed(() => deepCopy(value));
-    transitionalArchitectureRef.value.debugState = <DebugStateContainer>{
+    const transitionalArchitectureRef = ref<ArchitectureDescription>(deepCopy(value));
+    transitionalArchitectureRef.value!.debugState = <DebugStateContainer>{
         selected: null
     };
 
     const architecture = computed<Architecture>(() => {
         if (isArchitectureDescription(transitionalArchitectureRef.value)) {
-            return transformDescriptionToArchitecture(transitionalArchitectureRef, setting);
+            return transformDescriptionToArchitecture(transitionalArchitectureRef, setting, refDescription as Ref<ArchitectureDescription>);
         }
         return {
             name: "",
@@ -43,14 +40,13 @@ export function transformToArchitecture(description: Ref<unknown> | unknown, set
     };
 }
 
-export function transformDescriptionToArchitecture(transitionalArchitectureRef: Ref<ArchitectureDescription>, setting: TransformSetting): Architecture {
-    const initState = deepCopy(transitionalArchitectureRef.value);
+export function transformDescriptionToArchitecture(transitionalArchitectureRef: Ref<ArchitectureDescription>, setting: TransformSetting, initState: Ref<ArchitectureDescription>): Architecture {
     const currentPhase: CurrentPhaseInfo = reactive({
         current: null
     });
  
     const blocks = computed(() => BlockGroupDescriptionsToBlock(transitionalArchitectureRef.value))
-    const phaseIndex = buildPhasesIndex(transitionalArchitectureRef.value.phases);
+    const phaseIndex = buildPhasesIndex(transitionalArchitectureRef);
     const style = computed(() => styleDescriptionToArchitectureStyle(transitionalArchitectureRef.value, blocks.value, setting));
     const next = () => {
         const phase = phaseIndex.getPhaseById(currentPhase.current);
@@ -73,7 +69,7 @@ export function transformDescriptionToArchitecture(transitionalArchitectureRef: 
     };
     const toPhase = (phaseId: number | string) => {
         currentPhase.current = null;
-        transitionalArchitectureRef.value = deepCopy(initState);
+        transitionalArchitectureRef.value = deepCopy(initState.value);
         const phaseInd = phaseIndex.getPhaseIndex(phaseId);
         const currentPhaseInd = phaseIndex.getPhaseIndex(currentPhase.current);
         if (phaseInd === currentPhaseInd) {
