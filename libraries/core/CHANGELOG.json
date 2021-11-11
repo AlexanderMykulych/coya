@@ -2,6 +2,12 @@
   "name": "coya-core",
   "entries": [
     {
+      "version": "0.9.18",
+      "tag": "coya-core_v0.9.18",
+      "date": "Thu, 11 Nov 2021 09:27:52 GMT",
+      "comments": {}
+    },
+    {
       "version": "0.9.17",
       "tag": "coya-core_v0.9.17",
       "date": "Wed, 10 Nov 2021 20:57:14 GMT",
