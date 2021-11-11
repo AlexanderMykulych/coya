@@ -111,7 +111,7 @@ export default defineConfig({
 
     server: {
         fs: {
-            strict: true,
+            strict: false,
         },
         port: 5000,
         strictPort: true

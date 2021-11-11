@@ -89,3 +89,4 @@ libraries/vscode/coya/out/configEditor.js
 libraries/vscode/coya/out/configEditor.js.map
 libraries/vscode/coya/out/extension.js
 libraries/vscode/coya/out/extension.js.map
+libraries/vscode/coya/vite-proj/coya/examples/**
