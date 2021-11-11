@@ -44,28 +44,22 @@ const height = computed(() => {
     }
     return 0;
 });
-watch(() => preparedConfig.config, val => {
-    if (val) {
-        const { architecture, config } = transformToArchitecture(val, {
-            viewBox: {
-                x: vX,
-                y: vY,
-                w: width,
-                h: height
-            }
-        });
-        arch.value = architecture.value;
-        archConfig = config;
-        editor.value = enableEditor({
-            svg: coyaSvgEl,
-            config,
-            initialConfig,
-            architecture: arch,
-            id: props.id
-        });
+const { architecture, config } = transformToArchitecture(preparedConfig.config, {
+    viewBox: {
+        x: vX,
+        y: vY,
+        w: width,
+        h: height
     }
-}, {
-    immediate: true
+});
+arch.value = architecture.value;
+archConfig = config;
+editor.value = enableEditor({
+    svg: coyaSvgEl,
+    config,
+    initialConfig,
+    architecture: arch,
+    id: props.id
 });
 
 const rectPositions = computed(() => {
