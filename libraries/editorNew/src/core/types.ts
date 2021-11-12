@@ -1,4 +1,4 @@
-import { Action, ActionSetting, Architecture } from "coya-core";
+import { Action, ActionSetting, ActionType, Architecture } from "coya-core";
 import { ArchitectureDescription, Change } from "coya-core";
 import { Ref } from "vue";
 
@@ -58,7 +58,10 @@ export interface EnableEditorParameters {
     architecture: Ref<Architecture>;
     id?: string
 }
-
+export interface MakeChangeAction {
+    action: Action;
+    applyChangesToDiagram?: boolean;
+}
 export interface CurrentEditorState {
     isOneNodeSelected: Ref<boolean>;
     phases: Ref<{
@@ -72,6 +75,6 @@ export interface CurrentEditorState {
     architecture: Architecture;
     mouseState: MouseState;
     svg: SVGSVGElement | null;
-    makeChange: (action: Action | Action[]) => void;
+    makeChange: (action: MakeChangeAction | MakeChangeAction[]) => void;
     getNewUniqBlockName: () => string;
 }

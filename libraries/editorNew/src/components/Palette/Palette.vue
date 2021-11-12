@@ -19,27 +19,32 @@ watch(() => mouseState.palette.pressed, (val, oldVal) => {
     if (!val && oldVal && mouseState.palette.blockName) {
         const blockName = getNewUniqBlockName();
         makeChange([{
-            name: ActionType.AddNewBlock,
-            value: {
-                [blockName]: {
-                    label: "new palette block"
-                }
-            }
-        }, {
-            name: ActionType.ChangeBlockStyle,
-            value: {
-                [blockName]: {
-                    position: {
-                        x: `${mouseState.position.x - 50}`,
-                        y: `${mouseState.position.y - 50}`,
-                        w: "100",
-                        h: "100",
-                    },
-                    css: {
-                        fill: "#3e6b94"
+            action: {
+                name: ActionType.AddNewBlock,
+                value: {
+                    [blockName]: {
+                        label: "new palette block"
                     }
                 }
             }
+        }, {
+            action: {
+                name: ActionType.ChangeBlockStyle,
+                value: {
+                    [blockName]: {
+                        position: {
+                            x: `${mouseState.position.x - 50}`,
+                            y: `${mouseState.position.y - 50}`,
+                            w: "100",
+                            h: "100",
+                        },
+                        css: {
+                            fill: "#3e6b94"
+                        }
+                    }
+                }
+            },
+            applyChangesToDiagram: true
         }]);
     }
 });
