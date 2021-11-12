@@ -1,11 +1,11 @@
 import { blockGroupDescriptionsToBlock } from "./block/blockGroupDescriptionsToBlock";
 import { ArchitectureDescription, TransformSetting } from "./descriptionTypes";
 import { isArchitectureDescription, isNotNullOrUndefined } from "./typeGuards";
-import { SelectedProperties, Architecture, Block, CurrentPhaseInfo, DebugStateContainer, DebugSelectContext, TransformationResult } from "./types";
+import { SelectedProperties, Architecture, Block, DebugStateContainer, DebugSelectContext, TransformationResult } from "./types";
 import { styleDescriptionToArchitectureStyle } from "./style/styleDescriptionToArchitectureStyle";
 import { startPhases } from "./phase/startPhases";
 import { buildPhasesIndex } from "./phase/buildPhasesIndex";
-import { computed, Ref, isRef, ref, reactive } from 'vue';
+import { computed, Ref, isRef, ref } from 'vue';
 import { deepCopy } from "./util/deepCopy";
 import { getDebugActions } from "./debug/getDebugActions";
 import { DebugType } from "./debugTypes";
@@ -41,9 +41,7 @@ export function transformToArchitecture(description: Ref<unknown> | unknown, set
 }
 
 export function transformDescriptionToArchitecture(transitionalArchitectureRef: Ref<ArchitectureDescription>, setting: TransformSetting, initState: Ref<ArchitectureDescription>): Architecture {
-    const currentPhase: CurrentPhaseInfo = reactive({
-        current: null
-    });
+    const currentPhase = setting.currentPhase;
  
     const blocks = computed(() => BlockGroupDescriptionsToBlock(transitionalArchitectureRef.value))
     const phaseIndex = buildPhasesIndex(transitionalArchitectureRef);
@@ -67,7 +65,7 @@ export function transformDescriptionToArchitecture(transitionalArchitectureRef: 
         
         return null;
     };
-    const toPhase = (phaseId: number | string) => {
+    const toPhase = (phaseId: number | string | null | undefined) => {
         currentPhase.current = null;
         transitionalArchitectureRef.value = deepCopy(initState.value);
         const phaseInd = phaseIndex.getPhaseIndex(phaseId);
@@ -104,6 +102,9 @@ export function transformDescriptionToArchitecture(transitionalArchitectureRef: 
             }
         });
     };
+    if (currentPhase.current !== null) {
+        toPhase(currentPhase.current);
+    }
     return {
         name: transitionalArchitectureRef.value.name,
         blocks,

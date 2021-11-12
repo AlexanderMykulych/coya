@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { transformToArchitecture, RectPositioning, Architecture, ArchitectureDescription } from "coya-core";
+import { transformToArchitecture, RectPositioning, Architecture, ArchitectureDescription, CurrentPhaseInfo } from "coya-core";
 import { computed, provide, reactive, ref, toRef, watch } from "vue";
 import { useNodeDetails } from "../logic/useNodeDetails";
 import { useMousePosition } from "../logic/useSvgMousePosition";
@@ -7,12 +7,14 @@ import { useDebug } from "../state/useDebug";
 import { enableEditor } from "coya-editor-new";
 import "coya-editor-new/dist/style.css";
 import { saveConfig } from "../socket";
+import { useCurrentPhase } from "../state/useCurrentPhase";
 
-const props = defineProps<{ config: string | Object, id?: string }>();
+const props = defineProps<{ config: string | Object, id: string }>();
 
 const preparedConfig = reactive({
     config: null
 });
+const currentPhase: CurrentPhaseInfo = useCurrentPhase(props.id);
 const initialConfig = ref(null);
 watch(() => props.config, () => {
     preparedConfig.config = !!props.config && typeof props.config === "string" ? JSON.parse(props.config) : props.config;
@@ -50,7 +52,8 @@ const { architecture, config } = transformToArchitecture(preparedConfig.config, 
         y: vY,
         w: width,
         h: height
-    }
+    },
+    currentPhase
 });
 arch.value = architecture.value;
 archConfig = config;

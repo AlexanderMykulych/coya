@@ -1,7 +1,7 @@
 import { Ref } from "vue";
 import { Properties } from "csstype";
 import { DebugSetting } from "./debugTypes";
-import { BlockPositioning, DebugStateContainer, FormulaValueFuncContext } from "./types";
+import { BlockPositioning, CurrentPhaseInfo, DebugStateContainer, FormulaValueFuncContext } from "./types";
 
 export enum BlockElementType {
     Rect = "rect",
@@ -160,4 +160,5 @@ export type CustomContextBuilderFunc = (blocksPositioning: Ref<BlockPositioning[
 export interface TransformSetting {
     viewBox: ViewBoxSetting;
     customContextBuilderFunc?: CustomContextBuilderFunc;
+    currentPhase: CurrentPhaseInfo;
 }
