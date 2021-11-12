@@ -29,8 +29,8 @@ export function wrapEditorNode(editor: Editor, node: any) {
                 x: editor!.mouseState.position.x - editor.state.drag!.clickDeltaPoint.x,
                 y: editor!.mouseState.position.y - editor.state.drag!.clickDeltaPoint.y
             }) : null);
-            watch(() => newPosition.value, (val) => {
-                if (val) {
+            watch(() => newPosition.value, (val, oldVal) => {
+                if (val && val !== oldVal && oldVal) {
                     editor.makeChange({
                         type: ChangeType.ChangePosition,
                         setting: {

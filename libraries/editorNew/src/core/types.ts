@@ -77,5 +77,5 @@ export interface CurrentEditorState {
     svg: SVGSVGElement | null;
     makeChange: (action: MakeChangeAction | MakeChangeAction[]) => void;
     getNewUniqBlockName: () => string;
-    activeNode: Ref<{ style: any }>;
+    activeNode: Ref<{ x: any; y: any; w: any; h: any; }>;
 }

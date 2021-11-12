@@ -18,8 +18,13 @@ export function getFormulaValue(
         return computed(() => {
             const contextBuilderFunc = setting.customContextBuilderFunc ?? getFormulaValueFuncContext;
             const context = contextBuilderFunc(positioning, setting);
-            const fn = Function(`"use strict";return (function(${context.blockNamesAsFuncParams}){return ${formula};})`)();
-            return fn.apply(null, context.blocksValues) || 0;
+            try {
+                const fn = Function(`"use strict";return (function(${context.blockNamesAsFuncParams}){return ${formula};})`)();
+                return fn.apply(null, context.blocksValues) || 0;
+            } catch (e) {
+                console.warn(e);
+                return 0;
+            }
         });
     }
     return ref(0);

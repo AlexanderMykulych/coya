@@ -74,9 +74,9 @@ const phasesContainerStyle = computed(() => ({
 const nodeSettingWidth = ref(300);
 const nodeSettingContainerStyle = computed(() => ({
     x: `${svgPosition.w - nodeSettingWidth.value - phasesMargin.value}px`,
-    y: `${svgPosition.h / 2}px`,
+    y: `${svgPosition.h / 3}px`,
     width: `${nodeSettingWidth.value}px`,
-    height: `200px`
+    height: `300px`
 }));
 const debugStyle = computed(() => ({
     x: `${svgPosition.w - svgPosition.w / 5}`,
@@ -98,6 +98,10 @@ const { mouseState } = useCurrentEditorState();
             :x="svgViewBox.x"
             :y="svgViewBox.y"
         >
+
+            <foreignObject class="node" :style="debugStyle">
+                <body xmlns="http://www.w3.org/1999/xhtml" :style="debugStyle">{{ mouseState }}</body>
+            </foreignObject>
             <foreignObject class="node" :style="phasesContainerStyle">
                 <body xmlns="http://www.w3.org/1999/xhtml" :style="phasesContainerStyle">
                     <Phases />
@@ -112,13 +116,11 @@ const { mouseState } = useCurrentEditorState();
                 class="node"
                 :style="nodeSettingContainerStyle"
                 v-if="isOneNodeSelected"
+                @click.stop.prevent
             >
-                <body xmlns="http://www.w3.org/1999/xhtml" :style="nodeSettingContainerStyle">
+                <body xmlns="http://www.w3.org/1999/xhtml" :style="nodeSettingContainerStyle" @click.stop.prevent>
                     <NodeSetting />
                 </body>
-            </foreignObject>
-            <foreignObject class="node" :style="debugStyle">
-                <body xmlns="http://www.w3.org/1999/xhtml" :style="debugStyle">{{ mouseState }}</body>
             </foreignObject>
         </svg>
     </Teleport>

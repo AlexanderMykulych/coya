@@ -1,8 +1,9 @@
-import { computed, ref } from "vue";
+import { computed, reactive, ref } from "vue";
 import { CurrentEditorState, getCurrentEditor, MakeChangeAction } from ".";
 import { Action, isArray } from "coya-core";
 import { executeActions } from "coya-core";
 import { ArchitectureDescription } from "coya-core";
+import { config } from "process";
 
 export function useCurrentEditorState(): CurrentEditorState | null {
     const editor = getCurrentEditor();
@@ -19,12 +20,12 @@ export function useCurrentEditorState(): CurrentEditorState | null {
                     actions
                         .filter(x => !x.applyChangesToDiagram)
                         .forEach(({ action }) => {
-                        if (!!phaseConfig[action.name]) {
-                            Object.keys(action.value)
-                                .forEach(key => phaseConfig[action.name][key] = action.value[key]);
-                        } else {
-                            phaseConfig[action.name] = action.value;
-                        }
+                            if (!!phaseConfig[action.name]) {
+                                Object.keys(action.value)
+                                    .forEach(key => phaseConfig[action.name][key] = action.value[key]);
+                            } else {
+                                phaseConfig[action.name] = action.value;
+                            }
                         });
                     actions
 
@@ -40,7 +41,13 @@ export function useCurrentEditorState(): CurrentEditorState | null {
                     );
                 }
             }
-        }
+        };
+        const configActiveNode = computed(() => !!editor.state.selectedNodeIds?.[0] ? ({
+            style: editor.config.style?.blocks[editor.state.selectedNodeIds?.[0]]
+        }) : null);
+        const initConfigActiveNode = computed(() => !!editor.state.selectedNodeIds?.[0] ? ({
+            style: editor.initialConfig.style?.blocks[editor.state.selectedNodeIds?.[0]]
+        }) : null);
         return {
             isOneNodeSelected: computed(() => !!editor.state.selectedNodeIds?.[0]),
             phases: computed(() => {
@@ -58,9 +65,36 @@ export function useCurrentEditorState(): CurrentEditorState | null {
                     totalCount: index + 1
                 }
             }),
-            activeNode: computed(() => !!editor.state.selectedNodeIds?.[0] ? ({
-                style: editor.config.style?.blocks[editor.state.selectedNodeIds?.[0]]
-            }) : null),
+            activeNode: reactive({
+                x: computed({
+                    get: () => configActiveNode.value?.style?.position?.x,
+                    set: val => {
+                        configActiveNode.value.style.position.x = val;
+                        initConfigActiveNode.value.style.position.x = val;
+                    }
+                }),
+                y: computed({
+                    get: () => configActiveNode.value?.style?.position?.y,
+                    set: val => {
+                        configActiveNode.value.style.position.y = val;
+                        initConfigActiveNode.value.style.position.y = val;
+                    }
+                }),
+                w: computed({
+                    get: () => configActiveNode.value?.style?.position?.w,
+                    set: val => {
+                        configActiveNode.value.style.position.w = val;
+                        initConfigActiveNode.value.style.position.w = val;
+                    }
+                }),
+                h: computed({
+                    get: () => configActiveNode.value?.style?.position?.h,
+                    set: val => {
+                        configActiveNode.value!.style!.position.h = val;
+                        initConfigActiveNode.value.style.position.h = val;
+                    }
+                }),
+            }),
             architecture: editor.architecture,
             mouseState: editor.mouseState,
             svg: editor.svg,

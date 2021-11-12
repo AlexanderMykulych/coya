@@ -11,13 +11,18 @@ export default defineConfig({
     plugins: [
         vue(),
         Components({
+            include: [
+                /\.vue\??/, // .vue
+                /\.ts\??/, // .vue
+            ],
             resolvers: IconsResolver(),
+            dts: 'src/auto-imports.d.ts',
         }),
         Icons({
             autoInstall: true,
             compiler: "vue3"
         }),
-        WindiCSS(),
+        WindiCSS()
     ],
     build: {
         rollupOptions: {
