@@ -59,7 +59,7 @@ export function useCurrentEditorState(): CurrentEditorState | null {
                 }
             }),
             activeNode: computed(() => !!editor.state.selectedNodeIds?.[0] ? ({
-                style: editor.architecture.style?.blocks[editor.state.selectedNodeIds?.[0]]
+                style: editor.config.style?.blocks[editor.state.selectedNodeIds?.[0]]
             }) : null),
             architecture: editor.architecture,
             mouseState: editor.mouseState,
