@@ -1,4 +1,4 @@
-import { Action, ActionSetting, ActionType, Architecture } from "coya-core";
+import { Action, ActionSetting, ActionType, Architecture, RectPositioning } from "coya-core";
 import { ArchitectureDescription, Change } from "coya-core";
 import { Ref } from "vue";
 
@@ -12,12 +12,19 @@ export interface Point {
 export interface DragState {
     clickPoint: Point;
     movePoint: Point;
+    originPosition: RectPositioning;
     clickDeltaPoint: Point;
 }
 export interface EnabledEditorState {
     drag?: DragState;
     selectedNodeIds?: string[];
+    pins: PinState;
 }
+
+export interface PinState {
+    selectedPinType?: PinType | null;
+}
+
 export type SvgRef = Ref<SVGSVGElement | null>;
 
 export interface MousePaletteState {
@@ -27,6 +34,7 @@ export interface MousePaletteState {
 export interface MouseState {
     position: Point;
     pressed: boolean;
+    pressedPosition: Point;
     palette: MousePaletteState;
     leave: boolean;
 }
@@ -78,4 +86,16 @@ export interface CurrentEditorState {
     makeChange: (action: MakeChangeAction | MakeChangeAction[]) => void;
     getNewUniqBlockName: () => string;
     activeNode: Ref<{ x: any; y: any; w: any; h: any; }>;
+    state: EnabledEditorState;
+}
+
+export enum PinType {
+    TopLeft = "topLeft",
+    BottomLeft = "bottomLeft",
+    BottomRight = "bottomRight",
+    TopRight = "topRight",
+    Top = "top",
+    Left = "left",
+    Bottom = "bottom",
+    Right = "right",
 }

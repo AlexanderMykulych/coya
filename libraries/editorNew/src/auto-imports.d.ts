@@ -14,6 +14,7 @@ declare module 'vue' {
     Phases: typeof import('./components/Phases/Phases.vue')['default']
     RectPalette: typeof import('./components/Palette/blocks/rect/rectPalette.vue')['default']
     Test: typeof import('./components/test.vue')['default']
+    WrapperRect: typeof import('./components/Wrap/WrapperRect.vue')['default']
   }
 }
 

@@ -79,15 +79,13 @@ const nodeSettingContainerStyle = computed(() => ({
     height: `300px`
 }));
 const debugStyle = computed(() => ({
-    x: `${svgPosition.w - svgPosition.w / 5}`,
+    x: `${svgPosition.w - svgPosition.w / 2}`,
     y: "10",
-    width: "300",
+    width: "500",
     height: "400"
 }));
 
-const { isOneNodeSelected } = useCurrentEditorState();
-
-const { mouseState } = useCurrentEditorState();
+const { mouseState, state, isOneNodeSelected } = useCurrentEditorState();
 </script>
 
 <template>
@@ -100,7 +98,10 @@ const { mouseState } = useCurrentEditorState();
         >
 
             <foreignObject class="node" :style="debugStyle">
-                <body xmlns="http://www.w3.org/1999/xhtml" :style="debugStyle">{{ mouseState }}</body>
+                <body xmlns="http://www.w3.org/1999/xhtml" :style="debugStyle">
+                <textarea name="" id="" cols="30" rows="20" 
+                    :value="`${JSON.stringify(state)}\n${JSON.stringify(mouseState)}`"></textarea>
+                </body>
             </foreignObject>
             <foreignObject class="node" :style="phasesContainerStyle">
                 <body xmlns="http://www.w3.org/1999/xhtml" :style="phasesContainerStyle">

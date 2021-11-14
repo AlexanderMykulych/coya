@@ -207,6 +207,8 @@ export interface ChangePosition extends BaseChange {
         blockId: string;
         x: number | FormulaValue;
         y: number | FormulaValue;
+        w: number | FormulaValue;
+        h: number | FormulaValue;
     };
 }
 export type Change = AddBlockChange | ChangeBlockStyle | RemoveBlocks | ChangePosition;

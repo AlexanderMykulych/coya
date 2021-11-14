@@ -1,7 +1,10 @@
-import { ChangeType, ChangeOwnerType } from "coya-core";
+import { ChangeType, ChangeOwnerType, RectPositioning } from "coya-core";
 import { computed, h, reactive, SetupContext, watch } from "vue";
 import { getMousePosition } from "./getMousePosition";
 import { Editor, EnabledEditor } from "./types";
+import WrapperRect from "./../components/Wrap/WrapperRect.vue";
+import { PinType } from ".";
+
 
 export function wrapEditorNode(editor: Editor, node: any) {
     return {
@@ -23,6 +26,7 @@ export function wrapEditorNode(editor: Editor, node: any) {
             watch(() => editor.mouseState.pressed, val => {
                 if (!val) {
                     editor.state.drag = undefined;
+                    editor.state.pins.selectedPinType = undefined;
                 }
             });
             const newPosition = computed(() => isDragged.value ? ({
@@ -31,17 +35,34 @@ export function wrapEditorNode(editor: Editor, node: any) {
             }) : null);
             watch(() => newPosition.value, (val, oldVal) => {
                 if (val && val !== oldVal && oldVal) {
-                    editor.makeChange({
-                        type: ChangeType.ChangePosition,
-                        setting: {
-                            blockId: blockId.value,
-                            x: `${val?.x}`,
-                            y: `${val?.y}`,
-                        },
-                        owner: {
-                            type: ChangeOwnerType.Editor
-                        }
-                    });
+                    if (editor.state.pins.selectedPinType) {
+                        const { x, y, w, h } = calculatePinDragResult(editor);
+                        editor.makeChange({
+                            type: ChangeType.ChangePosition,
+                            setting: {
+                                blockId: blockId.value,
+                                x,
+                                y,
+                                w,
+                                h,
+                            },
+                            owner: {
+                                type: ChangeOwnerType.Editor
+                            }
+                        });
+                    } else {
+                        editor.makeChange({
+                            type: ChangeType.ChangePosition,
+                            setting: {
+                                blockId: blockId.value,
+                                x: `${val?.x}`,
+                                y: `${val?.y}`,
+                            },
+                            owner: {
+                                type: ChangeOwnerType.Editor
+                            }
+                        });
+                    }
                 }
             });
             return () =>
@@ -56,7 +77,11 @@ export function wrapEditorNode(editor: Editor, node: any) {
                     },
                     [
                         h(node, attrs, context.slots),
-                        isSelected.value ? h("rect", overflowCoyaRectAttrs.value) : undefined
+                        isSelected.value ? h(WrapperRect, {
+                            position: attrs.positioning,
+                            onPinPress: (val) => editor.state.pins.selectedPinType = val,
+                            onPinLeave: () => console.log("unpin")
+                        }) : undefined
                     ]
                 );
         }
@@ -65,14 +90,69 @@ export function wrapEditorNode(editor: Editor, node: any) {
 
 function onMousedown(editor: EnabledEditor, { attrs }: { attrs: any }, event: MouseEvent) {
     const clickPoint = getMousePosition(editor.svg, event);
-    const originPos = attrs.positioning;
+    const { x, y, w, h } = attrs.positioning;
     editor.state.drag = {
         clickPoint,
         movePoint: clickPoint,
+        originPosition: { x, y, w, h },
         clickDeltaPoint: {
-            x: clickPoint.x - originPos.x,
-            y: clickPoint.y - originPos.y
+            x: clickPoint.x - x,
+            y: clickPoint.y - y
         }
     };
     editor.state.selectedNodeIds = [attrs.block.id];
+}
+
+function calculatePinDragResult(editor: EnabledEditor): RectPositioning {
+    if (!editor.state.drag) {
+        return {};
+    }
+    const { x, y } = editor!.mouseState.position;
+    const init = editor.state.drag.originPosition;
+    switch (editor.state.pins.selectedPinType) {
+        case PinType.BottomRight:
+            return {
+                w: x - init.x,
+                h: y - init.y,
+            };
+        case PinType.BottomLeft:
+            return {
+                x,
+                w: init.w - (x - init.x),
+                h: y - init.y,
+            };
+        case PinType.TopLeft:
+            return {
+                x,
+                y,
+                w: init.w - (x - init.x),
+                h: init.h - (y - init.y),
+            };
+        case PinType.TopRight:
+            return {
+                y,
+                w: x - init.x,
+                h: init.h - (y - init.y),
+            };
+        case PinType.Top:
+            return {
+                y,
+                h: init.h - (y - init.y),
+            };
+        case PinType.Left:
+            return {
+                x,
+                w: init.w - (x - init.x),
+            };
+        case PinType.Bottom:
+            return {
+                h: y - init.y,
+            };
+        case PinType.Right:
+            return {
+                w: x - init.x,
+            };
+        default:
+            return {};
+    }
 }

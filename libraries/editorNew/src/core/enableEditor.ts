@@ -12,7 +12,9 @@ export function enableEditor({svg, config, id, initialConfig, architecture}: Ena
             id,
             enable: true,
             wrap: (node) => wrapEditorNode(editor, node),
-            state: {},
+            state: {
+                pins: {}
+            },
             svg: svg as any,
             mouseState: useSvgMouse(svg),
             config: config as any,

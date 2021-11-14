@@ -1,3 +1,4 @@
+import { isNotNullOrUndefined } from "..";
 import { ArchitectureDescription, BlockStyle } from "../descriptionTypes";
 import {
     AddBlockChangeSetting,
@@ -33,9 +34,20 @@ export function makeChange(architecture: ArchitectureDescription, change: Change
 
     } else if (change.type === ChangeType.ChangePosition) {
         const currentSetting = architecture.style?.blocks?.[change.setting.blockId];
-        if (currentSetting) {
-            currentSetting.position!.x = change.setting.x;
-            currentSetting.position!.y = change.setting.y;
+        if (!currentSetting) {
+            return;
+        }
+        if (isNotNullOrUndefined(change.setting.x)) {
+            currentSetting.position!.x = `${change.setting.x}`;
+        }
+        if (isNotNullOrUndefined(change.setting.y)) {
+            currentSetting.position!.y = `${change.setting.y}`;
+        }
+        if (isNotNullOrUndefined(change.setting.w)) {
+            currentSetting.position!.w = `${change.setting.w}`;
+        }
+        if (isNotNullOrUndefined(change.setting.h)) {
+            currentSetting.position!.h = `${change.setting.h}`;
         }
     } else {
         throw new Error("Function not implemented.");

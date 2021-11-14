@@ -10,6 +10,10 @@ export function useSvgMouse(svg: SvgRef) {
             y: 0
         },
         pressed: false,
+        pressedPosition: {
+            x: 0,
+            y: 0
+        },
         leave: true,
         palette: {
             pressed: false
@@ -23,8 +27,11 @@ export function useSvgMouse(svg: SvgRef) {
                 mouse.position.y = y;
                 mouse.leave = false;
             };
-            const onMouseDownListener = (_: MouseEvent) => {
+            const onMouseDownListener = (event: MouseEvent) => {
+                const { x, y } = getMousePosition(svgEl, event);
                 mouse.pressed = true;
+                mouse.pressedPosition.x = x;
+                mouse.pressedPosition.y = y;
             };
             const onMouseUpListener = (_: MouseEvent) => {
                 mouse.pressed = false;

@@ -97,6 +97,7 @@ export function useCurrentEditorState(): CurrentEditorState | null {
             }),
             architecture: editor.architecture,
             mouseState: editor.mouseState,
+            state: editor.state,
             svg: editor.svg,
             makeChange: (action: MakeChangeAction | MakeChangeAction[]) => {
                 console.log(action);
