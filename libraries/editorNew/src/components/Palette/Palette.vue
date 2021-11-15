@@ -1,18 +1,26 @@
 <script lang="ts" setup>
 import { ActionType } from "coya-core";
 import { computed, watch } from "vue";
+import { PaletteItemType } from "../../core/types";
 import { useCurrentEditorState } from "../../core/useCurrentEditorState";
-import { PaletteBlocks, PaletteItemType } from "./PaletteBlocks";
+import { PaletteBlocks } from "./PaletteBlocks";
 
-const { mouseState, svg, makeChange, getNewUniqBlockName } = useCurrentEditorState()!;
-const onMouseDown = ({ name }: { name: string }) => {
+const { mouseState, svg, makeChange, getNewUniqBlockName, state } = useCurrentEditorState()!;
+const onMouseDown = (name: string) => {
     const activePaletteBlock = PaletteBlocks.find(x => x.name === name);
     if (!activePaletteBlock?.type || activePaletteBlock.type === PaletteItemType.Block) {
         mouseState.palette.pressed = true;
         mouseState.palette.blockName = name;
     }
 }
-
+const onClick = (name: string) => {
+    const activePaletteBlock = PaletteBlocks.find(x => x.name === name);
+    if (activePaletteBlock?.type === PaletteItemType.Action) {
+        activePaletteBlock.action({
+            editorState: state
+        });
+    }
+}
 const drawDraggedElement = computed(() => !!svg && mouseState.palette.pressed && !!mouseState.palette.blockName);
 const draggedComponentConfig = computed(() => drawDraggedElement.value ? PaletteBlocks.find(x => x.name === mouseState.palette.blockName)?.preview : null);
 const draggedComponentWidth = computed(() => draggedComponentConfig.value?.width || 100);
@@ -58,7 +66,8 @@ watch(() => mouseState.palette.pressed, (val, oldVal) => {
         <div
             v-for="block in PaletteBlocks"
             :key="block.name"
-            @mousedown="onMouseDown({ name: block.name })"
+            @mousedown="onMouseDown(block.name)"
+            @click="onClick(block.name)"
         >
             <component :is="block.paletteComponent" />
         </div>

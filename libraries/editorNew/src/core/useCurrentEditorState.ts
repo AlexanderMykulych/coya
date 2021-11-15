@@ -5,7 +5,7 @@ import { executeActions } from "coya-core";
 import { ArchitectureDescription } from "coya-core";
 import { config } from "process";
 
-export function useCurrentEditorState(): CurrentEditorState | null {
+export function useCurrentEditorState(): CurrentEditorState {
     const editor = getCurrentEditor();
     if (editor.enable) {
         const makeChangeToDiagram = (diagram: ArchitectureDescription, actions: MakeChangeAction[]) => {
@@ -115,5 +115,5 @@ export function useCurrentEditorState(): CurrentEditorState | null {
             }
         };
     }
-    return null;
+    throw "no editor state";
 }

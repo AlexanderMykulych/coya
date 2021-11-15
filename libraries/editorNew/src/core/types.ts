@@ -1,6 +1,6 @@
 import { Action, ActionSetting, ActionType, Architecture, RectPositioning } from "coya-core";
 import { ArchitectureDescription, Change } from "coya-core";
-import { Ref } from "vue";
+import { Component, Ref } from "vue";
 
 export interface BaseEditor {
     enable: boolean;
@@ -15,10 +15,19 @@ export interface DragState {
     originPosition: RectPositioning;
     clickDeltaPoint: Point;
 }
+export interface HoverState {
+    hoveredBlockId: string;
+}
+export enum EditorMode {
+    None = "none",
+    Arrow = "arrow"
+}
 export interface EnabledEditorState {
     drag?: DragState;
+    hover?: HoverState | null;
     selectedNodeIds?: string[];
     pins: PinState;
+    mode?: EditorMode;
 }
 
 export interface PinState {
@@ -99,3 +108,32 @@ export enum PinType {
     Bottom = "bottom",
     Right = "right",
 }
+
+
+export enum PaletteItemType {
+    Block = "block",
+    Action = "action"
+}
+export interface BasePaletteItem {
+    name: string;
+    paletteComponent: Component;
+    type?: PaletteItemType;
+}
+export interface PaletteBlock extends BasePaletteItem {
+    type?: PaletteItemType.Block;
+    preview: {
+        component: Component,
+        width?: number | string;
+        height?: number | string;
+    };
+}
+
+export interface PaletteActionContext {
+    editorState: EnabledEditorState;
+}
+export type PaletteActionFunc = (context: PaletteActionContext) => void;
+export interface PaletteAction extends BasePaletteItem {
+    type: PaletteItemType.Action;
+    action: PaletteActionFunc;
+}
+export type PaletteItem = PaletteBlock | PaletteAction;

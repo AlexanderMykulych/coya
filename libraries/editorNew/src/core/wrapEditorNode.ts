@@ -3,7 +3,8 @@ import { computed, h, reactive, SetupContext, watch } from "vue";
 import { getMousePosition } from "./getMousePosition";
 import { Editor, EnabledEditor } from "./types";
 import WrapperRect from "./../components/Wrap/WrapperRect.vue";
-import { PinType } from ".";
+import ArrowWrapperRect from "./../components/Wrap/ArrowWrapperRect.vue";
+import { EditorMode, PinType } from ".";
 
 
 export function wrapEditorNode(editor: Editor, node: any) {
@@ -16,6 +17,7 @@ export function wrapEditorNode(editor: Editor, node: any) {
             const blockId = computed(() => attrs?.block?.id);
             const isSelected = computed(() => editor.state.selectedNodeIds?.some(x => x === blockId.value) ?? false);
             const isDragged = computed(() => editor.mouseState.pressed && isSelected.value && editor.state.drag);
+            const isHovered = computed(() => editor.state.hover?.hoveredBlockId === blockId.value);
             const overflowCoyaRectAttrs = computed(() => reactive({
                 x: attrs.positioning.x,
                 y: attrs.positioning.y,
@@ -65,11 +67,17 @@ export function wrapEditorNode(editor: Editor, node: any) {
                     }
                 }
             });
+
+            //arrow
+            const isArrowMode = computed(() => editor.state.mode === EditorMode.Arrow);
+            //arrow end
             return () =>
                 h(
                     "g",
                     {
                         onMousedown: (event: MouseEvent) => onMousedown(editor, context, event),
+                        onMouseover: (event: MouseEvent) => onMouseover(editor, context, event),
+                        onMouseleave: (event: MouseEvent) => onMouseleave(editor, context, event),
                         onClick: (event: MouseEvent) => event.stopPropagation(),
                         class: {
                             "cursor-move": isDragged.value
@@ -81,6 +89,9 @@ export function wrapEditorNode(editor: Editor, node: any) {
                             position: attrs.positioning,
                             onPinPress: (val) => editor.state.pins.selectedPinType = val,
                             onPinLeave: () => console.log("unpin")
+                        }) : undefined,
+                        isArrowMode.value ? h(ArrowWrapperRect, {
+                            position: attrs.positioning,
                         }) : undefined
                     ]
                 );
@@ -89,18 +100,28 @@ export function wrapEditorNode(editor: Editor, node: any) {
 }
 
 function onMousedown(editor: EnabledEditor, { attrs }: { attrs: any }, event: MouseEvent) {
-    const clickPoint = getMousePosition(editor.svg, event);
-    const { x, y, w, h } = attrs.positioning;
-    editor.state.drag = {
-        clickPoint,
-        movePoint: clickPoint,
-        originPosition: { x, y, w, h },
-        clickDeltaPoint: {
-            x: clickPoint.x - x,
-            y: clickPoint.y - y
-        }
+    if (!editor.state.mode || editor.state.mode === EditorMode.None) {
+        const clickPoint = getMousePosition(editor.svg, event);
+        const { x, y, w, h } = attrs.positioning;
+        editor.state.drag = {
+            clickPoint,
+            movePoint: clickPoint,
+            originPosition: { x, y, w, h },
+            clickDeltaPoint: {
+                x: clickPoint.x - x,
+                y: clickPoint.y - y
+            }
+        };
+        editor.state.selectedNodeIds = [attrs.block.id];
+    }
+}
+function onMouseover(editor: EnabledEditor, { attrs }: { attrs: any }, event: MouseEvent) {
+    editor.state.hover = {
+        hoveredBlockId: attrs.block.id
     };
-    editor.state.selectedNodeIds = [attrs.block.id];
+}
+function onMouseleave(editor: EnabledEditor, { attrs }: { attrs: any }, event: MouseEvent) {
+    editor.state.hover = null;
 }
 
 function calculatePinDragResult(editor: EnabledEditor): RectPositioning {

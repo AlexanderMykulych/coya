@@ -14,6 +14,9 @@ const config = ref({
 	"blocks": {
 		"start": {
 			"label": "app = Vue.createApp(options); app.mount(el)"
+		},
+        "start2": {
+			"label": "app = Vue.createApp(options); app.mount(el)"
 		}
 	},
 	"phases": [
@@ -114,6 +117,17 @@ const config = ref({
 					"fill": "#3e6b94"
 				}
 			},
+			"start2": {
+				"position": {
+					"x": 100,
+					"y": 100,
+					"w": 100,
+					"h": 60
+				},
+				"css": {
+					"fill": "#9257fa"
+				}
+			},
 			"init": {
 				"position": {
 					"x": "start.x",
@@ -202,13 +216,27 @@ onMounted(() => {
 const block = {
     id: "start"
 }
+const block2 = {
+    id: "start2"
+}
 </script>
 
 <template>
     <editor.component v-if="!!editor"/>
     <div class="h-full relative">
         <svg width="95%" height="700" :viewBox="`${viewBox.x} ${viewBox.y} ${viewBox.w} ${viewBox.h}`" ref="svgEl" class="rounded-lg border-3 shadow-3 ml-10">
-            <testComponent v-if="testComponent" :positioning="config.style.blocks.start.position" :block="block" />
+            <testComponent
+                v-if="testComponent"
+                :style="config.style.blocks.start.css"
+                :positioning="config.style.blocks.start.position"
+                :block="block"
+            />
+            <testComponent
+                v-if="testComponent"
+                :positioning="config.style.blocks.start2.position"
+                :style="config.style.blocks.start2.css"
+                :block="block2"
+            />
         </svg>
     </div>
 </template>

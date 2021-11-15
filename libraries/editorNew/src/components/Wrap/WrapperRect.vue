@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { RectPositioning } from "coya-core";
 import { computed } from "vue";
-import { PinType } from "../../core/types";
+import { EditorMode, PinType } from "../../core/types";
 import { useCurrentEditorState } from "../../core/useCurrentEditorState";
 
 const props = defineProps<{

@@ -5,12 +5,15 @@
 declare module 'vue' {
   export interface GlobalComponents {
     ArrowPalette: typeof import('./components/Palette/blocks/arrow/arrowPalette.vue')['default']
+    ArrowWrapperRect: typeof import('./components/Wrap/ArrowWrapperRect.vue')['default']
     CoyaInput: typeof import('./components/ui/coyaInput.vue')['default']
     EditorComponent: typeof import('./components/editorComponent.vue')['default']
+    FingerPalette: typeof import('./components/Palette/blocks/finger/fingerPalette.vue')['default']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     'ICarbon:arrowRight': typeof import('~icons/carbon/arrow-right')['default']
     'ICil:rectangle': typeof import('~icons/cil/rectangle')['default']
     'IGis:flagStartB': typeof import('~icons/gis/flag-start-b')['default']
+    'ITabler:handFinger': typeof import('~icons/tabler/hand-finger')['default']
     NodeSetting: typeof import('./components/NodeSetting/NodeSetting.vue')['default']
     Palette: typeof import('./components/Palette/Palette.vue')['default']
     Phases: typeof import('./components/Phases/Phases.vue')['default']

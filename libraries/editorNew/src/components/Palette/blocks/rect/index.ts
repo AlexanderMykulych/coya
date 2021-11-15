@@ -1,6 +1,7 @@
 import { defineAsyncComponent } from "vue";
+import { PaletteBlock } from "../../../../core/types";
 
-export default {
+export default <PaletteBlock>{
     name: "rect",
     paletteComponent: defineAsyncComponent(() => import("./rectPalette.vue")),
     preview: {

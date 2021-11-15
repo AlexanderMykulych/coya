@@ -2,10 +2,10 @@ import { defineAsyncComponent } from "vue";
 import { EditorMode, PaletteAction, PaletteItemType } from "../../../../core/types";
 
 export default <PaletteAction>{
-    name: "arrow",
-    paletteComponent: defineAsyncComponent(() => import("./arrowPalette.vue")),
+    name: "finger",
+    paletteComponent: defineAsyncComponent(() => import("./fingerPalette.vue")),
     type: PaletteItemType.Action,
     action: ({editorState}) => {
-        editorState.mode = EditorMode.Arrow;
+        editorState.mode = EditorMode.None;
     }
 };
