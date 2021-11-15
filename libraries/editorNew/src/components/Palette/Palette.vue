@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ActionType } from "coya-core";
 import { computed, watch } from "vue";
-import { PaletteItemType } from "../../core/types";
+import { EditorMode, PaletteItemType } from "../../core/types";
 import { useCurrentEditorState } from "../../core/useCurrentEditorState";
 import { PaletteBlocks } from "./PaletteBlocks";
 
@@ -59,6 +59,13 @@ watch(() => mouseState.palette.pressed, (val, oldVal) => {
         }]);
     }
 });
+
+// arrow
+const isArrowMode = computed(() => state.mode === EditorMode.Arrow);
+const isStartArrow = computed(() => isArrowMode.value && state.arrowState?.start && state.arrowState?.startPosition && !state.arrowState?.end);
+
+
+// arrow - end
 </script>
 
 <template>
@@ -81,5 +88,14 @@ watch(() => mouseState.palette.pressed, (val, oldVal) => {
             :width="draggedComponentWidth"
             :height="draggedComponentHeight"
         ></component>
+    </Teleport>
+    <Teleport v-if="isStartArrow" :to="svg">
+        <line
+            :x1="state.arrowState?.startPosition.x"
+            :y1="state.arrowState?.startPosition.y"
+            :x2="mouseState.position.x - 1"
+            :y2="mouseState.position.y - 1"
+            stroke="black"
+        />
     </Teleport>
 </template>

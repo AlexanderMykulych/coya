@@ -4,8 +4,10 @@ import { computed, ref } from "vue";
 import { useCurrentEditorState } from "../../core/useCurrentEditorState";
 
 const props = defineProps<{
-    position: RectPositioning
+    position: RectPositioning,
+    id: string
 }>();
+const $emit = defineEmits(["click"]);
 const padding = 20;
 
 const { state } = useCurrentEditorState();
@@ -27,6 +29,13 @@ const arrowRectPos = computed(() => ({
 
 const hovered = ref(false);
 const fill = computed(() => hovered.value ? "rgb(0, 0, 0, 0.1)" : "rgb(0, 0, 0, 0)");
+
+const onClick = (event: MouseEvent) => {
+    $emit("click", event);
+
+};
+
+
 </script>
 
 <template>
@@ -38,6 +47,7 @@ const fill = computed(() => hovered.value ? "rgb(0, 0, 0, 0.1)" : "rgb(0, 0, 0, 
         :fill="fill"
         @mouseover="hovered = true"
         @mouseleave="hovered = false"
+        @click="onClick"
     />
 </template>
 

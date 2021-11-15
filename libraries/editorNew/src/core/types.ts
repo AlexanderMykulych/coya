@@ -22,12 +22,21 @@ export enum EditorMode {
     None = "none",
     Arrow = "arrow"
 }
+
+export interface ArrowState {
+    start?: string;
+    startPosition?: Point;
+    end?: string;
+    endPosition?: Point;
+}
+
 export interface EnabledEditorState {
     drag?: DragState;
     hover?: HoverState | null;
     selectedNodeIds?: string[];
     pins: PinState;
     mode?: EditorMode;
+    arrowState?: ArrowState | null;
 }
 
 export interface PinState {
