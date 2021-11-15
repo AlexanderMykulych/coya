@@ -8,7 +8,10 @@
 	"phases": [
 		{
 			"newBlock": {
-				"init": "init events & lifecycle"
+                "init": "init events & lifecycle",
+                "block_new": {
+                    "label": "new palette block"
+                }
 			},
 			"connect": {
 				"from": "start",
@@ -26,7 +29,10 @@
 		},
 		{
 			"newBlock": {
-				"beforeCreate": "beforeCreate"
+                "beforeCreate": "beforeCreate",
+                "block_new_new": {
+                    "label": "new palette block"
+                }
 			},
 			"connect": {
 				"from": "init",
@@ -46,10 +52,10 @@
 			},
 			"start": {
 				"position": {
-					"x": "_.viewBox.w / 2 - _.viewBox.w / 20",
-					"y": "0",
-					"w": "_.viewBox.w / 10",
-					"h": "_.viewBox.h / 10"
+                    "x": "265",
+                    "y": "34.921875",
+                    "w": "161",
+                    "h": "98"
 				},
 				"css": {
 					"fill": "#3e6b94"
@@ -66,7 +72,7 @@
 			"initInject": {
 				"position": {
 					"x": "init.x",
-					"y": "init.y + start.h + 20",
+                    "y": "init.y + start.h + 100",
 					"w": "init.w",
 					"h": "init.h"
 				}
@@ -95,6 +101,28 @@
 					"stroke": "red",
 					"stroke-dasharray": 3
 				}
+            },
+            "block_new": {
+                "position": {
+                    "x": "start.x + start.w + 100",
+                    "y": "start.y",
+                    "w": "100",
+                    "h": "start.h / 2 - 5"
+                },
+                "css": {
+                    "fill": "#3e6b94"
+                }
+            },
+            "block_new_new": {
+                "position": {
+                    "x": "start.x + start.w + 100",
+                    "y": "start.y + start.h / 2",
+                    "w": "100",
+                    "h": "start.h / 2 - 5"
+                },
+                "css": {
+                    "fill": "#3e6b94"
+                }
 			}
 		}
 	}

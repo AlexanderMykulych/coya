@@ -2,12 +2,15 @@
 import { ActionType } from "coya-core";
 import { computed, watch } from "vue";
 import { useCurrentEditorState } from "../../core/useCurrentEditorState";
-import { PaletteBlocks } from "./PaletteBlocks";
+import { PaletteBlocks, PaletteItemType } from "./PaletteBlocks";
 
 const { mouseState, svg, makeChange, getNewUniqBlockName } = useCurrentEditorState()!;
 const onMouseDown = ({ name }: { name: string }) => {
-    mouseState.palette.pressed = true;
-    mouseState.palette.blockName = name;
+    const activePaletteBlock = PaletteBlocks.find(x => x.name === name);
+    if (!activePaletteBlock?.type || activePaletteBlock.type === PaletteItemType.Block) {
+        mouseState.palette.pressed = true;
+        mouseState.palette.blockName = name;
+    }
 }
 
 const drawDraggedElement = computed(() => !!svg && mouseState.palette.pressed && !!mouseState.palette.blockName);

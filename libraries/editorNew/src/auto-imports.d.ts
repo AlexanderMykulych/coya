@@ -4,9 +4,11 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    ArrowPalette: typeof import('./components/Palette/blocks/arrow/arrowPalette.vue')['default']
     CoyaInput: typeof import('./components/ui/coyaInput.vue')['default']
     EditorComponent: typeof import('./components/editorComponent.vue')['default']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
+    'ICarbon:arrowRight': typeof import('~icons/carbon/arrow-right')['default']
     'ICil:rectangle': typeof import('~icons/cil/rectangle')['default']
     'IGis:flagStartB': typeof import('~icons/gis/flag-start-b')['default']
     NodeSetting: typeof import('./components/NodeSetting/NodeSetting.vue')['default']

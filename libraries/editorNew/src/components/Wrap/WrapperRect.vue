@@ -67,10 +67,10 @@ const clickPin = (pinType: PinType) => emit("pinPress", pinType);
 
 <template>
     <rect
-        :x="position.x - padding"
-        :y="position.y - padding"
-        :width="position.w + padding * 2"
-        :height="position.h + padding * 2"
+        :x="preparedPosition.x"
+        :y="preparedPosition.y"
+        :width="preparedPosition.w"
+        :height="preparedPosition.h"
         fill="#00d0ff4a"
         stroke="black"
         stroke-dasharray="5 5"
