@@ -28,17 +28,31 @@
 			}
 		},
 		{
-			"newBlock": {
-                "beforeCreate": "beforeCreate",
-                "block_new_new": {
-                    "label": "new palette block"
+            "newBlock": [
+                {
+                    "beforeCreate": "beforeCreate"
+                },
+                {
+                    "block_new_new": {
+                        "label": "new palette block"
+                    }
                 }
-			},
-			"connect": {
-				"from": "init",
-				"to": "beforeCreate",
-				"name": "line_init_beforeCreate"
-			}
+            ],
+            "connect": [
+                {
+                    "from": "init",
+                    "to": "beforeCreate",
+                    "name": "line_init_beforeCreate"
+                },
+                {
+                    "from": "initInject",
+                    "to": "block_new"
+                },
+                {
+                    "from": "block_new",
+                    "to": "block_new_new"
+                }
+            ]
 		}
 	],
 	"style": {
@@ -52,10 +66,10 @@
 			},
 			"start": {
 				"position": {
-                    "x": "265",
-                    "y": "34.921875",
-                    "w": "161",
-                    "h": "98"
+                    "x": "219",
+                    "y": "21.921875",
+                    "w": "149",
+                    "h": "88"
 				},
 				"css": {
 					"fill": "#3e6b94"
@@ -72,7 +86,7 @@
 			"initInject": {
 				"position": {
 					"x": "init.x",
-                    "y": "init.y + start.h + 100",
+                    "y": "init.y + start.h + 20",
 					"w": "init.w",
 					"h": "init.h"
 				}
@@ -92,9 +106,9 @@
 			},
 			"line_init_beforeCreate": {
 				"position": {
-					"x1": "line_1_1.x1",
-					"y1": "line_1_1.y1 + (line_1_1.y2 - line_1_1.y1) / 2",
-					"y2": "line_1_1.y1 + (line_1_1.y2 - line_1_1.y1) / 2"
+                    "x1": "line_1_1.x1",
+                    "y1": "line_1_1.y1 + (line_1_1.y2 - line_1_1.y1) / 2",
+                    "y2": "line_1_1.y1 + (line_1_1.y2 - line_1_1.y1) / 2"
 				},
 				"css": {
 					"fill": "red",
@@ -104,10 +118,10 @@
             },
             "block_new": {
                 "position": {
-                    "x": "start.x + start.w + 100",
-                    "y": "start.y",
-                    "w": "100",
-                    "h": "start.h / 2 - 5"
+                    "x": "initInject.x",
+                    "y": "initInject.y + initInject.h + 20",
+                    "w": "initInject.w",
+                    "h": "start.h"
                 },
                 "css": {
                     "fill": "#3e6b94"
@@ -115,10 +129,10 @@
             },
             "block_new_new": {
                 "position": {
-                    "x": "start.x + start.w + 100",
-                    "y": "start.y + start.h / 2",
+                    "x": "470",
+                    "y": "345.921875",
                     "w": "100",
-                    "h": "start.h / 2 - 5"
+                    "h": "100"
                 },
                 "css": {
                     "fill": "#3e6b94"

@@ -23,10 +23,14 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                         .filter(x => !x.applyChangesToDiagram)
                         .forEach(({ action }) => {
                             if (!!phaseConfig[action.name]) {
-                                phaseConfig[action.name] = [
-                                    phaseConfig[action.name],
-                                    action.value
-                                ];
+                                if (isArray(phaseConfig[action.name])) {
+                                    phaseConfig[action.name].push(action.value);
+                                } else {
+                                    phaseConfig[action.name] = [
+                                        phaseConfig[action.name],
+                                        action.value
+                                    ];
+                                }
                             } else {
                                 phaseConfig[action.name] = action.value;
                             }
