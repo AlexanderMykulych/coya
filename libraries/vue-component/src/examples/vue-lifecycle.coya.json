@@ -92,9 +92,9 @@
 			},
 			"line_init_beforeCreate": {
 				"position": {
-					"x1": "line_1.x1",
-					"y1": "line_1.y1 + (line_1.y2 - line_1.y1) / 2",
-					"y2": "line_1.y1 + (line_1.y2 - line_1.y1) / 2"
+					"x1": "line_1_1.x1",
+					"y1": "line_1_1.y1 + (line_1_1.y2 - line_1_1.y1) / 2",
+					"y2": "line_1_1.y1 + (line_1_1.y2 - line_1_1.y1) / 2"
 				},
 				"css": {
 					"fill": "red",

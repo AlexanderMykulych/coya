@@ -1,12 +1,14 @@
 import { computed, reactive, ref } from "vue";
-import { CurrentEditorState, getCurrentEditor, MakeChangeAction } from ".";
+import { CurrentEditorState, Editor, getCurrentEditor, MakeChangeAction } from ".";
 import { Action, isArray } from "coya-core";
 import { executeActions } from "coya-core";
 import { ArchitectureDescription } from "coya-core";
-import { config } from "process";
 
 export function useCurrentEditorState(): CurrentEditorState {
     const editor = getCurrentEditor();
+    return useEditorState(editor);
+}
+export function useEditorState(editor: Editor): CurrentEditorState {
     if (editor.enable) {
         const makeChangeToDiagram = (diagram: ArchitectureDescription, actions: MakeChangeAction[]) => {
             if (editor.architecture?.currentPhase === null) {
@@ -21,13 +23,14 @@ export function useCurrentEditorState(): CurrentEditorState {
                         .filter(x => !x.applyChangesToDiagram)
                         .forEach(({ action }) => {
                             if (!!phaseConfig[action.name]) {
-                                Object.keys(action.value)
-                                    .forEach(key => phaseConfig[action.name][key] = action.value[key]);
+                                phaseConfig[action.name] = [
+                                    phaseConfig[action.name],
+                                    action.value
+                                ];
                             } else {
                                 phaseConfig[action.name] = action.value;
                             }
                         });
-                    actions
 
                     executeActions(
                         diagram,
@@ -100,7 +103,6 @@ export function useCurrentEditorState(): CurrentEditorState {
             state: editor.state,
             svg: editor.svg,
             makeChange: (action: MakeChangeAction | MakeChangeAction[]) => {
-                console.log(action);
                 const actions = isArray(action) ? action : [action];
                 makeChangeToDiagram(editor.config, actions);
                 makeChangeToDiagram(editor.initialConfig, actions);
@@ -117,3 +119,4 @@ export function useCurrentEditorState(): CurrentEditorState {
     }
     throw "no editor state";
 }
+

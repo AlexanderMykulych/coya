@@ -3,9 +3,9 @@ import { BlockElementType } from "../descriptionTypes";
 import { isConnectActionSetting } from "../typeGuards";
 import { Action, ActionDebugInfo, Change, ChangeOwnerType, ChangeType } from "../types";
 
-export function connectActionExecutor(phaseId: number, action: Action): Change[] | null {
+export function connectActionExecutor(phaseId: number, action: Action, actionIndex: number): Change[] | null {
     if (isConnectActionSetting(action.value)) {
-        const newBlockId = action.value.name ?? `line_${phaseId}`;
+        const newBlockId = action.value.name ?? `line_${phaseId}_${actionIndex}`;
         return [{
             type: ChangeType.AddNewBlock,
             setting: {

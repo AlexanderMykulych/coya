@@ -64,7 +64,6 @@ watch(() => mouseState.palette.pressed, (val, oldVal) => {
 const isArrowMode = computed(() => state.mode === EditorMode.Arrow);
 const isStartArrow = computed(() => isArrowMode.value && state.arrowState?.start && state.arrowState?.startPosition && !state.arrowState?.end);
 
-
 // arrow - end
 </script>
 
