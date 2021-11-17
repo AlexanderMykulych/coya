@@ -8,6 +8,7 @@ import { enableEditor } from "coya-editor-new";
 import "coya-editor-new/dist/style.css";
 import { saveConfig } from "../socket";
 import { useCurrentPhase } from "../state/useCurrentPhase";
+import { getMousePosition } from "../../../editorNew/src/core/getMousePosition";
 
 const props = defineProps<{ config: string | Object, id: string }>();
 
@@ -123,16 +124,20 @@ provide("svgInfo", reactive({
 // zoom
 const globalG = ref(null);
 const transformMatrix = ref([1, 0, 0, 1, 0, 0]);
-var scrollSensitivity = 0.005;
+var scrollSensitivity = 0.05;
 const matrix = computed(() => `matrix(${transformMatrix.value.join(",")})`);
 const zoom = (evt: WheelEvent) => {
-    console.log(evt);
     var scroll = evt.detail ? evt.detail * scrollSensitivity : (evt.wheelDelta / 120) * scrollSensitivity;
-    for (var i = 0; i < 4; i++) {
-        transformMatrix.value[i] *= scroll;
-    }
-    transformMatrix.value[4] += (1 - scroll) * (width.value / 2);
-    transformMatrix.value[5] += (1 - scroll) * (height.value / 2);
+    transformMatrix.value[0] += scroll;
+    transformMatrix.value[3] += scroll;
+    // for (var i = 0; i < 4; i++) {
+        //     transformMatrix.value[i] *= scroll;
+    // }
+    const sign = Math.sign(evt.wheelDelta);
+    const {x, y} = getMousePosition(coyaSvgEl.value, evt);
+    console.log(scroll * (evt.x - width.value / 2), scroll * (evt.y - height.value / 2), evt.x - width.value / 2, evt.y - height.value / 2, evt.x, x);
+    transformMatrix.value[4] += scroll * (x - width.value / 2);
+    transformMatrix.value[5] += scroll * (y - height.value / 2);
 }
 onMounted(() => {
     coyaSvgEl.value["onmousewheel"] = (e) => {
@@ -163,8 +168,9 @@ onMounted(() => {
                 ref="coyaSvgEl"
                 overflow="auto"
                 v-if="!!arch?.style?.positioning"
+                :transform="matrix"
             >
-                <g ref="globalG" :transform="matrix">
+                <g ref="globalG" >
                     <defs>
                         <marker
                             id="arrowhead"
