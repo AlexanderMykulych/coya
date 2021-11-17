@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { transformToArchitecture, RectPositioning, Architecture, ArchitectureDescription, CurrentPhaseInfo } from "coya-core";
-import { computed, provide, reactive, ref, toRef, watch } from "vue";
+import { computed, provide, reactive, ref, onMounted, watch } from "vue";
 import { useNodeDetails } from "../logic/useNodeDetails";
 import { useMousePosition } from "../logic/useSvgMousePosition";
 import { useDebug } from "../state/useDebug";
@@ -119,11 +119,37 @@ provide("svgInfo", reactive({
     realHeight,
     realWidth
 }));
+
+// zoom
+const globalG = ref(null);
+const transformMatrix = ref([1, 0, 0, 1, 0, 0]);
+var scrollSensitivity = 0.005;
+const matrix = computed(() => `matrix(${transformMatrix.value.join(",")})`);
+const zoom = (evt: WheelEvent) => {
+    console.log(evt);
+    var scroll = evt.detail ? evt.detail * scrollSensitivity : (evt.wheelDelta / 120) * scrollSensitivity;
+    for (var i = 0; i < 4; i++) {
+        transformMatrix.value[i] *= scroll;
+    }
+    transformMatrix.value[4] += (1 - scroll) * (width.value / 2);
+    transformMatrix.value[5] += (1 - scroll) * (height.value / 2);
+}
+onMounted(() => {
+    coyaSvgEl.value["onmousewheel"] = (e) => {
+        e.preventDefault();
+        Math.sign(e.deltaY)
+        zoom(e);
+
+        //svgEl.value.dispatchEvent(new CustomEvent("onViewBoxChange", {detail: {viewBox}}));
+    };
+});
+
+
 </script>
 <template>
     <div class="grid grid-cols-5 grid-rows-12 h-full">
         <div>
-            <editor.component v-if="!!editor" />
+            <editor class="component" v-if="!!editor" />
         </div>
         <div
             class="coya-container col-span-4 row-span-full p-7 bg-gray-200 bg-opacity-70"
@@ -136,86 +162,97 @@ provide("svgInfo", reactive({
                 xmlns="http://www.w3.org/2000/svg"
                 ref="coyaSvgEl"
                 overflow="auto"
-               
                 v-if="!!arch?.style?.positioning"
             >
-                <defs>
-                    <marker
-                        id="arrowhead"
-                        markerWidth="10"
-                        markerHeight="7"
-                        refX="10"
-                        refY="3.5"
-                        orient="auto"
-                    >
-                        <polygon points="0 0, 10 3.5, 0 7" />
-                    </marker>
-                    <pattern id="tenthGrid" width="10" height="10" patternUnits="userSpaceOnUse">
-                        <path
-                            d="M 10 0 L 0 0 0 10"
-                            fill="none"
-                            stroke="silver"
-                            stroke-width="0.7"
-                            stroke-dasharray="3"
-                        />
-                    </pattern>
-                    <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
-                        <rect width="100" height="100" fill="url(#tenthGrid)" />
-                        <path d="M 100 0 L 0 0 0 100" fill="none" stroke="gray" stroke-width="0.7" />
-                    </pattern>
-                    <clipPath id="myClip">
-                        <circle cx="100" cy="100" r="40" />
-                        <circle cx="60" cy="60" r="40" />
-                    </clipPath>
-                    <mask id="hole" v-if="!!highlights && highlights.length > 0">
-                        <rect x="0" y="0" width="100%" height="100%" fill="white" />
+                <g ref="globalG" :transform="matrix">
+                    <defs>
+                        <marker
+                            id="arrowhead"
+                            markerWidth="10"
+                            markerHeight="7"
+                            refX="10"
+                            refY="3.5"
+                            orient="auto"
+                        >
+                            <polygon points="0 0, 10 3.5, 0 7" />
+                        </marker>
+                        <pattern
+                            id="tenthGrid"
+                            width="10"
+                            height="10"
+                            patternUnits="userSpaceOnUse"
+                        >
+                            <path
+                                d="M 10 0 L 0 0 0 10"
+                                fill="none"
+                                stroke="silver"
+                                stroke-width="0.7"
+                                stroke-dasharray="3"
+                            />
+                        </pattern>
+                        <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+                            <rect width="100" height="100" fill="url(#tenthGrid)" />
+                            <path
+                                d="M 100 0 L 0 0 0 100"
+                                fill="none"
+                                stroke="gray"
+                                stroke-width="0.7"
+                            />
+                        </pattern>
+                        <clipPath id="myClip">
+                            <circle cx="100" cy="100" r="40" />
+                            <circle cx="60" cy="60" r="40" />
+                        </clipPath>
+                        <mask id="hole" v-if="!!highlights && highlights.length > 0">
+                            <rect x="0" y="0" width="100%" height="100%" fill="white" />
+                            <CoyaNode
+                                v-for="item in highlights"
+                                :key="item.id"
+                                :block="item.block"
+                                :block-style="{ ...item.style, css: { fill: 'black' } }"
+                                :positioning="item.pos"
+                            />
+                        </mask>
+                    </defs>
+
+                    <rect v-if="debug" x="0" y="0" width="100%" height="100%" fill="url(#grid)" />
+
+                    <!-- Rounded corner rectangle -->
+                    <template v-for="item in filteredRectPositions" :key="item.id">
                         <CoyaNode
-                            v-for="item in highlights"
-                            :key="item.id"
                             :block="item.block"
-                            :block-style="{ ...item.style, css: { fill: 'black' } }"
+                            :block-style="item.style"
                             :positioning="item.pos"
+                            :debug="debug"
                         />
-                    </mask>
-                </defs>
-
-                <rect v-if="debug" x="0" y="0" width="100%" height="100%" fill="url(#grid)" />
-
-                <!-- Rounded corner rectangle -->
-                <template v-for="item in filteredRectPositions" :key="item.id">
-                    <CoyaNode
-                        :block="item.block"
-                        :block-style="item.style"
-                        :positioning="item.pos"
-                        :debug="debug"
-                    />
-                    <template v-if="debug">
-                        <rect
-                            :x="item.pos.x"
-                            :y="item.pos.y"
-                            :width="item.pos.w"
-                            :height="item.pos.h"
-                            fill="none"
-                            pointer-events="all"
-                            @mouseover="res.onMouseover(item)"
-                            @mouseout="res.onMouseleave"
-                            @click="res.onClick(item)"
-                        />
+                        <template v-if="debug">
+                            <rect
+                                :x="item.pos.x"
+                                :y="item.pos.y"
+                                :width="item.pos.w"
+                                :height="item.pos.h"
+                                fill="none"
+                                pointer-events="all"
+                                @mouseover="res.onMouseover(item)"
+                                @mouseout="res.onMouseleave"
+                                @click="res.onClick(item)"
+                            />
+                        </template>
                     </template>
-                </template>
 
-                <PointPosition v-if="debug" :x="x" :y="y" />
-                <rect
-                    v-if="highlights?.length > 0"
-                    x="-10000"
-                    y="-10000"
-                    width="100000"
-                    height="100000"
-                    fill="#0000008a"
-                    mask="url(#hole)"
-                />
+                    <PointPosition v-if="debug" :x="x" :y="y" />
+                    <rect
+                        v-if="highlights?.length > 0"
+                        x="-10000"
+                        y="-10000"
+                        width="100000"
+                        height="100000"
+                        fill="#0000008a"
+                        mask="url(#hole)"
+                    />
 
-                <DebugLines v-if="debugLines" :lines="debugLines" />
+                    <DebugLines v-if="debugLines" :lines="debugLines" />
+                </g>
             </svg>
             <svg v-if="enableDrawing" class="drawableSvg" ref="drawableSvgEl" />
         </div>
