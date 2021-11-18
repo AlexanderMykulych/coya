@@ -10,167 +10,167 @@ defineProps<{ msg: string }>()
 var svgEl = ref<SVGSVGElement | null>(null);
 let testComponent = ref(null);
 const config = ref({
-	"name": "vue-lifecycle-json",
-	"blocks": {
-		"start": {
-			"label": "app = Vue.createApp(options); app.mount(el)"
-		},
+    "name": "vue-lifecycle-json",
+    "blocks": {
+        "start": {
+            "label": "app = Vue.createApp(options); app.mount(el)"
+        },
         "start2": {
-			"label": "app = Vue.createApp(options); app.mount(el)"
-		}
-	},
-	"phases": [
-		{
-			"newBlock": {
-				"init": "init events & lifecycle"
-			},
-			"connect": {
-				"from": "start",
-				"to": "init"
-			}
-		},
-		{
-			"newBlock": {
-				"initInject": "Init injections & reactivity"
-			},
-			"connect": {
-				"from": "init",
-				"to": "initInject"
-			}
-		},
-		{
-			"newBlock": {
-				"beforeCreate": "beforeCreate"
-			},
-			"connect": {
-				"from": "init",
-				"to": "beforeCreate",
-				"name": "line_init_beforeCreate"
-			},
-            "connect1": {
-				"from": "init",
-				"to": "beforeCreate",
-				"name": "line_init_beforeCreate"
-			},
-            "connect2": {
-				"from": "init",
-				"to": "beforeCreate",
-				"name": "line_init_beforeCreate"
-			},
-            "connect3": {
-				"from": "init",
-				"to": "beforeCreate",
-				"name": "line_init_beforeCreate"
-			}
-		},
+            "label": "app = Vue.createApp(options); app.mount(el)"
+        }
+    },
+    "phases": [
         {
-			"newBlock": {
-				"initInject": "Init injections & reactivity"
-			},
-			"connect": {
-				"from": "init",
-				"to": "initInject"
-			}
-		},{
-			"newBlock": {
-				"initInject": "Init injections & reactivity"
-			},
-			"connect": {
-				"from": "init",
-				"to": "initInject"
-			}
-		},{
-			"newBlock": {
-				"initInject": "Init injections & reactivity"
-			},
-			"connect": {
-				"from": "init",
-				"to": "initInject"
-			}
-		},{
-			"newBlock": {
-				"initInject": "Init injections & reactivity"
-			},
-			"connect": {
-				"from": "init",
-				"to": "initInject"
-			}
-		},
-	],
-	"style": {
-		"blocks": {
-			"_": {
-				"css": {
-					"color": "white",
-					"fill": "#3ab881",
-					"fontSize": "0.1em"
-				}
-			},
-			"start": {
-				"position": {
-					"x": 10,
-					"y": 10,
-					"w": 100,
-					"h": 60
-				},
-				"css": {
-					"fill": "#3e6b94"
-				}
-			},
-			"start2": {
-				"position": {
-					"x": 100,
-					"y": 100,
-					"w": 100,
-					"h": 60
-				},
-				"css": {
-					"fill": "#9257fa"
-				}
-			},
-			"init": {
-				"position": {
-					"x": "start.x",
-					"y": "start.y + start.h + 20",
-					"w": "start.w",
-					"h": "start.h"
-				}
-			},
-			"initInject": {
-				"position": {
-					"x": "init.x",
-					"y": "init.y + start.h + 20",
-					"w": "init.w",
-					"h": "init.h"
-				}
-			},
-			"beforeCreate": {
-				"position": {
-					"x": "init.x - init.w - 40",
-					"y": "init.y + init.h",
-					"w": "init.w",
-					"h": "initInject.y - init.y - init.h"
-				},
-				"css": {
-					"fill": "none",
-					"color": "red",
-					"stroke": "red"
-				}
-			},
-			"line_init_beforeCreate": {
-				"position": {
-					"x1": "line_1.x1",
-					"y1": "line_1.y1 + (line_1.y2 - line_1.y1) / 2",
-					"y2": "line_1.y1 + (line_1.y2 - line_1.y1) / 2"
-				},
-				"css": {
-					"fill": "red",
-					"stroke": "red",
-					"stroke-dasharray": 3
-				}
-			}
-		}
-	}
+            "newBlock": {
+                "init": "init events & lifecycle"
+            },
+            "connect": {
+                "from": "start",
+                "to": "init"
+            }
+        },
+        {
+            "newBlock": {
+                "initInject": "Init injections & reactivity"
+            },
+            "connect": {
+                "from": "init",
+                "to": "initInject"
+            }
+        },
+        {
+            "newBlock": {
+                "beforeCreate": "beforeCreate"
+            },
+            "connect": {
+                "from": "init",
+                "to": "beforeCreate",
+                "name": "line_init_beforeCreate"
+            },
+            "connect1": {
+                "from": "init",
+                "to": "beforeCreate",
+                "name": "line_init_beforeCreate"
+            },
+            "connect2": {
+                "from": "init",
+                "to": "beforeCreate",
+                "name": "line_init_beforeCreate"
+            },
+            "connect3": {
+                "from": "init",
+                "to": "beforeCreate",
+                "name": "line_init_beforeCreate"
+            }
+        },
+        {
+            "newBlock": {
+                "initInject": "Init injections & reactivity"
+            },
+            "connect": {
+                "from": "init",
+                "to": "initInject"
+            }
+        }, {
+            "newBlock": {
+                "initInject": "Init injections & reactivity"
+            },
+            "connect": {
+                "from": "init",
+                "to": "initInject"
+            }
+        }, {
+            "newBlock": {
+                "initInject": "Init injections & reactivity"
+            },
+            "connect": {
+                "from": "init",
+                "to": "initInject"
+            }
+        }, {
+            "newBlock": {
+                "initInject": "Init injections & reactivity"
+            },
+            "connect": {
+                "from": "init",
+                "to": "initInject"
+            }
+        },
+    ],
+    "style": {
+        "blocks": {
+            "_": {
+                "css": {
+                    "color": "white",
+                    "fill": "#3ab881",
+                    "fontSize": "0.1em"
+                }
+            },
+            "start": {
+                "position": {
+                    "x": 10,
+                    "y": 10,
+                    "w": 100,
+                    "h": 60
+                },
+                "css": {
+                    "fill": "#3e6b94"
+                }
+            },
+            "start2": {
+                "position": {
+                    "x": 100,
+                    "y": 100,
+                    "w": 100,
+                    "h": 60
+                },
+                "css": {
+                    "fill": "#9257fa"
+                }
+            },
+            "init": {
+                "position": {
+                    "x": "start.x",
+                    "y": "start.y + start.h + 20",
+                    "w": "start.w",
+                    "h": "start.h"
+                }
+            },
+            "initInject": {
+                "position": {
+                    "x": "init.x",
+                    "y": "init.y + start.h + 20",
+                    "w": "init.w",
+                    "h": "init.h"
+                }
+            },
+            "beforeCreate": {
+                "position": {
+                    "x": "init.x - init.w - 40",
+                    "y": "init.y + init.h",
+                    "w": "init.w",
+                    "h": "initInject.y - init.y - init.h"
+                },
+                "css": {
+                    "fill": "none",
+                    "color": "red",
+                    "stroke": "red"
+                }
+            },
+            "line_init_beforeCreate": {
+                "position": {
+                    "x1": "line_1.x1",
+                    "y1": "line_1.y1 + (line_1.y2 - line_1.y1) / 2",
+                    "y2": "line_1.y1 + (line_1.y2 - line_1.y1) / 2"
+                },
+                "css": {
+                    "fill": "red",
+                    "stroke": "red",
+                    "stroke-dasharray": 3
+                }
+            }
+        }
+    }
 });
 const architecture = <Ref<Architecture>>(<any>ref({
     currentPhase: ref(null),
@@ -200,16 +200,16 @@ onMounted(() => {
         var w = viewBox.w;
         var h = viewBox.h;
         var mx = e.offsetX;
-        var my = e.offsetY;    
-        var dw = w*Math.sign(e.deltaY)*0.05;
-        var dh = h*Math.sign(e.deltaY)*0.05;
-        var dx = dw*mx/svgSize.width;
-        var dy = dh*my/svgSize.height;
-        viewBox.x = viewBox.x+dx;
-        viewBox.y = viewBox.y+dy;
-        viewBox.w = viewBox.w-dw;
-        viewBox.h = viewBox.h-dh;
-        svgEl.value.dispatchEvent(new CustomEvent("onViewBoxChange", {detail: {viewBox}}));
+        var my = e.offsetY;
+        var dw = w * Math.sign(e.deltaY) * 0.05;
+        var dh = h * Math.sign(e.deltaY) * 0.05;
+        var dx = dw * mx / svgSize.width;
+        var dy = dh * my / svgSize.height;
+        viewBox.x = viewBox.x + dx;
+        viewBox.y = viewBox.y + dy;
+        viewBox.w = viewBox.w - dw;
+        viewBox.h = viewBox.h - dh;
+        svgEl.value.dispatchEvent(new CustomEvent("onViewBoxChange", { detail: { viewBox } }));
     }
 
 });
@@ -222,21 +222,29 @@ const block2 = {
 </script>
 
 <template>
-    <editor.component v-if="!!editor"/>
+    <editor class="component" v-if="!!editor" />
     <div class="h-full relative">
-        <svg width="95%" height="700" :viewBox="`${viewBox.x} ${viewBox.y} ${viewBox.w} ${viewBox.h}`" ref="svgEl" class="rounded-lg border-3 shadow-3 ml-10">
-            <testComponent
-                v-if="testComponent"
-                :style="config.style.blocks.start.css"
-                :positioning="config.style.blocks.start.position"
-                :block="block"
-            />
-            <testComponent
-                v-if="testComponent"
-                :positioning="config.style.blocks.start2.position"
-                :style="config.style.blocks.start2.css"
-                :block="block2"
-            />
+        <svg
+            width="95%"
+            height="700"
+            :viewBox="`${viewBox.x} ${viewBox.y} ${viewBox.w} ${viewBox.h}`"
+            ref="svgEl"
+            class="rounded-lg border-3 shadow-3 ml-10"
+        >
+            <g>
+                <testComponent
+                    v-if="testComponent"
+                    :style="config.style.blocks.start.css"
+                    :positioning="config.style.blocks.start.position"
+                    :block="block"
+                />
+                <testComponent
+                    v-if="testComponent"
+                    :positioning="config.style.blocks.start2.position"
+                    :style="config.style.blocks.start2.css"
+                    :block="block2"
+                />
+            </g>
         </svg>
     </div>
 </template>

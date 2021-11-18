@@ -123,29 +123,38 @@ provide("svgInfo", reactive({
 
 // zoom
 const globalG = ref(null);
-const transformMatrix = ref([1, 0, 0, 1, 0, 0]);
-var scrollSensitivity = 0.05;
-const matrix = computed(() => `matrix(${transformMatrix.value.join(",")})`);
-const zoom = (evt: WheelEvent) => {
-    var scroll = evt.detail ? evt.detail * scrollSensitivity : (evt.wheelDelta / 120) * scrollSensitivity;
-    transformMatrix.value[0] += scroll;
-    transformMatrix.value[3] += scroll;
-    // for (var i = 0; i < 4; i++) {
-        //     transformMatrix.value[i] *= scroll;
-    // }
-    const sign = Math.sign(evt.wheelDelta);
-    const {x, y} = getMousePosition(coyaSvgEl.value, evt);
-    console.log(scroll * (evt.x - width.value / 2), scroll * (evt.y - height.value / 2), evt.x - width.value / 2, evt.y - height.value / 2, evt.x, x);
-    transformMatrix.value[4] += scroll * (x - width.value / 2);
-    transformMatrix.value[5] += scroll * (y - height.value / 2);
-}
+var scrollSensitivity = 0.3;
+const translate = reactive({
+    x: 0,
+    y: 0
+});
+const scale = ref(1);
+const minScale = 0.4;
+const maxScale = 8;
+const transform = computed(() => `translate(${translate.x} ${translate.y}) scale(${scale.value})`);
+
+const zoom = (event: WheelEvent) => {
+    const { x, y } = getMousePosition(coyaSvgEl.value, event);
+    const oldScale = scale.value;
+    if (Math.abs(event.wheelDeltaY) > 100 && event.wheelDeltaX === 0) {
+        const newScale = oldScale + Math.sign(event.wheelDelta) * scrollSensitivity;
+        if (newScale <= minScale || newScale >= maxScale) {
+            return;
+        }
+        scale.value = newScale;
+        translate.x = (translate.x - x) * scale.value / oldScale + x;
+        translate.y = (translate.y - y) * scale.value / oldScale + y;
+    } else {
+        const newX = event.deltaX;
+        const newY = event.deltaY;
+        translate.x = (translate.x - newX) * 1;
+        translate.y = (translate.y - newY) * 1;
+    }
+};
 onMounted(() => {
     coyaSvgEl.value["onmousewheel"] = (e) => {
         e.preventDefault();
-        Math.sign(e.deltaY)
         zoom(e);
-
-        //svgEl.value.dispatchEvent(new CustomEvent("onViewBoxChange", {detail: {viewBox}}));
     };
 });
 
@@ -168,9 +177,8 @@ onMounted(() => {
                 ref="coyaSvgEl"
                 overflow="auto"
                 v-if="!!arch?.style?.positioning"
-                :transform="matrix"
             >
-                <g ref="globalG" >
+                <g ref="globalG" :transform="transform">
                     <defs>
                         <marker
                             id="arrowhead"
