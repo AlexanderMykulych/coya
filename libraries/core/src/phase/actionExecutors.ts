@@ -3,7 +3,7 @@ import { addHighlightActionExecutor } from "./addHighlightActionExecutor";
 import { addNewBlockActionDebugger, addNewBlockActionExecutor } from "./addNewBlockActionExecutor";
 import { changeBlockPositionActionExecutor } from "./changeBlockPositionActionExecutor";
 import { changeLabelActionDebugger, changeLabelActionExecutor } from "./changeLabelActionExecutor";
-import { connectActionDebugger, connectActionExecutor } from "./connectActionExecutor";
+import { connectActionDebugger, connectActionExecutor, connectBlockRenamer } from "./connectActionExecutor";
 import { hideBlocksActionDebugger, hideBlocksActionExecutor } from "./hideBlocksActionExecutor";
 import { removeHighlightActionExecutor } from "./removeHighlightActionExecutor";
 import { changeBlockStyleExecutor } from "./changeBlockStyleExecutor";
@@ -11,7 +11,8 @@ import { changeBlockStyleExecutor } from "./changeBlockStyleExecutor";
 export const actionExecutors: ActionList = [{
     type: ActionType.Connect,
     executor: connectActionExecutor,
-    debugger: connectActionDebugger
+    debugger: connectActionDebugger,
+    blockRenamer: connectBlockRenamer,
 }, {
     type: ActionType.AddNewBlock,
     executor: addNewBlockActionExecutor,

@@ -280,10 +280,12 @@ export interface DebugStateContainer {
 }
 
 export type ActionItemExecutor = (phaseId: number, action: Action, actionIndex: number) => Change[] | null;
+
 export interface ActionItem {
     type: ActionType;
     executor: ActionItemExecutor;
     debugger?: (debugInfo: any) => DebugAction[];
+    blockRenamer?: (actionSetting: any, oldVal: string, val: string) => void;
 }
 export type ActionList = ActionItem[];
 

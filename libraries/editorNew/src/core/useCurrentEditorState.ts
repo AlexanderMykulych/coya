@@ -3,6 +3,7 @@ import { CurrentEditorState, Editor, getCurrentEditor, MakeChangeAction } from "
 import { Action, isArray } from "coya-core";
 import { executeActions } from "coya-core";
 import { ArchitectureDescription } from "coya-core";
+import { renameBlock } from "./renameBlock";
 
 export function useCurrentEditorState(): CurrentEditorState {
     const editor = getCurrentEditor();
@@ -102,7 +103,13 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                         initConfigActiveNode.value.style.position.h = val;
                     }
                 }),
-                name: blockId,
+                name: computed({
+                    get: () => blockId.value,
+                    set: (val) => {
+                        renameBlock(editor.config, blockId.value, val);
+                        renameBlock(editor.initialConfig, blockId.value, val);
+                    }
+                }),
                 label: computed({
                     get: () => configActiveNode.value?.style?.label,
                     set: val => {
@@ -132,4 +139,5 @@ export function useEditorState(editor: Editor): CurrentEditorState {
     }
     throw "no editor state";
 }
+
 

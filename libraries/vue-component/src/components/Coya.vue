@@ -130,7 +130,7 @@ const translate = reactive({
     y: 0
 });
 const scale = ref(1);
-const minScale = 0.4;
+const minScale = 0.1;
 const maxScale = 8;
 const transform = computed(() => `translate(${translate.x} ${translate.y}) scale(${scale.value})`);
 

@@ -9,7 +9,7 @@ const text = ref("");
 <template>
     <div class="border-2 rounded-md p-3 bg-white grid h-full"  v-if="activeNode">
         node:
-        {{activeNode.name}}
+        <CoyaInput v-model="activeNode.name" label="name" />
         <CoyaInput v-model="activeNode.label" label="label" />
         <CoyaInput v-model="activeNode.x" label="x" />
         <CoyaInput v-model="activeNode.y" label="y" />

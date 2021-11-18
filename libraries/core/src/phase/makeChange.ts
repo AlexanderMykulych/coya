@@ -1,5 +1,5 @@
-import { isNotNullOrUndefined } from "..";
 import { ArchitectureDescription, BlockStyle } from "../descriptionTypes";
+import { isNotNullOrUndefined } from "../typeGuards";
 import {
     AddBlockChangeSetting,
     Change, ChangeBlockStyleSetting,

@@ -1,5 +1,5 @@
 import { DebugAction, DebugType } from "../debugTypes";
-import { BlockElementType } from "../descriptionTypes";
+import { BlockElementType, ConnectActionSetting } from "../descriptionTypes";
 import { isConnectActionSetting } from "../typeGuards";
 import { Action, ActionDebugInfo, Change, ChangeOwnerType, ChangeType } from "../types";
 
@@ -36,5 +36,14 @@ export function connectActionDebugger(actionInfo: ActionDebugInfo): DebugAction[
             }];
         default:
             return [];
+    }
+}
+
+export function connectBlockRenamer(actionSetting: ConnectActionSetting, oldVal: string, value: string): void {
+    if (actionSetting.to === oldVal) {
+        actionSetting.to = value;
+    }
+    if (actionSetting.from === oldVal) {
+        actionSetting.from = value;
     }
 }
