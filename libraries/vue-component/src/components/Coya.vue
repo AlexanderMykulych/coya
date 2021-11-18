@@ -65,6 +65,7 @@ editor.value = enableEditor({
     architecture: arch,
     id: props.id
 });
+const editorComponent = computed(() => editor.value?.component);
 
 const rectPositions = computed(() => {
     if (arch.value?.style?.positioning) {
@@ -163,7 +164,7 @@ onMounted(() => {
 <template>
     <div class="grid grid-cols-5 grid-rows-12 h-full">
         <div>
-            <editor class="component" v-if="!!editor" />
+            <editorComponent v-if="!!editor" />
         </div>
         <div
             class="coya-container col-span-4 row-span-full p-7 bg-gray-200 bg-opacity-70"

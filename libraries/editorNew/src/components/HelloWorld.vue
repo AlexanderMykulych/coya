@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Architecture } from 'coya-core';
-import { onMounted, onScopeDispose, reactive, Ref, ref, shallowRef } from 'vue'
+import { computed, onMounted, onScopeDispose, reactive, Ref, ref, shallowRef } from 'vue'
 import { EnabledEditor } from '../core';
 import { enableEditor } from '../core/enableEditor';
 import test from "./test.vue";
@@ -183,6 +183,7 @@ const viewBox = reactive({
     w: 0,
     h: 0
 });
+const editorComponent = computed(() => editor.value?.component);
 onMounted(() => {
     editor.value = enableEditor({
         svg: svgEl,
@@ -222,7 +223,7 @@ const block2 = {
 </script>
 
 <template>
-    <editor class="component" v-if="!!editor" />
+    <editorComponent v-if="!!editor" />
     <div class="h-full relative">
         <svg
             width="95%"
@@ -231,7 +232,6 @@ const block2 = {
             ref="svgEl"
             class="rounded-lg border-3 shadow-3 ml-10"
         >
-            <g>
                 <testComponent
                     v-if="testComponent"
                     :style="config.style.blocks.start.css"
@@ -244,7 +244,8 @@ const block2 = {
                     :style="config.style.blocks.start2.css"
                     :block="block2"
                 />
-            </g>
+
+
         </svg>
     </div>
 </template>
