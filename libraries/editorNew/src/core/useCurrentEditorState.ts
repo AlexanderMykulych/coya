@@ -49,14 +49,15 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                 }
             }
         };
-        const configActiveNode = computed(() => !!editor.state.selectedNodeIds?.[0] ? ({
-            style: editor.config.style?.blocks[editor.state.selectedNodeIds?.[0]]
+        const blockId = computed(() => editor.state.selectedNodeIds?.[0]);
+        const configActiveNode = computed(() => !!blockId.value ? ({
+            style: editor.config.style?.blocks[blockId.value]
         }) : null);
-        const initConfigActiveNode = computed(() => !!editor.state.selectedNodeIds?.[0] ? ({
-            style: editor.initialConfig.style?.blocks[editor.state.selectedNodeIds?.[0]]
+        const initConfigActiveNode = computed(() => !!blockId.value ? ({
+            style: editor.initialConfig.style?.blocks[blockId.value]
         }) : null);
         return {
-            isOneNodeSelected: computed(() => !!editor.state.selectedNodeIds?.[0]),
+            isOneNodeSelected: computed(() => !!blockId.value),
             phases: computed(() => {
                 let index = 0;
                 return {
@@ -101,6 +102,14 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                         initConfigActiveNode.value.style.position.h = val;
                     }
                 }),
+                name: blockId,
+                label: computed({
+                    get: () => configActiveNode.value?.style?.label,
+                    set: val => {
+                        configActiveNode.value!.style!.label = val;
+                        initConfigActiveNode.value!.style!.label = val;
+                    }
+                })
             }),
             architecture: editor.architecture,
             mouseState: editor.mouseState,
