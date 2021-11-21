@@ -1,6 +1,6 @@
 import { ActionList, ActionType } from "../types";
 import { addHighlightActionExecutor } from "./addHighlightActionExecutor";
-import { addNewBlockActionDebugger, addNewBlockActionExecutor } from "./addNewBlockActionExecutor";
+import { addNewBlockActionDebugger, addNewBlockActionExecutor, addNewBlockBlockRenamer } from "./addNewBlockActionExecutor";
 import { changeBlockPositionActionExecutor } from "./changeBlockPositionActionExecutor";
 import { changeLabelActionDebugger, changeLabelActionExecutor } from "./changeLabelActionExecutor";
 import { connectActionDebugger, connectActionExecutor, connectBlockRenamer } from "./connectActionExecutor";
@@ -16,7 +16,8 @@ export const actionExecutors: ActionList = [{
 }, {
     type: ActionType.AddNewBlock,
     executor: addNewBlockActionExecutor,
-    debugger: addNewBlockActionDebugger
+    debugger: addNewBlockActionDebugger,
+    blockRenamer: addNewBlockBlockRenamer
 }, {
     type: ActionType.ChangePosition,
     executor: changeBlockPositionActionExecutor

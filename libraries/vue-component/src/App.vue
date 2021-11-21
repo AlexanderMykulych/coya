@@ -23,15 +23,8 @@ const config = computed(() => examples[currentExampleIndex.value]);
 </script>
 <template>
     <main
-        class="px-4 py-10 text-center text-gray-700 dark:text-gray-200 bg-white h-full grid grid-cols-1 grid-rows-12"
+        class="text-center text-gray-700 dark:text-gray-200 bg-white h-full"
     >
-        <Select
-            class="row-span-1"
-            :items="examples"
-            v-model="currentExampleIndex"
-            item-text="label"
-            label="Example"
-        />
         <Coya class="row-span-11" :config="config.value" :id="config.id" />
     </main>
 </template>

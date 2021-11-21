@@ -28,3 +28,10 @@ export function addNewBlockActionDebugger(actionInfo: ActionDebugInfo): DebugAct
     }
     return [];
 }
+
+export function addNewBlockBlockRenamer(actionSetting: AddNewBlockActionSetting, oldVal: string, value: string): void {
+    if (actionSetting[oldVal]) {
+        actionSetting[value] = actionSetting[oldVal];
+        delete actionSetting[oldVal];
+    }
+}

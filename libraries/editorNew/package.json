@@ -8,8 +8,10 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@types/debounce": "^1.2.1",
     "@vueuse/core": "^6.5.3",
     "coya-core": "~0.9.18",
+    "debounce": "^1.2.1",
     "unplugin-auto-import": "^0.4.8",
     "unplugin-icons": "^0.12.17",
     "unplugin-vue-components": "^0.15.3",

@@ -4,6 +4,7 @@ import { Action, isArray } from "coya-core";
 import { executeActions } from "coya-core";
 import { ArchitectureDescription } from "coya-core";
 import { renameBlock } from "./renameBlock";
+import { debounce } from "debounce";
 
 export function useCurrentEditorState(): CurrentEditorState {
     const editor = getCurrentEditor();
@@ -105,10 +106,13 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                 }),
                 name: computed({
                     get: () => blockId.value,
-                    set: (val) => {
-                        renameBlock(editor.config, blockId.value, val);
-                        renameBlock(editor.initialConfig, blockId.value, val);
-                    }
+                    set: debounce((val) => {
+                        if (blockId.value) {
+                            renameBlock(editor.config, blockId.value, val);
+                            renameBlock(editor.initialConfig, blockId.value, val);
+                            editor.state.selectedNodeIds = [val];
+                        }
+                    }, 800)
                 }),
                 label: computed({
                     get: () => configActiveNode.value?.style?.label,

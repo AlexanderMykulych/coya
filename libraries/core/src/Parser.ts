@@ -5,7 +5,7 @@ import { SelectedProperties, Architecture, Block, DebugStateContainer, DebugSele
 import { styleDescriptionToArchitectureStyle } from "./style/styleDescriptionToArchitectureStyle";
 import { startPhases } from "./phase/startPhases";
 import { buildPhasesIndex } from "./phase/buildPhasesIndex";
-import { computed, Ref, isRef, ref } from 'vue';
+import { computed, Ref, isRef, ref, watch, reactive } from 'vue';
 import { deepCopy } from "./util/deepCopy";
 import { getDebugActions } from "./debug/getDebugActions";
 import { DebugType } from "./debugTypes";
@@ -40,10 +40,17 @@ export function transformToArchitecture(description: Ref<unknown> | unknown, set
     };
 }
 
-export function transformDescriptionToArchitecture(transitionalArchitectureRef: Ref<ArchitectureDescription>, setting: TransformSetting, initState: Ref<ArchitectureDescription>): Architecture {
+export function transformDescriptionToArchitecture(
+    transitionalArchitectureRef: Ref<ArchitectureDescription>,
+    setting: TransformSetting,
+    initState: Ref<ArchitectureDescription>
+): Architecture {
     const currentPhase = setting.currentPhase;
  
     const blocks = computed(() => BlockGroupDescriptionsToBlock(transitionalArchitectureRef.value))
+    watch(() => blocks.value, (val) => {
+        console.log("block = ", val.map(x => `${x.id}`).join(","));
+    })
     const phaseIndex = buildPhasesIndex(transitionalArchitectureRef);
     const style = computed(() => styleDescriptionToArchitectureStyle(transitionalArchitectureRef.value, blocks.value, setting));
     const next = () => {
@@ -105,7 +112,7 @@ export function transformDescriptionToArchitecture(transitionalArchitectureRef: 
     if (currentPhase.current !== null) {
         toPhase(currentPhase.current);
     }
-    return {
+    return reactive<Architecture>({
         name: transitionalArchitectureRef.value.name,
         blocks,
         style,
@@ -116,7 +123,7 @@ export function transformDescriptionToArchitecture(transitionalArchitectureRef: 
         phases: phaseIndex.phases,
         currentPhase: computed(() => currentPhase.current),
         debugState: computed(() => transitionalArchitectureRef.value.debugState)
-    }
+    }) as Architecture;
 }
 
 export function BlockGroupDescriptionsToBlock(description: ArchitectureDescription): Block[] {

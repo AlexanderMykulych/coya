@@ -34,7 +34,10 @@ export function lineBlockPosition(blocksPositions: Ref<BlockPositioning[]>, bloc
         return {
             blockId: block.id,
             position: {
-                x1: computed(() => position.value.p1.x + (indentX1.value ?? 2)),
+                x1: computed(() => {
+                    console.log(block.id);
+                    return position.value.p1.x + (indentX1.value ?? 2);
+                }),
                 y1: computed(() => position.value.p1.y + (indentY1.value ?? 2)),
                 x2: computed(() => position.value.p2.x + (indentX2.value ?? -2)),
                 y2: computed(() => position.value.p2.y + (indentY2.value ?? -2))

@@ -1,9 +1,11 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@types/debounce': ^1.2.1
   '@vitejs/plugin-vue': ^1.9.3
   '@vueuse/core': ^6.5.3
   coya-core: ~0.9.16
+  debounce: ^1.2.1
   typescript: ^4.4.2
   unplugin-auto-import: ^0.4.8
   unplugin-icons: ^0.12.17
@@ -14,8 +16,10 @@ specifiers:
   vue-tsc: ^0.3.0
 
 dependencies:
+  '@types/debounce': 1.2.1
   '@vueuse/core': 6.7.4_vue@3.2.21
   coya-core: 0.9.16
+  debounce: 1.2.1
   unplugin-auto-import: 0.4.13_@vueuse+core@6.7.4+vite@2.6.13
   unplugin-icons: 0.12.17_vite@2.6.13
   unplugin-vue-components: 0.15.6_vite@2.6.13+vue@3.2.21
@@ -689,6 +693,10 @@ packages:
       '@babel/types': 7.16.0
     dev: false
 
+  /@types/debounce/1.2.1:
+    resolution: {integrity: sha512-epMsEE85fi4lfmJUH/89/iV/LI+F5CvNIvmgs5g5jYFPfhO2S/ae8WSsLOKWdwtoaZw9Q2IhJ4tQ5tFCcS/4HA==}
+    dev: false
+
   /@types/graceful-fs/4.1.5:
     resolution: {integrity: sha512-anKkLmZZ+xm4p8JWBf4hElkM4XR+EZeA2M9BAkkTldmcyDY4mbdIJnRghDJH3Ov5ooY7/UAoENtmdMSkaAd7Cw==}
     dependencies:
@@ -1358,6 +1366,10 @@ packages:
       abab: 2.0.5
       whatwg-mimetype: 2.3.0
       whatwg-url: 8.7.0
+    dev: false
+
+  /debounce/1.2.1:
+    resolution: {integrity: sha512-XRRe6Glud4rd/ZGQfiV1ruXSfbvfJedlV9Y6zOlP+2K04vBYiJEte6stfFkCP03aMnY5tsipamumUjL14fofug==}
     dev: false
 
   /debug/4.3.2:

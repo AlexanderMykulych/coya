@@ -9,7 +9,7 @@
 		{
 			"newBlock": {
                 "init": "init events & lifecycle",
-                "block_new": {
+                "has_temp2": {
                     "label": "new palette block"
                 }
 			},
@@ -46,10 +46,10 @@
                 },
                 {
                     "from": "initInject",
-                    "to": "block_new"
+                    "to": "has_temp2"
                 },
                 {
-                    "from": "block_new",
+                    "from": "has_temp2",
                     "to": "block_new_new"
                 }
             ]
@@ -63,18 +63,7 @@
 					"fill": "#3ab881",
 					"fontSize": "0.1em"
 				}
-			},
-			"start": {
-				"position": {
-                    "x": "219",
-                    "y": "21.921875",
-                    "w": "149",
-                    "h": "88"
-				},
-				"css": {
-					"fill": "#3e6b94"
-				}
-			},
+            },
 			"init": {
 				"position": {
 					"x": "start.x",
@@ -116,17 +105,6 @@
 					"stroke-dasharray": 3
 				}
             },
-            "block_new": {
-                "position": {
-                    "x": "initInject.x",
-                    "y": "initInject.y + initInject.h + 20",
-                    "w": "initInject.w",
-                    "h": "start.h"
-                },
-                "css": {
-                    "fill": "#3e6b94"
-                }
-            },
             "block_new_new": {
                 "position": {
                     "x": "470",
@@ -137,6 +115,29 @@
                 "css": {
                     "fill": "#3e6b94"
                 }
+            },
+            "start": {
+                "position": {
+                    "x": "217",
+                    "y": "26.921875",
+                    "w": "149",
+                    "h": "88"
+                },
+                "css": {
+                    "fill": "#3e6b94"
+                }
+            },
+            "has_temp2": {
+                "position": {
+                    "x": "initInject.x",
+                    "y": "initInject.y + initInject.h + 20",
+                    "w": "initInject.w",
+                    "h": "start.h"
+                },
+                "css": {
+                    "fill": "#3e6b94"
+                },
+                "label": "Has template options"
 			}
 		}
 	}

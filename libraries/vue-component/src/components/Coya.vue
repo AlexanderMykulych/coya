@@ -22,7 +22,7 @@ watch(() => props.config, () => {
     initialConfig.value = preparedConfig.config;
 }, { immediate: true });
 
-const arch = ref<Architecture | null>(null);
+// const arch = ref<Architecture | null>(null);
 const editor = ref(null);
 let archConfig = ref<ArchitectureDescription | null>(null);
 const coyaSvgEl = ref<SVGSVGElement | null>(null);
@@ -47,7 +47,7 @@ const height = computed(() => {
     }
     return 0;
 });
-const { architecture, config } = transformToArchitecture(preparedConfig.config, {
+const { architecture: arch, config } = transformToArchitecture(preparedConfig.config, {
     viewBox: {
         x: vX,
         y: vY,
@@ -56,7 +56,7 @@ const { architecture, config } = transformToArchitecture(preparedConfig.config, 
     },
     currentPhase
 });
-arch.value = architecture.value;
+// arch.value = architecture.value;
 archConfig = config;
 editor.value = enableEditor({
     svg: coyaSvgEl,
@@ -81,6 +81,7 @@ const rectPositions = computed(() => {
     return [];
 });
 const filteredRectPositions = computed(() => rectPositions.value.filter(x => !x?.style?.isHighlight));
+window.temp = filteredRectPositions;
 const next = () => arch.value?.next();
 const back = () => arch.value?.back();
 const save = () => saveConfig(props.id, initialConfig.value);
@@ -153,10 +154,12 @@ const zoom = (event: WheelEvent) => {
     }
 };
 onMounted(() => {
-    coyaSvgEl.value["onmousewheel"] = (e) => {
-        e.preventDefault();
-        zoom(e);
-    };
+    if(coyaSvgEl.value) {
+        coyaSvgEl.value["onmousewheel"] = (e) => {
+            e.preventDefault();
+            zoom(e);
+        };
+    }
 });
 
 
