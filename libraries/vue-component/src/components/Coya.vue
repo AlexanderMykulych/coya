@@ -4,11 +4,10 @@ import { computed, provide, reactive, ref, onMounted, watch } from "vue";
 import { useNodeDetails } from "../logic/useNodeDetails";
 import { useMousePosition } from "../logic/useSvgMousePosition";
 import { useDebug } from "../state/useDebug";
-import { enableEditor } from "coya-editor-new";
+import { enableEditor, getMousePosition} from "coya-editor-new";
 import "coya-editor-new/dist/style.css";
 import { saveConfig } from "../socket";
 import { useCurrentPhase } from "../state/useCurrentPhase";
-import { getMousePosition } from "../../../editorNew/src/core/getMousePosition";
 
 const props = defineProps<{ config: string | Object, id: string }>();
 
@@ -136,7 +135,7 @@ const maxScale = 8;
 const transform = computed(() => `translate(${translate.x} ${translate.y}) scale(${scale.value})`);
 
 const zoom = (event: WheelEvent) => {
-    const { x, y } = getMousePosition(coyaSvgEl.value, event);
+    const { x, y } = getMousePosition(coyaSvgEl.value, event, true);
     const oldScale = scale.value;
     if (Math.abs(event.wheelDeltaY) > 100 && event.wheelDeltaX === 0) {
         const newScale = oldScale + Math.sign(event.wheelDelta) * scrollSensitivity;
