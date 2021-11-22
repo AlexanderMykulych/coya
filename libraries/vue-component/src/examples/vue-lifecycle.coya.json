@@ -9,7 +9,7 @@
 		{
 			"newBlock": {
                 "init": "init events & lifecycle",
-                "has_temp2": {
+                "has_template_opt": {
                     "label": "new palette block"
                 }
 			},
@@ -46,10 +46,10 @@
                 },
                 {
                     "from": "initInject",
-                    "to": "has_temp2"
+                    "to": "has_template_opt"
                 },
                 {
-                    "from": "has_temp2",
+                    "from": "has_template_opt",
                     "to": "block_new_new"
                 }
             ]
@@ -107,10 +107,10 @@
             },
             "block_new_new": {
                 "position": {
-                    "x": "470",
-                    "y": "345.921875",
-                    "w": "100",
-                    "h": "100"
+                    "x": "has_template_opt.x",
+                    "y": "has_template_opt.y + has_template_opt.h + 20",
+                    "w": "has_template_opt.w",
+                    "h": "has_template_opt.h"
                 },
                 "css": {
                     "fill": "#3e6b94"
@@ -118,16 +118,16 @@
             },
             "start": {
                 "position": {
-                    "x": "217",
-                    "y": "26.921875",
-                    "w": "149",
-                    "h": "88"
+                    "x": "133.5509796142578",
+                    "y": "16.78569793701172",
+                    "w": "232.4490203857422",
+                    "h": "98.13617706298828"
                 },
                 "css": {
                     "fill": "#3e6b94"
                 }
             },
-            "has_temp2": {
+            "has_template_opt": {
                 "position": {
                     "x": "initInject.x",
                     "y": "initInject.y + initInject.h + 20",

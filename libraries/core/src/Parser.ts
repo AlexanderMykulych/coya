@@ -5,7 +5,7 @@ import { SelectedProperties, Architecture, Block, DebugStateContainer, DebugSele
 import { styleDescriptionToArchitectureStyle } from "./style/styleDescriptionToArchitectureStyle";
 import { startPhases } from "./phase/startPhases";
 import { buildPhasesIndex } from "./phase/buildPhasesIndex";
-import { computed, Ref, isRef, ref, watch, reactive } from 'vue';
+import { computed, Ref, isRef, ref, reactive } from 'vue';
 import { deepCopy } from "./util/deepCopy";
 import { getDebugActions } from "./debug/getDebugActions";
 import { DebugType } from "./debugTypes";
@@ -47,10 +47,7 @@ export function transformDescriptionToArchitecture(
 ): Architecture {
     const currentPhase = setting.currentPhase;
  
-    const blocks = computed(() => BlockGroupDescriptionsToBlock(transitionalArchitectureRef.value))
-    watch(() => blocks.value, (val) => {
-        console.log("block = ", val.map(x => `${x.id}`).join(","));
-    })
+    const blocks = computed(() => BlockGroupDescriptionsToBlock(transitionalArchitectureRef.value));
     const phaseIndex = buildPhasesIndex(transitionalArchitectureRef);
     const style = computed(() => styleDescriptionToArchitectureStyle(transitionalArchitectureRef.value, blocks.value, setting));
     const next = () => {
