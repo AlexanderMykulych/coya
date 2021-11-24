@@ -97,12 +97,12 @@ const { mouseState, state, isOneNodeSelected } = useCurrentEditorState();
             :y="svgViewBox.y"
         >
 
-            <foreignObject class="node" :style="debugStyle">
+            <!-- <foreignObject class="node" :style="debugStyle">
                 <body xmlns="http://www.w3.org/1999/xhtml" :style="debugStyle">
                 <textarea name="" id="" cols="30" rows="20" 
                     :value="`${JSON.stringify(state)}\n${JSON.stringify(mouseState)}`"></textarea>
                 </body>
-            </foreignObject>
+            </foreignObject> -->
             <foreignObject class="node" :style="phasesContainerStyle">
                 <body xmlns="http://www.w3.org/1999/xhtml" :style="phasesContainerStyle">
                     <Phases />
