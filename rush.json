@@ -472,6 +472,12 @@
       "reviewCategory": "production"
     },
     {
+      "packageName": "coya-json-editor",
+      "projectFolder": "libraries/jsonEditor",
+      "versionPolicyName": "main",
+      "reviewCategory": "production"
+    },
+    {
       "packageName": "coya-vue-component",
       "versionPolicyName": "main",
       "projectFolder": "libraries/vue-component",
