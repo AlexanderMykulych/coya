@@ -17,7 +17,7 @@ export const actionExecutors: ActionList = [{
     type: ActionType.AddNewBlock,
     executor: addNewBlockActionExecutor,
     debugger: addNewBlockActionDebugger,
-    blockRenamer: addNewBlockBlockRenamer
+    blockRenamer: addNewBlockBlockRenamer,
 }, {
     type: ActionType.ChangePosition,
     executor: changeBlockPositionActionExecutor

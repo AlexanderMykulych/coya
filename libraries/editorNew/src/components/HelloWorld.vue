@@ -22,12 +22,16 @@ const config = ref({
     "phases": [
         {
             "newBlock": {
-                "init": "init events & lifecycle"
+                "init": "init events & lifecycle",
+                "test": "test blockp"
             },
-            "connect": {
+            "connect": [{
                 "from": "start",
                 "to": "init"
-            }
+            }, {
+                "from": "init",
+                "to": "start"
+            }]
         },
         {
             "newBlock": {
