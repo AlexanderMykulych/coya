@@ -1,6 +1,6 @@
 import { computed, reactive, ref } from "vue";
 import { CurrentEditorState, Editor, getCurrentEditor, MakeChangeAction } from ".";
-import { Action, isArray } from "coya-core";
+import { Action, isArray, isString } from "coya-core";
 import { executeActions } from "coya-core";
 import { ArchitectureDescription } from "coya-core";
 import { renameBlock } from "./renameBlock";
@@ -58,6 +58,14 @@ export function useEditorState(editor: Editor): CurrentEditorState {
         const initConfigActiveNode = computed(() => !!blockId.value ? ({
             style: editor.initialConfig.style?.blocks[blockId.value]
         }) : null);
+        const prepareNum = (val: string | Number) => {
+            const num = Number(val);
+            if (!isNaN(num)) {
+                const res = Math.round((num + Number.EPSILON) * 100) / 100;
+                return isString(val) ? `${res}` : res;
+            }
+            return val;
+        }
         return {
             isOneNodeSelected: computed(() => !!blockId.value),
             phases: computed(() => {
@@ -77,28 +85,28 @@ export function useEditorState(editor: Editor): CurrentEditorState {
             }),
             activeNode: reactive({
                 x: computed({
-                    get: () => configActiveNode.value?.style?.position?.x,
+                    get: () => prepareNum(configActiveNode.value?.style?.position?.x),
                     set: val => {
                         configActiveNode.value.style.position.x = val;
                         initConfigActiveNode.value.style.position.x = val;
                     }
                 }),
                 y: computed({
-                    get: () => configActiveNode.value?.style?.position?.y,
+                    get: () => prepareNum(configActiveNode.value?.style?.position?.y),
                     set: val => {
                         configActiveNode.value.style.position.y = val;
                         initConfigActiveNode.value.style.position.y = val;
                     }
                 }),
                 w: computed({
-                    get: () => configActiveNode.value?.style?.position?.w,
+                    get: () => prepareNum(configActiveNode.value?.style?.position?.w),
                     set: val => {
                         configActiveNode.value.style.position.w = val;
                         initConfigActiveNode.value.style.position.w = val;
                     }
                 }),
                 h: computed({
-                    get: () => configActiveNode.value?.style?.position?.h,
+                    get: () => prepareNum(configActiveNode.value?.style?.position?.h),
                     set: val => {
                         configActiveNode.value!.style!.position.h = val;
                         initConfigActiveNode.value.style.position.h = val;

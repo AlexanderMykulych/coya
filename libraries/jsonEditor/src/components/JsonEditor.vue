@@ -2,10 +2,11 @@
 import * as monaco from 'monaco-editor'
 import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker'
 import jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker'
-import { onMounted, ref, shallowRef } from 'vue'
+import cssWorker from 'monaco-editor/esm/vs/language/css/css.worker?worker'
+import { onMounted, ref, shallowRef, watch, computed } from 'vue'
 import { configureEditor } from './configureEditor';
 
-const props = defineProps<{modelValue: any, config: any}>();
+const props = defineProps<{modelValue: any, config?: any}>();
 const emit = defineEmits(["update:modelValue"]);
 const editorEl = ref(null);
 
@@ -21,10 +22,11 @@ self.MonacoEnvironment = {
     }
 }
 const editor = shallowRef<monaco.editor.IStandaloneCodeEditor | null>(null)
+const jsonValue = computed(() => JSON.stringify(props.modelValue, null, '\t'));
 onMounted(() => {
     if (editorEl.value) {
         editor.value = monaco.editor.create(editorEl.value, {
-            value: JSON.stringify(props.modelValue, null, '\t'),
+            value: jsonValue.value,
             language: 'json',
             contextmenu: false,
             readOnly: false,
@@ -32,9 +34,16 @@ onMounted(() => {
         })
         if (editor.value) {
             editor.value.onDidChangeModelContent(_ => {
-                emit("update:modelValue", JSON.parse(editor.value.getValue()))
-            })
+                if (editor.value && editor.value.getValue() !== jsonValue.value) {
+                    emit("update:modelValue", JSON.parse(editor.value.getValue()))
+                }
+            });
             configureEditor(editor.value)
+            watch(() => jsonValue.value, (val) => {
+                if (val && val !== editor.value?.getValue()) {
+                    editor.value?.setValue(val);
+                }
+            }, { deep: true })
         }
     }
 })

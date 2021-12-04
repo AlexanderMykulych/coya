@@ -17,120 +17,79 @@ import LinkAttributes from 'markdown-it-link-attributes'
 const markdownWrapperClasses = 'prose prose-sm m-auto text-left'
 
 export default defineConfig({
-  resolve: {
-    alias: {
-      '~/': `${path.resolve(__dirname, 'src')}/`,
+    resolve: {
+        alias: {
+            '~/': `${path.resolve(__dirname, 'src')}/`,
+        },
     },
-  },
-  plugins: [
-    Vue({
-      include: [/\.vue$/, /\.md$/],
-    }),
+    plugins: [
+        Vue({
+            include: [/\.vue$/, /\.md$/],
+        }),
 
-    // https://github.com/hannoeru/vite-plugin-pages
-    Pages({
-      extensions: ['vue', 'md'],
-    }),
+        // https://github.com/antfu/unplugin-auto-import
+        AutoImport({
+            imports: [
+                'vue',
+                'vue-router',
+                'vue-i18n',
+                '@vueuse/head',
+                '@vueuse/core',
+            ],
+            dts: 'src/auto-imports.d.ts',
+        }),
 
-    // https://github.com/JohnCampionJr/vite-plugin-vue-layouts
-    Layouts(),
+        // https://github.com/antfu/unplugin-vue-components
+        Components({
+            // allow auto load markdown components under `./src/components/`
+            extensions: ['vue', 'md'],
 
-    // https://github.com/antfu/unplugin-auto-import
-    AutoImport({
-      imports: [
-        'vue',
-        'vue-router',
-        'vue-i18n',
-        '@vueuse/head',
-        '@vueuse/core',
-      ],
-      dts: 'src/auto-imports.d.ts',
-    }),
+            // allow auto import and register components used in markdown
+            include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
 
-    // https://github.com/antfu/unplugin-vue-components
-    Components({
-      // allow auto load markdown components under `./src/components/`
-      extensions: ['vue', 'md'],
+            // custom resolvers
+            resolvers: [
+                // auto import icons
+                // https://github.com/antfu/unplugin-icons
+                IconsResolver(),
+            ],
 
-      // allow auto import and register components used in markdown
-      include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
+            dts: 'src/components.d.ts',
+        }),
 
-      // custom resolvers
-      resolvers: [
-        // auto import icons
         // https://github.com/antfu/unplugin-icons
-        IconsResolver(),
-      ],
+        Icons({
+            autoInstall: true,
+        }),
 
-      dts: 'src/components.d.ts',
-    }),
+        // https://github.com/antfu/vite-plugin-windicss
+        WindiCSS({
+            safelist: markdownWrapperClasses,
+        }),
+    ],
 
-    // https://github.com/antfu/unplugin-icons
-    Icons({
-      autoInstall: true,
-    }),
-
-    // https://github.com/antfu/vite-plugin-windicss
-    WindiCSS({
-      safelist: markdownWrapperClasses,
-    }),
-
-    // https://github.com/antfu/vite-plugin-md
-    // Don't need this? Try vitesse-lite: https://github.com/antfu/vitesse-lite
-    Markdown({
-      wrapperClasses: markdownWrapperClasses,
-      headEnabled: true,
-      markdownItSetup(md) {
-        // https://prismjs.com/
-        // @ts-expect-error types mismatch
-        md.use(Prism)
-        // @ts-expect-error types mismatch
-        md.use(LinkAttributes, {
-          pattern: /^https?:\/\//,
-          attrs: {
-            target: '_blank',
-            rel: 'noopener',
-          },
-        })
-      },
-    }),
-
-    // https://github.com/intlify/bundle-tools/tree/main/packages/vite-plugin-vue-i18n
-    VueI18n({
-      runtimeOnly: true,
-      compositionOnly: true,
-      include: [path.resolve(__dirname, 'locales/**')],
-    }),
-
-    // https://github.com/antfu/vite-plugin-inspect
-    Inspect({
-      // change this to enable inspect for debugging
-      enabled: false,
-    }),
-  ],
-
-  server: {
-    fs: {
-      strict: true,
+    server: {
+        fs: {
+            strict: true,
+        },
     },
-  },
 
-  // https://github.com/antfu/vite-ssg
-  ssgOptions: {
-    script: 'async',
-    formatting: 'minify',
-  },
+    // https://github.com/antfu/vite-ssg
+    ssgOptions: {
+        script: 'async',
+        formatting: 'minify',
+    },
 
-  optimizeDeps: {
-    include: [
-      'vue',
-      'vue-router',
-      '@vueuse/core',
-      '@vueuse/head',
-    ],
-    exclude: [
-      'vue-demi',
-    ],
+    optimizeDeps: {
+        include: [
+            'vue',
+            'vue-router',
+            '@vueuse/core',
+            '@vueuse/head',
+        ],
+        exclude: [
+            'vue-demi',
+        ],
     },
     build: {
         rollupOptions: {
