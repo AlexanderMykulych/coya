@@ -71,7 +71,7 @@ const phasesContainerStyle = computed(() => ({
     height: `70px`,
     w: svgPosition.w
 }));
-const nodeSettingWidth = ref(300);
+const nodeSettingWidth = ref(400);
 const nodeSettingContainerStyle = computed(() => ({
     x: `${svgPosition.w - nodeSettingWidth.value - phasesMargin.value}px`,
     y: `${svgPosition.h / 3}px`,

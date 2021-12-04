@@ -1,8 +1,10 @@
 {
   "private": true,
   "name": "coya-json-editor",
+  "version": "0.9.18",
+  "module": "dist/coya-json-editor.es.js",
   "scripts": {
-    "build": "cross-env NODE_ENV=production vite-ssg build",
+    "build": "cross-env NODE_ENV=production vite build --debug",
     "dev": "vite --port 3333 --open",
     "lint": "eslint \"**/*.{vue,ts,js}\"",
     "test": "cypress open",

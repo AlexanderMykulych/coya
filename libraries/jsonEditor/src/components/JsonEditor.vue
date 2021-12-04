@@ -5,8 +5,8 @@ import jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker'
 import { onMounted, ref, shallowRef } from 'vue'
 import { configureEditor } from './configureEditor';
 
-const props = defineProps<{modelValue: any}>();
-
+const props = defineProps<{modelValue: any, config: any}>();
+const emit = defineEmits(["update:modelValue"]);
 const editorEl = ref(null);
 
 self.MonacoEnvironment = {
@@ -28,8 +28,12 @@ onMounted(() => {
             language: 'json',
             contextmenu: false,
             readOnly: false,
+            ...(props.config || {})
         })
         if (editor.value) {
+            editor.value.onDidChangeModelContent(_ => {
+                emit("update:modelValue", JSON.parse(editor.value.getValue()))
+            })
             configureEditor(editor.value)
         }
     }

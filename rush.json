@@ -481,8 +481,7 @@
       "packageName": "coya-vue-component",
       "versionPolicyName": "main",
       "projectFolder": "libraries/vue-component",
-      "reviewCategory": "production",
-    //   "shouldPublish": true
+      "reviewCategory": "production"
     },
     {
       "packageName": "demo",
