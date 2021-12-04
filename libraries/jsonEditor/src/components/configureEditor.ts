@@ -39,7 +39,7 @@ function getAndApplyConfig(editor: monaco.editor.IStandaloneCodeEditor, row: Jso
             setToValue(obj, value, config.row.path);
             editor.setValue(JSON.stringify(obj, null, '\t'));
         }
-    })
+    }, false)
     return config
 }
 
