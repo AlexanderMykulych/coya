@@ -4,6 +4,7 @@ import { computed, onScopeDispose, reactive, ref, watch } from "vue";
 import Palette from "./Palette/Palette.vue";
 import Phases from "./Phases/Phases.vue";
 import NodeSetting from "./NodeSetting/NodeSetting.vue";
+import AppMenu from "./AppMenu/AppMenu.vue";
 import { useCurrentEditorState } from "../core/useCurrentEditorState";
 
 const teleportEl = ref(null);
@@ -85,6 +86,12 @@ const debugStyle = computed(() => ({
     height: "400"
 }));
 
+const appMenuContainerStyle = computed(() => ({
+    x: `${svgPosition.w - nodeSettingWidth.value - phasesMargin.value}px`,
+    y: `10px`,
+    width: `${nodeSettingWidth.value}px`,
+    height: `50px`
+}));
 const { mouseState, state, isOneNodeSelected } = useCurrentEditorState();
 </script>
 
@@ -96,13 +103,6 @@ const { mouseState, state, isOneNodeSelected } = useCurrentEditorState();
             :x="svgViewBox.x"
             :y="svgViewBox.y"
         >
-
-            <!-- <foreignObject class="node" :style="debugStyle">
-                <body xmlns="http://www.w3.org/1999/xhtml" :style="debugStyle">
-                <textarea name="" id="" cols="30" rows="20" 
-                    :value="`${JSON.stringify(state)}\n${JSON.stringify(mouseState)}`"></textarea>
-                </body>
-            </foreignObject> -->
             <foreignObject class="node" :style="phasesContainerStyle">
                 <body xmlns="http://www.w3.org/1999/xhtml" :style="phasesContainerStyle">
                     <Phases />
@@ -121,6 +121,15 @@ const { mouseState, state, isOneNodeSelected } = useCurrentEditorState();
             >
                 <body xmlns="http://www.w3.org/1999/xhtml" :style="nodeSettingContainerStyle" @click.stop.prevent>
                     <NodeSetting />
+                </body>
+            </foreignObject>
+            <foreignObject
+                class="node"
+                :style="appMenuContainerStyle"
+                @click.stop.prevent
+            >
+                <body xmlns="http://www.w3.org/1999/xhtml" :style="appMenuContainerStyle" @click.stop.prevent>
+                    <AppMenu />
                 </body>
             </foreignObject>
         </svg>

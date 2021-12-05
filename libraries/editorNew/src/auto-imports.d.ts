@@ -4,6 +4,7 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    AppMenu: typeof import('./components/AppMenu/AppMenu.vue')['default']
     ArrowPalette: typeof import('./components/Palette/blocks/arrow/arrowPalette.vue')['default']
     ArrowWrapperRect: typeof import('./components/Wrap/ArrowWrapperRect.vue')['default']
     CoyaInput: typeof import('./components/ui/coyaInput.vue')['default']

@@ -105,6 +105,7 @@ export interface CurrentEditorState {
     getNewUniqBlockName: () => string;
     activeNode: Ref<{ x: any; y: any; w: any; h: any; name: string; label: string;}>;
     state: EnabledEditorState;
+    selectedNode: Ref<string | undefined>;
 }
 
 export enum PinType {

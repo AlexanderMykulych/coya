@@ -153,7 +153,11 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                     name += "_new";
                 }
                 return name;
-            }
+            },
+            selectedNode: computed({
+                get: () => editor.state.selectedNodeIds?.[0],
+                set: (val) => !!val ? editor.state.selectedNodeIds = [val] : null,
+            })
         };
     }
     throw "no editor state";
