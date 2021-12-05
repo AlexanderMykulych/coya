@@ -1,11 +1,11 @@
 import { createApp } from 'vue';
 import { WidgetChangeCallback, WidgetConfig } from './WidgetConfig';
-import formulaWidget from './widgets/formulaWidget.vue';
+import wrapperWidget from './widgets/wrapperWidget.vue';
 
 export function createVueDomElement(widgetConfig: WidgetConfig, onValueChange: WidgetChangeCallback, props?: any) {
     const dom = document.createElement('div');
     dom.style.width = "100%";
-    const app = createApp(formulaWidget, {
+    const app = createApp(wrapperWidget, {
         widgetConfig,
         onValueChange: (value: any) => onValueChange({ value }),
         ...(props || {})

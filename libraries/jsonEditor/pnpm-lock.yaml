@@ -42,6 +42,7 @@ specifiers:
   vite-plugin-windicss: ^1.5.3
   vite-ssg: ^0.16.2
   vue: ^3.2.23
+  vue-color-kit: ^1.0.5
   vue-demi: ^0.12.1
   vue-i18n: ^9.1.9
   vue-router: ^4.0.12
@@ -56,6 +57,7 @@ dependencies:
   pinia: 2.0.4_typescript@4.5.2+vue@3.2.23
   prism-theme-vars: 0.2.2
   vue: 3.2.23
+  vue-color-kit: 1.0.5
   vue-demi: 0.12.1_vue@3.2.23
   vue-i18n: 9.1.9_vue@3.2.23
   vue-router: 4.0.12_vue@3.2.23
@@ -7111,6 +7113,12 @@ packages:
       vscode-pug-languageservice: 0.29.6
       vscode-typescript-languageservice: 0.29.6
     dev: true
+
+  /vue-color-kit/1.0.5:
+    resolution: {integrity: sha512-PUQzqdpI7672YYuoHdTLENHldieVMis0u9g2n7NAxiLGdiaqCD/QaYtbDOvtASpN5oSIfKxQgPV+i45MOlkKnw==}
+    peerDependencies:
+      vue: ^3.0.5
+    dev: false
 
   /vue-demi/0.12.1_vue@3.2.23:
     resolution: {integrity: sha512-QL3ny+wX8c6Xm1/EZylbgzdoDolye+VpCXRhI2hug9dJTP3OUJ3lmiKN3CsVV3mOJKwFi0nsstbgob0vG7aoIw==}

@@ -9,6 +9,9 @@ const val = ref({
             w: 'start.w',
             h: 'start.h',
         },
+        css: {
+            fill: "black"
+        }
     },
 });
 const prepVal = computed({

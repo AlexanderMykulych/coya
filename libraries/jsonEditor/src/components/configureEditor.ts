@@ -36,6 +36,7 @@ function getAndApplyConfig(editor: monaco.editor.IStandaloneCodeEditor, row: Jso
     createWidget(editor, config, ({ value }) => {
         const obj = JSON.parse(editor.getValue());
         if (obj) {
+            config.row.value = value;
             setToValue(obj, value, config.row.path);
             editor.setValue(JSON.stringify(obj, null, '\t'));
         }

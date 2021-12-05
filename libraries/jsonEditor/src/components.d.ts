@@ -12,17 +12,22 @@ declare module 'vue' {
     CarbonPedestrian: typeof import('~icons/carbon/pedestrian')['default']
     CarbonSun: typeof import('~icons/carbon/sun')['default']
     CarbonWarning: typeof import('~icons/carbon/warning')['default']
+    CollorWidget: typeof import('./components/widgets/CollorWidget.vue')['default']
+    ColorWidget: typeof import('./components/widgets/ColorWidget.vue')['default']
     Footer: typeof import('./components/Footer.vue')['default']
     FormulaWidget: typeof import('./components/widgets/formulaWidget.vue')['default']
     'ICarbon:arrowRight': typeof import('~icons/carbon/arrow-right')['default']
     ICarbonCampsite: typeof import('~icons/carbon/campsite')['default']
     IconAccessibility: typeof import('~icons/ic/on-accessibility')['default']
     'IFoundation:widget': typeof import('~icons/foundation/widget')['default']
+    'IIc:roundRectangle': typeof import('~icons/ic/round-rectangle')['default']
+    'IIc:twotoneBorderColor': typeof import('~icons/ic/twotone-border-color')['default']
     'IUil:arrowsResize': typeof import('~icons/uil/arrows-resize')['default']
     JsonEditor: typeof import('./components/JsonEditor.vue')['default']
     README: typeof import('./components/README.md')['default']
     TestWidget: typeof import('./components/widgets/testWidget.vue')['default']
     'TestWidget copy': typeof import('./components/widgets/testWidget copy.vue')['default']
+    WrapperWidget: typeof import('./components/widgets/wrapperWidget.vue')['default']
   }
 }
 

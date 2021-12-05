@@ -128,6 +128,13 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                         configActiveNode.value!.style!.label = val;
                         initConfigActiveNode.value!.style!.label = val;
                     }
+                }),
+                css: computed({
+                    get: () => configActiveNode.value?.style?.css,
+                    set: val => {
+                        configActiveNode.value!.style!.css = val;
+                        initConfigActiveNode.value!.style!.css = val;
+                    }
                 })
             }),
             architecture: editor.architecture,
