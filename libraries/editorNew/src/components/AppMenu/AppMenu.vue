@@ -9,7 +9,7 @@ const selectDefaultNode = () => selectedNode.value = "_";
 <template>
     <div class="border-2 rounded-md p-3 bg-white h-full flex flex-row">
         <div class="border-2 rounded-md flex-1 flex-grow-0 ">
-            <button click="selectDefaultNode">
+            <button @click="selectDefaultNode">
                 Default
             </button>
         </div>
