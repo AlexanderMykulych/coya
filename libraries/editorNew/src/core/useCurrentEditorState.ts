@@ -157,7 +157,11 @@ export function useEditorState(editor: Editor): CurrentEditorState {
             selectedNode: computed({
                 get: () => editor.state.selectedNodeIds?.[0],
                 set: (val) => !!val ? editor.state.selectedNodeIds = [val] : null,
-            })
+            }),
+            showDebugWindow: computed({
+                get: () => editor.showDebugWindow,
+                set: (val: boolean) => editor.showDebugWindow = val,
+            }),
         };
     }
     throw "no editor state";

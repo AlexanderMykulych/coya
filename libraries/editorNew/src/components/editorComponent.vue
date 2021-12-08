@@ -5,6 +5,7 @@ import Palette from "./Palette/Palette.vue";
 import Phases from "./Phases/Phases.vue";
 import NodeSetting from "./NodeSetting/NodeSetting.vue";
 import AppMenu from "./AppMenu/AppMenu.vue";
+import Debug from "./Debug/Debug.vue";
 import { useCurrentEditorState } from "../core/useCurrentEditorState";
 
 const teleportEl = ref(null);
@@ -75,24 +76,29 @@ const phasesContainerStyle = computed(() => ({
 const nodeSettingWidth = ref(400);
 const nodeSettingContainerStyle = computed(() => ({
     x: `${svgPosition.w - nodeSettingWidth.value - phasesMargin.value}px`,
-    y: `${svgPosition.h / 3}px`,
+    y: `${svgPosition.h / 2.5}px`,
     width: `${nodeSettingWidth.value}px`,
     height: `300px`
 }));
-const debugStyle = computed(() => ({
-    x: `${svgPosition.w - svgPosition.w / 2}`,
-    y: "10",
-    width: "500",
-    height: "400"
-}));
 
+const appMenu = reactive({
+    y: 10,
+    h: 50
+});
 const appMenuContainerStyle = computed(() => ({
     x: `${svgPosition.w - nodeSettingWidth.value - phasesMargin.value}px`,
-    y: `10px`,
+    y: `${appMenu.y}px`,
     width: `${nodeSettingWidth.value}px`,
-    height: `50px`
+    height: `${appMenu.h}px`
 }));
-const { mouseState, state, isOneNodeSelected } = useCurrentEditorState();
+
+const debugContainerStyle = computed(() => ({
+    x: `${svgPosition.w - nodeSettingWidth.value * 2 - phasesMargin.value - 10}px`,
+    y: `${appMenu.y}px`,
+    width: `${nodeSettingWidth.value}px`,
+    height: `${svgPosition.h - 120}px`
+}));
+const { mouseState, state, isOneNodeSelected, showDebugWindow } = useCurrentEditorState();
 </script>
 
 <template>
@@ -130,6 +136,16 @@ const { mouseState, state, isOneNodeSelected } = useCurrentEditorState();
             >
                 <body xmlns="http://www.w3.org/1999/xhtml" :style="appMenuContainerStyle" @click.stop.prevent>
                     <AppMenu />
+                </body>
+            </foreignObject>
+            <foreignObject
+                v-if="showDebugWindow"
+                class="node"
+                :style="debugContainerStyle"
+                @click.stop.prevent
+            >
+                <body xmlns="http://www.w3.org/1999/xhtml" :style="debugContainerStyle" @click.stop.prevent>
+                    <Debug />
                 </body>
             </foreignObject>
         </svg>

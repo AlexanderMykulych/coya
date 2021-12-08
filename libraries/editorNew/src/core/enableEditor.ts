@@ -25,7 +25,8 @@ export function enableEditor({svg, config, id, initialConfig, architecture}: Ena
                 makeChange(config.value, change);
                 makeChange(initialConfig.value, change);
             },
-            component: editorComponent
+            component: editorComponent,
+            showDebugWindow: false,
         });
         listenSvgEvents(editor);
         provide("coya-editor", editor);

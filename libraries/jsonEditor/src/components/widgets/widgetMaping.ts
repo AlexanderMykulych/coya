@@ -1,6 +1,6 @@
 import ColorWidget from './ColorWidget.vue'
 
 export const widgetMaping = [{
-    path: /.fill/,
+    path: /css\.fill/,
     component: ColorWidget
 }]

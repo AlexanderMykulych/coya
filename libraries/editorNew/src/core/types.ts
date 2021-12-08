@@ -61,13 +61,14 @@ export interface EnabledEditor extends BaseEditor {
     id?: string;
     wrap: (node: any) => any;
     state: EnabledEditorState;
+    showDebugWindow: boolean;
     svg: SVGSVGElement | null;
     mouseState: MouseState;
     config: ArchitectureDescription;
     initialConfig: ArchitectureDescription;
     architecture: Architecture;
     makeChange: (change: Change) => void;
-    component: any
+    component: any;
 }
 export interface DisabledEditor extends BaseEditor {
     enable: false;
@@ -106,6 +107,7 @@ export interface CurrentEditorState {
     activeNode: Ref<{ x: any; y: any; w: any; h: any; name: string; label: string;}>;
     state: EnabledEditorState;
     selectedNode: Ref<string | undefined>;
+    showDebugWindow: Ref<boolean>;
 }
 
 export enum PinType {
