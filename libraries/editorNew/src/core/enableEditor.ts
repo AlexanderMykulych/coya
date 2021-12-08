@@ -1,12 +1,13 @@
 import { ActionType, Change, makeChange } from "coya-core";
-import { effectScope, onScopeDispose, provide, reactive, toRefs, watch } from "vue";
+import { effectScope, onScopeDispose, provide, reactive, ref, watch, computed } from "vue";
 import { EnabledEditor, EnableEditorParameters } from "./types";
 import { wrapEditorNode } from "./wrapEditorNode";
 import editorComponent from "../components/editorComponent.vue";
 import { useSvgMouse } from "./useSvgMouse";
 import { useEditorState } from "./useCurrentEditorState";
+import { getMousePosition } from "./getMousePosition";
 
-export function enableEditor({svg, config, id, initialConfig, architecture}: EnableEditorParameters) {
+export function enableEditor({ svg, config, id, initialConfig, architecture }: EnableEditorParameters) {
     const scope = effectScope();
     const editor = scope.run(() => {
         const editor: EnabledEditor = reactive<EnabledEditor>({
@@ -27,6 +28,7 @@ export function enableEditor({svg, config, id, initialConfig, architecture}: Ena
             },
             component: editorComponent,
             showDebugWindow: false,
+            zoomState: null,
         });
         listenSvgEvents(editor);
         provide("coya-editor", editor);
@@ -46,6 +48,8 @@ function listenSvgEvents(editor: EnabledEditor) {
             onScopeDispose(() => {
                 svgEl.removeEventListener("click", onMouseClickListener);
             });
+
+            enableZoom(editor);
         }
     }, { immediate: true });
     const { makeChange } = useEditorState(editor);
@@ -62,5 +66,57 @@ function listenSvgEvents(editor: EnabledEditor) {
             });
             editor.state.arrowState = null;
         }
+    });
+    
+}
+function enableZoom(editor: EnabledEditor) {
+    const svg = editor.svg;
+    if (!svg) {
+        return;
+    }
+    var scrollSensitivity = 0.3;
+    const translate = reactive({
+        x: 0,
+        y: 0
+    });
+    const scale = ref(1);
+    const minScale = 0.1;
+    const maxScale = 8;
+    const transform = computed(() => `translate(${translate.x} ${translate.y}) scale(${scale.value})`);
+
+    const zoom = (event: WheelEvent) => {
+        const { x, y } = getMousePosition(svg, event, true);
+        const oldScale = scale.value;
+        if (Math.abs(event.wheelDeltaY) > 100 && event.wheelDeltaX === 0) {
+            const newScale = oldScale + Math.sign(event.wheelDelta) * scrollSensitivity;
+            if (newScale <= minScale || newScale >= maxScale) {
+                return;
+            }
+            scale.value = newScale;
+            translate.x = (translate.x - x) * scale.value / oldScale + x;
+            translate.y = (translate.y - y) * scale.value / oldScale + y;
+        } else {
+            const newX = event.deltaX;
+            const newY = event.deltaY;
+            translate.x = (translate.x - newX) * 1;
+            translate.y = (translate.y - newY) * 1;
+        }
+    };
+    const mouseState = editor.mouseState;
+    watch(() => mouseState.position, val => {
+        if (mouseState.pressed && mouseState.pressedPosition && !editor.state.hover) {
+            const deltaX = (mouseState.pressedPosition.x - val.x) * scale.value;
+            const deltaY = (mouseState.pressedPosition.y - val.y) * scale.value;
+            translate.x = (translate.x - deltaX) * 1;
+            translate.y = (translate.y - deltaY) * 1;
+        }
+    }, { deep: true });
+
+    svg["onmousewheel"] = (e) => {
+        e.preventDefault();
+        zoom(e);
+    };
+    editor.zoomState = reactive({
+        transform
     });
 }

@@ -1,6 +1,6 @@
 import { Action, ActionSetting, ActionType, Architecture, RectPositioning } from "coya-core";
 import { ArchitectureDescription, Change } from "coya-core";
-import { Component, Ref } from "vue";
+import { Component, ComputedRef, Ref } from "vue";
 
 export interface BaseEditor {
     enable: boolean;
@@ -62,6 +62,7 @@ export interface EnabledEditor extends BaseEditor {
     wrap: (node: any) => any;
     state: EnabledEditorState;
     showDebugWindow: boolean;
+    zoomState: any;
     svg: SVGSVGElement | null;
     mouseState: MouseState;
     config: ArchitectureDescription;
@@ -108,6 +109,7 @@ export interface CurrentEditorState {
     state: EnabledEditorState;
     selectedNode: Ref<string | undefined>;
     showDebugWindow: Ref<boolean>;
+    zoomState: ComputedRef<any>;
 }
 
 export enum PinType {

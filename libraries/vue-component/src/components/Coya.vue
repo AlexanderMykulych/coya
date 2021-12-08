@@ -121,47 +121,7 @@ provide("svgInfo", reactive({
     realHeight,
     realWidth
 }));
-
-// zoom
-const globalG = ref(null);
-var scrollSensitivity = 0.3;
-const translate = reactive({
-    x: 0,
-    y: 0
-});
-const scale = ref(1);
-const minScale = 0.1;
-const maxScale = 8;
-const transform = computed(() => `translate(${translate.x} ${translate.y}) scale(${scale.value})`);
-
-const zoom = (event: WheelEvent) => {
-    const { x, y } = getMousePosition(coyaSvgEl.value, event, true);
-    const oldScale = scale.value;
-    if (Math.abs(event.wheelDeltaY) > 100 && event.wheelDeltaX === 0) {
-        const newScale = oldScale + Math.sign(event.wheelDelta) * scrollSensitivity;
-        if (newScale <= minScale || newScale >= maxScale) {
-            return;
-        }
-        scale.value = newScale;
-        translate.x = (translate.x - x) * scale.value / oldScale + x;
-        translate.y = (translate.y - y) * scale.value / oldScale + y;
-    } else {
-        const newX = event.deltaX;
-        const newY = event.deltaY;
-        translate.x = (translate.x - newX) * 1;
-        translate.y = (translate.y - newY) * 1;
-    }
-};
-onMounted(() => {
-    if(coyaSvgEl.value) {
-        coyaSvgEl.value["onmousewheel"] = (e) => {
-            e.preventDefault();
-            zoom(e);
-        };
-    }
-});
-
-
+const transform = computed(() => editor.value?.zoomState?.transform);
 </script>
 <template>
     <div class="grid grid-cols-5 grid-rows-12 h-full">
@@ -181,7 +141,7 @@ onMounted(() => {
                 overflow="auto"
                 v-if="!!arch?.style?.positioning"
             >
-                <g ref="globalG" :transform="transform">
+                <g :transform="transform">
                     <defs>
                         <marker
                             id="arrowhead"

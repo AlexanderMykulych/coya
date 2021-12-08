@@ -162,6 +162,7 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                 get: () => editor.showDebugWindow,
                 set: (val: boolean) => editor.showDebugWindow = val,
             }),
+            zoomState: computed(() => editor.zoomState),
         };
     }
     throw "no editor state";

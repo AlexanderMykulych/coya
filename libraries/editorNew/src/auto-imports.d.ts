@@ -17,6 +17,7 @@ declare module 'vue' {
     'ICodicon:debug': typeof import('~icons/codicon/debug')['default']
     'IGis:flagStartB': typeof import('~icons/gis/flag-start-b')['default']
     'IIc:baselineMouse': typeof import('~icons/ic/baseline-mouse')['default']
+    'IIconParkOutline:zoom': typeof import('~icons/icon-park-outline/zoom')['default']
     'ILs:underscore': typeof import('~icons/ls/underscore')['default']
     'IPh:rectangleBold': typeof import('~icons/ph/rectangle-bold')['default']
     'ITabler:handFinger': typeof import('~icons/tabler/hand-finger')['default']

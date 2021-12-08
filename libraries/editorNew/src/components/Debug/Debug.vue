@@ -4,7 +4,7 @@ import { useCurrentEditorState } from '../../core/useCurrentEditorState';
 import JsonEditor from 'coya-json-editor';
 import 'coya-json-editor/dist/style.css';
 
-const { state, mouseState } = useCurrentEditorState();
+const { state, mouseState, zoomState } = useCurrentEditorState();
 const jsonEditorConfig = reactive({
     lineNumbers: 'off',
     glyphMargin: false,
@@ -21,6 +21,8 @@ const obj = computed(() => {
     switch(tab.value) {
         case 'mouse':
             return mouseState;
+        case 'zoom':
+            return zoomState.value;
         case "block":
         default:
             return state;
@@ -33,6 +35,7 @@ const obj = computed(() => {
         <div class="flex flex-row">
             <i-ph:rectangle-bold class="mr-2" @click="tab = 'block'" />
             <i-ic:baseline-mouse @click="tab = 'mouse'"/>
+            <i-icon-park-outline:zoom @click="tab = 'zoom'"/>
         </div>
         <JsonEditor :config="jsonEditorConfig" :modelValue="obj" />
     </div>
