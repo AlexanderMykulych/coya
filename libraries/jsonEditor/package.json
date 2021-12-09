@@ -13,8 +13,10 @@
     "typecheck": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "@types/debounce": "^1.2.1",
     "@vueuse/core": "^7.1.2",
     "@vueuse/head": "^0.7.2",
+    "debounce": "^1.2.1",
     "json-to-ast": "^2.1.0",
     "monaco-editor": "^0.30.1",
     "nprogress": "^0.2.0",

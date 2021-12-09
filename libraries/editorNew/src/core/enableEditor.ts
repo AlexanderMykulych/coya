@@ -104,7 +104,11 @@ function enableZoom(editor: EnabledEditor) {
     };
     const mouseState = editor.mouseState;
     watch(() => mouseState.position, val => {
-        if (mouseState.pressed && mouseState.pressedPosition && !editor.state.hover) {
+        if (
+            mouseState.pressed
+            && mouseState.pressedPosition
+            && !editor.state.hover
+            && !editor.state.drag) {
             const deltaX = (mouseState.pressedPosition.x - val.x) * scale.value;
             const deltaY = (mouseState.pressedPosition.y - val.y) * scale.value;
             translate.x = (translate.x - deltaX) * 1;

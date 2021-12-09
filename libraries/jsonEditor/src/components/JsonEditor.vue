@@ -5,6 +5,8 @@ import jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker'
 import cssWorker from 'monaco-editor/esm/vs/language/css/css.worker?worker'
 import { onMounted, ref, shallowRef, watch, computed } from 'vue'
 import { configureEditor } from './configureEditor';
+import { useDebouncedRef } from './widgets/useDebounceRef'
+import { debounce } from "debounce";
 
 const props = defineProps<{modelValue: any, config?: any}>();
 const emit = defineEmits(["update:modelValue"]);
@@ -22,7 +24,16 @@ self.MonacoEnvironment = {
     }
 }
 const editor = shallowRef<monaco.editor.IStandaloneCodeEditor | null>(null)
-const jsonValue = computed(() => JSON.stringify(props.modelValue, null, '\t'));
+
+const jsonValue = ref(JSON.stringify(props.modelValue, null, '\t'));
+watch(
+    () => props.modelValue,
+    debounce((val: any) => {
+        jsonValue.value = JSON.stringify(val, null, '\t');
+    }, 200),
+    { deep: true, }
+);
+
 onMounted(() => {
     if (editorEl.value) {
         editor.value = monaco.editor.create(editorEl.value, {
@@ -43,7 +54,7 @@ onMounted(() => {
                 if (val && val !== editor.value?.getValue()) {
                     editor.value?.setValue(val);
                 }
-            }, { deep: true })
+            })
         }
     }
 })

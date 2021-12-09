@@ -33,7 +33,10 @@ const jsonEditorConfig = reactive({
 </script>
 
 <template>
-    <div class="border-2 rounded-md p-3 bg-white grid h-full"  v-if="activeNode">
+    <div
+        v-if="activeNode"
+        class="border-2 rounded-md p-3 bg-white grid h-full"
+        >
         <JsonEditor v-model="preparedValue" :config="jsonEditorConfig"/>
     </div>
 </template>
