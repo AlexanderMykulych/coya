@@ -7,7 +7,7 @@ import { useSvgMouse } from "./useSvgMouse";
 import { useEditorState } from "./useCurrentEditorState";
 import { getMousePosition } from "./getMousePosition";
 
-export function enableEditor({ svg, config, id, initialConfig, architecture }: EnableEditorParameters) {
+export function enableEditor({ svg, config, id, initialConfig, architecture, workEl }: EnableEditorParameters) {
     const scope = effectScope();
     const editor = scope.run(() => {
         const editor: EnabledEditor = reactive<EnabledEditor>({
@@ -18,6 +18,7 @@ export function enableEditor({ svg, config, id, initialConfig, architecture }: E
                 pins: {}
             },
             svg: svg as any,
+            workEl: (workEl || svg) as any,
             mouseState: useSvgMouse(svg),
             config: config as any,
             initialConfig: initialConfig as any,
@@ -48,10 +49,14 @@ function listenSvgEvents(editor: EnabledEditor) {
             onScopeDispose(() => {
                 svgEl.removeEventListener("click", onMouseClickListener);
             });
-
-            enableZoom(editor);
         }
     }, { immediate: true });
+
+    watch(() => editor.workEl, val => {
+        if (val) {
+            enableZoom(editor, val);
+        }
+    }, { immediate: true })
     const { makeChange } = useEditorState(editor);
     watch(() => editor.state.arrowState?.end, (val, oldVal) => {
         if (val && !oldVal && editor.state.arrowState && editor.state.arrowState.start) {
@@ -69,7 +74,7 @@ function listenSvgEvents(editor: EnabledEditor) {
     });
     
 }
-function enableZoom(editor: EnabledEditor) {
+function enableZoom(editor: EnabledEditor, zoomElement: SVGGraphicsElement) {
     const svg = editor.svg;
     if (!svg) {
         return;
@@ -122,5 +127,8 @@ function enableZoom(editor: EnabledEditor) {
     };
     editor.zoomState = reactive({
         transform
+    });
+    watch(() => transform.value, val => {
+        zoomElement.setAttribute("transform", val);
     });
 }

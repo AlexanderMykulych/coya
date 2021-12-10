@@ -5,7 +5,7 @@ import { EditorMode, PaletteItemType } from "../../core/types";
 import { useCurrentEditorState } from "../../core/useCurrentEditorState";
 import { PaletteBlocks } from "./PaletteBlocks";
 
-const { mouseState, svg, makeChange, getNewUniqBlockName, state } = useCurrentEditorState()!;
+const { mouseState, svg, workEl, makeChange, getNewUniqBlockName, state } = useCurrentEditorState()!;
 const onMouseDown = (name: string) => {
     const activePaletteBlock = PaletteBlocks.find(x => x.name === name);
     if (!activePaletteBlock?.type || activePaletteBlock.type === PaletteItemType.Block) {
@@ -78,7 +78,7 @@ const isStartArrow = computed(() => isArrowMode.value && state.arrowState?.start
             <component :is="block.paletteComponent" />
         </div>
     </div>
-    <Teleport v-if="drawDraggedElement" :to="svg">
+    <Teleport v-if="drawDraggedElement" :to="workEl">
         <component
             v-if="draggedComponentConfig"
             :is="draggedComponentConfig.component"
@@ -88,7 +88,7 @@ const isStartArrow = computed(() => isArrowMode.value && state.arrowState?.start
             :height="draggedComponentHeight"
         ></component>
     </Teleport>
-    <Teleport v-if="isStartArrow" :to="svg">
+    <Teleport v-if="isStartArrow" :to="workEl">
         <line
             :x1="state.arrowState?.startPosition.x"
             :y1="state.arrowState?.startPosition.y"

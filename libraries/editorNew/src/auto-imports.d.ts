@@ -19,6 +19,7 @@ declare module 'vue' {
     'IIc:baselineMouse': typeof import('~icons/ic/baseline-mouse')['default']
     'IIconParkOutline:zoom': typeof import('~icons/icon-park-outline/zoom')['default']
     'ILs:underscore': typeof import('~icons/ls/underscore')['default']
+    'IMdi:arrowTopLeftThin': typeof import('~icons/mdi/arrow-top-left-thin')['default']
     'IPh:rectangleBold': typeof import('~icons/ph/rectangle-bold')['default']
     'ITabler:handFinger': typeof import('~icons/tabler/hand-finger')['default']
     NodeSetting: typeof import('./components/NodeSetting/NodeSetting.vue')['default']

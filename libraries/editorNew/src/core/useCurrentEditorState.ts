@@ -141,6 +141,7 @@ export function useEditorState(editor: Editor): CurrentEditorState {
             mouseState: editor.mouseState,
             state: editor.state,
             svg: editor.svg,
+            workEl: editor.workEl,
             makeChange: (action: MakeChangeAction | MakeChangeAction[]) => {
                 const actions = isArray(action) ? action : [action];
                 makeChangeToDiagram(editor.config, actions);

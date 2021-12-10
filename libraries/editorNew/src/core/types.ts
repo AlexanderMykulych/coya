@@ -44,6 +44,7 @@ export interface PinState {
 }
 
 export type SvgRef = Ref<SVGSVGElement | null>;
+export type SvgGRef = Ref<SVGGElement | null>;
 
 export interface MousePaletteState {
     pressed: boolean;
@@ -64,6 +65,7 @@ export interface EnabledEditor extends BaseEditor {
     showDebugWindow: boolean;
     zoomState: any;
     svg: SVGSVGElement | null;
+    workEl: SVGSVGElement | SVGGElement | null;
     mouseState: MouseState;
     config: ArchitectureDescription;
     initialConfig: ArchitectureDescription;
@@ -81,6 +83,7 @@ export type PrivideKeys = "coya-editor";
 
 export interface EnableEditorParameters {
     svg: SvgRef;
+    workEl?: SvgGRef;
     config: Ref<ArchitectureDescription>;
     initialConfig: Ref<ArchitectureDescription>;
     architecture: Ref<Architecture>;
@@ -103,6 +106,7 @@ export interface CurrentEditorState {
     architecture: Architecture;
     mouseState: MouseState;
     svg: SVGSVGElement | null;
+    workEl: SVGSVGElement | SVGGElement | null;
     makeChange: (action: MakeChangeAction | MakeChangeAction[]) => void;
     getNewUniqBlockName: () => string;
     activeNode: Ref<{ x: any; y: any; w: any; h: any; name: string; label: string;}>;

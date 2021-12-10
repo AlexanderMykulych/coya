@@ -106,7 +106,9 @@
 				"css": {
 					"color": "white",
 					"fill": "#FF89CF",
-					"fontSize": "1.1em"
+					"fontSize": "1.1em",
+					"rx": "25",
+					"stroke": "none"
 				}
 			},
 			"init": {
@@ -152,8 +154,8 @@
 			},
 			"start": {
 				"position": {
-					"x": "304.27",
-					"y": "35.21",
+					"x": "379.27",
+					"y": "146.20999999999998",
 					"w": "232.4490203857422",
 					"h": "98.13617706298828"
 				},
@@ -164,7 +166,7 @@
 			"has_template_opt": {
 				"position": {
 					"x": "initInject.x",
-					"y": "initInject.y + initInject.h + 20",
+					"y": "initInject.y + initInject.h + 90",
 					"w": "initInject.w",
 					"h": "start.h"
 				},
