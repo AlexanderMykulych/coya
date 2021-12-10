@@ -1,200 +1,216 @@
 <script setup lang="ts">
 import { Architecture } from 'coya-core';
-import { computed, onMounted, onScopeDispose, reactive, Ref, ref, shallowRef } from 'vue'
+import {
+    computed,
+    onMounted,
+    onScopeDispose,
+    reactive,
+    Ref,
+    ref,
+    shallowRef,
+} from 'vue';
 import { EnabledEditor } from '../core';
 import { enableEditor } from '../core/enableEditor';
-import test from "./test.vue";
+import test from './test.vue';
 
-defineProps<{ msg: string }>()
+defineProps<{ msg: string }>();
 
 var svgEl = ref<SVGSVGElement | null>(null);
+var svgGEl = ref<SVGGElement | null>(null);
 let testComponent = ref(null);
 const config = ref({
-    "name": "vue-lifecycle-json",
-    "blocks": {
-        "start": {
-            "label": "app = Vue.createApp(options); app.mount(el)"
+    name: 'vue-lifecycle-json',
+    blocks: {
+        start: {
+            label: 'app = Vue.createApp(options); app.mount(el)',
         },
-        "start2": {
-            "label": "app = Vue.createApp(options); app.mount(el)"
-        }
+        start2: {
+            label: 'app = Vue.createApp(options); app.mount(el)',
+        },
     },
-    "phases": [
+    phases: [
         {
-            "newBlock": {
-                "init": "init events & lifecycle",
-                "test": "test blockp"
+            newBlock: {
+                init: 'init events & lifecycle',
+                test: 'test blockp',
             },
-            "connect": [{
-                "from": "start",
-                "to": "init"
-            }, {
-                "from": "init",
-                "to": "start"
-            }]
+            connect: [
+                {
+                    from: 'start',
+                    to: 'init',
+                },
+                {
+                    from: 'init',
+                    to: 'start',
+                },
+            ],
         },
         {
-            "newBlock": {
-                "initInject": "Init injections & reactivity"
+            newBlock: {
+                initInject: 'Init injections & reactivity',
             },
-            "connect": {
-                "from": "init",
-                "to": "initInject"
-            }
+            connect: {
+                from: 'init',
+                to: 'initInject',
+            },
         },
         {
-            "newBlock": {
-                "beforeCreate": "beforeCreate"
+            newBlock: {
+                beforeCreate: 'beforeCreate',
             },
-            "connect": {
-                "from": "init",
-                "to": "beforeCreate",
-                "name": "line_init_beforeCreate"
+            connect: {
+                from: 'init',
+                to: 'beforeCreate',
+                name: 'line_init_beforeCreate',
             },
-            "connect1": {
-                "from": "init",
-                "to": "beforeCreate",
-                "name": "line_init_beforeCreate"
+            connect1: {
+                from: 'init',
+                to: 'beforeCreate',
+                name: 'line_init_beforeCreate',
             },
-            "connect2": {
-                "from": "init",
-                "to": "beforeCreate",
-                "name": "line_init_beforeCreate"
+            connect2: {
+                from: 'init',
+                to: 'beforeCreate',
+                name: 'line_init_beforeCreate',
             },
-            "connect3": {
-                "from": "init",
-                "to": "beforeCreate",
-                "name": "line_init_beforeCreate"
-            }
+            connect3: {
+                from: 'init',
+                to: 'beforeCreate',
+                name: 'line_init_beforeCreate',
+            },
         },
         {
-            "newBlock": {
-                "initInject": "Init injections & reactivity"
+            newBlock: {
+                initInject: 'Init injections & reactivity',
             },
-            "connect": {
-                "from": "init",
-                "to": "initInject"
-            }
-        }, {
-            "newBlock": {
-                "initInject": "Init injections & reactivity"
+            connect: {
+                from: 'init',
+                to: 'initInject',
             },
-            "connect": {
-                "from": "init",
-                "to": "initInject"
-            }
-        }, {
-            "newBlock": {
-                "initInject": "Init injections & reactivity"
+        },
+        {
+            newBlock: {
+                initInject: 'Init injections & reactivity',
             },
-            "connect": {
-                "from": "init",
-                "to": "initInject"
-            }
-        }, {
-            "newBlock": {
-                "initInject": "Init injections & reactivity"
+            connect: {
+                from: 'init',
+                to: 'initInject',
             },
-            "connect": {
-                "from": "init",
-                "to": "initInject"
-            }
+        },
+        {
+            newBlock: {
+                initInject: 'Init injections & reactivity',
+            },
+            connect: {
+                from: 'init',
+                to: 'initInject',
+            },
+        },
+        {
+            newBlock: {
+                initInject: 'Init injections & reactivity',
+            },
+            connect: {
+                from: 'init',
+                to: 'initInject',
+            },
         },
     ],
-    "style": {
-        "blocks": {
-            "_": {
-                "css": {
-                    "color": "white",
-                    "fill": "#3ab881",
-                    "fontSize": "0.1em"
-                }
-            },
-            "start": {
-                "position": {
-                    "x": 10,
-                    "y": 10,
-                    "w": 100,
-                    "h": 60
+    style: {
+        blocks: {
+            _: {
+                css: {
+                    color: 'white',
+                    fill: '#3ab881',
+                    fontSize: '0.1em',
                 },
-                "css": {
-                    "fill": "#3e6b94"
-                }
             },
-            "start2": {
-                "position": {
-                    "x": 100,
-                    "y": 100,
-                    "w": 100,
-                    "h": 60
+            start: {
+                position: {
+                    x: 10,
+                    y: 10,
+                    w: 100,
+                    h: 60,
                 },
-                "css": {
-                    "fill": "#9257fa"
-                }
-            },
-            "init": {
-                "position": {
-                    "x": "start.x",
-                    "y": "start.y + start.h + 20",
-                    "w": "start.w",
-                    "h": "start.h"
-                }
-            },
-            "initInject": {
-                "position": {
-                    "x": "init.x",
-                    "y": "init.y + start.h + 20",
-                    "w": "init.w",
-                    "h": "init.h"
-                }
-            },
-            "beforeCreate": {
-                "position": {
-                    "x": "init.x - init.w - 40",
-                    "y": "init.y + init.h",
-                    "w": "init.w",
-                    "h": "initInject.y - init.y - init.h"
+                css: {
+                    fill: '#3e6b94',
                 },
-                "css": {
-                    "fill": "none",
-                    "color": "red",
-                    "stroke": "red"
-                }
             },
-            "line_init_beforeCreate": {
-                "position": {
-                    "x1": "line_1.x1",
-                    "y1": "line_1.y1 + (line_1.y2 - line_1.y1) / 2",
-                    "y2": "line_1.y1 + (line_1.y2 - line_1.y1) / 2"
+            start2: {
+                position: {
+                    x: 100,
+                    y: 100,
+                    w: 100,
+                    h: 60,
                 },
-                "css": {
-                    "fill": "red",
-                    "stroke": "red",
-                    "stroke-dasharray": 3
-                }
-            }
-        }
-    }
+                css: {
+                    fill: '#9257fa',
+                },
+            },
+            init: {
+                position: {
+                    x: 'start.x',
+                    y: 'start.y + start.h + 20',
+                    w: 'start.w',
+                    h: 'start.h',
+                },
+            },
+            initInject: {
+                position: {
+                    x: 'init.x',
+                    y: 'init.y + start.h + 20',
+                    w: 'init.w',
+                    h: 'init.h',
+                },
+            },
+            beforeCreate: {
+                position: {
+                    x: 'init.x - init.w - 40',
+                    y: 'init.y + init.h',
+                    w: 'init.w',
+                    h: 'initInject.y - init.y - init.h',
+                },
+                css: {
+                    fill: 'none',
+                    color: 'red',
+                    stroke: 'red',
+                },
+            },
+            line_init_beforeCreate: {
+                position: {
+                    x1: 'line_1.x1',
+                    y1: 'line_1.y1 + (line_1.y2 - line_1.y1) / 2',
+                    y2: 'line_1.y1 + (line_1.y2 - line_1.y1) / 2',
+                },
+                css: {
+                    fill: 'red',
+                    stroke: 'red',
+                    'stroke-dasharray': 3,
+                },
+            },
+        },
+    },
 });
 const architecture = <Ref<Architecture>>(<any>ref({
     currentPhase: ref(null),
-    toPhase: (index) => architecture.value.currentPhase = index
+    toPhase: (index) => (architecture.value.currentPhase = index),
 }));
 let editor = shallowRef();
 const viewBox = reactive({
     x: 0,
     y: 0,
     w: 0,
-    h: 0
+    h: 0,
 });
 const editorComponent = computed(() => editor.value?.component);
 onMounted(() => {
     editor.value = enableEditor({
         svg: svgEl,
+        workEl: svgGEl,
         config,
         initialConfig: config,
         architecture,
-        id: "test"
+        id: 'test',
     });
     testComponent.value = editor.value.wrap(test);
     const svgSize = svgEl.value.getBoundingClientRect();
@@ -216,14 +232,13 @@ onMounted(() => {
     //     viewBox.h = viewBox.h - dh;
     //     svgEl.value.dispatchEvent(new CustomEvent("onViewBoxChange", { detail: { viewBox } }));
     // }
-
 });
 const block = {
-    id: "start"
-}
+    id: 'start',
+};
 const block2 = {
-    id: "start2"
-}
+    id: 'start2',
+};
 </script>
 
 <template>
@@ -236,7 +251,29 @@ const block2 = {
             ref="svgEl"
             class="rounded-lg border-3 shadow-3 ml-10"
         >
-            <g :transform="editor?.zoomState?.transform">
+            <defs>
+                <marker
+                    id="sequenceflow-end"
+                    viewBox="0 0 20 20"
+                    refX="11"
+                    refY="10"
+                    markerWidth="10"
+                    markerHeight="10"
+                    orient="auto"
+                >
+                    <path
+                        d="M 1 5 L 11 10 L 1 15 Z"
+                        style="
+                            fill: black;
+                            stroke-width: 1px;
+                            stroke-linecap: round;
+                            stroke-dasharray: 10000, 1;
+                            stroke: black;
+                        "
+                    ></path>
+                </marker>
+            </defs>
+            <g ref="svgGEl">
                 <testComponent
                     v-if="testComponent"
                     :style="config.style.blocks.start.css"

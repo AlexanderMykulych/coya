@@ -3,6 +3,7 @@ import { Block, BlockStyle, isLineBlockElement, isRectPositioning, Positioning, 
 import { computed } from "vue";
 import {getCurrentEditor} from "coya-editor-new";
 import coyaRectNode from "./Nodes/CoyaRectNode.vue";
+import coyaLineNode from "./Nodes/CoyaLineNode.vue";
 
 const props = defineProps<{ block: Block, positioning: Positioning, blockStyle?: BlockStyle, debug: boolean }>();
 
@@ -16,6 +17,7 @@ const blockDebug = computed(() => props.block.debug);
 
 const editor = getCurrentEditor();
 const CoyaRectNode = editor.wrap(coyaRectNode);
+const CoyaLineNode = editor.wrap(coyaLineNode);
 </script>
 
 <template>

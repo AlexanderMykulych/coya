@@ -89,12 +89,11 @@ const isStartArrow = computed(() => isArrowMode.value && state.arrowState?.start
         ></component>
     </Teleport>
     <Teleport v-if="isStartArrow" :to="workEl">
-        <line
-            :x1="state.arrowState?.startPosition.x"
-            :y1="state.arrowState?.startPosition.y"
-            :x2="mouseState.position.x - 1"
-            :y2="mouseState.position.y - 1"
+        <path
+            :d="`M${state.arrowState?.startPosition.x},${state.arrowState?.startPosition.y},${mouseState.position.x - 1},${mouseState.position.y - 1}`"
             stroke="black"
+            stroke-width="2px"
+            marker-end="url(#sequenceflow-end)"
         />
     </Teleport>
 </template>
