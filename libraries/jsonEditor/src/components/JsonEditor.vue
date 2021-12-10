@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import * as monaco from 'monaco-editor'
-import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker'
-import jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker'
-import cssWorker from 'monaco-editor/esm/vs/language/css/css.worker?worker'
+import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker.js?worker&inline'
+import jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker.js?worker&inline'
+import cssWorker from 'monaco-editor/esm/vs/language/css/css.worker.js?worker&inline'
 import { onMounted, ref, shallowRef, watch, computed } from 'vue'
 import { configureEditor } from './configureEditor';
 import { useDebouncedRef } from './widgets/useDebounceRef'

@@ -16,6 +16,7 @@ import LinkAttributes from 'markdown-it-link-attributes'
 
 const markdownWrapperClasses = 'prose prose-sm m-auto text-left'
 
+const prefix = `monaco-editor/esm/vs`;
 export default defineConfig({
     resolve: {
         alias: {
@@ -98,7 +99,14 @@ export default defineConfig({
                 globals: {
                     vue: 'Vue'
                 },
-                format: 'es'
+                format: 'es',
+                manualChunks: {
+                    jsonWorker: [`${prefix}/language/json/json.worker`],
+                    cssWorker: [`${prefix}/language/css/css.worker`],
+                    htmlWorker: [`${prefix}/language/html/html.worker`],
+                    tsWorker: [`${prefix}/language/typescript/ts.worker`],
+                    editorWorker: [`${prefix}/editor/editor.worker`],
+                },
             }
         },
         lib: {
