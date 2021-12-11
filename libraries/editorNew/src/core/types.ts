@@ -109,7 +109,18 @@ export interface CurrentEditorState {
     workEl: SVGSVGElement | SVGGElement | null;
     makeChange: (action: MakeChangeAction | MakeChangeAction[]) => void;
     getNewUniqBlockName: () => string;
-    activeNode: Ref<{ x: any; y: any; w: any; h: any; name: string; label: string;}>;
+    activeNode: Ref<{
+        x: any;
+        y: any;
+        w: any;
+        h: any;
+        name: string;
+        label: string;
+        x1: any;
+        y1: any;
+        x2: any;
+        y2: any;
+    }>;
     state: EnabledEditorState;
     selectedNode: Ref<string | undefined>;
     showDebugWindow: Ref<boolean>;

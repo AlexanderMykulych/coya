@@ -114,7 +114,7 @@
 			"init": {
 				"position": {
 					"x": "start.x",
-					"y": "start.y + start.h + 20",
+					"y": "start.y + start.h + 80",
 					"w": "start.w",
 					"h": "start.h"
 				}
@@ -144,7 +144,9 @@
 				"position": {
 					"x1": "line_1_1.x1",
 					"y1": "line_1_1.y1 + (line_1_1.y2 - line_1_1.y1) / 2",
-					"y2": "line_1_1.y1 + (line_1_1.y2 - line_1_1.y1) / 2"
+					"y2": "line_1_1.y1 + (line_1_1.y2 - line_1_1.y1) / 2",
+					"x": "NaN",
+					"y": "NaN"
 				},
 				"css": {
 					"fill": "red",
@@ -247,6 +249,11 @@
 					"fill": "#3e6b94"
 				},
 				"label": "Virtual DOM re-rendered and patch"
+			},
+			"line_0_1": {
+				"css": {
+					"stroke": "#2900FF"
+				}
 			}
 		}
 	}

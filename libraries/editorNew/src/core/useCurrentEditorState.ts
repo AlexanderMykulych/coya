@@ -1,10 +1,11 @@
 import { computed, reactive, ref } from "vue";
 import { CurrentEditorState, Editor, getCurrentEditor, MakeChangeAction } from ".";
-import { Action, isArray, isString } from "coya-core";
+import { Action, isArray, isNotNullOrUndefined, isNullOrUndefined } from "coya-core";
 import { executeActions } from "coya-core";
 import { ArchitectureDescription } from "coya-core";
 import { renameBlock } from "./renameBlock";
 import { debounce } from "debounce";
+import { prepareNum } from "./prepareNum";
 
 export function useCurrentEditorState(): CurrentEditorState {
     const editor = getCurrentEditor();
@@ -53,19 +54,20 @@ export function useEditorState(editor: Editor): CurrentEditorState {
         };
         const blockId = computed(() => editor.state.selectedNodeIds?.[0]);
         const configActiveNode = computed(() => !!blockId.value ? ({
-            style: editor.config.style?.blocks[blockId.value]
+            style: computed({
+                get: () => editor.config.style?.blocks?.[blockId.value],
+                set: val => editor.config.style.blocks[blockId.value] = val,
+            }),
+            block: editor.config?.blocks?.[blockId.value],
         }) : null);
         const initConfigActiveNode = computed(() => !!blockId.value ? ({
-            style: editor.initialConfig.style?.blocks[blockId.value]
+            style: computed({
+                get: () => editor.initialConfig.style?.blocks?.[blockId.value],
+                set: val => editor.initialConfig.style.blocks[blockId.value] = val,
+            }),
+            block: editor.initialConfig?.blocks?.[blockId.value],
         }) : null);
-        const prepareNum = (val: string | Number) => {
-            const num = Number(val);
-            if (!isNaN(num)) {
-                const res = Math.round((num + Number.EPSILON) * 100) / 100;
-                return isString(val) ? `${res}` : res;
-            }
-            return val;
-        }
+        
         return {
             isOneNodeSelected: computed(() => !!blockId.value),
             phases: computed(() => {
@@ -84,34 +86,24 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                 }
             }),
             activeNode: reactive({
-                x: computed({
-                    get: () => prepareNum(configActiveNode.value?.style?.position?.x),
-                    set: val => {
-                        configActiveNode.value.style.position.x = val;
-                        initConfigActiveNode.value.style.position.x = val;
-                    }
-                }),
-                y: computed({
-                    get: () => prepareNum(configActiveNode.value?.style?.position?.y),
-                    set: val => {
-                        configActiveNode.value.style.position.y = val;
-                        initConfigActiveNode.value.style.position.y = val;
-                    }
-                }),
-                w: computed({
-                    get: () => prepareNum(configActiveNode.value?.style?.position?.w),
-                    set: val => {
-                        configActiveNode.value.style.position.w = val;
-                        initConfigActiveNode.value.style.position.w = val;
-                    }
-                }),
-                h: computed({
-                    get: () => prepareNum(configActiveNode.value?.style?.position?.h),
-                    set: val => {
-                        configActiveNode.value!.style!.position.h = val;
-                        initConfigActiveNode.value.style.position.h = val;
-                    }
-                }),
+                ...createComputed(
+                    configActiveNode,
+                    [configActiveNode, initConfigActiveNode,],
+                    [
+                        ['style.value.position.x', prepareNum],
+                        ['style.value.position.y', prepareNum],
+                        ['style.value.position.w', prepareNum],
+                        ['style.value.position.h', prepareNum],
+                        ['style.value.position.x1', prepareNum],
+                        ['style.value.position.y1', prepareNum],
+                        ['style.value.position.x2', prepareNum],
+                        ['style.value.position.y2', prepareNum],
+                        'block.from',
+                        'block.to',
+                        'style.value.label',
+                        'style.value.css',
+                    ]
+                ),
                 name: computed({
                     get: () => blockId.value,
                     set: debounce((val) => {
@@ -122,20 +114,6 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                         }
                     }, 800)
                 }),
-                label: computed({
-                    get: () => configActiveNode.value?.style?.label,
-                    set: val => {
-                        configActiveNode.value!.style!.label = val;
-                        initConfigActiveNode.value!.style!.label = val;
-                    }
-                }),
-                css: computed({
-                    get: () => configActiveNode.value?.style?.css,
-                    set: val => {
-                        configActiveNode.value!.style!.css = val;
-                        initConfigActiveNode.value!.style!.css = val;
-                    }
-                })
             }),
             architecture: editor.architecture,
             mouseState: editor.mouseState,
@@ -169,4 +147,46 @@ export function useEditorState(editor: Editor): CurrentEditorState {
     throw "no editor state";
 }
 
-
+function createComputed(getObj: any, setObjects: any[], configs: string[] | (string[])[]) {
+    const res = {};
+    const set = (obj: any, path: string[], val: any) => {
+        const leftPath = path.slice(0, path.length - 1);
+        const lastItem = path[path.length - 1];
+        leftPath.forEach(x => {
+            if (isNullOrUndefined(obj[x])) {
+                obj[x] = {};
+            }
+            obj = obj[x]
+        });
+        if (isNotNullOrUndefined(obj)) {
+            obj[lastItem] = val;
+        }
+    }
+    const get = (obj: any, path: string[]) => {
+        if (path.every(x => {
+            if (obj?.[x]) {
+                obj = obj[x];
+                return true;
+            }
+            return false;
+        })) {
+            return obj;
+        }
+    }
+    configs.forEach(item => {
+        if (!isArray(item)) {
+            item = [item];
+        }
+        const path = item[0].split('.');
+        res[path[path.length - 1]] = computed({
+            get: () => {
+                const res = get(getObj.value, path);
+                return item[1] ? item[1](res) : res;
+            },
+            set: val => {
+                setObjects.forEach(x => set(x.value, path, val));
+            }
+        });
+    });
+    return res;
+}
