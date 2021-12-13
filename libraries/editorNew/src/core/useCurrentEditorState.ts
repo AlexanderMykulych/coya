@@ -1,11 +1,12 @@
 import { computed, reactive, ref } from "vue";
 import { CurrentEditorState, Editor, getCurrentEditor, MakeChangeAction } from ".";
-import { Action, isArray, isLineBlockElementDescription, isNotNullOrUndefined, isNullOrUndefined } from "coya-core";
+import { Action, isArray, isNotNullOrUndefined, isNullOrUndefined } from "coya-core";
 import { executeActions } from "coya-core";
 import { ArchitectureDescription } from "coya-core";
 import { renameBlock } from "./renameBlock";
 import { debounce } from "debounce";
 import { prepareNum } from "./prepareNum";
+import { reconnectArrow } from "./reconnectArrow";
 
 export function useCurrentEditorState(): CurrentEditorState {
     const editor = getCurrentEditor();
@@ -86,6 +87,16 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                 }
             }),
             activeNode: reactive({
+                name: computed({
+                    get: () => blockId.value,
+                    set: debounce((val) => {
+                        if (blockId.value) {
+                            renameBlock(editor.config, blockId.value, val);
+                            renameBlock(editor.initialConfig, blockId.value, val);
+                            editor.state.selectedNodeIds = [val];
+                        }
+                    }, 800)
+                }),
                 ...createComputed(
                     configActiveNode,
                     [configActiveNode, initConfigActiveNode,],
@@ -129,16 +140,6 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                             );
                         }
                     }
-                }),
-                name: computed({
-                    get: () => blockId.value,
-                    set: debounce((val) => {
-                        if (blockId.value) {
-                            renameBlock(editor.config, blockId.value, val);
-                            renameBlock(editor.initialConfig, blockId.value, val);
-                            editor.state.selectedNodeIds = [val];
-                        }
-                    }, 800)
                 }),
             }),
             activeConfig: computed(() => editor.config),
@@ -217,33 +218,4 @@ function createComputed(getObj: any, setObjects: any[], configs: string[] | (str
         });
     });
     return res;
-}
-function reconnectArrow(
-    activeArchitecture: ArchitectureDescription,
-    initArchitecture: ArchitectureDescription,
-    blockId: string,
-    value: string,
-    attr: "from" | "to") {
-    const applyChange = (obj: { from: string, to: string }) => {
-        if (attr === "from") {
-            obj.from = value;
-        } else {
-            obj.to = value;
-        }
-    }
-    const activeBlock = activeArchitecture.blocks[blockId];
-    if (typeof activeBlock !== "string" && isLineBlockElementDescription(activeBlock)) {
-        applyChange(activeBlock);
-    }
-    const initBlock = initArchitecture.blocks[blockId];
-    if (typeof initBlock !== "string" && isLineBlockElementDescription(initBlock)) {
-        applyChange(initBlock);
-    }
-    if (isNotNullOrUndefined(activeBlock.sourcePhase)
-        && isNotNullOrUndefined(activeBlock.sourcePhaseAction)) {
-        const connect = initArchitecture[activeBlock.sourcePhase]?.["connect"]?.[activeBlock.sourcePhaseAction];
-        if (connect) {
-            applyChange(connect);
-        }
-    }
 }
