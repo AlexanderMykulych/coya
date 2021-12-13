@@ -1,6 +1,6 @@
 import { computed, reactive, ref } from "vue";
 import { CurrentEditorState, Editor, getCurrentEditor, MakeChangeAction } from ".";
-import { Action, isArray, isNotNullOrUndefined, isNullOrUndefined } from "coya-core";
+import { Action, isArray, isLineBlockElementDescription, isNotNullOrUndefined, isNullOrUndefined } from "coya-core";
 import { executeActions } from "coya-core";
 import { ArchitectureDescription } from "coya-core";
 import { renameBlock } from "./renameBlock";
@@ -98,12 +98,38 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                         ['style.value.position.y1', prepareNum],
                         ['style.value.position.x2', prepareNum],
                         ['style.value.position.y2', prepareNum],
-                        'block.from',
-                        'block.to',
                         'style.value.label',
                         'style.value.css',
                     ]
                 ),
+                from: computed({
+                    get: () => configActiveNode.value?.block?.from,
+                    set: val => {
+                        if (blockId.value) {
+                            reconnectArrow(
+                                editor.config,
+                                editor.initialConfig,
+                                blockId.value,
+                                val,
+                                "from",
+                            );
+                        }
+                    }
+                }),
+                to: computed({
+                    get: () => configActiveNode.value?.block?.to,
+                    set: val => {
+                        if (blockId.value) {
+                            reconnectArrow(
+                                editor.config,
+                                editor.initialConfig,
+                                blockId.value,
+                                val,
+                                "to",
+                            );
+                        }
+                    }
+                }),
                 name: computed({
                     get: () => blockId.value,
                     set: debounce((val) => {
@@ -115,6 +141,8 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                     }, 800)
                 }),
             }),
+            activeConfig: computed(() => editor.config),
+            initialConfig: computed(() => editor.initialConfig),
             architecture: editor.architecture,
             mouseState: editor.mouseState,
             state: editor.state,
@@ -189,4 +217,33 @@ function createComputed(getObj: any, setObjects: any[], configs: string[] | (str
         });
     });
     return res;
+}
+function reconnectArrow(
+    activeArchitecture: ArchitectureDescription,
+    initArchitecture: ArchitectureDescription,
+    blockId: string,
+    value: string,
+    attr: "from" | "to") {
+    const applyChange = (obj: { from: string, to: string }) => {
+        if (attr === "from") {
+            obj.from = value;
+        } else {
+            obj.to = value;
+        }
+    }
+    const activeBlock = activeArchitecture.blocks[blockId];
+    if (typeof activeBlock !== "string" && isLineBlockElementDescription(activeBlock)) {
+        applyChange(activeBlock);
+    }
+    const initBlock = initArchitecture.blocks[blockId];
+    if (typeof initBlock !== "string" && isLineBlockElementDescription(initBlock)) {
+        applyChange(initBlock);
+    }
+    if (isNotNullOrUndefined(activeBlock.sourcePhase)
+        && isNotNullOrUndefined(activeBlock.sourcePhaseAction)) {
+        const connect = initArchitecture[activeBlock.sourcePhase]?.["connect"]?.[activeBlock.sourcePhaseAction];
+        if (connect) {
+            applyChange(connect);
+        }
+    }
 }

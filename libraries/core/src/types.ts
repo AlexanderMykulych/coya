@@ -154,7 +154,7 @@ export enum ChangeType {
     ChangePosition = 3,
 }
 export interface AddBlockChangeSetting {
-    blockSettings: string | BlockGroupDescriptions | BlockElementDescription | null;
+    blockSettings: BlockGroupDescriptions | BlockElementDescription | null;
     newBlockId: string;
 }
 export interface ChangeBlockStyleSetting {
@@ -180,6 +180,7 @@ export interface BaseChangeOwner {
 export interface PhaseChangeOwner extends BaseChangeOwner {
     type: ChangeOwnerType.Phase;
     phaseId: number;
+    actionIndex: number;
 }
 export interface EditorChangeOwner extends BaseChangeOwner {
     type: ChangeOwnerType.Editor;
@@ -187,7 +188,7 @@ export interface EditorChangeOwner extends BaseChangeOwner {
 export type ChangeOwner = PhaseChangeOwner | EditorChangeOwner;
 export interface BaseChange {
     type: ChangeType;
-    owner: ChangeOwner;
+    owner?: ChangeOwner;
 }
 export interface AddBlockChange extends BaseChange {
     type: ChangeType.AddNewBlock;
@@ -228,6 +229,7 @@ export interface PhaseIndexItem {
 export interface PhaseIndexItemAction {
     action: Action;
     actionId: number;
+    actionIndex: number;
 }
 
 export interface ActionExecutorContext {

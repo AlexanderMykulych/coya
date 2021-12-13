@@ -1,6 +1,6 @@
 import { ArchitectureDescription } from "../descriptionTypes";
 import { isNotNullOrUndefined } from "../typeGuards";
-import { Change, PhaseIndexItemAction } from "../types";
+import { Change, PhaseIndexItemAction, ChangeOwnerType } from "../types";
 import { actionExecutors } from "./actionExecutors";
 import { makeChange } from "./makeChange";
 
@@ -12,11 +12,17 @@ export function executeActions(architecture: ArchitectureDescription, actions: P
         .forEach(change => makeChange(architecture, change));
     return phaseId;
 }
-function executePhaseIndex(item: PhaseIndexItemAction, phaseId: number, actionIndex: number): Change[] | null {
+function executePhaseIndex(item: PhaseIndexItemAction, phaseId: number, actionId: number): Change[] | null {
     const action = actionExecutors
         .find(x => x.type === item.action.name);
     if (action) {
-        return action.executor(phaseId, item.action, actionIndex);
+        const res = action.executor(phaseId, item.action, actionId);
+        res?.forEach(x => x.owner = {
+            type: ChangeOwnerType.Phase,
+            phaseId: phaseId,
+            actionIndex: item.actionIndex
+        })
+        return res;
     }
     throw "Not implemented!";
 }

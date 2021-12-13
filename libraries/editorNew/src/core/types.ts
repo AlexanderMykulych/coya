@@ -104,6 +104,8 @@ export interface CurrentEditorState {
         totalCount: number;
     }>;
     architecture: Architecture;
+    activeConfig: Ref<ArchitectureDescription>;
+    initialConfig: Ref<ArchitectureDescription>;
     mouseState: MouseState;
     svg: SVGSVGElement | null;
     workEl: SVGSVGElement | SVGGElement | null;

@@ -1,7 +1,7 @@
 import { DebugAction, DebugType } from "../debugTypes";
 import { BlockElementType, ConnectActionSetting } from "../descriptionTypes";
 import { isConnectActionSetting } from "../typeGuards";
-import { Action, ActionDebugInfo, Change, ChangeOwnerType, ChangeType } from "../types";
+import { Action, ActionDebugInfo, Change, ChangeType } from "../types";
 
 export function connectActionExecutor(phaseId: number, action: Action, actionIndex: number): Change[] | null {
     if (isConnectActionSetting(action.value)) {
@@ -15,10 +15,6 @@ export function connectActionExecutor(phaseId: number, action: Action, actionInd
                     type: BlockElementType.Line,
                     label: action.value.label ?? ""
                 }
-            },
-            owner: {
-                type: ChangeOwnerType.Phase,
-                phaseId
             }
         }];
     }

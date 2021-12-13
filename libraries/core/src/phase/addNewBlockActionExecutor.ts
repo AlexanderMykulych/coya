@@ -1,9 +1,9 @@
 import { ActionDebugInfo } from "..";
 import { DebugAction, DebugType } from "../debugTypes";
 import { AddNewBlockActionSetting } from "../descriptionTypes";
-import { Action, Change, ChangeOwnerType, ChangeType } from "../types";
+import { Action, Change, ChangeType } from "../types";
 
-export function addNewBlockActionExecutor(phaseId: number, action: Action): Change[] | null {
+export function addNewBlockActionExecutor(_: number, action: Action): Change[] | null {
     const val = action.value as AddNewBlockActionSetting;
     return Object
         .keys(val)
@@ -12,10 +12,6 @@ export function addNewBlockActionExecutor(phaseId: number, action: Action): Chan
             setting: {
                 newBlockId: key,
                 blockSettings: val[key]
-            },
-            owner: {
-                type: ChangeOwnerType.Phase,
-                phaseId
             }
         }));
 }

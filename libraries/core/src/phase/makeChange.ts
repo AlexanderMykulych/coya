@@ -1,4 +1,5 @@
 import { ArchitectureDescription, BlockStyle } from "../descriptionTypes";
+import { ChangeOwnerType } from "../types";
 import { isNotNullOrUndefined } from "../typeGuards";
 import {
     AddBlockChangeSetting,
@@ -11,7 +12,16 @@ export function makeChange(architecture: ArchitectureDescription, change: Change
     if (change.type === ChangeType.AddNewBlock) {
         const setting = change.setting as AddBlockChangeSetting;
         if (setting) {
-            architecture.blocks[setting.newBlockId] = setting.blockSettings;
+            if (typeof setting.blockSettings === "string") {
+                setting.blockSettings = {
+                    label: setting.blockSettings
+                };
+            }
+            architecture.blocks[setting.newBlockId] = {
+                ...setting.blockSettings,
+                sourcePhase: change.owner?.type === ChangeOwnerType.Phase ? change.owner.phaseId : undefined,
+                sourcePhaseAction: change.owner?.type === ChangeOwnerType.Phase ? change.owner.actionIndex : undefined,
+            };
         }
     } else if (change.type === ChangeType.ChangeStyle) {
         const setting = change.setting as ChangeBlockStyleSetting;

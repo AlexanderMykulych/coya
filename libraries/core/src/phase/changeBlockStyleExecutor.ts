@@ -1,8 +1,8 @@
 import { BlockStyleActionSetting } from "../descriptionTypes";
-import { Action, Change, ChangeType, ChangeOwnerType } from "../types";
+import { Action, Change, ChangeType } from "../types";
 
 
-export function changeBlockStyleExecutor(phaseId: number, action: Action): Change[] | null {
+export function changeBlockStyleExecutor(_: number, action: Action): Change[] | null {
     const val = action.value as BlockStyleActionSetting;
     return Object
         .keys(val)
@@ -11,10 +11,6 @@ export function changeBlockStyleExecutor(phaseId: number, action: Action): Chang
             setting: {
                 blockId: key,
                 newStyle: val[key]
-            },
-            owner: {
-                type: ChangeOwnerType.Phase,
-                phaseId
             }
         }));
 }

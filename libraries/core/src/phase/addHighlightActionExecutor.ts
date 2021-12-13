@@ -1,7 +1,7 @@
 import { BlockElementType, HighlightActionSetting } from "../descriptionTypes";
-import { Action, Change, ChangeOwnerType, ChangeType } from "../types";
+import { Action, Change, ChangeType } from "../types";
 
-export function addHighlightActionExecutor(phaseId: number, action: Action): Change[] | null {
+export function addHighlightActionExecutor(_: number, action: Action): Change[] | null {
     const val = action.value as HighlightActionSetting;
     const blocks = typeof val.blocks === "string" ? [val.blocks] : val.blocks;
     const gap = val.gap ?? 5;
@@ -19,10 +19,6 @@ export function addHighlightActionExecutor(phaseId: number, action: Action): Cha
                     },
                     isHighlight: true
                 }
-            },
-            owner: {
-                type: ChangeOwnerType.Phase,
-                phaseId
             }
         }, {
             type: ChangeType.AddNewBlock,
@@ -32,10 +28,6 @@ export function addHighlightActionExecutor(phaseId: number, action: Action): Cha
                     type: BlockElementType.Rect,
                     label: ""
                 }
-            },
-            owner: {
-                type: ChangeOwnerType.Phase,
-                phaseId
             }
         }]);
 }

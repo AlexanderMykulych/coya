@@ -1,9 +1,9 @@
 import { DebugAction, DebugType } from "../debugTypes";
 import { ChangeLabelActionSetting } from "../descriptionTypes";
 import { isHasLabel } from "../typeGuards";
-import { Action, ActionDebugInfo, Change, ChangeOwnerType, ChangeType } from "../types";
+import { Action, ActionDebugInfo, Change, ChangeType } from "../types";
 
-export function changeLabelActionExecutor(phaseId: number, action: Action): Change[] | null {
+export function changeLabelActionExecutor(_: number, action: Action): Change[] | null {
     const val = action.value as ChangeLabelActionSetting;
     return Object
         .keys(val)
@@ -16,10 +16,6 @@ export function changeLabelActionExecutor(phaseId: number, action: Action): Chan
                     newStyle: {
                         label: isHasLabel(v) ? v.label : v
                     }
-                },
-                owner: {
-                    type: ChangeOwnerType.Phase,
-                    phaseId,
                 }
             };
         });

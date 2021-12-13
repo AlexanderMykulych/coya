@@ -44,12 +44,13 @@ function buildIndexObject(phases: PhaseAction[] | undefined | null): PhaseIndexI
                 } else {
                     actions = action;
                 }
-                return actions.map<PhaseIndexItemAction>(y => ({
+                return actions.map<PhaseIndexItemAction>((y, index) => ({
                     action: {
                         name: key as ActionType,
                         value: y as any
                     },
-                    actionId: actionIndex
+                    actionId: actionIndex,
+                    actionIndex: index
                 }));
             })
             .filter(isNotNullOrUndefined);

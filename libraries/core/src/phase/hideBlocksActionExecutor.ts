@@ -1,8 +1,8 @@
 import { DebugAction, DebugType } from "../debugTypes";
 import { isHideBlocksActionSetting } from "../typeGuards";
-import { Action, ActionDebugInfo, Change, ChangeOwnerType, ChangeType } from "../types";
+import { Action, ActionDebugInfo, Change, ChangeType } from "../types";
 
-export function hideBlocksActionExecutor(phaseId: number, action: Action): Change[] | null {
+export function hideBlocksActionExecutor(_: number, action: Action): Change[] | null {
     if (isHideBlocksActionSetting(action.value)) {
         return [{
             type: ChangeType.ChangeStyle,
@@ -13,10 +13,6 @@ export function hideBlocksActionExecutor(phaseId: number, action: Action): Chang
                         display: "none"
                     }
                 }
-            },
-            owner: {
-                type: ChangeOwnerType.Phase,
-                phaseId
             }
         }];
     }

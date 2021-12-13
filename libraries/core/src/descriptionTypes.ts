@@ -18,6 +18,8 @@ export interface BaseBlockElementDescription {
     enter?: EnterSetting;
     type?: BlockElementType;
     debug?: DebugSetting;
+    sourcePhase?: number;
+    sourcePhaseAction?: number;
 }
 
 export interface LineBlockElementDescription extends BaseBlockElementDescription {
@@ -33,7 +35,7 @@ export interface RectBlockElementDescription extends BaseBlockElementDescription
 export type BlockElementDescription = LineBlockElementDescription | RectBlockElementDescription;
 
 export interface BlockGroupDescriptions {
-    [name: string]: BlockGroupDescriptions | BlockElementDescription | string | null
+    [name: string]: BlockElementDescription | null
 }
 
 export interface ConnectActionSetting {
