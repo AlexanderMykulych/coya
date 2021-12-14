@@ -67,7 +67,7 @@
         "@types/jest": "^27.0.1",
         "@typescript-eslint/eslint-plugin": "^4.29.3",
         "@typescript-eslint/parser": "^4.29.3",
-        "eslint": "^7.32.0",
+        "eslint": "^8.3.0",
         "husky": "^7.0.1",
         "size-limit": "^5.0.3",
         "tsdx": "^0.14.1",
@@ -81,6 +81,6 @@
         "jest": "^27.0.6",
         "lodash": "^4.17.21",
         "stylis": "^4.0.10",
-        "vue": "^3.2.20"
+        "vue": "^3.2.23"
     }
 }
