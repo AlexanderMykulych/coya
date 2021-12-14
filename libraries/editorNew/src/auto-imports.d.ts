@@ -20,6 +20,7 @@ declare module 'vue' {
     'IIc:baselineMouse': typeof import('~icons/ic/baseline-mouse')['default']
     'IIconParkOutline:zoom': typeof import('~icons/icon-park-outline/zoom')['default']
     'ILs:underscore': typeof import('~icons/ls/underscore')['default']
+    'IMdi:arrowRightThin': typeof import('~icons/mdi/arrow-right-thin')['default']
     'IMdi:arrowTopLeftThin': typeof import('~icons/mdi/arrow-top-left-thin')['default']
     'IMdi:familyTree': typeof import('~icons/mdi/family-tree')['default']
     'IPh:rectangleBold': typeof import('~icons/ph/rectangle-bold')['default']

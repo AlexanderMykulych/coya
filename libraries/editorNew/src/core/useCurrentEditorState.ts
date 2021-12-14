@@ -115,7 +115,7 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                 ),
                 from: computed({
                     get: () => configActiveNode.value?.block?.from,
-                    set: val => {
+                    set: debounce(val => {
                         if (blockId.value) {
                             reconnectArrow(
                                 editor.config,
@@ -125,11 +125,11 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                                 "from",
                             );
                         }
-                    }
+                    }, 800)
                 }),
                 to: computed({
                     get: () => configActiveNode.value?.block?.to,
-                    set: val => {
+                    set: debounce(val => {
                         if (blockId.value) {
                             reconnectArrow(
                                 editor.config,
@@ -139,7 +139,7 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                                 "to",
                             );
                         }
-                    }
+                    }, 800)
                 }),
             }),
             activeConfig: computed(() => editor.config),

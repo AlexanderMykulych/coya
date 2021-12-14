@@ -163,4 +163,5 @@ export interface TransformSetting {
     viewBox: ViewBoxSetting;
     customContextBuilderFunc?: CustomContextBuilderFunc;
     currentPhase: CurrentPhaseInfo;
+    defaultValue?: any;
 }

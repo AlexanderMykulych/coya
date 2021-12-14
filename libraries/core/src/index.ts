@@ -6,6 +6,7 @@ export * from "./descriptionTypes";
 export * from "./phase/makeChange";
 export * from "./phase/executeActions";
 export * from "./phase/actionExecutors";
+export * from "./util/deepAssign";
 export {
     transformDescriptionToArchitecture,
     transformToArchitecture,

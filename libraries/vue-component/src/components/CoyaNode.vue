@@ -2,10 +2,18 @@
 import { Block, BlockStyle, isLineBlockElement, isRectPositioning, Positioning, RectPositioning } from "coya-core";
 import { computed } from "vue";
 import {getCurrentEditor} from "coya-editor-new";
+import { deepAssign } from "coya-core";
 import coyaRectNode from "./Nodes/CoyaRectNode.vue";
 import coyaLineNode from "./Nodes/CoyaLineNode.vue";
 
-const props = defineProps<{ block: Block, positioning: Positioning, blockStyle?: BlockStyle, debug: boolean }>();
+const props = defineProps<{
+    block: Block,
+    positioning: Positioning,
+    blockStyle?: BlockStyle,
+    debug: boolean,
+    defaultArrowStyle?: BlockStyle,
+    defaultRectStyle?: BlockStyle,
+}>();
 
 const rectPosition = computed(() => <RectPositioning>props.positioning);
 const isRect = computed(() => isRectPositioning(props.positioning));
@@ -18,44 +26,54 @@ const blockDebug = computed(() => props.block.debug);
 const editor = getCurrentEditor();
 const CoyaRectNode = editor.wrap(coyaRectNode);
 const CoyaLineNode = editor.wrap(coyaLineNode);
+
+const preparedStyle = computed(() => {
+    if (isRect.value) {
+        return deepAssign({}, props.defaultRectStyle || {}, props.blockStyle || {});
+    }
+    if (isLine.value) {
+        return deepAssign({}, props.defaultArrowStyle || {}, props.blockStyle || {});
+    }
+    return props.blockStyle;
+});
 </script>
 
 <template>
     <CoyaLineNode
         v-if="isLine"
         :block="block"
-        :block-style="blockStyle"
+        :block-style="preparedStyle"
         :positioning="rectPosition"
     />
     <CoyaImageNode
         v-else-if="isCustomSvgUrl"
         :block="block"
-        :block-style="blockStyle"
+        :block-style="preparedStyle"
         :positioning="rectPosition"
     />
     <CoyaSvgNode
         v-else-if="isCustomSvg"
         :block="block"
-        :block-style="blockStyle"
+        :block-style="preparedStyle"
         :positioning="rectPosition"
     />
     <CoyaSvgTagNode
         v-else-if="!!svgTag"
         :block="block"
-        :block-style="blockStyle"
+        :block-style="preparedStyle"
         :positioning="rectPosition"
     />
     <CoyaRectNode
         v-else-if="isRect"
         :block="block"
-        :block-style="blockStyle"
+        :block-style="preparedStyle"
         :positioning="rectPosition"
     />
     <DebugNode
         v-if="!!blockDebug"
         :value="blockDebug"
         :block="block"
-        :block-style="blockStyle"
+        :block-style="preparedStyle"
         :positioning="rectPosition"
     />
 </template>

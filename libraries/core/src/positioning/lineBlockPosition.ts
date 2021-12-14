@@ -19,16 +19,19 @@ export function lineBlockPosition(blocksPositions: Ref<BlockPositioning[]>, bloc
         && isRectPositioning(blockToPos.value?.position)
         && blockFromPos.value.position.x < blockToPos.value.position.x
     );
-    const getValueByCtx = (x?: number | FormulaValue) => getFormulaValue(x, blocksPositions, setting);
+    const getValueByCtx = (x?: number | FormulaValue, def?: any) =>
+        getFormulaValue(x, blocksPositions, { defaultValue: def, ...setting });
     const indentX1 = getValueByCtx(blockStyle?.position?.indentX1 ?? blockStyle?.position?.indentX);
     const indentX2 = getValueByCtx(blockStyle?.position?.indentX2 ?? blockStyle?.position?.indentX);
     const indentY1 = getValueByCtx(blockStyle?.position?.indentY1 ?? blockStyle?.position?.indentY);
     const indentY2 = getValueByCtx(blockStyle?.position?.indentY2 ?? blockStyle?.position?.indentY);
 
+    const isFromFormula = block.from.indexOf('.') > -1;
+    const isToFormula = block.to.indexOf('.') > -1;
 
     if (!blockStyle?.position) {
-        const fromPoints = `${block.from}.top, ${block.from}.bottom, ${block.from}.right, ${block.from}.left`;
-        const toPoints = `${block.to}.top, ${block.to}.bottom, ${block.to}.right, ${block.to}.left`;
+        const fromPoints = isFromFormula ? block.from : `${block.from}.top, ${block.from}.bottom, ${block.from}.right, ${block.from}.left`;
+        const toPoints = isToFormula ? block.to : `${block.to}.top, ${block.to}.bottom, ${block.to}.right, ${block.to}.left`;
         const closesPoints = `_.fn.findClosestPoints([${fromPoints}], [${toPoints}])`;
         const position = getValueByCtx(closesPoints);
         return {

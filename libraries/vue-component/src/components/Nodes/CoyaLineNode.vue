@@ -9,9 +9,10 @@ const props =
         blockStyle: BlockStyle;
     }>();
 const cssStyle = computed(() => ({
-    stroke: '#000',
+    stroke: 'black',
     'stroke-width': '2px',
     'marker-end': 'url(#sequenceflow-end)',
+    fill: "none",
     ...(props.blockStyle?.css ?? {}),
 }));
 const textEl = ref(null);
@@ -30,19 +31,15 @@ const textStyle = ref({
     fontSize: '4px',
 });
 const path = computed(() => {
-    return `M${props.positioning.x1},${props.positioning.y1},${props.positioning.x2},${props.positioning.y2}`;
+    if (props.positioning.x1 === props.positioning.x2 || props.positioning.y1 === props.positioning.y2) {
+        return `M${props.positioning.x1},${props.positioning.y1},${props.positioning.x2},${props.positioning.y2}`;
+    }
+    return `M${props.positioning.x1},${props.positioning.y1} h ${props.positioning.x2 - props.positioning.x1} L ${props.positioning.x2} ${props.positioning.y2}`;
 });
 </script>
 
 <template>
     <g :style="cssStyle">
-        <!-- <line
-            :id="block.id"
-            :x1="positioning.x1"
-            :y1="positioning.y1"
-            :x2="positioning.x2"
-            :y2="positioning.y2"
-        /> -->
         <path :d="path" :style="cssStyle" />
         <text
             :style="textStyle"

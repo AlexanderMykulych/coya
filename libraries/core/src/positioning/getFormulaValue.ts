@@ -23,7 +23,7 @@ export function getFormulaValue(
                 return fn.apply(null, context.blocksValues) || 0;
             } catch (e) {
                 console.warn(e);
-                return 0;
+                return setting.defaultValue !== undefined ? setting.defaultValue : 0;
             }
         });
     }

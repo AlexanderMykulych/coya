@@ -5,6 +5,7 @@ import {EditorMode} from "../../core/types";
 
 const { selectedNode, showDebugWindow, state } = useCurrentEditorState();
 const selectDefaultNode = () => (selectedNode.value = '_');
+const selectDefaultArrowNode = () => (selectedNode.value = '->');
 const toggleDebug = () => (showDebugWindow.value = !showDebugWindow.value);
 </script>
 
@@ -17,6 +18,9 @@ const toggleDebug = () => (showDebugWindow.value = !showDebugWindow.value);
         <div>
             <button class="border-2" @click="selectDefaultNode">
                 <i-ls:underscore class="pb-1" />
+            </button>
+            <button class="border-2" @click="selectDefaultArrowNode">
+                <i-mdi:arrow-right-thin class="pb-1" />
             </button>
             <button class="border-2" @click="toggleDebug">
                 <i-codicon:debug class="p-0.6" />

@@ -75,19 +75,19 @@
 				},
 				{
 					"from": "has_template_opt",
-					"to": "compile"
+					"to": "compile.top"
 				},
 				{
 					"from": "has_template_opt",
-					"to": "compileEl"
+					"to": "compileEl.top"
 				},
 				{
 					"from": "compile",
-					"to": "createApp"
+					"to": "createApp.top"
 				},
 				{
 					"from": "compileEl",
-					"to": "createApp"
+					"to": "createApp.top"
 				},
 				{
 					"from": "createApp",
@@ -253,6 +253,11 @@
 			"line_0_1": {
 				"css": {
 					"stroke": "#2900FF"
+				}
+			},
+			"->": {
+				"css": {
+					"fill": "none"
 				}
 			}
 		}

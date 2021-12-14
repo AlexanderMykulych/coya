@@ -4,12 +4,11 @@ import { useCurrentEditorState } from '../../core/useCurrentEditorState';
 import JsonEditor from 'coya-json-editor';
 import 'coya-json-editor/dist/style.css';
 
-const { state, mouseState, zoomState, activeConfig, initialConfig } =
+const { state, mouseState, zoomState, activeConfig, initialConfig, architecture } =
     useCurrentEditorState();
 const jsonEditorConfig = reactive({
-    lineNumbers: 'off',
     glyphMargin: false,
-    folding: false,
+    folding: true,
     lineDecorationsWidth: 0,
     lineNumbersMinChars: 0,
     minimap: {
@@ -27,6 +26,8 @@ const obj = computed(() => {
             return activeConfig.value;
         case 'initConfig':
             return initialConfig.value;
+        case 'arch':
+            return architecture;
         case 'block':
         default:
             return state;
@@ -42,6 +43,7 @@ const obj = computed(() => {
             <i-icon-park-outline:zoom @click="tab = 'zoom'" />
             <i-mdi:family-tree @click="tab = 'config'" />
             <i-grommet-icons:document-config @click="tab = 'initConfig'" />
+            <i-grommet-icons:document-config @click="tab = 'arch'" />
         </div>
         <JsonEditor :config="jsonEditorConfig" :modelValue="obj" />
     </div>

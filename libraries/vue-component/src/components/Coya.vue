@@ -97,6 +97,8 @@ const rectPositions = computed(() => {
     }
     return [];
 });
+const defaultRectStyle = computed(() => arch.value?.style?.blocks?.["_"]);
+const defaultArrowStyle = computed(() => arch.value?.style?.blocks?.["->"]);
 const filteredRectPositions = computed(() =>
     rectPositions.value.filter((x) => !x?.style?.isHighlight),
 );
@@ -277,6 +279,8 @@ provide(
                         <CoyaNode
                             :block="item.block"
                             :block-style="item.style"
+                            :defaultRectStyle="defaultRectStyle"
+                            :defaultArrowStyle="defaultArrowStyle"
                             :positioning="item.pos"
                             :debug="debug"
                         />

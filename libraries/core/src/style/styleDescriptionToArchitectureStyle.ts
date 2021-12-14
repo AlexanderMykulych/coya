@@ -23,9 +23,8 @@ function generateBlocksStyle(style: StyleDescription): BlocksStyle | undefined {
     if (!style.blocks) {
         return style.blocks;
     }
-    const defaultStyle = style.blocks?.["_"] ?? {};
     return Object.fromEntries(
         Object.entries(style.blocks)
-            .map(([key, value]) => [key, deepAssign({}, defaultStyle, value)])
+            .map(([key, value]) => [key, deepAssign({}, value)])
     );
 }
