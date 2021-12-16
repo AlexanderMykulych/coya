@@ -66,7 +66,7 @@
 			"connect": [
 				{
 					"from": "init",
-					"to": "beforeCreate",
+					"to": "beforeCreate.top",
 					"name": "line_init_beforeCreate"
 				},
 				{
@@ -149,7 +149,7 @@
 					"y": "NaN"
 				},
 				"css": {
-					"fill": "red",
+					"fill": "none",
 					"stroke": "red",
 					"stroke-dasharray": 3
 				}
@@ -158,8 +158,8 @@
 				"position": {
 					"x": "379.27",
 					"y": "146.20999999999998",
-					"w": "232.4490203857422",
-					"h": "98.13617706298828"
+					"w": "496.45",
+					"h": "134.14"
 				},
 				"css": {
 					"fill": "#5D61FF"

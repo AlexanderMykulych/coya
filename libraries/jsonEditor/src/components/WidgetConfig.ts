@@ -1,3 +1,6 @@
+import parse from "json-to-ast";
+import * as monaco from 'monaco-editor';
+
 export interface JsonAstPosition {
     line: number;
     column: number;
@@ -9,6 +12,11 @@ export interface JsonAstRow {
     value: string;
     start: JsonAstPosition;
     end: JsonAstPosition;
+    type: "Literal" | "Object";
+}
+export interface AstAnalizingResult {
+    ast: parse.ValueNode;
+    rows: JsonAstRow[];
 }
 export interface IPosition {
     lineNumber: number;
@@ -22,3 +30,12 @@ export interface WidgetConfig {
     row: JsonAstRow;
 }
 export type WidgetChangeCallback = (data: {value: any}) => void;
+export type WidgetFilter = (row: JsonAstRow) => boolean;
+export interface WidgetFilterConfig {
+    activateDefaultWidget?: boolean;
+    widgetFilter?: WidgetFilter;
+}
+export interface ConfigureEditorOption {
+    editor: monaco.editor.IStandaloneCodeEditor;
+    widgetConfig?: WidgetFilterConfig;
+}

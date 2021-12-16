@@ -1,8 +1,7 @@
 <script lang="ts" setup>
 import { ref, reactive, computed } from "vue";
 import { useCurrentEditorState } from "../../core/useCurrentEditorState";
-import JsonEditor from 'coya-json-editor'
-import 'coya-json-editor/dist/style.css'
+import JsonEditor from 'coya-json-editor';
 
 const {activeNode} = useCurrentEditorState();
 const text = ref("");
@@ -37,6 +36,10 @@ const jsonEditorConfig = reactive({
         v-if="activeNode"
         class="border-2 rounded-md p-3 bg-white grid h-full"
         >
-        <JsonEditor v-model="preparedValue" :config="jsonEditorConfig"/>
+        <JsonEditor
+            v-model="preparedValue"
+            :config="jsonEditorConfig"
+            activateDefaultWidget
+        />
     </div>
 </template>

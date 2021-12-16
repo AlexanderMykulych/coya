@@ -1,4 +1,4 @@
-import { Action, ActionSetting, ActionType, Architecture, RectPositioning } from "coya-core";
+import { Action, ActionSetting, ActionType, Architecture, PhaseAction, RectPositioning } from "coya-core";
 import { ArchitectureDescription, Change } from "coya-core";
 import { Component, ComputedRef, Ref } from "vue";
 
@@ -95,6 +95,7 @@ export interface MakeChangeAction {
 }
 export interface CurrentEditorState {
     isOneNodeSelected: Ref<boolean>;
+    initPhases: Ref<PhaseAction[] | undefined>;
     phases: Ref<{
         items?: {
             phaseKey: string;

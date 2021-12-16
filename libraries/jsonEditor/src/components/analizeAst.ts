@@ -1,18 +1,27 @@
 import parse, { ValueNode, PropertyNode } from 'json-to-ast';
-import { JsonAstRow } from './WidgetConfig';
+import { AstAnalizingResult } from './WidgetConfig';
 
-export function analizeAst(editorValue: string): JsonAstRow[] {
+export function analizeAst(editorValue: string): AstAnalizingResult {
     const ast = parse(editorValue);
 
     const analizeChildrens = (parent: string, value: ValueNode, node?: PropertyNode) => {
         if (value.type === 'Object') {
-            return value.children
-                .flatMap(x => {
-                    if (x.type === 'Property') {
-                        return analizeChildrens(`${parent}${parent ? '.' : ''}${x.key.value}`, x.value, x);
-                    }
-                })
-                .filter(x => !!x);
+            return [
+                {
+                    path: parent,
+                    type: value.type,
+                    start: value.loc?.start,
+                    end: value.loc?.end,
+                },
+                ...value
+                    .children
+                    .flatMap(x => {
+                        if (x.type === 'Property') {
+                            return analizeChildrens(`${parent}${parent ? '.' : ''}${x.key.value}`, x.value, x);
+                        }
+                    })
+                    .filter(x => !!x),
+            ];
         }
         else if (value.type === 'Literal' && node) {
             return {
@@ -21,8 +30,21 @@ export function analizeAst(editorValue: string): JsonAstRow[] {
                 value: value.value,
                 start: node.loc?.start,
                 end: node.loc?.end,
+                type: value.type,
             };
+        } else if (value.type === "Array") {
+            return value
+                .children
+                .flatMap((x, index) => {
+                    if (x.type === 'Object') {
+                        return analizeChildrens(`${parent}${parent ? '.' : ''}${index}`, x);
+                    }
+                })
+                .filter(x => !!x);
         }
     };
-    return analizeChildrens('', ast);
+    return {
+        ast,
+        rows: analizeChildrens('', ast)
+    };
 }

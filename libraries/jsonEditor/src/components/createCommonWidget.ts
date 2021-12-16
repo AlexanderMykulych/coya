@@ -3,8 +3,8 @@ import { watch } from 'vue';
 import { WidgetChangeCallback, WidgetConfig } from './WidgetConfig';
 import { createVueDomElement } from './createVueDomElement';
 
-export function createCommonWidget(widgetConfig: WidgetConfig, onValueChange: WidgetChangeCallback, editor: monaco.editor.IStandaloneCodeEditor) {
-    const dom = createVueDomElement(widgetConfig, onValueChange);
+export function createCommonWidget(widgetConfig: WidgetConfig, editor: monaco.editor.IStandaloneCodeEditor) {
+    const dom = createVueDomElement();
     const createMonacoConfig = (widgetConfig: WidgetConfig) => ({
         getId() {
             return widgetConfig.id;
@@ -32,4 +32,5 @@ export function createCommonWidget(widgetConfig: WidgetConfig, onValueChange: Wi
     });
 
     editor.addContentWidget(initConfig);
+    return dom;
 }

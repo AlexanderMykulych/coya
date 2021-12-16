@@ -71,6 +71,7 @@ export function useEditorState(editor: Editor): CurrentEditorState {
         
         return {
             isOneNodeSelected: computed(() => !!blockId.value),
+            initPhases: computed(() => editor.initialConfig.phases),
             phases: computed(() => {
                 let index = 0;
                 return {
@@ -109,6 +110,10 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                         ['style.value.position.y1', prepareNum],
                         ['style.value.position.x2', prepareNum],
                         ['style.value.position.y2', prepareNum],
+                        ['style.value.position.indentX1', prepareNum],
+                        ['style.value.position.indentX2', prepareNum],
+                        ['style.value.position.indentY1', prepareNum],
+                        ['style.value.position.indentY2', prepareNum],
                         'style.value.label',
                         'style.value.css',
                     ]

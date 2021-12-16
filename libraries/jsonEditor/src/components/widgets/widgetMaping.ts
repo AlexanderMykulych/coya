@@ -7,6 +7,6 @@ export const widgetMaping = [{
     path: /css\..*color/,
     component: ColorWidget
 }, {
-    path: /css\.stroke/,
+    path: /css\.stroke$/,
     component: ColorWidget
 }]

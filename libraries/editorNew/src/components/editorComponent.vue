@@ -3,10 +3,12 @@ import { getCurrentEditor } from '../core';
 import { computed, onScopeDispose, reactive, ref, watch } from 'vue';
 import Palette from './Palette/Palette.vue';
 import Phases from './Phases/Phases.vue';
+import PhasesJson from './Phases/PhasesJson.vue';
 import NodeSetting from './NodeSetting/NodeSetting.vue';
 import AppMenu from './AppMenu/AppMenu.vue';
 import Debug from './Debug/Debug.vue';
 import { useCurrentEditorState } from '../core/useCurrentEditorState';
+import 'coya-json-editor/dist/style.css';
 
 const teleportEl = ref(null);
 const svgPosition = reactive({
@@ -103,6 +105,13 @@ const debugContainerStyle = computed(() => ({
     width: `${nodeSettingWidth.value}px`,
     height: `${svgPosition.h - 120}px`,
 }));
+
+const phasesJsonContainerStyle = computed(() => ({
+    x: appMenuContainerStyle.value.x,
+    y: `${appMenu.y + appMenu.h + 10}px`,
+    width: `${nodeSettingWidth.value}px`,
+    height: `${svgPosition.h - 120}px`,
+}));
 const { mouseState, state, isOneNodeSelected, showDebugWindow } =
     useCurrentEditorState();
 </script>
@@ -115,7 +124,7 @@ const { mouseState, state, isOneNodeSelected, showDebugWindow } =
                 :x="svgViewBox.x"
                 :y="svgViewBox.y"
             >
-                <foreignObject
+                <!-- <foreignObject
                     class="node"
                     :style="phasesContainerStyle"
                     @click.stop.prevent
@@ -127,7 +136,7 @@ const { mouseState, state, isOneNodeSelected, showDebugWindow } =
                     >
                         <Phases />
                     </body>
-                </foreignObject>
+                </foreignObject> -->
                 <foreignObject
                     class="node"
                     :style="paletteContainerStyle"
@@ -139,6 +148,20 @@ const { mouseState, state, isOneNodeSelected, showDebugWindow } =
                         :style="paletteContainerStyle"
                     >
                         <Palette />
+                    </body>
+                </foreignObject>
+                <foreignObject
+                    class="node"
+                    :style="phasesJsonContainerStyle"
+                    @click.stop.prevent
+                    @mousedown.stop.prevent
+                >
+                    <body
+                        xmlns="http://www.w3.org/1999/xhtml"
+                        :style="phasesJsonContainerStyle"
+                        @click.stop.prevent
+                    >
+                        <PhasesJson />
                     </body>
                 </foreignObject>
                 <foreignObject
