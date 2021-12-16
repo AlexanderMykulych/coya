@@ -8,3 +8,4 @@ import 'virtual:windi-utilities.css'
 
 import JsonEditor from './components/JsonEditor.vue'
 export default JsonEditor;
+export * from "./components/WidgetConfig";

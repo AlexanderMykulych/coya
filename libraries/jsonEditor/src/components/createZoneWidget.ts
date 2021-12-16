@@ -14,11 +14,18 @@ export function createZoneWidget(
         top: 100,
         height: 0
     });
-    const showWidget = computed(() => widgetFilterConfig.widgetFilter && widgetFilterConfig.widgetFilter(widgetConfig.row));
+    const showWidgetResult = computed(() => widgetFilterConfig.widgetFilter && widgetFilterConfig.widgetFilter(widgetConfig.row));
+    const showWidget = computed(() => showWidgetResult.value !== false);
+    const zoneHeight = computed(() => {
+        if (typeof showWidgetResult.value !== "boolean" && showWidgetResult.value?.heightInLines) {
+            return showWidgetResult.value?.heightInLines;
+        }
+        return showWidgetResult.value === true ? 1 : 0;
+    });
     const zoneConfig = computed(() => ({
         afterLineNumber: widgetConfig.position.lineNumber - 1,
         afterColumn: widgetConfig.row.start.offset,
-        heightInLines: showWidget.value ? 1 : 0,
+        heightInLines: zoneHeight.value,
         domNode,
         suppressMouseDown: false,
         onDomNodeTop: (top) => pos.top = top,
@@ -48,6 +55,17 @@ export function createZoneWidget(
             });
         }
     }, { immediate: true });
+    watch(() => zoneConfig.value, value => {
+        editor.changeViewZones(changeAccessor => {
+            if (zoneId) {
+                changeAccessor.removeZone(zoneId);
+                zoneId = changeAccessor.addZone(value);
+            }
+        });
+    }, {
+        deep: true,
+    });
+
     const initConfig = {
         getId() {
             return widgetConfig.id;

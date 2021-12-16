@@ -1,9 +1,10 @@
 <script lang="ts" setup>
 import JsonEditor from 'coya-json-editor';
 import { reactive, ref, shallowRef, watch } from 'vue';
-import { useCurrentEditorState } from "../../core/useCurrentEditorState";
+import { useCurrentEditorState } from '../../core/useCurrentEditorState';
+import { usePhases } from './usePhases';
 
-const {initPhases} = useCurrentEditorState();
+const { initPhases } = useCurrentEditorState();
 
 const jsonEditorConfig = reactive({
     glyphMargin: false,
@@ -12,33 +13,41 @@ const jsonEditorConfig = reactive({
     lineDecorationsWidth: 0,
     lineNumbersMinChars: 0,
     minimap: {
-		enabled: false
-	},
+        enabled: false,
+    },
     guides: {
-        bracketPairs: "active",
-    }
+        bracketPairs: 'active',
+    },
 });
 
 const editor = shallowRef(null);
-watch(() => editor.value, editor => {
-    if (editor) {
-        // editor.trigger('fold', 'editor.foldLevel3');
+
+const widgetFilter = ({ path }) => {
+    if (isPhasePath(path)) {
+        return {
+            heightInLines: 2
+        };
     }
-})
+    return false;
+};
+const isPhasePath = (path: string) => !isNaN(Number(path));
+
+const { setCurrentPhase } = usePhases();
 </script>
 
 <template>
-    <div
-        class="border-2 rounded-md p-3 bg-white grid h-full"
-        >
+    <div class="border-2 rounded-md p-3 bg-white grid h-full">
         <JsonEditor
             v-model="initPhases"
             :config="jsonEditorConfig"
             @set-editor="editor = $event.value"
             activateDefaultWidget
+            :widgetFilter="widgetFilter"
         >
-            <template #widget="{config}">
-                {{config.row.start.line}}
+            <template #line-widget="{ config }">
+                <template v-if="isPhasePath(config.path)">
+                    <PhaseBar :config="config"/>
+                </template>
             </template>
         </JsonEditor>
     </div>

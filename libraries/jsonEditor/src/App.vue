@@ -46,10 +46,18 @@ const setConfig = ({ analizingResult }) => {
 
 const allowedPath = ref(null);
 const widgetFilter = ({ path }) => {
-    return (
-        path === 'init.css' ||
-        path === allowedPath.value
-    );
+    switch (path) {
+        case 'init.css':
+            return {
+                heightInLines: 5,
+            };
+        case allowedPath.value:
+            return {
+                heightInLines: 3,
+            };
+        default:
+            return false;
+    }
 };
 </script>
 
@@ -74,7 +82,11 @@ const widgetFilter = ({ path }) => {
             <template #widget="{ config }">
                 <!-- {{config.id}} -->
             </template>
-            <template #line-widget="{ config }"> {{config.row.path}} </template>
+            <template #line-widget="{ config }">
+                <div class="bg-red-200 h-full">
+                {{ config.row.path }}
+                </div>
+            </template>
         </JsonEditor>
     </div>
 </template>

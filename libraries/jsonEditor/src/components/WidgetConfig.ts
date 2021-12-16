@@ -29,8 +29,11 @@ export interface WidgetConfig {
     path: string;
     row: JsonAstRow;
 }
-export type WidgetChangeCallback = (data: {value: any}) => void;
-export type WidgetFilter = (row: JsonAstRow) => boolean;
+export type WidgetChangeCallback = (data: { value: any }) => void;
+export interface WidgetFilterSuccessConfig {
+    heightInLines: number;
+}
+export type WidgetFilter = (row: JsonAstRow) => boolean | WidgetFilterSuccessConfig;
 export interface WidgetFilterConfig {
     activateDefaultWidget?: boolean;
     widgetFilter?: WidgetFilter;

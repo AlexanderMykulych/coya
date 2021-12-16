@@ -132,7 +132,7 @@ export interface Architecture extends RefsType<ArchitectureData> {
     next: () => PhaseId;
     back: () => PhaseId;
     debugSelect: (select: SelectedProperties) => void;
-    toPhase: (phase: number) => void;
+    toPhase: (phase: number | null) => void;
     debugState?: Ref<DebugStateContainer | undefined>;
 }
 export type RefsType<T> = {
