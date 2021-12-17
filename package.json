@@ -2,7 +2,7 @@
     "scripts": {
         "bump": "rush version --bump",
         "publish-npm": "rush publish --include-all --publish --set-access-level public --npm-auth-token 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 --version-policy main",
-        "builc-core": "rush build -o coya-core",
+        "build-core": "rush build -o coya-core",
         "build-vue": "rush build -o coya-vue-component",
         "build-editor": "rush build -o coya-editor-new",
         "build-json": "rush build -o coya-json-editor",

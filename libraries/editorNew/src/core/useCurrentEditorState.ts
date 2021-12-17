@@ -71,7 +71,13 @@ export function useEditorState(editor: Editor): CurrentEditorState {
         
         return {
             isOneNodeSelected: computed(() => !!blockId.value),
-            initPhases: computed(() => editor.initialConfig.phases),
+            initPhases: computed({
+                get: () => editor.initialConfig.phases,
+                set: debounce((val: any) => {
+                    editor.config.phases = val;
+                    editor.initialConfig.phases = val;
+                }, 400)
+            }),
             phases: computed(() => {
                 let index = 0;
                 return {

@@ -70,6 +70,9 @@ export function transformDescriptionToArchitecture(
         return null;
     };
     const toPhase = (phaseId: number | string | null | undefined) => {
+        if (Number(phaseId) < 0) {
+            phaseId = null;
+        }
         currentPhase.current = null;
         transitionalArchitectureRef.value = deepCopy(initState.value);
         const phaseInd = phaseIndex.getPhaseIndex(phaseId);
