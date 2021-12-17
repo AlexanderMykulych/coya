@@ -159,7 +159,18 @@ provide(
 <template>
     <div class="grid grid-cols-5 grid-rows-12 h-full">
         <div>
-            <editorComponent v-if="!!editor" />
+            <editorComponent v-if="!!editor">
+                <template #preview="{item}">
+                    <CoyaNode
+                        :block="item.block"
+                        :block-style="item.blockStyle"
+                        :defaultRectStyle="defaultRectStyle"
+                        :defaultArrowStyle="defaultArrowStyle"
+                        :positioning="item.positioning"
+                        :disableWrap="true"
+                    />
+                </template>
+            </editorComponent>
         </div>
         <div
             class="

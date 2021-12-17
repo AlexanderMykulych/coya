@@ -242,7 +242,21 @@ const block2 = {
 </script>
 
 <template>
-    <editorComponent v-if="!!editor" />
+    <editorComponent v-if="!!editor">
+        <template #preview="data">
+            <foreignObject
+                pointer-events="none"
+                width="100%"
+                height="100%"
+                requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
+                ><div xmlns="http://www.w3.org/1999/xhtml">
+                    <div class="bg-red-100" style="box-sizing: border-box; text-align: center">
+                        <div>test</div>
+                    </div>
+                </div></foreignObject
+            >
+        </template>
+    </editorComponent>
     <div class="h-full relative">
         <svg
             width="95%"

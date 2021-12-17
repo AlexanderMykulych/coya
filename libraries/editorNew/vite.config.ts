@@ -22,7 +22,13 @@ export default defineConfig({
             autoInstall: true,
             compiler: "vue3"
         }),
-        WindiCSS()
+        WindiCSS({
+            config: {
+                plugins: [
+                    require('@windicss/plugin-scrollbar'),
+                ],
+            },
+        })
     ],
     build: {
         rollupOptions: {

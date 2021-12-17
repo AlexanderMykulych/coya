@@ -13,6 +13,7 @@ const props = defineProps<{
     debug: boolean,
     defaultArrowStyle?: BlockStyle,
     defaultRectStyle?: BlockStyle,
+    disableWrap?: boolean,
 }>();
 
 const rectPosition = computed(() => <RectPositioning>props.positioning);
@@ -24,8 +25,8 @@ const isLine = computed(() => isLineBlockElement(props.block));
 const blockDebug = computed(() => props.block.debug);
 
 const editor = getCurrentEditor();
-const CoyaRectNode = editor.wrap(coyaRectNode);
-const CoyaLineNode = editor.wrap(coyaLineNode);
+const CoyaRectNode = props.disableWrap ? coyaRectNode : editor.wrap(coyaRectNode);
+const CoyaLineNode = props.disableWrap ? coyaLineNode : editor.wrap(coyaLineNode);
 
 const preparedStyle = computed(() => {
     if (isRect.value) {

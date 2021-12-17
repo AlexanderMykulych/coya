@@ -124,6 +124,8 @@ export interface CurrentEditorState {
         x2: any;
         y2: any;
     }>;
+    activeBlockSetting?: any;
+    activeBlockStyleSetting?: any;
     state: EnabledEditorState;
     selectedNode: Ref<string | undefined>;
     showDebugWindow: Ref<boolean>;

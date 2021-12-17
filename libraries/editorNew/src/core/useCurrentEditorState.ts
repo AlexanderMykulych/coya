@@ -153,6 +153,8 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                     }, 800)
                 }),
             }),
+            activeBlockSetting: computed(() => blockId.value ? editor.config.blocks?.[blockId.value] : null),
+            activeBlockStyleSetting: computed(() => blockId.value ? editor.config.style?.blocks?.[blockId.value] : null),
             activeConfig: computed(() => editor.config),
             initialConfig: computed(() => editor.initialConfig),
             architecture: editor.architecture,

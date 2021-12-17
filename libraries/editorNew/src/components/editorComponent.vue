@@ -176,7 +176,11 @@ const { mouseState, state, isOneNodeSelected, showDebugWindow } =
                         :style="nodeSettingContainerStyle"
                         @click.stop.prevent
                     >
-                        <NodeSetting />
+                        <NodeSetting>
+                            <template #preview="slotData">
+                                <slot name="preview" v-bind="slotData"/>
+                            </template>
+                        </NodeSetting>
                     </body>
                 </foreignObject>
                 <foreignObject

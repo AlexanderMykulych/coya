@@ -91,7 +91,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div>
+    <div class="h-full">
         <div ref="editorEl" class="h-full text-left json-editor" />
         <template v-if="editorConfig?.configs?.length > 0">
             <Teleport v-for="config in editorConfig?.configs" :to="config.sideDom" :key="config.config.id">
