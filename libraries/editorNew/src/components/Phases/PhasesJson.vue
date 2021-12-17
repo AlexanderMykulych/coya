@@ -43,11 +43,13 @@ const {
     isStartPhaseActive,
 } = usePhases();
 
+
+const open = ref(false);
 </script>
 
 <template>
-    <div class="border-2 rounded-md p-3 bg-white flex flex-col h-full">
-        <div class="flex pb-2 space-x-2">
+    <div class="border-2 rounded-md p-3 bg-white flex flex-col" :class="{'h-full': open}">
+        <div class="flex pb-2 space-x-2 justify-between">
             <button class="border-2 text-2xl" @click="setCurrentPhase(null)">
                 <i-mdi:page-first :class="{'text-green-600': isStartPhaseActive}"/>
             </button>
@@ -60,8 +62,15 @@ const {
             <button class="border-2 text-2xl" @click="setLastPhase(null)">
                 <i-mdi:page-last :class="{'text-green-600': isLastPhaseActive}"/>
             </button>
+            <button class="border-2 text-2xl justify-self-end" v-if="!open" @click="open = true">
+                <i-mdi:chevron-double-down :class="{'text-green-600': isLastPhaseActive}"/>
+            </button>
+            <button class="border-2 text-2xl justify-self-end" v-else @click="open = false">
+                <i-mdi:chevron-double-up :class="{'text-green-600': isLastPhaseActive}"/>
+            </button>
         </div>
         <JsonEditor
+            v-if="open"
             class="h-full"
             v-model="initPhases"
             :config="jsonEditorConfig"

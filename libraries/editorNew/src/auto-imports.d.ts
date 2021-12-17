@@ -25,6 +25,8 @@ declare module 'vue' {
     'ILs:underscore': typeof import('~icons/ls/underscore')['default']
     'IMdi:arrowRightThin': typeof import('~icons/mdi/arrow-right-thin')['default']
     'IMdi:arrowTopLeftThin': typeof import('~icons/mdi/arrow-top-left-thin')['default']
+    'IMdi:chevronDoubleDown': typeof import('~icons/mdi/chevron-double-down')['default']
+    'IMdi:chevronDoubleUp': typeof import('~icons/mdi/chevron-double-up')['default']
     'IMdi:familyTree': typeof import('~icons/mdi/family-tree')['default']
     'IMdi:motionPlayOutline': typeof import('~icons/mdi/motion-play-outline')['default']
     'IMdi:pageFirst': typeof import('~icons/mdi/page-first')['default']
