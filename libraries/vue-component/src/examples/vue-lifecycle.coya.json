@@ -106,11 +106,11 @@
         "blocks": {
             "_": {
                 "css": {
-                    "color": "white",
+                    "color": "black",
                     "fill": "#FF89CF",
-                    "fontSize": "1.1em",
+                    "fontSize": "2.1em",
                     "rx": "25",
-                    "stroke": "none"
+                    "stroke": "black"
                 }
             },
             "init": {

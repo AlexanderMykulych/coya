@@ -2,7 +2,9 @@
   "name": "coya-vue-component",
   "version": "0.9.18",
   "module": "dist/coya.es.js",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite --port 3333 --open",
     "build": "cross-env NODE_ENV=production vite build --debug",
@@ -12,16 +14,17 @@
     "@headlessui/vue": "^1.4.0",
     "@types/ws": "^8.2.0",
     "@vueuse/core": "^7.1.2",
+    "coya-core": "~0.9.18",
+    "coya-editor-new": "~0.9.18",
     "drauu": "^0.1.0",
     "gsap": "latest",
     "rollup-plugin-svg": "^2.0.0",
+    "roughjs": "^4.5.2",
     "vue": "^3.2.23",
     "vue-color-kit": "^1.0.5",
     "vue-demi": "^0.12.1",
     "vue-router": "^4.0.12",
-    "ws": "^8.2.3",
-    "coya-core": "~0.9.18",
-    "coya-editor-new": "~0.9.18"
+    "ws": "^8.2.3"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.11.1",

@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { Block, BlockStyle, LinePositioning } from 'coya-core';
 import { computed, ref } from 'vue';
+import rough from 'roughjs';
 
 const props =
     defineProps<{
@@ -36,11 +37,31 @@ const path = computed(() => {
     }
     return `M${props.positioning.x1},${props.positioning.y1} h ${props.positioning.x2 - props.positioning.x1} L ${props.positioning.x2} ${props.positioning.y2}`;
 });
+
+const rc = computed(() => (gEl.value ? rough.svg(gEl.value) : null));
+const line = ref(null);
+const updateElementPosition = () => {
+    if (!rc.value) {
+        return;
+    }
+    if (line.value) {
+        gEl.value!.removeChild(line.value);
+    }
+    line.value = rc.value.path(path.value, cssStyle.value);
+    gEl.value.insertBefore(line.value, gEl.value.firstElementChild);
+}
+
+onMounted(() => {
+    watch(() => path.value, val => {
+        updateElementPosition();
+    }, { immediate: true });
+});
+
+
 </script>
 
 <template>
-    <g :style="cssStyle">
-        <path :d="path" :style="cssStyle" />
+    <g :style="cssStyle" ref="gEl">
         <text
             :style="textStyle"
             ref="textEl"

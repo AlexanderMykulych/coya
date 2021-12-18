@@ -1,11 +1,14 @@
 <script lang="ts" setup>
 import { computed, onMounted, onScopeDispose, ref } from 'vue';
-import { PredefCategory } from './../PredefinedSetting/PredefinedSetting';
+import { useCurrentEditorState } from '../../core/useCurrentEditorState';
+import { Predef, PredefBlock, PredefCategory } from './../PredefinedSetting/PredefinedSetting';
 
 const props = defineProps<{
-    preparedPredefs: any;
+    preparedPredefs: PredefBlock[];
     config: any;
 }>();
+
+const { activeNode } = useCurrentEditorState();
 
 const scrollEl = ref<HTMLElement | null>(null);
 const onWheel = (event: WheelEvent) => {
@@ -31,6 +34,12 @@ const filteredPredefs = computed(() => {
     }
     return props.preparedPredefs;
 });
+
+const applyPredef = (predef: PredefBlock) => {
+    activeNode.css = {
+        ...predef.item.blockStyle.css
+    };
+};
 </script>
 
 <template>
@@ -97,7 +106,7 @@ const filteredPredefs = computed(() => {
             >
                 {{!filteredPredefs || filteredPredefs.length === 0 ? "Comming soon..." : "" }}
                 <template v-for="predef in filteredPredefs" :key="predef.name">
-                    <div style="min-width: 200px">
+                    <div style="min-width: 200px" @click.stop.prevent="applyPredef(predef)">
                         <svg
                             width="90%"
                             height="90%"

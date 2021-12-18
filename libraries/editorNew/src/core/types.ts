@@ -123,6 +123,7 @@ export interface CurrentEditorState {
         y1: any;
         x2: any;
         y2: any;
+        css: any;
     }>;
     activeBlockSetting?: any;
     activeBlockStyleSetting?: any;
