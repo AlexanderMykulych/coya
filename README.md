@@ -14,3 +14,14 @@
 </tbody>
 </table>
 </p>
+
+
+Coya is a drawing diagram tool for developers.
+The resulting diagram is just a JSON file, so you can:
+- 🤓 commit it to git and compare it with prev version
+- 💡 generate it from any programming language
+- ✨ has animations feature, like in PowerPoint
+- 🔨 powerful editor
+- 🧰 vscode extension
+
+![](./assets/example.gif)
