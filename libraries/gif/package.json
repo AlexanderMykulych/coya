@@ -44,12 +44,12 @@
         }
     ],
     "devDependencies": {
-        "@size-limit/preset-small-lib": "^5.0.3",
+        "@size-limit/preset-small-lib": "^7.0.4",
         "husky": "^7.0.2",
-        "size-limit": "^5.0.3",
+        "husky": "^7.0.4",
         "tsdx": "^0.14.1",
         "tslib": "^2.3.1",
-        "typescript": "^4.4.2"
+        "typescript": "^4.5.4"
     },
     "dependencies": {
         "@types/gifencoder": "^2.0.1",

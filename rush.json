@@ -478,9 +478,15 @@
       "reviewCategory": "production"
     },
     {
-      "packageName": "coya-vue-component",
+        "packageName": "coya-vue-component",
+        "versionPolicyName": "main",
+        "projectFolder": "libraries/vue-component",
+        "reviewCategory": "production"
+    },
+    {
+      "packageName": "coya-ts-cli",
+      "projectFolder": "libraries/cli/typescript",
       "versionPolicyName": "main",
-      "projectFolder": "libraries/vue-component",
       "reviewCategory": "production"
     },
     {
