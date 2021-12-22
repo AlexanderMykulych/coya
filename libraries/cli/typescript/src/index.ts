@@ -1,6 +1,5 @@
-export const sum = (a: number, b: number) => {
-  if ('development' === process.env.NODE_ENV) {
-    console.log('boop');
-  }
-  return a + b;
-};
+import figlet from "figlet";
+import picocolor from "picocolors";
+
+
+console.log(picocolor.green(figlet.textSync("Coya TS")));

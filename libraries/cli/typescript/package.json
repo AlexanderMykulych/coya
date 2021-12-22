@@ -11,8 +11,12 @@
   "engines": {
     "node": ">=10"
   },
+  "bin": {
+    "coya-ts": "dist/index.js"
+  },
   "scripts": {
     "start": "tsdx watch",
+    "dev": "pnpm build && cd dist && node index.js",
     "build": "tsdx build",
     "test": "tsdx test",
     "lint": "tsdx lint",
@@ -20,7 +24,6 @@
     "size": "size-limit",
     "analyze": "size-limit --why"
   },
-  "peerDependencies": {},
   "husky": {
     "hooks": {
       "pre-commit": "tsdx lint"
@@ -46,11 +49,16 @@
   ],
   "devDependencies": {
     "@size-limit/preset-small-lib": "^7.0.4",
+    "@types/figlet": "^1.5.4",
+    "@types/node": "^16.7.1",
     "husky": "^7.0.4",
     "size-limit": "^7.0.4",
     "tsdx": "^0.14.1",
     "tslib": "^2.3.1",
-    "typescript": "^4.5.4",
-    "@types/node": "^16.7.1"
+    "typescript": "^4.5.4"
+  },
+  "dependencies": {
+    "figlet": "^1.5.2",
+    "picocolors": "^1.0.0"
   }
 }
