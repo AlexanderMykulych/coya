@@ -18,10 +18,10 @@
 
 Coya is a drawing diagram tool for developers.
 The resulting diagram is just a JSON file, so you can:
-- 🤓 commit it to git and compare it with prev version
-- 💡 generate it from any programming language
-- ✨ has animations feature, like in PowerPoint
-- 🔨 powerful editor
-- 🧰 vscode extension
+- 🤓 commit to git and compare with prev version
+- 💡 generate diagram from any programming language
+- ✨ animate diagram, like in PowerPoint
+- 🔨 use powerful editor
+- 🧰 use vscode extension
 
 ![](./assets/example.gif)
