@@ -53,6 +53,9 @@ onMounted(() => {
 });
 
 const updateElementPosition = () => {
+    if (isNaN(props.positioning.w) || isNaN(props.positioning.h)) {
+        return;
+    }
     if (rect.value) {
         gEl.value!.removeChild(rect.value);
     }

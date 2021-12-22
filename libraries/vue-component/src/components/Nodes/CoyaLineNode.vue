@@ -3,17 +3,16 @@ import { Block, BlockStyle, LinePositioning } from 'coya-core';
 import { computed, ref } from 'vue';
 import rough from 'roughjs';
 
-const props =
-    defineProps<{
-        block: Block;
-        positioning: LinePositioning;
-        blockStyle: BlockStyle;
-    }>();
+const props = defineProps<{
+    block: Block;
+    positioning: LinePositioning;
+    blockStyle: BlockStyle;
+}>();
 const cssStyle = computed(() => ({
     stroke: 'black',
     'stroke-width': '2px',
     'marker-end': 'url(#sequenceflow-end)',
-    fill: "none",
+    fill: 'none',
     ...(props.blockStyle?.css ?? {}),
 }));
 const textEl = ref(null);
@@ -32,10 +31,15 @@ const textStyle = ref({
     fontSize: '4px',
 });
 const path = computed(() => {
-    if (props.positioning.x1 === props.positioning.x2 || props.positioning.y1 === props.positioning.y2) {
+    if (
+        props.positioning.x1 === props.positioning.x2 ||
+        props.positioning.y1 === props.positioning.y2
+    ) {
         return `M${props.positioning.x1},${props.positioning.y1},${props.positioning.x2},${props.positioning.y2}`;
     }
-    return `M${props.positioning.x1},${props.positioning.y1} h ${props.positioning.x2 - props.positioning.x1} L ${props.positioning.x2} ${props.positioning.y2}`;
+    return `M${props.positioning.x1},${props.positioning.y1} h ${
+        props.positioning.x2 - props.positioning.x1
+    } L ${props.positioning.x2} ${props.positioning.y2}`;
 });
 
 const rc = computed(() => (gEl.value ? rough.svg(gEl.value) : null));
@@ -44,20 +48,31 @@ const updateElementPosition = () => {
     if (!rc.value) {
         return;
     }
-    if (line.value) {
-        gEl.value!.removeChild(line.value);
+    try {
+        if (line.value) {
+            gEl.value!.removeChild(line.value);
+        }
+    } catch (e) {
+        console.warn(e);
     }
-    line.value = rc.value.path(path.value, cssStyle.value);
-    gEl.value.insertBefore(line.value, gEl.value.firstElementChild);
-}
+    try {
+        line.value = rc.value.path(path.value, cssStyle.value);
+    } catch (e) {
+        console.warn(e);
+    } finally {
+        gEl.value.insertBefore(line.value, gEl.value.firstElementChild);
+    }
+};
 
 onMounted(() => {
-    watch(() => path.value, val => {
-        updateElementPosition();
-    }, { immediate: true });
+    watch(
+        () => path.value,
+        (val) => {
+            updateElementPosition();
+        },
+        { immediate: true },
+    );
 });
-
-
 </script>
 
 <template>
