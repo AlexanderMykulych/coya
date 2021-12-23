@@ -490,6 +490,12 @@
       "reviewCategory": "production"
     },
     {
+      "packageName": "coya-ts-analizer",
+      "projectFolder": "libraries/cli/typescript-analizer",
+      "versionPolicyName": "main",
+      "reviewCategory": "production"
+    },
+    {
       "packageName": "demo",
       "projectFolder": "apps/demo",
       "reviewCategory": "apps"

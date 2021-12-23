@@ -3,6 +3,8 @@ lockfileVersion: 5.3
 specifiers:
   '@size-limit/preset-small-lib': ^7.0.4
   '@types/figlet': ^1.5.4
+  clear: ^0.1.0
+  commander: ^8.3.0
   figlet: ^1.5.2
   husky: ^7.0.4
   picocolors: ^1.0.0
@@ -12,6 +14,8 @@ specifiers:
   typescript: ^4.5.4
 
 dependencies:
+  clear: 0.1.0
+  commander: 8.3.0
   figlet: 1.5.2
   picocolors: 1.0.0
 
@@ -2370,6 +2374,10 @@ packages:
       static-extend: 0.1.2
     dev: true
 
+  /clear/0.1.0:
+    resolution: {integrity: sha512-qMjRnoL+JDPJHeLePZJuao6+8orzHMGP04A8CdwCNsKhRbOnKRjefxONR7bwILT3MHecxKBjHkKL/tkZ8r4Uzw==}
+    dev: false
+
   /cli-cursor/2.1.0:
     resolution: {integrity: sha1-s12sN2R5+sw+lHR9QdDQ9SOP/LU=}
     engines: {node: '>=4'}
@@ -2460,6 +2468,11 @@ packages:
   /commander/2.20.3:
     resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==}
     dev: true
+
+  /commander/8.3.0:
+    resolution: {integrity: sha512-OkTL9umf+He2DZkUq8f8J9of7yL6RJKI24dVITBmNfZBmri9zYZQrKkuXiKhyfPSu8tUhnVBB1iKXevvnlR4Ww==}
+    engines: {node: '>= 12'}
+    dev: false
 
   /commondir/1.0.1:
     resolution: {integrity: sha1-3dgA2gxmEnOTzKWVDqloo6rxJTs=}
