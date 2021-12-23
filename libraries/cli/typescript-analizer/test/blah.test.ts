@@ -1,7 +1,8 @@
-import { sum } from '../src';
+import { expect, test } from "vitest";
+import { analize } from '../src';
 
-describe('blah', () => {
-  it('works', () => {
-    expect(sum(1, 1)).toEqual(2);
-  });
+test('analize core', () => {
+    const result = analize("./../../../core");
+    console.log(result);
+    expect(result).not.null;
 });
