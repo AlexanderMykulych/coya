@@ -30,10 +30,12 @@ const lineTextY = computed(() => {
 const textStyle = ref({
     fontSize: '4px',
 });
+const enableStraitLine = ref(true);
 const path = computed(() => {
     if (
         props.positioning.x1 === props.positioning.x2 ||
-        props.positioning.y1 === props.positioning.y2
+        props.positioning.y1 === props.positioning.y2 ||
+        enableStraitLine.value
     ) {
         return `M${props.positioning.x1},${props.positioning.y1},${props.positioning.x2},${props.positioning.y2}`;
     }
