@@ -5,13 +5,12 @@ import { gsap } from 'gsap';
 import rough from 'roughjs';
 import { RoughSVG } from 'roughjs/bin/svg';
 
-const props =
-    defineProps<{
-        block: Block;
-        positioning: RectPositioning;
-        blockStyle: BlockStyle;
-    }>();
-    
+const props = defineProps<{
+    block: Block;
+    positioning: RectPositioning;
+    blockStyle: BlockStyle;
+}>();
+
 const cssStyle = computed(
     () =>
         ({
@@ -35,13 +34,37 @@ onMounted(() => {
     const enter = props.block.enter;
     if (enter && enter.from && enter.to) {
         runEnter(enter);
+        updateElementPosition();
         watch(
-            () => props.positioning,
+            () => [props.positioning.w, props.positioning.h],
             (pos) => {
                 updateElementPosition();
                 gsap.to(gEl.value, {
                     duration: 0,
-                    attr: { x: pos.x, y: pos.y, width: pos.w, height: pos.h },
+                    attr: {
+                        x: props.positioning.x,
+                        y: props.positioning.y,
+                        width: props.positioning.w,
+                        height: props.positioning.h,
+                    },
+                });
+            },
+            {
+                immediate: true,
+                deep: true,
+            },
+        );
+        watch(
+            () => props.positioning,
+            (pos) => {
+                gsap.to(gEl.value, {
+                    duration: 0,
+                    attr: {
+                        x: props.positioning.x,
+                        y: props.positioning.y,
+                        width: props.positioning.w,
+                        height: props.positioning.h,
+                    },
                 });
             },
             {
@@ -59,9 +82,15 @@ const updateElementPosition = () => {
     if (rect.value) {
         gEl.value!.removeChild(rect.value);
     }
-    rect.value = rc.value.rectangle(5, 5, props.positioning.w - 10, props.positioning.h - 10, cssStyle.value);
+    rect.value = rc.value.rectangle(
+        5,
+        5,
+        props.positioning.w - 10,
+        props.positioning.h - 10,
+        cssStyle.value,
+    );
     gEl.value.insertBefore(rect.value, gEl.value.firstElementChild);
-}
+};
 
 const textStyle = reactive({
     display: 'flex',

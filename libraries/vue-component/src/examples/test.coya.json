@@ -847,304 +847,304 @@
 		"blocks": {
 			"Parser": {
 				"position": {
-					"x": "3540",
-					"y": "90",
+					"x": "7270",
+					"y": "220",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"blockGroupDescriptionsToBlock": {
 				"position": {
-					"x": "257.5",
-					"y": "1090",
+					"x": "562.5",
+					"y": "2260",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"debugTypes": {
 				"position": {
-					"x": "2250",
-					"y": "3340",
+					"x": "4875",
+					"y": "6850",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"descriptionTypes": {
 				"position": {
-					"x": "1482.5",
-					"y": "1590",
+					"x": "3197.5",
+					"y": "3280",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"types": {
 				"position": {
-					"x": "2255",
-					"y": "1840",
+					"x": "4815",
+					"y": "3790",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"index": {
 				"position": {
-					"x": "1397.5",
-					"y": "2090",
+					"x": "2917.5",
+					"y": "4300",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"startPhases": {
 				"position": {
-					"x": "2690",
-					"y": "2340",
+					"x": "5640",
+					"y": "4810",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"executeActions": {
 				"position": {
-					"x": "2690",
-					"y": "2590",
+					"x": "5640",
+					"y": "5320",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"typeGuards": {
 				"position": {
-					"x": "3185",
-					"y": "3340",
+					"x": "6785",
+					"y": "6850",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"actionExecutors": {
 				"position": {
-					"x": "2720",
-					"y": "2840",
+					"x": "5670",
+					"y": "5830",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"addHighlightActionExecutor": {
 				"position": {
-					"x": "1210",
-					"y": "3090",
+					"x": "2340",
+					"y": "6340",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"addNewBlockActionExecutor": {
 				"position": {
-					"x": "1400",
-					"y": "3090",
+					"x": "2790",
+					"y": "6340",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"changeBlockPositionActionExecutor": {
 				"position": {
-					"x": "1660",
-					"y": "3090",
+					"x": "3310",
+					"y": "6340",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"changeLabelActionExecutor": {
 				"position": {
-					"x": "2060",
-					"y": "3090",
+					"x": "4230",
+					"y": "6340",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"connectActionExecutor": {
 				"position": {
-					"x": "2250",
-					"y": "3090",
+					"x": "4680",
+					"y": "6340",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"hideBlocksActionExecutor": {
 				"position": {
-					"x": "2790",
-					"y": "3090",
+					"x": "5740",
+					"y": "6340",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"removeHighlightActionExecutor": {
 				"position": {
-					"x": "2440",
-					"y": "3090",
+					"x": "5130",
+					"y": "6340",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"changeBlockStyleExecutor": {
 				"position": {
-					"x": "1870",
-					"y": "3090",
+					"x": "3780",
+					"y": "6340",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"makeChange": {
 				"position": {
-					"x": "3000",
-					"y": "3090",
+					"x": "6267.5",
+					"y": "6340",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"deepAssign": {
 				"position": {
-					"x": "3707.5",
-					"y": "3340",
+					"x": "7892.5",
+					"y": "6850",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"createBlockElementByString": {
 				"position": {
-					"x": "70",
-					"y": "1340",
+					"x": "210",
+					"y": "2770",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"deepCopy": {
 				"position": {
-					"x": "70",
-					"y": "1590",
+					"x": "200",
+					"y": "3280",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"createLineElementByDescription": {
 				"position": {
-					"x": "352.5",
-					"y": "1340",
+					"x": "817.5",
+					"y": "2770",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"styleDescriptionToArchitectureStyle": {
 				"position": {
-					"x": "755",
-					"y": "340",
+					"x": "1755",
+					"y": "730",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"gridPositioning": {
 				"position": {
-					"x": "1047.5",
-					"y": "590",
+					"x": "2372.5",
+					"y": "1240",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"getFormulaValue": {
 				"position": {
-					"x": "3207.5",
-					"y": "1090",
+					"x": "6612.5",
+					"y": "2260",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"getFormulaValueFuncContext": {
 				"position": {
-					"x": "3325",
-					"y": "1340",
+					"x": "6925",
+					"y": "2770",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"findClosestPoints": {
 				"position": {
-					"x": "3377.5",
-					"y": "1590",
+					"x": "7042.5",
+					"y": "3280",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"lineBlockPosition": {
 				"position": {
-					"x": "910",
-					"y": "840",
+					"x": "1975",
+					"y": "1750",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"prepareCss": {
 				"position": {
-					"x": "660",
-					"y": "1340",
+					"x": "1465",
+					"y": "2770",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"shim_d": {
 				"position": {
-					"x": "650",
-					"y": "1590",
+					"x": "1455",
+					"y": "3280",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"buildPhasesIndex": {
 				"position": {
-					"x": "4770",
-					"y": "1340",
+					"x": "10060",
+					"y": "2770",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"getDebugActions": {
 				"position": {
-					"x": "4290",
-					"y": "590",
+					"x": "9060",
+					"y": "1240",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"isBlockSelected": {
 				"position": {
-					"x": "4160",
-					"y": "1590",
+					"x": "8670",
+					"y": "3280",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"isPhaseSelected": {
 				"position": {
-					"x": "4350",
-					"y": "1590",
+					"x": "9120",
+					"y": "3280",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"isStyleSelected": {
 				"position": {
-					"x": "4540",
-					"y": "1590",
+					"x": "9570",
+					"y": "3280",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"getStylePositionDebugActions": {
 				"position": {
-					"x": "3950",
-					"y": "840",
+					"x": "8200",
+					"y": "1750",
 					"w": "280",
 					"h": "110"
 				}
 			},
 			"colors": {
 				"position": {
-					"x": "3825",
-					"y": "1090",
+					"x": "7945",
+					"y": "2260",
 					"w": "280",
 					"h": "110"
 				}

@@ -85,8 +85,8 @@ function enableZoom(editor: EnabledEditor, zoomElement: SVGGraphicsElement) {
         y: 0
     });
     const scale = ref(1);
-    const minScale = 0.1;
-    const maxScale = 8;
+    const minScale = 0.01;
+    const maxScale = 20;
     const transform = computed(() => `translate(${translate.x} ${translate.y}) scale(${scale.value})`);
 
     const zoom = (event: WheelEvent) => {

@@ -79,7 +79,7 @@ export const indexToCoya = (index: Index) => {
         type: "dagre",
         ranksep: 70,
         controlPoints: true,
-        
+        nodeSize: 300
     });
     // const layoutObj = new layout({
     //     unitRadius: 500,
