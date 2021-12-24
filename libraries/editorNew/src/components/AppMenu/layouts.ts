@@ -9,6 +9,20 @@ const dagreDef = {
     nodesep: 100,
     workerEnabled: true,
 }
+const treeDef = {
+    getHeight: function getHeight() {
+        return 200;
+    },
+    getWidth: function getWidth() {
+        return 500;
+    },
+    getVGap: function getVGap() {
+        return 50;
+    },
+    getHGap: function getHGap() {
+        return 100;
+    },
+}
 export const layouts: LayoutConfig[] = [{
     name: "dagre1",
     type: "Dagre",
@@ -37,6 +51,38 @@ export const layouts: LayoutConfig[] = [{
         }
     }
 }, {
+    name: "CompactBox",
+    type: "CompactBox",
+    config: {
+        layout: {
+            ...treeDef
+        }
+    }
+}, {
+    name: "Dendrogram",
+    type: "Dendrogram",
+    config: {
+        layout: {
+            ...treeDef
+        }
+    }
+}, {
+    name: "Indented",
+    type: "Indented",
+    config: {
+        layout: {
+            ...treeDef
+        }
+    }
+}, {
+    name: "Mindmap",
+    type: "Mindmap",
+    config: {
+        layout: {
+            ...treeDef
+        }
+    }
+}, {
     name: "Random",
     type: "Random",
     config: {
@@ -45,4 +91,4 @@ export const layouts: LayoutConfig[] = [{
             height: 3000,
         }
     }
-}]
+},]

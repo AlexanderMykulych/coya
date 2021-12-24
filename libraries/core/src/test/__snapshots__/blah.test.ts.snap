@@ -1,0 +1,1409 @@
+// Vitest Snapshot v1
+
+exports[`analize core 1`] = `
+Node {
+  "children": [
+    Node {
+      "children": [
+        Node {
+          "children": [],
+          "data": {
+            "children": [],
+            "id": "debugTypes",
+          },
+          "depth": 2,
+          "height": 72,
+          "hgap": 18,
+          "id": "debugTypes",
+          "parent": [Circular],
+          "preH": 0,
+          "preV": 0,
+          "vgap": 18,
+          "width": 54,
+          "x": 63,
+          "y": -558,
+        },
+        Node {
+          "children": [
+            Node {
+              "children": [
+                Node {
+                  "children": [
+                    Node {
+                      "children": [
+                        Node {
+                          "children": [
+                            Node {
+                              "children": [],
+                              "data": {
+                                "children": [],
+                                "id": "typeGuards",
+                              },
+                              "depth": 7,
+                              "height": 72,
+                              "hgap": 18,
+                              "id": "typeGuards",
+                              "parent": [Circular],
+                              "preH": 0,
+                              "preV": 0,
+                              "vgap": 18,
+                              "width": 54,
+                              "x": 333,
+                              "y": -558,
+                            },
+                            Node {
+                              "children": [
+                                Node {
+                                  "children": [],
+                                  "data": {
+                                    "children": [],
+                                    "id": "addHighlightActionExecutor",
+                                  },
+                                  "depth": 8,
+                                  "height": 72,
+                                  "hgap": 18,
+                                  "id": "addHighlightActionExecutor",
+                                  "parent": [Circular],
+                                  "preH": 0,
+                                  "preV": 0,
+                                  "vgap": 18,
+                                  "width": 54,
+                                  "x": 387,
+                                  "y": -558,
+                                },
+                                Node {
+                                  "children": [],
+                                  "data": {
+                                    "children": [],
+                                    "id": "addNewBlockActionExecutor",
+                                  },
+                                  "depth": 8,
+                                  "height": 72,
+                                  "hgap": 18,
+                                  "id": "addNewBlockActionExecutor",
+                                  "parent": [Circular],
+                                  "preH": 0,
+                                  "preV": 0,
+                                  "vgap": 18,
+                                  "width": 54,
+                                  "x": 387,
+                                  "y": -486,
+                                },
+                                Node {
+                                  "children": [],
+                                  "data": {
+                                    "children": [],
+                                    "id": "changeBlockPositionActionExecutor",
+                                  },
+                                  "depth": 8,
+                                  "height": 72,
+                                  "hgap": 18,
+                                  "id": "changeBlockPositionActionExecutor",
+                                  "parent": [Circular],
+                                  "preH": 0,
+                                  "preV": 0,
+                                  "vgap": 18,
+                                  "width": 54,
+                                  "x": 387,
+                                  "y": -414,
+                                },
+                                Node {
+                                  "children": [],
+                                  "data": {
+                                    "children": [],
+                                    "id": "changeLabelActionExecutor",
+                                  },
+                                  "depth": 8,
+                                  "height": 72,
+                                  "hgap": 18,
+                                  "id": "changeLabelActionExecutor",
+                                  "parent": [Circular],
+                                  "preH": 0,
+                                  "preV": 0,
+                                  "vgap": 18,
+                                  "width": 54,
+                                  "x": 387,
+                                  "y": -342,
+                                },
+                                Node {
+                                  "children": [],
+                                  "data": {
+                                    "children": [],
+                                    "id": "connectActionExecutor",
+                                  },
+                                  "depth": 8,
+                                  "height": 72,
+                                  "hgap": 18,
+                                  "id": "connectActionExecutor",
+                                  "parent": [Circular],
+                                  "preH": 0,
+                                  "preV": 0,
+                                  "vgap": 18,
+                                  "width": 54,
+                                  "x": 387,
+                                  "y": -270,
+                                },
+                                Node {
+                                  "children": [],
+                                  "data": {
+                                    "children": [],
+                                    "id": "hideBlocksActionExecutor",
+                                  },
+                                  "depth": 8,
+                                  "height": 72,
+                                  "hgap": 18,
+                                  "id": "hideBlocksActionExecutor",
+                                  "parent": [Circular],
+                                  "preH": 0,
+                                  "preV": 0,
+                                  "vgap": 18,
+                                  "width": 54,
+                                  "x": 387,
+                                  "y": -198,
+                                },
+                                Node {
+                                  "children": [],
+                                  "data": {
+                                    "children": [],
+                                    "id": "removeHighlightActionExecutor",
+                                  },
+                                  "depth": 8,
+                                  "height": 72,
+                                  "hgap": 18,
+                                  "id": "removeHighlightActionExecutor",
+                                  "parent": [Circular],
+                                  "preH": 0,
+                                  "preV": 0,
+                                  "vgap": 18,
+                                  "width": 54,
+                                  "x": 387,
+                                  "y": -126,
+                                },
+                                Node {
+                                  "children": [],
+                                  "data": {
+                                    "children": [],
+                                    "id": "changeBlockStyleExecutor",
+                                  },
+                                  "depth": 8,
+                                  "height": 72,
+                                  "hgap": 18,
+                                  "id": "changeBlockStyleExecutor",
+                                  "parent": [Circular],
+                                  "preH": 0,
+                                  "preV": 0,
+                                  "vgap": 18,
+                                  "width": 54,
+                                  "x": 387,
+                                  "y": -54,
+                                },
+                              ],
+                              "data": {
+                                "children": [
+                                  {
+                                    "children": [],
+                                    "id": "addHighlightActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "addNewBlockActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "changeBlockPositionActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "changeLabelActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "connectActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "hideBlocksActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "removeHighlightActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "changeBlockStyleExecutor",
+                                  },
+                                ],
+                                "id": "actionExecutors",
+                              },
+                              "depth": 7,
+                              "height": 72,
+                              "hgap": 18,
+                              "id": "actionExecutors",
+                              "parent": [Circular],
+                              "preH": 0,
+                              "preV": 0,
+                              "vgap": 18,
+                              "width": 54,
+                              "x": 333,
+                              "y": -306,
+                            },
+                            Node {
+                              "children": [
+                                Node {
+                                  "children": [],
+                                  "data": {
+                                    "children": [],
+                                    "id": "deepAssign",
+                                  },
+                                  "depth": 8,
+                                  "height": 72,
+                                  "hgap": 18,
+                                  "id": "deepAssign",
+                                  "parent": [Circular],
+                                  "preH": 0,
+                                  "preV": 0,
+                                  "vgap": 18,
+                                  "width": 54,
+                                  "x": 387,
+                                  "y": 18,
+                                },
+                              ],
+                              "data": {
+                                "children": [
+                                  {
+                                    "children": [],
+                                    "id": "deepAssign",
+                                  },
+                                ],
+                                "id": "makeChange",
+                              },
+                              "depth": 7,
+                              "height": 72,
+                              "hgap": 18,
+                              "id": "makeChange",
+                              "parent": [Circular],
+                              "preH": 0,
+                              "preV": 0,
+                              "vgap": 18,
+                              "width": 54,
+                              "x": 333,
+                              "y": 18,
+                            },
+                          ],
+                          "data": {
+                            "children": [
+                              {
+                                "children": [],
+                                "id": "typeGuards",
+                              },
+                              {
+                                "children": [
+                                  {
+                                    "children": [],
+                                    "id": "addHighlightActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "addNewBlockActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "changeBlockPositionActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "changeLabelActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "connectActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "hideBlocksActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "removeHighlightActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "changeBlockStyleExecutor",
+                                  },
+                                ],
+                                "id": "actionExecutors",
+                              },
+                              {
+                                "children": [
+                                  {
+                                    "children": [],
+                                    "id": "deepAssign",
+                                  },
+                                ],
+                                "id": "makeChange",
+                              },
+                            ],
+                            "id": "executeActions",
+                          },
+                          "depth": 6,
+                          "height": 72,
+                          "hgap": 18,
+                          "id": "executeActions",
+                          "parent": [Circular],
+                          "preH": 0,
+                          "preV": 0,
+                          "vgap": 18,
+                          "width": 54,
+                          "x": 279,
+                          "y": -270,
+                        },
+                      ],
+                      "data": {
+                        "children": [
+                          {
+                            "children": [
+                              {
+                                "children": [],
+                                "id": "typeGuards",
+                              },
+                              {
+                                "children": [
+                                  {
+                                    "children": [],
+                                    "id": "addHighlightActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "addNewBlockActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "changeBlockPositionActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "changeLabelActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "connectActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "hideBlocksActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "removeHighlightActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "changeBlockStyleExecutor",
+                                  },
+                                ],
+                                "id": "actionExecutors",
+                              },
+                              {
+                                "children": [
+                                  {
+                                    "children": [],
+                                    "id": "deepAssign",
+                                  },
+                                ],
+                                "id": "makeChange",
+                              },
+                            ],
+                            "id": "executeActions",
+                          },
+                        ],
+                        "id": "startPhases",
+                      },
+                      "depth": 5,
+                      "height": 72,
+                      "hgap": 18,
+                      "id": "startPhases",
+                      "parent": [Circular],
+                      "preH": 0,
+                      "preV": 0,
+                      "vgap": 18,
+                      "width": 54,
+                      "x": 225,
+                      "y": -270,
+                    },
+                  ],
+                  "data": {
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "children": [
+                              {
+                                "children": [],
+                                "id": "typeGuards",
+                              },
+                              {
+                                "children": [
+                                  {
+                                    "children": [],
+                                    "id": "addHighlightActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "addNewBlockActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "changeBlockPositionActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "changeLabelActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "connectActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "hideBlocksActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "removeHighlightActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "changeBlockStyleExecutor",
+                                  },
+                                ],
+                                "id": "actionExecutors",
+                              },
+                              {
+                                "children": [
+                                  {
+                                    "children": [],
+                                    "id": "deepAssign",
+                                  },
+                                ],
+                                "id": "makeChange",
+                              },
+                            ],
+                            "id": "executeActions",
+                          },
+                        ],
+                        "id": "startPhases",
+                      },
+                    ],
+                    "id": "index",
+                  },
+                  "depth": 4,
+                  "height": 72,
+                  "hgap": 18,
+                  "id": "index",
+                  "parent": [Circular],
+                  "preH": 0,
+                  "preV": 0,
+                  "vgap": 18,
+                  "width": 54,
+                  "x": 171,
+                  "y": -270,
+                },
+              ],
+              "data": {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "children": [
+                              {
+                                "children": [],
+                                "id": "typeGuards",
+                              },
+                              {
+                                "children": [
+                                  {
+                                    "children": [],
+                                    "id": "addHighlightActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "addNewBlockActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "changeBlockPositionActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "changeLabelActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "connectActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "hideBlocksActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "removeHighlightActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "changeBlockStyleExecutor",
+                                  },
+                                ],
+                                "id": "actionExecutors",
+                              },
+                              {
+                                "children": [
+                                  {
+                                    "children": [],
+                                    "id": "deepAssign",
+                                  },
+                                ],
+                                "id": "makeChange",
+                              },
+                            ],
+                            "id": "executeActions",
+                          },
+                        ],
+                        "id": "startPhases",
+                      },
+                    ],
+                    "id": "index",
+                  },
+                ],
+                "id": "types",
+              },
+              "depth": 3,
+              "height": 72,
+              "hgap": 18,
+              "id": "types",
+              "parent": [Circular],
+              "preH": 0,
+              "preV": 0,
+              "vgap": 18,
+              "width": 54,
+              "x": 117,
+              "y": -270,
+            },
+          ],
+          "data": {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "children": [
+                              {
+                                "children": [],
+                                "id": "typeGuards",
+                              },
+                              {
+                                "children": [
+                                  {
+                                    "children": [],
+                                    "id": "addHighlightActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "addNewBlockActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "changeBlockPositionActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "changeLabelActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "connectActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "hideBlocksActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "removeHighlightActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "changeBlockStyleExecutor",
+                                  },
+                                ],
+                                "id": "actionExecutors",
+                              },
+                              {
+                                "children": [
+                                  {
+                                    "children": [],
+                                    "id": "deepAssign",
+                                  },
+                                ],
+                                "id": "makeChange",
+                              },
+                            ],
+                            "id": "executeActions",
+                          },
+                        ],
+                        "id": "startPhases",
+                      },
+                    ],
+                    "id": "index",
+                  },
+                ],
+                "id": "types",
+              },
+            ],
+            "id": "descriptionTypes",
+          },
+          "depth": 2,
+          "height": 72,
+          "hgap": 18,
+          "id": "descriptionTypes",
+          "parent": [Circular],
+          "preH": 0,
+          "preV": 0,
+          "vgap": 18,
+          "width": 54,
+          "x": 63,
+          "y": -270,
+        },
+        Node {
+          "children": [
+            Node {
+              "children": [],
+              "data": {
+                "children": [],
+                "id": "deepCopy",
+              },
+              "depth": 3,
+              "height": 72,
+              "hgap": 18,
+              "id": "deepCopy",
+              "parent": [Circular],
+              "preH": 0,
+              "preV": 0,
+              "vgap": 18,
+              "width": 54,
+              "x": 117,
+              "y": -198,
+            },
+          ],
+          "data": {
+            "children": [
+              {
+                "children": [],
+                "id": "deepCopy",
+              },
+            ],
+            "id": "createBlockElementByString",
+          },
+          "depth": 2,
+          "height": 72,
+          "hgap": 18,
+          "id": "createBlockElementByString",
+          "parent": [Circular],
+          "preH": 0,
+          "preV": 0,
+          "vgap": 18,
+          "width": 54,
+          "x": 63,
+          "y": -198,
+        },
+        Node {
+          "children": [],
+          "data": {
+            "children": [],
+            "id": "createLineElementByDescription",
+          },
+          "depth": 2,
+          "height": 72,
+          "hgap": 18,
+          "id": "createLineElementByDescription",
+          "parent": [Circular],
+          "preH": 0,
+          "preV": 0,
+          "vgap": 18,
+          "width": 54,
+          "x": 63,
+          "y": -126,
+        },
+      ],
+      "data": {
+        "children": [
+          {
+            "children": [],
+            "id": "debugTypes",
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "children": [
+                              {
+                                "children": [],
+                                "id": "typeGuards",
+                              },
+                              {
+                                "children": [
+                                  {
+                                    "children": [],
+                                    "id": "addHighlightActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "addNewBlockActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "changeBlockPositionActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "changeLabelActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "connectActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "hideBlocksActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "removeHighlightActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "changeBlockStyleExecutor",
+                                  },
+                                ],
+                                "id": "actionExecutors",
+                              },
+                              {
+                                "children": [
+                                  {
+                                    "children": [],
+                                    "id": "deepAssign",
+                                  },
+                                ],
+                                "id": "makeChange",
+                              },
+                            ],
+                            "id": "executeActions",
+                          },
+                        ],
+                        "id": "startPhases",
+                      },
+                    ],
+                    "id": "index",
+                  },
+                ],
+                "id": "types",
+              },
+            ],
+            "id": "descriptionTypes",
+          },
+          {
+            "children": [
+              {
+                "children": [],
+                "id": "deepCopy",
+              },
+            ],
+            "id": "createBlockElementByString",
+          },
+          {
+            "children": [],
+            "id": "createLineElementByDescription",
+          },
+        ],
+        "id": "blockGroupDescriptionsToBlock",
+      },
+      "depth": 1,
+      "height": 72,
+      "hgap": 18,
+      "id": "blockGroupDescriptionsToBlock",
+      "parent": [Circular],
+      "preH": 0,
+      "preV": 0,
+      "vgap": 18,
+      "width": 54,
+      "x": 9,
+      "y": -342,
+    },
+    Node {
+      "children": [
+        Node {
+          "children": [
+            Node {
+              "children": [
+                Node {
+                  "children": [
+                    Node {
+                      "children": [],
+                      "data": {
+                        "children": [],
+                        "id": "findClosestPoints",
+                      },
+                      "depth": 5,
+                      "height": 72,
+                      "hgap": 18,
+                      "id": "findClosestPoints",
+                      "parent": [Circular],
+                      "preH": 0,
+                      "preV": 0,
+                      "vgap": 18,
+                      "width": 54,
+                      "x": 225,
+                      "y": -90,
+                    },
+                  ],
+                  "data": {
+                    "children": [
+                      {
+                        "children": [],
+                        "id": "findClosestPoints",
+                      },
+                    ],
+                    "id": "getFormulaValueFuncContext",
+                  },
+                  "depth": 4,
+                  "height": 72,
+                  "hgap": 18,
+                  "id": "getFormulaValueFuncContext",
+                  "parent": [Circular],
+                  "preH": 0,
+                  "preV": 0,
+                  "vgap": 18,
+                  "width": 54,
+                  "x": 171,
+                  "y": -90,
+                },
+              ],
+              "data": {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "children": [],
+                        "id": "findClosestPoints",
+                      },
+                    ],
+                    "id": "getFormulaValueFuncContext",
+                  },
+                ],
+                "id": "getFormulaValue",
+              },
+              "depth": 3,
+              "height": 72,
+              "hgap": 18,
+              "id": "getFormulaValue",
+              "parent": [Circular],
+              "preH": 0,
+              "preV": 0,
+              "vgap": 18,
+              "width": 54,
+              "x": 117,
+              "y": -90,
+            },
+            Node {
+              "children": [],
+              "data": {
+                "children": [],
+                "id": "lineBlockPosition",
+              },
+              "depth": 3,
+              "height": 72,
+              "hgap": 18,
+              "id": "lineBlockPosition",
+              "parent": [Circular],
+              "preH": 0,
+              "preV": 0,
+              "vgap": 18,
+              "width": 54,
+              "x": 117,
+              "y": -18,
+            },
+          ],
+          "data": {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "children": [],
+                        "id": "findClosestPoints",
+                      },
+                    ],
+                    "id": "getFormulaValueFuncContext",
+                  },
+                ],
+                "id": "getFormulaValue",
+              },
+              {
+                "children": [],
+                "id": "lineBlockPosition",
+              },
+            ],
+            "id": "gridPositioning",
+          },
+          "depth": 2,
+          "height": 72,
+          "hgap": 18,
+          "id": "gridPositioning",
+          "parent": [Circular],
+          "preH": 0,
+          "preV": 0,
+          "vgap": 18,
+          "width": 54,
+          "x": 63,
+          "y": -54,
+        },
+        Node {
+          "children": [
+            Node {
+              "children": [],
+              "data": {
+                "children": [],
+                "id": "shim_d",
+              },
+              "depth": 3,
+              "height": 72,
+              "hgap": 18,
+              "id": "shim_d",
+              "parent": [Circular],
+              "preH": 0,
+              "preV": 0,
+              "vgap": 18,
+              "width": 54,
+              "x": 117,
+              "y": 54,
+            },
+          ],
+          "data": {
+            "children": [
+              {
+                "children": [],
+                "id": "shim_d",
+              },
+            ],
+            "id": "prepareCss",
+          },
+          "depth": 2,
+          "height": 72,
+          "hgap": 18,
+          "id": "prepareCss",
+          "parent": [Circular],
+          "preH": 0,
+          "preV": 0,
+          "vgap": 18,
+          "width": 54,
+          "x": 63,
+          "y": 54,
+        },
+      ],
+      "data": {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "children": [],
+                        "id": "findClosestPoints",
+                      },
+                    ],
+                    "id": "getFormulaValueFuncContext",
+                  },
+                ],
+                "id": "getFormulaValue",
+              },
+              {
+                "children": [],
+                "id": "lineBlockPosition",
+              },
+            ],
+            "id": "gridPositioning",
+          },
+          {
+            "children": [
+              {
+                "children": [],
+                "id": "shim_d",
+              },
+            ],
+            "id": "prepareCss",
+          },
+        ],
+        "id": "styleDescriptionToArchitectureStyle",
+      },
+      "depth": 1,
+      "height": 72,
+      "hgap": 18,
+      "id": "styleDescriptionToArchitectureStyle",
+      "parent": [Circular],
+      "preH": 0,
+      "preV": 0,
+      "vgap": 18,
+      "width": 54,
+      "x": 9,
+      "y": 0,
+    },
+    Node {
+      "children": [],
+      "data": {
+        "children": [],
+        "id": "buildPhasesIndex",
+      },
+      "depth": 1,
+      "height": 72,
+      "hgap": 18,
+      "id": "buildPhasesIndex",
+      "parent": [Circular],
+      "preH": 0,
+      "preV": 0,
+      "vgap": 18,
+      "width": 54,
+      "x": 9,
+      "y": 117,
+    },
+    Node {
+      "children": [
+        Node {
+          "children": [],
+          "data": {
+            "children": [],
+            "id": "isBlockSelected",
+          },
+          "depth": 2,
+          "height": 72,
+          "hgap": 18,
+          "id": "isBlockSelected",
+          "parent": [Circular],
+          "preH": 0,
+          "preV": 0,
+          "vgap": 18,
+          "width": 54,
+          "x": 63,
+          "y": 126,
+        },
+        Node {
+          "children": [],
+          "data": {
+            "children": [],
+            "id": "isPhaseSelected",
+          },
+          "depth": 2,
+          "height": 72,
+          "hgap": 18,
+          "id": "isPhaseSelected",
+          "parent": [Circular],
+          "preH": 0,
+          "preV": 0,
+          "vgap": 18,
+          "width": 54,
+          "x": 63,
+          "y": 198,
+        },
+        Node {
+          "children": [],
+          "data": {
+            "children": [],
+            "id": "isStyleSelected",
+          },
+          "depth": 2,
+          "height": 72,
+          "hgap": 18,
+          "id": "isStyleSelected",
+          "parent": [Circular],
+          "preH": 0,
+          "preV": 0,
+          "vgap": 18,
+          "width": 54,
+          "x": 63,
+          "y": 270,
+        },
+        Node {
+          "children": [
+            Node {
+              "children": [],
+              "data": {
+                "children": [],
+                "id": "colors",
+              },
+              "depth": 3,
+              "height": 72,
+              "hgap": 18,
+              "id": "colors",
+              "parent": [Circular],
+              "preH": 0,
+              "preV": 0,
+              "vgap": 18,
+              "width": 54,
+              "x": 117,
+              "y": 342,
+            },
+          ],
+          "data": {
+            "children": [
+              {
+                "children": [],
+                "id": "colors",
+              },
+            ],
+            "id": "getStylePositionDebugActions",
+          },
+          "depth": 2,
+          "height": 72,
+          "hgap": 18,
+          "id": "getStylePositionDebugActions",
+          "parent": [Circular],
+          "preH": 0,
+          "preV": 0,
+          "vgap": 18,
+          "width": 54,
+          "x": 63,
+          "y": 342,
+        },
+      ],
+      "data": {
+        "children": [
+          {
+            "children": [],
+            "id": "isBlockSelected",
+          },
+          {
+            "children": [],
+            "id": "isPhaseSelected",
+          },
+          {
+            "children": [],
+            "id": "isStyleSelected",
+          },
+          {
+            "children": [
+              {
+                "children": [],
+                "id": "colors",
+              },
+            ],
+            "id": "getStylePositionDebugActions",
+          },
+        ],
+        "id": "getDebugActions",
+      },
+      "depth": 1,
+      "height": 72,
+      "hgap": 18,
+      "id": "getDebugActions",
+      "parent": [Circular],
+      "preH": 0,
+      "preV": 0,
+      "vgap": 18,
+      "width": 54,
+      "x": 9,
+      "y": 234,
+    },
+  ],
+  "data": {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [],
+            "id": "debugTypes",
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "children": [
+                              {
+                                "children": [],
+                                "id": "typeGuards",
+                              },
+                              {
+                                "children": [
+                                  {
+                                    "children": [],
+                                    "id": "addHighlightActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "addNewBlockActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "changeBlockPositionActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "changeLabelActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "connectActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "hideBlocksActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "removeHighlightActionExecutor",
+                                  },
+                                  {
+                                    "children": [],
+                                    "id": "changeBlockStyleExecutor",
+                                  },
+                                ],
+                                "id": "actionExecutors",
+                              },
+                              {
+                                "children": [
+                                  {
+                                    "children": [],
+                                    "id": "deepAssign",
+                                  },
+                                ],
+                                "id": "makeChange",
+                              },
+                            ],
+                            "id": "executeActions",
+                          },
+                        ],
+                        "id": "startPhases",
+                      },
+                    ],
+                    "id": "index",
+                  },
+                ],
+                "id": "types",
+              },
+            ],
+            "id": "descriptionTypes",
+          },
+          {
+            "children": [
+              {
+                "children": [],
+                "id": "deepCopy",
+              },
+            ],
+            "id": "createBlockElementByString",
+          },
+          {
+            "children": [],
+            "id": "createLineElementByDescription",
+          },
+        ],
+        "id": "blockGroupDescriptionsToBlock",
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "children": [],
+                        "id": "findClosestPoints",
+                      },
+                    ],
+                    "id": "getFormulaValueFuncContext",
+                  },
+                ],
+                "id": "getFormulaValue",
+              },
+              {
+                "children": [],
+                "id": "lineBlockPosition",
+              },
+            ],
+            "id": "gridPositioning",
+          },
+          {
+            "children": [
+              {
+                "children": [],
+                "id": "shim_d",
+              },
+            ],
+            "id": "prepareCss",
+          },
+        ],
+        "id": "styleDescriptionToArchitectureStyle",
+      },
+      {
+        "children": [],
+        "id": "buildPhasesIndex",
+      },
+      {
+        "children": [
+          {
+            "children": [],
+            "id": "isBlockSelected",
+          },
+          {
+            "children": [],
+            "id": "isPhaseSelected",
+          },
+          {
+            "children": [],
+            "id": "isStyleSelected",
+          },
+          {
+            "children": [
+              {
+                "children": [],
+                "id": "colors",
+              },
+            ],
+            "id": "getStylePositionDebugActions",
+          },
+        ],
+        "id": "getDebugActions",
+      },
+    ],
+    "id": "Parser",
+  },
+  "depth": 0,
+  "height": 72,
+  "hgap": 18,
+  "id": "Parser",
+  "preH": 0,
+  "preV": 0,
+  "vgap": 18,
+  "width": 54,
+  "x": -45,
+  "y": -54,
+}
+`;

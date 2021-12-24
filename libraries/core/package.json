@@ -19,7 +19,7 @@
         "tsc:watch": "yarn tsc --watch",
         "buildi": "tsc --build",
         "build:watch": "tsdx build",
-        "test": "tsdx test",
+        "test": "vitest",
         "lint": "tsdx lint",
         "prepare": "tsdx build --transpileOnly",
         "version2": "tsdx --version",
@@ -71,9 +71,11 @@
         "husky": "^7.0.4",
         "tsdx": "^0.14.1",
         "tslib": "^2.3.1",
-        "typescript": "^4.4.2"
+        "typescript": "^4.4.2",
+        "vitest": "^0.0.112"
     },
     "dependencies": {
+        "@antv/hierarchy": "^0.6.8",
         "@antv/layout": "^0.1.24",
         "@types/lodash": "^4.14.172",
         "@types/node": "^16.7.1",
@@ -82,6 +84,7 @@
         "lodash": "^4.17.21",
         "rollup-plugin-commonjs": "^10.1.0",
         "stylis": "^4.0.10",
+        "vite": "^2.7.6",
         "vue": "^3.2.23"
     }
 }

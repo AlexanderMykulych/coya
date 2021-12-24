@@ -2,6 +2,7 @@
 import { computed, onMounted, onScopeDispose, ref } from 'vue';
 import { useCurrentEditorState } from '../../core/useCurrentEditorState';
 import { Predef, PredefBlock, PredefCategory } from './../PredefinedSetting/PredefinedSetting';
+import { onWheelHorScroll } from './onWheelHorScroll';
 
 const props = defineProps<{
     preparedPredefs: PredefBlock[];
@@ -11,12 +12,6 @@ const props = defineProps<{
 const { activeNode } = useCurrentEditorState();
 
 const scrollEl = ref<HTMLElement | null>(null);
-const onWheel = (event: WheelEvent) => {
-    scrollEl.value!.scrollBy({
-        left: event.deltaY < 0 ? -30 : 30,
-    });
-};
-
 const activeCategory = ref<string | null>(null);
 const showCategory = ref(false);
 const categories = Object.entries(PredefCategory).map(x => ({
@@ -46,7 +41,7 @@ const applyPredef = (predef: PredefBlock) => {
     <div class="flex flex-nowrap h-full space-x-2 items-center">
         <template v-if="showCategory">
             <div
-                @wheel.stop.prevent="onWheel"
+                @wheel.stop.prevent="onWheelHorScroll"
                 ref="scrollEl"
                 class="
                     pl-5
@@ -90,7 +85,7 @@ const applyPredef = (predef: PredefBlock) => {
                 <i-ph:arrow-square-left-fill />
             </button>
             <div
-                @wheel.stop.prevent="onWheel"
+                @wheel.stop.prevent="onWheelHorScroll"
                 ref="scrollEl"
                 class="
                     flex flex-nowrap

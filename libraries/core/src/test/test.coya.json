@@ -1,0 +1,1078 @@
+{
+	"name": "coya-ts-cli",
+	"blocks": {
+		"Parser": "Parser",
+		"blockGroupDescriptionsToBlock": "blockGroupDescriptionsToBlock",
+		"debugTypes": "debugTypes",
+		"descriptionTypes": "descriptionTypes",
+		"types": "types",
+		"index": "index",
+		"startPhases": "startPhases",
+		"executeActions": "executeActions",
+		"typeGuards": "typeGuards",
+		"actionExecutors": "actionExecutors",
+		"addHighlightActionExecutor": "addHighlightActionExecutor",
+		"addNewBlockActionExecutor": "addNewBlockActionExecutor",
+		"changeBlockPositionActionExecutor": "changeBlockPositionActionExecutor",
+		"changeLabelActionExecutor": "changeLabelActionExecutor",
+		"connectActionExecutor": "connectActionExecutor",
+		"hideBlocksActionExecutor": "hideBlocksActionExecutor",
+		"removeHighlightActionExecutor": "removeHighlightActionExecutor",
+		"changeBlockStyleExecutor": "changeBlockStyleExecutor",
+		"makeChange": "makeChange",
+		"deepAssign": "deepAssign",
+		"createBlockElementByString": "createBlockElementByString",
+		"deepCopy": "deepCopy",
+		"createLineElementByDescription": "createLineElementByDescription",
+		"styleDescriptionToArchitectureStyle": "styleDescriptionToArchitectureStyle",
+		"gridPositioning": "gridPositioning",
+		"getFormulaValue": "getFormulaValue",
+		"getFormulaValueFuncContext": "getFormulaValueFuncContext",
+		"findClosestPoints": "findClosestPoints",
+		"lineBlockPosition": "lineBlockPosition",
+		"prepareCss": "prepareCss",
+		"shim_d": "shim_d",
+		"buildPhasesIndex": "buildPhasesIndex",
+		"getDebugActions": "getDebugActions",
+		"isBlockSelected": "isBlockSelected",
+		"isPhaseSelected": "isPhaseSelected",
+		"isStyleSelected": "isStyleSelected",
+		"getStylePositionDebugActions": "getStylePositionDebugActions",
+		"colors": "colors",
+		"line_0": {
+			"from": "Parser",
+			"to": "blockGroupDescriptionsToBlock",
+			"type": "line",
+			"label": ""
+		},
+		"line_1": {
+			"from": "Parser",
+			"to": "descriptionTypes",
+			"type": "line",
+			"label": ""
+		},
+		"line_2": {
+			"from": "Parser",
+			"to": "typeGuards",
+			"type": "line",
+			"label": ""
+		},
+		"line_3": {
+			"from": "Parser",
+			"to": "types",
+			"type": "line",
+			"label": ""
+		},
+		"line_4": {
+			"from": "Parser",
+			"to": "styleDescriptionToArchitectureStyle",
+			"type": "line",
+			"label": ""
+		},
+		"line_5": {
+			"from": "Parser",
+			"to": "startPhases",
+			"type": "line",
+			"label": ""
+		},
+		"line_6": {
+			"from": "Parser",
+			"to": "buildPhasesIndex",
+			"type": "line",
+			"label": ""
+		},
+		"line_7": {
+			"from": "Parser",
+			"to": "deepCopy",
+			"type": "line",
+			"label": ""
+		},
+		"line_8": {
+			"from": "Parser",
+			"to": "getDebugActions",
+			"type": "line",
+			"label": ""
+		},
+		"line_9": {
+			"from": "Parser",
+			"to": "debugTypes",
+			"type": "line",
+			"label": ""
+		},
+		"line_10": {
+			"from": "blockGroupDescriptionsToBlock",
+			"to": "debugTypes",
+			"type": "line",
+			"label": ""
+		},
+		"line_11": {
+			"from": "blockGroupDescriptionsToBlock",
+			"to": "descriptionTypes",
+			"type": "line",
+			"label": ""
+		},
+		"line_12": {
+			"from": "blockGroupDescriptionsToBlock",
+			"to": "typeGuards",
+			"type": "line",
+			"label": ""
+		},
+		"line_13": {
+			"from": "blockGroupDescriptionsToBlock",
+			"to": "types",
+			"type": "line",
+			"label": ""
+		},
+		"line_14": {
+			"from": "blockGroupDescriptionsToBlock",
+			"to": "createBlockElementByString",
+			"type": "line",
+			"label": ""
+		},
+		"line_15": {
+			"from": "blockGroupDescriptionsToBlock",
+			"to": "createLineElementByDescription",
+			"type": "line",
+			"label": ""
+		},
+		"line_16": {
+			"from": "descriptionTypes",
+			"to": "debugTypes",
+			"type": "line",
+			"label": ""
+		},
+		"line_17": {
+			"from": "descriptionTypes",
+			"to": "types",
+			"type": "line",
+			"label": ""
+		},
+		"line_18": {
+			"from": "types",
+			"to": "index",
+			"type": "line",
+			"label": ""
+		},
+		"line_19": {
+			"from": "types",
+			"to": "debugTypes",
+			"type": "line",
+			"label": ""
+		},
+		"line_20": {
+			"from": "types",
+			"to": "descriptionTypes",
+			"type": "line",
+			"label": ""
+		},
+		"line_21": {
+			"from": "index",
+			"to": "Parser",
+			"type": "line",
+			"label": ""
+		},
+		"line_22": {
+			"from": "index",
+			"to": "startPhases",
+			"type": "line",
+			"label": ""
+		},
+		"line_23": {
+			"from": "startPhases",
+			"to": "descriptionTypes",
+			"type": "line",
+			"label": ""
+		},
+		"line_24": {
+			"from": "startPhases",
+			"to": "types",
+			"type": "line",
+			"label": ""
+		},
+		"line_25": {
+			"from": "startPhases",
+			"to": "executeActions",
+			"type": "line",
+			"label": ""
+		},
+		"line_26": {
+			"from": "executeActions",
+			"to": "descriptionTypes",
+			"type": "line",
+			"label": ""
+		},
+		"line_27": {
+			"from": "executeActions",
+			"to": "typeGuards",
+			"type": "line",
+			"label": ""
+		},
+		"line_28": {
+			"from": "executeActions",
+			"to": "types",
+			"type": "line",
+			"label": ""
+		},
+		"line_29": {
+			"from": "executeActions",
+			"to": "actionExecutors",
+			"type": "line",
+			"label": ""
+		},
+		"line_30": {
+			"from": "executeActions",
+			"to": "makeChange",
+			"type": "line",
+			"label": ""
+		},
+		"line_31": {
+			"from": "typeGuards",
+			"to": "descriptionTypes",
+			"type": "line",
+			"label": ""
+		},
+		"line_32": {
+			"from": "typeGuards",
+			"to": "types",
+			"type": "line",
+			"label": ""
+		},
+		"line_33": {
+			"from": "actionExecutors",
+			"to": "types",
+			"type": "line",
+			"label": ""
+		},
+		"line_34": {
+			"from": "actionExecutors",
+			"to": "addHighlightActionExecutor",
+			"type": "line",
+			"label": ""
+		},
+		"line_35": {
+			"from": "actionExecutors",
+			"to": "addNewBlockActionExecutor",
+			"type": "line",
+			"label": ""
+		},
+		"line_36": {
+			"from": "actionExecutors",
+			"to": "changeBlockPositionActionExecutor",
+			"type": "line",
+			"label": ""
+		},
+		"line_37": {
+			"from": "actionExecutors",
+			"to": "changeLabelActionExecutor",
+			"type": "line",
+			"label": ""
+		},
+		"line_38": {
+			"from": "actionExecutors",
+			"to": "connectActionExecutor",
+			"type": "line",
+			"label": ""
+		},
+		"line_39": {
+			"from": "actionExecutors",
+			"to": "hideBlocksActionExecutor",
+			"type": "line",
+			"label": ""
+		},
+		"line_40": {
+			"from": "actionExecutors",
+			"to": "removeHighlightActionExecutor",
+			"type": "line",
+			"label": ""
+		},
+		"line_41": {
+			"from": "actionExecutors",
+			"to": "changeBlockStyleExecutor",
+			"type": "line",
+			"label": ""
+		},
+		"line_42": {
+			"from": "addHighlightActionExecutor",
+			"to": "descriptionTypes",
+			"type": "line",
+			"label": ""
+		},
+		"line_43": {
+			"from": "addHighlightActionExecutor",
+			"to": "types",
+			"type": "line",
+			"label": ""
+		},
+		"line_44": {
+			"from": "addNewBlockActionExecutor",
+			"to": "index",
+			"type": "line",
+			"label": ""
+		},
+		"line_45": {
+			"from": "addNewBlockActionExecutor",
+			"to": "debugTypes",
+			"type": "line",
+			"label": ""
+		},
+		"line_46": {
+			"from": "addNewBlockActionExecutor",
+			"to": "descriptionTypes",
+			"type": "line",
+			"label": ""
+		},
+		"line_47": {
+			"from": "addNewBlockActionExecutor",
+			"to": "types",
+			"type": "line",
+			"label": ""
+		},
+		"line_48": {
+			"from": "changeBlockPositionActionExecutor",
+			"to": "descriptionTypes",
+			"type": "line",
+			"label": ""
+		},
+		"line_49": {
+			"from": "changeBlockPositionActionExecutor",
+			"to": "types",
+			"type": "line",
+			"label": ""
+		},
+		"line_50": {
+			"from": "changeLabelActionExecutor",
+			"to": "debugTypes",
+			"type": "line",
+			"label": ""
+		},
+		"line_51": {
+			"from": "changeLabelActionExecutor",
+			"to": "descriptionTypes",
+			"type": "line",
+			"label": ""
+		},
+		"line_52": {
+			"from": "changeLabelActionExecutor",
+			"to": "typeGuards",
+			"type": "line",
+			"label": ""
+		},
+		"line_53": {
+			"from": "changeLabelActionExecutor",
+			"to": "types",
+			"type": "line",
+			"label": ""
+		},
+		"line_54": {
+			"from": "connectActionExecutor",
+			"to": "debugTypes",
+			"type": "line",
+			"label": ""
+		},
+		"line_55": {
+			"from": "connectActionExecutor",
+			"to": "descriptionTypes",
+			"type": "line",
+			"label": ""
+		},
+		"line_56": {
+			"from": "connectActionExecutor",
+			"to": "typeGuards",
+			"type": "line",
+			"label": ""
+		},
+		"line_57": {
+			"from": "connectActionExecutor",
+			"to": "types",
+			"type": "line",
+			"label": ""
+		},
+		"line_58": {
+			"from": "hideBlocksActionExecutor",
+			"to": "debugTypes",
+			"type": "line",
+			"label": ""
+		},
+		"line_59": {
+			"from": "hideBlocksActionExecutor",
+			"to": "typeGuards",
+			"type": "line",
+			"label": ""
+		},
+		"line_60": {
+			"from": "hideBlocksActionExecutor",
+			"to": "types",
+			"type": "line",
+			"label": ""
+		},
+		"line_61": {
+			"from": "removeHighlightActionExecutor",
+			"to": "types",
+			"type": "line",
+			"label": ""
+		},
+		"line_62": {
+			"from": "changeBlockStyleExecutor",
+			"to": "descriptionTypes",
+			"type": "line",
+			"label": ""
+		},
+		"line_63": {
+			"from": "changeBlockStyleExecutor",
+			"to": "types",
+			"type": "line",
+			"label": ""
+		},
+		"line_64": {
+			"from": "makeChange",
+			"to": "descriptionTypes",
+			"type": "line",
+			"label": ""
+		},
+		"line_65": {
+			"from": "makeChange",
+			"to": "types",
+			"type": "line",
+			"label": ""
+		},
+		"line_66": {
+			"from": "makeChange",
+			"to": "typeGuards",
+			"type": "line",
+			"label": ""
+		},
+		"line_67": {
+			"from": "makeChange",
+			"to": "types",
+			"type": "line",
+			"label": ""
+		},
+		"line_68": {
+			"from": "makeChange",
+			"to": "deepAssign",
+			"type": "line",
+			"label": ""
+		},
+		"line_69": {
+			"from": "createBlockElementByString",
+			"to": "index",
+			"type": "line",
+			"label": ""
+		},
+		"line_70": {
+			"from": "createBlockElementByString",
+			"to": "descriptionTypes",
+			"type": "line",
+			"label": ""
+		},
+		"line_71": {
+			"from": "createBlockElementByString",
+			"to": "types",
+			"type": "line",
+			"label": ""
+		},
+		"line_72": {
+			"from": "createBlockElementByString",
+			"to": "deepCopy",
+			"type": "line",
+			"label": ""
+		},
+		"line_73": {
+			"from": "createLineElementByDescription",
+			"to": "descriptionTypes",
+			"type": "line",
+			"label": ""
+		},
+		"line_74": {
+			"from": "createLineElementByDescription",
+			"to": "types",
+			"type": "line",
+			"label": ""
+		},
+		"line_75": {
+			"from": "styleDescriptionToArchitectureStyle",
+			"to": "descriptionTypes",
+			"type": "line",
+			"label": ""
+		},
+		"line_76": {
+			"from": "styleDescriptionToArchitectureStyle",
+			"to": "types",
+			"type": "line",
+			"label": ""
+		},
+		"line_77": {
+			"from": "styleDescriptionToArchitectureStyle",
+			"to": "gridPositioning",
+			"type": "line",
+			"label": ""
+		},
+		"line_78": {
+			"from": "styleDescriptionToArchitectureStyle",
+			"to": "deepCopy",
+			"type": "line",
+			"label": ""
+		},
+		"line_79": {
+			"from": "styleDescriptionToArchitectureStyle",
+			"to": "prepareCss",
+			"type": "line",
+			"label": ""
+		},
+		"line_80": {
+			"from": "styleDescriptionToArchitectureStyle",
+			"to": "deepAssign",
+			"type": "line",
+			"label": ""
+		},
+		"line_81": {
+			"from": "gridPositioning",
+			"to": "descriptionTypes",
+			"type": "line",
+			"label": ""
+		},
+		"line_82": {
+			"from": "gridPositioning",
+			"to": "typeGuards",
+			"type": "line",
+			"label": ""
+		},
+		"line_83": {
+			"from": "gridPositioning",
+			"to": "types",
+			"type": "line",
+			"label": ""
+		},
+		"line_84": {
+			"from": "gridPositioning",
+			"to": "getFormulaValue",
+			"type": "line",
+			"label": ""
+		},
+		"line_85": {
+			"from": "gridPositioning",
+			"to": "lineBlockPosition",
+			"type": "line",
+			"label": ""
+		},
+		"line_86": {
+			"from": "gridPositioning",
+			"to": "types",
+			"type": "line",
+			"label": ""
+		},
+		"line_87": {
+			"from": "getFormulaValue",
+			"to": "index",
+			"type": "line",
+			"label": ""
+		},
+		"line_88": {
+			"from": "getFormulaValue",
+			"to": "descriptionTypes",
+			"type": "line",
+			"label": ""
+		},
+		"line_89": {
+			"from": "getFormulaValue",
+			"to": "typeGuards",
+			"type": "line",
+			"label": ""
+		},
+		"line_90": {
+			"from": "getFormulaValue",
+			"to": "types",
+			"type": "line",
+			"label": ""
+		},
+		"line_91": {
+			"from": "getFormulaValue",
+			"to": "getFormulaValueFuncContext",
+			"type": "line",
+			"label": ""
+		},
+		"line_92": {
+			"from": "getFormulaValueFuncContext",
+			"to": "index",
+			"type": "line",
+			"label": ""
+		},
+		"line_93": {
+			"from": "getFormulaValueFuncContext",
+			"to": "types",
+			"type": "line",
+			"label": ""
+		},
+		"line_94": {
+			"from": "getFormulaValueFuncContext",
+			"to": "findClosestPoints",
+			"type": "line",
+			"label": ""
+		},
+		"line_95": {
+			"from": "findClosestPoints",
+			"to": "types",
+			"type": "line",
+			"label": ""
+		},
+		"line_96": {
+			"from": "lineBlockPosition",
+			"to": "types",
+			"type": "line",
+			"label": ""
+		},
+		"line_97": {
+			"from": "lineBlockPosition",
+			"to": "descriptionTypes",
+			"type": "line",
+			"label": ""
+		},
+		"line_98": {
+			"from": "lineBlockPosition",
+			"to": "getFormulaValue",
+			"type": "line",
+			"label": ""
+		},
+		"line_99": {
+			"from": "lineBlockPosition",
+			"to": "index",
+			"type": "line",
+			"label": ""
+		},
+		"line_100": {
+			"from": "prepareCss",
+			"to": "descriptionTypes",
+			"type": "line",
+			"label": ""
+		},
+		"line_101": {
+			"from": "prepareCss",
+			"to": "shim_d",
+			"type": "line",
+			"label": ""
+		},
+		"line_102": {
+			"from": "buildPhasesIndex",
+			"to": "descriptionTypes",
+			"type": "line",
+			"label": ""
+		},
+		"line_103": {
+			"from": "buildPhasesIndex",
+			"to": "typeGuards",
+			"type": "line",
+			"label": ""
+		},
+		"line_104": {
+			"from": "buildPhasesIndex",
+			"to": "types",
+			"type": "line",
+			"label": ""
+		},
+		"line_105": {
+			"from": "getDebugActions",
+			"to": "debugTypes",
+			"type": "line",
+			"label": ""
+		},
+		"line_106": {
+			"from": "getDebugActions",
+			"to": "actionExecutors",
+			"type": "line",
+			"label": ""
+		},
+		"line_107": {
+			"from": "getDebugActions",
+			"to": "typeGuards",
+			"type": "line",
+			"label": ""
+		},
+		"line_108": {
+			"from": "getDebugActions",
+			"to": "types",
+			"type": "line",
+			"label": ""
+		},
+		"line_109": {
+			"from": "getDebugActions",
+			"to": "isBlockSelected",
+			"type": "line",
+			"label": ""
+		},
+		"line_110": {
+			"from": "getDebugActions",
+			"to": "isPhaseSelected",
+			"type": "line",
+			"label": ""
+		},
+		"line_111": {
+			"from": "getDebugActions",
+			"to": "isStyleSelected",
+			"type": "line",
+			"label": ""
+		},
+		"line_112": {
+			"from": "getDebugActions",
+			"to": "getStylePositionDebugActions",
+			"type": "line",
+			"label": ""
+		},
+		"line_113": {
+			"from": "isBlockSelected",
+			"to": "types",
+			"type": "line",
+			"label": ""
+		},
+		"line_114": {
+			"from": "isPhaseSelected",
+			"to": "types",
+			"type": "line",
+			"label": ""
+		},
+		"line_115": {
+			"from": "isStyleSelected",
+			"to": "types",
+			"type": "line",
+			"label": ""
+		},
+		"line_116": {
+			"from": "getStylePositionDebugActions",
+			"to": "debugTypes",
+			"type": "line",
+			"label": ""
+		},
+		"line_117": {
+			"from": "getStylePositionDebugActions",
+			"to": "descriptionTypes",
+			"type": "line",
+			"label": ""
+		},
+		"line_118": {
+			"from": "getStylePositionDebugActions",
+			"to": "getFormulaValue",
+			"type": "line",
+			"label": ""
+		},
+		"line_119": {
+			"from": "getStylePositionDebugActions",
+			"to": "types",
+			"type": "line",
+			"label": ""
+		},
+		"line_120": {
+			"from": "getStylePositionDebugActions",
+			"to": "colors",
+			"type": "line",
+			"label": ""
+		}
+	},
+	"phases": [],
+	"style": {
+		"blocks": {
+			"Parser": {
+				"position": {
+					"x": "7270",
+					"y": "220",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"blockGroupDescriptionsToBlock": {
+				"position": {
+					"x": "562.5",
+					"y": "2260",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"debugTypes": {
+				"position": {
+					"x": "4875",
+					"y": "6850",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"descriptionTypes": {
+				"position": {
+					"x": "3197.5",
+					"y": "3280",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"types": {
+				"position": {
+					"x": "4815",
+					"y": "3790",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"index": {
+				"position": {
+					"x": "2917.5",
+					"y": "4300",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"startPhases": {
+				"position": {
+					"x": "5640",
+					"y": "4810",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"executeActions": {
+				"position": {
+					"x": "5640",
+					"y": "5320",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"typeGuards": {
+				"position": {
+					"x": "6785",
+					"y": "6850",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"actionExecutors": {
+				"position": {
+					"x": "5670",
+					"y": "5830",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"addHighlightActionExecutor": {
+				"position": {
+					"x": "2340",
+					"y": "6340",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"addNewBlockActionExecutor": {
+				"position": {
+					"x": "2790",
+					"y": "6340",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"changeBlockPositionActionExecutor": {
+				"position": {
+					"x": "3310",
+					"y": "6340",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"changeLabelActionExecutor": {
+				"position": {
+					"x": "4230",
+					"y": "6340",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"connectActionExecutor": {
+				"position": {
+					"x": "4680",
+					"y": "6340",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"hideBlocksActionExecutor": {
+				"position": {
+					"x": "5740",
+					"y": "6340",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"removeHighlightActionExecutor": {
+				"position": {
+					"x": "5130",
+					"y": "6340",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"changeBlockStyleExecutor": {
+				"position": {
+					"x": "3780",
+					"y": "6340",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"makeChange": {
+				"position": {
+					"x": "6267.5",
+					"y": "6340",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"deepAssign": {
+				"position": {
+					"x": "7892.5",
+					"y": "6850",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"createBlockElementByString": {
+				"position": {
+					"x": "210",
+					"y": "2770",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"deepCopy": {
+				"position": {
+					"x": "200",
+					"y": "3280",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"createLineElementByDescription": {
+				"position": {
+					"x": "817.5",
+					"y": "2770",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"styleDescriptionToArchitectureStyle": {
+				"position": {
+					"x": "1755",
+					"y": "730",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"gridPositioning": {
+				"position": {
+					"x": "2372.5",
+					"y": "1240",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"getFormulaValue": {
+				"position": {
+					"x": "6612.5",
+					"y": "2260",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"getFormulaValueFuncContext": {
+				"position": {
+					"x": "6925",
+					"y": "2770",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"findClosestPoints": {
+				"position": {
+					"x": "7042.5",
+					"y": "3280",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"lineBlockPosition": {
+				"position": {
+					"x": "1975",
+					"y": "1750",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"prepareCss": {
+				"position": {
+					"x": "1465",
+					"y": "2770",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"shim_d": {
+				"position": {
+					"x": "1455",
+					"y": "3280",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"buildPhasesIndex": {
+				"position": {
+					"x": "10060",
+					"y": "2770",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"getDebugActions": {
+				"position": {
+					"x": "9060",
+					"y": "1240",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"isBlockSelected": {
+				"position": {
+					"x": "8670",
+					"y": "3280",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"isPhaseSelected": {
+				"position": {
+					"x": "9120",
+					"y": "3280",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"isStyleSelected": {
+				"position": {
+					"x": "9570",
+					"y": "3280",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"getStylePositionDebugActions": {
+				"position": {
+					"x": "8200",
+					"y": "1750",
+					"w": "280",
+					"h": "110"
+				}
+			},
+			"colors": {
+				"position": {
+					"x": "7945",
+					"y": "2260",
+					"w": "280",
+					"h": "110"
+				}
+			}
+		}
+	}
+}
