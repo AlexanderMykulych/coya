@@ -3,10 +3,12 @@ import { CurrentEditorState, Editor, getCurrentEditor, MakeChangeAction } from "
 import { Action, isArray, isNotNullOrUndefined, isNullOrUndefined } from "coya-core";
 import { executeActions } from "coya-core";
 import { ArchitectureDescription } from "coya-core";
+import { applyPositioning } from "coya-core";
 import { renameBlock } from "./renameBlock";
 import { debounce } from "debounce";
 import { prepareNum } from "./prepareNum";
 import { reconnectArrow } from "./reconnectArrow";
+import { LayoutConfig } from "../components/AppMenu/layouts";
 
 export function useCurrentEditorState(): CurrentEditorState {
     const editor = getCurrentEditor();
@@ -184,6 +186,10 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                 set: (val: boolean) => editor.showDebugWindow = val,
             }),
             zoomState: computed(() => editor.zoomState),
+            applyPositioning: (layout: LayoutConfig) => {
+                applyPositioning(editor.config, layout.type, layout.config);
+                editor.initialConfig.style = JSON.parse(JSON.stringify(editor.config.style))
+            }
         };
     }
     throw "no editor state";

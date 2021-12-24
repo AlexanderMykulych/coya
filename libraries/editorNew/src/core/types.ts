@@ -1,6 +1,7 @@
-import { Action, ActionSetting, ActionType, Architecture, PhaseAction, RectPositioning } from "coya-core";
+import { Action, ActionSetting, ActionType, applyPositioning, Architecture, PhaseAction, RectPositioning } from "coya-core";
 import { ArchitectureDescription, Change } from "coya-core";
 import { Component, ComputedRef, Ref } from "vue";
+import { LayoutConfig } from "../components/AppMenu/layouts";
 
 export interface BaseEditor {
     enable: boolean;
@@ -131,6 +132,7 @@ export interface CurrentEditorState {
     selectedNode: Ref<string | undefined>;
     showDebugWindow: Ref<boolean>;
     zoomState: ComputedRef<any>;
+    applyPositioning: (layout: LayoutConfig) => void;
 }
 
 export enum PinType {

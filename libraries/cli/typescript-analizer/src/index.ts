@@ -99,9 +99,11 @@ export const indexToCoya = (index: Index) => {
 export const indexToG6 = (index: Index): Model => {
     return {
         nodes: Object.entries(index)
-            .map(([name]) => ({
+            .map(([name], index) => ({
                 id: name,
                 name,
+                x: index === 0 ? 100 : undefined,
+                y: index === 0 ? 100 : undefined,
             })),
         edges: Object.entries(index)
             .flatMap<Edge | null>(([name, b]) => b.children.map(child => !!index[child] ? ({
@@ -117,9 +119,7 @@ export const g6ToCoya = (graph: ReturnType<typeof indexToG6>) => {
         [
             ...graph
                 .nodes!
-                .map(x => [x.id, {
-                    label: x.name
-                }]),
+                .map(x => [x.id, x.name]),
             ...graph
                 .edges!
                 .map((x, index) => [`line_${index}`, {

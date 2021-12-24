@@ -7,6 +7,7 @@ export * from "./phase/makeChange";
 export * from "./phase/executeActions";
 export * from "./phase/actionExecutors";
 export * from "./util/deepAssign";
+export * from "./positioning/g6/positioning";
 export {
     transformDescriptionToArchitecture,
     transformToArchitecture,

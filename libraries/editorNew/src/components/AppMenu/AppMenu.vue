@@ -2,11 +2,15 @@
 import { ref, reactive, computed } from 'vue';
 import { useCurrentEditorState } from '../../core/useCurrentEditorState';
 import {EditorMode} from "../../core/types";
+import { LayoutConfig, layouts } from './layouts';
 
-const { selectedNode, showDebugWindow, state } = useCurrentEditorState();
+const openLayouts = ref(false);
+
+const { selectedNode, showDebugWindow, state, applyPositioning } = useCurrentEditorState();
 const selectDefaultNode = () => (selectedNode.value = '_');
 const selectDefaultArrowNode = () => (selectedNode.value = '->');
 const toggleDebug = () => (showDebugWindow.value = !showDebugWindow.value);
+const selectLayout = (layout: LayoutConfig) => applyPositioning(layout);
 </script>
 
 <template>
@@ -15,7 +19,10 @@ const toggleDebug = () => (showDebugWindow.value = !showDebugWindow.value);
             <i-mdi:arrow-top-left-thin v-if="state.mode === EditorMode.Arrow"/>
             <i-tabler:hand-finger v-else/>
         </div>
-        <div>
+        <div v-if="!openLayouts">
+            <button class="border-2" @click="openLayouts = true">
+                <i-mdi:graph class="pb-1" />
+            </button>
             <button class="border-2" @click="selectDefaultNode">
                 <i-ls:underscore class="pb-1" />
             </button>
@@ -24,6 +31,14 @@ const toggleDebug = () => (showDebugWindow.value = !showDebugWindow.value);
             </button>
             <button class="border-2" @click="toggleDebug">
                 <i-codicon:debug class="p-0.6" />
+            </button>
+        </div>
+        <div v-else class="flex flex-row justify-between ">
+            <button
+                v-for="layout in layouts"
+                @click="selectLayout(layout)"
+                class="w-20 border-2 mr-3">
+                {{layout.name}}
             </button>
         </div>
     </div>

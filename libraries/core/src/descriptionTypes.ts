@@ -139,8 +139,9 @@ export interface StyleDescription {
 }
 
 export enum PositioningSystem {
-    Auto = "auto",
-    Grid = "grid"
+    Default = "def",
+    Grid = "grid",
+    Dagre = "grid",
 }
 export interface ArchitectureDescription {
     name: string;

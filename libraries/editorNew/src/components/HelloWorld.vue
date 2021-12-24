@@ -27,6 +27,21 @@ const config = ref({
         start2: {
             label: 'app = Vue.createApp(options); app.mount(el)',
         },
+        start3: {
+            label: 'app = Vue.createApp(options); app.mount(el)',
+        },
+        line: {
+            from: "start",
+            to: "start2",
+            type: "line",
+            label: "",
+        },
+        line2: {
+            from: "start",
+            to: "start3",
+            type: "line",
+            label: "",
+        }
     },
     phases: [
         {
@@ -147,6 +162,17 @@ const config = ref({
                     fill: '#9257fa',
                 },
             },
+            start3: {
+                position: {
+                    x: 300,
+                    y: 100,
+                    w: 100,
+                    h: 60,
+                },
+                css: {
+                    fill: '#9257fa',
+                },
+            },
             init: {
                 position: {
                     x: 'start.x',
@@ -239,6 +265,9 @@ const block = {
 const block2 = {
     id: 'start2',
 };
+const block3 = {
+    id: 'start3',
+};
 </script>
 
 <template>
@@ -299,6 +328,12 @@ const block2 = {
                     :positioning="config.style.blocks.start2.position"
                     :style="config.style.blocks.start2.css"
                     :block="block2"
+                />
+                <testComponent
+                    v-if="testComponent"
+                    :positioning="config.style.blocks.start3.position"
+                    :style="config.style.blocks.start3.css"
+                    :block="block3"
                 />
             </g>
         </svg>

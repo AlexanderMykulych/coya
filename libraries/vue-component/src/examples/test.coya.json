@@ -1,120 +1,44 @@
 {
 	"name": "coya-ts-cli",
 	"blocks": {
-		"Parser": {
-			"label": "Parser"
-		},
-		"blockGroupDescriptionsToBlock": {
-			"label": "blockGroupDescriptionsToBlock"
-		},
-		"debugTypes": {
-			"label": "debugTypes"
-		},
-		"descriptionTypes": {
-			"label": "descriptionTypes"
-		},
-		"types": {
-			"label": "types"
-		},
-		"index": {
-			"label": "index"
-		},
-		"startPhases": {
-			"label": "startPhases"
-		},
-		"executeActions": {
-			"label": "executeActions"
-		},
-		"typeGuards": {
-			"label": "typeGuards"
-		},
-		"actionExecutors": {
-			"label": "actionExecutors"
-		},
-		"addHighlightActionExecutor": {
-			"label": "addHighlightActionExecutor"
-		},
-		"addNewBlockActionExecutor": {
-			"label": "addNewBlockActionExecutor"
-		},
-		"changeBlockPositionActionExecutor": {
-			"label": "changeBlockPositionActionExecutor"
-		},
-		"changeLabelActionExecutor": {
-			"label": "changeLabelActionExecutor"
-		},
-		"connectActionExecutor": {
-			"label": "connectActionExecutor"
-		},
-		"hideBlocksActionExecutor": {
-			"label": "hideBlocksActionExecutor"
-		},
-		"removeHighlightActionExecutor": {
-			"label": "removeHighlightActionExecutor"
-		},
-		"changeBlockStyleExecutor": {
-			"label": "changeBlockStyleExecutor"
-		},
-		"makeChange": {
-			"label": "makeChange"
-		},
-		"deepAssign": {
-			"label": "deepAssign"
-		},
-		"createBlockElementByString": {
-			"label": "createBlockElementByString"
-		},
-		"deepCopy": {
-			"label": "deepCopy"
-		},
-		"createLineElementByDescription": {
-			"label": "createLineElementByDescription"
-		},
-		"styleDescriptionToArchitectureStyle": {
-			"label": "styleDescriptionToArchitectureStyle"
-		},
-		"gridPositioning": {
-			"label": "gridPositioning"
-		},
-		"getFormulaValue": {
-			"label": "getFormulaValue"
-		},
-		"getFormulaValueFuncContext": {
-			"label": "getFormulaValueFuncContext"
-		},
-		"findClosestPoints": {
-			"label": "findClosestPoints"
-		},
-		"lineBlockPosition": {
-			"label": "lineBlockPosition"
-		},
-		"prepareCss": {
-			"label": "prepareCss"
-		},
-		"shim_d": {
-			"label": "shim_d"
-		},
-		"buildPhasesIndex": {
-			"label": "buildPhasesIndex"
-		},
-		"getDebugActions": {
-			"label": "getDebugActions"
-		},
-		"isBlockSelected": {
-			"label": "isBlockSelected"
-		},
-		"isPhaseSelected": {
-			"label": "isPhaseSelected"
-		},
-		"isStyleSelected": {
-			"label": "isStyleSelected"
-		},
-		"getStylePositionDebugActions": {
-			"label": "getStylePositionDebugActions"
-		},
-		"colors": {
-			"label": "colors"
-		},
+		"Parser": "Parser",
+		"blockGroupDescriptionsToBlock": "blockGroupDescriptionsToBlock",
+		"debugTypes": "debugTypes",
+		"descriptionTypes": "descriptionTypes",
+		"types": "types",
+		"index": "index",
+		"startPhases": "startPhases",
+		"executeActions": "executeActions",
+		"typeGuards": "typeGuards",
+		"actionExecutors": "actionExecutors",
+		"addHighlightActionExecutor": "addHighlightActionExecutor",
+		"addNewBlockActionExecutor": "addNewBlockActionExecutor",
+		"changeBlockPositionActionExecutor": "changeBlockPositionActionExecutor",
+		"changeLabelActionExecutor": "changeLabelActionExecutor",
+		"connectActionExecutor": "connectActionExecutor",
+		"hideBlocksActionExecutor": "hideBlocksActionExecutor",
+		"removeHighlightActionExecutor": "removeHighlightActionExecutor",
+		"changeBlockStyleExecutor": "changeBlockStyleExecutor",
+		"makeChange": "makeChange",
+		"deepAssign": "deepAssign",
+		"createBlockElementByString": "createBlockElementByString",
+		"deepCopy": "deepCopy",
+		"createLineElementByDescription": "createLineElementByDescription",
+		"styleDescriptionToArchitectureStyle": "styleDescriptionToArchitectureStyle",
+		"gridPositioning": "gridPositioning",
+		"getFormulaValue": "getFormulaValue",
+		"getFormulaValueFuncContext": "getFormulaValueFuncContext",
+		"findClosestPoints": "findClosestPoints",
+		"lineBlockPosition": "lineBlockPosition",
+		"prepareCss": "prepareCss",
+		"shim_d": "shim_d",
+		"buildPhasesIndex": "buildPhasesIndex",
+		"getDebugActions": "getDebugActions",
+		"isBlockSelected": "isBlockSelected",
+		"isPhaseSelected": "isPhaseSelected",
+		"isStyleSelected": "isStyleSelected",
+		"getStylePositionDebugActions": "getStylePositionDebugActions",
+		"colors": "colors",
 		"line_0": {
 			"from": "Parser",
 			"to": "blockGroupDescriptionsToBlock",

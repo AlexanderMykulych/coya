@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import path from "path";
 import { computed, ref } from "vue";
 const modulesTs = Object.entries(import.meta.globEager('./examples/*.coya.ts'));
 const modulesJs = Object.entries(import.meta.globEager('./examples/*.coya.json'));

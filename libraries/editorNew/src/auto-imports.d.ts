@@ -27,6 +27,7 @@ declare module 'vue' {
     'IMdi:chevronDoubleDown': typeof import('~icons/mdi/chevron-double-down')['default']
     'IMdi:chevronDoubleUp': typeof import('~icons/mdi/chevron-double-up')['default']
     'IMdi:familyTree': typeof import('~icons/mdi/family-tree')['default']
+    'IMdi:graph': typeof import('~icons/mdi/graph')['default']
     'IMdi:pageFirst': typeof import('~icons/mdi/page-first')['default']
     'IMdi:pageLast': typeof import('~icons/mdi/page-last')['default']
     'IMdi:playBox': typeof import('~icons/mdi/play-box')['default']
