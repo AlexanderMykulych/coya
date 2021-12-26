@@ -5,6 +5,7 @@ specifiers:
   '@headlessui/vue': ^1.4.0
   '@iconify/json': ^1.1.406
   '@types/node': ^16.7.1
+  '@types/prismjs': ^1.16.6
   '@types/ws': ^8.2.0
   '@typescript-eslint/eslint-plugin': ^4.29.3
   '@vitejs/plugin-vue': ^1.10.1
@@ -17,6 +18,7 @@ specifiers:
   eslint: ^8.3.0
   gsap: latest
   pnpm: ^6.23.2
+  prismjs: ^1.25.0
   rollup-plugin-svg: ^2.0.0
   roughjs: ^4.5.2
   typescript: ^4.4.2
@@ -40,6 +42,7 @@ dependencies:
   coya-editor-new: 0.9.18_fb6292b47fe9c67e26b404bea724bbe1
   drauu: 0.1.0
   gsap: 3.9.0
+  prismjs: 1.25.0
   rollup-plugin-svg: 2.0.0
   roughjs: 4.5.2
   vue: 3.2.26
@@ -52,6 +55,7 @@ devDependencies:
   '@antfu/eslint-config': 0.11.1_eslint@8.5.0+typescript@4.5.4
   '@iconify/json': 1.1.444
   '@types/node': 16.11.14
+  '@types/prismjs': 1.16.6
   '@typescript-eslint/eslint-plugin': 4.33.0_eslint@8.5.0+typescript@4.5.4
   '@vitejs/plugin-vue': 1.10.2_vite@2.7.3
   '@vue/compiler-sfc': 3.2.26
@@ -902,6 +906,10 @@ packages:
   /@types/prettier/2.4.2:
     resolution: {integrity: sha512-ekoj4qOQYp7CvjX8ZDBgN86w3MqQhLE1hczEJbEIjgFEumDy+na/4AJAbLXfgEWFNB2pKadM5rPFtuSGMWK7xA==}
     dev: false
+
+  /@types/prismjs/1.16.6:
+    resolution: {integrity: sha512-dTvnamRITNqNkqhlBd235kZl3KfVJQQoT5jkXeiWSBK7i4/TLKBNLV0S1wOt8gy4E2TY722KLtdmv2xc6+Wevg==}
+    dev: true
 
   /@types/stack-utils/2.0.1:
     resolution: {integrity: sha512-Hl219/BT5fLAaz6NDkSuhzasy49dwQS/DSdu4MdggFB8zcXv7vflBI3xp7FEmkmdDkBUI2bPUNeMttp2knYdxw==}
@@ -4308,6 +4316,10 @@ packages:
       ansi-regex: 5.0.1
       ansi-styles: 5.2.0
       react-is: 17.0.2
+    dev: false
+
+  /prismjs/1.25.0:
+    resolution: {integrity: sha512-WCjJHl1KEWbnkQom1+SzftbtXMKQoezOCYs5rECqMN+jP+apI7ftoflyqigqzopSO3hMhTEb0mFClA8lkolgEg==}
     dev: false
 
   /progress/2.0.3:

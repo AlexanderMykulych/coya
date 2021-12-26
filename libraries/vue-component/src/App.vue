@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
+import { AssetConfigs } from './logic/useAssets';
 const modulesTs = Object.entries(import.meta.globEager('./examples/*.coya.ts'));
 const modulesJs = Object.entries(
     import.meta.globEager('./examples/*.coya.json'),
 );
-const assetsDir = "./examples/assets/";
-const assets = Object.entries(import.meta.globEager(`./examples/assets/*`));
+const baseUrl = "./examples";
 const examples = [
     ...modulesTs.map(([key, value]) => ({
         label: value.default.name,
@@ -18,12 +18,20 @@ const examples = [
         id: key.split('/').reverse()[0],
     })),
 ];
-const loadedAssets = assets.map(([name, module]) => {
-    return { name: name.slice(assetsDir.length), href: new URL(module.default, import.meta.url).href };
-});
-const currentExampleIndex = ref(examples.length - 1);
+const currentExampleIndex = ref(examples.length - 3);
 
 const config = computed(() => examples[currentExampleIndex.value]);
+
+
+const assetsDir = "./examples/assets/";
+const modules = import.meta.glob('./examples/assets/*')
+const assets: AssetConfigs = [];
+for (const path in modules) {
+  assets.push({
+      load: () => import(`${path}?raw`),
+      name: path.slice(assetsDir.length),
+  });
+}
 </script>
 <template>
     <main class="text-center text-gray-700 dark:text-gray-200 bg-white h-full">
@@ -31,7 +39,7 @@ const config = computed(() => examples[currentExampleIndex.value]);
             class="row-span-11"
             :config="config.value"
             :id="config.id"
-            :assets="loadedAssets"
+            :assets="assets"
         />
     </main>
 </template>

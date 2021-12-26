@@ -1,0 +1,35 @@
+{
+    "name": "vue-lifecycle-json",
+    "blocks": {
+        "start": "code"
+    },
+    "phases": [
+    ],
+    "style": {
+        "blocks": {
+            "_": {
+                "css": {
+                    "color": "black",
+                    "fill": "#FF89CF",
+                    "fontSize": "2.1em",
+                    "rx": "25",
+                    "stroke": "black"
+                }
+            },
+            "->": {
+                "css": {
+                    "fill": "none"
+                }
+            },
+            "start": {
+                "position": {
+                    "x": "400",
+                    "y": "100",
+                    "w": "953",
+                    "h": "600"
+                },
+                "code": "libEntry.ts"
+            }
+        }
+    }
+}

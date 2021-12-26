@@ -68,7 +68,7 @@ export default defineConfig({
             '@vueuse/core'
         ],
         exclude: [
-            'vue-demi',
+            'vue-demi'
         ],
     },
     build: {

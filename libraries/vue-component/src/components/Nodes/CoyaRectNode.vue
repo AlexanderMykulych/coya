@@ -5,6 +5,7 @@ import { gsap } from 'gsap';
 import rough from 'roughjs';
 import { RoughSVG } from 'roughjs/bin/svg';
 import { getImageUrl, useAssets } from '../../logic/useAssets';
+import Prism from 'prismjs';
 
 const props = defineProps<{
     block: Block;
@@ -12,12 +13,24 @@ const props = defineProps<{
     blockStyle: BlockStyle;
 }>();
 
-const {getUrl} = useAssets();
-const imgUrl = getUrl(props.blockStyle?.img);
+const {getContent} = useAssets();
+const imgUrl = asyncComputed(async () => await getContent(props.blockStyle?.img));
+
+const isCode = computed(() => !!props.blockStyle?.code);
+
+const codeHtml = asyncComputed(async () => {
+    if (isCode.value) {
+        const code = await getContent(props.blockStyle?.code);
+        return Prism.highlight(code, Prism.languages.js, "ts")?.trim();
+    }
+    return null;
+});
+
+
 const cssStyle = computed(
     () =>
         ({
-            fontSize: '1em',
+            fontSize: '0.3em',
             color: 'black',
             fillWeight: 1.2,
             hachureAngle: 60,
@@ -105,6 +118,8 @@ const textStyle = reactive({
     'margin-left': computed(() => `0px`),
 });
 
+
+const label = computed(() => isCode.value ? codeHtml.value : props.block.label);
 </script>
 
 <template>
@@ -130,10 +145,15 @@ const textStyle = reactive({
                             word-wrap: normal;
                         "
                     >
-                        <p v-html="block.label"></p>
+                        <pre v-if="isCode" class="language-ts"><code class="language-ts" v-html="label"></code></pre>
+                        <p v-else v-html="label"></p>
                     </div>
-                </div>
+                </div> 
             </div>
         </foreignObject>
     </svg>
 </template>
+
+<style>
+
+</style>
