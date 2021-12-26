@@ -119,7 +119,8 @@
                     "y": "start.y + start.h + 80",
                     "w": "start.w",
                     "h": "start.h"
-                }
+                },
+                "img": "bank.svg"
             },
             "initInject": {
                 "position": {

@@ -14,8 +14,15 @@ import { enableEditor, getMousePosition } from 'coya-editor-new';
 import 'coya-editor-new/dist/style.css';
 import { saveConfig } from '../socket';
 import { useCurrentPhase } from '../state/useCurrentPhase';
+import { AssetConfigs, provideAssets } from '../logic/useAssets';
 
-const props = defineProps<{ config: string | Object; id: string }>();
+const props = defineProps<{
+    config: string | Object;
+    id: string;
+    assets: AssetConfigs;
+}>();
+
+provideAssets(props.assets);
 
 const preparedConfig = reactive({
     config: null,
@@ -97,8 +104,8 @@ const rectPositions = computed(() => {
     }
     return [];
 });
-const defaultRectStyle = computed(() => arch.value?.style?.blocks?.["_"]);
-const defaultArrowStyle = computed(() => arch.value?.style?.blocks?.["->"]);
+const defaultRectStyle = computed(() => arch.value?.style?.blocks?.['_']);
+const defaultArrowStyle = computed(() => arch.value?.style?.blocks?.['->']);
 const filteredRectPositions = computed(() =>
     rectPositions.value.filter((x) => !x?.style?.isHighlight),
 );
@@ -160,7 +167,7 @@ provide(
     <div class="grid grid-cols-5 grid-rows-12 h-full">
         <div>
             <editorComponent v-if="!!editor">
-                <template #preview="{item}">
+                <template #preview="{ item }">
                     <CoyaNode
                         :block="item.block"
                         :block-style="item.blockStyle"

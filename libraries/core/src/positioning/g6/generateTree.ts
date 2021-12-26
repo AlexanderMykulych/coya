@@ -32,7 +32,9 @@ export function generateTree(
         return item;
     };
 
-    const root = treeBuilder(Object.keys(arch.blocks)?.[0]);
+    const rootEl = defaults.activeEl || Object.keys(arch.blocks)?.[0];
+    let root = treeBuilder(rootEl);
+    root = tree[rootEl];
     const layoutConfig = defaults.layout;
     switch (strategy) {
         case "Dendrogram":

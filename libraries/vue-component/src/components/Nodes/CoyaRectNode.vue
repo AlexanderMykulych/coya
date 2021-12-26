@@ -4,6 +4,7 @@ import { computed, onMounted, reactive, Ref, ref, watch } from 'vue';
 import { gsap } from 'gsap';
 import rough from 'roughjs';
 import { RoughSVG } from 'roughjs/bin/svg';
+import { getImageUrl, useAssets } from '../../logic/useAssets';
 
 const props = defineProps<{
     block: Block;
@@ -11,6 +12,8 @@ const props = defineProps<{
     blockStyle: BlockStyle;
 }>();
 
+const {getUrl} = useAssets();
+const imgUrl = getUrl(props.blockStyle?.img);
 const cssStyle = computed(
     () =>
         ({
@@ -76,7 +79,7 @@ onMounted(() => {
 });
 
 const updateElementPosition = () => {
-    if (isNaN(props.positioning.w) || isNaN(props.positioning.h)) {
+    if (isNaN(props.positioning.w) || isNaN(props.positioning.h) || !!imgUrl) {
         return;
     }
     if (rect.value) {
@@ -101,10 +104,12 @@ const textStyle = reactive({
     'padding-top': computed(() => `0px`),
     'margin-left': computed(() => `0px`),
 });
+
 </script>
 
 <template>
     <svg ref="gEl">
+        <image v-if="imgUrl" :href="imgUrl" width="100%" height="100%"/>
         <foreignObject
             style="overflow: visible; text-align: left"
             pointer-events="none"

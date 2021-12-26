@@ -117,6 +117,7 @@ export interface BlockStyle {
     svg?: string;
     svgUrl?: string | URL;
     svgTag?: keyof SVGElementTagNameMap;
+    img?: string;
     css?: Properties;
     position?: Position;
     label?: string;

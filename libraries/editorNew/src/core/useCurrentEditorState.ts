@@ -187,7 +187,10 @@ export function useEditorState(editor: Editor): CurrentEditorState {
             }),
             zoomState: computed(() => editor.zoomState),
             applyPositioning: (layout: LayoutConfig) => {
-                applyPositioning(editor.config, layout.type, layout.config);
+                applyPositioning(editor.config, layout.type, {
+                    ...layout.config,
+                    activeEl: blockId.value,
+                });
                 editor.initialConfig.style = JSON.parse(JSON.stringify(editor.config.style))
             }
         };
