@@ -89,7 +89,6 @@ export function wrapEditorNode(editor: Editor, node: any) {
                             position: attrs.positioning,
                             block: attrs.block,
                             onPinPress: (val) => editor.state.pins.selectedPinType = val,
-                            onPinLeave: () => console.log("unpin")
                         }) : undefined,
                         isArrowMode.value ? h(ArrowWrapperRect, {
                             position: attrs.positioning,

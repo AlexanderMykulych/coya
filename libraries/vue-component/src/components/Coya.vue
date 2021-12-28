@@ -392,6 +392,7 @@ provide(
     width: 100%;
     touch-action: none;
     box-shadow: 0px 0px 2px 1px #d1d1d1;
+    user-select: none;
 }
 .drawableSvg {
     position: absolute;

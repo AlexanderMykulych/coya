@@ -10,7 +10,7 @@ const props = defineProps<{
     block: Block,
     positioning: Positioning,
     blockStyle?: BlockStyle,
-    debug: boolean,
+    debug?: boolean,
     defaultArrowStyle?: BlockStyle,
     defaultRectStyle?: BlockStyle,
     disableWrap?: boolean,

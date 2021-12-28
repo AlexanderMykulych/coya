@@ -28,7 +28,8 @@ const modules = import.meta.glob('./examples/assets/*')
 const assets: AssetConfigs = [];
 for (const path in modules) {
   assets.push({
-      load: () => import(`${path}?raw`),
+      
+      load: () => import(/* @vite-ignore */`${path}?raw`),
       name: path.slice(assetsDir.length),
   });
 }

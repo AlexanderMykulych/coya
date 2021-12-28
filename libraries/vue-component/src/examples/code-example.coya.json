@@ -1,35 +1,58 @@
 {
-    "name": "vue-lifecycle-json",
-    "blocks": {
-        "start": "code"
-    },
-    "phases": [
-    ],
-    "style": {
-        "blocks": {
-            "_": {
-                "css": {
-                    "color": "black",
-                    "fill": "#FF89CF",
-                    "fontSize": "2.1em",
-                    "rx": "25",
-                    "stroke": "black"
-                }
-            },
-            "->": {
-                "css": {
-                    "fill": "none"
-                }
-            },
-            "start": {
-                "position": {
-                    "x": "400",
-                    "y": "100",
-                    "w": "953",
-                    "h": "600"
-                },
-                "code": "libEntry.ts"
-            }
-        }
-    }
+	"name": "vue-lifecycle-json",
+	"blocks": {
+		"start": "code",
+		"block_new": {
+			"label": "new palette block"
+		},
+		"line_0_0": {
+			"from": "start",
+			"to": "block_new",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		}
+	},
+	"phases": [],
+	"style": {
+		"blocks": {
+			"_": {
+				"css": {
+					"color": "black",
+					"fill": "#FF89CF",
+					"fontSize": "2.1em",
+					"rx": "25",
+					"stroke": "black"
+				}
+			},
+			"->": {
+				"css": {
+					"fill": "none"
+				}
+			},
+			"start": {
+				"position": {
+					"x": "-624.7141571044922",
+					"y": "-1579.0714569091797",
+					"w": "1359.0714111328125",
+					"h": "1556.5"
+				},
+				"code": "libEntry.ts",
+				"css": {
+					"fillStyle": "solid"
+				}
+			},
+			"block_new": {
+				"position": {
+					"x": "1769.642822265625",
+					"y": "-859.9285888671875",
+					"w": "495",
+					"h": "402.5"
+				},
+				"css": {
+					"fill": "#3e6b94"
+				}
+			}
+		}
+	}
 }

@@ -6,6 +6,10 @@ import rough from 'roughjs';
 import { RoughSVG } from 'roughjs/bin/svg';
 import { getImageUrl, useAssets } from '../../logic/useAssets';
 import Prism from 'prismjs';
+import 'prismjs/components/prism-typescript.min.js';
+import 'prismjs/components/prism-json.min.js';
+import 'prismjs/components/prism-css.min.js';
+import { getExtension } from '../../logic/getExtension';
 
 const props = defineProps<{
     block: Block;
@@ -13,19 +17,21 @@ const props = defineProps<{
     blockStyle: BlockStyle;
 }>();
 
-const {getContent} = useAssets();
-const imgUrl = asyncComputed(async () => await getContent(props.blockStyle?.img));
+const { getContent } = useAssets();
+const imgUrl = asyncComputed(
+    async () => await getContent(props.blockStyle?.img),
+);
 
 const isCode = computed(() => !!props.blockStyle?.code);
 
 const codeHtml = asyncComputed(async () => {
     if (isCode.value) {
         const code = await getContent(props.blockStyle?.code);
-        return Prism.highlight(code, Prism.languages.js, "ts")?.trim();
+        const ext = getExtension(props.blockStyle?.code);
+        return Prism.highlight(code, Prism.languages[ext], ext)?.trim();
     }
     return null;
 });
-
 
 const cssStyle = computed(
     () =>
@@ -51,48 +57,53 @@ onMounted(() => {
     if (enter && enter.from && enter.to) {
         runEnter(enter);
         updateElementPosition();
-        watch(
-            () => [props.positioning.w, props.positioning.h],
-            (pos) => {
-                updateElementPosition();
-                gsap.to(gEl.value, {
-                    duration: 0,
-                    attr: {
-                        x: props.positioning.x,
-                        y: props.positioning.y,
-                        width: props.positioning.w,
-                        height: props.positioning.h,
-                    },
-                });
-            },
-            {
-                immediate: true,
-                deep: true,
-            },
-        );
-        watch(
-            () => props.positioning,
-            (pos) => {
-                gsap.to(gEl.value, {
-                    duration: 0,
-                    attr: {
-                        x: props.positioning.x,
-                        y: props.positioning.y,
-                        width: props.positioning.w,
-                        height: props.positioning.h,
-                    },
-                });
-            },
-            {
-                immediate: true,
-                deep: true,
-            },
-        );
+        showGElement();
     }
+    watch(
+        () => props.positioning.x,
+        (val) => gEl.value?.setAttribute('x', val),
+    );
+    watch(
+        () => props.positioning.y,
+        (val) => gEl.value?.setAttribute('y', val),
+    );
+    watch(
+        () => props.positioning.w,
+        (val) => {
+            gEl.value?.setAttribute('width', val);
+            updateElementPosition();
+        },
+    );
+    watch(
+        () => props.positioning.h,
+        (val) => {
+            gEl.value?.setAttribute('height', val);
+            updateElementPosition();
+        },
+    );
+    debouncedWatch(
+        () => cssStyle.value,
+        () => updateElementPosition(),
+        { deep: false, debounce: 300 },
+    );
 });
-
+const showGElement = () => {
+    gsap.to(gEl.value, {
+        duration: 0,
+        attr: {
+            x: props.positioning.x,
+            y: props.positioning.y,
+            width: props.positioning.w,
+            height: props.positioning.h,
+        },
+    });
+};
 const updateElementPosition = () => {
-    if (isNaN(props.positioning.w) || isNaN(props.positioning.h) || !!imgUrl) {
+    if (
+        isNaN(props.positioning.w) ||
+        isNaN(props.positioning.h) ||
+        !!imgUrl.value
+    ) {
         return;
     }
     if (rect.value) {
@@ -118,13 +129,14 @@ const textStyle = reactive({
     'margin-left': computed(() => `0px`),
 });
 
-
-const label = computed(() => isCode.value ? codeHtml.value : props.block.label);
+const label = computed(() =>
+    isCode.value ? codeHtml.value : props.block.label,
+);
 </script>
 
 <template>
     <svg ref="gEl">
-        <image v-if="imgUrl" :href="imgUrl" width="100%" height="100%"/>
+        <image v-if="imgUrl" :href="imgUrl" width="100%" height="100%" />
         <foreignObject
             style="overflow: visible; text-align: left"
             pointer-events="none"
@@ -145,15 +157,15 @@ const label = computed(() => isCode.value ? codeHtml.value : props.block.label);
                             word-wrap: normal;
                         "
                     >
-                        <pre v-if="isCode" class="language-ts"><code class="language-ts" v-html="label"></code></pre>
+                        <pre v-if="isCode" class="language-">
+                            <code class="language-" v-html="label"></code>
+                        </pre>
                         <p v-else v-html="label"></p>
                     </div>
-                </div> 
+                </div>
             </div>
         </foreignObject>
     </svg>
 </template>
 
-<style>
-
-</style>
+<style></style>
