@@ -11,7 +11,6 @@ const props = defineProps<{
 const cssStyle = computed(() => ({
     stroke: 'black',
     'stroke-width': '2px',
-    'marker-end': 'url(#sequenceflow-end)',
     fill: 'none',
     ...(props.blockStyle?.css ?? {}),
 }));
@@ -31,7 +30,12 @@ const textStyle = ref({
     fontSize: '4px',
 });
 const enableStraitLine = ref(true);
+const meta = computed(() => props.positioning.meta);
 const path = computed(() => {
+    if (meta.value) {
+        const {x1, y1, cx1, cy1, cx2, cy2, x2, y2} = meta.value;
+        return `M ${x1} ${y1} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${x2} ${y2}`;
+    }
     if (
         props.positioning.x1 === props.positioning.x2 ||
         props.positioning.y1 === props.positioning.y2 ||
@@ -44,41 +48,25 @@ const path = computed(() => {
     } L ${props.positioning.x2} ${props.positioning.y2}`;
 });
 
-const rc = computed(() => (gEl.value ? rough.svg(gEl.value) : null));
-const line = ref(null);
-const updateElementPosition = () => {
+const rc = computed(() => (gEl.value ? rough.svg(gEl.value).generator : null));
+const paths = computed(() => {
     if (!rc.value) {
         return;
     }
-    try {
-        if (line.value) {
-            gEl.value!.removeChild(line.value);
-        }
-    } catch (e) {
-        console.warn(e);
-    }
-    try {
-        line.value = rc.value.path(path.value, cssStyle.value);
-    } catch (e) {
-        console.warn(e);
-    } finally {
-        gEl.value.insertBefore(line.value, gEl.value.firstElementChild);
-    }
-};
-
-onMounted(() => {
-    watch(
-        () => path.value,
-        (val) => {
-            updateElementPosition();
-        },
-        { immediate: true },
-    );
+    
+    return rc.value.toPaths(rc.value.path(path.value, cssStyle.value));
 });
+
 </script>
 
 <template>
     <g :style="cssStyle" ref="gEl">
+        <path v-for="path in paths" v-bind="path"/>
+        <polygon
+            :points="`0,${-meta.arrowHeadSize} ${meta.arrowHeadSize * 2},0, 0,${meta.arrowHeadSize}`"
+            :transform="`translate(${meta.x2}, ${meta.y2}) rotate(${meta.ae})`"
+            fill="black"
+        />
         <text
             :style="textStyle"
             ref="textEl"

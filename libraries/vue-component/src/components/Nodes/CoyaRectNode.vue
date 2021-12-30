@@ -48,8 +48,7 @@ const gEl = ref<SVGSVGElement | null>(null);
 const runEnter = (enter: EnterSetting) => {
     gsap.fromTo(gEl.value, enter.from, enter.to);
 };
-const rc = computed(() => (gEl.value ? rough.svg(gEl.value) : null));
-const rect = ref<SVGGElement | null>(null);
+
 onMounted(() => {
     const enter = props.block.enter;
     if (enter && enter.from && enter.to) {

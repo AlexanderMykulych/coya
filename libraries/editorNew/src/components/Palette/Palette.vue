@@ -63,7 +63,26 @@ watch(() => mouseState.palette.pressed, (val, oldVal) => {
 // arrow
 const isArrowMode = computed(() => state.mode === EditorMode.Arrow);
 const isStartArrow = computed(() => isArrowMode.value && state.arrowState?.start && state.arrowState?.startPosition && !state.arrowState?.end);
-
+const arrowPath = computed(() => {
+    if (isStartArrow.value) {
+        const x1 = state?.arrowState?.startPosition?.x;
+        const y1 = state?.arrowState?.startPosition?.y;
+        const x2 = mouseState.position?.x;
+        const y2 = mouseState.position?.y;
+        if (x1 && x2 && y1 && y2) {
+            let indentX = -1;
+            let indentY = -1;
+            if (x1 > x2) {
+                indentX = -indentX;
+            }
+            if (y1 > y2) {
+                indentY = -indentY;
+            }
+            return `M${x1},${y1},${x2 + indentX},${y2 + indentY}`
+        }
+    }
+    
+})
 // arrow - end
 </script>
 
@@ -90,9 +109,9 @@ const isStartArrow = computed(() => isArrowMode.value && state.arrowState?.start
     </Teleport>
     <Teleport v-if="isStartArrow" :to="workEl">
         <path
-            :d="`M${state.arrowState?.startPosition.x},${state.arrowState?.startPosition.y},${mouseState.position.x - 1},${mouseState.position.y - 1}`"
+            :d="arrowPath"
             stroke="black"
-            stroke-width="2px"
+            stroke-width="9px"
             marker-end="url(#sequenceflow-end)"
         />
     </Teleport>

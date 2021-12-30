@@ -112,6 +112,7 @@ export interface LinePositioning {
     y1: NumberValue;
     x2: NumberValue;
     y2: NumberValue;
+    meta?: any;
 }
 
 export type Positioning = RectPositioning | CirclePositioning | LinePositioning;

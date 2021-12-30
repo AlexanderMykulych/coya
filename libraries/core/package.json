@@ -83,6 +83,7 @@
         "@vueuse/core": "^7.4.1",
         "coya-util": "~0.1.0",
         "csstype": "^3.0.8",
+        "curved-arrows": "^0.1.0",
         "jest": "^27.0.6",
         "lodash": "^4.17.21",
         "rollup-plugin-commonjs": "^10.1.0",

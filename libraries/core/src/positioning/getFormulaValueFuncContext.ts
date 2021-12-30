@@ -2,6 +2,8 @@ import { Ref, unref } from "vue";
 import { TransformSetting } from "..";
 import { BlockPositioning, FormulaValueFuncContext } from "../types";
 import { findClosestPoints } from "./alg/findClosestPoints";
+import { getBoxToBoxArrow } from "./alg/getBoxToBoxArrow";
+
 
 export function getFormulaValueFuncContext(blocksPositioning: Ref<BlockPositioning[]>,
     setting: TransformSetting): FormulaValueFuncContext {
@@ -18,7 +20,8 @@ export function getFormulaValueFuncContext(blocksPositioning: Ref<BlockPositioni
                         h: unref(setting.viewBox.h),
                     },
                     fn: {
-                        findClosestPoints
+                        findClosestPoints,
+                        getBoxToBoxArrow,
                     }
                 }
             ]
