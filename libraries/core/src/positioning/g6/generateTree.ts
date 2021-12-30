@@ -1,8 +1,7 @@
 import { ArchitectureDescription, BlockElementType, LineBlockElementDescription } from "../../descriptionTypes";
 import { isNotNullOrUndefined } from "../../typeGuards";
 import { TreePositioningStrategy, PositioningDefaults } from "./positioning";
-import * as hAll  from "@antv/hierarchy/dist/hierarchy.min.js";
-const { Hierarchy } = hAll;
+import Hierarchy from "@antv/hierarchy";
 
 export function generateTree(
     arch: ArchitectureDescription,

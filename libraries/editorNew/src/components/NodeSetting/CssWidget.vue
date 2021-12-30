@@ -13,7 +13,7 @@ const props = defineProps<{
 const { activeNode } = useCurrentEditorState();
 
 const scrollEl = ref<HTMLElement | null>(null);
-const activeCategory = ref<string | null>(null);
+const activeCategory = ref<string | null>(PredefCategory.Rough);
 const showCategory = ref(false);
 const categories = Object.entries(PredefCategory).map(x => ({
     name: x[0],

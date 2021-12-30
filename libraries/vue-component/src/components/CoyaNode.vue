@@ -39,12 +39,7 @@ const calculateStyle = () => {
     return props.blockStyle;
 };
 
-const preparedStyle = ref(calculateStyle());
-watch(() => [isRect.value, props.blockStyle, props.defaultRectStyle], (val, oldVal) => {
-    if (!fastDeepEqual(val, oldVal)) {
-        preparedStyle.value = calculateStyle();
-    }
-});
+const preparedStyle = computed(() => calculateStyle());
 </script>
 
 <template>
