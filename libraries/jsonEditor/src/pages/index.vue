@@ -14,5 +14,5 @@ const val = ref({
 </script>
 
 <template>
-    <JsonEditor v-model="val" />
+    <JsonEditor :modelValue="val" />
 </template>

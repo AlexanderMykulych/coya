@@ -14,6 +14,7 @@ specifiers:
   '@types/node': ^16.7.1
   '@typescript-eslint/eslint-plugin': ^4.29.3
   '@typescript-eslint/parser': ^4.29.3
+  '@vueuse/core': ^7.4.1
   csstype: ^3.0.8
   eslint: ^8.3.0
   husky: ^7.0.4
@@ -33,6 +34,7 @@ dependencies:
   '@antv/layout': 0.1.24
   '@types/lodash': 4.14.172
   '@types/node': 16.7.1
+  '@vueuse/core': 7.4.1
   csstype: 3.0.8
   jest: 27.0.6
   lodash: 4.17.21
@@ -2228,6 +2230,35 @@ packages:
 
   /@vue/shared/3.2.26:
     resolution: {integrity: sha512-vPV6Cq+NIWbH5pZu+V+2QHE9y1qfuTq49uNWw4f7FDEeZaDU2H2cx5jcUZOAKW7qTrUS4k6qZPbMy1x4N96nbA==}
+    dev: false
+
+  /@vueuse/core/7.4.1:
+    resolution: {integrity: sha512-8UeLPCAieeQLXFHF1/28SIEK6ILLPb/4hp03hR+xkXF00gB/YUp0CEVcRAL9uQ8HTZa3S2T/jTISMc1ZjilM0A==}
+    peerDependencies:
+      '@vue/composition-api': ^1.1.0
+      vue: ^2.6.0 || ^3.2.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+      vue:
+        optional: true
+    dependencies:
+      '@vueuse/shared': 7.4.1
+      vue-demi: 0.12.1
+    dev: false
+
+  /@vueuse/shared/7.4.1:
+    resolution: {integrity: sha512-Pzb7XoHIcgPwwBJ5Ow9lZb0HTDyaLDV3pgxKauPGTMN9qvEylG06kUG+VTjJXkPsRtiGu46di8XyFeMw2dongA==}
+    peerDependencies:
+      '@vue/composition-api': ^1.1.0
+      vue: ^2.6.0 || ^3.2.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+      vue:
+        optional: true
+    dependencies:
+      vue-demi: 0.12.1
     dev: false
 
   /@webgpu/glslang/0.0.15:
@@ -8505,6 +8536,19 @@ packages:
       tinyspy: 0.2.6
       vite: 2.7.6
     dev: true
+
+  /vue-demi/0.12.1:
+    resolution: {integrity: sha512-QL3ny+wX8c6Xm1/EZylbgzdoDolye+VpCXRhI2hug9dJTP3OUJ3lmiKN3CsVV3mOJKwFi0nsstbgob0vG7aoIw==}
+    engines: {node: '>=12'}
+    hasBin: true
+    requiresBuild: true
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0-rc.1
+      vue: ^3.0.0-0 || ^2.6.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    dev: false
 
   /vue/3.2.26:
     resolution: {integrity: sha512-KD4lULmskL5cCsEkfhERVRIOEDrfEL9CwAsLYpzptOGjaGFNWo3BQ9g8MAb7RaIO71rmVOziZ/uEN/rHwcUIhg==}

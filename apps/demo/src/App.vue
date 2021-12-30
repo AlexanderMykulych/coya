@@ -1,15 +1,22 @@
 <script setup lang="ts">
-// https://github.com/vueuse/head
-// you can use this to manipulate the document head in any components,
-// they will be rendered correctly in the html results with vite-ssg
-useHead({
-  title: 'Vitesse',
-  meta: [
-    { name: 'description', content: 'Opinionated Vite Starter Template' },
-  ],
-})
+const num = ref(1);
+const isPositive = eagerComputed(() => num.value > 0);
+const someComp = computed(() => isPositive.value ? 1 : 2, {
+    onTrigger() {
+        console.log("onTrigger");
+    }
+});
+const someComp2 = controlledComputed(
+    () => isPositive.value,
+    () => {
+        console.log("from computed")
+        return isPositive.value ? 1 : 2;
+    });
 </script>
 
 <template>
-  <router-view />
+    {{num}} - {{someComp}} - {{someComp2}} - {{isPositive}}
+    <button @click="num++">add</button>
+    <br/>
+    <button @click="num--">dec</button>
 </template>

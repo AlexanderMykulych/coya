@@ -1,7 +1,7 @@
+import { deepCopy } from "coya-util";
 import { EnterSetting } from "..";
 import { BlockElementDescription, BlockStyle } from "../descriptionTypes";
 import { BlockElement } from "../types";
-import { deepCopy } from "../util/deepCopy";
 
 
 export function createBlockElementByString(id: string, label: string, blockStyle?: BlockStyle): BlockElement {

@@ -43,7 +43,6 @@ watch(
 
 // const arch = ref<Architecture | null>(null);
 const editor = ref(null);
-let archConfig = ref<ArchitectureDescription | null>(null);
 const coyaSvgEl = ref<SVGSVGElement | null>(null);
 const coyaGEl = ref<SVGGElement | null>(null);
 const drawableSvgEl = ref<SVGSVGElement | null>(null);
@@ -78,8 +77,7 @@ const { architecture: arch, config } = transformToArchitecture(
         currentPhase,
     },
 );
-// arch.value = architecture.value;
-archConfig = config;
+
 editor.value = enableEditor({
     svg: coyaSvgEl,
     workEl: coyaGEl,
@@ -107,9 +105,9 @@ const rectPositions = computed(() => {
 const defaultRectStyle = computed(() => arch.value?.style?.blocks?.['_']);
 const defaultArrowStyle = computed(() => arch.value?.style?.blocks?.['->']);
 const filteredRectPositions = computed(() =>
-    rectPositions.value.filter((x) => !x?.style?.isHighlight),
+    rectPositions.value.filter((x) => !x?.style?.isHighlight)
 );
-window.temp = filteredRectPositions;
+
 const next = () => arch.value?.next();
 const back = () => arch.value?.back();
 const save = () => saveConfig(props.id, initialConfig.value);

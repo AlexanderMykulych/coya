@@ -10,6 +10,7 @@ import 'prismjs/components/prism-typescript.min.js';
 import 'prismjs/components/prism-json.min.js';
 import 'prismjs/components/prism-css.min.js';
 import { getExtension } from '../../logic/getExtension';
+import { fastDeepEqual } from 'coya-util';
 
 const props = defineProps<{
     block: Block;
@@ -17,9 +18,9 @@ const props = defineProps<{
     blockStyle: BlockStyle;
 }>();
 
-const { getContent } = useAssets();
+const { getContent, getImgUrl } = useAssets();
 const imgUrl = asyncComputed(
-    async () => await getContent(props.blockStyle?.img),
+    async () => await getImgUrl(props.blockStyle?.img),
 );
 
 const isCode = computed(() => !!props.blockStyle?.code);
@@ -33,18 +34,15 @@ const codeHtml = asyncComputed(async () => {
     return null;
 });
 
-const cssStyle = computed(
-    () =>
-        ({
-            fontSize: '0.3em',
-            color: 'black',
-            fillWeight: 1.2,
-            hachureAngle: 60,
-            hachureGap: 8,
-            roughness: 4.8,
-            ...props.blockStyle?.css,
-        } ?? {}),
-);
+const cssStyle = computed(() => ({
+    fontSize: '0.3em',
+    color: 'black',
+    fillWeight: 1.2,
+    hachureAngle: 60,
+    hachureGap: 8,
+    roughness: 4.8,
+    ...props.blockStyle?.css,
+}));
 const gEl = ref<SVGSVGElement | null>(null);
 
 const runEnter = (enter: EnterSetting) => {
@@ -56,7 +54,6 @@ onMounted(() => {
     const enter = props.block.enter;
     if (enter && enter.from && enter.to) {
         runEnter(enter);
-        updateElementPosition();
         showGElement();
     }
     watch(
@@ -71,20 +68,13 @@ onMounted(() => {
         () => props.positioning.w,
         (val) => {
             gEl.value?.setAttribute('width', val);
-            updateElementPosition();
         },
     );
     watch(
         () => props.positioning.h,
         (val) => {
             gEl.value?.setAttribute('height', val);
-            updateElementPosition();
         },
-    );
-    debouncedWatch(
-        () => cssStyle.value,
-        () => updateElementPosition(),
-        { deep: false, debounce: 300 },
     );
 });
 const showGElement = () => {
@@ -98,26 +88,7 @@ const showGElement = () => {
         },
     });
 };
-const updateElementPosition = () => {
-    if (
-        isNaN(props.positioning.w) ||
-        isNaN(props.positioning.h) ||
-        !!imgUrl.value
-    ) {
-        return;
-    }
-    if (rect.value) {
-        gEl.value!.removeChild(rect.value);
-    }
-    rect.value = rc.value.rectangle(
-        5,
-        5,
-        props.positioning.w - 10,
-        props.positioning.h - 10,
-        cssStyle.value,
-    );
-    gEl.value.insertBefore(rect.value, gEl.value.firstElementChild);
-};
+
 
 const textStyle = reactive({
     display: 'flex',
@@ -136,6 +107,7 @@ const label = computed(() =>
 
 <template>
     <svg ref="gEl">
+        <Rough :w="positioning.w" :h="positioning.h" :css="cssStyle"/>
         <image v-if="imgUrl" :href="imgUrl" width="100%" height="100%" />
         <foreignObject
             style="overflow: visible; text-align: left"

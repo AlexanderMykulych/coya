@@ -3,6 +3,7 @@ import { reactive } from 'vue';
 import { ConfigureEditorOption, JsonAstRow, WidgetConfig, WidgetFilterConfig } from './WidgetConfig';
 import { createWidget } from './createWidget';
 import { analizeAst } from "./analizeAst";
+import { setValueByPath } from "coya-util";
 
 export function configureEditor({ editor, widgetConfig }: ConfigureEditorOption) {
     const getAndApplyConfigLoc = (row: JsonAstRow, index: number) => getAndApplyConfig(editor, row, index, widgetConfig);
@@ -15,6 +16,9 @@ export function configureEditor({ editor, widgetConfig }: ConfigureEditorOption)
     );
 
     editor.onDidChangeModelContent(_ => {
+        if (editor["_savingByWidget"]) {
+            return;
+        }
         const { ast, rows: result } = analizeAst(editor.getValue());
         analizingResult.ast = ast;
         analizingResult.rows = result;
@@ -66,21 +70,11 @@ function getAndApplyConfig(
             const obj = JSON.parse(editor.getValue());
             if (obj) {
                 config.row.value = value;
-                setToValue(obj, value, config.row.path);
+                setValueByPath(obj, value, config.row.path);
+                editor["_savingByWidget"] = true;
                 editor.setValue(JSON.stringify(obj, null, '\t'));
+                editor["_savingByWidget"] = false;
             }
         }
     };
-}
-
-function setToValue(obj: any, value: any, path: string) {
-    let i = 0;
-    const paths = path.split('.');
-    for (i = 0; i < paths.length - 1; i++) {
-        if (obj !== null && obj !== undefined) {
-            obj = obj[paths[i]];
-        }
-    }
-
-    obj[paths[i]] = value;
 }

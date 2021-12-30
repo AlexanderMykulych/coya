@@ -11,6 +11,10 @@
 			"type": "line",
 			"label": "",
 			"sourcePhase": 0
+		},
+		"block_new_new": {
+			"label": "new palette block",
+			"sourcePhase": 0
 		}
 	},
 	"phases": [],
@@ -44,14 +48,27 @@
 			},
 			"block_new": {
 				"position": {
-					"x": "1769.642822265625",
-					"y": "-859.9285888671875",
+					"x": "1504.642822265625",
+					"y": "-1622.4286499023438",
 					"w": "495",
 					"h": "402.5"
 				},
 				"css": {
 					"fill": "#3e6b94"
 				}
+			},
+			"block_new_new": {
+				"position": {
+					"x": "1572.999755859375",
+					"y": "-569.4997730255127",
+					"w": "437.500244140625",
+					"h": "432.49989318847656"
+				},
+				"css": {
+					"fill": "blue",
+					"stroke": "red"
+				},
+				"img": "rocket-launch.png"
 			}
 		}
 	}

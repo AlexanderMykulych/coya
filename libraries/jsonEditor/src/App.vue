@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { setValueByPath } from 'coya-util';
 import { ref, computed, toRef, reactive } from 'vue';
+import { ChangedItem } from 'coya-util/src/whatChanged';
 
 const val = ref({
     init: {
@@ -59,6 +61,9 @@ const widgetFilter = ({ path }) => {
             return false;
     }
 };
+const onChangeAttr = (change: ChangedItem) => {
+    setValueByPath(val.value, change.val, change.fullPath);
+}
 </script>
 
 <template>
@@ -74,7 +79,8 @@ const widgetFilter = ({ path }) => {
             </div>
         </div>
         <JsonEditor
-            v-model="val"
+            :modelValue="val"
+            @changeAttr="onChangeAttr"
             @set-editor-config="setConfig"
             :activateDefaultWidget="true"
             :widgetFilter="widgetFilter"

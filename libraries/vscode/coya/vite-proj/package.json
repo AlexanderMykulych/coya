@@ -16,7 +16,7 @@
         "path-browserify": "^1.0.1",
         "pinia": "^2.0.4",
         "prism-theme-vars": "^0.2.2",
-        "vue": "^3.2.23",
+        "vue": "^3.2.26",
         "vue-demi": "^0.12.1",
         "vue-i18n": "^9.1.9",
         "vue-router": "^4.0.12",

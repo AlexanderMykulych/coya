@@ -1,7 +1,8 @@
 import { ArchitectureDescription, BlockElementType } from "../../descriptionTypes";
-import { CircularLayout, DagreLayout, Edge, GridLayout, Model, Node, OutModel, RandomLayout } from "@antv/layout";
+import * as layout  from "@antv/layout/dist/layout.min.js";
+import { Edge, Model, Node, OutModel } from "@antv/layout";
 import { GraphPositioningStrategy, PositioningDefaults } from "./positioning";
-
+const { CircularLayout, DagreLayout, GridLayout, RandomLayout } = layout;
 export function applyGraphPositioning(arch: ArchitectureDescription, strategy: GraphPositioningStrategy, defaults: PositioningDefaults) {
     let layout: any = null;
     switch (strategy) {

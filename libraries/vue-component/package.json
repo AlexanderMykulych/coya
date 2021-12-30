@@ -21,11 +21,12 @@
     "prismjs": "^1.25.0",
     "rollup-plugin-svg": "^2.0.0",
     "roughjs": "^4.5.2",
-    "vue": "^3.2.23",
+    "vue": "^3.2.26",
     "vue-color-kit": "^1.0.5",
     "vue-demi": "^0.12.1",
     "vue-router": "^4.0.12",
-    "ws": "^8.2.3"
+    "ws": "^8.2.3",
+    "coya-util": "~0.1.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.11.1",

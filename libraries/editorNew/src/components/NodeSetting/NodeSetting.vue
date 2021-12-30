@@ -3,23 +3,12 @@ import { ref, reactive, computed } from 'vue';
 import { useCurrentEditorState } from '../../core/useCurrentEditorState';
 import JsonEditor from 'coya-json-editor';
 import { predefinedSetting } from './../PredefinedSetting/PredefinedSetting';
-import { deepAssign, isNotNullOrUndefined } from 'coya-core';
+import { isNotNullOrUndefined } from 'coya-core';
+import { deepAssign, ChangedItem, setValueByPath } from "coya-util";
 
 const { activeNode, activeBlockStyleSetting, architecture, selectedNode } =
     useCurrentEditorState();
 const text = ref('');
-const preparedValue = computed({
-    get() {
-        return activeNode;
-    },
-    set(val: any) {
-        Object.keys(val).forEach((key) => {
-            if (activeNode[key] !== val[key]) {
-                activeNode[key] = val[key];
-            }
-        });
-    },
-});
 const jsonEditorConfig = reactive({
     lineNumbers: 'off',
     glyphMargin: false,
@@ -72,12 +61,16 @@ const preparedPredefs = computed(() => {
         },
     }));
 });
+const onAttrChange = (change: ChangedItem) => {
+    setValueByPath(activeNode, change.val, change.fullPath);
+}
 </script>
 
 <template>
     <div v-if="activeNode" class="border-2 rounded-md p-3 bg-white grid h-full">
         <JsonEditor
-            v-model="preparedValue"
+            :modelValue="activeNode"
+            @changeAttr="onAttrChange"
             :config="jsonEditorConfig"
             activateDefaultWidget
             :widgetFilter="widgetFilter"

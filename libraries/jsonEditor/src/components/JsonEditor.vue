@@ -8,6 +8,7 @@ import { configureEditor } from './configureEditor';
 import { useDebouncedRef } from './widgets/useDebounceRef';
 import { debounce } from 'debounce';
 import { JsonAstRow, WidgetFilter } from './WidgetConfig';
+import { whatChanged } from 'coya-util';
 
 const props = defineProps<{
     modelValue: any;
@@ -16,7 +17,7 @@ const props = defineProps<{
     widgetFilter?: WidgetFilter;
 }>();
 const emit = defineEmits([
-    'update:modelValue',
+    'changeAttr',
     'set-editor',
     'set-editor-config',
 ]);
@@ -61,10 +62,14 @@ onMounted(() => {
                     editor.value &&
                     editor.value.getValue() !== jsonValue.value
                 ) {
-                    emit(
-                        'update:modelValue',
-                        JSON.parse(editor.value.getValue()),
-                    );
+                    const val = JSON.parse(editor.value.getValue());
+                    const changed = whatChanged(props.modelValue, val);
+                    if (changed.length > 0) {
+                        emit(
+                            'changeAttr',
+                            changed[0],
+                        );
+                    }
                 }
             });
             editorConfig.value = configureEditor({

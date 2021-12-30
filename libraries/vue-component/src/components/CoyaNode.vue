@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { Block, BlockStyle, isLineBlockElement, isRectPositioning, Positioning, RectPositioning } from "coya-core";
-import { computed } from "vue";
+import { computed, Ref } from "vue";
 import {getCurrentEditor} from "coya-editor-new";
-import { deepAssign } from "coya-core";
+import { deepAssign, fastDeepEqual } from "coya-util";
 import coyaRectNode from "./Nodes/CoyaRectNode.vue";
 import coyaLineNode from "./Nodes/CoyaLineNode.vue";
+import { deepEqual } from "assert";
 
 const props = defineProps<{
     block: Block,
@@ -17,18 +18,18 @@ const props = defineProps<{
 }>();
 
 const rectPosition = computed(() => <RectPositioning>props.positioning);
-const isRect = computed(() => isRectPositioning(props.positioning));
-const isCustomSvg = computed(() => !!props.blockStyle?.svg);
-const isCustomSvgUrl = computed(() => !!props.blockStyle?.svgUrl);
+const isRect = eagerComputed(() => isRectPositioning(props.positioning));
+const isCustomSvg = eagerComputed(() => !!props.blockStyle?.svg);
+const isCustomSvgUrl = eagerComputed(() => !!props.blockStyle?.svgUrl);
 const svgTag = computed(() => props.blockStyle?.svgTag);
-const isLine = computed(() => isLineBlockElement(props.block));
+const isLine = eagerComputed(() => isLineBlockElement(props.block));
 const blockDebug = computed(() => props.block.debug);
 
 const editor = getCurrentEditor();
 const CoyaRectNode = props.disableWrap ? coyaRectNode : editor.wrap(coyaRectNode);
 const CoyaLineNode = props.disableWrap ? coyaLineNode : editor.wrap(coyaLineNode);
 
-const preparedStyle = computed(() => {
+const calculateStyle = () => {
     if (isRect.value) {
         return deepAssign({}, props.defaultRectStyle || {}, props.blockStyle || {});
     }
@@ -36,6 +37,13 @@ const preparedStyle = computed(() => {
         return deepAssign({}, props.defaultArrowStyle || {}, props.blockStyle || {});
     }
     return props.blockStyle;
+};
+
+const preparedStyle = ref(calculateStyle());
+watch(() => [isRect.value, props.blockStyle, props.defaultRectStyle], (val, oldVal) => {
+    if (!fastDeepEqual(val, oldVal)) {
+        preparedStyle.value = calculateStyle();
+    }
 });
 </script>
 

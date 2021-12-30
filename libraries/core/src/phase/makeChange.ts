@@ -6,7 +6,7 @@ import {
     Change, ChangeBlockStyleSetting,
     ChangeType
 } from "../types";
-import { deepAssign } from "../util/deepAssign";
+import { deepAssign } from "coya-util";
 
 export function makeChange(architecture: ArchitectureDescription, change: Change): void {
     if (change.type === ChangeType.AddNewBlock) {

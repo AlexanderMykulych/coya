@@ -1,9 +1,8 @@
 import { ArchitectureDescription, StyleDescription, TransformSetting } from "../descriptionTypes";
 import { Block, BlocksStyle, Style } from "../types";
 import { gridPositioning } from "../positioning/gridPositioning";
-import { deepCopy } from "../util/deepCopy";
 import { prepareCss } from "./prepareCss";
-import { deepAssign } from "../util/deepAssign";
+import { deepAssign, deepCopy } from "coya-util";
 
 export function styleDescriptionToArchitectureStyle(
     architectureDescription: ArchitectureDescription,
@@ -25,6 +24,12 @@ function generateBlocksStyle(style: StyleDescription): BlocksStyle | undefined {
     }
     return Object.fromEntries(
         Object.entries(style.blocks)
-            .map(([key, value]) => [key, deepAssign({}, value)])
+            .map(([key, value]) => {
+                const prepVal = Object.fromEntries(
+                    Object.entries(value)
+                        .filter(([vKey, _]) => vKey !== "position")
+                );
+                return [key, deepAssign({}, prepVal)];
+            })
     );
 }

@@ -5,6 +5,7 @@
         "build-core": "rush build -o coya-core",
         "build-vue": "rush build -o coya-vue-component",
         "build-editor": "rush build -o coya-editor-new",
+        "build-util": "rush build -o coya-util",
         "build-json": "rush build -o coya-json-editor",
         "json": "cd \"./libraries/jsonEditor/\" && pnpm dev",
         "vue": "cd \"./libraries/vue-component/\" && pnpm dev",

@@ -28,7 +28,7 @@ const modules = import.meta.glob('./examples/assets/*')
 const assets: AssetConfigs = [];
 for (const path in modules) {
   assets.push({
-      
+      getImgUrl: () => new URL(path, import.meta.url)?.href,
       load: () => import(/* @vite-ignore */`${path}?raw`),
       name: path.slice(assetsDir.length),
   });

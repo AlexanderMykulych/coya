@@ -32,7 +32,7 @@ export default defineConfig({
     ],
     build: {
         rollupOptions: {
-            external: ['vue', "coya-core"],
+            external: ['vue', "coya-core", "@vueuse/core"],
             output: {
                 // Provide global variables to use in the UMD build
                 // for externalized deps

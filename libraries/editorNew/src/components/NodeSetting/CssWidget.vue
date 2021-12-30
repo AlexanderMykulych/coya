@@ -3,6 +3,7 @@ import { computed, onMounted, onScopeDispose, ref } from 'vue';
 import { useCurrentEditorState } from '../../core/useCurrentEditorState';
 import { Predef, PredefBlock, PredefCategory } from './../PredefinedSetting/PredefinedSetting';
 import { onWheelHorScroll } from './onWheelHorScroll';
+import {useDebounce} from '@vueuse/core';
 
 const props = defineProps<{
     preparedPredefs: PredefBlock[];
@@ -29,6 +30,7 @@ const filteredPredefs = computed(() => {
     }
     return props.preparedPredefs;
 });
+const debouncedPredef = useDebounce(filteredPredefs, 400);
 
 const applyPredef = (predef: PredefBlock) => {
     activeNode.css = {
@@ -99,8 +101,8 @@ const applyPredef = (predef: PredefBlock) => {
                     css-widget-scrollbar
                 "
             >
-                {{!filteredPredefs || filteredPredefs.length === 0 ? "Comming soon..." : "" }}
-                <template v-for="predef in filteredPredefs" :key="predef.name">
+                {{!debouncedPredef || debouncedPredef.length === 0 ? "Comming soon..." : "" }}
+                <template v-for="predef in debouncedPredef" :key="predef.name">
                     <div style="min-width: 200px" @click.stop.prevent="applyPredef(predef)">
                         <svg
                             width="90%"

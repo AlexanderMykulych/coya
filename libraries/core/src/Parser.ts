@@ -6,9 +6,9 @@ import { styleDescriptionToArchitectureStyle } from "./style/styleDescriptionToA
 import { startPhases } from "./phase/startPhases";
 import { buildPhasesIndex } from "./phase/buildPhasesIndex";
 import { computed, Ref, isRef, ref, reactive } from 'vue';
-import { deepCopy } from "./util/deepCopy";
 import { getDebugActions } from "./debug/getDebugActions";
 import { DebugType } from "./debugTypes";
+import { deepCopy } from "coya-util";
 
 export function transformToArchitecture(description: Ref<unknown> | unknown, setting: TransformSetting): TransformationResult {
     const refDescription = isRef(description) ? description : ref(description);
@@ -49,7 +49,9 @@ export function transformDescriptionToArchitecture(
  
     const blocks = computed(() => BlockGroupDescriptionsToBlock(transitionalArchitectureRef.value));
     const phaseIndex = buildPhasesIndex(transitionalArchitectureRef);
-    const style = computed(() => styleDescriptionToArchitectureStyle(transitionalArchitectureRef.value, blocks.value, setting));
+    const style = computed(() =>
+        styleDescriptionToArchitectureStyle(transitionalArchitectureRef.value, blocks.value, setting)
+    );
     const next = () => {
         const phase = phaseIndex.getPhaseById(currentPhase.current);
         if (isNotNullOrUndefined(currentPhase.current) && !phase?.hasNext) {
