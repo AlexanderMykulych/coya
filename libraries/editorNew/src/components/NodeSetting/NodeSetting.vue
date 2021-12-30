@@ -4,7 +4,7 @@ import { useCurrentEditorState } from '../../core/useCurrentEditorState';
 import JsonEditor from 'coya-json-editor';
 import { predefinedSetting } from './../PredefinedSetting/PredefinedSetting';
 import { isNotNullOrUndefined } from 'coya-core';
-import { deepAssign, ChangedItem, setValueByPath } from "coya-util";
+import { deepAssign, ChangedItem, setValueByPath } from 'coya-util';
 
 const { activeNode, activeBlockStyleSetting, architecture, selectedNode } =
     useCurrentEditorState();
@@ -40,30 +40,45 @@ const preparePositioning = (pos) => {
     }
 };
 const preparedPredefs = computed(() => {
-    const block = architecture.blocks?.find((x) => x.id === selectedNode.value);
-    return predefinedSetting.map((predef) => ({
-        ...predef,
-        item: {
-            block: {
-                ...block,
-                id: block ? `${block.id}_prev` : "",
+    // const block = architecture.blocks?.find((x) => x.id === selectedNode.value);
+    const positioning = {
+        x: 0,
+        y: 0,
+        w: 300,
+        h: 150,
+    };
+    const block =  {
+        label: "Block",
+        id: "test"
+    };
+    
+    const blockStyle = activeBlockStyleSetting.value;
+    // const blockStyle = {
+        
+    // };
+    const style = !!blockStyle?.code
+        ? {
+                ...blockStyle,
+                code: undefined,
+            }
+        : blockStyle;
+    return predefinedSetting.map((predef) => {
+        return {
+            ...predef,
+            item: {
+                block: {
+                    ...block,
+                    id: block ? `${block.id}_prev` : '',
+                },
+                blockStyle: deepAssign({}, style, predef.config,),
+                positioning,
             },
-            blockStyle: deepAssign(
-                {},
-                activeBlockStyleSetting.value,
-                predef.config,
-            ),
-            positioning: preparePositioning(
-                architecture.style?.positioning?.find(
-                    (x) => x.blockId === selectedNode.value,
-                )?.position,
-            ),
-        },
-    }));
+        };
+    });
 });
 const onAttrChange = (change: ChangedItem) => {
     setValueByPath(activeNode, change.val, change.fullPath);
-}
+};
 </script>
 
 <template>
@@ -78,10 +93,7 @@ const onAttrChange = (change: ChangedItem) => {
             <template #line-widget="{ config }">
                 <CssWidget :preparedPredefs="preparedPredefs" :config="config">
                     <template #preview="slotData">
-                        <slot
-                            name="preview"
-                            v-bind="slotData"
-                        />
+                        <slot name="preview" v-bind="slotData" />
                     </template>
                 </CssWidget>
             </template>

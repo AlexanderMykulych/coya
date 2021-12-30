@@ -114,4 +114,14 @@ export const predefinedSetting: Predef[] = [{
             fillStyle: "zigzag-line"
         }
     }
-}];
+}, , {
+    name: "none",
+    label: "none",
+    category: PredefCategory.Color,
+    config: {
+        css: {
+            fill: "none",
+            stroke: "none",
+        }
+    }
+},];

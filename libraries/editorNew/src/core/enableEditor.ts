@@ -6,6 +6,7 @@ import editorComponent from "../components/editorComponent.vue";
 import { useSvgMouse } from "./useSvgMouse";
 import { useEditorState } from "./useCurrentEditorState";
 import { getMousePosition } from "./getMousePosition";
+import { EditorMode } from ".";
 
 export function enableEditor({ svg, config, id, initialConfig, architecture, workEl }: EnableEditorParameters) {
     const scope = effectScope();
@@ -71,6 +72,7 @@ function listenSvgEvents(editor: EnabledEditor) {
                 }
             });
             editor.state.arrowState = null;
+            editor.state.mode = EditorMode.None;
         }
     });
     
