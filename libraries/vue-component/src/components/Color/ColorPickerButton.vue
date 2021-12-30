@@ -13,16 +13,18 @@ function prepareColor({r, g, b, a}: {r: number; g: number; b: number; a: number;
 
 <template>
     <div>
-        <button class="btn bg-opacity-0 hover:bg-opacity-0" @click="open = !open">
-            <ic:twotone-border-color :color="modelValue" class="min-w-8 min-h-8"/>
+        <button class="border-2" @click="open = !open">
+            <ic:twotone-border-color :color="modelValue" />
         </button>
-        <div class="modal-mask" v-if="open" @click="open = false">
-            <div class="modal-wrapper">
-                <div class="modal-container">
-                    <ColorPicker @click.stop :color="modelValue" @changeColor="val => $emit('update:modelValue', prepareColor(val.rgba))"/>
+        <Teleport to="body">
+            <div class="modal-mask" v-if="open" @click="open = false">
+                <div class="modal-wrapper">
+                    <div class="modal-container">
+                        <ColorPicker @click.stop :color="modelValue" @changeColor="val => $emit('update:modelValue', prepareColor(val.rgba))"/>
+                    </div>
                 </div>
             </div>
-        </div>
+        </Teleport>
     </div>
 </template>
 

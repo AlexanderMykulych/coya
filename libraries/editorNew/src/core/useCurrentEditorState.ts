@@ -170,10 +170,16 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                 makeChangeToDiagram(editor.initialConfig, actions);
                 editor.architecture.toPhase(editor.architecture.currentPhase);
             },
-            getNewUniqBlockName: () => {
-                let name = "block_new";
-                while (Object.keys(editor.architecture.style?.blocks || {}).some(x => x === name)) {
-                    name += "_new";
+            getNewUniqBlockName: (prefix: string = 'block_') => {
+                let index = 1;
+                const getName = () => `${prefix}${index}`;
+                let name = getName();
+                const isBlockExist = (name: string) =>
+                    Object.keys(editor.architecture.style?.blocks || {}).some(x => x === name) ||
+                    editor.architecture?.blocks.some((x: any) => x.id === name);
+                while (isBlockExist(name)) {
+                    index++;
+                    name = getName();
                 }
                 return name;
             },

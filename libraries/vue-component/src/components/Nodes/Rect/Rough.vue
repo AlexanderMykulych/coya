@@ -8,11 +8,7 @@ const props = defineProps<{
 }>();
 const gEl = ref<SVGSVGElement | null>(null);
 
-const rc = computed(() => (gEl.value ? rough.svg(gEl.value).generator : null), {
-    onTrigger() {
-        console.log("rough");
-    }
-});
+const rc = computed(() => (gEl.value ? rough.svg(gEl.value).generator : null));
 const paths = computed(() => {
     if (isNaN(props.w) || isNaN(props.h) || !rc.value || !gEl.value) {
         return;

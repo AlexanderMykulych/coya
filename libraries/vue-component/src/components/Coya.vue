@@ -105,7 +105,7 @@ const rectPositions = computed(() => {
 const defaultRectStyle = computed(() => arch.value?.style?.blocks?.['_']);
 const defaultArrowStyle = computed(() => arch.value?.style?.blocks?.['->']);
 const filteredRectPositions = computed(() =>
-    rectPositions.value.filter((x) => !x?.style?.isHighlight)
+    rectPositions.value.filter((x) => !x?.style?.isHighlight),
 );
 
 const next = () => arch.value?.next();
@@ -175,6 +175,20 @@ provide(
                         :disableWrap="true"
                     />
                 </template>
+                <template #menu>
+                    <CoyaControlPanel
+                        :svgEl="drawableSvgEl"
+                        @back="back"
+                        @next="next"
+                        @enable="(val) => (enableDrawing = val)"
+                        @save="save"
+                    />
+                </template>
+                <template #before>
+                     <svg v-if="enableDrawing" class="drawableSvg" ref="drawableSvgEl">
+                        <rect x="0" y="0" width="100vw" height="100vh" style="opacity:0;"></rect>
+                     </svg>
+                </template>
             </editorComponent>
         </div>
         <div
@@ -182,7 +196,6 @@ provide(
                 coya-container
                 col-span-4
                 row-span-full
-                p-7
                 bg-gray-200 bg-opacity-70
             "
             ref="coyaEl"
@@ -328,8 +341,8 @@ provide(
 
                     <DebugLines v-if="debugLines" :lines="debugLines" />
                 </g>
+               
             </svg>
-            <svg v-if="enableDrawing" class="drawableSvg" ref="drawableSvgEl" />
         </div>
         <div v-if="debug" class="col-span-1">
             <NodeDetails
@@ -344,25 +357,6 @@ provide(
                 :phases="arch?.phases"
                 :modelValue="arch.currentPhase"
                 @update:modelValue="arch?.toPhase"
-            />
-        </div>
-        <div
-            class="
-                col-span-full
-                row-span-1
-                block
-                text-gray-700 text-center
-                bg-gray-200
-                px-4
-                py-2
-            "
-        >
-            <CoyaControlPanel
-                :svgEl="drawableSvgEl"
-                @back="back"
-                @next="next"
-                @enable="(val) => (enableDrawing = val)"
-                @save="save"
             />
         </div>
     </div>

@@ -32,6 +32,7 @@ const selectLayout = (layout: LayoutConfig) => applyPositioning(layout);
             <i-mdi:arrow-top-left-thin v-if="state.mode === EditorMode.Arrow" />
             <i-tabler:hand-finger v-else />
         </div>
+        <slot name="center"></slot>
         <div>
             <button class="border-2" @click="openLayouts = true">
                 <i-mdi:graph class="pb-1" />

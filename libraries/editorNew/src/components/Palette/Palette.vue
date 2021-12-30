@@ -34,7 +34,7 @@ watch(() => mouseState.palette.pressed, (val, oldVal) => {
                 name: ActionType.AddNewBlock,
                 value: {
                     [blockName]: {
-                        label: "new palette block"
+                        label: blockName,
                     }
                 }
             }

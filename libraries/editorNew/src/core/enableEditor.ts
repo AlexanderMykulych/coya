@@ -57,7 +57,7 @@ function listenSvgEvents(editor: EnabledEditor) {
             enableZoom(editor, val);
         }
     }, { immediate: true })
-    const { makeChange } = useEditorState(editor);
+    const { makeChange, getNewUniqBlockName } = useEditorState(editor);
     watch(() => editor.state.arrowState?.end, (val, oldVal) => {
         if (val && !oldVal && editor.state.arrowState && editor.state.arrowState.start) {
             makeChange({
@@ -66,7 +66,8 @@ function listenSvgEvents(editor: EnabledEditor) {
                     value: {
                         from: editor.state.arrowState.start,
                         to: val,
-                    }
+                        name: getNewUniqBlockName("line_"),
+                    },
                 }
             });
             editor.state.arrowState = null;

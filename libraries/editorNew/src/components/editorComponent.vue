@@ -110,7 +110,7 @@ const phasesJsonContainerStyle = computed(() => ({
     x: appMenuContainerStyle.value.x,
     y: `${appMenu.y + appMenu.h + 10}px`,
     width: `${nodeSettingWidth.value}px`,
-    height: `${svgPosition.h - 120}px`,
+    height: `1px`,
 }));
 const { mouseState, state, isOneNodeSelected, showDebugWindow } =
     useCurrentEditorState();
@@ -124,19 +124,7 @@ const { mouseState, state, isOneNodeSelected, showDebugWindow } =
                 :x="svgViewBox.x"
                 :y="svgViewBox.y"
             >
-                <!-- <foreignObject
-                    class="node"
-                    :style="phasesContainerStyle"
-                    @click.stop.prevent
-                    @mousedown.stop.prevent
-                >
-                    <body
-                        xmlns="http://www.w3.org/1999/xhtml"
-                        :style="phasesContainerStyle"
-                    >
-                        <Phases />
-                    </body>
-                </foreignObject> -->
+                <slot name="before"/>
                 <foreignObject
                     class="node"
                     :style="paletteContainerStyle"
@@ -153,6 +141,7 @@ const { mouseState, state, isOneNodeSelected, showDebugWindow } =
                 <foreignObject
                     class="node"
                     :style="phasesJsonContainerStyle"
+                    style="overflow: visible;"
                     @click.stop.prevent
                     @mousedown.stop.prevent
                 >
@@ -178,7 +167,7 @@ const { mouseState, state, isOneNodeSelected, showDebugWindow } =
                     >
                         <NodeSetting>
                             <template #preview="slotData">
-                                <slot name="preview" v-bind="slotData"/>
+                                <slot name="preview" v-bind="slotData" />
                             </template>
                         </NodeSetting>
                     </body>
@@ -194,7 +183,11 @@ const { mouseState, state, isOneNodeSelected, showDebugWindow } =
                         :style="appMenuContainerStyle"
                         @click.stop.prevent
                     >
-                        <AppMenu />
+                        <AppMenu>
+                            <template #center>
+                                <slot name="menu"/>
+                            </template>
+                        </AppMenu>
                     </body>
                 </foreignObject>
                 <foreignObject
