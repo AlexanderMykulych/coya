@@ -1,5 +1,5 @@
-import { isArray, isLineBlockElementDescription, isNotNullOrUndefined } from "coya-core";
-import { ArchitectureDescription } from "coya-core";
+import { isArray, isLineBlockElementDescription, ArchitectureDescription } from "coya-core";
+import { isNotNullOrUndefined } from "coya-util";
 
 export function reconnectArrow(
     activeArchitecture: ArchitectureDescription,

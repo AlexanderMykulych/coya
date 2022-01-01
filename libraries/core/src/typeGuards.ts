@@ -1,3 +1,4 @@
+import { isNotNullOrUndefined } from "coya-util";
 import {
     ActionSetting, AddNewBlockActionSetting,
     ArchitectureDescription, BlockElementDescription,
@@ -12,12 +13,7 @@ import {
     Positioning, RectPositioning
 } from "./types";
 
-export function isNotNullOrUndefined<T>(obj: T | null | undefined): obj is T {
-    return obj !== null && typeof obj !== "undefined";
-}
-export function isNullOrUndefined(obj: unknown): obj is null | undefined {
-    return obj === null || typeof obj === "undefined";
-}
+
 export function isString(obj: unknown): obj is string {
     return typeof obj === "string";
 }

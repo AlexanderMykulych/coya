@@ -1,6 +1,6 @@
 import { DebugAction, DebugType, StartPhaseDebugAction } from "../debugTypes";
 import { actionExecutors } from "../phase/actionExecutors";
-import {  isNotNullOrUndefined } from "../typeGuards";
+import { isNotNullOrUndefined } from "coya-util";
 import { ActionType, DebugSelectContext, SelectedProperties } from "../types";
 import { getSelectedBlockId, isBlockSelected } from "./isBlockSelected";
 import { getActionInfo, getPhaseIndex, isPhaseSelected } from "./isPhaseSelected";
@@ -54,7 +54,7 @@ export function getDebugActions(selected: SelectedProperties, context: DebugSele
                                 action.action.name === ActionType.AddNewBlock &&
                                 isNotNullOrUndefined((action.action.value as any)[blockId])
                             )
-                );
+                    );
                 if (phaseId) {
                     items.push({
                         type: DebugType.StartPhase,

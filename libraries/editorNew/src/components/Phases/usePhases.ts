@@ -1,4 +1,4 @@
-import { isNotNullOrUndefined, isNullOrUndefined } from "coya-core";
+import { isNotNullOrUndefined, isNullOrUndefined } from "coya-util";
 import { computed } from "vue";
 import { useCurrentEditorState } from "../../core/useCurrentEditorState";
 

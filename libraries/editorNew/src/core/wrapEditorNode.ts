@@ -1,10 +1,12 @@
-import { ChangeType, ChangeOwnerType, RectPositioning } from "coya-core";
+import { ChangeType, ChangeOwnerType } from "coya-core";
 import { computed, h, reactive, SetupContext, watch } from "vue";
 import { getMousePosition } from "./getMousePosition";
 import { Editor, EnabledEditor } from "./types";
 import WrapperRect from "./../components/Wrap/WrapperRect.vue";
 import ArrowWrapperRect from "./../components/Wrap/ArrowWrapperRect.vue";
-import { EditorMode, PinType } from ".";
+import { EditorMode } from ".";
+import { calculatePinDragResult } from "./calculatePinDragResult";
+import { isNotNullOrUndefined } from "coya-util";
 
 
 export function wrapEditorNode(editor: Editor, node: any) {
@@ -18,6 +20,14 @@ export function wrapEditorNode(editor: Editor, node: any) {
             const isSelected = computed(() => editor.state.selectedNodeIds?.some(x => x === blockId.value) ?? false);
             const isDragged = computed(() => editor.mouseState.pressed && isSelected.value && editor.state.drag);
             const isHovered = computed(() => editor.state.hover?.hoveredBlockId === blockId.value);
+            const blockStyle = computed(() => editor.architecture.style?.blocks?.[blockId.value]);
+            const pinToPos = computed(() => {
+                const pinTo = blockStyle.value?.pinTo;
+                if (pinTo) {
+                    return editor.architecture.style?.positioning?.find(x => x.blockId === pinTo)?.position;
+                }
+                return null;
+            });
             const overflowCoyaRectAttrs = computed(() => reactive({
                 x: attrs.positioning.x,
                 y: attrs.positioning.y,
@@ -37,8 +47,18 @@ export function wrapEditorNode(editor: Editor, node: any) {
             }) : null);
             watch(() => newPosition.value, (val, oldVal) => {
                 if (val && val !== oldVal && oldVal) {
+                    let { x: pX, y: pY } = val;
+
                     if (editor.state.pins.selectedPinType) {
-                        const { x, y, w, h } = calculatePinDragResult(editor);
+                        let { x, y, w, h } = calculatePinDragResult(editor);
+                        if (pinToPos.value) {
+                            if (isNotNullOrUndefined(x)) {
+                                x -= pinToPos.value.x;
+                            }
+                            if (isNotNullOrUndefined(y)) {
+                                y -= pinToPos.value.y;
+                            }
+                        }
                         editor.makeChange({
                             type: ChangeType.ChangePosition,
                             setting: {
@@ -53,12 +73,16 @@ export function wrapEditorNode(editor: Editor, node: any) {
                             }
                         });
                     } else {
+                        if (pinToPos.value) {
+                            pX -= pinToPos.value.x;
+                            pY -= pinToPos.value.y;
+                        }
                         editor.makeChange({
                             type: ChangeType.ChangePosition,
                             setting: {
                                 blockId: blockId.value,
-                                x: `${val?.x}`,
-                                y: `${val?.y}`,
+                                x: `${pX}`,
+                                y: `${pY}`,
                             },
                             owner: {
                                 type: ChangeOwnerType.Editor
@@ -147,56 +171,4 @@ function onMouseleave(editor: EnabledEditor, { attrs }: { attrs: any }, event: M
     editor.state.hover = null;
 }
 
-function calculatePinDragResult(editor: EnabledEditor): RectPositioning {
-    if (!editor.state.drag) {
-        return {};
-    }
-    const { x, y } = editor!.mouseState.position;
-    const init = editor.state.drag.originPosition;
-    switch (editor.state.pins.selectedPinType) {
-        case PinType.BottomRight:
-            return {
-                w: x - init.x,
-                h: y - init.y,
-            };
-        case PinType.BottomLeft:
-            return {
-                x,
-                w: init.w - (x - init.x),
-                h: y - init.y,
-            };
-        case PinType.TopLeft:
-            return {
-                x,
-                y,
-                w: init.w - (x - init.x),
-                h: init.h - (y - init.y),
-            };
-        case PinType.TopRight:
-            return {
-                y,
-                w: x - init.x,
-                h: init.h - (y - init.y),
-            };
-        case PinType.Top:
-            return {
-                y,
-                h: init.h - (y - init.y),
-            };
-        case PinType.Left:
-            return {
-                x,
-                w: init.w - (x - init.x),
-            };
-        case PinType.Bottom:
-            return {
-                h: y - init.y,
-            };
-        case PinType.Right:
-            return {
-                w: x - init.x,
-            };
-        default:
-            return {};
-    }
-}
+

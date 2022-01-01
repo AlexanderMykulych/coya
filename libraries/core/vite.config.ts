@@ -8,8 +8,9 @@ export default defineConfig({
             external: ['vue', "@vueuse/core"],
             output: {
                 format: 'es'
-            }
+            },
         },
+        sourcemap: true,
         lib: {
             entry: path.resolve(__dirname, "/src/index.ts"),
             name: "coya-core",

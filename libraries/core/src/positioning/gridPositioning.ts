@@ -1,6 +1,7 @@
+import { isNotNullOrUndefined } from "coya-util";
 import { computed, Ref, ref } from "vue";
 import { FormulaValue } from "../descriptionTypes";
-import { isContainerBlock, isFormulaValue, isLineBlockElement, isNotNullOrUndefined } from "../typeGuards";
+import { isContainerBlock, isFormulaValue, isLineBlockElement } from "../typeGuards";
 import { BlockPositioning } from "../types";
 import { getFormulaValue } from "./getFormulaValue";
 import { lineBlockPosition } from "./lineBlockPosition";
@@ -46,15 +47,26 @@ export function gridPositioning(option: AutoPositioningSetting): BlockPositionin
         if (blockStyle.position) {
             const pos = blockStyle.position;
             
-
-            const indentX = (getValueByCtx(pos.indentX) ?? 0);
-            const indentY = (getValueByCtx(pos.indentY) ?? 0);
+            const indentX = (getValueByCtx(pos.indentX) ?? ref(0));
+            const indentY = (getValueByCtx(pos.indentY) ?? ref(0));
+            
+            const pinTo = blockStyle.pinTo;
+            let pinToBlockPos = {
+                x: ref(0),
+                y: ref(0),
+            };
+            if (pinTo) {
+                pinToBlockPos = {
+                    x: computed(() => blocksPositioning.value.find(x => x.blockId === pinTo)?.position?.x ?? 0),
+                    y: computed(() => blocksPositioning.value.find(x => x.blockId === pinTo)?.position?.y ?? 0),
+                };
+            }
             const blockId = block.id;
             return <BlockPositioning>{
                 blockId: blockId,
                 position: {
-                    x: computed(() => getValueByCtx(pos.x, gridSize.columnWidth).value + indentX.value),
-                    y: computed(() => getValueByCtx(pos.y, gridSize.rowHeight).value + indentY.value),
+                    x: computed(() => getValueByCtx(pos.x, gridSize.columnWidth).value + indentX.value + pinToBlockPos.x.value),
+                    y: computed(() => getValueByCtx(pos.y, gridSize.rowHeight).value + indentY.value + pinToBlockPos.y.value),
                     w: computed(() => getValueByCtx(pos.w, gridSize.columnWidth).value + indentX.value),
                     h: computed(() => getValueByCtx(pos.h, gridSize.rowHeight).value + indentY.value),
                     top: {

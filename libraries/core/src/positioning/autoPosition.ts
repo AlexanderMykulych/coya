@@ -1,9 +1,10 @@
 import { AutoPositioningSetting, AutoPositioningSizeSetting } from "./types";
 import { computed, ref, Ref } from "vue";
 import { BlockPositioning, Positioning } from "../types";
-import { isContainerBlock, isLineBlockElement, isNotNullOrUndefined, isParentBlockElement, isRectPositioning } from "../typeGuards";
+import { isContainerBlock, isLineBlockElement, isParentBlockElement, isRectPositioning } from "../typeGuards";
 import { lineBlockPosition } from "./lineBlockPosition";
 import { getNumber } from "./getNumber";
+import { isNotNullOrUndefined } from "coya-util";
 
 export function autoPositioning(setting: AutoPositioningSetting): BlockPositioning[] | any {
     const sizeSetting = setting.sizeSetting ?? defaultSiseSettings;

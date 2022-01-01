@@ -1,6 +1,6 @@
 import { ArchitectureDescription, BlockStyle } from "../descriptionTypes";
 import { ChangeOwnerType } from "../types";
-import { isNotNullOrUndefined } from "../typeGuards";
+import { isNotNullOrUndefined } from "coya-util";
 import {
     AddBlockChangeSetting,
     Change, ChangeBlockStyleSetting,

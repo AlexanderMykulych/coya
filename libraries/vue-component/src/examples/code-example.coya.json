@@ -1,75 +1,95 @@
 {
-	"name": "vue-lifecycle-json",
-	"blocks": {
-		"start": "code",
-		"block_new": {
-			"label": "new palette block"
-		},
-		"line_0_0": {
-			"from": "start",
-			"to": "block_new",
-			"type": "line",
-			"label": "",
-			"sourcePhase": 0
-		},
-		"block_new_new": {
-			"label": "new palette block",
-			"sourcePhase": 0
-		}
-	},
-	"phases": [],
-	"style": {
-		"blocks": {
-			"_": {
-				"css": {
-					"color": "black",
-					"fill": "#FF89CF",
-					"fontSize": "2.1em",
-					"rx": "25",
-					"stroke": "black"
-				}
-			},
-			"->": {
-				"css": {
-					"fill": "none"
-				}
-			},
-			"start": {
-				"position": {
-					"x": "-624.7141571044922",
-					"y": "-1579.0714569091797",
-					"w": "1359.0714111328125",
-					"h": "1556.5"
-				},
-				"code": "libEntry.ts",
-				"css": {
-					"fillStyle": "solid"
-				}
-			},
-			"block_new": {
-				"position": {
-					"x": "1504.642822265625",
-					"y": "-1622.4286499023438",
-					"w": "495",
-					"h": "402.5"
-				},
-				"css": {
-					"fill": "#3e6b94"
-				}
-			},
-			"block_new_new": {
-				"position": {
-					"x": "1572.999755859375",
-					"y": "-569.4997730255127",
-					"w": "437.500244140625",
-					"h": "432.49989318847656"
-				},
-				"css": {
-					"fill": "blue",
-					"stroke": "red"
-				},
-				"img": "rocket-launch.png"
-			}
-		}
-	}
+    "name": "vue-lifecycle-json",
+    "blocks": {
+        "start": "code",
+        "bGroup": "Group",
+        "bImg": "Image",
+        "bItem": "Item 1",
+        "line_0_0": {
+            "from": "start",
+            "to": "bGroup",
+            "type": "line",
+            "label": ""
+        },
+        "line_0_1": {
+            "from": "start",
+            "to": "bImg",
+            "type": "line",
+            "label": ""
+        },
+        "line_0_2": {
+            "from": "bImg",
+            "to": "bItem",
+            "type": "line",
+            "label": ""
+        }
+    },
+    "phases": [],
+    "style": {
+        "blocks": {
+            "_": {
+                "css": {
+                    "color": "black",
+                    "fill": "#FF89CF",
+                    "fontSize": "2.1em",
+                    "rx": "25",
+                    "stroke": "black"
+                }
+            },
+            "->": {
+                "css": {
+                    "fill": "none"
+                }
+            },
+            "start": {
+                "position": {
+                    "x": "-624.7141571044922",
+                    "y": "-1579.0714569091797",
+                    "w": "1359.0714111328125",
+                    "h": "1556.5"
+                },
+                "code": "libEntry.ts",
+                "css": {
+                    "fillStyle": "solid"
+                }
+            },
+            "bGroup": {
+                "position": {
+                    "x": "1504.642822265625",
+                    "y": "-1622.4286499023438",
+                    "w": "495",
+                    "h": "402.5"
+                },
+                "css": {
+                    "fill": "#3e6b94"
+                }
+            },
+            "bItem": {
+                "position": {
+                    "x": "20",
+                    "y": "20",
+                    "w": "200",
+                    "h": "180"
+                },
+                "css": {
+                    "fill": "#3e6b94",
+                    "fillStyle": "solid"
+                },
+                "pinTo": "bGroup"
+            },
+            "bImg": {
+                "position": {
+                    "x": "1572.999755859375",
+                    "y": "-569.4997730255127",
+                    "w": "437.500244140625",
+                    "h": "432.49989318847656"
+                },
+                "css": {
+                    "fill": "blue",
+                    "stroke": "red"
+                },
+                "img": "rocket-launch.png"
+            }
+        }
+    }
 }

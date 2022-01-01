@@ -1,5 +1,5 @@
 import { ArchitectureDescription } from "../descriptionTypes";
-import { isNotNullOrUndefined } from "../typeGuards";
+import { isNotNullOrUndefined } from "coya-util";
 import { Change, PhaseIndexItemAction, ChangeOwnerType } from "../types";
 import { actionExecutors } from "./actionExecutors";
 import { makeChange } from "./makeChange";

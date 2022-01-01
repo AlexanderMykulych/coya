@@ -3,7 +3,7 @@ import { ref, reactive, computed } from 'vue';
 import { useCurrentEditorState } from '../../core/useCurrentEditorState';
 import JsonEditor from 'coya-json-editor';
 import { predefinedSetting } from './../PredefinedSetting/PredefinedSetting';
-import { isNotNullOrUndefined } from 'coya-core';
+import { isNotNullOrUndefined } from 'coya-util';
 import { deepAssign, ChangedItem, setValueByPath } from 'coya-util';
 
 const { activeNode, activeBlockStyleSetting, architecture, selectedNode } =

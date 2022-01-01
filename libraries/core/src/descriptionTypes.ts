@@ -121,6 +121,7 @@ export interface BlockStyle {
     code?: string;
     css?: Properties;
     position?: Position;
+    pinTo?: string;
     label?: string;
     isHighlight?: boolean;
 }

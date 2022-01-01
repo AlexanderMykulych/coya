@@ -1,6 +1,6 @@
 import { blockGroupDescriptionsToBlock } from "./block/blockGroupDescriptionsToBlock";
 import { ArchitectureDescription, TransformSetting } from "./descriptionTypes";
-import { isArchitectureDescription, isNotNullOrUndefined } from "./typeGuards";
+import { isArchitectureDescription } from "./typeGuards";
 import { SelectedProperties, Architecture, Block, DebugStateContainer, DebugSelectContext, TransformationResult } from "./types";
 import { styleDescriptionToArchitectureStyle } from "./style/styleDescriptionToArchitectureStyle";
 import { startPhases } from "./phase/startPhases";
@@ -8,7 +8,7 @@ import { buildPhasesIndex } from "./phase/buildPhasesIndex";
 import { computed, Ref, isRef, ref, reactive } from 'vue';
 import { getDebugActions } from "./debug/getDebugActions";
 import { DebugType } from "./debugTypes";
-import { deepCopy } from "coya-util";
+import { deepCopy, isNotNullOrUndefined } from "coya-util";
 
 export function transformToArchitecture(description: Ref<unknown> | unknown, setting: TransformSetting): TransformationResult {
     const refDescription = isRef(description) ? description : ref(description);

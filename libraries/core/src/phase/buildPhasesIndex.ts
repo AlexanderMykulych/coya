@@ -1,6 +1,6 @@
 import { computed, Ref } from "vue";
 import { ArchitectureDescription, ActionSetting, PhaseAction } from "../descriptionTypes";
-import { isNotNullOrUndefined, isNullOrUndefined } from "../typeGuards";
+import { isNotNullOrUndefined, isNullOrUndefined } from "coya-util";
 import { PhaseId, PhaseIndex, PhaseIndexItem, PhaseIndexItemAction, ActionType } from "../types";
 
 export function buildPhasesIndex(architectureDescription: Ref<ArchitectureDescription>): PhaseIndex {

@@ -1,6 +1,7 @@
 import { computed, reactive, ref } from "vue";
 import { CurrentEditorState, Editor, getCurrentEditor, MakeChangeAction } from ".";
-import { Action, isArray, isNotNullOrUndefined, isNullOrUndefined } from "coya-core";
+import { Action, isArray } from "coya-core";
+import { isNotNullOrUndefined, isNullOrUndefined } from "coya-util";
 import { executeActions } from "coya-core";
 import { ArchitectureDescription } from "coya-core";
 import { applyPositioning } from "coya-core";

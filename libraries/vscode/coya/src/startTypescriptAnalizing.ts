@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import * as ts from "typescript";
 import { watch } from '@vue-reactivity/watch';
 import state from './state';
-import { isNotNullOrUndefined } from 'coya-core';
+import { isNotNullOrUndefined } from 'coya-util';
 
 export function startTypescriptAnalizing(context: vscode.ExtensionContext) {
     const options = getOptions();

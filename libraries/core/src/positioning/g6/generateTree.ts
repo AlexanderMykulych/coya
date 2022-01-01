@@ -1,5 +1,5 @@
 import { ArchitectureDescription, BlockElementType, LineBlockElementDescription } from "../../descriptionTypes";
-import { isNotNullOrUndefined } from "../../typeGuards";
+import { isNotNullOrUndefined } from "coya-util";
 import { TreePositioningStrategy, PositioningDefaults } from "./positioning";
 import Hierarchy from "@antv/hierarchy";
 
