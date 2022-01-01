@@ -162,35 +162,43 @@ provide(
 );
 </script>
 <template>
-    <div class="grid grid-cols-5 grid-rows-12 h-full">
-        <div>
-            <editorComponent v-if="!!editor">
-                <template #preview="{ item }">
-                    <CoyaNode
-                        :block="item.block"
-                        :block-style="item.blockStyle"
-                        :defaultRectStyle="defaultRectStyle"
-                        :defaultArrowStyle="defaultArrowStyle"
-                        :positioning="item.positioning"
-                        :disableWrap="true"
-                    />
-                </template>
-                <template #menu>
-                    <CoyaControlPanel
-                        :svgEl="drawableSvgEl"
-                        @back="back"
-                        @next="next"
-                        @enable="(val) => (enableDrawing = val)"
-                        @save="save"
-                    />
-                </template>
-                <template #before>
-                     <svg v-if="enableDrawing" class="drawableSvg" ref="drawableSvgEl">
-                        <rect x="0" y="0" width="100vw" height="100vh" style="opacity:0;"></rect>
-                     </svg>
-                </template>
-            </editorComponent>
-        </div>
+    <div class="grid grid-cols-4 grid-rows-12 h-full">
+        <editorComponent v-if="!!editor">
+            <template #preview="{ item }">
+                <CoyaNode
+                    :block="item.block"
+                    :block-style="item.blockStyle"
+                    :defaultRectStyle="defaultRectStyle"
+                    :defaultArrowStyle="defaultArrowStyle"
+                    :positioning="item.positioning"
+                    :disableWrap="true"
+                />
+            </template>
+            <template #menu>
+                <CoyaControlPanel
+                    :svgEl="drawableSvgEl"
+                    @back="back"
+                    @next="next"
+                    @enable="(val) => (enableDrawing = val)"
+                    @save="save"
+                />
+            </template>
+            <template #before>
+                <svg
+                    v-if="enableDrawing"
+                    class="drawableSvg"
+                    ref="drawableSvgEl"
+                >
+                    <rect
+                        x="0"
+                        y="0"
+                        width="100vw"
+                        height="100vh"
+                        style="opacity: 0"
+                    ></rect>
+                </svg>
+            </template>
+        </editorComponent>
         <div
             class="
                 coya-container
@@ -341,7 +349,6 @@ provide(
 
                     <DebugLines v-if="debugLines" :lines="debugLines" />
                 </g>
-               
             </svg>
         </div>
         <div v-if="debug" class="col-span-1">

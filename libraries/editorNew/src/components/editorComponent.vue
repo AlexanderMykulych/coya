@@ -117,95 +117,93 @@ const { mouseState, state, isOneNodeSelected, showDebugWindow } =
 </script>
 
 <template>
-    <div>
-        <Teleport v-if="!!editor.enable && editor.svg" :to="editor.svg">
-            <svg
-                :viewBox="`0 0 ${svgPosition.w} ${svgPosition.h}`"
-                :x="svgViewBox.x"
-                :y="svgViewBox.y"
+    <Teleport v-if="!!editor.enable && editor.svg" :to="editor.svg">
+        <svg
+            :viewBox="`0 0 ${svgPosition.w} ${svgPosition.h}`"
+            :x="svgViewBox.x"
+            :y="svgViewBox.y"
+        >
+            <slot name="before" />
+            <foreignObject
+                class="node"
+                :style="paletteContainerStyle"
+                @click.stop.prevent
+                @mousedown.stop.prevent
             >
-                <slot name="before"/>
-                <foreignObject
-                    class="node"
+                <body
+                    xmlns="http://www.w3.org/1999/xhtml"
                     :style="paletteContainerStyle"
-                    @click.stop.prevent
-                    @mousedown.stop.prevent
                 >
-                    <body
-                        xmlns="http://www.w3.org/1999/xhtml"
-                        :style="paletteContainerStyle"
-                    >
-                        <Palette />
-                    </body>
-                </foreignObject>
-                <foreignObject
-                    class="node"
+                    <Palette />
+                </body>
+            </foreignObject>
+            <foreignObject
+                class="node"
+                :style="phasesJsonContainerStyle"
+                style="overflow: visible"
+                @click.stop.prevent
+                @mousedown.stop.prevent
+            >
+                <body
+                    xmlns="http://www.w3.org/1999/xhtml"
                     :style="phasesJsonContainerStyle"
-                    style="overflow: visible;"
                     @click.stop.prevent
-                    @mousedown.stop.prevent
                 >
-                    <body
-                        xmlns="http://www.w3.org/1999/xhtml"
-                        :style="phasesJsonContainerStyle"
-                        @click.stop.prevent
-                    >
-                        <PhasesJson />
-                    </body>
-                </foreignObject>
-                <foreignObject
-                    class="node"
+                    <PhasesJson />
+                </body>
+            </foreignObject>
+            <foreignObject
+                class="node"
+                :style="nodeSettingContainerStyle"
+                v-if="isOneNodeSelected"
+                @click.stop.prevent
+                @mousedown.stop.prevent
+            >
+                <body
+                    xmlns="http://www.w3.org/1999/xhtml"
                     :style="nodeSettingContainerStyle"
-                    v-if="isOneNodeSelected"
                     @click.stop.prevent
-                    @mousedown.stop.prevent
                 >
-                    <body
-                        xmlns="http://www.w3.org/1999/xhtml"
-                        :style="nodeSettingContainerStyle"
-                        @click.stop.prevent
-                    >
-                        <NodeSetting>
-                            <template #preview="slotData">
-                                <slot name="preview" v-bind="slotData" />
-                            </template>
-                        </NodeSetting>
-                    </body>
-                </foreignObject>
-                <foreignObject
-                    class="node"
+                    <NodeSetting>
+                        <template #preview="slotData">
+                            <slot name="preview" v-bind="slotData" />
+                        </template>
+                    </NodeSetting>
+                </body>
+            </foreignObject>
+            <foreignObject
+                class="node"
+                :style="appMenuContainerStyle"
+                @click.stop.prevent
+                @mousedown.stop.prevent
+            >
+                <body
+                    xmlns="http://www.w3.org/1999/xhtml"
                     :style="appMenuContainerStyle"
                     @click.stop.prevent
-                    @mousedown.stop.prevent
                 >
-                    <body
-                        xmlns="http://www.w3.org/1999/xhtml"
-                        :style="appMenuContainerStyle"
-                        @click.stop.prevent
-                    >
-                        <AppMenu>
-                            <template #center>
-                                <slot name="menu"/>
-                            </template>
-                        </AppMenu>
-                    </body>
-                </foreignObject>
-                <foreignObject
-                    v-if="showDebugWindow"
-                    class="node"
+                    <AppMenu>
+                        <template #center>
+                            <slot name="menu" />
+                        </template>
+                    </AppMenu>
+                </body>
+            </foreignObject>
+            <foreignObject
+                v-if="showDebugWindow"
+                class="node"
+                :style="debugContainerStyle"
+                @click.stop.prevent
+                @mousedown.stop.prevent
+            >
+                <body
+                    xmlns="http://www.w3.org/1999/xhtml"
                     :style="debugContainerStyle"
                     @click.stop.prevent
-                    @mousedown.stop.prevent
                 >
-                    <body
-                        xmlns="http://www.w3.org/1999/xhtml"
-                        :style="debugContainerStyle"
-                        @click.stop.prevent
-                    >
-                        <Debug />
-                    </body>
-                </foreignObject>
-            </svg>
-        </Teleport>
-    </div>
+                    <Debug />
+                </body>
+            </foreignObject>
+        </svg>
+    </Teleport>
 </template>
