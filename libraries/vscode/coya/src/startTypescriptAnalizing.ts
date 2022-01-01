@@ -17,7 +17,6 @@ export function startTypescriptAnalizing(context: vscode.ExtensionContext) {
     };
     
     watch(() => state.files.length, _ => {
-        console.log("startTypescritpAnalizing, watch(state.files)");
         const files = state.files;
         const paths = files.map(x => x.path);
         var program = ts.createProgram(paths, options, compilerHost);
