@@ -2,9 +2,11 @@
     "name": "vue-lifecycle-json",
     "blocks": {
         "start": "code",
+        "bGroup2": "Group",
         "bGroup": "Group",
         "bImg": "Image",
         "bItem": "Item 1",
+        "bItem2": "Item 2",
         "line_0_0": {
             "from": "start",
             "to": "bGroup",
@@ -20,6 +22,12 @@
         "line_0_2": {
             "from": "bImg",
             "to": "bItem",
+            "type": "line",
+            "label": ""
+        },
+        "line_0_3": {
+            "from": "bImg",
+            "to": "bItem2",
             "type": "line",
             "label": ""
         }
@@ -55,19 +63,46 @@
             },
             "bGroup": {
                 "position": {
-                    "x": "1504.642822265625",
-                    "y": "-1622.4286499023438",
+                    "x": "40",
+                    "y": "40",
                     "w": "495",
                     "h": "402.5"
                 },
                 "css": {
-                    "fill": "#3e6b94"
+                    "fill": "#6EFF00",
+                    "fillStyle": "solid"
+                },
+                "pinTo": "bGroup2"
+            },
+            "bGroup2": {
+                "position": {
+                    "x": "1104.642822265625",
+                    "y": "-1822.4286499023438",
+                    "w": "895",
+                    "h": "802.5"
+                },
+                "css": {
+                    "fill": "#FF00A2",
+                    "fillStyle": "solid"
                 }
             },
             "bItem": {
                 "position": {
                     "x": "20",
                     "y": "20",
+                    "w": "200",
+                    "h": "180"
+                },
+                "css": {
+                    "fill": "#3e6b94",
+                    "fillStyle": "solid"
+                },
+                "pinTo": "bGroup"
+            },
+            "bItem2": {
+                "position": {
+                    "x": "270",
+                    "y": "170",
                     "w": "200",
                     "h": "180"
                 },
