@@ -15,7 +15,7 @@ export default defineConfig({
             entry: path.resolve(__dirname, "/src/index.ts"),
             name: "coya-core",
             fileName: (format) => `coya-core.${format}.js`,
-            formats: ['esm']
+            formats: ['es']
         },
     }
 })

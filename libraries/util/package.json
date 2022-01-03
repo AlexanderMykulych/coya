@@ -1,7 +1,7 @@
 {
   "version": "0.1.0",
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "dist/coya-util.es.js",
   "typings": "dist/index.d.ts",
   "files": [
     "dist",
@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "tsdx watch",
-    "build": "tsdx build",
+    "build": "vite build",
     "test": "tsdx test",
     "lint": "tsdx lint",
     "prepare": "tsdx build",
@@ -32,7 +32,7 @@
   },
   "name": "coya-util",
   "author": "AlexMykulych",
-  "module": "dist/coya-util.esm.js",
+  "module": "dist/coya-util.es.js",
   "size-limit": [
     {
       "path": "dist/coya-util.cjs.production.min.js",
@@ -52,8 +52,11 @@
     "typescript": "^4.5.4"
   },
   "dependencies": {
+    "@rollup/plugin-typescript": "^8.3.0",
     "curved-arrows": "^0.1.0",
     "fast-deep-equal": "^3.1.3",
-    "hex-to-rgba": "^2.0.1"
+    "hex-to-rgba": "^2.0.1",
+    "rollup-plugin-typescript2": "^0.31.1",
+    "vite": "^2.7.10"
   }
 }

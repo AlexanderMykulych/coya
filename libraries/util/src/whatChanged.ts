@@ -1,14 +1,9 @@
+import { ChangedItem } from "./ChangedItem";
 
 function isObject(object: any) {
     return object != null && typeof object === 'object';
 }
-export interface ChangedItem {
-    attr: string;
-    fullPath: string;
-    oldVal: any;
-    val: any;
-}
-export function whatChanged(initObj: any, changedObj: any, findFirst: boolean = true) {
+export function whatChanged(initObj: any, changedObj: any, findFirst: boolean = true): ChangedItem[] {
     const res: ChangedItem[] = [];
     const deepEqual = (object1: any, object2: any, parentPath: string) => {
         if (findFirst && res.length > 0) {
@@ -36,5 +31,6 @@ export function whatChanged(initObj: any, changedObj: any, findFirst: boolean = 
         });
     }
     deepEqual(initObj, changedObj, "");
+    res.forEach(x => x.parents = x.fullPath.split("."));
     return res;
 }

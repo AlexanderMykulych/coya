@@ -5,6 +5,7 @@ import path from 'path'
 import Icons from 'unplugin-icons/vite';
 import IconsResolver from 'unplugin-icons/resolver'
 import Components from 'unplugin-vue-components/vite'
+import { triggerAsyncId } from 'async_hooks';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -32,7 +33,7 @@ export default defineConfig({
     ],
     build: {
         rollupOptions: {
-            external: ['vue', "coya-core", "@vueuse/core"],
+            external: ['vue', "coya-core", "coya-util", "@vueuse/core"],
             output: {
                 // Provide global variables to use in the UMD build
                 // for externalized deps
@@ -43,6 +44,7 @@ export default defineConfig({
                 format: 'es'
             }
         },
+        sourcemap: true,
         lib: {
             entry: path.resolve(__dirname, "/src/libMain.ts"),
             name: "coya-editor",

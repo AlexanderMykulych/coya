@@ -3,8 +3,13 @@ import { ref, reactive, computed } from 'vue';
 import { useCurrentEditorState } from '../../core/useCurrentEditorState';
 import JsonEditor from 'coya-json-editor';
 import { predefinedSetting } from './../PredefinedSetting/PredefinedSetting';
-import { isNotNullOrUndefined } from 'coya-util';
-import { deepAssign, ChangedItem, setValueByPath } from 'coya-util';
+import {
+    groupBy,
+    isNotNullOrUndefined,
+    deepAssign,
+    ChangedItem,
+    setValueByPath,
+} from 'coya-util';
 
 const { activeNode, activeBlockStyleSetting, architecture, selectedNode } =
     useCurrentEditorState();
@@ -47,20 +52,20 @@ const preparedPredefs = computed(() => {
         w: 300,
         h: 150,
     };
-    const block =  {
-        label: "Block",
-        id: "test"
+    const block = {
+        label: 'Block',
+        id: 'test',
     };
-    
+
     const blockStyle = activeBlockStyleSetting.value;
     // const blockStyle = {
-        
+
     // };
     const style = !!blockStyle?.code
         ? {
-                ...blockStyle,
-                code: undefined,
-            }
+              ...blockStyle,
+              code: undefined,
+          }
         : blockStyle;
     return predefinedSetting.map((predef) => {
         return {
@@ -70,14 +75,32 @@ const preparedPredefs = computed(() => {
                     ...block,
                     id: block ? `${block.id}_prev` : '',
                 },
-                blockStyle: deepAssign({}, style, predef.config,),
+                blockStyle: deepAssign({}, style, predef.config),
                 positioning,
             },
         };
     });
 });
-const onAttrChange = (change: ChangedItem) => {
-    setValueByPath(activeNode, change.val, change.fullPath);
+const onAttrsChange = (changes: ChangedItem[]) => {
+    Object.entries(groupBy(changes, (x) => x.parents[0])).forEach(
+        ([key, items]) => onAttrChange(items, key),
+    );
+};
+const onAttrChange = (changes: ChangedItem[], key: string) => {
+    const oldVal = activeNode[key];
+    if (typeof oldVal === 'object') {
+        const newVal = deepAssign({}, oldVal);
+        changes.forEach(change =>
+            setValueByPath(
+                newVal,
+                change.val,
+                change.parents.slice(1).join('.'),
+            ),
+        );
+        activeNode[key] = newVal;
+    } else if (changes.length === 1) {
+        activeNode[key] = changes[0].val;
+    }
 };
 </script>
 
@@ -85,7 +108,7 @@ const onAttrChange = (change: ChangedItem) => {
     <div v-if="activeNode" class="border-2 rounded-md p-3 bg-white grid h-full">
         <JsonEditor
             :modelValue="activeNode"
-            @changeAttr="onAttrChange"
+            @changeAttr="onAttrsChange"
             :config="jsonEditorConfig"
             activateDefaultWidget
             :widgetFilter="widgetFilter"

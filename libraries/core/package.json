@@ -40,7 +40,7 @@
     },
     "name": "coya-core",
     "author": "alex.mykulych",
-    "module": "dist/coya-core.esm.js",
+    "module": "dist/coya-core.es.js",
     "size-limit": [
         {
             "path": "dist/core-core.cjs.production.min.js",

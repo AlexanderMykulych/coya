@@ -94,7 +94,7 @@ export default defineConfig({
     },
     build: {
         rollupOptions: {
-            external: ['vue'],
+            external: ['vue', 'coya-util'],
             output: {
                 globals: {
                     vue: 'Vue'

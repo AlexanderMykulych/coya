@@ -67,7 +67,7 @@ onMounted(() => {
                     if (changed.length > 0) {
                         emit(
                             'changeAttr',
-                            changed[0],
+                            changed,
                         );
                     }
                 }

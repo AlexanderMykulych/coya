@@ -7,3 +7,4 @@ export * from "./isNotNullOrUndefined";
 export * from "./isNullOrUndefined";
 export * from "./getBoxToBoxArrow";
 export * from "./hexToRgba";
+export * from "./groupBy";

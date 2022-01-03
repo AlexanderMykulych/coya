@@ -61,8 +61,8 @@ const widgetFilter = ({ path }) => {
             return false;
     }
 };
-const onChangeAttr = (change: ChangedItem) => {
-    setValueByPath(val.value, change.val, change.fullPath);
+const onChangeAttr = (change: ChangedItem[]) => {
+    setValueByPath(val.value, change[0].val, change[0].fullPath);
 }
 </script>
 
