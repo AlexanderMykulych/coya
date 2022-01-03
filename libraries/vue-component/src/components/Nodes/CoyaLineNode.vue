@@ -8,10 +8,13 @@ const props = defineProps<{
     positioning: LinePositioning;
     blockStyle: BlockStyle;
 }>();
+const seed = Math.random() * 1000;
 const cssStyle = computed(() => ({
     stroke: 'black',
     'stroke-width': '2px',
     fill: 'none',
+    roughness: 2.5,
+    seed,
     ...(props.blockStyle?.css ?? {}),
 }));
 const textEl = ref(null);

@@ -125,6 +125,7 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                         ['style.value.position.indentY2', prepareNum],
                         'style.value.label',
                         'style.value.css',
+                        'style.value.pinTo',
                     ]
                 ),
                 from: computed({

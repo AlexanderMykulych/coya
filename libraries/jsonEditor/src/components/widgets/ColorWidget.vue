@@ -3,6 +3,7 @@ import { ref, computed } from 'vue';
 import { ColorPicker } from 'vue-color-kit';
 import 'vue-color-kit/dist/vue-color-kit.css';
 import { WidgetConfig } from '../WidgetConfig';
+import { hexToRgba } from 'coya-util';
 
 const props = defineProps<{ widgetConfig: WidgetConfig }>();
 const emit = defineEmits(['valueChange']);
@@ -10,7 +11,11 @@ const emit = defineEmits(['valueChange']);
 const open = ref(false);
 const prepVal = computed({
     get: () => props.widgetConfig.row.value,
-    set: val => emit("valueChange", val)
+    set: (val: any) => {
+        const alpha = Math.round((Math.round(val.rgba.a * 100) / 100) * 255);
+        var hexAlpha = (alpha + 0x10000).toString(16).substr(-2).toUpperCase();
+        emit("valueChange", val.hex + hexAlpha);
+    }
 });
 
 </script>
@@ -24,8 +29,8 @@ const prepVal = computed({
                     <div class="modal-container">
                         <ColorPicker
                             @click.stop
-                            :color="prepVal"
-                            @changeColor="val => prepVal = val.hex"
+                            :color="hexToRgba(prepVal)"
+                            @changeColor="prepVal = $event"
                         />
                     </div>
                 </div>

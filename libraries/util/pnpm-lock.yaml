@@ -3,10 +3,12 @@ lockfileVersion: 5.3
 specifiers:
   curved-arrows: ^0.1.0
   fast-deep-equal: ^3.1.3
+  hex-to-rgba: ^2.0.1
 
 dependencies:
   curved-arrows: 0.1.0
   fast-deep-equal: 3.1.3
+  hex-to-rgba: 2.0.1
 
 packages:
 
@@ -17,4 +19,8 @@ packages:
 
   /fast-deep-equal/3.1.3:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
+    dev: false
+
+  /hex-to-rgba/2.0.1:
+    resolution: {integrity: sha512-5XqPJBpsEUMsseJUi2w2Hl7cHFFi3+OO10M2pzAvKB1zL6fc+koGMhmBqoDOCB4GemiRM/zvDMRIhVw6EkB8dQ==}
     dev: false
