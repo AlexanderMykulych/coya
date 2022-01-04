@@ -14,7 +14,9 @@ const val = ref({
         css: {
             fill: 'black',
         },
+        label: "",
     },
+    label: "",
 });
 const prepVal = computed({
     get() {

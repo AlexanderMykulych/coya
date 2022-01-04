@@ -88,9 +88,13 @@ const onAttrsChange = (changes: ChangedItem[]) => {
 };
 const onAttrChange = (changes: ChangedItem[], key: string) => {
     const oldVal = activeNode[key];
-    if (typeof oldVal === 'object') {
+    if (
+        typeof oldVal === 'object' &&
+        !Array.isArray(oldVal) &&
+        oldVal !== null
+    ) {
         const newVal = deepAssign({}, oldVal);
-        changes.forEach(change =>
+        changes.forEach((change) =>
             setValueByPath(
                 newVal,
                 change.val,

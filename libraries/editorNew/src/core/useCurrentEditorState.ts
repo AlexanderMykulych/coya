@@ -223,7 +223,7 @@ function createComputed(getObj: any, setObjects: any[], configs: string[] | (str
     }
     const get = (obj: any, path: string[]) => {
         if (path.every(x => {
-            if (obj?.[x]) {
+            if (obj?.[x] !== undefined) {
                 obj = obj[x];
                 return true;
             }
