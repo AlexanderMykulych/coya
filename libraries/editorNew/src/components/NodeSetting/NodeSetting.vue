@@ -118,7 +118,7 @@ const onAttrChange = (changes: ChangedItem[], key: string) => {
             :widgetFilter="widgetFilter"
         >
             <template #line-widget="{ config }">
-                <CssWidget :preparedPredefs="preparedPredefs" :config="config">
+                <CssWidget v-if="config.path === 'css'"  :preparedPredefs="preparedPredefs" :config="config">
                     <template #preview="slotData">
                         <slot name="preview" v-bind="slotData" />
                     </template>
