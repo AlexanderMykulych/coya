@@ -140,7 +140,7 @@ const arrowPath = computed(() => {
     }
 });
 const getBlockPos = (block: string) =>
-    architecture.style.positioning.find((x) => x.blockId === block)?.position;
+    architecture.style?.positioning?.find((x) => x.blockId === block)?.position;
 // arrow - end
 </script>
 

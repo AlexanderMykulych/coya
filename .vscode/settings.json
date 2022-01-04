@@ -1,7 +1,7 @@
 {
     "jest.jestCommandLine": "rush test",
-    "cSpell.words": [
-        "formula",
-        "multiplier"
-    ]
+    "cSpell.words": ["formula", "multiplier"],
+    "editor.quickSuggestions": {
+        "strings": true
+    }
 }

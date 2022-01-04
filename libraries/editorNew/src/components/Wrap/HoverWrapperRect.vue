@@ -20,7 +20,7 @@ const preparedPosition = computed(() => ({
 }));
 
 
-const arrowRectPos = computed(() => ({
+const rectPos = computed(() => ({
     x: preparedPosition.value.x,
     y: preparedPosition.value.y,
     w: preparedPosition.value.w,
@@ -40,10 +40,10 @@ const onClick = (event: MouseEvent) => {
 
 <template>
     <rect
-        :x="arrowRectPos.x"
-        :y="arrowRectPos.y"
-        :width="arrowRectPos.w"
-        :height="arrowRectPos.h"
+        :x="rectPos.x"
+        :y="rectPos.y"
+        :width="rectPos.w"
+        :height="rectPos.h"
         :fill="fill"
         @mouseover="hovered = true"
         @mouseleave="hovered = false"

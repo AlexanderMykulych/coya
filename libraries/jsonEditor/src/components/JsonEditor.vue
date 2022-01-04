@@ -57,11 +57,9 @@ onMounted(() => {
         });
         if (editor.value) {
             editor.value.onDidChangeModelContent((_) => {
-                if (
-                    editor.value &&
-                    editor.value.getValue() !== jsonValue.value
-                ) {
-                    const val = JSON.parse(editor.value.getValue());
+                const editorVal: string | undefined = editor.value?.getValue();
+                if (editorVal && editorVal !== jsonValue.value) {
+                    const val = JSON.parse(editorVal);
                     const changed = whatChanged(props.modelValue, val);
                     if (changed.length > 0) {
                         emit('changeAttr', changed);

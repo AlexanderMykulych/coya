@@ -3,7 +3,7 @@ import { computed, h, reactive, SetupContext, watch } from "vue";
 import { getMousePosition } from "./getMousePosition";
 import { Editor, EnabledEditor } from "./types";
 import WrapperRect from "./../components/Wrap/WrapperRect.vue";
-import ArrowWrapperRect from "./../components/Wrap/ArrowWrapperRect.vue";
+import HoverWrapperRect from "../components/Wrap/HoverWrapperRect.vue";
 import { EditorMode } from ".";
 import { calculatePinDragResult } from "./calculatePinDragResult";
 import { isNotNullOrUndefined } from "coya-util";
@@ -94,6 +94,8 @@ export function wrapEditorNode(editor: Editor, node: any) {
 
             //arrow
             const isArrowMode = computed(() => editor.state.mode === EditorMode.Arrow);
+            //select
+            const isSelectMode = computed(() => editor.state.mode === EditorMode.Select);
             //arrow end
             return () =>
                 h(
@@ -114,11 +116,16 @@ export function wrapEditorNode(editor: Editor, node: any) {
                             block: attrs.block,
                             onPinPress: (val) => editor.state.pins.selectedPinType = val,
                         }) : undefined,
-                        isArrowMode.value ? h(ArrowWrapperRect, {
+                        isArrowMode.value ? h(HoverWrapperRect, {
                             position: attrs.positioning,
                             id: attrs.block?.id,
                             onClick: (event: MouseEvent) => onArrowBlockClick(editor, context, event)
-                        }) : undefined
+                        }) : isSelectMode.value ? h(HoverWrapperRect, {
+                            position: attrs.positioning,
+                            id: attrs.block?.id,
+                            onClick: (event: MouseEvent) => onSelectBlockClick(editor, context, event)
+                        })
+                            : undefined
                     ]
                 );
         }
@@ -160,6 +167,21 @@ function onArrowBlockClick(editor: EnabledEditor, { attrs }: { attrs: any }, eve
                 }
             };
         }
+    }
+}
+function onSelectBlockClick(editor: EnabledEditor, { attrs }: { attrs: any }, event: MouseEvent) {
+    if (editor.state?.mode === EditorMode.Select) {
+        const id = attrs.block.id;
+        const { x, y } = getMousePosition(editor.svg, event);
+        if (editor.state.onSelect) {
+            editor.state.onSelect({
+                blockId: id,
+                x,
+                y,
+            });
+        }
+        editor.state.onSelect = undefined;
+        editor.state.mode = EditorMode.None;
     }
 }
 function onMouseover(editor: EnabledEditor, { attrs }: { attrs: any }, event: MouseEvent) {

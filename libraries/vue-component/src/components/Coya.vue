@@ -200,12 +200,7 @@ provide(
             </template>
         </editorComponent>
         <div
-            class="
-                coya-container
-                col-span-4
-                row-span-full
-                bg-gray-200 bg-opacity-70
-            "
+            class="coya-container col-span-4 row-span-full bg-gray-200 bg-opacity-70"
             ref="coyaEl"
             :class="{ [`col-span-${debug ? 4 : 'full'}`]: true }"
             :id="arch?.name"

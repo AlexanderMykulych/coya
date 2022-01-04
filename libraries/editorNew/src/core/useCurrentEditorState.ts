@@ -200,7 +200,8 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                     activeEl: blockId.value,
                 });
                 editor.initialConfig.style = JSON.parse(JSON.stringify(editor.config.style))
-            }
+            },
+            getBlockRealPosition: (blockId: string) => editor.architecture?.style?.positioning?.find(x => x.blockId === blockId)?.position,
         };
     }
     throw "no editor state";

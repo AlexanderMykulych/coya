@@ -87,6 +87,7 @@ export default defineConfig({
             'vue-router',
             '@vueuse/core',
             '@vueuse/head',
+            "vue-color-kit",
         ],
         exclude: [
             'vue-demi',

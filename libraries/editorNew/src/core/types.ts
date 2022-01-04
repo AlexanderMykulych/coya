@@ -21,7 +21,8 @@ export interface HoverState {
 }
 export enum EditorMode {
     None = "none",
-    Arrow = "arrow"
+    Arrow = "arrow",
+    Select = "select"
 }
 
 export interface ArrowState {
@@ -30,7 +31,11 @@ export interface ArrowState {
     end?: string;
     endPosition?: Point;
 }
-
+export interface SelectEvent {
+    blockId: string;
+    x: number;
+    y: number;
+}
 export interface EnabledEditorState {
     drag?: DragState;
     hover?: HoverState | null;
@@ -38,6 +43,7 @@ export interface EnabledEditorState {
     pins: PinState;
     mode?: EditorMode;
     arrowState?: ArrowState | null;
+    onSelect?: (select: SelectEvent) => void;
 }
 
 export interface PinState {
@@ -125,6 +131,7 @@ export interface CurrentEditorState {
         x2: any;
         y2: any;
         css: any;
+        pinTo: string;
     }>;
     activeBlockSetting?: any;
     activeBlockStyleSetting?: any;
@@ -133,6 +140,7 @@ export interface CurrentEditorState {
     showDebugWindow: Ref<boolean>;
     zoomState: ComputedRef<any>;
     applyPositioning: (layout: LayoutConfig) => void;
+    getBlockRealPosition: (blockId: string) => RectPositioning;
 }
 
 export enum PinType {

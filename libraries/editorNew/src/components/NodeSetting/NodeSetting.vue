@@ -9,6 +9,7 @@ import {
     deepAssign,
     ChangedItem,
     setValueByPath,
+deepCopy,
 } from 'coya-util';
 
 const { activeNode, activeBlockStyleSetting, architecture, selectedNode } =
@@ -93,7 +94,7 @@ const onAttrChange = (changes: ChangedItem[], key: string) => {
         !Array.isArray(oldVal) &&
         oldVal !== null
     ) {
-        const newVal = deepAssign({}, oldVal);
+        const newVal = deepCopy(oldVal);
         changes.forEach((change) =>
             setValueByPath(
                 newVal,
@@ -109,8 +110,13 @@ const onAttrChange = (changes: ChangedItem[], key: string) => {
 </script>
 
 <template>
-    <div v-if="activeNode" class="border-2 rounded-md p-3 bg-white grid h-full">
+    <div
+        v-if="activeNode"
+        class="border-2 rounded-md p-3 bg-white h-full flex flex-col"
+    >
+        <NodeActionBar />
         <JsonEditor
+            class="flex-auto"
             :modelValue="activeNode"
             @changeAttr="onAttrsChange"
             :config="jsonEditorConfig"
@@ -118,7 +124,11 @@ const onAttrChange = (changes: ChangedItem[], key: string) => {
             :widgetFilter="widgetFilter"
         >
             <template #line-widget="{ config }">
-                <CssWidget v-if="config.path === 'css'"  :preparedPredefs="preparedPredefs" :config="config">
+                <CssWidget
+                    v-if="config.path === 'css'"
+                    :preparedPredefs="preparedPredefs"
+                    :config="config"
+                >
                     <template #preview="slotData">
                         <slot name="preview" v-bind="slotData" />
                     </template>

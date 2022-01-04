@@ -7,7 +7,6 @@ declare module 'vue' {
     ColorWidget: typeof import('./components/widgets/ColorWidget.vue')['default']
     Footer: typeof import('./components/Footer.vue')['default']
     FormulaWidget: typeof import('./components/widgets/formulaWidget.vue')['default']
-    'IIc:roundRectangle': typeof import('~icons/ic/round-rectangle')['default']
     'IUil:arrowsResize': typeof import('~icons/uil/arrows-resize')['default']
     JsonEditor: typeof import('./components/JsonEditor.vue')['default']
     README: typeof import('./components/README.md')['default']
