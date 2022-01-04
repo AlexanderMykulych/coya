@@ -22,13 +22,13 @@ const config = ref({
     name: 'vue-lifecycle-json',
     blocks: {
         start: {
-            label: 'app = Vue.createApp(options); app.mount(el)',
+            label: 'block.app = Vue.createApp(options); app.mount(el)',
         },
         start2: {
-            label: 'app = Vue.createApp(options); app.mount(el)',
+            label: 'block.app = Vue.createApp(options); app.mount(el)',
         },
         start3: {
-            label: 'app = Vue.createApp(options); app.mount(el)',
+            label: 'block.app = Vue.createApp(options); app.mount(el)',
         },
         line: {
             from: "start",
@@ -150,6 +150,7 @@ const config = ref({
                 css: {
                     fill: '#3e6b94',
                 },
+                label: "start"
             },
             start2: {
                 position: {
@@ -261,9 +262,11 @@ onMounted(() => {
 });
 const block = {
     id: 'start',
+    label: "test"
 };
 const block2 = {
     id: 'start2',
+    label: "test",
 };
 const block3 = {
     id: 'start3',

@@ -7,7 +7,7 @@ const props = defineProps<{
     css: any;
 }>();
 const gEl = ref<SVGSVGElement | null>(null);
-const seed = Math.random() * 1000;
+const seed = Math.floor(Math.random() * 10000) + 1;
 const rc = computed(() => (gEl.value ? rough.svg(gEl.value).generator : null));
 const paths = computed(() => {
     if (isNaN(props.w) || isNaN(props.h) || !rc.value || !gEl.value) {

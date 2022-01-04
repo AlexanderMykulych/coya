@@ -62,16 +62,22 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                 get: () => editor.config.style?.blocks?.[blockId.value],
                 set: val => editor.config.style.blocks[blockId.value] = val,
             }),
-            block: editor.config?.blocks?.[blockId.value],
+            block: computed({
+                get: () => editor.config?.blocks?.[blockId.value],
+                set: val => editor.config.blocks[blockId.value] = val
+            }),
         }) : null);
         const initConfigActiveNode = computed(() => !!blockId.value ? ({
             style: computed({
                 get: () => editor.initialConfig.style?.blocks?.[blockId.value],
                 set: val => editor.initialConfig.style.blocks[blockId.value] = val,
             }),
-            block: editor.initialConfig?.blocks?.[blockId.value],
+            block: computed({
+                get: () => editor.initialConfig?.blocks?.[blockId.value],
+                set: val => editor.initialConfig.blocks[blockId.value] = val
+            }),
         }) : null);
-        
+
         return {
             isOneNodeSelected: computed(() => !!blockId.value),
             initPhases: computed({
@@ -123,13 +129,34 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                         ['style.value.position.indentX2', prepareNum],
                         ['style.value.position.indentY1', prepareNum],
                         ['style.value.position.indentY2', prepareNum],
-                        'style.value.label',
                         'style.value.css',
                         'style.value.pinTo',
                     ]
                 ),
+                label: computed({
+                    get: () =>
+                        configActiveNode.value?.style?.value?.label
+                        ?? (
+                            typeof configActiveNode.value?.block.value === "string"
+                                ? configActiveNode.value?.block.value
+                                : null
+                        )
+                        ?? configActiveNode.value?.block.value.label,
+                    set: (val: string | null) => {
+                        if (configActiveNode.value?.style?.value?.label) {
+                            set(configActiveNode.value, "style.value.label", val);
+                            set(initConfigActiveNode.value, "style.value.label", val);
+                        } else if (typeof configActiveNode.value?.block.value === "string") {
+                            set(configActiveNode.value, "block.value", val);
+                            set(initConfigActiveNode.value, "block.value", val);
+                        } else if (configActiveNode.value?.block.value.label) {
+                            set(configActiveNode.value, "block.value.label", val);
+                            set(initConfigActiveNode.value, "block.value.label", val);
+                        }
+                    }
+                }),
                 from: computed({
-                    get: () => configActiveNode.value?.block?.from,
+                    get: () => configActiveNode.value?.block.value?.from,
                     set: debounce(val => {
                         if (blockId.value) {
                             reconnectArrow(
@@ -143,7 +170,7 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                     }, 800)
                 }),
                 to: computed({
-                    get: () => configActiveNode.value?.block?.to,
+                    get: () => configActiveNode.value?.block.value?.to,
                     set: debounce(val => {
                         if (blockId.value) {
                             reconnectArrow(
@@ -206,22 +233,25 @@ export function useEditorState(editor: Editor): CurrentEditorState {
     }
     throw "no editor state";
 }
-
+const set = (obj: any, path: string[] | string, val: any) => {
+    if (typeof path === "string") {
+        path = path.split(".");
+    }
+    const leftPath = path.slice(0, path.length - 1);
+    const lastItem = path[path.length - 1];
+    leftPath.forEach(x => {
+        if (isNullOrUndefined(obj[x])) {
+            obj[x] = {};
+        }
+        obj = obj[x]
+    });
+    if (isNotNullOrUndefined(obj)) {
+        obj[lastItem] = val;
+    }
+}
 function createComputed(getObj: any, setObjects: any[], configs: string[] | (string[])[]) {
     const res = {};
-    const set = (obj: any, path: string[], val: any) => {
-        const leftPath = path.slice(0, path.length - 1);
-        const lastItem = path[path.length - 1];
-        leftPath.forEach(x => {
-            if (isNullOrUndefined(obj[x])) {
-                obj[x] = {};
-            }
-            obj = obj[x]
-        });
-        if (isNotNullOrUndefined(obj)) {
-            obj[lastItem] = val;
-        }
-    }
+
     const get = (obj: any, path: string[]) => {
         if (path.every(x => {
             if (obj?.[x] !== undefined) {

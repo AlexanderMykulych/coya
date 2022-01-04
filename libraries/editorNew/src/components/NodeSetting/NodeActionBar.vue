@@ -6,8 +6,8 @@ import { useCurrentEditorState } from '../../core/useCurrentEditorState';
 const { activeNode, state, architecture, getBlockRealPosition } =
     useCurrentEditorState();
 
+//pin
 const isPinned = computed(() => !!activeNode.pinTo);
-
 const activatePinMode = () => {
     state.mode =
         state.mode === EditorMode.Select ? EditorMode.None : EditorMode.Select;
@@ -23,6 +23,10 @@ const activatePinMode = () => {
         }
     };
 };
+
+//label
+const hasLabel = computed(() => !!activeNode.label);
+const cleanLabel = () => activeNode.label = '';
 </script>
 
 <template>
@@ -32,6 +36,10 @@ const activatePinMode = () => {
         </button>
         <button v-else @click="activatePinMode">
             <i-ph:push-pin-bold />
+        </button>
+
+        <button v-if="hasLabel">
+            <i-ic:baseline-text-decrease @click="cleanLabel" />
         </button>
     </div>
 </template>
