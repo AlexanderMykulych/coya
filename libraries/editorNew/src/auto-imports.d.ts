@@ -13,6 +13,7 @@ declare module 'vue' {
     FingerPalette: typeof import('./components/Palette/blocks/finger/fingerPalette.vue')['default']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     HoverWrapperRect: typeof import('./components/Wrap/HoverWrapperRect.vue')['default']
+    'IBx:bxsTrash': typeof import('~icons/bx/bxs-trash')['default']
     'ICil:rectangle': typeof import('~icons/cil/rectangle')['default']
     'ICodicon:debug': typeof import('~icons/codicon/debug')['default']
     'IGrommetIcons:documentConfig': typeof import('~icons/grommet-icons/document-config')['default']

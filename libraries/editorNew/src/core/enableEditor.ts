@@ -7,6 +7,7 @@ import { useSvgMouse } from "./useSvgMouse";
 import { useEditorState } from "./useCurrentEditorState";
 import { getMousePosition } from "./getMousePosition";
 import { EditorMode } from ".";
+import { useMagicKeys } from "@vueuse/core";
 
 export function enableEditor({ svg, config, id, initialConfig, architecture, workEl }: EnableEditorParameters) {
     const scope = effectScope();
@@ -33,6 +34,7 @@ export function enableEditor({ svg, config, id, initialConfig, architecture, wor
             zoomState: null,
         });
         listenSvgEvents(editor);
+        listenHotKeys(editor);
         provide("coya-editor", editor);
         return editor;
     });
@@ -76,6 +78,16 @@ function listenSvgEvents(editor: EnabledEditor) {
         }
     });
     
+}
+
+function listenHotKeys(editor: EnabledEditor) {
+    const { Delete } = useMagicKeys();
+    const {removeBlock} = useEditorState(editor);
+    watch(Delete, val => {
+        if (val) {
+            removeBlock();
+        }
+    })
 }
 function enableZoom(editor: EnabledEditor, zoomElement: SVGGraphicsElement) {
     const svg = editor.svg;

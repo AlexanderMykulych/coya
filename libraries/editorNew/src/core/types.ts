@@ -141,6 +141,8 @@ export interface CurrentEditorState {
     zoomState: ComputedRef<any>;
     applyPositioning: (layout: LayoutConfig) => void;
     getBlockRealPosition: (blockId: string) => RectPositioning;
+    pinToBlock: (toBlockId: string) => void;
+    removeBlock: (id?: string) => void;
 }
 
 export enum PinType {

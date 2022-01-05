@@ -3,7 +3,7 @@ import { computed } from 'vue';
 import { EditorMode, SelectEvent } from '../../core';
 import { useCurrentEditorState } from '../../core/useCurrentEditorState';
 
-const { activeNode, state, architecture, getBlockRealPosition } =
+const { activeNode, state, architecture, getBlockRealPosition, removeBlock, pinToBlock } =
     useCurrentEditorState();
 
 //pin
@@ -13,13 +13,7 @@ const activatePinMode = () => {
         state.mode === EditorMode.Select ? EditorMode.None : EditorMode.Select;
     state.onSelect = (event: SelectEvent) => {
         if (event.blockId) {
-            const pinToPos = getBlockRealPosition(event.blockId);
-            const blockPos = getBlockRealPosition(activeNode.name);
-            if (pinToPos && blockPos) {
-                activeNode.x = `${blockPos.x - pinToPos.x}`;
-                activeNode.y = `${blockPos.y - pinToPos.y}`;
-                activeNode.pinTo = event.blockId;
-            }
+            pinToBlock(event.blockId);
         }
     };
 };
@@ -27,6 +21,7 @@ const activatePinMode = () => {
 //label
 const hasLabel = computed(() => !!activeNode.label);
 const cleanLabel = () => activeNode.label = '';
+
 </script>
 
 <template>
@@ -40,6 +35,10 @@ const cleanLabel = () => activeNode.label = '';
 
         <button v-if="hasLabel">
             <i-ic:baseline-text-decrease @click="cleanLabel" />
+        </button>
+
+        <button @click="removeBlock()">
+            <i-bx:bxs-trash />
         </button>
     </div>
 </template>

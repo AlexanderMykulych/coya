@@ -7,18 +7,6 @@
 		"bImg": "Image",
 		"bItem": "Item 1",
 		"bItem2": "Item 2",
-		"line_0_0": {
-			"from": "start",
-			"to": "bGroup",
-			"type": "line",
-			"label": ""
-		},
-		"line_0_1": {
-			"from": "start",
-			"to": "bImg",
-			"type": "line",
-			"label": ""
-		},
 		"line_0_2": {
 			"from": "bImg",
 			"to": "bItem",

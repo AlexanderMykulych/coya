@@ -10,6 +10,7 @@ import { debounce } from "debounce";
 import { prepareNum } from "./prepareNum";
 import { reconnectArrow } from "./reconnectArrow";
 import { LayoutConfig } from "../components/AppMenu/layouts";
+import { removeBlockById } from "./removeBlockById";
 
 export function useCurrentEditorState(): CurrentEditorState {
     const editor = getCurrentEditor();
@@ -77,7 +78,89 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                 set: val => editor.initialConfig.blocks[blockId.value] = val
             }),
         }) : null);
-
+        const getBlockRealPosition = (blockId: string) => editor.architecture?.style?.positioning?.find(x => x.blockId === blockId)?.position;
+        const activeNode = reactive({
+            name: computed({
+                get: () => blockId.value,
+                set: debounce((val) => {
+                    if (blockId.value) {
+                        renameBlock(editor.config, blockId.value, val);
+                        renameBlock(editor.initialConfig, blockId.value, val);
+                        editor.state.selectedNodeIds = [val];
+                    }
+                }, 800)
+            }),
+            ...createComputed(
+                configActiveNode,
+                [configActiveNode, initConfigActiveNode,],
+                [
+                    ['style.value.position.x', prepareNum],
+                    ['style.value.position.y', prepareNum],
+                    ['style.value.position.w', prepareNum],
+                    ['style.value.position.h', prepareNum],
+                    ['style.value.position.x1', prepareNum],
+                    ['style.value.position.y1', prepareNum],
+                    ['style.value.position.x2', prepareNum],
+                    ['style.value.position.y2', prepareNum],
+                    ['style.value.position.indentX1', prepareNum],
+                    ['style.value.position.indentX2', prepareNum],
+                    ['style.value.position.indentY1', prepareNum],
+                    ['style.value.position.indentY2', prepareNum],
+                    'style.value.css',
+                    'style.value.pinTo',
+                ]
+            ),
+            label: computed({
+                get: () =>
+                    configActiveNode.value?.style?.value?.label
+                    ?? (
+                        typeof configActiveNode.value?.block.value === "string"
+                            ? configActiveNode.value?.block.value
+                            : null
+                    )
+                    ?? configActiveNode.value?.block.value.label,
+                set: (val: string | null) => {
+                    if (configActiveNode.value?.style?.value?.label) {
+                        set(configActiveNode.value, "style.value.label", val);
+                        set(initConfigActiveNode.value, "style.value.label", val);
+                    } else if (typeof configActiveNode.value?.block.value === "string") {
+                        set(configActiveNode.value, "block.value", val);
+                        set(initConfigActiveNode.value, "block.value", val);
+                    } else if (configActiveNode.value?.block.value.label) {
+                        set(configActiveNode.value, "block.value.label", val);
+                        set(initConfigActiveNode.value, "block.value.label", val);
+                    }
+                }
+            }),
+            from: computed({
+                get: () => configActiveNode.value?.block.value?.from,
+                set: debounce(val => {
+                    if (blockId.value) {
+                        reconnectArrow(
+                            editor.config,
+                            editor.initialConfig,
+                            blockId.value,
+                            val,
+                            "from",
+                        );
+                    }
+                }, 800)
+            }),
+            to: computed({
+                get: () => configActiveNode.value?.block.value?.to,
+                set: debounce(val => {
+                    if (blockId.value) {
+                        reconnectArrow(
+                            editor.config,
+                            editor.initialConfig,
+                            blockId.value,
+                            val,
+                            "to",
+                        );
+                    }
+                }, 800)
+            }),
+        });
         return {
             isOneNodeSelected: computed(() => !!blockId.value),
             initPhases: computed({
@@ -102,88 +185,7 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                     totalCount: index + 1
                 }
             }),
-            activeNode: reactive({
-                name: computed({
-                    get: () => blockId.value,
-                    set: debounce((val) => {
-                        if (blockId.value) {
-                            renameBlock(editor.config, blockId.value, val);
-                            renameBlock(editor.initialConfig, blockId.value, val);
-                            editor.state.selectedNodeIds = [val];
-                        }
-                    }, 800)
-                }),
-                ...createComputed(
-                    configActiveNode,
-                    [configActiveNode, initConfigActiveNode,],
-                    [
-                        ['style.value.position.x', prepareNum],
-                        ['style.value.position.y', prepareNum],
-                        ['style.value.position.w', prepareNum],
-                        ['style.value.position.h', prepareNum],
-                        ['style.value.position.x1', prepareNum],
-                        ['style.value.position.y1', prepareNum],
-                        ['style.value.position.x2', prepareNum],
-                        ['style.value.position.y2', prepareNum],
-                        ['style.value.position.indentX1', prepareNum],
-                        ['style.value.position.indentX2', prepareNum],
-                        ['style.value.position.indentY1', prepareNum],
-                        ['style.value.position.indentY2', prepareNum],
-                        'style.value.css',
-                        'style.value.pinTo',
-                    ]
-                ),
-                label: computed({
-                    get: () =>
-                        configActiveNode.value?.style?.value?.label
-                        ?? (
-                            typeof configActiveNode.value?.block.value === "string"
-                                ? configActiveNode.value?.block.value
-                                : null
-                        )
-                        ?? configActiveNode.value?.block.value.label,
-                    set: (val: string | null) => {
-                        if (configActiveNode.value?.style?.value?.label) {
-                            set(configActiveNode.value, "style.value.label", val);
-                            set(initConfigActiveNode.value, "style.value.label", val);
-                        } else if (typeof configActiveNode.value?.block.value === "string") {
-                            set(configActiveNode.value, "block.value", val);
-                            set(initConfigActiveNode.value, "block.value", val);
-                        } else if (configActiveNode.value?.block.value.label) {
-                            set(configActiveNode.value, "block.value.label", val);
-                            set(initConfigActiveNode.value, "block.value.label", val);
-                        }
-                    }
-                }),
-                from: computed({
-                    get: () => configActiveNode.value?.block.value?.from,
-                    set: debounce(val => {
-                        if (blockId.value) {
-                            reconnectArrow(
-                                editor.config,
-                                editor.initialConfig,
-                                blockId.value,
-                                val,
-                                "from",
-                            );
-                        }
-                    }, 800)
-                }),
-                to: computed({
-                    get: () => configActiveNode.value?.block.value?.to,
-                    set: debounce(val => {
-                        if (blockId.value) {
-                            reconnectArrow(
-                                editor.config,
-                                editor.initialConfig,
-                                blockId.value,
-                                val,
-                                "to",
-                            );
-                        }
-                    }, 800)
-                }),
-            }),
+            activeNode,
             activeBlockSetting: computed(() => blockId.value ? editor.config.blocks?.[blockId.value] : null),
             activeBlockStyleSetting: computed(() => blockId.value ? editor.config.style?.blocks?.[blockId.value] : null),
             activeConfig: computed(() => editor.config),
@@ -228,7 +230,26 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                 });
                 editor.initialConfig.style = JSON.parse(JSON.stringify(editor.config.style))
             },
-            getBlockRealPosition: (blockId: string) => editor.architecture?.style?.positioning?.find(x => x.blockId === blockId)?.position,
+            getBlockRealPosition,
+            removeBlock: (id?: string) => {
+                if (isNullOrUndefined(id)) {
+                    id = blockId.value;
+                }
+                if (id) {
+                    editor.state.selectedNodeIds = [];
+                    removeBlockById(editor.config, editor.architecture, id);
+                    removeBlockById(editor.initialConfig, editor.architecture, id);
+                }
+            },
+            pinToBlock: (toBlockId: string) => {
+                const pinToPos = getBlockRealPosition(toBlockId);
+                const blockPos = getBlockRealPosition(activeNode.name);
+                if (pinToPos && blockPos) {
+                    activeNode.x = `${blockPos.x - pinToPos.x}`;
+                    activeNode.y = `${blockPos.y - pinToPos.y}`;
+                    activeNode.pinTo = toBlockId;
+                }
+            },
         };
     }
     throw "no editor state";
@@ -280,3 +301,4 @@ function createComputed(getObj: any, setObjects: any[], configs: string[] | (str
     });
     return res;
 }
+
