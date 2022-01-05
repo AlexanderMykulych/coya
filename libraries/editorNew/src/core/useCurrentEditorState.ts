@@ -118,7 +118,7 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                             ? configActiveNode.value?.block.value
                             : null
                     )
-                    ?? configActiveNode.value?.block.value.label,
+                    ?? configActiveNode.value?.block.value?.label,
                 set: (val: string | null) => {
                     if (configActiveNode.value?.style?.value?.label) {
                         set(configActiveNode.value, "style.value.label", val);
@@ -195,6 +195,7 @@ export function useEditorState(editor: Editor): CurrentEditorState {
             state: editor.state,
             svg: editor.svg,
             workEl: editor.workEl,
+            history: computed(() => editor.history),
             makeChange: (action: MakeChangeAction | MakeChangeAction[]) => {
                 const actions = isArray(action) ? action : [action];
                 makeChangeToDiagram(editor.config, actions);
@@ -248,6 +249,29 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                     activeNode.x = `${blockPos.x - pinToPos.x}`;
                     activeNode.y = `${blockPos.y - pinToPos.y}`;
                     activeNode.pinTo = toBlockId;
+                }
+            },
+            undoChange: () => {
+                const history = editor.history;
+                const length = history.items.length;
+                if (isNullOrUndefined(history.current)) {
+                    if (length > 0) {
+                        history.current = 1;
+                    }
+                } else if (length >= history.current + 1) {
+                    history.current++;
+                }
+            },
+            redoChange: () => {
+                const history = editor.history;
+                const length = history.items.length;
+                if (isNullOrUndefined(history.current)) {
+                    return;
+                }
+                if (history.current > 1) {
+                    history.current--;
+                } else if (history.current === 1) {
+                    history.current = undefined;
                 }
             },
         };

@@ -1,5 +1,6 @@
 import { Action, ActionSetting, ActionType, applyPositioning, Architecture, PhaseAction, RectPositioning } from "coya-core";
 import { ArchitectureDescription, Change } from "coya-core";
+import { ChangedItem } from "coya-util/dist/src/ChangedItem";
 import { Component, ComputedRef, Ref } from "vue";
 import { LayoutConfig } from "../components/AppMenu/layouts";
 
@@ -64,6 +65,14 @@ export interface MouseState {
     palette: MousePaletteState;
     leave: boolean;
 }
+export interface HistoryChange {
+    type: "changes",
+    changes: ChangedItem[];
+}
+export interface History {
+    items: HistoryChange[];
+    current?: number;
+}
 export interface EnabledEditor extends BaseEditor {
     enable: true;
     id?: string;
@@ -79,6 +88,7 @@ export interface EnabledEditor extends BaseEditor {
     architecture: Architecture;
     makeChange: (change: Change) => void;
     component: any;
+    history: History;
 }
 export interface DisabledEditor extends BaseEditor {
     enable: false;
@@ -117,6 +127,7 @@ export interface CurrentEditorState {
     mouseState: MouseState;
     svg: SVGSVGElement | null;
     workEl: SVGSVGElement | SVGGElement | null;
+    history: Ref<History>;
     makeChange: (action: MakeChangeAction | MakeChangeAction[]) => void;
     getNewUniqBlockName: (prefix?: string) => string;
     activeNode: Ref<{
@@ -143,6 +154,8 @@ export interface CurrentEditorState {
     getBlockRealPosition: (blockId: string) => RectPositioning;
     pinToBlock: (toBlockId: string) => void;
     removeBlock: (id?: string) => void;
+    undoChange: () => void;
+    redoChange: () => void;
 }
 
 export enum PinType {

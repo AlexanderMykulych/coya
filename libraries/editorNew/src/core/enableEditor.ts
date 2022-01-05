@@ -7,7 +7,9 @@ import { useSvgMouse } from "./useSvgMouse";
 import { useEditorState } from "./useCurrentEditorState";
 import { getMousePosition } from "./getMousePosition";
 import { EditorMode } from ".";
-import { useMagicKeys } from "@vueuse/core";
+import { debouncedWatch, useMagicKeys } from "@vueuse/core";
+import { listenHotKeys } from "./listenHotKeys";
+import { deepCopy, isNotNullOrUndefined, setValueByPath, whatChanged } from "coya-util";
 
 export function enableEditor({ svg, config, id, initialConfig, architecture, workEl }: EnableEditorParameters) {
     const scope = effectScope();
@@ -32,9 +34,14 @@ export function enableEditor({ svg, config, id, initialConfig, architecture, wor
             component: editorComponent,
             showDebugWindow: false,
             zoomState: null,
+            history: {
+                items: [],
+                current: undefined,
+            },
         });
         listenSvgEvents(editor);
         listenHotKeys(editor);
+        enableHistory(editor);
         provide("coya-editor", editor);
         return editor;
     });
@@ -77,17 +84,51 @@ function listenSvgEvents(editor: EnabledEditor) {
             editor.state.mode = EditorMode.None;
         }
     });
-    
+
 }
 
-function listenHotKeys(editor: EnabledEditor) {
-    const { Delete } = useMagicKeys();
-    const {removeBlock} = useEditorState(editor);
-    watch(Delete, val => {
-        if (val) {
-            removeBlock();
+export function enableHistory(editor: EnabledEditor) {
+    let lastItem = deepCopy(editor.initialConfig);
+    let setFromHistory = false;
+    debouncedWatch(() => editor.initialConfig, (val) => {
+        if (setFromHistory) {
+            setFromHistory = false;
+            return;
         }
-    })
+        const changes = whatChanged(lastItem, val);
+        if (changes?.length > 0) {
+            if (isNotNullOrUndefined(editor.history.current)) {
+                editor.history.items = editor
+                    .history
+                    .items
+                    .slice(0, editor.history.items.length - editor.history.current);
+                editor.history.current = undefined;
+            }
+            editor.history.items.push({
+                type: "changes",
+                changes,
+            });
+            lastItem = deepCopy(val);
+        }
+    }, {
+        debounce: 300,
+        deep: true,
+    });
+
+    watch(() => editor.history.current, (val, oldVal) => {
+        const index = editor.history.items.length - (val === undefined ? 1 : val);
+        if (index >= 0 && index < editor.history.items.length) {
+            const { changes } = editor.history.items[index];
+            changes.forEach(change => {
+                const appliedVal = val === undefined ? change.val : change.oldVal;
+                setFromHistory = true;
+                setValueByPath(editor.initialConfig, appliedVal, change.fullPath);
+                setValueByPath(editor.config, appliedVal, change.fullPath);
+            });
+        }
+    }, {
+        flush: "sync",
+    });
 }
 function enableZoom(editor: EnabledEditor, zoomElement: SVGGraphicsElement) {
     const svg = editor.svg;

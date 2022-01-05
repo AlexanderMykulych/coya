@@ -21,6 +21,7 @@ declare module 'vue' {
     'IIc:baselineSkipNext': typeof import('~icons/ic/baseline-skip-next')['default']
     'IIc:baselineSkipPrevious': typeof import('~icons/ic/baseline-skip-previous')['default']
     'IIc:baselineTextDecrease': typeof import('~icons/ic/baseline-text-decrease')['default']
+    'IIc:outlineHistory': typeof import('~icons/ic/outline-history')['default']
     'IIc:roundPlayArrow': typeof import('~icons/ic/round-play-arrow')['default']
     'IIconParkOutline:zoom': typeof import('~icons/icon-park-outline/zoom')['default']
     'ILs:underscore': typeof import('~icons/ls/underscore')['default']
