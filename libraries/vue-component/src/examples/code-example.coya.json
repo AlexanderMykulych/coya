@@ -1,130 +1,155 @@
 {
-    "name": "vue-lifecycle-json",
-    "blocks": {
-        "start": "code",
-        "bGroup2": "Group",
-        "bGroup": "Group",
-        "bImg": "Image",
-        "bItem": "Item 1",
-        "bItem2": "Item 2",
-        "line_0_0": {
-            "from": "start",
-            "to": "bGroup",
-            "type": "line",
-            "label": ""
-        },
-        "line_0_1": {
-            "from": "start",
-            "to": "bImg",
-            "type": "line",
-            "label": ""
-        },
-        "line_0_2": {
-            "from": "bImg",
-            "to": "bItem",
-            "type": "line",
-            "label": ""
-        },
-        "line_0_3": {
-            "from": "bImg",
-            "to": "bItem2",
-            "type": "line",
-            "label": ""
-        }
-    },
-    "phases": [],
-    "style": {
-        "blocks": {
-            "_": {
-                "css": {
-                    "color": "black",
-                    "fill": "#FF89CF",
-                    "fontSize": "2.1em",
-                    "rx": "25",
-                    "stroke": "black"
-                }
-            },
-            "->": {
-                "css": {
-                    "fill": "none"
-                }
-            },
-            "start": {
-                "position": {
-                    "x": "-624.7141571044922",
-                    "y": "-1579.0714569091797",
-                    "w": "1359.0714111328125",
-                    "h": "1556.5"
-                },
-                "code": "libEntry.ts",
-                "css": {
-                    "fillStyle": "solid"
-                }
-            },
-            "bGroup": {
-                "position": {
-                    "x": "40",
-                    "y": "40",
-                    "w": "495",
-                    "h": "402.5"
-                },
-                "css": {
-                    "fill": "#6EFF00",
-                    "fillStyle": "solid"
-                },
-                "pinTo": "bGroup2"
-            },
-            "bGroup2": {
-                "position": {
-                    "x": "1104.642822265625",
-                    "y": "-1822.4286499023438",
-                    "w": "895",
-                    "h": "802.5"
-                },
-                "css": {
-                    "fill": "#FF00A2",
-                    "fillStyle": "solid"
-                }
-            },
-            "bItem": {
-                "position": {
-                    "x": "20",
-                    "y": "20",
-                    "w": "200",
-                    "h": "180"
-                },
-                "css": {
-                    "fill": "#3e6b94",
-                    "fillStyle": "solid"
-                },
-                "pinTo": "bGroup"
-            },
-            "bItem2": {
-                "position": {
-                    "x": "270",
-                    "y": "170",
-                    "w": "200",
-                    "h": "180"
-                },
-                "css": {
-                    "fill": "#3e6b94",
-                    "fillStyle": "solid"
-                },
-                "pinTo": "bGroup"
-            },
-            "bImg": {
-                "position": {
-                    "x": "1572.999755859375",
-                    "y": "-569.4997730255127",
-                    "w": "437.500244140625",
-                    "h": "432.49989318847656"
-                },
-                "css": {
-                    "fill": "blue",
-                    "stroke": "red"
-                },
-                "img": "rocket-launch.png"
-            }
-        }
-    }
+	"name": "vue-lifecycle-json",
+	"blocks": {
+		"start": "",
+		"bGroup2": "Group",
+		"bGroup": "Group",
+		"bImg": "Image",
+		"bItem": "Item 1",
+		"bItem2": "Item 2",
+		"line_0_0": {
+			"from": "start",
+			"to": "bGroup",
+			"type": "line",
+			"label": ""
+		},
+		"line_0_1": {
+			"from": "start",
+			"to": "bImg",
+			"type": "line",
+			"label": ""
+		},
+		"line_0_2": {
+			"from": "bImg",
+			"to": "bItem",
+			"type": "line",
+			"label": ""
+		},
+		"line_0_3": {
+			"from": "bImg",
+			"to": "bItem2",
+			"type": "line",
+			"label": ""
+		},
+		"block_1": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_1": {
+			"from": "block_1",
+			"to": "bItem",
+			"name": "line_1",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		}
+	},
+	"phases": [],
+	"style": {
+		"blocks": {
+			"_": {
+				"css": {
+					"color": "black",
+					"fill": "#FF89CF",
+					"fontSize": "2.1em",
+					"rx": "25",
+					"stroke": "black"
+				}
+			},
+			"->": {
+				"css": {
+					"fill": "none"
+				}
+			},
+			"start": {
+				"position": {
+					"x": "-597.2141571044922",
+					"y": "-1659.0714569091797",
+					"w": "1359.0714111328125",
+					"h": "1556.5"
+				},
+				"code": "libEntry.ts",
+				"css": {
+					"fillStyle": "solid"
+				}
+			},
+			"bGroup": {
+				"position": {
+					"x": "40",
+					"y": "40",
+					"w": "495",
+					"h": "402.5"
+				},
+				"css": {
+					"fill": "#6EFF00",
+					"fillStyle": "solid"
+				},
+				"pinTo": "bGroup2"
+			},
+			"bGroup2": {
+				"position": {
+					"x": "1437.142822265625",
+					"y": "-1652.4286499023438",
+					"w": "895",
+					"h": "802.5"
+				},
+				"css": {
+					"fill": "#FF00A2",
+					"fillStyle": "solid"
+				}
+			},
+			"bItem": {
+				"position": {
+					"x": "190",
+					"y": "10",
+					"w": "200",
+					"h": "180"
+				},
+				"css": {
+					"fill": "#3e6b94",
+					"fillStyle": "solid"
+				},
+				"pinTo": "bGroup"
+			},
+			"bItem2": {
+				"position": {
+					"x": "27.5",
+					"y": "202.5",
+					"w": "200",
+					"h": "180"
+				},
+				"css": {
+					"fill": "#3e6b94",
+					"fillStyle": "solid"
+				},
+				"pinTo": "bGroup"
+			},
+			"bImg": {
+				"position": {
+					"x": "1572.999755859375",
+					"y": "-569.4997730255127",
+					"w": "437.500244140625",
+					"h": "432.49989318847656"
+				},
+				"css": {
+					"fill": "blue",
+					"stroke": "red"
+				},
+				"img": "rocket-launch.png"
+			},
+			"block_1": {
+				"position": {
+					"x": "125.71421813964844",
+					"y": "318.2142791748047",
+					"w": "715",
+					"h": "85"
+				},
+				"css": {
+					"fill": "#4cb05045",
+					"fillStyle": "solid"
+				},
+				"pinTo": "start"
+			}
+		}
+	}
 }

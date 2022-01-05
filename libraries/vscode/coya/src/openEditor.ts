@@ -1,5 +1,5 @@
 import { watch } from '@vue-reactivity/watch';
-import path = require('path');
+import path from 'path';
 import * as vscode from 'vscode';
 import state from './state';
 

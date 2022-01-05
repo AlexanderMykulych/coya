@@ -1,7 +1,7 @@
-import { existsSync, readdirSync, rmdirSync, symlink, unlinkSync } from 'fs';
-import path = require('path');
+import fs from 'fs';
+import path from 'path';
 import * as vscode from 'vscode';
-
+const { existsSync, readdirSync, rmdirSync, symlink, unlinkSync } = fs;
 export function createViteFileSymlink(context: vscode.ExtensionContext, file: vscode.Uri) {
     try {
         const dir = path.parse(file.path).dir;

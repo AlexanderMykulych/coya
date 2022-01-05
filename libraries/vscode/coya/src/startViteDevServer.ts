@@ -1,8 +1,10 @@
 import * as vscode from 'vscode';
 import state from './state';
-import { readdirSync } from 'fs';
-import { exec } from 'child_process';
+import fs from 'fs';
+const child_process = require("child_process");
+// import * as child_process from 'child_process';
 
+const { exec } = child_process;
 const terminalName = "coya server";
 
 export async function startViteDevServer(context: vscode.ExtensionContext) {
@@ -12,7 +14,7 @@ export async function startViteDevServer(context: vscode.ExtensionContext) {
 }
 
 const getDirectories = (source: string) =>
-    readdirSync(source, { withFileTypes: true })
+    fs.readdirSync(source, { withFileTypes: true })
         .filter(dirent => dirent.isDirectory())
         .map(dirent => dirent.name)
 function startProjectViteDevServer() {

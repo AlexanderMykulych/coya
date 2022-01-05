@@ -1,8 +1,8 @@
 {
     "version": "0.9.18",
     "license": "MIT",
-    "main": "dist/index.js",
-    "typings": "dist/index.d.ts",
+    "main": "dist/coya-core.cjs.js",
+    "typings": "dist/src/index.d.ts",
     "files": [
         "dist",
         "src"
@@ -73,6 +73,7 @@
         "tsdx": "^0.14.1",
         "tslib": "^2.3.1",
         "typescript": "^4.4.2",
+        "vite-plugin-dts": "^0.9.7",
         "vitest": "^0.0.112"
     },
     "dependencies": {
