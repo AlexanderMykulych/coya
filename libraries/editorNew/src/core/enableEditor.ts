@@ -1,4 +1,4 @@
-import { ActionType, Change, makeChange } from "coya-core";
+import { ActionType, Architecture, Change, makeChange } from "coya-core";
 import { effectScope, onScopeDispose, provide, reactive, ref, watch, computed } from "vue";
 import { EnabledEditor, EnableEditorParameters } from "./types";
 import { wrapEditorNode } from "./wrapEditorNode";
@@ -136,11 +136,12 @@ function enableZoom(editor: EnabledEditor, zoomElement: SVGGraphicsElement) {
         return;
     }
     var scrollSensitivity = 0.3;
+    const startTransform = findStartTransform(editor.architecture, svg);
     const translate = reactive({
-        x: 0,
-        y: 0
+        x: startTransform.x,
+        y: startTransform.y
     });
-    const scale = ref(1);
+    const scale = ref(startTransform.scale);
     const minScale = 0.01;
     const maxScale = 20;
     const transform = computed(() => `translate(${translate.x} ${translate.y}) scale(${scale.value})`);
@@ -172,8 +173,8 @@ function enableZoom(editor: EnabledEditor, zoomElement: SVGGraphicsElement) {
             && !editor.state.drag) {
             const deltaX = (mouseState.pressedPosition.x - val.x) * scale.value;
             const deltaY = (mouseState.pressedPosition.y - val.y) * scale.value;
-            translate.x = (translate.x - deltaX) * 1;
-            translate.y = (translate.y - deltaY) * 1;
+            translate.x = translate.x - deltaX;
+            translate.y = translate.y - deltaY;
         }
     }, { deep: true });
 
@@ -186,5 +187,55 @@ function enableZoom(editor: EnabledEditor, zoomElement: SVGGraphicsElement) {
     });
     watch(() => transform.value, val => {
         zoomElement.setAttribute("transform", val);
+    }, {
+        immediate: true,
     });
+}
+
+export const findStartTransform = (arch: Architecture, svg: SVGSVGElement) => {
+    const svgWidth = svg.width.baseVal.value;
+    const svgHeight = svg.height.baseVal.value;
+    let minX = Number.MAX_SAFE_INTEGER;
+    let minY = Number.MAX_SAFE_INTEGER;
+    let maxX = Number.MIN_SAFE_INTEGER;
+    let maxY = Number.MIN_SAFE_INTEGER;
+    arch.style?.positioning.forEach(({ position }) => {
+        if (minX > position.x) {
+            minX = position.x;
+        }
+        if (minY > position.y) {
+            minY = position.y;
+        }
+        if (maxX < position.x + position.w) {
+            maxX = position.x + position.w;
+        }
+        if (maxY < position.y + position.h) {
+            maxY = position.y + position.h;
+        }
+    });
+    let width = maxX - minX;
+    let height = maxY - minY;
+    let deltaX = (width * 0.2) / 2;
+    let deltaY = (height * 0.2) / 2;
+
+    if (width >= height) {
+        const newHeight = (svgHeight * width) / svgWidth;
+        deltaY = Math.abs(newHeight - height) / 2;
+    } else {
+        const newWidth = (svgWidth * height) / svgHeight;
+        deltaX = Math.abs(newWidth - width) / 2;
+    }
+
+    minX -= deltaX;
+    minY -= deltaY;
+    maxX += deltaX;
+    maxY += deltaY;
+    const scale1 = svgWidth / (maxX - minX);
+    const scale2 = svgHeight / (maxY - minY);
+    const scale = Math.min(scale1, scale2);
+    return {
+        x: -minX * scale,
+        y: -minY * scale,
+        scale,
+    };
 }

@@ -128,9 +128,7 @@ const label = computed(() =>
                             word-wrap: normal;
                         "
                     >
-                        <pre v-if="isCode" class="language-">
-                            <code class="language-" v-html="label"></code>
-                        </pre>
+                        <pre v-if="isCode" class="language-"><code class="language-" v-html="label"></code></pre>
                         <p v-else v-html="label"></p>
                     </div>
                 </div>

@@ -41,7 +41,6 @@ watch(
     { immediate: true },
 );
 
-// const arch = ref<Architecture | null>(null);
 const editor = ref(null);
 const coyaSvgEl = ref<SVGSVGElement | null>(null);
 const coyaGEl = ref<SVGGElement | null>(null);
