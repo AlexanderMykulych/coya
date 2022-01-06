@@ -11,6 +11,7 @@ import { prepareNum } from "./prepareNum";
 import { reconnectArrow } from "./reconnectArrow";
 import { LayoutConfig } from "../components/AppMenu/layouts";
 import { removeBlockById } from "./removeBlockById";
+import { findStartTransform } from "./findStartTransform";
 
 export function useCurrentEditorState(): CurrentEditorState {
     const editor = getCurrentEditor();
@@ -161,6 +162,8 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                 }, 800)
             }),
         });
+
+        const diagramRect = computed(() => findStartTransform(editor.architecture, editor.svg));
         return {
             isOneNodeSelected: computed(() => !!blockId.value),
             initPhases: computed({
@@ -274,6 +277,12 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                     history.current = undefined;
                 }
             },
+            diagramRect,
+            scaleToStart: () => {
+                editor.zoomState.translate.x = diagramRect.value.x;
+                editor.zoomState.translate.y = diagramRect.value.y;
+                editor.zoomState.scale = diagramRect.value.scale;
+            }
         };
     }
     throw "no editor state";

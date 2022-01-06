@@ -7,7 +7,7 @@ import { onWheelHorScroll } from '../NodeSetting/onWheelHorScroll';
 
 const openLayouts = ref(false);
 
-const { selectedNode, showDebugWindow, state, applyPositioning } =
+const { selectedNode, showDebugWindow, state, applyPositioning, scaleToStart } =
     useCurrentEditorState();
 const selectDefaultNode = () => (selectedNode.value = '_');
 const selectDefaultArrowNode = () => (selectedNode.value = '->');
@@ -34,6 +34,9 @@ const selectLayout = (layout: LayoutConfig) => applyPositioning(layout);
         </div>
         <slot name="center"></slot>
         <div>
+            <button class="border-2" @click="scaleToStart">
+                <i-ic:round-fit-screen class="pb-1" />
+            </button>
             <button class="border-2" @click="openLayouts = true">
                 <i-mdi:graph class="pb-1" />
             </button>

@@ -112,8 +112,9 @@ const phasesJsonContainerStyle = computed(() => ({
     width: `${nodeSettingWidth.value}px`,
     height: `1px`,
 }));
-const { mouseState, state, isOneNodeSelected, showDebugWindow } =
+const { mouseState, state, isOneNodeSelected, showDebugWindow, diagramRect } =
     useCurrentEditorState();
+
 </script>
 
 <template>

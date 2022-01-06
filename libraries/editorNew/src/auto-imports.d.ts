@@ -22,6 +22,7 @@ declare module 'vue' {
     'IIc:baselineSkipPrevious': typeof import('~icons/ic/baseline-skip-previous')['default']
     'IIc:baselineTextDecrease': typeof import('~icons/ic/baseline-text-decrease')['default']
     'IIc:outlineHistory': typeof import('~icons/ic/outline-history')['default']
+    'IIc:roundFitScreen': typeof import('~icons/ic/round-fit-screen')['default']
     'IIc:roundPlayArrow': typeof import('~icons/ic/round-play-arrow')['default']
     'IIconParkOutline:zoom': typeof import('~icons/icon-park-outline/zoom')['default']
     'ILs:underscore': typeof import('~icons/ls/underscore')['default']
@@ -47,6 +48,7 @@ declare module 'vue' {
     PhasesJson: typeof import('./components/Phases/PhasesJson.vue')['default']
     RectPalette: typeof import('./components/Palette/blocks/rect/rectPalette.vue')['default']
     Test: typeof import('./components/test.vue')['default']
+    ToDiagram: typeof import('./components/ToDiagram/ToDiagram.vue')['default']
     WrapperRect: typeof import('./components/Wrap/WrapperRect.vue')['default']
   }
 }

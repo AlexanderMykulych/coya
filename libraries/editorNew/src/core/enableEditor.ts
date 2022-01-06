@@ -188,7 +188,9 @@ function enableZoom(editor: EnabledEditor, zoomElement: SVGGraphicsElement) {
         zoom(e);
     };
     editor.zoomState = reactive({
-        transform
+        transform,
+        translate,
+        scale,
     });
     watch(() => transform.value, val => {
         zoomElement.setAttribute("transform", val);

@@ -73,13 +73,18 @@ export interface History {
     items: HistoryChange[];
     current?: number;
 }
+export interface ZoomState {
+    transform: string;
+    translate: { x: number; y: number; }
+    scale: number;
+}
 export interface EnabledEditor extends BaseEditor {
     enable: true;
     id?: string;
     wrap: (node: any) => any;
     state: EnabledEditorState;
     showDebugWindow: boolean;
-    zoomState: any;
+    zoomState: ZoomState;
     svg: SVGSVGElement | null;
     workEl: SVGSVGElement | SVGGElement | null;
     mouseState: MouseState;
@@ -109,6 +114,15 @@ export interface EnableEditorParameters {
 export interface MakeChangeAction {
     action: Action;
     applyChangesToDiagram?: boolean;
+}
+export interface DiagramRectangle {
+    x: number;
+    y: number;
+    x1: number;
+    y1: number;
+    x2: number;
+    y2: number;
+    scale: number;
 }
 export interface CurrentEditorState {
     isOneNodeSelected: Ref<boolean>;
@@ -150,12 +164,14 @@ export interface CurrentEditorState {
     selectedNode: Ref<string | undefined>;
     showDebugWindow: Ref<boolean>;
     zoomState: ComputedRef<any>;
+    diagramRect: ComputedRef<DiagramRectangle>;
     applyPositioning: (layout: LayoutConfig) => void;
     getBlockRealPosition: (blockId: string) => RectPositioning;
     pinToBlock: (toBlockId: string) => void;
     removeBlock: (id?: string) => void;
     undoChange: () => void;
     redoChange: () => void;
+    scaleToStart: () => void;
 }
 
 export enum PinType {

@@ -1,7 +1,8 @@
 import { Architecture } from "coya-core";
+import { DiagramRectangle } from "./types";
 
 
-export const findStartTransform = (arch: Architecture, svg: SVGSVGElement) => {
+export const findStartTransform = (arch: Architecture, svg: SVGSVGElement): DiagramRectangle => {
     const svgWidth = svg.width.baseVal.value;
     const svgHeight = svg.height.baseVal.value;
     let minX = Number.MAX_SAFE_INTEGER;
@@ -45,6 +46,10 @@ export const findStartTransform = (arch: Architecture, svg: SVGSVGElement) => {
     return {
         x: -minX * scale,
         y: -minY * scale,
+        x1: minX,
+        y1: minY,
+        x2: maxX,
+        y2: maxY,
         scale,
     };
 };

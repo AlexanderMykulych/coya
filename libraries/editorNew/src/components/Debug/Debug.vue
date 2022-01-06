@@ -12,6 +12,7 @@ const {
     initialConfig,
     architecture,
     history,
+    diagramRect,
 } = useCurrentEditorState();
 const jsonEditorConfig = reactive({
     glyphMargin: false,
@@ -28,7 +29,10 @@ const obj = computed(() => {
         case 'mouse':
             return mouseState;
         case 'zoom':
-            return zoomState.value;
+            return {
+                transform: zoomState.value,
+                rect: diagramRect.value
+            };
         case 'config':
             return activeConfig.value;
         case 'initConfig':
