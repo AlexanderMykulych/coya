@@ -7,7 +7,7 @@ import { useMagicKeys, whenever } from "@vueuse/core";
 export function listenHotKeys(editor: EnabledEditor) {
     const { Delete, Ctrl_Z, shift } = useMagicKeys();
     const { removeBlock, undoChange, redoChange } = useEditorState(editor);
-    whenever(Delete, removeBlock);
+    whenever(Delete, () => removeBlock());
     watchEffect(() => {
         if (Ctrl_Z.value) {
             if (shift.value) {

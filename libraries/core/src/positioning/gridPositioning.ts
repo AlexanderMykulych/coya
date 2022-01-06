@@ -72,18 +72,26 @@ export function gridPositioning(option: AutoPositioningSetting): BlockPositionin
                     top: {
                         x: computed(() => getValueByCtx(pos.top?.x ?? `${blockId}.x + ${blockId}.w / 2`, gridSize.columnWidth).value),
                         y: computed(() => getValueByCtx(pos.top?.y ?? `${blockId}.y`, gridSize.columnWidth).value),
+                        w: 0,
+                        h: 0,
                     },
                     bottom: {
                         x: computed(() => getValueByCtx(pos.top?.x ?? `${blockId}.top.x`, gridSize.columnWidth).value),
                         y: computed(() => getValueByCtx(pos.top?.y ?? `${blockId}.y + ${blockId}.h`, gridSize.columnWidth).value),
+                        w: 0,
+                        h: 0,
                     },
                     right: {
                         x: computed(() => getValueByCtx(pos.top?.x ?? `${blockId}.x + ${blockId}.w`, gridSize.columnWidth).value),
                         y: computed(() => getValueByCtx(pos.top?.y ?? `${blockId}.y + ${blockId}.h / 2`, gridSize.columnWidth).value),
+                        w: 0,
+                        h: 0,
                     },
                     left: {
                         x: computed(() => getValueByCtx(pos.top?.x ?? `${blockId}.x`, gridSize.columnWidth).value),
                         y: computed(() => getValueByCtx(pos.top?.y ?? `${blockId}.right.y`, gridSize.columnWidth).value),
+                        w: 0,
+                        h: 0,
                     }
                 }
             };

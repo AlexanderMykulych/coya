@@ -48,7 +48,6 @@ declare module 'vue' {
     PhasesJson: typeof import('./components/Phases/PhasesJson.vue')['default']
     RectPalette: typeof import('./components/Palette/blocks/rect/rectPalette.vue')['default']
     Test: typeof import('./components/test.vue')['default']
-    ToDiagram: typeof import('./components/ToDiagram/ToDiagram.vue')['default']
     WrapperRect: typeof import('./components/Wrap/WrapperRect.vue')['default']
   }
 }

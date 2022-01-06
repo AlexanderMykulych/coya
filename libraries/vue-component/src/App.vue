@@ -18,7 +18,7 @@ const examples = [
         id: key.split('/').reverse()[0],
     })),
 ];
-const currentExampleIndex = ref(examples.length - 3);
+const currentExampleIndex = ref(examples.length - 1);
 
 const config = computed(() => examples[currentExampleIndex.value]);
 
