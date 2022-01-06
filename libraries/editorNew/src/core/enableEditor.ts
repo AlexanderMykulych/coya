@@ -117,11 +117,15 @@ export function enableHistory(editor: EnabledEditor) {
     });
 
     watch(() => editor.history.current, (val, oldVal) => {
-        const index = editor.history.items.length - (val === undefined ? 1 : val);
+        let index = editor.history.items.length - (val === undefined ? 0 : val);
+        const isRedo = val === undefined || (oldVal !== undefined && val < oldVal);
+        if (isRedo) {
+            index -= 1;
+        }
         if (index >= 0 && index < editor.history.items.length) {
             const { changes } = editor.history.items[index];
             changes.forEach(change => {
-                const appliedVal = val === undefined ? change.val : change.oldVal;
+                const appliedVal = isRedo ? change.val : change.oldVal;
                 setFromHistory = true;
                 setValueByPath(editor.initialConfig, appliedVal, change.fullPath);
                 setValueByPath(editor.config, appliedVal, change.fullPath);
