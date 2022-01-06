@@ -18,7 +18,6 @@ const paths = strictComputed(
     if (isNaN(w.value) || isNaN(h.value) || !rc.value || !gEl.value) {
         return;
     }
-    console.log("calc rough")
     return rc.value.toPaths(
         rc.value.rectangle(5, 5, w.value - 10, h.value - 10, {
             ...props.css,

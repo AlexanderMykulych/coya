@@ -12,7 +12,6 @@ export function strictComputed<T, S>(source: () => S, fn: () => T, options?: any
         source,
         (val, oldVal) => {
             if (!fastDeepEqual(val, oldVal)) {
-                console.log(val, oldVal);
                 dirty.value = true
                 trigger()
             }
