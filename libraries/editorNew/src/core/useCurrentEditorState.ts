@@ -123,12 +123,12 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                     )
                     ?? configActiveNode.value?.block.value?.label,
                 set: (val: string | null) => {
-                    if (typeof configActiveNode.value?.style?.value?.label) {
-                        set(configActiveNode.value, "style.value.label", val);
-                        set(initConfigActiveNode.value, "style.value.label", val);
-                    } else if (typeof configActiveNode.value?.block.value === "string") {
+                    if (typeof configActiveNode.value?.block.value === "string") {
                         set(configActiveNode.value, "block.value", val);
                         set(initConfigActiveNode.value, "block.value", val);
+                    } else if (typeof configActiveNode.value?.style?.value?.label) {
+                        set(configActiveNode.value, "style.value.label", val);
+                        set(initConfigActiveNode.value, "style.value.label", val);
                     } else if (typeof configActiveNode.value?.block.value.label) {
                         set(configActiveNode.value, "block.value.label", val);
                         set(initConfigActiveNode.value, "block.value.label", val);
@@ -193,7 +193,7 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                     action: {
                         name: ActionType.AddNewBlock,
                         value: {
-                            [blockName]: {
+                            [blockName]: isNullOrUndefined(block) ? blockName : {
                                 label: blockName,
                                 ...block
                             },
