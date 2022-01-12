@@ -50,15 +50,32 @@ export function enableEditor({ svg, config, id, initialConfig, architecture, wor
 }
 
 function listenSvgEvents(editor: EnabledEditor) {
+    const { makeChange, getNewUniqBlockName, addNewBlock } = useEditorState(editor);
     watch(() => editor.svg, svgEl => {
         if (svgEl) {
             const onMouseClickListener = (_: MouseEvent) => {
                 editor.state.selectedNodeIds = undefined;
             };
+            const onDblClick = (e: MouseEvent) => {
+                if (e.target === svgEl) {
+                    const { x, y } = getMousePosition(svgEl, e);
+                    addNewBlock({
+                        position: {
+                            x: x - 150,
+                            y: y - 50,
+                            w: 300,
+                            h: 100
+                        },
+                    });
+                }
+            };
             svgEl.addEventListener("click", onMouseClickListener);
+
+            svgEl.addEventListener("dblclick", onDblClick);
 
             onScopeDispose(() => {
                 svgEl.removeEventListener("click", onMouseClickListener);
+                svgEl.removeEventListener("dblclick", onDblClick);
             });
         }
     }, { immediate: true });
@@ -68,7 +85,6 @@ function listenSvgEvents(editor: EnabledEditor) {
             enableZoom(editor, val);
         }
     }, { immediate: true })
-    const { makeChange, getNewUniqBlockName } = useEditorState(editor);
     watch(() => editor.state.arrowState?.end, (val, oldVal) => {
         if (val && !oldVal && editor.state.arrowState && editor.state.arrowState.start) {
             makeChange({

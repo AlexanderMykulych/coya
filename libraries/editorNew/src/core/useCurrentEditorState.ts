@@ -272,6 +272,9 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                 }
                 if (id) {
                     editor.state.selectedNodeIds = [];
+                    if (editor.state.hover?.hoveredBlockId === id) {
+                        editor.state.hover = null;
+                    }
                     removeBlockById(editor.config, editor.architecture, id);
                     removeBlockById(editor.initialConfig, editor.architecture, id);
                 }
@@ -364,8 +367,8 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                                 } catch { }
                                 addNewBlock({
                                     position: {
-                                        x: editor.mouseState.position.x,
-                                        y: editor.mouseState.position.y,
+                                        x: editor.mouseState.position.x - 150,
+                                        y: editor.mouseState.position.y - 50,
                                         w: 300,
                                         h: 100,
                                     },
