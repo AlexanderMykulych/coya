@@ -89,7 +89,7 @@ const showGElement = () => {
 };
 
 
-const textStyle = reactive({
+const textBlockStyle = reactive({
     display: 'flex',
     'align-items': 'unsafe center',
     'justify-content': 'unsafe center',
@@ -97,6 +97,22 @@ const textStyle = reactive({
     height: computed(() => `${props.positioning.h - 2}px`),
     'padding-top': 0,
     'margin-left': 0,
+});
+const textStyle = computed(() => {
+    const textStyle = props.blockStyle?.css?.text;
+    if (textStyle) {
+
+        if (textStyle.fontSize === "auto") {
+            const fontSize = computed(() => `${props.positioning.w / 6}px`);
+            return reactive({
+                ...textStyle,
+                fontSize,
+            });
+        }
+        return {
+            ...textStyle,
+        };
+    }
 });
 
 const label = computed(() =>
@@ -116,7 +132,7 @@ const label = computed(() =>
             height="100%"
             requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
         >
-            <div xmlns="http://www.w3.org/1999/xhtml" :style="textStyle">
+            <div xmlns="http://www.w3.org/1999/xhtml" :style="textBlockStyle">
                 <div style="box-sizing: border-box; text-align: center">
                     <div
                         style="
@@ -128,7 +144,7 @@ const label = computed(() =>
                         "
                     >
                         <pre v-if="isCode" class="language-"><code class="language-" v-html="label"></code></pre>
-                        <p v-else v-html="label"></p>
+                        <p v-else :style="textStyle" v-html="label"></p>
                     </div>
                 </div>
             </div>

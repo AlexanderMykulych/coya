@@ -80,6 +80,7 @@ export function useEditorState(editor: Editor): CurrentEditorState {
             }),
         }) : null);
         const getBlockRealPosition = (blockId: string) => editor.architecture?.style?.positioning?.find(x => x.blockId === blockId)?.position;
+        
         const selectNode = (id: string) => editor.state.selectedNodeIds = [id];
         const activeNode = reactive({
             name: computed({
@@ -316,6 +317,14 @@ export function useEditorState(editor: Editor): CurrentEditorState {
             copy: async () => {
                 if (blockId.value) {
                     const activeBlockPos = getBlockRealPosition(blockId.value);
+                    const pinTo = configActiveNode.value?.style?.value?.pinTo;
+                    let x = activeBlockPos.x + 100;
+                    let y = activeBlockPos.y + 100;
+                    if (pinTo) {
+                        const pinBlockPos = getBlockRealPosition(pinTo);
+                        x -= pinBlockPos.x;
+                        y -= pinBlockPos.y;
+                    }
                     const data = JSON.stringify({
                         type: "coya/block",
                         block: {
@@ -324,25 +333,53 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                                 ...configActiveNode.value?.style?.value,
                                 position: {
                                     ...configActiveNode.value?.style?.value?.position,
-                                    x: activeBlockPos.x + 100,
-                                    y: activeBlockPos.y + 100,
+                                    x,
+                                    y,
                                 }
                             },
                         },
                     });
-                    await navigator.clipboard.writeText(data);
+                    await navigator.clipboard.write([
+                        new ClipboardItem({
+                            "text/plain": new Blob([data], {type: 'text/plain'})
+                        }),
+                    ]);
                 }
             },
             paste: async () => {
-                const dataStr = await navigator.clipboard.readText();
-                try {
-                    const data = JSON.parse(dataStr);
-                    if (data && data.type === "coya/block") {
-                        const blockName = addNewBlock(data.block.style, data.block.value);
-                        selectNode(blockName);
-                    }
-                } catch { }
-                console.log("paste:", dataStr);
+                const clipItems = await navigator.clipboard.read();
+                clipItems?.forEach(item => {
+                    item.types.forEach(async type => {
+                        const itemData = await item.getType(type);
+                        switch (type) {
+                            case "text/plain":
+                                const dataStr = await itemData.text();
+                                try {
+                                    const data = JSON.parse(dataStr);
+                                    if (data && data.type === "coya/block") {
+                                        const blockName = addNewBlock(data.block.style, data.block.value);
+                                        selectNode(blockName);
+                                    }
+                                    return;
+                                } catch { }
+                                addNewBlock({
+                                    position: {
+                                        x: editor.mouseState.position.x,
+                                        y: editor.mouseState.position.y,
+                                        w: 300,
+                                        h: 100,
+                                    },
+                                }, {
+                                    label: dataStr
+                                });
+                                break;
+                            default:
+                                console.log(`type: ${type} is not supported! Sorry:(`)
+                        }
+                    })
+                })
+
+                console.log("paste:", clipItems);
             },
             addNewBlock,
         };

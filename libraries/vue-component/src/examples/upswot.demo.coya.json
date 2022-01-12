@@ -3,6 +3,122 @@
 	"blocks": {
 		"block_1": {
 			"label": "block_1"
+		},
+		"block_2": {
+			"label": "block_1",
+			"sourcePhase": 0
+		},
+		"block_3": {
+			"label": "block_1",
+			"sourcePhase": 0
+		},
+		"line_1": {
+			"from": "block_2",
+			"to": "block_3",
+			"name": "line_1",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_4": {
+			"label": "block_1",
+			"sourcePhase": 0
+		},
+		"line_2": {
+			"from": "block_2",
+			"to": "block_4",
+			"name": "line_2",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_5": {
+			"label": "block_1",
+			"sourcePhase": 0
+		},
+		"line_3": {
+			"from": "block_3",
+			"to": "block_5",
+			"name": "line_3",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_6": {
+			"label": "block_1",
+			"sourcePhase": 0
+		},
+		"line_4": {
+			"from": "block_4",
+			"to": "block_6",
+			"name": "line_4",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_7": {
+			"label": "block_1",
+			"sourcePhase": 0
+		},
+		"block_8": {
+			"label": "block_1",
+			"sourcePhase": 0
+		},
+		"block_9": {
+			"label": "block_1",
+			"sourcePhase": 0
+		},
+		"line_5": {
+			"from": "block_7",
+			"to": "block_8",
+			"name": "line_5",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_6": {
+			"from": "block_7",
+			"to": "block_9",
+			"name": "line_6",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_10": {
+			"label": "block_1",
+			"sourcePhase": 0
+		},
+		"block_11": {
+			"label": "block_1",
+			"sourcePhase": 0
+		},
+		"block_12": {
+			"label": "block_1",
+			"sourcePhase": 0
+		},
+		"line_7": {
+			"from": "block_8",
+			"to": "block_10",
+			"name": "line_7",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_8": {
+			"from": "block_9",
+			"to": "block_11",
+			"name": "line_8",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_9": {
+			"from": "block_9",
+			"to": "block_12",
+			"name": "line_9",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
 		}
 	},
 	"phases": [],
@@ -16,22 +132,199 @@
 					"rx": "49",
 					"stroke": "black",
 					"fillStyle": "solid",
-					"border-radius": "10px"
+					"border-radius": "10px",
+					"text": {
+						"fontSize": "auto"
+					}
 				}
 			},
 			"block_1": {
 				"position": {
-					"x": "-227.21459197998047",
-					"y": "-345.22785568237305",
-					"w": "311.221643447876",
-					"h": "28.103496551513672"
+					"x": "-295.9727020263672",
+					"y": "-563.2939453125",
+					"w": "198.3541259765625",
+					"h": "59.82672119140625"
+				},
+				"css": {
+					"fill": "none",
+					"color": "black",
+					"stroke": "none",
+					"text": {
+						"color": "#5d35b0ff"
+					}
+				},
+				"label": "Project/Hosting"
+			},
+			"block_2": {
+				"position": {
+					"x": "-352.9847717285156",
+					"y": "110.81976318359375",
+					"w": "142.9726104736328",
+					"h": "31.55517578125"
+				},
+				"css": {
+					"fill": "none",
+					"color": "black",
+					"stroke": "none",
+					"text": {
+						"color": "#5d35b0ff"
+					}
+				},
+				"label": "Project",
+				"pinTo": "block_1"
+			},
+			"block_3": {
+				"position": {
+					"x": "-103.37069702148438",
+					"y": "272.4456024169922",
+					"w": "157.32850646972656",
+					"h": "45.68963623046875"
 				},
 				"css": {
 					"fill": "none",
 					"color": "black",
 					"stroke": "none"
 				},
-				"label": "Project/Hosting"
+				"label": "PoC",
+				"pinTo": "block_2"
+			},
+			"block_4": {
+				"position": {
+					"x": "78.44331359863281",
+					"y": "275.07557678222656",
+					"w": "210.77685546875",
+					"h": "36.82481384277344"
+				},
+				"css": {
+					"fill": "none",
+					"color": "black",
+					"stroke": "none"
+				},
+				"label": "Pilot",
+				"pinTo": "block_2"
+			},
+			"block_5": {
+				"position": {
+					"x": "-84.78605651855469",
+					"y": "455.88692343235016",
+					"w": "123.4024658203125",
+					"h": "51.3473482131958"
+				},
+				"css": {
+					"fill": "none",
+					"color": "black",
+					"stroke": "none"
+				},
+				"label": "Dummy data",
+				"pinTo": "block_2"
+			},
+			"block_6": {
+				"position": {
+					"x": "123.7154541015625",
+					"y": "453.0425420999527",
+					"w": "123.4024658203125",
+					"h": "51.3473482131958"
+				},
+				"css": {
+					"fill": "none",
+					"color": "black",
+					"stroke": "none"
+				},
+				"label": "Real data",
+				"pinTo": "block_2"
+			},
+			"block_7": {
+				"position": {
+					"x": "328.15605545043945",
+					"y": "131.64202880859375",
+					"w": "142.9726104736328",
+					"h": "31.55517578125"
+				},
+				"css": {
+					"fill": "none",
+					"color": "black",
+					"stroke": "none",
+					"text": {
+						"color": "#5d35b0ff"
+					}
+				},
+				"label": "Hosting",
+				"pinTo": "block_1"
+			},
+			"block_8": {
+				"position": {
+					"x": "-117.82081508636475",
+					"y": "240.17971801757812",
+					"w": "157.32850646972656",
+					"h": "45.68963623046875"
+				},
+				"css": {
+					"fill": "none",
+					"color": "black",
+					"stroke": "none"
+				},
+				"label": "upSWOT",
+				"pinTo": "block_7"
+			},
+			"block_9": {
+				"position": {
+					"x": "104.9085693359375",
+					"y": "239.3691864013672",
+					"w": "157.32850646972656",
+					"h": "45.68963623046875"
+				},
+				"css": {
+					"fill": "none",
+					"color": "black",
+					"stroke": "none"
+				},
+				"label": "Bank",
+				"pinTo": "block_7"
+			},
+			"block_10": {
+				"position": {
+					"x": "-120.05294847488403",
+					"y": "446.1520519256592",
+					"w": "157.32850646972656",
+					"h": "45.68963623046875"
+				},
+				"css": {
+					"fill": "none",
+					"color": "black",
+					"stroke": "none"
+				},
+				"label": "1 week",
+				"pinTo": "block_7"
+			},
+			"block_11": {
+				"position": {
+					"x": "38.5435209274292",
+					"y": "441.4264488220215",
+					"w": "157.32850646972656",
+					"h": "45.68963623046875"
+				},
+				"css": {
+					"fill": "none",
+					"color": "black",
+					"stroke": "none"
+				},
+				"label": "2 week",
+				"pinTo": "block_7"
+			},
+			"block_12": {
+				"position": {
+					"x": "193.138445854187",
+					"y": "446.4133834838867",
+					"w": "157.32850646972656",
+					"h": "45.68963623046875"
+				},
+				"css": {
+					"fill": "none",
+					"color": "black",
+					"stroke": "none"
+				},
+				"label": "Docker-compose",
+				"pinTo": "block_7"
 			}
 		}
 	}

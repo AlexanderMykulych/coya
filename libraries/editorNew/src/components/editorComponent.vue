@@ -123,6 +123,9 @@ const { mouseState, state, isOneNodeSelected, showDebugWindow, diagramRect } =
             :viewBox="`0 0 ${svgPosition.w} ${svgPosition.h}`"
             :x="svgViewBox.x"
             :y="svgViewBox.y"
+            @keydown.stop
+            @keypress.stop
+            @keyup.stop
         >
             <slot name="before" />
             <foreignObject
