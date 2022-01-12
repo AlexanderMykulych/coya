@@ -29,9 +29,7 @@ const lineTextY = computed(() => {
     const y = Math.min(props.positioning.y1, props.positioning.y2);
     return y + height + 5;
 });
-const textStyle = ref({
-    fontSize: '4px',
-});
+
 const enableStraitLine = ref(true);
 const meta = computed(() => props.positioning.meta);
 const path = computed(() => {
@@ -70,14 +68,15 @@ const paths = computed(() => {
             :transform="`translate(${meta.x2}, ${meta.y2}) rotate(${meta.ae})`"
             fill="black"
         />
-        <text
-            :style="textStyle"
-            ref="textEl"
-            :x="lineTextX"
-            :y="lineTextY"
-            dominant-baseline="middle"
-            text-anchor="middle"
-            >{{ block.label }}</text
+        
+        <Text
+            :css="cssStyle"
+            :x="positioning.x"
+            :y="positioning.y"
+            :width="positioning.w"
+            :height="positioning.h"
+            :label="block.label"
         >
+        </Text>
     </g>
 </template>

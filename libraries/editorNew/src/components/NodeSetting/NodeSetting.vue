@@ -9,7 +9,7 @@ import {
     deepAssign,
     ChangedItem,
     setValueByPath,
-deepCopy,
+    deepCopy,
 } from 'coya-util';
 
 const { activeNode, activeBlockStyleSetting, architecture, selectedNode } =

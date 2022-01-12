@@ -161,7 +161,7 @@ provide(
 );
 </script>
 <template>
-    <div class="grid grid-cols-4 grid-rows-12 h-full">
+    <div class="grid grid-cols-4 grid-rows-12 h-full hwf">
         <editorComponent v-if="!!editor">
             <template #preview="{ item }">
                 <CoyaNode

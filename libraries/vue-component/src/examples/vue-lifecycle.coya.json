@@ -1,9 +1,8 @@
 {
 	"name": "vue-lifecycle-json",
 	"blocks": {
-		"start": {
-			"label": "app = Vue.createApp(options); app.mount(el)"
-		}
+		"start": "",
+		"created": "created"
 	},
 	"phases": [
 		{
@@ -63,11 +62,16 @@
 					"has_template_opt": {
 						"label": "new palette block"
 					}
+				},
+				{
+					"created": {
+						"label": "block_1"
+					}
 				}
 			],
 			"connect": [
 				{
-					"from": "init",
+					"from": "line_1_1",
 					"to": "beforeCreate",
 					"name": "line_init_beforeCreate"
 				},
@@ -103,6 +107,11 @@
 					"from": "mounted",
 					"to": "virtualRerender",
 					"name": "line_1"
+				},
+				{
+					"from": "line_2_10",
+					"to": "created",
+					"name": "line_2"
 				}
 			]
 		}
@@ -111,35 +120,53 @@
 		"blocks": {
 			"_": {
 				"css": {
-					"color": "black",
-					"fill": "#FF89CF",
+					"color": "#ffffffff",
+					"fill": "#4cb050ff",
 					"fontSize": "2.1em",
-					"rx": "25",
-					"stroke": "black"
+					"rx": "49",
+					"stroke": "black",
+					"fillStyle": "solid",
+					"border-radius": "10px"
 				}
+			},
+			"start": {
+				"position": {
+					"x": "-172.81404541015627",
+					"y": "128.60828491210935",
+					"w": "464.8565563964844",
+					"h": "112.25911621093752"
+				},
+				"css": {
+					"fill": "#4cb050ff",
+					"fillStyle": "solid",
+					"fontSize": "1em"
+				},
+				"code": "vue.01.ts"
 			},
 			"init": {
 				"position": {
-					"x": "start.x",
-					"y": "start.y + start.h + 80",
+					"x": "2.42633056640625",
+					"y": "287.97745422363283",
 					"w": "start.w",
 					"h": "start.h"
-				}
+				},
+				"pinTo": "start"
 			},
 			"initInject": {
 				"position": {
-					"x": "init.x",
-					"y": "init.y + start.h + 60",
+					"x": "6.87646484375",
+					"y": "281.86463073730465",
 					"w": "init.w",
 					"h": "init.h"
-				}
+				},
+				"pinTo": "init"
 			},
 			"beforeCreate": {
 				"position": {
-					"x": "-801.0842697143555",
-					"y": "48.834259643554674",
+					"x": "-594.7564498901368",
+					"y": "174.5709844970703",
 					"w": "init.w",
-					"h": "initInject.y - init.y - init.h"
+					"h": "66.97213684082033"
 				},
 				"css": {
 					"fill": "none",
@@ -149,41 +176,25 @@
 				"pinTo": "init"
 			},
 			"line_init_beforeCreate": {
-				"position": {
-					"x1": "line_1_1.x1",
-					"y1": "line_1_1.y1 + (line_1_1.y2 - line_1_1.y1) / 2",
-					"y2": "line_1_1.y1 + (line_1_1.y2 - line_1_1.y1) / 2",
-					"x": "NaN",
-					"y": "NaN"
-				},
+				"position": {},
 				"css": {
 					"fill": "none",
 					"stroke": "red",
 					"stroke-dasharray": 3
 				}
 			},
-			"start": {
-				"position": {
-					"x": "6.714152832031232",
-					"y": "196.04229064941404",
-					"w": "496.45",
-					"h": "134.14"
-				},
-				"css": {
-					"fill": "#5D61FF"
-				}
-			},
 			"has_template_opt": {
 				"position": {
-					"x": "initInject.x",
-					"y": "initInject.y + initInject.h + 90",
+					"x": "4.584320068359375",
+					"y": "330.20178894042965",
 					"w": "initInject.w",
 					"h": "start.h"
 				},
 				"css": {
 					"fill": "#3e6b94"
 				},
-				"label": "Has template options"
+				"label": "Has template options",
+				"pinTo": "initInject"
 			},
 			"compile": {
 				"position": {
@@ -200,8 +211,8 @@
 			},
 			"compileEl": {
 				"position": {
-					"x": "1000.94609375",
-					"y": "201.27798522949217",
+					"x": "935.623583984375",
+					"y": "230.31021179199206",
 					"w": "compile.w",
 					"h": "compile.h"
 				},
@@ -213,40 +224,37 @@
 			},
 			"createApp": {
 				"position": {
-					"x": "has_template_opt.x",
-					"y": "compile.y + compile.h + 100",
+					"x": "-144.72507904052736",
+					"y": "1436.9027612304685",
 					"w": "has_template_opt.w",
 					"h": "has_template_opt.h"
 				},
-				"css": {
-					"fill": "#00FF9D",
-					"color": "#121212"
-				},
+				"css": {},
 				"label": "Create app.$el and append it to el"
 			},
 			"mounted": {
 				"position": {
-					"x": "createApp.x + createApp.w/4",
-					"y": "createApp.y + createApp.h + 100",
+					"x": "116.21414291381836",
+					"y": "256.45748046874996",
 					"w": "createApp.w/2",
 					"h": "createApp.h"
 				},
-				"css": {
-					"fill": "#00B0FF"
-				},
-				"label": "Mounted"
+				"css": {},
+				"label": "Mounted",
+				"pinTo": "createApp"
 			},
 			"unmounted": {
 				"position": {
-					"x": "mounted.x",
-					"y": "mounted.y + mounted.h + 200",
+					"x": "-3.1570281982421875",
+					"y": "321.73018554687496",
 					"w": "mounted.w",
 					"h": "mounted.h"
 				},
 				"css": {
 					"fill": "#3e6b94"
 				},
-				"label": "Unmounted"
+				"label": "Unmounted",
+				"pinTo": "mounted"
 			},
 			"virtualRerender": {
 				"position": {
@@ -262,14 +270,46 @@
 				"pinTo": "mounted"
 			},
 			"line_0_1": {
-				"css": {
-					"stroke": "#2900FF"
-				}
+				"css": {}
 			},
 			"->": {
 				"css": {
-					"fill": "none"
+					"fill": "none",
+					"text": {
+						"background-color": "#83c683ff",
+						"padding": "20px",
+						"border-radius": "12px",
+						"color": "white"
+					}
 				}
+			},
+			"created": {
+				"position": {
+					"x": "-594.8689837646484",
+					"y": "195.76747985839847",
+					"w": "beforeCreate.w",
+					"h": "beforeCreate.h"
+				},
+				"css": {
+					"fill": "none",
+					"color": "red",
+					"stroke": "red"
+				},
+				"pinTo": "initInject",
+				"label": "created"
+			},
+			"line_2": {
+				"css": {
+					"fill": "none",
+					"stroke": "red",
+					"stroke-dasharray": 3
+				}
+			},
+			"line_2_11": {
+				"label": "YES"
+			},
+			"line_2_12": {
+				"label": "NO"
 			}
 		}
 	}

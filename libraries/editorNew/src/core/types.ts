@@ -1,4 +1,4 @@
-import { Action, ActionSetting, ActionType, applyPositioning, Architecture, PhaseAction, RectPositioning } from "coya-core";
+import { Action, ActionSetting, ActionType, applyPositioning, Architecture, BlockElementDescription, BlockStyle, PhaseAction, RectPositioning } from "coya-core";
 import { ArchitectureDescription, Change } from "coya-core";
 import { ChangedItem } from "coya-util/dist/src/ChangedItem";
 import { Component, ComputedRef, Ref } from "vue";
@@ -172,6 +172,9 @@ export interface CurrentEditorState {
     undoChange: () => void;
     redoChange: () => void;
     scaleToStart: () => void;
+    copy: () => void;
+    paste: () => void;
+    addNewBlock: (style: BlockStyle, block?: BlockElementDescription) => void;
 }
 
 export enum PinType {

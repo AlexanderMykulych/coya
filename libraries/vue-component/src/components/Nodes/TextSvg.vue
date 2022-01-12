@@ -22,7 +22,7 @@ const textStyle = computed(() => ({
         <div xmlns="http://www.w3.org/1999/xhtml" :style="textStyle">
             <div style="box-sizing: border-box; text-align: center; display: inline-block; background-color: yellow;">
                 <div
-                    style="display: inline-block; font-family: Helvetica; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "
+                    style="display: inline-block; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "
                 >
                     <slot>
                         <p v-if="isHtml" v-html="text"></p>

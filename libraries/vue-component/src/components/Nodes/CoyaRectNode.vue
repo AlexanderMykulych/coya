@@ -95,8 +95,8 @@ const textStyle = reactive({
     'justify-content': 'unsafe center',
     width: computed(() => `${props.positioning.w - 2}px`),
     height: computed(() => `${props.positioning.h - 2}px`),
-    'padding-top': computed(() => `0px`),
-    'margin-left': computed(() => `0px`),
+    'padding-top': 0,
+    'margin-left': 0,
 });
 
 const label = computed(() =>
@@ -121,7 +121,6 @@ const label = computed(() =>
                     <div
                         style="
                             display: inline-block;
-                            font-family: Helvetica;
                             line-height: 1.2;
                             pointer-events: all;
                             white-space: normal;

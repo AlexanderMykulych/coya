@@ -15,6 +15,7 @@ const {
     getNewUniqBlockName,
     state,
     architecture,
+    addNewBlock,
 } = useCurrentEditorState()!;
 const onMouseDown = (name: string) => {
     const activePaletteBlock = PaletteBlocks.find((x) => x.name === name);
@@ -54,38 +55,17 @@ watch(
     () => mouseState.palette.pressed,
     (val, oldVal) => {
         if (!val && oldVal && mouseState.palette.blockName) {
-            const blockName = getNewUniqBlockName();
-            makeChange([
-                {
-                    action: {
-                        name: ActionType.AddNewBlock,
-                        value: {
-                            [blockName]: {
-                                label: blockName,
-                            },
-                        },
-                    },
+            addNewBlock({
+                position: {
+                    x: `${mouseState.position.x - 50}`,
+                    y: `${mouseState.position.y - 50}`,
+                    w: '100',
+                    h: '100',
                 },
-                {
-                    action: {
-                        name: ActionType.ChangeBlockStyle,
-                        value: {
-                            [blockName]: {
-                                position: {
-                                    x: `${mouseState.position.x - 50}`,
-                                    y: `${mouseState.position.y - 50}`,
-                                    w: '100',
-                                    h: '100',
-                                },
-                                css: {
-                                    fill: '#3e6b94',
-                                },
-                            },
-                        },
-                    },
-                    applyChangesToDiagram: true,
+                css: {
+                    fill: '#3e6b94',
                 },
-            ]);
+            });
         }
     },
 );

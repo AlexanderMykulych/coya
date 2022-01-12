@@ -1,0 +1,38 @@
+{
+	"name": "upswot",
+	"blocks": {
+		"block_1": {
+			"label": "block_1"
+		}
+	},
+	"phases": [],
+	"style": {
+		"blocks": {
+			"_": {
+				"css": {
+					"color": "#ffffffff",
+					"fill": "#4cb050ff",
+					"fontSize": "2.1em",
+					"rx": "49",
+					"stroke": "black",
+					"fillStyle": "solid",
+					"border-radius": "10px"
+				}
+			},
+			"block_1": {
+				"position": {
+					"x": "-227.21459197998047",
+					"y": "-345.22785568237305",
+					"w": "311.221643447876",
+					"h": "28.103496551513672"
+				},
+				"css": {
+					"fill": "none",
+					"color": "black",
+					"stroke": "none"
+				},
+				"label": "Project/Hosting"
+			}
+		}
+	}
+}

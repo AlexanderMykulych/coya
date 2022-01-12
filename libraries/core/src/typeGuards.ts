@@ -1,4 +1,4 @@
-import { isNotNullOrUndefined } from "coya-util";
+import { isNotNullOrUndefined, isNullOrUndefined } from "coya-util";
 import {
     ActionSetting, AddNewBlockActionSetting,
     ArchitectureDescription, BlockElementDescription,
@@ -37,7 +37,9 @@ export function isArchitectureDescription(obj: unknown): obj is ArchitectureDesc
 export function isRectPositioning(obj: Positioning | undefined | null): obj is RectPositioning {
     if (!!obj) {
         const rectPos = <RectPositioning>obj;
-        return isNotNullOrUndefined(rectPos.x) && isNotNullOrUndefined(rectPos.y);
+        return isNotNullOrUndefined(rectPos.x)
+            && isNotNullOrUndefined(rectPos.y)
+            && isNullOrUndefined((rectPos as any).x1);
     }
     return false;
 }

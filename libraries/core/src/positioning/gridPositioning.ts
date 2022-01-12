@@ -23,10 +23,6 @@ export function gridPositioning(option: AutoPositioningSetting): BlockPositionin
     if (!style || notSettetBlocks.length > 0) {
         throw `Not every block has setting: [${notSettetBlocks.map(x => x.id)}]`;
     }
-    const gridSize = {
-        columnWidth: 20,
-        rowHeight: 20
-    };
 
     const blocksPositioning: Ref<BlockPositioning[]> = ref([]);
     const getValueByCtx = (x?: number | FormulaValue, multiplier: number = 1) => {
@@ -65,31 +61,31 @@ export function gridPositioning(option: AutoPositioningSetting): BlockPositionin
             return <BlockPositioning>{
                 blockId: blockId,
                 position: {
-                    x: computed(() => getValueByCtx(pos.x, gridSize.columnWidth).value + indentX.value + pinToBlockPos.x.value),
-                    y: computed(() => getValueByCtx(pos.y, gridSize.rowHeight).value + indentY.value + pinToBlockPos.y.value),
-                    w: computed(() => getValueByCtx(pos.w, gridSize.columnWidth).value + indentX.value),
-                    h: computed(() => getValueByCtx(pos.h, gridSize.rowHeight).value + indentY.value),
+                    x: computed(() => getValueByCtx(pos.x).value + indentX.value + pinToBlockPos.x.value),
+                    y: computed(() => getValueByCtx(pos.y).value + indentY.value + pinToBlockPos.y.value),
+                    w: computed(() => getValueByCtx(pos.w).value + indentX.value),
+                    h: computed(() => getValueByCtx(pos.h).value + indentY.value),
                     top: {
-                        x: computed(() => getValueByCtx(pos.top?.x ?? `${blockId}.x + ${blockId}.w / 2`, gridSize.columnWidth).value),
-                        y: computed(() => getValueByCtx(pos.top?.y ?? `${blockId}.y`, gridSize.columnWidth).value),
+                        x: computed(() => getValueByCtx(pos.top?.x ?? `${blockId}.x + ${blockId}.w / 2`).value),
+                        y: computed(() => getValueByCtx(pos.top?.y ?? `${blockId}.y`).value),
                         w: 0,
                         h: 0,
                     },
                     bottom: {
-                        x: computed(() => getValueByCtx(pos.top?.x ?? `${blockId}.top.x`, gridSize.columnWidth).value),
-                        y: computed(() => getValueByCtx(pos.top?.y ?? `${blockId}.y + ${blockId}.h`, gridSize.columnWidth).value),
+                        x: computed(() => getValueByCtx(pos.top?.x ?? `${blockId}.top.x`).value),
+                        y: computed(() => getValueByCtx(pos.top?.y ?? `${blockId}.y + ${blockId}.h`).value),
                         w: 0,
                         h: 0,
                     },
                     right: {
-                        x: computed(() => getValueByCtx(pos.top?.x ?? `${blockId}.x + ${blockId}.w`, gridSize.columnWidth).value),
-                        y: computed(() => getValueByCtx(pos.top?.y ?? `${blockId}.y + ${blockId}.h / 2`, gridSize.columnWidth).value),
+                        x: computed(() => getValueByCtx(pos.top?.x ?? `${blockId}.x + ${blockId}.w`).value),
+                        y: computed(() => getValueByCtx(pos.top?.y ?? `${blockId}.y + ${blockId}.h / 2`).value),
                         w: 0,
                         h: 0,
                     },
                     left: {
-                        x: computed(() => getValueByCtx(pos.top?.x ?? `${blockId}.x`, gridSize.columnWidth).value),
-                        y: computed(() => getValueByCtx(pos.top?.y ?? `${blockId}.right.y`, gridSize.columnWidth).value),
+                        x: computed(() => getValueByCtx(pos.top?.x ?? `${blockId}.x`).value),
+                        y: computed(() => getValueByCtx(pos.top?.y ?? `${blockId}.right.y`).value),
                         w: 0,
                         h: 0,
                     }

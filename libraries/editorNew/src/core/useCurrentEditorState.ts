@@ -1,6 +1,6 @@
 import { computed, reactive, ref } from "vue";
 import { CurrentEditorState, Editor, getCurrentEditor, MakeChangeAction } from ".";
-import { Action, isArray } from "coya-core";
+import { Action, ActionType, BlockElementDescription, BlockStyle, isArray } from "coya-core";
 import { isNotNullOrUndefined, isNullOrUndefined } from "coya-util";
 import { executeActions } from "coya-core";
 import { ArchitectureDescription } from "coya-core";
@@ -80,6 +80,7 @@ export function useEditorState(editor: Editor): CurrentEditorState {
             }),
         }) : null);
         const getBlockRealPosition = (blockId: string) => editor.architecture?.style?.positioning?.find(x => x.blockId === blockId)?.position;
+        const selectNode = (id: string) => editor.state.selectedNodeIds = [id];
         const activeNode = reactive({
             name: computed({
                 get: () => blockId.value,
@@ -87,7 +88,7 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                     if (blockId.value) {
                         renameBlock(editor.config, blockId.value, val);
                         renameBlock(editor.initialConfig, blockId.value, val);
-                        editor.state.selectedNodeIds = [val];
+                        selectNode(val);
                     }
                 }, 800)
             }),
@@ -121,13 +122,13 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                     )
                     ?? configActiveNode.value?.block.value?.label,
                 set: (val: string | null) => {
-                    if (configActiveNode.value?.style?.value?.label) {
+                    if (typeof configActiveNode.value?.style?.value?.label) {
                         set(configActiveNode.value, "style.value.label", val);
                         set(initConfigActiveNode.value, "style.value.label", val);
                     } else if (typeof configActiveNode.value?.block.value === "string") {
                         set(configActiveNode.value, "block.value", val);
                         set(initConfigActiveNode.value, "block.value", val);
-                    } else if (configActiveNode.value?.block.value.label) {
+                    } else if (typeof configActiveNode.value?.block.value.label) {
                         set(configActiveNode.value, "block.value.label", val);
                         set(initConfigActiveNode.value, "block.value.label", val);
                     }
@@ -164,6 +165,52 @@ export function useEditorState(editor: Editor): CurrentEditorState {
         });
 
         const diagramRect = computed(() => findStartTransform(editor.architecture, editor.svg));
+
+        const makeChange = (action: MakeChangeAction | MakeChangeAction[]) => {
+            const actions = isArray(action) ? action : [action];
+            makeChangeToDiagram(editor.config, actions);
+            makeChangeToDiagram(editor.initialConfig, actions);
+            editor.architecture.toPhase(editor.architecture.currentPhase);
+        };
+        const getNewUniqBlockName = (prefix: string = 'block_') => {
+            let index = 1;
+            const getName = () => `${prefix}${index}`;
+            let name = getName();
+            const isBlockExist = (name: string) =>
+                Object.keys(editor.architecture.style?.blocks || {}).some(x => x === name) ||
+                editor.architecture?.blocks.some((x: any) => x.id === name);
+            while (isBlockExist(name)) {
+                index++;
+                name = getName();
+            }
+            return name;
+        };
+        const addNewBlock = (style: BlockStyle, block?: BlockElementDescription) => {
+            const blockName = getNewUniqBlockName();
+            makeChange([
+                {
+                    action: {
+                        name: ActionType.AddNewBlock,
+                        value: {
+                            [blockName]: {
+                                label: blockName,
+                                ...block
+                            },
+                        },
+                    },
+                },
+                {
+                    action: {
+                        name: ActionType.ChangeBlockStyle,
+                        value: {
+                            [blockName]: style,
+                        },
+                    },
+                    applyChangesToDiagram: true,
+                },
+            ]);
+            return blockName;
+        }
         return {
             isOneNodeSelected: computed(() => !!blockId.value),
             initPhases: computed({
@@ -199,28 +246,11 @@ export function useEditorState(editor: Editor): CurrentEditorState {
             svg: editor.svg,
             workEl: editor.workEl,
             history: computed(() => editor.history),
-            makeChange: (action: MakeChangeAction | MakeChangeAction[]) => {
-                const actions = isArray(action) ? action : [action];
-                makeChangeToDiagram(editor.config, actions);
-                makeChangeToDiagram(editor.initialConfig, actions);
-                editor.architecture.toPhase(editor.architecture.currentPhase);
-            },
-            getNewUniqBlockName: (prefix: string = 'block_') => {
-                let index = 1;
-                const getName = () => `${prefix}${index}`;
-                let name = getName();
-                const isBlockExist = (name: string) =>
-                    Object.keys(editor.architecture.style?.blocks || {}).some(x => x === name) ||
-                    editor.architecture?.blocks.some((x: any) => x.id === name);
-                while (isBlockExist(name)) {
-                    index++;
-                    name = getName();
-                }
-                return name;
-            },
+            makeChange,
+            getNewUniqBlockName,
             selectedNode: computed({
                 get: () => editor.state.selectedNodeIds?.[0],
-                set: (val) => !!val ? editor.state.selectedNodeIds = [val] : null,
+                set: (val) => !!val ? selectNode(val) : null,
             }),
             showDebugWindow: computed({
                 get: () => editor.showDebugWindow,
@@ -282,7 +312,39 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                 editor.zoomState.translate.x = diagramRect.value.x;
                 editor.zoomState.translate.y = diagramRect.value.y;
                 editor.zoomState.scale = diagramRect.value.scale;
-            }
+            },
+            copy: async () => {
+                if (blockId.value) {
+                    const activeBlockPos = getBlockRealPosition(blockId.value);
+                    const data = JSON.stringify({
+                        type: "coya/block",
+                        block: {
+                            value: configActiveNode.value?.block?.value,
+                            style: {
+                                ...configActiveNode.value?.style?.value,
+                                position: {
+                                    ...configActiveNode.value?.style?.value?.position,
+                                    x: activeBlockPos.x + 100,
+                                    y: activeBlockPos.y + 100,
+                                }
+                            },
+                        },
+                    });
+                    await navigator.clipboard.writeText(data);
+                }
+            },
+            paste: async () => {
+                const dataStr = await navigator.clipboard.readText();
+                try {
+                    const data = JSON.parse(dataStr);
+                    if (data && data.type === "coya/block") {
+                        const blockName = addNewBlock(data.block.style, data.block.value);
+                        selectNode(blockName);
+                    }
+                } catch { }
+                console.log("paste:", dataStr);
+            },
+            addNewBlock,
         };
     }
     throw "no editor state";

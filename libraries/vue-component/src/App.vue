@@ -20,7 +20,7 @@ const examples = [
 ];
 const currentExampleIndex = ref(examples.length - 1);
 
-const config = computed(() => examples[currentExampleIndex.value]);
+const config = computed(() => examples.find(x => x.value.name === "upswot"));
 
 
 const assetsDir = "./examples/assets/";

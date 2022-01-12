@@ -23,3 +23,14 @@ html.dark {
     hover:opacity-100 hover:text-teal-600;
   font-size: 0.9em;
 }
+
+@font-face {
+    font-family: "doogdog";
+    font-style: normal;
+    src: local("doogdog"), url("./../assets/fonts/gooddog-plain/GOODDP__.TTF") format("truetype");
+}
+
+//hand writing font
+.hwf {
+    font-family: "doogdog";
+}

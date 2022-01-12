@@ -11,14 +11,22 @@ export function lineBlockPosition(blocksPositions: Ref<BlockPositioning[]>, bloc
         getFormulaValue(x, blocksPositions, { defaultValue: def, ...setting });
     const arrowHeadSize = 10;
     const boxs = `${block.from}.x, ${block.from}.y, ${block.from}.w, ${block.from}.h, ${block.to}.x, ${block.to}.y, ${block.to}.w, ${block.to}.h`;
-    const meta = getValueByCtx(`_.fn.getBoxToBoxArrow(${boxs}, {padEnd: ${arrowHeadSize}})`);
+    const meta = getValueByCtx(`_.fn.getBoxToBoxArrow(${boxs}, {padEnd: ${arrowHeadSize}, padStart: ${arrowHeadSize}})`);
+    const x1 = computed(() => meta.value.x1);
+    const y1 = computed(() => meta.value.y1);
+    const x2 = computed(() => meta.value.x2);
+    const y2 = computed(() => meta.value.y2);
     return {
         blockId: block.id,
         position: {
-            x1: computed(() => meta.value.x1),
-            y1: computed(() => meta.value.y1),
-            x2: computed(() => meta.value.x2),
-            y2: computed(() => meta.value.y2),
+            x1,
+            y1,
+            x2,
+            y2,
+            x: computed(() => Math.min(x1.value, x2.value)),
+            y: computed(() => Math.min(y1.value, y2.value)),
+            w: computed(() => Math.abs(x1.value - x2.value)),
+            h: computed(() => Math.abs(y1.value - y2.value)),
             meta: computed(() => ({
                 ...meta.value,
                 arrowHeadSize
