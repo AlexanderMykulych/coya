@@ -502,6 +502,12 @@
       "reviewCategory": "production"
     },
     {
+      "packageName": "coya-arrow",
+      "projectFolder": "libraries/arrow",
+      "versionPolicyName": "main",
+      "reviewCategory": "production"
+    },
+    {
       "packageName": "demo",
       "projectFolder": "apps/demo",
       "reviewCategory": "apps"

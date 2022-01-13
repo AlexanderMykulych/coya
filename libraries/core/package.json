@@ -90,6 +90,7 @@
         "rollup-plugin-commonjs": "^10.1.0",
         "stylis": "^4.0.10",
         "vite": "^2.7.6",
-        "vue": "^3.2.26"
+        "vue": "^3.2.26",
+        "coya-arrow": "~0.9.18"
     }
 }
