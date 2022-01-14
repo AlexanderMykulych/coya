@@ -3,7 +3,7 @@
     "name": "coya-arrow",
     "version": "0.9.18",
     "main": "dist/coya-arrow.es.js",
-    "typings": "dist/src/ArrowDescriptor.d.ts",
+    "typings": "dist/src/logic/libEntry.d.ts",
     "module": "dist/coya-arrow.es.js",
     "scripts": {
         "build": "vite build",

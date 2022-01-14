@@ -1,3 +1,5 @@
+import { Vec2 } from "./utils";
+
 export type ArrowDescriptor = [
     /** start point */
     /* sx: */ number,
@@ -21,4 +23,6 @@ export type ArrowOptions = Partial<{
     padStart: number;
     padEnd: number;
     controlPointStretch: number;
+    startPoint?: Vec2;
+    endPoint?: Vec2;
 }>;

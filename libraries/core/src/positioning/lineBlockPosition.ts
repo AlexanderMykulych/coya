@@ -10,8 +10,17 @@ export function lineBlockPosition(blocksPositions: Ref<BlockPositioning[]>, bloc
     const getValueByCtx = (x?: number | FormulaValue, def?: any) =>
         getFormulaValue(x, blocksPositions, { defaultValue: def, ...setting });
     const arrowHeadSize = 10;
-    const boxs = `${block.from}.x, ${block.from}.y, ${block.from}.w, ${block.from}.h, ${block.to}.x, ${block.to}.y, ${block.to}.w, ${block.to}.h`;
-    const meta = getValueByCtx(`_.fn.getBoxToBoxArrow(${boxs}, {padEnd: ${arrowHeadSize}, padStart: ${arrowHeadSize}})`);
+    const fromBlock = getBlockName(block.from);
+    const toBlock = getBlockName(block.to);
+    let str = "";
+    if (hasSpecificPoint(block.from)) {
+        str += `, startPoint: ${block.from}`;
+    }
+    if (hasSpecificPoint(block.to)) {
+        str += `, endPoint: ${block.to}`;
+    }
+    const boxs = `${block.from}.x, ${fromBlock}.y, ${fromBlock}.w, ${fromBlock}.h, ${toBlock}.x, ${toBlock}.y, ${toBlock}.w, ${toBlock}.h`;
+    const meta = getValueByCtx(`_.fn.getBoxToBoxArrow(${boxs}, {padEnd: ${arrowHeadSize}, padStart: ${arrowHeadSize} ${str} })`);
     const x1 = computed(() => meta.value.x1);
     const y1 = computed(() => meta.value.y1);
     const x2 = computed(() => meta.value.x2);
@@ -33,4 +42,10 @@ export function lineBlockPosition(blocksPositions: Ref<BlockPositioning[]>, bloc
             }))
         }
     };
+}
+const getBlockName = (str: string) => {
+    return str.split(".")?.[0];
+}
+const hasSpecificPoint  = (str: string) => {
+    return str.split(".").length === 2;
 }

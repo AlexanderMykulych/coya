@@ -4,7 +4,7 @@ import { computed, watch } from 'vue';
 import { EditorMode, PaletteItemType } from '../../core/types';
 import { useCurrentEditorState } from '../../core/useCurrentEditorState';
 import { PaletteBlocks } from './PaletteBlocks';
-import { getBoxToBoxArrowPath } from 'coya-util';
+import { getBoxToBoxArrowPath } from 'coya-arrow';
 import { eagerComputed } from '@vueuse/core';
 
 const {

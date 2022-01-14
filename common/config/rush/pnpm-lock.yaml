@@ -15096,7 +15096,7 @@ packages:
     dev: false
 
   file:projects/coya-editor-new.tgz:
-    resolution: {integrity: sha512-jtwmOm77ypZ0pCsSa7+OqbTXVHXC/J7Gsgk2qhiheAyJFGmuDqgJuFMBr0U9eiD0N8faJSZljLcRZRqd6P2fZg==, tarball: file:projects/coya-editor-new.tgz}
+    resolution: {integrity: sha512-BaD3ZMUEC/y3FnK/lhUvHKGxP9Go7xwmhnLubz724szpOCKaYFUKYv8Mb8t+LAFxVTrJuG3QhCNWdgxWXl0emg==, tarball: file:projects/coya-editor-new.tgz}
     name: '@rush-temp/coya-editor-new'
     version: 0.0.0
     dependencies:

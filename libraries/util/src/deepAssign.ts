@@ -1,6 +1,6 @@
 export function deepAssign<T>(...objects: object[]): T {
     const isObject = (obj: any) => obj && typeof obj === 'object';
-
+    objects = objects.filter(x => !!x);
     function deepMergeInner(target: any, source: any) {
         Object.keys(source).forEach((key: string) => {
             const targetValue = target[key];
