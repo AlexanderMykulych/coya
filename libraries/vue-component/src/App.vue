@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { AssetConfigs } from './logic/useAssets';
+import {test} from "coya-store";
+
 const modulesTs = Object.entries(import.meta.globEager('./examples/*.coya.ts'));
 const modulesJs = Object.entries(
     import.meta.globEager('./examples/*.coya.json'),
@@ -33,9 +35,11 @@ for (const path in modules) {
       name: path.slice(assetsDir.length),
   });
 }
+const t = test('test');
 </script>
 <template>
     <main class="text-center text-gray-700 dark:text-gray-200 bg-white h-full">
+        {{t}}
         <Coya
             class="row-span-11"
             :config="config.value"

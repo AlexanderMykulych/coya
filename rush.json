@@ -508,6 +508,12 @@
       "reviewCategory": "production"
     },
     {
+      "packageName": "coya-store",
+      "projectFolder": "libraries/store",
+      "versionPolicyName": "main",
+      "reviewCategory": "production"
+    },
+    {
       "packageName": "demo",
       "projectFolder": "apps/demo",
       "reviewCategory": "apps"
