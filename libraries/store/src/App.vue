@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch, watchEffect } from 'vue';
-import HelloWorld from './components/HelloWorld.vue'
-import { useCoyaStore } from './libEntry';
+import { useCoyaStore } from './stores/useCoyaStore';
 
 const store = useCoyaStore();
 const test = () => {
@@ -27,8 +25,8 @@ const saveFile = () => {
 <template>
   
   projects: {{store.projectsNames}} <br>
-  active: {{store.activeProject.name}} <br>
-  active proj files: {{store.activeProject.fileNames}}
+  active: {{store.activeProject?.name}} <br>
+  active proj files: {{store.activeProject?.fileNames}}
   <button @click="store.openFolder">
       open folder
   </button>
@@ -39,8 +37,5 @@ const saveFile = () => {
   <textarea v-model="text" cols="30" rows="10"></textarea>
     <br>
     <button v-if="!!text" @click="saveFile">save</button>
+    <button @click="store.restore">restore</button>
 </template>
-
-<style>
-
-</style>

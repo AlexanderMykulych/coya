@@ -1,9 +1,9 @@
 import { Ref, ref, watchEffect } from "vue";
 
-export const dirFiles = (dir: Ref<FileSystemDirectoryHandle | undefined>) => {
+export const dirFiles = (dir: Ref<FileSystemDirectoryHandle | undefined>, isVerified: Ref<boolean>) => {
     const res = ref<{ handle: FileSystemFileHandle; file: File; }[]>([]);
     watchEffect(async () => {
-        if (!dir.value) {
+        if (!dir.value || !isVerified.value) {
             return [];
         }
         const promises = [];
