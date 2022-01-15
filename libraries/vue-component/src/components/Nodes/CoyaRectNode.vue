@@ -123,7 +123,7 @@ const label = computed(() =>
 <template>
     <svg ref="gEl">
         <Rough :w="positioning.w" :h="positioning.h" :css="cssStyle"/>
-        <image v-if="imgUrl" :href="imgUrl" width="100%" height="100%" />
+        <image v-if="imgUrl" :href="imgUrl" x="15" y="15" :width="positioning.w-30" :height="positioning.h-30" />
         <foreignObject
             style="overflow: visible; text-align: left"
             pointer-events="none"
@@ -143,7 +143,7 @@ const label = computed(() =>
                             word-wrap: normal;
                         "
                     >
-                        <pre v-if="isCode" class="language-"><code class="language-" v-html="label"></code></pre>
+                        <pre v-if="isCode" class="language-"><code class="l1anguage-" v-html="label"></code></pre>
                         <p v-else :style="textStyle" v-html="label"></p>
                     </div>
                 </div>
