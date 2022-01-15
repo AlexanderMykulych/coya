@@ -14,14 +14,14 @@ import { enableEditor, getMousePosition } from 'coya-editor-new';
 import 'coya-editor-new/dist/style.css';
 import { saveConfig } from '../socket';
 import { useCurrentPhase } from '../state/useCurrentPhase';
-import { AssetConfigs, provideAssets } from '../logic/useAssets';
+import { AssetConfig, provideAssets } from '../logic/useAssets';
 
 const props = defineProps<{
     config: string | Object;
     id: string;
-    assets: AssetConfigs;
+    assets: AssetConfig;
 }>();
-
+const emit = defineEmits(['update:config']);
 provideAssets(props.assets);
 
 const preparedConfig = reactive({
@@ -84,6 +84,7 @@ editor.value = enableEditor({
     initialConfig,
     architecture: arch,
     id: props.id,
+    assets: props.assets,
 });
 const editorComponent = computed(() => editor.value?.component);
 
@@ -109,7 +110,7 @@ const filteredRectPositions = computed(() =>
 
 const next = () => arch.value?.next();
 const back = () => arch.value?.back();
-const save = () => saveConfig(props.id, initialConfig.value);
+const save = () => emit('update:config', JSON.stringify(initialConfig.value, null, '\t'));
 const { x, y } = useMousePosition(coyaSvgEl);
 const debug = computed(() => arch.value?.style?.debug?.enable ?? false);
 

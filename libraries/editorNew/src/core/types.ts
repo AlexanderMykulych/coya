@@ -1,4 +1,4 @@
-import { Action, ActionSetting, ActionType, applyPositioning, Architecture, BlockElementDescription, BlockStyle, PhaseAction, RectPositioning } from "coya-core";
+import { Action, ActionSetting, ActionType, applyPositioning, Architecture, AssetConfig, BlockElementDescription, BlockStyle, PhaseAction, RectPositioning } from "coya-core";
 import { ArchitectureDescription, Change } from "coya-core";
 import { ChangedItem } from "coya-util/dist/src/ChangedItem";
 import { Component, ComputedRef, Ref } from "vue";
@@ -94,6 +94,7 @@ export interface EnabledEditor extends BaseEditor {
     makeChange: (change: Change) => void;
     component: any;
     history: History;
+    assets: AssetConfig;
 }
 export interface DisabledEditor extends BaseEditor {
     enable: false;
@@ -109,7 +110,8 @@ export interface EnableEditorParameters {
     config: Ref<ArchitectureDescription>;
     initialConfig: Ref<ArchitectureDescription>;
     architecture: Ref<Architecture>;
-    id?: string
+    id?: string;
+    assets: AssetConfig;
 }
 export interface MakeChangeAction {
     action: Action;

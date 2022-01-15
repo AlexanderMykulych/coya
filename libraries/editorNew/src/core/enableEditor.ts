@@ -1,4 +1,4 @@
-import { ActionType, Change, makeChange } from "coya-core";
+import { ActionType, Change, makeChange, AssetConfig } from "coya-core";
 import { effectScope, onScopeDispose, provide, reactive, ref, watch, computed } from "vue";
 import { EnabledEditor, EnableEditorParameters } from "./types";
 import { wrapEditorNode } from "./wrapEditorNode";
@@ -12,7 +12,7 @@ import { listenHotKeys } from "./listenHotKeys";
 import { deepCopy, isNotNullOrUndefined, setValueByPath, whatChanged } from "coya-util";
 import { findStartTransform } from "./findStartTransform";
 
-export function enableEditor({ svg, config, id, initialConfig, architecture, workEl }: EnableEditorParameters) {
+export function enableEditor({ svg, config, id, initialConfig, architecture, workEl, assets }: EnableEditorParameters) {
     const scope = effectScope();
     const editor = scope.run(() => {
         const editor: EnabledEditor = reactive<EnabledEditor>({
@@ -39,6 +39,7 @@ export function enableEditor({ svg, config, id, initialConfig, architecture, wor
                 items: [],
                 current: undefined,
             },
+            assets,
         });
         listenSvgEvents(editor);
         listenHotKeys(editor);

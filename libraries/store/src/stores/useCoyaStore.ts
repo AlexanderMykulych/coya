@@ -4,10 +4,15 @@ import { dirFiles } from "./dirFiles";
 import { verifyPermission } from './verifyPermission';
 import { get, set } from 'idb-keyval';
 
+interface ActiveFile {
+    handle: FileSystemFileHandle;
+    file: File;
+    name: string;
+}
 export const useCoyaStore = defineStore('coya', () => {
     const projects = ref<FileSystemDirectoryHandle[]>([]);
     const activeProject = ref<FileSystemDirectoryHandle | undefined>();
-    const activeFileHandel = ref<FileSystemFileHandle | undefined>();
+    const activeFile = ref<ActiveFile | undefined>();
     const isVerified = ref(false);
     get<FileSystemDirectoryHandle>("coya:active")
         .then(async val => {
@@ -30,10 +35,13 @@ export const useCoyaStore = defineStore('coya', () => {
         return await file.text();
     }
     const saveFileText = async (file: File, text: string) => {
-        const fileHandle = activeProjectFileHandles.value.find(x => x.file === file);
+        const fileHandle = activeProjectHandles.value.find(x => x.file === file);
+        saveFileHandleText(fileHandle?.handle, text);
+    }
+    const saveFileHandleText = async (fileHandle?: FileSystemFileHandle, content?: any, mimeType?: string) => {
         if (fileHandle) {
-            const writable = await fileHandle.handle.createWritable();
-            await writable.write(new Blob([text], { type: 'text/plain' }));
+            const writable = await fileHandle.createWritable();
+            await writable.write(new Blob([content ?? ""], { type: mimeType ?? 'text/plain' }));
             await writable.close();
         }
     }
@@ -45,14 +53,46 @@ export const useCoyaStore = defineStore('coya', () => {
         }
     };
     const activateProjectFile = async (file: File) => {
-        const fileHandle = activeProjectFileHandles.value.find(x => x.file === file)?.handle;
+        const fileHandle = activeProjectHandles.value.files.find(x => x.file === file)?.handle;
         if (fileHandle) {
-            activeFileHandel.value = fileHandle;
+            const file = await fileHandle.getFile();
+            activeFile.value = {
+                handle: fileHandle,
+                file,
+                name: file.name,
+            };
         }
     }
+    const createAsset = async ({ name, ext, content, mime }: { name: string; ext: string; content: any; mime?: string;}) => {
+        if (activeProject.value) {
+            let assetsHandle = activeProjectHandles.value.folders.find(x => x.handle.name === 'assets');
+            if (!assetsHandle) {
+                const assetsHandle = await activeProject.value.getDirectoryHandle('assets', {
+                    create: true,
+                });
+                activeProjectHandles.value.folders.push({ handle: assetsHandle });
+            }
+            const uniqName = await getFileUniqName(assetsHandle!.handle, name, ext);
+            
+            const newFileHandle = await assetsHandle!.handle.getFileHandle(uniqName, { create: true });
+            await saveFileHandleText(newFileHandle, content, mime);
+            return uniqName;
+        }
+    };
+    const loadAsset = async (name: string) => {
+        let assetsHandle = activeProjectHandles.value.folders.find(x => x.handle.name === 'assets');
+        if (assetsHandle) {
+            const fileHandle = await assetsHandle.handle.getFileHandle(name);
+            if (fileHandle) {
+                const file = await fileHandle.getFile();
+                return file;
+            }
+        }
+    }
+
     const activeProjectName = computed(() => activeProject.value?.name);
-    const activeProjectFileHandles = dirFiles(activeProject, isVerified);
-    const activeProjectFiles = computed(() => activeProjectFileHandles.value.map(x => x.file));
+    const activeProjectHandles = dirFiles(activeProject, isVerified);
+    const activeProjectFiles = computed(() => activeProjectHandles.value.files.map(x => x.file));
     const activeProjectCoyaFiles = computed(() => activeProjectFiles.value.filter(x => x.name.endsWith(".coya.json")));
     return {
         projects,
@@ -64,7 +104,13 @@ export const useCoyaStore = defineStore('coya', () => {
             coyaFiles: activeProjectCoyaFiles,
             fileNames: computed(() => activeProjectFiles.value.map(x => x.name)),
             opened: computed(() => !!activeProject.value && isVerified.value),
-            activeFileHandel, 
+            activeFile,
+            getActiveFileText: async () => {
+                return await activeFile.value?.file?.text();
+            },
+            setActiveFileText: async (text: string) => await saveFileHandleText(activeFile.value?.handle, text),
+            createAsset,
+            loadAsset,
         },
         getFileText,
         saveFileText,
@@ -72,6 +118,19 @@ export const useCoyaStore = defineStore('coya', () => {
         activateProjectFile,
     };
 });
+
+const getFileUniqName = async (folder: FileSystemDirectoryHandle, name: string, ext: string) => {
+    const files: any = {};
+    for await (const file of folder.values()) {
+        files[file.name] = true;
+    }
+    let index = 0;
+    const getName = () => `${name}${index > 0 ? '_' + index.toString() : ''}.${ext}`;
+    while (files[getName()] === true) {
+        index++;
+    }
+    return getName();
+}
 
 if (import.meta.hot)
   import.meta.hot.accept(acceptHMRUpdate(useCoyaStore, import.meta.hot))

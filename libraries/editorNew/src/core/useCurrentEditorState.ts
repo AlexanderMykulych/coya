@@ -376,6 +376,24 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                                     label: dataStr
                                 });
                                 break;
+                            case "image/png":
+                                const imgArray = await itemData.arrayBuffer();
+                                const name = await editor.assets.create({
+                                    name: 'image',
+                                    ext: 'png',
+                                    content: imgArray,
+                                    mime: type,
+                                });
+                                addNewBlock({
+                                    position: {
+                                        x: editor.mouseState.position.x - 50,
+                                        y: editor.mouseState.position.y - 50,
+                                        w: 100,
+                                        h: 100,
+                                    },
+                                    img: name,
+                                }, {label: ""});
+                                break;
                             default:
                                 console.log(`type: ${type} is not supported! Sorry:(`)
                         }

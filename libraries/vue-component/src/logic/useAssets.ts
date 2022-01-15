@@ -1,31 +1,33 @@
-export interface AssetConfig {
-    load: () => Promise<string>;
-    getImgUrl: () => string | undefined;
-    name: string;
-}
-export type AssetConfigs = AssetConfig[];
+import { AssetConfig } from "coya-core";
+
 const assetsKey = "coyaAssets";
-export function provideAssets(assets: AssetConfigs) {
+export function provideAssets(assets: AssetConfig) {
     provide(assetsKey, assets);
 }
 
 export function useAssets() {
-    const assets = inject<AssetConfigs | undefined>(assetsKey);
+    const assets = inject<AssetConfig | undefined>(assetsKey);
+    if (!assets) {
+        return;
+    }
     return {
         getContent: async (name?: string) => {
             if (!name) {
                 return;
             }
-            const asset = assets?.find(x => x.name === name);
-            if (asset) {
-                return (await asset?.load()).default;
-            }
+            return await assets.load(name);
         },
-        getImgUrl: (name: string) => {
-            const asset = assets?.find(x => x.name === name);
-            if (asset) {
-                return asset.getImgUrl();
-            }
-        }
+        getImgUrl: async (name: string) => {
+            const blob = await assets.load(name);
+            return await blobToBase64(blob);
+        },
+        create: assets?.create
     };
+}
+function blobToBase64(blob: Blob) {
+    return new Promise((resolve, _) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.readAsDataURL(blob);
+    });
 }

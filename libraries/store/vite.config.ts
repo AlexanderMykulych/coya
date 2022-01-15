@@ -163,5 +163,7 @@ export default defineConfig({
             fileName: (format) => `coya-store.${format}.js`,
             formats: ['es']
         },
+        minify: false,
+        sourcemap: true,
     }
 })

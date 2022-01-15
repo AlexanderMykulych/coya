@@ -308,3 +308,13 @@ export interface TransformationResult {
     architecture: Ref<Architecture>;
     config: Ref<ArchitectureDescription>;
 }
+
+export interface AssetConfig {
+    create: (config: {
+        name: string;
+        content: any;
+        ext: string;
+        mime?: string;
+    }) => Promise<string>;
+    load: (name: string) => Promise<Blob>;
+}
