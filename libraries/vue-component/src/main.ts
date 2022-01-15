@@ -13,9 +13,11 @@ import 'virtual:windi-components.css'
 import './styles/main.css'
 import 'virtual:windi-utilities.css'
 import { startSocketClient } from './socket'
+import { createPinia } from "pinia";
 
 
 const app = createApp(App)
+app.use(createPinia());
 const router = createRouter({
   history: createWebHistory(),
   routes,

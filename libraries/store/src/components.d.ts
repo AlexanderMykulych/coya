@@ -5,6 +5,11 @@
 declare module 'vue' {
   export interface GlobalComponents {
     CarbonCampsite: typeof import('~icons/carbon/campsite')['default']
+    Files: typeof import('./components/Files.vue')['default']
+    'Mdi:arrowRightThin': typeof import('~icons/mdi/arrow-right-thin')['default']
+    'Mdi:file': typeof import('~icons/mdi/file')['default']
+    'Ph:folderFill': typeof import('~icons/ph/folder-fill')['default']
+    Projects: typeof import('./components/Projects.vue')['default']
   }
 }
 

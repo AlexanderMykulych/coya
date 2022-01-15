@@ -16,8 +16,11 @@
     "@vueuse/core": "^7.1.2",
     "coya-core": "~0.9.18",
     "coya-editor-new": "~0.9.18",
+    "coya-store": "~0.0.0",
+    "coya-util": "~0.1.0",
     "drauu": "^0.1.0",
     "gsap": "latest",
+    "pinia": "^2.0.9",
     "prismjs": "^1.25.0",
     "rollup-plugin-svg": "^2.0.0",
     "roughjs": "^4.5.2",
@@ -25,9 +28,7 @@
     "vue-color-kit": "^1.0.5",
     "vue-demi": "^0.12.1",
     "vue-router": "^4.0.12",
-    "ws": "^8.2.3",
-    "coya-util": "~0.1.0",
-    "coya-store": "~0.0.0"
+    "ws": "^8.2.3"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.11.1",

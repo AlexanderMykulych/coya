@@ -7,6 +7,7 @@ import { get, set } from 'idb-keyval';
 export const useCoyaStore = defineStore('coya', () => {
     const projects = ref<FileSystemDirectoryHandle[]>([]);
     const activeProject = ref<FileSystemDirectoryHandle | undefined>();
+    const activeFileHandel = ref<FileSystemFileHandle | undefined>();
     const isVerified = ref(false);
     get<FileSystemDirectoryHandle>("coya:active")
         .then(async val => {
@@ -18,15 +19,12 @@ export const useCoyaStore = defineStore('coya', () => {
 
     const openFolder = async () => {
         const dirHandle = await window.showDirectoryPicker();
-        if (await verifyPermission(dirHandle)) {
-            isVerified.value = true;
-            const checksProm = projects.value.map(x => x.isSameEntry(dirHandle));
-            const checks = await Promise.all(checksProm);
-            if (!checks.some(x => x)) {
-                projects.value.push(dirHandle);
-            }
-            activeProject.value = dirHandle;
+        const checksProm = projects.value.map(x => x.isSameEntry(dirHandle));
+        const checks = await Promise.all(checksProm);
+        if (!checks.some(x => x)) {
+            projects.value.push(dirHandle);
         }
+        await activateProject(dirHandle);
     };
     const getFileText = async (file: File) => {
         return await file.text();
@@ -39,9 +37,23 @@ export const useCoyaStore = defineStore('coya', () => {
             await writable.close();
         }
     }
+    const activateProject = async (project: FileSystemDirectoryHandle) => {
+        isVerified.value = false;
+        if (await verifyPermission(project)) {
+            isVerified.value = true;
+            activeProject.value = project;
+        }
+    };
+    const activateProjectFile = async (file: File) => {
+        const fileHandle = activeProjectFileHandles.value.find(x => x.file === file)?.handle;
+        if (fileHandle) {
+            activeFileHandel.value = fileHandle;
+        }
+    }
     const activeProjectName = computed(() => activeProject.value?.name);
     const activeProjectFileHandles = dirFiles(activeProject, isVerified);
     const activeProjectFiles = computed(() => activeProjectFileHandles.value.map(x => x.file));
+    const activeProjectCoyaFiles = computed(() => activeProjectFiles.value.filter(x => x.name.endsWith(".coya.json")));
     return {
         projects,
         openFolder,
@@ -49,10 +61,15 @@ export const useCoyaStore = defineStore('coya', () => {
         activeProject: {
             name: activeProjectName,
             files: activeProjectFiles,
+            coyaFiles: activeProjectCoyaFiles,
             fileNames: computed(() => activeProjectFiles.value.map(x => x.name)),
+            opened: computed(() => !!activeProject.value && isVerified.value),
+            activeFileHandel, 
         },
         getFileText,
         saveFileText,
+        activateProject,
+        activateProjectFile,
     };
 });
 
