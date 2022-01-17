@@ -87,11 +87,6 @@ export const useCoyaStore = defineStore('coya', () => {
         if (assetsHandle) {
             try {
                 if (await verifyPermission(assetsHandle.handle)) {
-                    for await (const entry of assetsHandle.handle.entries()) {
-                        const testHandle = await assetsHandle.handle.getFileHandle(entry[1].name);
-                        const testHandle2 = await assetsHandle.handle.getFileHandle(name);
-                        console.log(entry[0], entry[1].name, testHandle.name, name, testHandle2.name);
-                    }
                     const fileHandle = await assetsHandle.handle.getFileHandle(name);
                     if (fileHandle) {
                         const file = await fileHandle.getFile();
@@ -99,7 +94,7 @@ export const useCoyaStore = defineStore('coya', () => {
                     }
                 }
             } catch (e) {
-                console.log(name, e);
+                console.error(name, e);
                 return null;
             }
         }
