@@ -5,9 +5,7 @@ defineProps<{
 const emit = defineEmits(['update:modelValue', 'create', 'update:open']);
 
 const updateName = (name: string) => {
-    emit('update:modelValue', {
-        name,
-    });
+    emit('update:modelValue', { name,});
 };
 
 const target = ref(null);
