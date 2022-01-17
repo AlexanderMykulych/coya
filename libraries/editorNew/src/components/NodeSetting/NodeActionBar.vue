@@ -3,8 +3,16 @@ import { computed } from 'vue';
 import { EditorMode, SelectEvent } from '../../core';
 import { useCurrentEditorState } from '../../core/useCurrentEditorState';
 
-const { activeNode, state, architecture, getBlockRealPosition, removeBlock, pinToBlock } =
-    useCurrentEditorState();
+const {
+    activeNode,
+    state,
+    architecture,
+    getBlockRealPosition,
+    removeBlock,
+    pinToBlock,
+    arrangeForward,
+    arrangeBackward,
+} = useCurrentEditorState();
 
 //pin
 const isPinned = computed(() => !!activeNode.pinTo);
@@ -20,21 +28,25 @@ const activatePinMode = () => {
 
 //label
 const hasLabel = computed(() => !!activeNode.label);
-const cleanLabel = () => activeNode.label = '';
-
+const cleanLabel = () => (activeNode.label = '');
 </script>
 
 <template>
     <div class="flex justify-start pb-2">
-        <button v-if="isPinned">
-            <i-ph:push-pin-simple-fill />
-        </button>
-        <button v-else @click="activatePinMode">
-            <i-ph:push-pin-bold />
+        <button @click="activatePinMode">
+            <i-ph:push-pin-simple-fill v-if="isPinned" />
+            <i-ph:push-pin-bold v-else />
         </button>
 
         <button v-if="hasLabel">
             <i-ic:baseline-text-decrease @click="cleanLabel" />
+        </button>
+
+        <button>
+            <i-mdi:arrange-bring-forward @click="arrangeForward()" />
+        </button>
+        <button>
+            <i-mdi:arrange-send-backward @click="arrangeBackward()" />
         </button>
 
         <button @click="removeBlock()">

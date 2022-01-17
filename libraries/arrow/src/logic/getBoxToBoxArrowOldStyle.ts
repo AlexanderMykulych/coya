@@ -148,7 +148,7 @@ export default function getBoxToBoxArrowOldStyle(
 
 const preparePad = (side: RectSide, point: Vec2, pad?: number) => {
     if (!pad) {
-        return;
+        return point;
     }
     const multiplier = 2.5;
     switch (side) {

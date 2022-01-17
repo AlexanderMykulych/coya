@@ -1,7 +1,7 @@
 import { computed, reactive, ref } from "vue";
 import { CurrentEditorState, Editor, getCurrentEditor, MakeChangeAction } from ".";
 import { Action, ActionType, BlockElementDescription, BlockStyle, isArray } from "coya-core";
-import { isNotNullOrUndefined, isNullOrUndefined } from "coya-util";
+import { isNullOrUndefined } from "coya-util";
 import { executeActions } from "coya-core";
 import { ArchitectureDescription } from "coya-core";
 import { applyPositioning } from "coya-core";
@@ -12,6 +12,8 @@ import { reconnectArrow } from "./reconnectArrow";
 import { LayoutConfig } from "../components/AppMenu/layouts";
 import { removeBlockById } from "./removeBlockById";
 import { findStartTransform } from "./findStartTransform";
+import { set } from "./set";
+import { createComputed } from "./createComputed";
 
 export function useCurrentEditorState(): CurrentEditorState {
     const editor = getCurrentEditor();
@@ -403,55 +405,44 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                 console.log("paste:", clipItems);
             },
             addNewBlock,
+            arrangeBackward: (id?: string) => {
+                arrangeBackward(id ?? blockId.value, editor.initialConfig);
+                arrangeBackward(id ?? blockId.value, editor.config);
+            },
+            arrangeForward: (id?: string) => {
+                arrangeForward(id ?? blockId.value, editor.initialConfig);
+                arrangeForward(id ?? blockId.value, editor.config);
+            },
         };
     }
     throw "no editor state";
 }
-const set = (obj: any, path: string[] | string, val: any) => {
-    if (typeof path === "string") {
-        path = path.split(".");
-    }
-    const leftPath = path.slice(0, path.length - 1);
-    const lastItem = path[path.length - 1];
-    leftPath.forEach(x => {
-        if (isNullOrUndefined(obj[x])) {
-            obj[x] = {};
-        }
-        obj = obj[x]
-    });
-    if (isNotNullOrUndefined(obj)) {
-        obj[lastItem] = val;
-    }
-}
-function createComputed(getObj: any, setObjects: any[], configs: string[] | (string[])[]) {
-    const res = {};
 
-    const get = (obj: any, path: string[]) => {
-        if (path.every(x => {
-            if (obj?.[x] !== undefined) {
-                obj = obj[x];
-                return true;
-            }
-            return false;
-        })) {
-            return obj;
-        }
+const arrangeBackward = (blockId: string | undefined, config: ArchitectureDescription) => {
+    if (!blockId && config?.blocks) {
+        return;
     }
-    configs.forEach(item => {
-        if (!isArray(item)) {
-            item = [item];
-        }
-        const path = item[0].split('.');
-        res[path[path.length - 1]] = computed({
-            get: () => {
-                const res = get(getObj.value, path);
-                return item[1] ? item[1](res) : res;
-            },
-            set: val => {
-                setObjects.forEach(x => set(x.value, path, val));
-            }
-        });
-    });
-    return res;
+    const entries = Object.entries(config.blocks);
+    const firstEntry = entries[0];
+    const blockEntryIndex = entries.findIndex(x => x[0] === blockId);
+    const blockEntry = entries[blockEntryIndex];
+    if (firstEntry && blockEntry) {
+        entries[0] = blockEntry;
+        entries[blockEntryIndex] = firstEntry;
+    }
+    config.blocks = Object.fromEntries(entries);
 }
-
+const arrangeForward = (blockId: string | undefined, config: ArchitectureDescription) => {
+    if (!blockId && config?.blocks) {
+        return;
+    }
+    const entries = Object.entries(config.blocks);
+    const lastEntry = entries[entries.length - 1];
+    const blockEntryIndex = entries.findIndex(x => x[0] === blockId);
+    const blockEntry = entries[blockEntryIndex];
+    if (lastEntry && blockEntry) {
+        entries[entries.length - 1] = blockEntry;
+        entries[blockEntryIndex] = lastEntry;
+    }
+    config.blocks = Object.fromEntries(entries);
+}

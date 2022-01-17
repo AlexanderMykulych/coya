@@ -177,6 +177,8 @@ export interface CurrentEditorState {
     copy: () => void;
     paste: () => void;
     addNewBlock: (style: BlockStyle, block?: BlockElementDescription) => void;
+    arrangeBackward: (blockId?: string) => void;
+    arrangeForward: (blockId?: string) => void;
 }
 
 export enum PinType {
