@@ -79,13 +79,28 @@ export const useCoyaStore = defineStore('coya', () => {
             return uniqName;
         }
     };
-    const loadAsset = async (name: string) => {
+    const loadAsset = async (name?: string) => {
+        if (!name) {
+            return null;
+        }
         let assetsHandle = activeProjectHandles.value.folders.find(x => x.handle.name === 'assets');
         if (assetsHandle) {
-            const fileHandle = await assetsHandle.handle.getFileHandle(name);
-            if (fileHandle) {
-                const file = await fileHandle.getFile();
-                return file;
+            try {
+                if (await verifyPermission(assetsHandle.handle)) {
+                    for await (const entry of assetsHandle.handle.entries()) {
+                        const testHandle = await assetsHandle.handle.getFileHandle(entry[1].name);
+                        const testHandle2 = await assetsHandle.handle.getFileHandle(name);
+                        console.log(entry[0], entry[1].name, testHandle.name, name, testHandle2.name);
+                    }
+                    const fileHandle = await assetsHandle.handle.getFileHandle(name);
+                    if (fileHandle) {
+                        const file = await fileHandle.getFile();
+                        return file;
+                    }
+                }
+            } catch (e) {
+                console.log(name, e);
+                return null;
             }
         }
     }

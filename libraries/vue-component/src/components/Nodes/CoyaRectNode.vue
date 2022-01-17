@@ -18,7 +18,7 @@ const props = defineProps<{
     blockStyle: BlockStyle;
 }>();
 
-const { getContent, getImgUrl } = useAssets();
+const { getText, getImgUrl } = useAssets();
 const imgUrl = asyncComputed(
     async () => await getImgUrl(props.blockStyle?.img),
 );
@@ -27,7 +27,7 @@ const isCode = computed(() => !!props.blockStyle?.code);
 
 const codeHtml = asyncComputed(async () => {
     if (isCode.value) {
-        const code = await getContent(props.blockStyle?.code);
+        const code = await getText(props.blockStyle?.code);
         const ext = getExtension(props.blockStyle?.code);
         return Prism.highlight(code, Prism.languages[ext], ext)?.trim();
     }
@@ -116,7 +116,7 @@ const textStyle = computed(() => {
 });
 
 const label = computed(() =>
-    isCode.value ? codeHtml.value : props.block.label,
+    isCode.value && codeHtml.value ? codeHtml.value : props.block.label,
 );
 </script>
 
@@ -143,7 +143,7 @@ const label = computed(() =>
                             word-wrap: normal;
                         "
                     >
-                        <pre v-if="isCode" class="language-"><code class="l1anguage-" v-html="label"></code></pre>
+                        <pre v-if="isCode && !!codeHtml" class="language-"><code class="l1anguage-" v-html="label"></code></pre>
                         <p v-else :style="textStyle" v-html="label"></p>
                     </div>
                 </div>
