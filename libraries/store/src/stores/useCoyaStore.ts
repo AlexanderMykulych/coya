@@ -89,7 +89,20 @@ export const useCoyaStore = defineStore('coya', () => {
             }
         }
     }
+    const createNewCoya = async (name: string, content: string) => {
+        const ext = 'coya.json';
+        if (activeProject.value) {
+            const uniqName = await getFileUniqName(activeProject.value, name, ext);
 
+            const newFileHandle = await activeProject.value.getFileHandle(uniqName, { create: true });
+            await saveFileHandleText(newFileHandle, content);
+            activeProjectHandles.value.files.push({
+                file: await newFileHandle.getFile(),
+                handle: newFileHandle,
+            });
+            return uniqName;
+        }
+    }
     const activeProjectName = computed(() => activeProject.value?.name);
     const activeProjectHandles = dirFiles(activeProject, isVerified);
     const activeProjectFiles = computed(() => activeProjectHandles.value.files.map(x => x.file));
@@ -111,6 +124,7 @@ export const useCoyaStore = defineStore('coya', () => {
             setActiveFileText: async (text: string) => await saveFileHandleText(activeFile.value?.handle, text),
             createAsset,
             loadAsset,
+            createNewCoya,
         },
         getFileText,
         saveFileText,

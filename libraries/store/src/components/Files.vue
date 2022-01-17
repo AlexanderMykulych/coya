@@ -1,12 +1,27 @@
 <script lang="ts" setup>
 import { useCoyaStore } from '../stores/useCoyaStore';
-
+import defJson from './def.coya.json';
 const store = useCoyaStore();
 
+const createNew = ref(false);
+const defCoyaSetting = {
+    name: 'my-diagram',
+};
+const newCoyaSetting = ref({
+    ...defCoyaSetting,
+});
+const createNewCoya = async () => {
+    defJson.name = newCoyaSetting.value.name;
+    await store.activeProject.createNewCoya(newCoyaSetting.value.name, JSON.stringify(defJson));
+    createNew.value = false;
+    newCoyaSetting.value = {
+    ...defCoyaSetting,
+    };
+};
 </script>
 
 <template>
-<div class="max-w-2xl mx-auto" v-if="store.activeProject.opened">
+    <div class="max-w-2xl mx-auto" v-if="store.activeProject.opened">
         <div
             class="p-4 max-w-md bg-white rounded-lg border shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700"
         >
@@ -14,15 +29,25 @@ const store = useCoyaStore();
                 <h3
                     class="text-xl font-bold leading-none text-gray-900 dark:text-white"
                 >
-                    Project: {{store.activeProject.name}}
+                    Project: {{ store.activeProject.name }}
                 </h3>
+                <a
+                    @click="createNew = true"
+                    href="#"
+                    class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500"
+                >
+                    Create new
+                </a>
             </div>
             <div class="flow-root">
                 <ul
                     role="list"
                     class="divide-y divide-gray-200 dark:divide-gray-700"
                 >
-                    <li class="py-3 sm:py-4" v-for="file in store.activeProject.coyaFiles">
+                    <li
+                        class="py-3 sm:py-4"
+                        v-for="file in store.activeProject.coyaFiles"
+                    >
                         <div class="flex items-center space-x-4">
                             <div class="flex-shrink-0">
                                 <mdi:file />
@@ -51,4 +76,9 @@ const store = useCoyaStore();
             </div>
         </div>
     </div>
+    <NewCoya v-if="createNew"
+        v-model="newCoyaSetting"
+        v-model:open="createNew"
+        @create="createNewCoya"
+    />
 </template>
