@@ -85,8 +85,8 @@ export default function getBoxToBoxArrowOldStyle(
     const endPoints = [endAtTop, endAtRight, endAtBottom, endAtLeft]
 
     let shortestDistance = 1 / 0
-    let bestStartPoint = userOptions?.startPoint
-    let bestEndPoint = userOptions?.endPoint
+    let bestStartPoint = userOptions?.startPoint ?? startAtTop;
+    let bestEndPoint = userOptions?.endPoint ?? endAtTop;
 
     const keepOutZone = 15
     for (let startSideId = 0; startSideId < sides.length; startSideId++) {

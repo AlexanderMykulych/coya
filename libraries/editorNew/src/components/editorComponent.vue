@@ -63,9 +63,11 @@ if (editor.enable) {
         { immediate: true },
     );
 }
-
+const leftMenuPos = reactive({
+    x: 10,
+});
 const paletteContainerStyle = computed(() => ({
-    x: `${10}px`,
+    x: `${leftMenuPos.x}px`,
     y: `${svgPosition.h / 4}px`,
     width: '45px',
     height: `${svgPosition.h / 3}px`,
@@ -95,6 +97,12 @@ const appMenuContainerStyle = computed(() => ({
     y: `${appMenu.y}px`,
     width: `${nodeSettingWidth.value}px`,
     height: `${appMenu.h}px`,
+}));
+const leftAppMenuContainerStyle = computed(() => ({
+    x: `${leftMenuPos.x}px`,
+    y: `${appMenu.y}px`,
+    width: `1px`,
+    height: `1px`,
 }));
 
 const debugContainerStyle = computed(() => ({
@@ -191,6 +199,21 @@ const { mouseState, state, isOneNodeSelected, showDebugWindow, diagramRect } =
                             <slot name="menu" />
                         </template>
                     </AppMenu>
+                </body>
+            </foreignObject>
+            <foreignObject
+                class="node"
+                :style="leftAppMenuContainerStyle"
+                style="overflow: visible"
+                @click.stop.prevent
+                @mousedown.stop.prevent
+            >
+                <body
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    :style="leftAppMenuContainerStyle"
+                    @click.stop.prevent
+                >
+                    <slot name="left-menu"></slot>
                 </body>
             </foreignObject>
             <foreignObject

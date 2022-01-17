@@ -1,5 +1,5 @@
 import { ActionType, Change, makeChange, AssetConfig } from "coya-core";
-import { effectScope, onScopeDispose, provide, reactive, ref, watch, computed } from "vue";
+import { effectScope, onScopeDispose, provide, reactive, ref, watch, computed, markRaw } from "vue";
 import { EnabledEditor, EnableEditorParameters } from "./types";
 import { wrapEditorNode } from "./wrapEditorNode";
 import editorComponent from "../components/editorComponent.vue";
@@ -32,7 +32,7 @@ export function enableEditor({ svg, config, id, initialConfig, architecture, wor
                 makeChange(config.value, change);
                 makeChange(initialConfig.value, change);
             },
-            component: editorComponent,
+            component: markRaw(editorComponent),
             showDebugWindow: false,
             zoomState: null,
             history: {

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const props = defineProps<{css: any; x:number; y: number; w: number; h: number; label: string;}>();
+const props = defineProps<{css: any; x:number; y: number; label: string;}>();
 const blockStyle = reactive({
     display: 'flex',
     'align-items': 'unsafe center',

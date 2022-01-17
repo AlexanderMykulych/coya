@@ -164,6 +164,9 @@ provide(
 <template>
     <div class="grid grid-cols-4 grid-rows-12 h-full hwf">
         <editorComponent v-if="!!editor">
+            <template #left-menu>
+                <slot name="left-menu"/>
+            </template>
             <template #preview="{ item }">
                 <CoyaNode
                     :block="item.block"

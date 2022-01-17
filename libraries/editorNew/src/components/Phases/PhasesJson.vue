@@ -45,27 +45,31 @@ const {
 
 
 const open = ref(false);
+
+const style = reactive({
+    height: computed(() => open.value ? '50vh' : undefined),
+});
 </script>
 
 <template>
-    <div class="border-2 rounded-md p-3 bg-white flex flex-col" :class="{'h-full': open}">
+    <div class="border-2 rounded-md p-3 bg-white flex flex-col" :style="style">
         <div class="flex pb-2 space-x-2 justify-between">
-            <button class="border-2 text-2xl" @click="setCurrentPhase(null)">
+            <button class="border-2" @click="setCurrentPhase(null)">
                 <i-mdi:page-first :class="{'text-green-600': isStartPhaseActive}"/>
             </button>
-            <button class="border-2 text-2xl" @click="setPrevPhase()">
+            <button class="border-2" @click="setPrevPhase()">
                 <i-ic:baseline-skip-previous />
             </button>
-            <button class="border-2 text-2xl" @click="setNextPhase()">
+            <button class="border-2" @click="setNextPhase()">
                 <i-ic:baseline-skip-next />
             </button>
-            <button class="border-2 text-2xl" @click="setLastPhase(null)">
+            <button class="border-2" @click="setLastPhase(null)">
                 <i-mdi:page-last :class="{'text-green-600': isLastPhaseActive}"/>
             </button>
-            <button class="border-2 text-2xl justify-self-end" v-if="!open" @click="open = true">
+            <button class="border-2 justify-self-end" v-if="!open" @click="open = true">
                 <i-mdi:chevron-double-down :class="{'text-green-600': isLastPhaseActive}"/>
             </button>
-            <button class="border-2 text-2xl justify-self-end" v-else @click="open = false">
+            <button class="border-2 justify-self-end" v-else @click="open = false">
                 <i-mdi:chevron-double-up :class="{'text-green-600': isLastPhaseActive}"/>
             </button>
         </div>

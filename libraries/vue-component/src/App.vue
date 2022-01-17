@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import Projects from "coya-store";
-import { useCoyaStore } from "coya-store";
-import "coya-store/dist/style.css";
+import Projects from 'coya-store';
+import { useCoyaStore } from 'coya-store';
+import 'coya-store/dist/style.css';
 
 const store = useCoyaStore();
 
@@ -27,13 +27,20 @@ const assets = {
 </script>
 <template>
     <main class="text-center text-gray-700 dark:text-gray-200 bg-white h-full">
-        <Coya v-if="activeConfig"
+        <Coya
+            v-if="activeConfig"
             class="row-span-11"
             :config="activeConfig.value"
             :id="activeConfig.id"
             :assets="assets"
             @update:config="save"
-        />
+        >
+            <template #left-menu>
+                <button class="border-2" @click="activeConfig = null">
+                    <mdi:arrow-left-bold-box-outline class="pb-1" />
+                </button>
+            </template>
+        </Coya>
         <Projects v-else />
     </main>
 </template>
