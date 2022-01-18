@@ -378,9 +378,9 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                                             w: 300,
                                             h: 100,
                                         },
+                                        iframe: dataStr,
                                     }, {
                                         label: '',
-                                        iframe: dataStr,
                                     });
                                     break;
                                 }
