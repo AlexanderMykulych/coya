@@ -105,7 +105,7 @@ export function wrapEditorNode(editor: Editor, node: any) {
                 h(
                     "g",
                     {
-                        onMousedown: (event: MouseEvent) => onMousedown(editor, context, event),
+                        onMousedown: (event: MouseEvent) => !isViewMode.value ? onMousedown(editor, context, event) : null,
                         onMouseover: (event: MouseEvent) => onMouseover(editor, context, event),
                         onMouseleave: (event: MouseEvent) => onMouseleave(editor, context, event),
                         onClick: (event: MouseEvent) => event.stopPropagation(),

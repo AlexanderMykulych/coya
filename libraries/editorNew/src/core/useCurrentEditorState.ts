@@ -14,6 +14,7 @@ import { removeBlockById } from "./removeBlockById";
 import { findStartTransform } from "./findStartTransform";
 import { set } from "./set";
 import { createComputed } from "./createComputed";
+import { isWebUrl } from "./isWebUrl";
 
 export function useCurrentEditorState(): CurrentEditorState {
     const editor = getCurrentEditor();
@@ -113,6 +114,8 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                     ['style.value.position.indentY2', prepareNum],
                     'style.value.css',
                     'style.value.pinTo',
+                    'style.value.iframe',
+                    'style.value.code',
                 ]
             ),
             label: computed({
@@ -367,6 +370,20 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                                     }
                                     return;
                                 } catch { }
+                                if (isWebUrl(dataStr)) {
+                                    addNewBlock({
+                                        position: {
+                                            x: editor.mouseState.position.x - 150,
+                                            y: editor.mouseState.position.y - 50,
+                                            w: 300,
+                                            h: 100,
+                                        },
+                                    }, {
+                                        label: '',
+                                        iframe: dataStr,
+                                    });
+                                    break;
+                                }
                                 addNewBlock({
                                     position: {
                                         x: editor.mouseState.position.x - 150,

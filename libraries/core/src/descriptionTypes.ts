@@ -122,6 +122,7 @@ export interface BlockStyle {
     css?: Properties;
     position?: Position;
     pinTo?: string;
+    iframe?: string;
     label?: string;
     isHighlight?: boolean;
 }

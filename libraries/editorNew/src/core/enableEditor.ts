@@ -58,7 +58,7 @@ function listenSvgEvents(editor: EnabledEditor) {
                 editor.state.selectedNodeIds = undefined;
             };
             const onDblClick = (e: MouseEvent) => {
-                if (e.target === svgEl) {
+                if (e.target === svgEl && !editor.state.isViewMode) {
                     const { x, y } = getMousePosition(svgEl, e);
                     addNewBlock({
                         position: {
