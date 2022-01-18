@@ -80,7 +80,7 @@ const phasesContainerStyle = computed(() => ({
     height: `70px`,
     w: svgPosition.w,
 }));
-const nodeSettingWidth = ref(400);
+const nodeSettingWidth = computed(() => editor.enable && editor.state.isViewMode ? 120 : 400);
 const nodeSettingContainerStyle = computed(() => ({
     x: `${svgPosition.w - nodeSettingWidth.value - phasesMargin.value}px`,
     y: `${svgPosition.h / 2.5}px`,
@@ -122,7 +122,6 @@ const phasesJsonContainerStyle = computed(() => ({
 }));
 const { mouseState, state, isOneNodeSelected, showDebugWindow, diagramRect } =
     useCurrentEditorState();
-
 </script>
 
 <template>
@@ -136,53 +135,6 @@ const { mouseState, state, isOneNodeSelected, showDebugWindow, diagramRect } =
             @keyup.stop
         >
             <slot name="before" />
-            <foreignObject
-                class="node"
-                :style="paletteContainerStyle"
-                @click.stop.prevent
-                @mousedown.stop.prevent
-            >
-                <body
-                    xmlns="http://www.w3.org/1999/xhtml"
-                    :style="paletteContainerStyle"
-                >
-                    <Palette />
-                </body>
-            </foreignObject>
-            <foreignObject
-                class="node"
-                :style="phasesJsonContainerStyle"
-                style="overflow: visible"
-                @click.stop.prevent
-                @mousedown.stop.prevent
-            >
-                <body
-                    xmlns="http://www.w3.org/1999/xhtml"
-                    :style="phasesJsonContainerStyle"
-                    @click.stop.prevent
-                >
-                    <PhasesJson />
-                </body>
-            </foreignObject>
-            <foreignObject
-                class="node"
-                :style="nodeSettingContainerStyle"
-                v-if="isOneNodeSelected"
-                @click.stop.prevent
-                @mousedown.stop.prevent
-            >
-                <body
-                    xmlns="http://www.w3.org/1999/xhtml"
-                    :style="nodeSettingContainerStyle"
-                    @click.stop.prevent
-                >
-                    <NodeSetting>
-                        <template #preview="slotData">
-                            <slot name="preview" v-bind="slotData" />
-                        </template>
-                    </NodeSetting>
-                </body>
-            </foreignObject>
             <foreignObject
                 class="node"
                 :style="appMenuContainerStyle"
@@ -201,6 +153,7 @@ const { mouseState, state, isOneNodeSelected, showDebugWindow, diagramRect } =
                     </AppMenu>
                 </body>
             </foreignObject>
+
             <foreignObject
                 class="node"
                 :style="leftAppMenuContainerStyle"
@@ -216,21 +169,70 @@ const { mouseState, state, isOneNodeSelected, showDebugWindow, diagramRect } =
                     <slot name="left-menu"></slot>
                 </body>
             </foreignObject>
-            <foreignObject
-                v-if="showDebugWindow"
-                class="node"
-                :style="debugContainerStyle"
-                @click.stop.prevent
-                @mousedown.stop.prevent
-            >
-                <body
-                    xmlns="http://www.w3.org/1999/xhtml"
+            <template v-if="!editor.state.isViewMode">
+                <foreignObject
+                    class="node"
+                    :style="paletteContainerStyle"
+                    @click.stop.prevent
+                    @mousedown.stop.prevent
+                >
+                    <body
+                        xmlns="http://www.w3.org/1999/xhtml"
+                        :style="paletteContainerStyle"
+                    >
+                        <Palette />
+                    </body>
+                </foreignObject>
+                <foreignObject
+                    class="node"
+                    :style="phasesJsonContainerStyle"
+                    style="overflow: visible"
+                    @click.stop.prevent
+                    @mousedown.stop.prevent
+                >
+                    <body
+                        xmlns="http://www.w3.org/1999/xhtml"
+                        :style="phasesJsonContainerStyle"
+                        @click.stop.prevent
+                    >
+                        <PhasesJson />
+                    </body>
+                </foreignObject>
+                <foreignObject
+                    class="node"
+                    :style="nodeSettingContainerStyle"
+                    v-if="isOneNodeSelected"
+                    @click.stop.prevent
+                    @mousedown.stop.prevent
+                >
+                    <body
+                        xmlns="http://www.w3.org/1999/xhtml"
+                        :style="nodeSettingContainerStyle"
+                        @click.stop.prevent
+                    >
+                        <NodeSetting>
+                            <template #preview="slotData">
+                                <slot name="preview" v-bind="slotData" />
+                            </template>
+                        </NodeSetting>
+                    </body>
+                </foreignObject>
+                <foreignObject
+                    v-if="showDebugWindow"
+                    class="node"
                     :style="debugContainerStyle"
                     @click.stop.prevent
+                    @mousedown.stop.prevent
                 >
-                    <Debug />
-                </body>
-            </foreignObject>
+                    <body
+                        xmlns="http://www.w3.org/1999/xhtml"
+                        :style="debugContainerStyle"
+                        @click.stop.prevent
+                    >
+                        <Debug />
+                    </body>
+                </foreignObject>
+            </template>
         </svg>
     </Teleport>
 </template>

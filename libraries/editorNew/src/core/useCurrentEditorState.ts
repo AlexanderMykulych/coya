@@ -413,6 +413,14 @@ export function useEditorState(editor: Editor): CurrentEditorState {
                 arrangeForward(id ?? blockId.value, editor.initialConfig);
                 arrangeForward(id ?? blockId.value, editor.config);
             },
+            isViewMode: computed({
+                get() {
+                    return editor.state.isViewMode ?? false;
+                },
+                set(val: boolean) {
+                    editor.state.isViewMode = val;
+                },
+            })
         };
     }
     throw "no editor state";

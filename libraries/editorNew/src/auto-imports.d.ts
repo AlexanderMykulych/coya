@@ -25,6 +25,8 @@ declare module 'vue' {
     'IIc:roundFitScreen': typeof import('~icons/ic/round-fit-screen')['default']
     'IIc:roundPlayArrow': typeof import('~icons/ic/round-play-arrow')['default']
     'IIconParkOutline:zoom': typeof import('~icons/icon-park-outline/zoom')['default']
+    'IJam:eyeF': typeof import('~icons/jam/eye-f')['default']
+    'ILa:eyeSlashSolid': typeof import('~icons/la/eye-slash-solid')['default']
     'ILs:underscore': typeof import('~icons/ls/underscore')['default']
     'IMdi:arrangeBringForward': typeof import('~icons/mdi/arrange-bring-forward')['default']
     'IMdi:arrangeSendBackward': typeof import('~icons/mdi/arrange-send-backward')['default']

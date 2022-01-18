@@ -45,6 +45,7 @@ export interface EnabledEditorState {
     mode?: EditorMode;
     arrowState?: ArrowState | null;
     onSelect?: (select: SelectEvent) => void;
+    isViewMode?: boolean;
 }
 
 export interface PinState {
@@ -179,6 +180,7 @@ export interface CurrentEditorState {
     addNewBlock: (style: BlockStyle, block?: BlockElementDescription) => void;
     arrangeBackward: (blockId?: string) => void;
     arrangeForward: (blockId?: string) => void;
+    isViewMode: Ref<boolean>
 }
 
 export enum PinType {

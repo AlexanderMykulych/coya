@@ -7,7 +7,7 @@ const props = defineProps<{
     position: RectPositioning,
     id: string
 }>();
-const $emit = defineEmits(["click"]);
+const $emit = defineEmits(["click", "mousedown"]);
 const padding = 20;
 
 const { state } = useCurrentEditorState();
@@ -47,7 +47,8 @@ const onClick = (event: MouseEvent) => {
         :fill="fill"
         @mouseover="hovered = true"
         @mouseleave="hovered = false"
-        @click="onClick"
+        @click="$emit('click', $event)"
+        @mousedown="$emit('mousedown', $event)"
     />
 </template>
 
