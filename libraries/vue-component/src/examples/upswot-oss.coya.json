@@ -1,0 +1,233 @@
+{
+	"name": "upswot-oss",
+	"blocks": {
+		"block_1": "Open-source software",
+		"block_3": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_4": {
+			"0": "O",
+			"1": "p",
+			"2": "e",
+			"3": "n",
+			"4": "-",
+			"5": "s",
+			"6": "o",
+			"7": "u",
+			"8": "r",
+			"9": "c",
+			"10": "e",
+			"11": " ",
+			"12": "s",
+			"13": "o",
+			"14": "f",
+			"15": "t",
+			"16": "w",
+			"17": "a",
+			"18": "r",
+			"19": "e",
+			"label": "block_4",
+			"sourcePhase": 0
+		},
+		"line_1": {
+			"from": "block_4",
+			"to": "block_3",
+			"name": "line_1",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_5": {
+			"0": "O",
+			"1": "p",
+			"2": "e",
+			"3": "n",
+			"4": "-",
+			"5": "s",
+			"6": "o",
+			"7": "u",
+			"8": "r",
+			"9": "c",
+			"10": "e",
+			"11": " ",
+			"12": "s",
+			"13": "o",
+			"14": "f",
+			"15": "t",
+			"16": "w",
+			"17": "a",
+			"18": "r",
+			"19": "e",
+			"label": "block_4",
+			"sourcePhase": 0
+		},
+		"block_6": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_2": {
+			"from": "block_5",
+			"to": "block_6",
+			"name": "line_2",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_2": {
+			"0": "O",
+			"1": "p",
+			"2": "e",
+			"3": "n",
+			"4": "-",
+			"5": "s",
+			"6": "o",
+			"7": "u",
+			"8": "r",
+			"9": "c",
+			"10": "e",
+			"11": " ",
+			"12": "s",
+			"13": "o",
+			"14": "f",
+			"15": "t",
+			"16": "w",
+			"17": "a",
+			"18": "r",
+			"19": "e",
+			"label": "block_2",
+			"sourcePhase": 0
+		},
+		"line_3": {
+			"from": "block_2",
+			"to": "block_4",
+			"name": "line_3",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_4": {
+			"from": "block_2",
+			"to": "block_5",
+			"name": "line_4",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_7": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_5": {
+			"from": "block_3",
+			"to": "block_7",
+			"name": "line_5",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		}
+	},
+	"phases": [],
+	"style": {
+		"blocks": {
+			"_": {
+				"css": {
+					"fontSize": "2.1em",
+					"rx": "49",
+					"border-radius": "10px"
+				}
+			},
+			"block_1": {
+				"position": {
+					"x": "-762.668571472168",
+					"y": "-987.9154291152954",
+					"w": "927.5317459106445",
+					"h": "296.78035831451416"
+				},
+				"css": {
+					"fill": "none",
+					"stroke": "none",
+					"fontSize": "153"
+				}
+			},
+			"block_3": {
+				"position": {
+					"x": "-569.695761680603",
+					"y": "419.74461460113525",
+					"w": "1060.8098649978638",
+					"h": "913.1612319946289"
+				},
+				"iframe": "https://www.codesee.io/welcome",
+				"css": {
+					"width": "100px",
+					"height": "100px"
+				},
+				"label": "",
+				"pinTo": "block_4"
+			},
+			"block_4": {
+				"position": {
+					"x": "-608.3457946777344",
+					"y": "333.3672180175781",
+					"w": "244.30048370361328",
+					"h": "122.80699062347412"
+				},
+				"css": {
+					"fill": "none",
+					"stroke": "none",
+					"fontSize": "48"
+				},
+				"label": "CodeSee",
+				"pinTo": "block_2"
+			},
+			"block_5": {
+				"position": {
+					"x": "556.4958724975586",
+					"y": "374.0987243652344",
+					"w": "244.30048370361328",
+					"h": "122.80699062347412"
+				},
+				"css": {
+					"fill": "none",
+					"stroke": "none",
+					"fontSize": "48"
+				},
+				"label": "Excalidraw",
+				"pinTo": "block_2"
+			},
+			"block_6": {
+				"position": {
+					"x": "-260.3651514053345",
+					"y": "444.3886089324951",
+					"w": "1123.7324991226196",
+					"h": "880.7992811203003"
+				},
+				"iframe": "https://plus.excalidraw.com/?utm_source=excalidraw&utm_medium=banner&utm_campaign=launch",
+				"pinTo": "block_5"
+			},
+			"block_2": {
+				"position": {
+					"x": "-1130.8605880737305",
+					"y": "-562.3336114883423",
+					"w": "244.30048370361328",
+					"h": "122.80699062347412"
+				},
+				"css": {
+					"fill": "none",
+					"stroke": "none",
+					"fontSize": "48"
+				},
+				"label": "Companies"
+			},
+			"block_7": {
+				"position": {
+					"x": "-2303.73583984375",
+					"y": "1431.0020751953125",
+					"w": "1169.7977294921875",
+					"h": "919.1151123046875"
+				},
+				"iframe": "https://www.finsmes.com/2021/09/codesee-raises-3m-in-seed-funding.html"
+			}
+		}
+	}
+}
