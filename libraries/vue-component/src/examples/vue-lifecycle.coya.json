@@ -131,8 +131,8 @@
 			},
 			"start": {
 				"position": {
-					"x": "-172.81404541015627",
-					"y": "128.60828491210935",
+					"x": "17.748797912597638",
+					"y": "6.809533081054667",
 					"w": "470.69783447265627",
 					"h": "150.3095007324219"
 				},
@@ -224,13 +224,14 @@
 			},
 			"createApp": {
 				"position": {
-					"x": "-144.72507904052736",
-					"y": "1436.9027612304685",
+					"x": "16.001007080078125",
+					"y": "455.72773712158187",
 					"w": "has_template_opt.w",
 					"h": "has_template_opt.h"
 				},
 				"css": {},
-				"label": "Create app.$el and append it to el"
+				"label": "Create app.$el and append it to el",
+				"pinTo": "has_template_opt"
 			},
 			"mounted": {
 				"position": {
