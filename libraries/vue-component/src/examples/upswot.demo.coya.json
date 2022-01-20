@@ -1,8 +1,8 @@
 {
 	"name": "upswot",
 	"blocks": {
-		"block_26": {
-			"label": "block_26",
+		"block_42": {
+			"label": "block_42",
 			"sourcePhase": 0
 		},
 		"block_2": {
@@ -310,6 +310,110 @@
 		},
 		"block_34": {
 			"label": "block_34",
+			"sourcePhase": 0
+		},
+		"block_35": {
+			"label": "block_1",
+			"sourcePhase": 0
+		},
+		"block_37": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"insight1": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_36": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_23": {
+			"from": "insight1",
+			"to": "block_37",
+			"name": "line_23",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_24": {
+			"from": "insight1",
+			"to": "block_36",
+			"name": "line_24",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_38": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_25": {
+			"from": "insight1",
+			"to": "block_38",
+			"name": "line_25",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_39": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_26": {
+			"from": "block_37",
+			"to": "block_39",
+			"name": "line_26",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_27": {
+			"from": "block_36",
+			"to": "block_39",
+			"name": "line_27",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_28": {
+			"from": "block_38",
+			"to": "block_39",
+			"name": "line_28",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_40": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_41": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_26": {
+			"label": "block_26",
+			"sourcePhase": 0
+		},
+		"block_43": {
+			"label": "block_1",
+			"sourcePhase": 0
+		},
+		"block_44": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_45": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_46": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_47": {
+			"label": "",
 			"sourcePhase": 0
 		}
 	},
@@ -809,6 +913,152 @@
 				},
 				"label": "",
 				"iframe": "https://demo.upswot.com/fsnb_new/#/"
+			},
+			"block_35": {
+				"position": {
+					"x": "5937.189231872559",
+					"y": "4.3545989990234375",
+					"w": "734.0866470336914",
+					"h": "199.16079711914062"
+				},
+				"css": {
+					"fill": "none",
+					"color": "black",
+					"stroke": "none",
+					"text": {
+						"color": "#5d35b0ff"
+					}
+				},
+				"label": "Insights map"
+			},
+			"block_37": {
+				"position": {
+					"x": "1579.80078125",
+					"y": "-400.8667297363281",
+					"w": "insight1.w",
+					"h": "insight1.h"
+				},
+				"img": "image_34.png",
+				"pinTo": "insight1"
+			},
+			"insight1": {
+				"position": {
+					"x": "4551.5087890625",
+					"y": "713.0086059570312",
+					"w": "837.35498046875",
+					"h": "193.61468505859375"
+				},
+				"img": "image_33.png"
+			},
+			"block_36": {
+				"position": {
+					"x": "1562.4609375",
+					"y": "-0.30877685546875",
+					"w": "insight1.w",
+					"h": "insight1.h"
+				},
+				"img": "image_35.png",
+				"pinTo": "insight1"
+			},
+			"block_38": {
+				"position": {
+					"x": "1562.4609375",
+					"y": "431.461669921875",
+					"w": "insight1.w",
+					"h": "insight1.h"
+				},
+				"img": "image_36.png",
+				"pinTo": "insight1"
+			},
+			"block_39": {
+				"position": {
+					"x": "7622.55126953125",
+					"y": "733.9993896484375",
+					"w": "insight1.w",
+					"h": "insight1.h"
+				},
+				"img": "image_37.png"
+			},
+			"block_40": {
+				"position": {
+					"x": "4550.6962890625",
+					"y": "1987.38720703125",
+					"w": "insight1.w",
+					"h": "insight1.h"
+				},
+				"img": "image_38.png"
+			},
+			"block_41": {
+				"position": {
+					"x": "4552.26171875",
+					"y": "2195.7451171875",
+					"w": "insight1.w",
+					"h": "insight1.h"
+				},
+				"img": "image_39.png"
+			},
+			"block_42": {
+				"position": {
+					"x": "4399.404296875",
+					"y": "1714.9405517578125",
+					"w": "3123.37744140625",
+					"h": "867.0462646484375"
+				},
+				"label": ""
+			},
+			"block_43": {
+				"position": {
+					"x": "-132.6349868774414",
+					"y": "29.175430297851562",
+					"w": "734.0866470336914",
+					"h": "199.16079711914062"
+				},
+				"css": {
+					"fill": "none",
+					"color": "black",
+					"stroke": "none",
+					"text": {
+						"color": "#5d35b0ff"
+					}
+				},
+				"label": "Backlog",
+				"pinTo": "block_42"
+			},
+			"block_44": {
+				"position": {
+					"x": "5560.33642578125",
+					"y": "1988.6982421875",
+					"w": "insight1.w",
+					"h": "insight1.h"
+				},
+				"img": "image_39.png"
+			},
+			"block_45": {
+				"position": {
+					"x": "5566.86962890625",
+					"y": "2184.685546875",
+					"w": "insight1.w",
+					"h": "insight1.h"
+				},
+				"img": "image_39.png"
+			},
+			"block_46": {
+				"position": {
+					"x": "6546.806640625",
+					"y": "1995.231201171875",
+					"w": "insight1.w",
+					"h": "insight1.h"
+				},
+				"img": "image_39.png"
+			},
+			"block_47": {
+				"position": {
+					"x": "6553.33984375",
+					"y": "2191.218505859375",
+					"w": "insight1.w",
+					"h": "insight1.h"
+				},
+				"img": "image_39.png"
 			}
 		}
 	}
