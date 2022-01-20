@@ -2,7 +2,7 @@ import { Ref, unref } from "vue";
 import { TransformSetting } from "..";
 import { BlockPositioning, FormulaValueFuncContext } from "../types";
 import { findClosestPoints } from "./alg/findClosestPoints";
-import { getBoxToBoxArrow } from "coya-arrow";
+import { getBoxToBoxArrow, getBoxToBoxArrowPath } from "coya-arrow";
 
 
 export function getFormulaValueFuncContext(blocksPositioning: Ref<BlockPositioning[]>,
@@ -22,6 +22,7 @@ export function getFormulaValueFuncContext(blocksPositioning: Ref<BlockPositioni
                     fn: {
                         findClosestPoints,
                         getBoxToBoxArrow,
+                        getBoxToBoxArrowPath,
                     }
                 }
             ]

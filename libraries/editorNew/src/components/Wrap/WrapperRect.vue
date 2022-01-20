@@ -13,6 +13,7 @@ import { useCurrentEditorState } from '../../core/useCurrentEditorState';
 const props = defineProps<{
     position: Positioning;
     block: BlockElementDescription;
+    hidePins: boolean;
 }>();
 const emit = defineEmits(['pinPress']);
 const padding = 10;
@@ -110,6 +111,7 @@ const clickPin = (pinType: PinType) => emit('pinPress', pinType);
         stroke-dasharray="5 5"
     />
     <rect
+        v-if="!hidePins"
         v-for="(pin, index) in pins"
         :key="index"
         :x="pin.x"

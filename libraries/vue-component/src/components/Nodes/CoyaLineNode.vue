@@ -32,10 +32,10 @@ const lineTextY = computed(() => {
 
 const enableStraitLine = ref(true);
 const meta = computed(() => props.positioning.meta);
+const metaResult = computed(() => props.positioning.meta.results);
 const path = computed(() => {
     if (meta.value) {
-        const {x1, y1, cx1, cy1, cx2, cy2, x2, y2} = meta.value;
-        return `M ${x1} ${y1} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${x2} ${y2}`;
+        return meta.value.path;
     }
     if (
         props.positioning.x1 === props.positioning.x2 ||
@@ -65,7 +65,7 @@ const paths = computed(() => {
         <path v-for="path in paths" v-bind="path"/>
         <polygon
             :points="`0,${-meta.arrowHeadSize} ${meta.arrowHeadSize * 2},0, 0,${meta.arrowHeadSize}`"
-            :transform="`translate(${meta.x2}, ${meta.y2}) rotate(${meta.ae})`"
+            :transform="`translate(${metaResult.x2}, ${metaResult.y2}) rotate(${metaResult.ae})`"
             fill="black"
         />
         

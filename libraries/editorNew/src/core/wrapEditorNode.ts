@@ -2,7 +2,8 @@ import { ChangeType, ChangeOwnerType } from "coya-core";
 import { computed, h, reactive, SetupContext, watch } from "vue";
 import { Editor } from "./types";
 import WrapperRect from "./../components/Wrap/WrapperRect.vue";
-import HoverWrapperRect from "../components/Wrap/HoverWrapperRect.vue";
+import HoverWrapper from "../components/Wrap/HoverWrapper.vue";
+import HoverWrapperLine from "../components/Wrap/HoverWrapperLine.vue";
 import { EditorMode } from ".";
 import { calculatePinDragResult } from "./calculatePinDragResult";
 import { isNotNullOrUndefined } from "coya-util";
@@ -10,6 +11,7 @@ import { onMouseover, onMouseleave } from "./onMouseover";
 import { onSelectBlockClick } from "./onSelectBlockClick";
 import { onArrowBlockClick } from "./onArrowBlockClick";
 import { onMousedown } from "./onMousedown";
+import { BlockElementType } from "coya-core";
 
 
 export function wrapEditorNode(editor: Editor, node: any) {
@@ -97,6 +99,8 @@ export function wrapEditorNode(editor: Editor, node: any) {
 
             //arrow
             const isArrowMode = computed(() => editor.state.mode === EditorMode.Arrow);
+            //line
+            const isLine = computed(() => attrs.block.type === BlockElementType.Line);
             //select
             const isSelectMode = computed(() => editor.state.mode === EditorMode.Select);
             const isViewMode = computed(() => editor.state.isViewMode);
@@ -119,17 +123,18 @@ export function wrapEditorNode(editor: Editor, node: any) {
                         isSelected.value ? h(WrapperRect, {
                             position: attrs.positioning,
                             block: attrs.block,
+                            hidePins: isLine.value,
                             onPinPress: (val) => editor.state.pins.selectedPinType = val,
-                        }) : h(HoverWrapperRect, {
+                        }) : h(isLine.value ? HoverWrapperLine : HoverWrapper, {
                             position: attrs.positioning,
                             id: attrs.block?.id,
                             onMousedown: (event: MouseEvent) => onMousedown(editor, context, event),
                         }),
-                        isArrowMode.value ? h(HoverWrapperRect, {
+                        isArrowMode.value ? h(HoverWrapper, {
                             position: attrs.positioning,
                             id: attrs.block?.id,
                             onClick: (event: MouseEvent) => onArrowBlockClick(editor, context, event)
-                        }) : isSelectMode.value ? h(HoverWrapperRect, {
+                        }) : isSelectMode.value ? h(HoverWrapper, {
                             position: attrs.positioning,
                             id: attrs.block?.id,
                             onClick: (event: MouseEvent) => onSelectBlockClick(editor, context, event)

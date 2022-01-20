@@ -30,12 +30,6 @@ const rectPos = computed(() => ({
 const hovered = ref(false);
 const fill = computed(() => hovered.value ? "rgb(0, 0, 0, 0.1)" : "rgb(0, 0, 0, 0)");
 
-const onClick = (event: MouseEvent) => {
-    $emit("click", event);
-
-};
-
-
 </script>
 
 <template>
