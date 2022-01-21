@@ -20,6 +20,6 @@ The resulting diagram is just a JSON file, so you can:
 - 💡 generate a diagram from any programming language
 - ✨ animate diagram, like in PowerPoint
 - 🔨 use a powerful editor
-- 🧰 use vscode extension
+- 🧰 use vscode extension (in development)
 
 ![](./assets/example.gif)
