@@ -50,52 +50,24 @@ const cssStyle = computed(() => ({
     ...props.blockStyle?.css,
 }));
 
-
 // animation
 const gEl = ref<SVGSVGElement | null>(null);
+const groupEl = ref<SVGSVGElement | null>(null);
 
 const runEnter = (enter: EnterSetting) => {
-    gsap.fromTo(gEl.value, enter.from, enter.to);
+    var an = groupEl.value?.animate([{ opacity: '0' }, { opacity: '1' }], {
+        duration: 3000,
+    });
+    console.log(an);
+    // gsap.fromTo(gEl.value, enter.from, enter.to);
 };
 
 onMounted(() => {
     const enter = props.block.enter;
     if (enter && enter.from && enter.to) {
         runEnter(enter);
-        showGElement();
     }
-    watch(
-        () => props.positioning.x,
-        (val) => gEl.value?.setAttribute('x', val),
-    );
-    watch(
-        () => props.positioning.y,
-        (val) => gEl.value?.setAttribute('y', val),
-    );
-    watch(
-        () => props.positioning.w,
-        (val) => {
-            gEl.value?.setAttribute('width', val);
-        },
-    );
-    watch(
-        () => props.positioning.h,
-        (val) => {
-            gEl.value?.setAttribute('height', val);
-        },
-    );
 });
-const showGElement = () => {
-    gsap.to(gEl.value, {
-        duration: 0,
-        attr: {
-            x: props.positioning.x,
-            y: props.positioning.y,
-            width: props.positioning.w,
-            height: props.positioning.h,
-        },
-    });
-};
 
 const textBlockStyle = reactive({
     display: 'flex',
@@ -128,52 +100,67 @@ const label = computed(() =>
 </script>
 
 <template>
-    <svg ref="gEl">
-        <Rough :w="positioning.w" :h="positioning.h" :css="cssStyle" />
-        <image
-            v-if="imgUrl"
-            :href="imgUrl"
-            x="15"
-            y="15"
-            :width="positioning.w - 30"
-            :height="positioning.h - 30"
-        />
-        <foreignObject
-            style="overflow: visible; text-align: left"
-            pointer-events="none"
-            :style="cssStyle"
-            width="100%"
-            height="100%"
-            requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
+    <g ref="groupEl">
+        <svg
+            ref="gEl"
+            :x="positioning.x"
+            :y="positioning.y"
+            :width="positioning.w"
+            :height="positioning.h"
         >
-            <div
-                xmlns="http://www.w3.org/1999/xhtml"
-                :style="textBlockStyle"
-                class="w-full h-full"
+            <Rough :w="positioning.w" :h="positioning.h" :css="cssStyle" />
+            <image
+                v-if="imgUrl"
+                :href="imgUrl"
+                x="15"
+                y="15"
+                :width="positioning.w - 30"
+                :height="positioning.h - 30"
+            />
+            <foreignObject
+                style="overflow: visible; text-align: left"
+                pointer-events="none"
+                :style="cssStyle"
+                width="100%"
+                height="100%"
+                requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
             >
                 <div
-                    style="
-                        box-sizing: border-box;
-                        text-align: center;
-                        line-height: 1.2;
-                        pointer-events: all;
-                        white-space: normal;
-                        word-wrap: normal;
-                    "
-                    class="w-full h-full flex justify-center items-center"
+                    xmlns="http://www.w3.org/1999/xhtml"
+                    :style="textBlockStyle"
+                    class="w-full h-full"
                 >
-                    <div v-if="isCode && !!codeHtml" class="h-max">
-                        <pre class="language-"><code class="l1anguage-" v-html="label"></code></pre>
+                    <div
+                        style="
+                            box-sizing: border-box;
+                            text-align: center;
+                            line-height: 1.2;
+                            pointer-events: all;
+                            white-space: normal;
+                            word-wrap: normal;
+                        "
+                        class="w-full h-full flex justify-center items-center"
+                    >
+                        <div v-if="isCode && !!codeHtml" class="h-max">
+                            <pre class="language-">
+                                <code class="l1anguage-" v-html="label"></code>
+                            </pre>
+                        </div>
+                        <iframe
+                            v-else-if="isIFrame"
+                            :src="iFrameSrc"
+                            frameborder="0"
+                            class="w-full h-full"
+                        />
+                        <p
+                            v-else
+                            :style="textStyle"
+                            class="h-max"
+                            v-html="label"
+                        ></p>
                     </div>
-                    <iframe
-                        v-else-if="isIFrame"
-                        :src="iFrameSrc"
-                        frameborder="0"
-                        class="w-full h-full"
-                    />
-                    <p v-else :style="textStyle" class="h-max" v-html="label"></p>
                 </div>
-            </div>
-        </foreignObject>
-    </svg>
+            </foreignObject>
+        </svg>
+    </g>
 </template>
