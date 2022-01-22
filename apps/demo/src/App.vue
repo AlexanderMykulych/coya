@@ -1,22 +1,9 @@
 <script setup lang="ts">
-const num = ref(1);
-const isPositive = eagerComputed(() => num.value > 0);
-const someComp = computed(() => isPositive.value ? 1 : 2, {
-    onTrigger() {
-        console.log("onTrigger");
-    }
-});
-const someComp2 = controlledComputed(
-    () => isPositive.value,
-    () => {
-        console.log("from computed")
-        return isPositive.value ? 1 : 2;
-    });
+import {FileSystemCoya} from "coya-vue-component";
+import "coya-vue-component/dist/style.css";
+
 </script>
 
 <template>
-    {{num}} - {{someComp}} - {{someComp2}} - {{isPositive}}
-    <button @click="num++">add</button>
-    <br/>
-    <button @click="num--">dec</button>
+    <FileSystemCoya></FileSystemCoya>
 </template>
