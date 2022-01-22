@@ -6,6 +6,7 @@ import ViteIcons, { ViteIconsResolver } from 'vite-plugin-icons'
 import ViteComponents from 'vite-plugin-components'
 import WindiCSS from 'vite-plugin-windicss'
 import AutoImport from 'unplugin-auto-import/vite'
+import dts from 'vite-plugin-dts';
 
 
 export default defineConfig({
@@ -52,7 +53,11 @@ export default defineConfig({
         ViteIcons(),
 
         // https://github.com/antfu/vite-plugin-windicss
-        WindiCSS()
+        WindiCSS(),
+        dts({
+            include: ["src/**/*.ts", "src/**/*.vue",],
+            logDiagnostics: true,
+        }),
     ],
 
     server: {
@@ -73,7 +78,7 @@ export default defineConfig({
     },
     build: {
         rollupOptions: {
-            external: ['vue'],
+            external: ['vue', "pinia"],
             output: {
                 // Provide global variables to use in the UMD build
                 // for externalized deps

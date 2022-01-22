@@ -44,3 +44,5 @@ const assets = {
         <Projects v-else />
     </main>
 </template>
+
+<style></style>

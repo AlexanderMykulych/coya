@@ -21,5 +21,6 @@
       "~/*": ["src/*"]
     }
   },
-  "exclude": ["dist", "node_modules", "/src/examples/assets"]
+  "exclude": ["dist", "node_modules", "/src/examples/assets"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/*.ts", "src/*.vue"],
 }

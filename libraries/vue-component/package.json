@@ -2,6 +2,7 @@
   "name": "coya-vue-component",
   "version": "0.9.18",
   "module": "dist/coya.es.js",
+  "types": "dist/src/libEntry.d.ts",
   "files": [
     "dist"
   ],
@@ -24,6 +25,7 @@
     "prismjs": "^1.25.0",
     "rollup-plugin-svg": "^2.0.0",
     "roughjs": "^4.5.2",
+    "vite-plugin-dts": "^0.9.9",
     "vue": "^3.2.26",
     "vue-color-kit": "^1.0.5",
     "vue-demi": "^0.12.1",
