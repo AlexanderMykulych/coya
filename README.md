@@ -39,7 +39,6 @@ Here is an example of how to use it:
 
 ![](./assets/ex_02.gif)
 
-
 # Sponsors
 
 <table>
@@ -51,3 +50,12 @@ Here is an example of how to use it:
     </tr>
   </tbody>
 </table>
+
+# More examples (only gifs for now)
+
+![](./assets/ex_04.gif)
+![](./assets/ex_05.gif)
+![](./assets/ex_06.gif)
+![](./assets/ex_07.gif)
+![](./assets/ex_08.gif)
+![](./assets/ex_09.gif)
