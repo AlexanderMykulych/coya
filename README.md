@@ -23,3 +23,16 @@ The resulting diagram is just a JSON file, so you can:
 - 🧰 use vscode extension (in development)
 
 ![](./assets/example.gif)
+
+
+## Sponsors
+
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="middle">
+        <a href="https://upswot.com/" target="_blank"><img src="https://upswot.com/wp-content/uploads/2021/06/upSWOT.svg" width="80"></a>
+      </td>
+    </tr>
+  </tbody>
+</table>
