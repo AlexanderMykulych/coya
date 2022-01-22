@@ -22,7 +22,15 @@ The resulting diagram is just a JSON file, so you can:
 - 🔨 use a powerful editor
 - 🧰 use vscode extension (in development)
 
-![](./assets/example.gif)
+![](./assets/ex_01.gif)
+
+# Available blocks
+- rectangles and arrows
+- images
+- code files
+- iframes
+
+![](./assets/ex_02.gif)
 
 
 ## Sponsors

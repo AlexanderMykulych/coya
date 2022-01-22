@@ -142,9 +142,7 @@ const label = computed(() =>
                         class="w-full h-full flex justify-center items-center"
                     >
                         <div v-if="isCode && !!codeHtml" class="h-max">
-                            <pre class="language-">
-                                <code class="l1anguage-" v-html="label"></code>
-                            </pre>
+                            <pre class="language-"><code class="l1anguage-" v-html="label"></code></pre>
                         </div>
                         <iframe
                             v-else-if="isIFrame"
