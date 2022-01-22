@@ -15,7 +15,7 @@
 </table>
 </p>
 
-Coya is a diagram drawing tool for developers.
+Coya is a diagram drawing library.
 The resulting diagram is just a JSON file, so you can:
 - 🤓 commit it to git and compare it with the prev version
 - 💡 generate a diagram from any programming language
@@ -28,7 +28,7 @@ The resulting diagram is just a JSON file, so you can:
 # Demo
 You can try it [here](https://coya-demo.herokuapp.com/)
 
-Here is example how to use it:
+Here is an example of how to use it:
 ![](./assets/ex_03.gif)
 
 # Available blocks
