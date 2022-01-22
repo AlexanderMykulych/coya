@@ -91,3 +91,5 @@ libraries/vscode/coya/out/extension.js
 libraries/vscode/coya/out/extension.js.map
 libraries/vscode/coya/vite-proj/coya/examples/**
 libraries/vscode/coya/vite-proj/coya/examples/test
+
+apps/demo/dist/**

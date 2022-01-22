@@ -24,6 +24,12 @@ The resulting diagram is just a JSON file, so you can:
 
 ![](./assets/ex_01.gif)
 
+# Demo
+You can try it [here](https://coya-demo.herokuapp.com/)
+
+Here is example how to use it:
+![](./assets/ex_03.gif)
+
 # Available blocks
 - rectangles and arrows
 - images
@@ -33,7 +39,7 @@ The resulting diagram is just a JSON file, so you can:
 ![](./assets/ex_02.gif)
 
 
-## Sponsors
+# Sponsors
 
 <table>
   <tbody>
