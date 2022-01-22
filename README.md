@@ -8,6 +8,7 @@
     <td align="center">
     <img width="2000" height="0"><br>
     Status: <b>Beta 🎉</b><br>
+    Give it a star. It really motivates us 🤩
     <img width="2000" height="0">
     </td>
 </tbody>
