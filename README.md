@@ -51,6 +51,10 @@ Here is an example of how to use it:
   </tbody>
 </table>
 
+# Keep posted
+
+More details on [Twitter](https://twitter.com/AMykulych)
+
 # More examples (only gifs for now)
 
 ![](./assets/ex_04.gif)
