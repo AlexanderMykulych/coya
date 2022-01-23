@@ -42,6 +42,7 @@ declare module 'vue' {
     'IMdi:playBox': typeof import('~icons/mdi/play-box')['default']
     'IPh:arrowSquareLeftFill': typeof import('~icons/ph/arrow-square-left-fill')['default']
     'IPh:pushPinBold': typeof import('~icons/ph/push-pin-bold')['default']
+    'IPh:pushPinFill': typeof import('~icons/ph/push-pin-fill')['default']
     'IPh:pushPinSimpleFill': typeof import('~icons/ph/push-pin-simple-fill')['default']
     'IPh:rectangleBold': typeof import('~icons/ph/rectangle-bold')['default']
     'ITabler:handFinger': typeof import('~icons/tabler/hand-finger')['default']

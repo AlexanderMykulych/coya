@@ -10,7 +10,7 @@ const props = defineProps<{
 const $emit = defineEmits(["click", "mousedown"]);
 const padding = 20;
 
-const { state } = useCurrentEditorState();
+const { state, activeNode } = useCurrentEditorState();
 
 const preparedPosition = computed(() => ({
     x: Number(props.position.x) - padding,
@@ -30,6 +30,7 @@ const rectPos = computed(() => ({
 const hovered = ref(false);
 const fill = computed(() => hovered.value ? "rgb(0, 0, 0, 0.1)" : "rgb(0, 0, 0, 0)");
 
+const isPinBlock = computed(() => activeNode.pinTo === props.id);
 </script>
 
 <template>
@@ -44,6 +45,14 @@ const fill = computed(() => hovered.value ? "rgb(0, 0, 0, 0.1)" : "rgb(0, 0, 0, 
         @click="$emit('click', $event)"
         @mousedown="$emit('mousedown', $event)"
     />
+    <i-ph:push-pin-fill
+        v-if="isPinBlock"
+        :x="position.x"
+        :y="position.y"
+        width="35"
+        height="35"
+    ></i-ph:push-pin-fill>
+    
 </template>
 
 <style>

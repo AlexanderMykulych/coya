@@ -20,7 +20,7 @@ const padding = 10;
 const pinW = 8;
 const pinCW = pinW / 2;
 
-const { state } = useCurrentEditorState();
+const { state, activeNode } = useCurrentEditorState();
 
 const preparedPosition = computed(() => {
     switch (props.block.type) {
