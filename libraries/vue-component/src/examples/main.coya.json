@@ -168,10 +168,6 @@
 			"type": "line",
 			"label": "",
 			"sourcePhase": 0
-		},
-		"block_18": {
-			"label": "block_18",
-			"sourcePhase": 0
 		}
 	},
 	"phases": [],
@@ -389,19 +385,6 @@
 					"fontSize": "108",
 					"fill": "none",
 					"stroke": "none"
-				}
-			},
-			"block_18": {
-				"position": {
-					"x": "-8419.6572265625",
-					"y": "-1492.644287109375",
-					"w": 300,
-					"h": 100
-				},
-				"css": {
-					"stroke": "black",
-					"fill": "red",
-					"color": "#ffffffff"
 				}
 			}
 		}

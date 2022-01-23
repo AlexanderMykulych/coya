@@ -16,12 +16,27 @@ import { set } from "./set";
 import { createComputed } from "./createComputed";
 import { isWebUrl } from "./isWebUrl";
 import { arrangeBackward, arrangeForward } from "./arrangeBackward";
+import { createSharedComposable, tryOnScopeDispose } from "@vueuse/core";
 
 export function useCurrentEditorState(): CurrentEditorState {
     const editor = getCurrentEditor();
     return useEditorState(editor);
 }
+let editorsState: Array<{editor: Editor, composable: () => CurrentEditorState,}> = [];
 export function useEditorState(editor: Editor): CurrentEditorState {
+    const item = editorsState.find(x => x.editor === editor);
+    if (!item) {
+        const composable = createSharedComposable(() => _useEditorState(editor));
+        editorsState.push({
+            editor,
+            composable
+        });
+        tryOnScopeDispose(() => editorsState = editorsState.filter(x => x.editor !== editor));
+        return composable();
+    }
+    return item.composable();
+}
+function _useEditorState(editor: Editor): CurrentEditorState {
     if (editor.enable) {
         const makeChangeToDiagram = (diagram: ArchitectureDescription, actions: MakeChangeAction[]) => {
             if (editor.architecture?.currentPhase === null) {
