@@ -15,6 +15,7 @@ export function getFormulaValue(
     }
     if (isFormulaValue(val)) {
         let formula = typeof val === "string" ? val : val.formula;
+        const defaultValue = setting.defaultValue !== undefined ? setting.defaultValue : 0;
         return computed(() => {
             const contextBuilderFunc = setting.customContextBuilderFunc ?? getFormulaValueFuncContext;
             const context = contextBuilderFunc(positioning, setting);
@@ -23,7 +24,7 @@ export function getFormulaValue(
                 return fn.apply(null, context.blocksValues) || 0;
             } catch (e) {
                 console.warn(e);
-                return setting.defaultValue !== undefined ? setting.defaultValue : 0;
+                return defaultValue;
             }
         });
     }

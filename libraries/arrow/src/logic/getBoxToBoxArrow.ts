@@ -24,6 +24,6 @@ export const getBoxToBoxArrowPath = (...args: Parameters<typeof getBoxToBoxArrow
     const { x1, y1, cx1, cy1, cx2, cy2, x2, y2 } = results;
     return {
         path: `M ${x1} ${y1} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${x2} ${y2}`,
-        results,
+        results: results ?? {},
     };
 }

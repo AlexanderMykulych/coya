@@ -20,7 +20,8 @@ export function lineBlockPosition(blocksPositions: Ref<BlockPositioning[]>, bloc
         str += `, endPoint: ${block.to}`;
     }
     const boxs = `${block.from}.x, ${fromBlock}.y, ${fromBlock}.w, ${fromBlock}.h, ${toBlock}.x, ${toBlock}.y, ${toBlock}.w, ${toBlock}.h`;
-    const meta = getValueByCtx(`_.fn.getBoxToBoxArrowPath(${boxs}, {padEnd: ${arrowHeadSize}, padStart: ${arrowHeadSize} ${str} })`);
+    const meta = getValueByCtx(`_.fn.getBoxToBoxArrowPath(${boxs}, {padEnd: ${arrowHeadSize}, padStart: ${arrowHeadSize} ${str} })`, {});
+
     const x1 = computed(() => meta.value.results.x1);
     const y1 = computed(() => meta.value.results.y1);
     const x2 = computed(() => meta.value.results.x2);
@@ -49,3 +50,21 @@ const getBlockName = (str: string) => {
 const hasSpecificPoint  = (str: string) => {
     return str.split(".").length === 2;
 }
+const getDefaultPosition = (blockId: string) => ({
+    blockId: blockId,
+    position: {
+        x1: 0,
+        y1: 0,
+        x2: 0,
+        y2: 0,
+        x: 0,
+        y: 0,
+        w: 0,
+        h: 0,
+        meta: {
+            arrowHeadSize: 0,
+            results: {},
+            path: "",
+        },
+    },
+});

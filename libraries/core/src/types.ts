@@ -247,7 +247,7 @@ export interface FormulaSystemContext {
 }
 export interface FormulaValueFuncContext {
     blockNamesAsFuncParams: string;
-    blocksValues: (Positioning | FormulaSystemContext)[];
+    blocksValues: any[];
 }
 
 export interface PropertiesConfig {
