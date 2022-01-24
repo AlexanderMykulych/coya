@@ -51,6 +51,10 @@ Here is an example of how to use it:
   </tbody>
 </table>
 
+# Contributors
+
+This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
+
 # Keep posted
 
 More details on [Twitter](https://twitter.com/AMykulych)
