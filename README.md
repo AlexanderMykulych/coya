@@ -53,7 +53,7 @@ Here is an example of how to use it:
 
 # Contributors
 
-This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
+Follow our [Contribute guide](CONTRIBUTING.md).
 
 # Keep posted
 
