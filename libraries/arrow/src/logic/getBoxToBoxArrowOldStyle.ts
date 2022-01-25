@@ -87,7 +87,8 @@ export default function getBoxToBoxArrowOldStyle(
     let shortestDistance = 1 / 0
     let bestStartPoint = userOptions?.startPoint ?? startAtTop;
     let bestEndPoint = userOptions?.endPoint ?? endAtTop;
-
+    let bestStartSide = null;
+    let bestEndSide = null;
     const keepOutZone = 15
     for (let startSideId = 0; startSideId < sides.length; startSideId++) {
         const startPoint = startPoints[startSideId]
@@ -96,27 +97,25 @@ export default function getBoxToBoxArrowOldStyle(
         for (let endSideId = 0; endSideId < sides.length; endSideId++) {
             const endPoint = endPoints[endSideId]
 
-            /**
-             * If the start point is in the rectangle of end, or the end point
-             * is in the rectangle of start, this combination is abandoned.
-             */
             if (isPointInBox(endPoint, growBox(startBox, keepOutZone))) continue
 
             const d = distanceOf(startPoint, endPoint)
             if (d < shortestDistance) {
                 shortestDistance = d
                 if (!userOptions?.startPoint) {
-                    bestStartPoint = startPoint
+                    bestStartPoint = startPoint;
+                    bestStartSide = sides[startSideId];
                 }
                 if (!userOptions?.endPoint) {
-                    bestEndPoint = endPoint
+                    bestEndPoint = endPoint;
+                    bestEndSide = sides[endSideId];
                 }
             }
         }
     }
 
-    const bestStartSide = getBoxSideByPoint(startBox, bestStartPoint);
-    const bestEndSide = getBoxSideByPoint(endBox, bestEndPoint);
+    bestStartSide ??= getBoxSideByPoint(startBox, bestStartPoint);
+    bestEndSide ??= getBoxSideByPoint(endBox, bestEndPoint);
     bestStartPoint = preparePad(bestStartSide, bestStartPoint, userOptions?.padStart);
     bestEndPoint = preparePad(bestEndSide, bestEndPoint, userOptions?.padEnd);
     const controlPointForStartPoint = controlPointOf(

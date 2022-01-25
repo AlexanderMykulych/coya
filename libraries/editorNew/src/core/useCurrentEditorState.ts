@@ -266,7 +266,7 @@ function _useEditorState(editor: Editor): CurrentEditorState {
             mouseState: editor.mouseState,
             state: editor.state,
             svg: editor.svg,
-            workEl: editor.workEl,
+            workEl: computed(() => editor.workEl),
             history: computed(() => editor.history),
             makeChange,
             getNewUniqBlockName,

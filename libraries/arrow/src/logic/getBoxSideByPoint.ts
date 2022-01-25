@@ -3,7 +3,7 @@ import {
     Vec2
 } from './utils';
 
-const delta = 10;
+const delta = 0.5;
 export const getBoxSideByPoint = (box: Box, point: Vec2): RectSide => {
     if (point.x >= box.x && point.x <= box.x + box.w) {
         if (Math.abs(point.y - box.y) <= delta) {

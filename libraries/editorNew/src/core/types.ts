@@ -143,7 +143,7 @@ export interface CurrentEditorState {
     initialConfig: Ref<ArchitectureDescription>;
     mouseState: MouseState;
     svg: SVGSVGElement | null;
-    workEl: SVGSVGElement | SVGGElement | null;
+    workEl: ComputedRef<SVGSVGElement | SVGGElement | null>;
     history: Ref<History>;
     makeChange: (action: MakeChangeAction | MakeChangeAction[]) => void;
     getNewUniqBlockName: (prefix?: string) => string;

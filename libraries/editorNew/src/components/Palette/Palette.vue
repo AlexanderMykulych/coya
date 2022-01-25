@@ -7,16 +7,8 @@ import { PaletteBlocks } from './PaletteBlocks';
 import { getBoxToBoxArrowPath } from 'coya-arrow';
 import { eagerComputed } from '@vueuse/core';
 
-const {
-    mouseState,
-    svg,
-    workEl,
-    makeChange,
-    getNewUniqBlockName,
-    state,
-    architecture,
-    addNewBlock,
-} = useCurrentEditorState()!;
+const { mouseState, svg, workEl, state, architecture, addNewBlock } =
+    useCurrentEditorState()!;
 const onMouseDown = (name: string) => {
     const activePaletteBlock = PaletteBlocks.find((x) => x.name === name);
     if (
@@ -87,22 +79,23 @@ const hoverBlockPos = computed(() =>
         ? getBlockPos(state.hover.hoveredBlockId)
         : null,
 );
-const arrowPath = computed(() => {
+const arrowHeadSize = 9;
+const arrow = computed(() => {
     if (isStartArrow.value && startBlockPos.value) {
         const x1 = startBlockPos.value.x;
         const y1 = startBlockPos.value.y;
         let x2 = mouseState.position?.x;
         let y2 = mouseState.position?.y;
         if (x1 && x2 && y1 && y2) {
-            let indentX = -1;
-            let indentY = -1;
+            let indentX = -2;
+            let indentY = -2;
             if (x1 > x2) {
                 indentX = -indentX;
             }
             if (y1 > y2) {
                 indentY = -indentY;
             }
-            const { path } = getBoxToBoxArrowPath(
+            return getBoxToBoxArrowPath(
                 x1,
                 y1,
                 startBlockPos.value.w,
@@ -112,13 +105,13 @@ const arrowPath = computed(() => {
                 0,
                 0,
                 {
-                    padEnd: 9,
+                    padEnd: arrowHeadSize,
                 },
             );
-            return path;
         }
     }
 });
+
 const getBlockPos = (block: string) =>
     architecture.style?.positioning?.find((x) => x.blockId === block)?.position;
 // arrow - end
@@ -135,7 +128,7 @@ const getBlockPos = (block: string) =>
             <component :is="block.paletteComponent" />
         </div>
     </div>
-    <Teleport v-if="drawDraggedElement" :to="workEl">
+    <Teleport v-if="drawDraggedElement && workEl" :to="workEl">
         <component
             v-if="draggedComponentConfig"
             :is="draggedComponentConfig.component"
@@ -145,13 +138,14 @@ const getBlockPos = (block: string) =>
             :height="draggedComponentHeight"
         ></component>
     </Teleport>
-    <Teleport v-if="isStartArrow" :to="workEl">
-        <path
-            :d="arrowPath"
-            stroke="black"
-            fill="none"
-            stroke-width="3px"
-            marker-end="url(#sequenceflow-end)"
+    <Teleport v-if="isStartArrow && workEl && arrow" :to="workEl">
+        <path :d="arrow.path" stroke="black" fill="none" stroke-width="3px" />
+        <polygon
+            :points="`0,${-arrowHeadSize} ${
+                arrowHeadSize * 2
+            },0, 0,${arrowHeadSize}`"
+            :transform="`translate(${arrow.results.x2}, ${arrow.results.y2}) rotate(${arrow.results.ae})`"
+            fill="black"
         />
     </Teleport>
 </template>
