@@ -86,8 +86,15 @@ export const useCoyaStore = defineStore('coya', () => {
         let assetsHandle = activeProjectHandles.value.folders.find(x => x.handle.name === 'assets');
         if (assetsHandle) {
             try {
-                if (await verifyPermission(assetsHandle.handle)) {
-                    const fileHandle = await assetsHandle.handle.getFileHandle(name);
+                let dirHandle = assetsHandle.handle;
+                if (await verifyPermission(dirHandle)) {
+                    let paths = name.split("/");
+                    const fileName = paths[paths.length - 1];
+                    paths = paths.slice(0, paths.length - 1);
+                    for await (const path of paths) {
+                        dirHandle = await dirHandle.getDirectoryHandle(path);
+                    }
+                    const fileHandle = await dirHandle.getFileHandle(fileName);
                     if (fileHandle) {
                         const file = await fileHandle.getFile();
                         return file;

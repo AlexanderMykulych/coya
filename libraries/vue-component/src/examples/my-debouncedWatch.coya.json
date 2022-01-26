@@ -1,0 +1,30 @@
+{
+	"name": "my-debouncedWatch",
+	"blocks": {
+		"block_1": "Block"
+	},
+	"phases": [],
+	"style": {
+		"blocks": {
+			"_": {
+				"css": {
+					"fontSize": "2.1em",
+					"rx": "49",
+					"border-radius": "10px"
+				}
+			},
+			"block_1": {
+				"position": {
+					"x": "-330.8979606628418",
+					"y": "-70.90995788574219",
+					"w": "505.54589462280273",
+					"h": "240.9422607421875"
+				},
+				"code": "vue/watch.ts",
+				"css": {
+					"fontSize": "14"
+				}
+			}
+		}
+	}
+}

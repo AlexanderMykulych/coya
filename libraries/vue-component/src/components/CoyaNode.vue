@@ -86,4 +86,5 @@ const preparedStyle = computed(() => calculateStyle());
 .heavy {
     font: bold 30px sans-serif;
 }
+
 </style>

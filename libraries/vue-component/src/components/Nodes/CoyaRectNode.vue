@@ -1,14 +1,8 @@
 <script lang="ts" setup>
+import { asyncComputed } from '@vueuse/core';
 import { Block, BlockStyle, EnterSetting, RectPositioning } from 'coya-core';
-import { computed, onMounted, reactive, ref, watch } from 'vue';
-import { gsap } from 'gsap';
+import { computed, onMounted, reactive, ref } from 'vue';
 import { useAssets } from '../../logic/useAssets';
-import Prism from 'prismjs';
-import 'prismjs/components/prism-typescript.min.js';
-import 'prismjs/components/prism-json.min.js';
-import 'prismjs/components/prism-css.min.js';
-import { getExtension } from '../../logic/getExtension';
-import { windi } from 'windicss/helpers';
 
 const props = defineProps<{
     block: Block;
@@ -25,15 +19,6 @@ const imgUrl = asyncComputed(
 
 // code
 const isCode = computed(() => !!props.blockStyle?.code);
-
-const codeHtml = asyncComputed(async () => {
-    if (isCode.value) {
-        const code = await getText(props.blockStyle?.code);
-        const ext = getExtension(props.blockStyle?.code);
-        return Prism.highlight(code, Prism.languages[ext], ext)?.trim();
-    }
-    return null;
-});
 
 // iframe
 const isIFrame = computed(() => !!props.blockStyle.iframe);
@@ -94,9 +79,7 @@ const textStyle = computed(() => {
     }
 });
 
-const label = computed(() =>
-    isCode.value && codeHtml.value ? codeHtml.value : props.block.label,
-);
+const label = computed(() =>props.block.label);
 </script>
 
 <template>
@@ -141,13 +124,11 @@ const label = computed(() =>
                         "
                         class="w-full h-full flex justify-center items-center"
                     >
-                        <div v-if="isCode && !!codeHtml" class="h-max">
-                            <pre class="language-"><code class="l1anguage-" v-html="label"></code></pre>
-                        </div>
+                        <Code v-if="isCode" :code="blockStyle.code" :label="label" :style="cssStyle"/>
                         <iframe
                             v-else-if="isIFrame"
                             :src="iFrameSrc"
-                            frameborder="0"
+                            frameborder="0" 
                             class="w-full h-full"
                         />
                         <p
