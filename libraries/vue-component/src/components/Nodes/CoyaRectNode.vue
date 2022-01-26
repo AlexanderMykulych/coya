@@ -124,7 +124,7 @@ const label = computed(() =>props.block.label);
                         "
                         class="w-full h-full flex justify-center items-center"
                     >
-                        <Code v-if="isCode" :code="blockStyle.code" :label="label" :style="cssStyle"/>
+                        <Code v-if="isCode" :code="blockStyle.code" :label="label" :style="textStyle"/>
                         <iframe
                             v-else-if="isIFrame"
                             :src="iFrameSrc"

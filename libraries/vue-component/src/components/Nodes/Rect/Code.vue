@@ -11,25 +11,39 @@ import { getExtension } from '../../../logic/getExtension';
 const props = defineProps<{code: string | any, label: string, style: any}>();
 
 const { getText } = useAssets();
+const codeSetting = computed(() => {
+    if (typeof props.code === 'string') {
+        return {
+            file: props.code,
+            theme: 'dark',
+        };
+    }
+    return {
+        theme: 'dark',
+        file: '',
+        ...props.code,
+    };
+});
+
 const codeHtml = asyncComputed(async () => {
-    const code = await getText(props.code);
-    const ext = getExtension(props.code);
+    const code = await getText(codeSetting.value.file);
+    const ext = getExtension(codeSetting.value.file);
     return Prism.highlight(code, Prism.languages[ext], ext)?.trim();
 });
 const text = computed(() => codeHtml.value ?? props.label);
 </script>
 
 <template>
-    <div v-if="!!codeHtml" class="h-max vsdark-block">
+    <div v-if="!!codeHtml" class="h-max" :class="codeSetting.theme" :style="style">
         <pre class="language-"><code class="language-" v-html="text"></code></pre>
     </div>
 </template>
 
 <style>
-.vslight-block {
+.light {
     @import "src/styles/prism-vs-light.css";
 }
-.vsdark-block {
+.dark {
     @import "src/styles/prism-vs-dark.css";
 }
 </style>
