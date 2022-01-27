@@ -39,6 +39,15 @@ Here is an example of how to use it:
 
 ![](./assets/ex_02.gif)
 
+# Run locally
+First time:
+```bash
+rush update
+```
+Run project:
+```bash
+pnpm vue
+```
 # Sponsors
 
 <table>
