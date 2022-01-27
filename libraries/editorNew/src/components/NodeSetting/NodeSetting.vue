@@ -95,13 +95,14 @@ const onAttrChange = (changes: ChangedItem[], key: string) => {
         oldVal !== null
     ) {
         const newVal = deepCopy(oldVal);
-        changes.forEach((change) =>
-            setValueByPath(
-                newVal,
-                change.val,
-                change.parents.slice(1).join('.'),
-            ),
-        );
+        if (changes.length === 1 && changes[0].parents?.length === 1) {
+            activeNode[key] = changes[0].val;
+            return;
+        }
+        changes.forEach((change) => {
+            const path = change.parents.slice(1).join('.');
+            setValueByPath(newVal, change.val, path);
+        });
         activeNode[key] = newVal;
     } else if (changes.length === 1) {
         activeNode[key] = changes[0].val;

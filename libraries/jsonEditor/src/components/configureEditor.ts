@@ -9,10 +9,10 @@ export function configureEditor({ editor, widgetConfig }: ConfigureEditorOption)
     const getAndApplyConfigLoc = (row: JsonAstRow, index: number) => getAndApplyConfig(editor, row, index, widgetConfig);
     const analizingResult = reactive(analizeAst(editor.getValue()));
     
-    const configs = ref(analizingResult
-        .rows
-        ?.map((x, index) => getAndApplyConfigLoc(x, index))
-        .filter(x => !!x)
+    const configs = ref(
+        analizingResult.rows
+            ?.map((x, index) => getAndApplyConfigLoc(x, index))
+            .filter(x => !!x)
     );
 
     editor.onDidChangeModelContent(_ => {
@@ -22,6 +22,7 @@ export function configureEditor({ editor, widgetConfig }: ConfigureEditorOption)
         const { ast, rows: result } = analizeAst(editor.getValue());
         analizingResult.ast = ast;
         analizingResult.rows = result;
+
         analizingResult.rows?.forEach((x, index) => {
             if (configs.value.length <= index) {
                 const res = getAndApplyConfigLoc(x, index);
@@ -31,10 +32,15 @@ export function configureEditor({ editor, widgetConfig }: ConfigureEditorOption)
                 configs.value.push(res);
             }
             const { config } = configs.value[index];
-            if (config.position.column !== x.end.column + 1 || config.position.lineNumber !== x.start.line) {
-                config.row = x;
-            }
-        })
+            config.row = x;
+            // if (config.position.column !== x.end.column + 1 || config.position.lineNumber !== x.start.line) {
+            // }
+        });
+        if (configs.value.length > analizingResult.rows.length) {
+            configs.value
+                .slice(analizingResult.rows.length)
+                .forEach(x => x!.config.row = undefined)
+        }
     });
     return {
         analizingResult,
@@ -55,9 +61,9 @@ function getAndApplyConfig(
         row,
         position: {
             column: computed(() => 100) as any,
-            lineNumber: computed(() => config.row.start.line) as any,
+            lineNumber: computed(() => config.row?.start.line) as any,
         },
-        path: computed(() => config.row.path) as any,
+        path: computed(() => config.row?.path) as any,
         id: `widget_${index}`,
         index,
     })
@@ -68,7 +74,7 @@ function getAndApplyConfig(
         zoneDom,
         onValueChange: (value) => {
             const obj = JSON.parse(editor.getValue());
-            if (obj) {
+            if (obj && config.row) {
                 config.row.value = value;
                 setValueByPath(obj, value, config.row.path);
                 editor["_savingByWidget"] = true;

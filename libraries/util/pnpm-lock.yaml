@@ -3,7 +3,6 @@ lockfileVersion: 5.3
 specifiers:
   '@rollup/plugin-typescript': ^8.3.0
   curved-arrows: ^0.1.0
-  fast-deep-equal: ^3.1.3
   hex-to-rgba: ^2.0.1
   rollup-plugin-typescript2: ^0.31.1
   vite: ^2.7.10
@@ -12,7 +11,6 @@ specifiers:
 dependencies:
   '@rollup/plugin-typescript': 8.3.0
   curved-arrows: 0.1.0
-  fast-deep-equal: 3.1.3
   hex-to-rgba: 2.0.1
   rollup-plugin-typescript2: 0.31.1
   vite: 2.7.10
@@ -316,10 +314,6 @@ packages:
 
   /estree-walker/2.0.2:
     resolution: {integrity: sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==}
-    dev: false
-
-  /fast-deep-equal/3.1.3:
-    resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
     dev: false
 
   /fast-glob/3.2.7:

@@ -14,8 +14,8 @@ export function createZoneWidget(
         top: 100,
         height: 0
     });
-    const showWidgetResult = computed(() => widgetFilterConfig.widgetFilter && widgetFilterConfig.widgetFilter(widgetConfig.row));
-    const showWidget = computed(() => showWidgetResult.value !== false);
+    const showWidgetResult = computed(() => widgetFilterConfig.widgetFilter && !!widgetConfig.row && widgetFilterConfig.widgetFilter(widgetConfig.row));
+    const showWidget = computed(() => showWidgetResult.value !== false && !!widgetConfig.row);
     const zoneHeight = computed(() => {
         if (typeof showWidgetResult.value !== "boolean" && showWidgetResult.value?.heightInLines) {
             return showWidgetResult.value?.heightInLines;
@@ -24,7 +24,7 @@ export function createZoneWidget(
     });
     const zoneConfig = computed(() => ({
         afterLineNumber: widgetConfig.position.lineNumber - 1,
-        afterColumn: widgetConfig.row.start.offset,
+        afterColumn: widgetConfig.row?.start.offset,
         heightInLines: zoneHeight.value,
         domNode,
         suppressMouseDown: false,

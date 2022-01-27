@@ -8,7 +8,7 @@ import { configureEditor } from './configureEditor';
 import { useDebouncedRef } from './widgets/useDebounceRef';
 import { debounce } from 'debounce';
 import { JsonAstRow, WidgetFilter } from './WidgetConfig';
-import { whatChanged } from 'coya-util';
+import { fastDeepEqual, whatChanged } from 'coya-util';
 import { map } from 'cypress/types/bluebird';
 
 const props = defineProps<{
@@ -39,7 +39,11 @@ const editorConfig = ref(null);
 
 debouncedWatch(
     () => props.modelValue,
-    (val: any) => (jsonValue.value = JSON.stringify(val, null, '\t')),
+    (val: any) => {
+        if (!fastDeepEqual(JSON.parse(jsonValue.value), val)) {
+            jsonValue.value = JSON.stringify(val, null, '\t');
+        }
+    },
     {
         debounce: 200,
         deep: true,
@@ -59,8 +63,9 @@ onMounted(() => {
             editor.value.onDidChangeModelContent((_) => {
                 const editorVal: string | undefined = editor.value?.getValue();
                 if (editorVal && editorVal !== jsonValue.value) {
+                    jsonValue.value = editorVal;
                     const val = JSON.parse(editorVal);
-                    const changed = whatChanged(props.modelValue, val);
+                    const changed = whatChanged(props.modelValue, val, false);
                     if (changed.length > 0) {
                         emit('changeAttr', changed);
                     }
@@ -97,7 +102,7 @@ onMounted(() => {
                 :to="config.sideDom"
                 :key="config.config.id"
             >
-                <div class="flex">
+                <div class="flex" v-if="config.config.row">
                     <slot
                         name="widget"
                         :config="config.config"
@@ -116,6 +121,7 @@ onMounted(() => {
             >
                 <slot
                     name="line-widget"
+                    v-if="!!config.config.row"
                     :config="config.config"
                     :valueChange="config.onValueChange"
                 />

@@ -27,7 +27,7 @@ export interface WidgetConfig {
     id: string;
     index: number;
     path: string;
-    row: JsonAstRow;
+    row?: JsonAstRow;
 }
 export type WidgetChangeCallback = (data: { value: any }) => void;
 export interface WidgetFilterSuccessConfig {
