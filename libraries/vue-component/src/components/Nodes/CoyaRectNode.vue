@@ -99,6 +99,7 @@ const label = computed(() =>props.block.label);
                 y="15"
                 :width="positioning.w - 30"
                 :height="positioning.h - 30"
+                :style="cssStyle"
             />
             <foreignObject
                 style="overflow: visible; text-align: left"

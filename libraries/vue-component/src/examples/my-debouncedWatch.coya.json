@@ -1,7 +1,55 @@
 {
 	"name": "my-debouncedWatch",
 	"blocks": {
-		"block_1": "Block"
+		"block_1": "Block",
+		"block_2": {
+			"label": "block_2",
+			"sourcePhase": 0
+		},
+		"block_3": {
+			"label": "block_2",
+			"sourcePhase": 0
+		},
+		"block_4": {
+			"label": "block_2",
+			"sourcePhase": 0
+		},
+		"block_5": {
+			"label": "block_2",
+			"sourcePhase": 0
+		},
+		"line_1": {
+			"from": "block_2.top",
+			"to": "block_5",
+			"name": "line_1",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_6": {
+			"label": "block_6",
+			"sourcePhase": 0
+		},
+		"line_2": {
+			"from": "block_6",
+			"to": "block_5",
+			"name": "line_2",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_3": {
+			"from": "block_5.bottom",
+			"to": "block_2",
+			"name": "line_3",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_7": {
+			"label": "",
+			"sourcePhase": 0
+		}
 	},
 	"phases": [],
 	"style": {
@@ -15,8 +63,8 @@
 			},
 			"block_1": {
 				"position": {
-					"x": "-829.7782249450684",
-					"y": "-243.3229856491089",
+					"x": "-1085.6136436462402",
+					"y": "-465.08323526382446",
 					"w": "598.0561408996582",
 					"h": "319.6623058319092"
 				},
@@ -30,6 +78,162 @@
 					"fillStyle": "solid",
 					"fontSize": "18"
 				}
+			},
+			"block_2": {
+				"position": {
+					"x": "92.39365722656248",
+					"y": "61.05422119140627",
+					"w": "145.49",
+					"h": "39.43"
+				},
+				"label": "",
+				"pinTo": "block_1",
+				"css": {
+					"fill": "#42a5f687",
+					"fillStyle": "solid",
+					"stroke": "#00000000"
+				}
+			},
+			"block_3": {
+				"position": {
+					"x": "91.09914779663086",
+					"y": "112.17805389404299",
+					"w": "69.406982421875",
+					"h": "40.43149705886839"
+				},
+				"label": "",
+				"pinTo": "block_1",
+				"css": {
+					"fill": "#83c68378",
+					"fillStyle": "solid",
+					"stroke": "#00000000"
+				}
+			},
+			"block_4": {
+				"position": {
+					"x": "153.0197410583496",
+					"y": "109.43842605590822",
+					"w": "75.93",
+					"h": "52.07"
+				},
+				"label": "",
+				"pinTo": "block_1",
+				"css": {
+					"fill": "#eb41658f",
+					"fillStyle": "solid",
+					"stroke": "#00000000"
+				}
+			},
+			"block_5": {
+				"position": {
+					"x": "345.2871203613281",
+					"y": "-278.7253279685974",
+					"w": "278.13282821655275",
+					"h": "88.8409423828125"
+				},
+				"label": "search",
+				"pinTo": "block_1",
+				"css": {
+					"fill": "#42a5f687",
+					"fillStyle": "solid",
+					"stroke": "#00000000"
+				}
+			},
+			"line_1": {
+				"css": {
+					"stroke": "#42a5f6ff"
+				}
+			},
+			"block_6": {
+				"position": {
+					"x": "-643.6450805664062",
+					"y": "-1220.943130493164",
+					"w": "298.2320861816406",
+					"h": "207.70889282226562"
+				},
+				"img": "vue/typing.gif",
+				"label": ""
+			},
+			"line_2": {
+				"css": {
+					"animation": "dashdraw .3s linear infinite",
+					"stroke-dasharray": 13
+				}
+			},
+			"line_3": {
+				"css": {
+					"animation": "dashdraw .3s linear infinite",
+					"stroke-dasharray": 13,
+					"stroke": "#42a5f6ff"
+				}
+			},
+			"block_7": {
+				"position": {
+					"x": "63.24618148803711",
+					"y": "132.85479593276978",
+					"w": "92.53128051757812",
+					"h": "110.37812805175781"
+				},
+				"img": "image_41.png",
+				"css": {
+					"animation": "rotating 2s linear infinite",
+					"transform-origin": "center center",
+					"fill": "#00000000",
+					"stroke": "none",
+					"color": "#7986ccff",
+					"opacity": "154"
+				},
+				"pinTo": "block_1"
+			},
+			"block_8": {
+				"position": {
+					"x": -543.6450805664062,
+					"y": -1120.943130493164,
+					"w": "298.2320861816406",
+					"h": "207.70889282226562"
+				},
+				"img": "vue/typing.gif",
+				"label": ""
+			},
+			"block_9": {
+				"position": {
+					"x": -543.6450805664062,
+					"y": -1120.943130493164,
+					"w": "298.2320861816406",
+					"h": "207.70889282226562"
+				},
+				"img": "vue/typing.gif",
+				"label": ""
+			},
+			"block_10": {
+				"position": {
+					"x": -543.6450805664062,
+					"y": -1120.943130493164,
+					"w": "298.2320861816406",
+					"h": "207.70889282226562"
+				},
+				"img": "vue/typing.gif",
+				"label": ""
+			},
+			"block_11": {
+				"position": {
+					"x": -543.6450805664062,
+					"y": -1120.943130493164,
+					"w": "298.2320861816406",
+					"h": "207.70889282226562"
+				},
+				"img": "vue/typing.gif",
+				"label": ""
+			},
+			"block_12": {
+				"position": {
+					"x": -543.6450805664062,
+					"y": -1120.943130493164,
+					"w": "298.2320861816406",
+					"h": "207.70889282226562"
+				},
+				"img": "vue/typing.gif",
+				"label": ""
 			}
 		}
 	}

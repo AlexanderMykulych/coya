@@ -110,7 +110,8 @@ const filteredRectPositions = computed(() =>
 
 const next = () => arch.value?.next();
 const back = () => arch.value?.back();
-const save = () => emit('update:config', JSON.stringify(initialConfig.value, null, '\t'));
+const save = () =>
+    emit('update:config', JSON.stringify(initialConfig.value, null, '\t'));
 const { x, y } = useMousePosition(coyaSvgEl);
 const debug = computed(() => arch.value?.style?.debug?.enable ?? false);
 
@@ -165,7 +166,7 @@ provide(
     <div class="grid grid-cols-4 grid-rows-12 h-full hwf">
         <editorComponent v-if="!!editor">
             <template #left-menu>
-                <slot name="left-menu"/>
+                <slot name="left-menu" />
             </template>
             <template #preview="{ item }">
                 <CoyaNode
@@ -217,6 +218,17 @@ provide(
             >
                 <g ref="coyaGEl">
                     <defs>
+                        <marker
+                            id="arrow-out"
+                            markerWidth="20"
+                            markerHeight="18"
+                            refX="9.5"
+                            refY="5.1"
+                            orient="auto"
+                            markerUnits="userSpaceOnUse"
+                        >
+                            <polyline points="1 1, 9 5, 1 7" />
+                        </marker>
                         <marker
                             id="sequenceflow-end"
                             viewBox="0 0 20 20"
@@ -400,5 +412,26 @@ provide(
 }
 .cursor-move {
     cursor: move;
+}
+@keyframes dashdraw {
+    0% {
+        stroke-dashoffset: 20;
+    }
+}
+@keyframes rotating {
+  from {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }
 </style>

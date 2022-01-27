@@ -63,10 +63,10 @@ const paths = computed(() => {
 <template>
     <g :style="cssStyle" ref="gEl">
         <path v-for="path in paths" v-bind="path"/>
-        <polygon
+        <polyline
             :points="`0,${-meta.arrowHeadSize} ${meta.arrowHeadSize * 2},0, 0,${meta.arrowHeadSize}`"
             :transform="`translate(${metaResult.x2}, ${metaResult.y2}) rotate(${metaResult.ae})`"
-            fill="black"
+            :style="cssStyle"
         />
         
         <Text

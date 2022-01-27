@@ -132,6 +132,7 @@ function _useEditorState(editor: Editor): CurrentEditorState {
                     'style.value.pinTo',
                     'style.value.iframe',
                     'style.value.code',
+                    'style.value.img',
                 ]
             ),
             label: computed({
