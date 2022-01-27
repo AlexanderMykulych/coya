@@ -3,7 +3,7 @@ import { computed } from "vue";
 import { useCurrentEditorState } from "../../core/useCurrentEditorState";
 
 export function usePhases() {
-    const { phases, architecture } = useCurrentEditorState();
+    const { phases, architecture, initPhases } = useCurrentEditorState();
     const currentPhase = computed(() => architecture?.currentPhase);
     const phaseCount = computed(() => phases.value.items?.length);
     const isLastPhaseActive = computed(() => phaseCount.value && currentPhase.value === phaseCount.value - 1);
@@ -35,6 +35,9 @@ export function usePhases() {
             setCurrentPhase(phaseCount.value - 1);
         }
     }
+    const addNewPhase = (afterPhaseIndex?: number) => {
+        initPhases.value?.splice((afterPhaseIndex ?? initPhases.value.length) + 1, 0, {});
+    }
 
     return {
         setCurrentPhase,
@@ -45,5 +48,6 @@ export function usePhases() {
         setLastPhase,
         isLastPhaseActive,
         isStartPhaseActive,
+        addNewPhase,
     };
 }

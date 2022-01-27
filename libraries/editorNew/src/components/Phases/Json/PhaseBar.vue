@@ -7,7 +7,7 @@ const props = defineProps<{
     config: WidgetConfig,
 }>();
 
-const { setCurrentPhase, currentPhase, phaseCount } = usePhases();
+const { setCurrentPhase, currentPhase, phaseCount, addNewPhase } = usePhases();
 const isSelected = computed(() => currentPhase.value == props.config.path);
 const index = computed(() => Number(props.config.path));
 </script>
@@ -17,19 +17,25 @@ const index = computed(() => Number(props.config.path));
         <button
             class="cursor-finger h-full "
             @click="setCurrentPhase(index)"
+            title="Play this phase"
         >
             <i-mdi:play-box class="text-green-600" v-if="isSelected"/>
             <i-ic:round-play-arrow v-else/>
 
         </button>
-        <button>
+        <button title="Play prev phase">
             <i-ic:baseline-skip-previous class="cursor-finger h-full"
                 @click="setCurrentPhase(index - 1)"
             />
         </button>
-        <button v-if="phaseCount - 1 > index">
+        <button v-if="phaseCount - 1 > index" title="Play new phase">
             <i-ic:baseline-skip-next class="cursor-finger h-full"
                 @click="setCurrentPhase(index + 1)"
+            />
+        </button>
+        <button title="Add new phase after this">
+            <i-fluent:tab-new-20-filled class="cursor-finger h-full"
+                @click="addNewPhase(index)"
             />
         </button>
     </div>
