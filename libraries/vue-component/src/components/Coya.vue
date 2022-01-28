@@ -434,4 +434,20 @@ provide(
     transform: rotate(360deg);
   }
 }
+@keyframes grow {
+  from {
+    stroke-dashoffset: 822;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 </style>

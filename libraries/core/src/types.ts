@@ -40,14 +40,15 @@ export type Block = ContainerBlock | LineBlockElement;
 
 export type ActionExecutor = (architecture: Architecture, actionSetting: Action) => Architecture;
 export enum ActionType {
-    Connect = "connect",
-    AddNewBlock = "newBlock",
-    ChangePosition = "changePosition",
-    ChangeLabel = "changeLabel",
-    Highlight = "highlight",
-    RemoveHighlight = "removeHighlight",
-    HideBlock = "hide",
-    ChangeBlockStyle = "changeBlockStyle"
+    Connect = 'connect',
+    AddNewBlock = 'newBlock',
+    ChangePosition = 'changePosition',
+    ChangeLabel = 'changeLabel',
+    Highlight = 'highlight',
+    RemoveHighlight = 'removeHighlight',
+    HideBlock = 'hide',
+    ChangeBlockStyle = 'changeBlockStyle',
+    Show = 'show',
 }
 export interface BaseAction<TActionType extends ActionType, TActionValue extends ActionSetting> {
     name: TActionType;

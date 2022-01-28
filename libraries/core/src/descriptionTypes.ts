@@ -45,8 +45,9 @@ export interface ConnectActionSetting {
     label?: string;
     enter?: EnterSetting;
 }
-export type HideBlocksActionSetting = string;
+export type HideBlocksActionSetting = Record<string, boolean>;
 export interface AddNewBlockActionSetting extends BlockGroupDescriptions { }
+export type ShowBlockActionSetting = Record<string, boolean>;
 export interface HighlightActionSetting {
     blocks: string[] | string;
     gap?: number;

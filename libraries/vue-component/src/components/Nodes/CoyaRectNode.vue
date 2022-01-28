@@ -39,18 +39,10 @@ const cssStyle = computed(() => ({
 const gEl = ref<SVGSVGElement | null>(null);
 const groupEl = ref<SVGSVGElement | null>(null);
 
-const runEnter = (enter: EnterSetting) => {
-    var an = groupEl.value?.animate([{ opacity: '0' }, { opacity: '1' }], {
-        duration: 3000,
-    });
-    console.log(an);
-    // gsap.fromTo(gEl.value, enter.from, enter.to);
-};
 
 onMounted(() => {
     const enter = props.block.enter;
     if (enter && enter.from && enter.to) {
-        runEnter(enter);
     }
 });
 
@@ -83,7 +75,7 @@ const label = computed(() =>props.block.label);
 </script>
 
 <template>
-    <g ref="groupEl">
+    <g ref="groupEl" class="rect-node">
         <svg
             ref="gEl"
             :x="positioning.x"
@@ -91,7 +83,7 @@ const label = computed(() =>props.block.label);
             :width="positioning.w"
             :height="positioning.h"
         >
-            <Rough :w="positioning.w" :h="positioning.h" :css="cssStyle" />
+            <Rough :w="positioning.w" :h="positioning.h" :css="cssStyle" class="rect-node" />
             <image
                 v-if="imgUrl"
                 :href="imgUrl"
@@ -144,3 +136,9 @@ const label = computed(() =>props.block.label);
         </svg>
     </g>
 </template>
+
+<style>
+.rect-node {
+    animation: enter 3s linear forwards;
+}
+</style>

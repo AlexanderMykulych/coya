@@ -85,6 +85,7 @@ const style = reactive({
             activateDefaultWidget
         >
             <template #line-widget="{ config }">
+                {{config.path}}
                 <template v-if="isPhasePath(config.path)">
                     <PhaseBar :config="config"/>
                 </template>

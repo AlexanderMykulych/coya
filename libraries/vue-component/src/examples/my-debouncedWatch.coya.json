@@ -6,14 +6,6 @@
 			"label": "block_2",
 			"sourcePhase": 0
 		},
-		"block_3": {
-			"label": "block_2",
-			"sourcePhase": 0
-		},
-		"block_4": {
-			"label": "block_2",
-			"sourcePhase": 0
-		},
 		"block_5": {
 			"label": "block_2",
 			"sourcePhase": 0
@@ -53,7 +45,46 @@
 	},
 	"phases": [
 		{
-			"show": []
+			"show": {
+				"$all": false
+			}
+		},
+		{
+			"show": {
+				"block_6": true
+			}
+		},
+		{
+			"show": {
+				"block_5": true,
+				"line_2": true
+			}
+		},
+		{
+			"show": {
+				"block_1": true
+			}
+		},
+		{
+			"show": {
+				"block_2": true,
+				"line_1": true
+			}
+		},
+		{
+			"show": {
+				"line_3": true
+			}
+		},
+		{
+			"show": {
+				"block_7": true
+			}
+		},
+		{
+			"show": {
+				"$all": true
+			}
 		}
 	],
 	"style": {
@@ -67,8 +98,8 @@
 			},
 			"block_1": {
 				"position": {
-					"x": "-1085.6136436462402",
-					"y": "-465.08323526382446",
+					"x": "-508.3268494606018",
+					"y": "-675.1333451271057",
 					"w": "598.0561408996582",
 					"h": "319.6623058319092"
 				},
@@ -98,60 +129,35 @@
 					"stroke": "#00000000"
 				}
 			},
-			"block_3": {
-				"position": {
-					"x": "91.09914779663086",
-					"y": "112.17805389404299",
-					"w": "69.406982421875",
-					"h": "40.43149705886839"
-				},
-				"label": "",
-				"pinTo": "block_1",
-				"css": {
-					"fill": "#83c68378",
-					"fillStyle": "solid",
-					"stroke": "#00000000"
-				}
-			},
-			"block_4": {
-				"position": {
-					"x": "153.0197410583496",
-					"y": "109.43842605590822",
-					"w": "75.93",
-					"h": "52.07"
-				},
-				"label": "",
-				"pinTo": "block_1",
-				"css": {
-					"fill": "#eb41658f",
-					"fillStyle": "solid",
-					"stroke": "#00000000"
-				}
-			},
 			"block_5": {
 				"position": {
-					"x": "345.2871203613281",
-					"y": "-278.7253279685974",
+					"x": "-880.1523251342774",
+					"y": "-942.2172713279724",
 					"w": "278.13282821655275",
 					"h": "88.8409423828125"
 				},
 				"label": "search",
-				"pinTo": "block_1",
 				"css": {
 					"fill": "#42a5f687",
 					"fillStyle": "solid",
-					"stroke": "#00000000"
+					"stroke": "#029688ff",
+					"animation": "grow 5s linear forwards",
+					"stroke-dasharray": 822,
+					"stroke-dashoffset": 822
 				}
 			},
 			"line_1": {
 				"css": {
-					"stroke": "#42a5f6ff"
+					"stroke": "#42a5f6ff",
+					"stroke-dasharray": 822,
+					"stroke-dashoffset": 822,
+					"animation": "grow 5s linear forwards"
 				}
 			},
 			"block_6": {
 				"position": {
-					"x": "-643.6450805664062",
-					"y": "-1220.943130493164",
+					"x": "-1396.9613494873047",
+					"y": "-1274.886734008789",
 					"w": "298.2320861816406",
 					"h": "207.70889282226562"
 				},
@@ -173,8 +179,8 @@
 			},
 			"block_7": {
 				"position": {
-					"x": "63.24618148803711",
-					"y": "132.85479593276978",
+					"x": "64.56124496459961",
+					"y": "134.38513040542603",
 					"w": "92.53128051757812",
 					"h": "110.37812805175781"
 				},

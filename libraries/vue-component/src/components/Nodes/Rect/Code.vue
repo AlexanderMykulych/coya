@@ -8,7 +8,7 @@ import { useAssets } from '../../../logic/useAssets';
 import { computed } from 'vue';
 import { getExtension } from '../../../logic/getExtension';
 
-const props = defineProps<{code: string | any, label: string, style: any}>();
+const props = defineProps<{code: any, label: string, style: any}>();
 
 const { getText } = useAssets();
 const codeSetting = computed(() => {

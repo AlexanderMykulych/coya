@@ -28,7 +28,7 @@ const paths = strictComputed(
 </script>
 
 <template>
-    <g ref="gEl">
-        <path v-for="path in paths" v-bind="path" :style="css"/>
+    <g ref="gEl" :style="css">
+        <path v-for="path in paths" v-bind="path"/>
     </g>
 </template>
