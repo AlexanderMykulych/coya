@@ -33,14 +33,26 @@ export function analizeAst(editorValue: string): AstAnalizingResult {
                 type: value.type,
             };
         } else if (value.type === "Array") {
-            return value
-                .children
-                .flatMap((x, index) => {
-                    if (x.type === 'Object') {
-                        return analizeChildrens(`${parent}${parent ? '.' : ''}${index}`, x);
-                    }
-                })
-                .filter(x => !!x);
+            const rows = [];
+            if (parent === '') {
+                rows.push({
+                    path: parent,
+                    start: value.loc?.start,
+                    end: value.loc?.end,
+                    type: value.type,
+                });
+            }
+            return [
+                ...rows,
+                ...value
+                    .children
+                    .flatMap((x, index) => {
+                        if (x.type === 'Object') {
+                            return analizeChildrens(`${parent}${parent ? '.' : ''}${index}`, x);
+                        }
+                    })
+                    .filter(x => !!x),
+            ];
         }
     };
     return {

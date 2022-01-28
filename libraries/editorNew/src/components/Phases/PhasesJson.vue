@@ -24,14 +24,15 @@ const jsonEditorConfig = reactive({
 const editor = shallowRef(null);
 
 const widgetFilter = ({ path }) => {
-    if (isPhasePath(path)) {
+    if (isPhasePath(path) || isPhaseStart(path)) {
         return {
             heightInLines: 2
         };
     }
     return false;
 };
-const isPhasePath = (path: string) => !isNaN(Number(path));
+const isPhasePath = (path: string) => !isPhaseStart(path) && !isNaN(Number(path));
+const isPhaseStart = (path: string) => path === '';
 
 const {
     setCurrentPhase,
@@ -78,13 +79,17 @@ const style = reactive({
             class="h-full"
             v-model="initPhases"
             :config="jsonEditorConfig"
+            :widgetFilter="widgetFilter"
+            :emitFullObject="true"
             @set-editor="editor = $event.value"
             activateDefaultWidget
-            :widgetFilter="widgetFilter"
         >
             <template #line-widget="{ config }">
                 <template v-if="isPhasePath(config.path)">
                     <PhaseBar :config="config"/>
+                </template>
+                <template v-else="isPhaseStart(config.path)">
+                    <PhasesStart :config="config"/>
                 </template>
             </template>
         </JsonEditor>

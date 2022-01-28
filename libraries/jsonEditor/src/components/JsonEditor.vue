@@ -15,9 +15,10 @@ const props = defineProps<{
     modelValue: any;
     config?: any;
     activateDefaultWidget?: boolean;
+    emitFullObject?: boolean;
     widgetFilter?: WidgetFilter;
 }>();
-const emit = defineEmits(['changeAttr', 'set-editor', 'set-editor-config']);
+const emit = defineEmits(['changeAttr', 'set-editor', 'set-editor-config', 'update:modelValue']);
 const editorEl = ref(null);
 
 self.MonacoEnvironment = {
@@ -68,6 +69,9 @@ onMounted(() => {
                     const changed = whatChanged(props.modelValue, val, false);
                     if (changed.length > 0) {
                         emit('changeAttr', changed);
+                        if (props.emitFullObject) {
+                            emit('update:modelValue', val);
+                        }
                     }
                 }
             });

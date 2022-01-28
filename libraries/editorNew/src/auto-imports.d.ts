@@ -53,6 +53,7 @@ declare module 'vue' {
     PhaseBar: typeof import('./components/Phases/Json/PhaseBar.vue')['default']
     Phases: typeof import('./components/Phases/Phases.vue')['default']
     PhasesJson: typeof import('./components/Phases/PhasesJson.vue')['default']
+    PhasesStart: typeof import('./components/Phases/Json/PhasesStart.vue')['default']
     RectPalette: typeof import('./components/Palette/blocks/rect/rectPalette.vue')['default']
     Test: typeof import('./components/test.vue')['default']
     WrapperRect: typeof import('./components/Wrap/WrapperRect.vue')['default']

@@ -3,7 +3,7 @@ import { changeValue, setValueByPath } from 'coya-util';
 import { ref, computed, toRef, reactive } from 'vue';
 import { ChangedItem } from 'coya-util/src/whatChanged';
 
-const val = ref({
+const val = ref([{
     init: {
         position: {
             x: '20',
@@ -17,7 +17,7 @@ const val = ref({
         label: '',
     },
     label: '',
-});
+}]);
 const prepVal = computed({
     get() {
         return JSON.stringify(val.value, null, '\t');
@@ -52,7 +52,11 @@ const setConfig = ({ analizingResult, configs }) => {
 };
 
 const allowedPath = ref(null);
+const allowAll = ref(false);
 const widgetFilter = ({ path }) => {
+    if (allowAll.value) {
+        return true;
+    }
     if (path.endsWith('.css')) {
         return {
             heightInLines: 5,
@@ -81,14 +85,13 @@ const onChangeAttr = (changes: ChangedItem[]) => {
 <template>
     <div class="grid grid-cols-2 h-full">
         <div class="grid grid-cols-1 grid-rows-2">
-            <!-- <textarea cols="30" rows="10" v-model="prepVal"/> -->
             <div>
                 <input type="text" v-model="allowedPath" /> <button @click="showConfigs = !showConfigs">switch</button>
-                <!-- <JsonEditor v-if="showConfigs" style="height: 500px" :modelValue="jsonRows.configs" />
-                <JsonEditor v-else style="height: 500px" :modelValue="jsonRows.rows" /> -->
+                <JsonEditor v-if="showConfigs" style="height: 500px" :modelValue="jsonRows.configs" />
+                <JsonEditor v-else style="height: 500px" :modelValue="jsonRows.rows" />
             </div>
             <div>
-                <!-- <JsonEditor style="height: 500px" :modelValue="jsonRows.ast" /> -->
+                <JsonEditor style="height: 500px" :modelValue="jsonRows.ast" />
             </div>
         </div>
         <JsonEditor
