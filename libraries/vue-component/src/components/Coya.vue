@@ -192,6 +192,7 @@ provide(
                     v-if="enableDrawing"
                     class="drawableSvg"
                     ref="drawableSvgEl"
+                    xmlns="http://www.w3.org/2000/svg"
                 >
                     <rect
                         x="0"
@@ -216,7 +217,7 @@ provide(
                 overflow="auto"
                 v-if="!!arch?.style?.positioning"
             >
-                <g ref="coyaGEl">
+                <g ref="coyaGEl" class="coya-work-el">
                     <defs>
                         <marker
                             id="arrow-out"

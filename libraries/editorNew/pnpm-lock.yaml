@@ -7,6 +7,7 @@ specifiers:
   '@windicss/plugin-scrollbar': ^1.2.3
   coya-core: ~0.9.16
   debounce: ^1.2.1
+  dom-to-image: ^2.6.0
   typescript: ^4.4.2
   unplugin-auto-import: ^0.4.8
   unplugin-icons: ^0.12.17
@@ -21,6 +22,7 @@ dependencies:
   '@vueuse/core': 6.7.4_vue@3.2.21
   coya-core: 0.9.16
   debounce: 1.2.1
+  dom-to-image: 2.6.0
   unplugin-auto-import: 0.4.13_@vueuse+core@6.7.4+vite@2.6.13
   unplugin-icons: 0.12.17_vite@2.6.13
   unplugin-vue-components: 0.15.6_vite@2.6.13+vue@3.2.21
@@ -1433,6 +1435,10 @@ packages:
       domhandler: 4.2.2
       entities: 2.2.0
     dev: true
+
+  /dom-to-image/2.6.0:
+    resolution: {integrity: sha1-ilA2CAiMh7HCL5A0rgMuGJiVWGc=}
+    dev: false
 
   /domelementtype/2.2.0:
     resolution: {integrity: sha512-DtBMo82pv1dFtUmHyr48beiuq792Sxohr+8Hm9zoxklYPfa6n0Z3Byjj2IV7bmr2IyqClnqEQhfgHJJ5QF0R5A==}

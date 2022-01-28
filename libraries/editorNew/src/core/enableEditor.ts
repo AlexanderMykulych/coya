@@ -166,7 +166,7 @@ function enableZoom(editor: EnabledEditor, zoomElement: SVGGraphicsElement) {
     const scale = ref(startTransform.scale);
     const minScale = 0.01;
     const maxScale = 20;
-    const transform = computed(() => `translate(${translate.x} ${translate.y}) scale(${scale.value})`);
+    const transform = computed(() => !isNaN(translate.x) && !isNaN(translate.y) && !isNaN(scale.value) ? `translate(${translate.x} ${translate.y}) scale(${scale.value})` : '');
 
     const zoom = (event: WheelEvent) => {
         const { x, y } = getMousePosition(svg, event, true);

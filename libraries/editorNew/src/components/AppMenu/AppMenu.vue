@@ -14,6 +14,7 @@ const {
     applyPositioning,
     scaleToStart,
     isViewMode,
+    saveToImage,
 } = useCurrentEditorState();
 const selectDefaultNode = () => (selectedNode.value = '_');
 const selectDefaultArrowNode = () => (selectedNode.value = '->');
@@ -37,6 +38,9 @@ const selectLayout = (layout: LayoutConfig) => applyPositioning(layout);
                 <i-jam:eye-f v-else class="pb-1" />
             </button>
             <template v-if="!isViewMode">
+                <button class="border-2" @click="saveToImage" title="Export as PNG">
+                    <i-mdi:image-move class="pb-1" />
+                </button>
                 <button class="border-2" @click="scaleToStart">
                     <i-ic:round-fit-screen class="pb-1" />
                 </button>

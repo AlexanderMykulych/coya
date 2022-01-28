@@ -10,16 +10,17 @@
   "dependencies": {
     "@types/debounce": "^1.2.1",
     "@vueuse/core": "^7.1.2",
+    "coya-arrow": "~0.9.18",
     "coya-core": "~0.9.18",
     "coya-json-editor": "~0.9.18",
+    "coya-util": "~0.1.0",
     "debounce": "^1.2.1",
+    "dom-to-image": "^2.6.0",
     "unplugin-auto-import": "^0.4.20",
     "unplugin-icons": "^0.12.20",
     "unplugin-vue-components": "^0.17.2",
     "vite-plugin-windicss": "^1.5.3",
-    "vue": "^3.2.26",
-    "coya-util": "~0.1.0",
-    "coya-arrow": "~0.9.18"
+    "vue": "^3.2.26"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.10.1",

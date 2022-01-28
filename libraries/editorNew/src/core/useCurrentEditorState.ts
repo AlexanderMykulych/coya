@@ -17,6 +17,7 @@ import { createComputed } from "./createComputed";
 import { isWebUrl } from "./isWebUrl";
 import { arrangeBackward, arrangeForward } from "./arrangeBackward";
 import { createSharedComposable, tryOnScopeDispose } from "@vueuse/core";
+import { lib } from "./domToImage";
 
 export function useCurrentEditorState(): CurrentEditorState {
     const editor = getCurrentEditor();
@@ -454,7 +455,39 @@ function _useEditorState(editor: Editor): CurrentEditorState {
                 set(val: boolean) {
                     editor.state.isViewMode = val;
                 },
-            })
+            }),
+            saveToImage: async () => {
+                const png = await lib.toPng(editor.svg, {
+                    prepareNode: (node: Element) => {
+                        const workEl = node.getElementsByClassName("coya-work-el");
+                        const translate = `translate(${diagramRect.value.x} ${diagramRect.value.y}) scale(${diagramRect.value.scale})`;
+                        if (workEl && workEl.length > 0) {
+                            workEl[0].style.transform = '';
+                            workEl[0].setAttribute('transform', translate);
+                        }
+                        const container = document.createElement('div');
+                        container.append(node);
+                        const elements = container.getElementsByClassName("editor-svg");
+                        for (let i = 0; i < elements.length; i++) {
+                            const el = elements.item(i);
+                            if (el) {
+                                el.remove();
+                            }
+                        }
+                        return container;
+                    }
+                });
+                var a = document.createElement('a');
+                a.href = png;
+                a.id = "tempAtoDelete"
+                a.download = "filename.png";
+                document.body.appendChild(a);
+                a.click();
+                let aToDelete = document.getElementById("tempAtoDelete");
+                if (aToDelete) {
+                    document.body.removeChild(aToDelete);
+                }
+            },
         };
     }
     throw "no editor state";

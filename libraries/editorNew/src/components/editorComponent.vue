@@ -127,6 +127,7 @@ const { mouseState, state, isOneNodeSelected, showDebugWindow, diagramRect } =
 <template>
     <Teleport v-if="!!editor.enable && editor.svg" :to="editor.svg">
         <svg
+            class="editor-svg"
             :viewBox="`0 0 ${svgPosition.w} ${svgPosition.h}`"
             :x="svgViewBox.x"
             :y="svgViewBox.y"

@@ -180,6 +180,7 @@ export interface CurrentEditorState {
     addNewBlock: (style: BlockStyle, block?: BlockElementDescription) => void;
     arrangeBackward: (blockId?: string) => void;
     arrangeForward: (blockId?: string) => void;
+    saveToImage: () => void;
     isViewMode: Ref<boolean>
 }
 
