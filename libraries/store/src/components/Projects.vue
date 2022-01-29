@@ -13,7 +13,7 @@ const store = useCoyaStore();
                 <h3
                     class="text-xl font-bold leading-none text-gray-900 dark:text-white"
                 >
-                    Projects
+                    Folders
                 </h3>
                 <a
                     @click="store.openFolder"
@@ -39,9 +39,6 @@ const store = useCoyaStore();
                                 >
                                     {{ project.name }}
                                 </p>
-                                <!-- <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                            email@windster.com
-                        </p> -->
                             </div>
                             <div
                                 class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white"

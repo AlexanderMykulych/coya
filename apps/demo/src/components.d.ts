@@ -11,7 +11,11 @@ declare module 'vue' {
     CarbonMoon: typeof import('~icons/carbon/moon')['default']
     CarbonSun: typeof import('~icons/carbon/sun')['default']
     Counter: typeof import('./components/Counter.vue')['default']
+    DemoCoyas: typeof import('./components/DemoCoyas.vue')['default']
     Footer: typeof import('./components/Footer.vue')['default']
+    'Mdi:arrowLeftBoldBoxOutline': typeof import('~icons/mdi/arrow-left-bold-box-outline')['default']
+    'Mdi:arrowRightThin': typeof import('~icons/mdi/arrow-right-thin')['default']
+    'Ph:folderFill': typeof import('~icons/ph/folder-fill')['default']
   }
 }
 

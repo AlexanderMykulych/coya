@@ -8,6 +8,7 @@ const props = defineProps<{
     block: Block;
     positioning: RectPositioning;
     blockStyle: BlockStyle;
+    component?: Slot;
 }>();
 
 const { getText, getImgUrl } = useAssets();
@@ -84,6 +85,7 @@ const label = computed(() =>props.block.label);
             :height="positioning.h"
         >
             <Rough :w="positioning.w" :h="positioning.h" :css="cssStyle" class="rect-node" />
+            
             <image
                 v-if="imgUrl"
                 :href="imgUrl"
@@ -117,7 +119,8 @@ const label = computed(() =>props.block.label);
                         "
                         class="w-full h-full flex justify-center items-center"
                     >
-                        <Code v-if="isCode" :code="blockStyle.code" :label="label" :style="textStyle"/>
+                        <component v-if="!!component" :is="component" />
+                        <Code v-else-if="isCode" :code="blockStyle.code" :label="label" :style="textStyle"/>
                         <iframe
                             v-else-if="isIFrame"
                             :src="iFrameSrc"

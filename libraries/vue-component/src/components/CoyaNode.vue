@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Block, BlockStyle, isLineBlockElement, isRectPositioning, Positioning, RectPositioning } from "coya-core";
-import { computed, Ref } from "vue";
+import { computed, Ref, Slot } from "vue";
 import {getCurrentEditor} from "coya-editor-new";
 import { deepAssign, fastDeepEqual } from "coya-util";
 import coyaRectNode from "./Nodes/CoyaRectNode.vue";
@@ -8,13 +8,14 @@ import coyaLineNode from "./Nodes/CoyaLineNode.vue";
 import { deepEqual } from "assert";
 
 const props = defineProps<{
-    block: Block,
-    positioning: Positioning,
-    blockStyle?: BlockStyle,
-    debug?: boolean,
-    defaultArrowStyle?: BlockStyle,
-    defaultRectStyle?: BlockStyle,
-    disableWrap?: boolean,
+    block: Block;
+    positioning: Positioning;
+    blockStyle?: BlockStyle;
+    debug?: boolean;
+    defaultArrowStyle?: BlockStyle;
+    defaultRectStyle?: BlockStyle;
+    disableWrap?: boolean;
+    component?: Slot;
 }>();
 
 const rectPosition = computed(() => <RectPositioning>props.positioning);
@@ -72,6 +73,7 @@ const preparedStyle = computed(() => calculateStyle());
         :block="block"
         :block-style="preparedStyle"
         :positioning="rectPosition"
+        :component="component"
     />
     <DebugNode
         v-if="!!blockDebug"

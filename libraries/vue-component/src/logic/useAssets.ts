@@ -6,10 +6,7 @@ export function provideAssets(assets: AssetConfig) {
 }
 
 export function useAssets() {
-    const assets = inject<AssetConfig | undefined>(assetsKey);
-    if (!assets) {
-        return;
-    }
+    const assets = inject<AssetConfig | undefined>(assetsKey) ?? defaultAssets;
     return {
         getContent: async (name?: string) => {
             if (!name) {
@@ -18,12 +15,18 @@ export function useAssets() {
             return await assets.load(name);
         },
         getImgUrl: async (name: string) => {
-            const blob = await assets.load(name);
+            let blob = await assets.load(name);
+            if (typeof blob === 'string') {
+                return blob;
+            }
             return await blobToBase64(blob);
         },
         getText: async (name: string) => {
-            const blob = await assets.load(name);
-            return await blob.text();
+            const blobOrText = await assets.load(name);
+            if (typeof blobOrText === 'string') {
+                return blobOrText;
+            }
+            return await blobOrText.text();
         },
         create: assets?.create
     };
@@ -34,4 +37,9 @@ function blobToBase64(blob: Blob) {
         reader.onloadend = () => resolve(reader.result);
         reader.readAsDataURL(blob);
     }) : "";
+}
+
+const defaultAssets = {
+    load: () => undefined,
+    create: () => undefined,
 }

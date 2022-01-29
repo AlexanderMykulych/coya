@@ -9,6 +9,6 @@ import Coya from "./../components/Coya.vue";
 import { startSocketClient } from '../socket';
 import App from './../App.vue';
 
-export const FileSystemCoya = App;;
+export const FileSystemCoya = App;
 export const startDebugClient = startSocketClient;
 export default Coya;

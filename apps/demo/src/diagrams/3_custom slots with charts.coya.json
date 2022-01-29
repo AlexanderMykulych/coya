@@ -1,0 +1,259 @@
+{
+	"name": "3. Custom slots with charts",
+	"tag": "custom",
+	"blocks": {
+		"block_1": "Block",
+		"block_2": {
+			"0": "B",
+			"1": "l",
+			"2": "o",
+			"3": "c",
+			"4": "k",
+			"label": "block_2",
+			"sourcePhase": 0
+		},
+		"block_3": {
+			"0": "B",
+			"1": "l",
+			"2": "o",
+			"3": "c",
+			"4": "k",
+			"label": "block_3",
+			"sourcePhase": 0
+		},
+		"block_4": {
+			"0": "B",
+			"1": "l",
+			"2": "o",
+			"3": "c",
+			"4": "k",
+			"label": "block_4",
+			"sourcePhase": 0
+		},
+		"line_1": {
+			"from": "block_1",
+			"to": "block_4",
+			"name": "line_1",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_2": {
+			"from": "block_2",
+			"to": "block_4",
+			"name": "line_2",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_3": {
+			"from": "block_3",
+			"to": "block_4",
+			"name": "line_3",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"text_1": {
+			"label": "block_5",
+			"sourcePhase": 0
+		},
+		"text_2": {
+			"label": "block_5",
+			"sourcePhase": 0
+		},
+		"case2_1": {
+			"label": "block_5",
+			"sourcePhase": 0
+		},
+		"case2_2": {
+			"label": "block_5",
+			"sourcePhase": 0
+		},
+		"line_4": {
+			"from": "case2_1",
+			"to": "case2_2",
+			"name": "line_4",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_5": {
+			"label": "block_5",
+			"sourcePhase": 0
+		},
+		"block_6": {
+			"label": "block_5",
+			"sourcePhase": 0
+		},
+		"block_7": {
+			"label": "block_7",
+			"sourcePhase": 0
+		},
+		"block_8": {
+			"label": "block_5",
+			"sourcePhase": 0
+		},
+		"line_5": {
+			"from": "block_8",
+			"to": "block_7",
+			"name": "line_5",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		}
+	},
+	"phases": [],
+	"style": {
+		"blocks": {
+			"_": {
+				"css": {
+					"fontSize": "2.1em",
+					"rx": "49",
+					"border-radius": "10px"
+				}
+			},
+			"block_1": {
+				"position": {
+					"x": "-454.9617004394531",
+					"y": "234.01381301879883",
+					"w": "399.65903663635254",
+					"h": "73.73644638061523"
+				},
+				"pinTo": "text_1"
+			},
+			"block_2": {
+				"position": {
+					"x": "-449.9493103027344",
+					"y": "348.13146352767944",
+					"w": "391.8231129646301",
+					"h": "87.38350915908813"
+				},
+				"pinTo": "text_1"
+			},
+			"block_3": {
+				"position": {
+					"x": "-444.0328674316406",
+					"y": "470.04075622558594",
+					"w": "390.3503179550171",
+					"h": "76.79527282714844"
+				},
+				"pinTo": "text_1"
+			},
+			"block_4": {
+				"position": {
+					"x": "261.2332229614258",
+					"y": "193.54322624206543",
+					"w": "551.6994857788086",
+					"h": "402.2070484161377"
+				},
+				"pinTo": "text_1"
+			},
+			"text_1": {
+				"position": {
+					"x": "45.91374206542969",
+					"y": "-433.5951843261719",
+					"w": 300,
+					"h": 100
+				},
+				"label": "Case 1",
+				"css": {
+					"fill": "none",
+					"stroke": "none",
+					"fontSize": "126"
+				}
+			},
+			"text_2": {
+				"position": {
+					"x": "136.11891174316406",
+					"y": "833.6180725097656",
+					"w": 300,
+					"h": 100
+				},
+				"label": "Case 2",
+				"css": {
+					"fill": "none",
+					"stroke": "none",
+					"fontSize": "126"
+				}
+			},
+			"case2_1": {
+				"position": {
+					"x": "-523.2604713439941",
+					"y": "180.83956909179688",
+					"w": "1313.6970710754395",
+					"h": "135.65814208984375"
+				},
+				"pinTo": "text_2"
+			},
+			"case2_2": {
+				"position": {
+					"x": "-516.9928131103516",
+					"y": "516.9112854003906",
+					"w": "1292.8048400878906",
+					"h": "647.5176391601562"
+				},
+				"pinTo": "text_2"
+			},
+			"block_5": {
+				"position": {
+					"x": "-1353.0119724273682",
+					"y": "-1108.9905700683594",
+					"w": "903.9342193603516",
+					"h": 100
+				},
+				"label": "1. Enable view-mode",
+				"css": {
+					"fill": "none",
+					"stroke": "none",
+					"fontSize": "126"
+				}
+			},
+			"block_6": {
+				"position": {
+					"x": "10.216270446777344",
+					"y": "147.88458251953125",
+					"w": "903.9342193603516",
+					"h": 100
+				},
+				"label": "2. Try to move sliders",
+				"css": {
+					"fill": "none",
+					"stroke": "none",
+					"fontSize": "126"
+				},
+				"pinTo": "block_5"
+			},
+			"block_7": {
+				"position": {
+					"x": "166.2043914794922",
+					"y": "-1320.4747314453125",
+					"w": "979.3521270751953",
+					"h": "590.5606079101562"
+				},
+				"img": "example_slots.gif",
+				"label": "",
+				"css": {
+					"stroke": "black",
+					"fill": "#83c683ff",
+					"fillStyle": "solid"
+				}
+			},
+			"block_8": {
+				"position": {
+					"x": "209.6238021850586",
+					"y": "304.9517822265625",
+					"w": "532.7464466094971",
+					"h": 100
+				},
+				"label": "3. Example",
+				"css": {
+					"fill": "none",
+					"stroke": "none",
+					"fontSize": "126"
+				},
+				"pinTo": "block_5"
+			}
+		}
+	}
+}

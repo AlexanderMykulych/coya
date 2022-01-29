@@ -24,6 +24,7 @@ const assets = {
         return await store.activeProject.loadAsset(name);
     },
 };
+
 </script>
 <template>
     <main class="text-center text-gray-700 dark:text-gray-200 bg-white h-full">
@@ -40,8 +41,15 @@ const assets = {
                     <mdi:arrow-left-bold-box-outline class="pb-1" />
                 </button>
             </template>
+            <template v-for="(_, slotName) in $slots" #[slotName]="slotData">
+                <slot :name="slotName" v-bind="slotData" />
+            </template>
         </Coya>
-        <Projects v-else />
+        <template v-else>
+            <slot name="before-projects"/>
+            <Projects  />
+            <slot name="after-projects"/>
+        </template>
     </main>
 </template>
 

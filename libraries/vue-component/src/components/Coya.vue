@@ -6,7 +6,15 @@ import {
     ArchitectureDescription,
     CurrentPhaseInfo,
 } from 'coya-core';
-import { computed, provide, reactive, ref, onMounted, watch } from 'vue';
+import {
+    computed,
+    provide,
+    reactive,
+    ref,
+    onMounted,
+    watch,
+    useSlots,
+} from 'vue';
 import { useNodeDetails } from '../logic/useNodeDetails';
 import { useMousePosition } from '../logic/useSvgMousePosition';
 import { useDebug } from '../state/useDebug';
@@ -22,6 +30,9 @@ const props = defineProps<{
     assets: AssetConfig;
 }>();
 const emit = defineEmits(['update:config']);
+const slots = useSlots();
+
+// assets
 provideAssets(props.assets);
 
 const preparedConfig = reactive({
@@ -160,6 +171,15 @@ provide(
         realHeight,
         realWidth,
     }),
+);
+
+const coyaSlotsKey = 'coya-';
+const coyaSlots = computed(() =>
+    Object.fromEntries(
+        Object.entries(slots)
+            .filter(([key]) => key.startsWith(coyaSlotsKey))
+            .map(([key, value]) => [key.slice(coyaSlotsKey.length), value]),
+    ),
 );
 </script>
 <template>
@@ -331,6 +351,7 @@ provide(
                             :defaultArrowStyle="defaultArrowStyle"
                             :positioning="item.pos"
                             :debug="debug"
+                            :component="coyaSlots[item.block.id]"
                         />
                         <template v-if="debug">
                             <rect
@@ -420,35 +441,35 @@ provide(
     }
 }
 @keyframes rotating {
-  from {
-    -ms-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -webkit-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  to {
-    -ms-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -webkit-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
+    from {
+        -ms-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    to {
+        -ms-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
 }
 @keyframes grow {
-  from {
-    stroke-dashoffset: 822;
-  }
-  to {
-    stroke-dashoffset: 0;
-  }
+    from {
+        stroke-dashoffset: 822;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
 }
 @keyframes enter {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 </style>
