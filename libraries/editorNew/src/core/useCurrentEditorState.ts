@@ -480,7 +480,7 @@ function _useEditorState(editor: Editor): CurrentEditorState {
                 var a = document.createElement('a');
                 a.href = png;
                 a.id = "tempAtoDelete"
-                a.download = "filename.png";
+                a.download = `${editor.config?.name ?? 'coya_img'}.png`;
                 document.body.appendChild(a);
                 a.click();
                 let aToDelete = document.getElementById("tempAtoDelete");
