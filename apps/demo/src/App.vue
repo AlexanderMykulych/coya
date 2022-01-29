@@ -6,21 +6,24 @@ import slider from '@vueform/slider'
 import { useCase1 } from './cases/case1';
 import { useCase2 } from './cases/case2';
 
-const assetsModules = import.meta.glob('./diagrams/assets/*.*');
-
+const rawAssetsModules = import.meta.glob('./diagrams/assets/**/*.ts', {
+    assert: {
+        type: 'raw',
+    },
+});
+const imgAssetsModules = import.meta.glob('./diagrams/assets/**/*.*');
 const images = ['.png', '.gif'];
 const assets = {
-    create: async (name: string, content: string) => {
-        
-    },
+    create: async (name: string, content: string) => {},
     load: async (name: string) => {
         if (!name) {
             return;
         }
-        const module = () => import(`./diagrams/assets/${name}${images.some(image => name.endsWith(image)) ? '' : '?raw'}`);
-        const result = await module();
-        console.log(result);
-        return result?.default;
+        if (images.some(image => name.endsWith(image))) {
+            const module = await imgAssetsModules[`./diagrams/assets/${name}`]();
+            return module.default;
+        }
+        return rawAssetsModules[`./diagrams/assets/${name}`];
     },
 };
 
