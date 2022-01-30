@@ -142,6 +142,6 @@ const label = computed(() =>props.block.label);
 
 <style>
 .rect-node {
-    animation: enter 3s linear forwards;
+    animation: enter 1s linear forwards;
 }
 </style>

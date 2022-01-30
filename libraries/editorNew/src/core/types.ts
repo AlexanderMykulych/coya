@@ -125,6 +125,8 @@ export interface DiagramRectangle {
     y1: number;
     x2: number;
     y2: number;
+    w: number;
+    h: number;
     scale: number;
 }
 export interface CurrentEditorState {

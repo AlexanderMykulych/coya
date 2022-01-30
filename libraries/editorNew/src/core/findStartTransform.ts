@@ -50,6 +50,8 @@ export const findStartTransform = (arch: Architecture, svg: SVGSVGElement): Diag
         y1: minY,
         x2: maxX,
         y2: maxY,
+        w: maxX - minX,
+        h: maxY - minY,
         scale,
     };
 };

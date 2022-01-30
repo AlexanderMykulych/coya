@@ -457,6 +457,7 @@ function _useEditorState(editor: Editor): CurrentEditorState {
                 },
             }),
             saveToImage: async () => {
+                var scale = 4;
                 const png = await lib.toPng(editor.svg, {
                     prepareNode: (node: Element) => {
                         const workEl = node.getElementsByClassName("coya-work-el");
@@ -475,6 +476,12 @@ function _useEditorState(editor: Editor): CurrentEditorState {
                             }
                         }
                         return container;
+                    },
+                    width: editor.svg!.clientWidth * scale,
+                    height: editor.svg!.clientHeight * scale,
+                    style: {
+                        transform: `scale(${scale})`,
+                        transformOrigin: 'top left'
                     }
                 });
                 var a = document.createElement('a');
