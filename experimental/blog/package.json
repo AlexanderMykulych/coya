@@ -1,0 +1,17 @@
+{
+  "name": "coya-rnd-blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:serve": "vitepress serve docs"
+  },
+  "author": "AlexMykulych",
+  "license": "ISC",
+  "dependencies": {
+    "vitepress": "^0.21.6",
+    "coya-vue-component": "~0.9.18"
+  }
+}

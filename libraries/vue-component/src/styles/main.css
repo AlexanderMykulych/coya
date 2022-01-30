@@ -36,3 +36,10 @@ html.dark {
     font-family: "doogdog";
 }
 
+svg.coya body {
+    min-width: initial;
+    min-height: initial;
+    font-size: initial;
+    background-color: initial;
+}
+

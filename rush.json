@@ -517,6 +517,13 @@
       "packageName": "demo",
       "projectFolder": "apps/demo",
       "reviewCategory": "apps"
+    },
+
+    //experimental - r&d
+    {
+        "packageName": "coya-rnd-blog",
+        "projectFolder": "experimental/blog",
+        "reviewCategory": "rnd"
     }
   ]
 }
