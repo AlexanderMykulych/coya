@@ -1,7 +1,7 @@
 import { computed, reactive, ref } from "vue";
 import { CurrentEditorState, Editor, getCurrentEditor, MakeChangeAction } from ".";
 import { Action, ActionType, BlockElementDescription, BlockStyle, isArray } from "coya-core";
-import { isNullOrUndefined } from "coya-util";
+import { isNotNullOrUndefined, isNullOrUndefined } from "coya-util";
 import { executeActions } from "coya-core";
 import { ArchitectureDescription } from "coya-core";
 import { applyPositioning } from "coya-core";
@@ -11,7 +11,7 @@ import { prepareNum } from "./prepareNum";
 import { reconnectArrow } from "./reconnectArrow";
 import { LayoutConfig } from "../components/AppMenu/layouts";
 import { removeBlockById } from "./removeBlockById";
-import { findStartTransform } from "./findStartTransform";
+import { findStartTransform, findTransform } from "./findStartTransform";
 import { set } from "./set";
 import { createComputed } from "./createComputed";
 import { isWebUrl } from "./isWebUrl";
@@ -335,10 +335,14 @@ function _useEditorState(editor: Editor): CurrentEditorState {
                 }
             },
             diagramRect,
-            scaleToStart: () => {
-                editor.zoomState.translate.x = diagramRect.value.x;
-                editor.zoomState.translate.y = diagramRect.value.y;
-                editor.zoomState.scale = diagramRect.value.scale;
+            scaleToStart: (blocks?: string[]) => {
+                let rect = diagramRect.value;
+                if (isNotNullOrUndefined(blocks)) {
+                    rect = findTransform(editor.architecture, editor.svg, blocks);
+                }
+                editor.zoomState.translate.x = rect.x;
+                editor.zoomState.translate.y = rect.y;
+                editor.zoomState.scale = rect.scale;
             },
             copy: async () => {
                 if (blockId.value) {

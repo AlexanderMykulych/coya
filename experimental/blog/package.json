@@ -4,14 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
-    "docs:serve": "vitepress serve docs"
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "serve": "vitepress serve docs"
   },
   "author": "AlexMykulych",
   "license": "ISC",
   "dependencies": {
+    "coya-vue-component": "~0.9.18",
+    "vite": "^2.7.13",
+    "vite-plugin-restart": "^0.1.1",
+    "vite-plugin-windicss": "^1.6.3",
     "vitepress": "^0.21.6",
-    "coya-vue-component": "~0.9.18"
+    "windicss": "^3.4.3"
   }
 }

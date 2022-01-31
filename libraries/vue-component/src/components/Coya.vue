@@ -18,7 +18,7 @@ import {
 import { useNodeDetails } from '../logic/useNodeDetails';
 import { useMousePosition } from '../logic/useSvgMousePosition';
 import { useDebug } from '../state/useDebug';
-import { enableEditor, getMousePosition } from 'coya-editor-new';
+import { enableEditor, useEditorState } from 'coya-editor-new';
 import 'coya-editor-new/dist/style.css';
 import { saveConfig } from '../socket';
 import { useCurrentPhase } from '../state/useCurrentPhase';
@@ -29,7 +29,7 @@ const props = defineProps<{
     id: string;
     assets: AssetConfig;
 }>();
-const emit = defineEmits(['update:config']);
+const emit = defineEmits(['update:config', 'update:controller']);
 const slots = useSlots();
 
 // assets
@@ -97,6 +97,8 @@ editor.value = enableEditor({
     id: props.id,
     assets: props.assets,
 });
+const editorController = useEditorState(editor.value);
+emit('update:controller', editorController);
 const editorComponent = computed(() => editor.value?.component);
 
 const rectPositions = computed(() => {
@@ -402,9 +404,6 @@ const coyaSlots = computed(() =>
 </template>
 
 <style>
-.block {
-    background-color: aqua;
-}
 .small {
     font: italic 13px sans-serif;
 }

@@ -176,7 +176,7 @@ export interface CurrentEditorState {
     removeBlock: (id?: string) => void;
     undoChange: () => void;
     redoChange: () => void;
-    scaleToStart: () => void;
+    scaleToStart: (blocks?: string[]) => void;
     copy: () => void;
     paste: () => void;
     addNewBlock: (style: BlockStyle, block?: BlockElementDescription) => void;
