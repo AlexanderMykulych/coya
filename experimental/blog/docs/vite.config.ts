@@ -1,7 +1,8 @@
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
-import WindiCSS from 'vite-plugin-windicss'
 import ViteRestart from 'vite-plugin-restart'
+import Unocss from 'unocss/vite'
+import { presetAttributify, presetUno } from 'unocss'
 
 export default defineConfig({
     resolve: {
@@ -19,8 +20,12 @@ export default defineConfig({
         },
     },
     plugins: [
-        // https://github.com/antfu/vite-plugin-windicss
-        WindiCSS(),
+        Unocss({
+            presets: [
+                presetAttributify({}),
+                presetUno(),
+            ]
+        }),
         ViteRestart({
             restart: '.vitepress/*.*',
         }),

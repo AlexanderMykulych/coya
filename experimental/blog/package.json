@@ -17,5 +17,8 @@
     "vite-plugin-windicss": "^1.6.3",
     "vitepress": "^0.21.6",
     "windicss": "^3.4.3"
+  },
+  "devDependencies": {
+    "unocss": "^0.22.6"
   }
 }

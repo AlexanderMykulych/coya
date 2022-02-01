@@ -29,8 +29,20 @@ setConfig1();
 Coya component here 🤩
 
 <pre>
-    <Button @click="scaleTo('block_1')" label="config 13"/>
-    <button @click="scaleTo('block_1', 'block_3')">config 2</button>
+    <Button
+        @click="scaleTo()"
+        label="All"
+    />
+    <Button
+        @click="scaleTo('block_1')"
+        label="Go to block1"
+        mt-5
+    />
+    <Button
+        @click="scaleTo('block_1', 'block_3')"
+        label="Go to blocks group"
+        mt-5
+    />
 </pre>
 
 
