@@ -27,7 +27,7 @@ export default defineConfig({
             ]
         }),
         ViteRestart({
-            restart: '.vitepress/*.*',
+            restart: '.vitepress/**',
         }),
     ]
 });

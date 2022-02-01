@@ -1,29 +1,23 @@
 <script setup lang="ts">
+import { asyncComputed } from '@vueuse/core';
 import Projects from 'coya-store';
-import { useCoyaStore } from 'coya-store';
+import { fileSystemAssets } from 'coya-store';
 import 'coya-store/dist/style.css';
 
-const store = useCoyaStore();
+const fileAssets = fileSystemAssets();
+const store = fileAssets.store;
 
 const activeConfig = asyncComputed(async () => {
     const text = await store.activeProject.getActiveFileText();
-    return {
+    return text ? {
         value: text,
-        label: store.activeProject.activeFile.name,
-        id: store.activeProject.activeFile.name,
-    };
+        label: store.activeProject.activeFile?.name,
+        id: store.activeProject.activeFile?.name,
+    } : null;
 });
 
 const save = (config: string) => store.activeProject.setActiveFileText(config);
 
-const assets = {
-    create: async (name: string, content: string) => {
-        return await store.activeProject.createAsset(name, content);
-    },
-    load: async (name: string) => {
-        return await store.activeProject.loadAsset(name);
-    },
-};
 
 </script>
 <template>
@@ -33,7 +27,7 @@ const assets = {
             class="row-span-11"
             :config="activeConfig.value"
             :id="activeConfig.id"
-            :assets="assets"
+            :assets="fileAssets.assets"
             @update:config="save"
         >
             <template #left-menu>

@@ -8,6 +8,7 @@ window.Prism.manual = true;
 import Coya from "./../components/Coya.vue";
 import { startSocketClient } from '../socket';
 import App from './../App.vue';
+export * from 'coya-store';
 
 export const FileSystemCoya = App;
 export const startDebugClient = startSocketClient;

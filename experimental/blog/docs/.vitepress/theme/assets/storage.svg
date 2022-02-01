@@ -1,0 +1,72 @@
+<?xml version="1.0" ?><svg
+    viewBox="0 0 32 32"
+    xmlns="http://www.w3.org/2000/svg"
+>
+    <defs>
+        <style>
+            .cls-1 {
+                fill: #d8e1ef;
+            }
+
+            .cls-2 {
+                fill: #0593ff;
+            }
+
+            .cls-3 {
+                fill: #0e6ae0;
+            }
+        </style>
+    </defs>
+    <title />
+    <g
+        data-name="Server Lock"
+        id="Server_Lock"
+    >
+        <path
+            class="cls-1"
+            d="M27,2H5A3,3,0,0,0,2,5V9a1,1,0,0,0,1,1H29a1,1,0,0,0,1-1V5A3,3,0,0,0,27,2Z"
+        />
+        <rect
+            class="cls-1"
+            height="8"
+            rx="1"
+            ry="1"
+            width="28"
+            x="2"
+            y="12"
+        />
+        <path
+            class="cls-1"
+            d="M25,22H3a1,1,0,0,0-1,1v4a3,3,0,0,0,3,3H25a1,1,0,0,0,1-1V23A1,1,0,0,0,25,22Z"
+        />
+        <path
+            class="cls-2"
+            d="M11,17H7a1,1,0,0,1,0-2h4a1,1,0,0,1,0,2Z"
+        />
+        <path
+            class="cls-2"
+            d="M11,7H7A1,1,0,0,1,7,5h4a1,1,0,0,1,0,2Z"
+        />
+        <path
+            class="cls-2"
+            d="M11,27H7a1,1,0,0,1,0-2h4a1,1,0,0,1,0,2Z"
+        />
+        <path
+            class="cls-3"
+            d="M26,18H20a1,1,0,0,1-1-1V15a4,4,0,0,1,8,0v2A1,1,0,0,1,26,18Zm-5-2h4V15a2,2,0,0,0-4,0Z"
+        />
+        <rect
+            class="cls-2"
+            height="14"
+            rx="3"
+            ry="3"
+            width="14"
+            x="16"
+            y="16"
+        />
+        <path
+            class="cls-3"
+            d="M25,22a2,2,0,1,0-3,1.72V25a1,1,0,0,0,2,0V23.72A2,2,0,0,0,25,22Z"
+        />
+    </g>
+</svg>

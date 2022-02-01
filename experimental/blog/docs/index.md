@@ -7,6 +7,8 @@ editLink: true
 import { ref, computed } from 'vue'
 import config1 from './config.coya.json';
 import config2 from './config2.coya.json';
+import config3 from './diagrams/1_all.coya.json';
+import config4 from './diagrams/upswot.demo.coya.json';
 import {useData} from 'vitepress';
 import {useCoyaData} from './.vitepress/theme/useCoyaData.ts';
 
@@ -15,6 +17,8 @@ const { state, setConfig, scaleTo }  = useCoyaData();
 
 const setConfig1 = () => setConfig(config1);
 const setConfig2 = () => setConfig(config2);
+const setConfig3 = () => setConfig(config3);
+const setConfig4 = () => setConfig(config4);
 
 window.addEventListener('hashchange', (e) => {
     if (window.location.hash?.startsWith('#')) {
@@ -30,16 +34,24 @@ Coya component here 🤩
 
 <pre>
     <Button
+        @click="setConfig4()"
+        label="upswot"
+    />
+    <Button
+        @click="setConfig3()"
+        label="Main"
+    />
+    <Button
         @click="scaleTo()"
         label="All"
     />
     <Button
-        @click="scaleTo('block_1')"
-        label="Go to block1"
+        @click="scaleTo('block_26')"
+        label="Go to block_26"
         mt-5
     />
     <Button
-        @click="scaleTo('block_1', 'block_3')"
+        @click="scaleTo('block_23', 'block_25')"
         label="Go to blocks group"
         mt-5
     />

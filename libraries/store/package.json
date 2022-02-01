@@ -2,8 +2,9 @@
   "private": true,
   "name": "coya-store",
   "version": "0.0.0",
+  "main": "dist/coya-store.es.js",
   "module": "dist/coya-store.es.js",
-  "types": "dist/src/libEntry.d.ts",
+  "types": "dist/coya-store.es.d.ts",
   "scripts": {
     "build": "vite build",
     "dev": "vite --port 3334 --open",
@@ -23,6 +24,7 @@
     "nprogress": "^0.2.0",
     "pinia": "^2.0.9",
     "prism-theme-vars": "^0.2.2",
+    "vite-dts": "^1.0.4",
     "vite-plugin-dts": "^0.9.9",
     "vue": "^3.2.26",
     "vue-demi": "^0.12.1",

@@ -6,7 +6,8 @@ import ViteIcons, { ViteIconsResolver } from 'vite-plugin-icons'
 import ViteComponents from 'vite-plugin-components'
 import WindiCSS from 'vite-plugin-windicss'
 import AutoImport from 'unplugin-auto-import/vite'
-import dts from 'vite-plugin-dts';
+// import dts from 'vite-plugin-dts';
+import dts from 'vite-dts';
 
 
 export default defineConfig({
@@ -54,10 +55,11 @@ export default defineConfig({
 
         // https://github.com/antfu/vite-plugin-windicss
         WindiCSS(),
-        dts({
-            include: ["src/**/*.ts", "src/**/*.vue",],
-            logDiagnostics: true,
-        }),
+        // dts({
+        //     include: ["src/**/*.ts", "src/**/*.vue",],
+        //     logDiagnostics: true,
+        // }),
+        dts(),
     ],
 
     server: {
@@ -88,7 +90,7 @@ export default defineConfig({
             }
         },
         lib: {
-            entry: path.resolve(__dirname, "/src/lib/libEntry.ts"),
+            entry: path.join(__dirname, "/src/lib/libEntry.ts"),
             name: "Coya",
             fileName: (format) => `coya.${format}.js`,
             formats: ['es']

@@ -1,0 +1,392 @@
+{
+	"name": "1. All",
+	"blocks": {
+		"block_3": {
+			"label": "block_3",
+			"sourcePhase": 0
+		},
+		"block_4": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_6": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_7": {
+			"label": "block_7",
+			"sourcePhase": 0
+		},
+		"line_1": {
+			"from": "block_7",
+			"to": "block_6",
+			"name": "line_1",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_2": {
+			"from": "block_7",
+			"to": "block_4",
+			"name": "line_2",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_8": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_9": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_10": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_12": {
+			"label": "block_7",
+			"sourcePhase": 0
+		},
+		"line_3": {
+			"from": "block_12",
+			"to": "block_9",
+			"name": "line_3",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_4": {
+			"from": "block_12",
+			"to": "block_8",
+			"name": "line_4",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_5": {
+			"from": "block_12",
+			"to": "block_10",
+			"name": "line_5",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_14": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_6": {
+			"from": "block_7",
+			"to": "block_14",
+			"name": "line_6",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_1": {
+			"label": "block_7",
+			"sourcePhase": 0
+		},
+		"line_7": {
+			"from": "block_1",
+			"to": "block_3",
+			"name": "line_7",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_2": {
+			"label": "block_2",
+			"sourcePhase": 0
+		},
+		"block_5": {
+			"label": "block_2",
+			"sourcePhase": 0
+		},
+		"block_13": {
+			"label": "block_2",
+			"sourcePhase": 0
+		},
+		"block_15": {
+			"label": "block_2",
+			"sourcePhase": 0
+		},
+		"block_16": {
+			"label": "block_2",
+			"sourcePhase": 0
+		},
+		"block_17": {
+			"label": "block_7",
+			"sourcePhase": 0
+		},
+		"line_8": {
+			"from": "block_17",
+			"to": "block_5",
+			"name": "line_8",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_10": {
+			"from": "block_17",
+			"to": "block_13",
+			"name": "line_10",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_9": {
+			"from": "block_17",
+			"to": "block_2",
+			"name": "line_9",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_11": {
+			"from": "block_17",
+			"to": "block_15",
+			"name": "line_11",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_12": {
+			"from": "block_17",
+			"to": "block_16",
+			"name": "line_12",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_13": {
+			"from": "block_15",
+			"to": "block_16",
+			"name": "line_13",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		}
+	},
+	"phases": [],
+	"style": {
+		"blocks": {
+			"_": {
+				"css": {
+					"fontSize": "2.1em",
+					"rx": "49",
+					"border-radius": "10px"
+				}
+			},
+			"block_3": {
+				"position": {
+					"x": "-53.25923156738281",
+					"y": "584.4968872070312",
+					"w": "933.2155914306641",
+					"h": "807.44775390625"
+				},
+				"code": "libEntry.ts",
+				"css": {
+					"fontSize": "19"
+				},
+				"pinTo": "block_1"
+			},
+			"block_4": {
+				"position": {
+					"x": "1484.8281860351562",
+					"y": "681.2940673828125",
+					"w": "1360.6559448242188",
+					"h": "869.635986328125"
+				},
+				"iframe": "https://stackoverflow.com/questions/3809401/what-is-a-good-regular-expression-to-match-a-url",
+				"pinTo": "block_7"
+			},
+			"block_6": {
+				"position": {
+					"x": "-2473.762466430664",
+					"y": "744.5509643554688",
+					"w": "1395.584716796875",
+					"h": "935.173828125"
+				},
+				"iframe": "https://github.com/AlexanderMykulych/coya",
+				"pinTo": "block_7"
+			},
+			"block_7": {
+				"position": {
+					"x": "-2859.3456954956055",
+					"y": "-409.8144836425781",
+					"w": "660.2855224609375",
+					"h": "178.3636474609375"
+				},
+				"label": "These are IFrames",
+				"css": {
+					"fontSize": "108",
+					"fill": "none",
+					"stroke": "none"
+				}
+			},
+			"block_8": {
+				"position": {
+					"x": "-9.55267333984375",
+					"y": "639.0976867675781",
+					"w": "603.57861328125",
+					"h": "889.5779113769531"
+				},
+				"img": "image_26.png",
+				"pinTo": "block_12"
+			},
+			"block_9": {
+				"position": {
+					"x": "-856.9967651367188",
+					"y": "629.2320137023926",
+					"w": "642.4521484375",
+					"h": "900.4100036621094"
+				},
+				"img": "image_27.png",
+				"pinTo": "block_12"
+			},
+			"block_10": {
+				"position": {
+					"x": "721.6948852539062",
+					"y": "642.4390869140625",
+					"w": "718.989013671875",
+					"h": "846.5507202148438"
+				},
+				"img": "image_30.png",
+				"pinTo": "block_12"
+			},
+			"block_11": {
+				"position": {
+					"x": 754.7264404296875,
+					"y": -2148.4580078125,
+					"w": 100,
+					"h": 100
+				},
+				"img": "image_31.png"
+			},
+			"block_12": {
+				"position": {
+					"x": "-1897.0746459960938",
+					"y": "-2547.043701171875",
+					"w": "660.2855224609375",
+					"h": "178.3636474609375"
+				},
+				"label": "These are images",
+				"css": {
+					"fontSize": "108",
+					"fill": "none",
+					"stroke": "none"
+				}
+			},
+			"block_14": {
+				"position": {
+					"x": "-339.2660598754883",
+					"y": "758.5079259872437",
+					"w": "1200.0543899536133",
+					"h": "810.8923425674438"
+				},
+				"iframe": "https://www.youtube.com/embed/9bZkp7q19f0",
+				"pinTo": "block_7"
+			},
+			"block_1": {
+				"position": {
+					"x": "597.5955200195312",
+					"y": "-2524.3837890625",
+					"w": "660.2855224609375",
+					"h": "178.3636474609375"
+				},
+				"label": "This is code",
+				"css": {
+					"fontSize": "108",
+					"fill": "none",
+					"stroke": "none"
+				}
+			},
+			"block_2": {
+				"position": {
+					"x": "-1092.7505264282227",
+					"y": "590.3231201171875",
+					"w": "397.56982421875",
+					"h": "458.8656005859375"
+				},
+				"css": {
+					"stroke": "black",
+					"fill": "#4cb050ff"
+				},
+				"pinTo": "block_17"
+			},
+			"block_5": {
+				"position": {
+					"x": "-1206.5610733032227",
+					"y": "-592.5396728515625",
+					"w": "397.56982421875",
+					"h": "458.8656005859375"
+				},
+				"css": {
+					"stroke": "black",
+					"fill": "#4cb050ff",
+					"fillStyle": "solid"
+				},
+				"pinTo": "block_17"
+			},
+			"block_13": {
+				"position": {
+					"x": "125.06539154052734",
+					"y": "682.8211669921875",
+					"w": "397.56982421875",
+					"h": "458.8656005859375"
+				},
+				"css": {
+					"stroke": "black",
+					"fill": "#4cb050ff",
+					"fillStyle": "cross-hatch"
+				},
+				"pinTo": "block_17"
+			},
+			"block_15": {
+				"position": {
+					"x": "1430.5097274780273",
+					"y": "651.0650634765625",
+					"w": "397.56982421875",
+					"h": "458.8656005859375"
+				},
+				"css": {
+					"stroke": "black",
+					"fill": "#4cb050ff",
+					"fillStyle": "dots"
+				},
+				"pinTo": "block_17"
+			},
+			"block_16": {
+				"position": {
+					"x": "1397.8688583374023",
+					"y": "-692.62451171875",
+					"w": "397.56982421875",
+					"h": "458.8656005859375"
+				},
+				"css": {
+					"stroke": "black",
+					"fill": "#4cb050ff",
+					"fillStyle": "zigzag-line"
+				},
+				"pinTo": "block_17"
+			},
+			"block_17": {
+				"position": {
+					"x": "-5646.411582946777",
+					"y": "-1985.2352294921875",
+					"w": "660.2855224609375",
+					"h": "178.3636474609375"
+				},
+				"label": "These are blocks",
+				"css": {
+					"fontSize": "108",
+					"fill": "none",
+					"stroke": "none"
+				}
+			}
+		}
+	}
+}

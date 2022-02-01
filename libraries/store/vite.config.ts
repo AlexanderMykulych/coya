@@ -13,7 +13,7 @@ import VueI18n from '@intlify/vite-plugin-vue-i18n'
 import Inspect from 'vite-plugin-inspect'
 import Prism from 'markdown-it-prism'
 import LinkAttributes from 'markdown-it-link-attributes'
-import dts from 'vite-plugin-dts'
+import dts from 'vite-dts'
 
 const markdownWrapperClasses = 'prose prose-sm m-auto text-left'
 
@@ -24,6 +24,7 @@ export default defineConfig({
         },
     },
     plugins: [
+        dts(),
         Vue({
             include: [/\.vue$/, /\.md$/],
         }),
@@ -112,7 +113,6 @@ export default defineConfig({
             // change this to enable inspect for debugging
             enabled: false,
         }),
-        dts(),
     ],
 
     server: {
@@ -139,14 +139,6 @@ export default defineConfig({
         ],
     },
 
-    // https://github.com/vitest-dev/vitest
-    test: {
-        include: ['test/**/*.test.ts'],
-        environment: 'jsdom',
-        deps: {
-            inline: ['@vue', '@vueuse', 'vue-demi'],
-        },
-    },
     build: {
         rollupOptions: {
             external: ['vue', 'pinia'],
@@ -158,7 +150,7 @@ export default defineConfig({
             },
         },
         lib: {
-            entry: path.resolve(__dirname, "/src/libEntry.ts"),
+            entry: path.join(__dirname, "/src/libEntry.ts"),
             name: "coya-store",
             fileName: (format) => `coya-store.${format}.js`,
             formats: ['es']

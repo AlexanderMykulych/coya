@@ -1,0 +1,317 @@
+{
+	"name": "2. Vue lifecycle with animation",
+	"blocks": {
+		"start": "",
+		"created": "created"
+	},
+	"phases": [
+		{
+			"newBlock": {
+				"init": "init events & lifecycle"
+			},
+			"connect": {
+				"from": "start",
+				"to": "init"
+			}
+		},
+		{
+			"newBlock": {
+				"initInject": "Init injections & reactivity"
+			},
+			"connect": {
+				"from": "init",
+				"to": "initInject"
+			}
+		},
+		{
+			"newBlock": [
+				{
+					"beforeCreate": "beforeCreate"
+				},
+				{
+					"compile": {
+						"label": "new palette block"
+					}
+				},
+				{
+					"compileEl": {
+						"label": "new palette block"
+					}
+				},
+				{
+					"createApp": {
+						"label": "new palette block"
+					}
+				},
+				{
+					"mounted": {
+						"label": "new palette block"
+					}
+				},
+				{
+					"unmounted": {
+						"label": "new palette block"
+					}
+				},
+				{
+					"virtualRerender": {
+						"label": "new palette block"
+					}
+				},
+				{
+					"has_template_opt": {
+						"label": "new palette block"
+					}
+				},
+				{
+					"created": {
+						"label": "block_1"
+					}
+				}
+			],
+			"connect": [
+				{
+					"from": "line_1_1",
+					"to": "beforeCreate",
+					"name": "line_init_beforeCreate"
+				},
+				{
+					"from": "initInject",
+					"to": "has_template_opt"
+				},
+				{
+					"from": "has_template_opt",
+					"to": "compile"
+				},
+				{
+					"from": "has_template_opt",
+					"to": "compileEl"
+				},
+				{
+					"from": "compile",
+					"to": "createApp"
+				},
+				{
+					"from": "compileEl",
+					"to": "createApp"
+				},
+				{
+					"from": "createApp",
+					"to": "mounted"
+				},
+				{
+					"from": "mounted",
+					"to": "unmounted"
+				},
+				{
+					"from": "mounted",
+					"to": "virtualRerender",
+					"name": "line_1"
+				},
+				{
+					"from": "line_2_10",
+					"to": "created",
+					"name": "line_2"
+				}
+			]
+		}
+	],
+	"style": {
+		"blocks": {
+			"_": {
+				"css": {
+					"color": "#ffffffff",
+					"fill": "#4cb050ff",
+					"fontSize": "2.1em",
+					"rx": "49",
+					"stroke": "black",
+					"fillStyle": "solid",
+					"border-radius": "10px"
+				}
+			},
+			"start": {
+				"position": {
+					"x": "17.748797912597638",
+					"y": "6.809533081054667",
+					"w": "470.69783447265627",
+					"h": "150.3095007324219"
+				},
+				"css": {
+					"fill": "#4cb050ff",
+					"fillStyle": "solid",
+					"fontSize": "1em"
+				},
+				"code": "vue.01.ts"
+			},
+			"init": {
+				"position": {
+					"x": "2.42633056640625",
+					"y": "287.97745422363283",
+					"w": "start.w",
+					"h": "start.h"
+				},
+				"pinTo": "start"
+			},
+			"initInject": {
+				"position": {
+					"x": "6.87646484375",
+					"y": "281.86463073730465",
+					"w": "init.w",
+					"h": "init.h"
+				},
+				"pinTo": "init"
+			},
+			"beforeCreate": {
+				"position": {
+					"x": "-594.7564498901368",
+					"y": "174.5709844970703",
+					"w": "init.w",
+					"h": "66.97213684082033"
+				},
+				"css": {
+					"fill": "none",
+					"color": "red",
+					"stroke": "red"
+				},
+				"pinTo": "init"
+			},
+			"line_init_beforeCreate": {
+				"position": {},
+				"css": {
+					"fill": "none",
+					"stroke": "red",
+					"stroke-dasharray": 3
+				}
+			},
+			"has_template_opt": {
+				"position": {
+					"x": "4.584320068359375",
+					"y": "330.20178894042965",
+					"w": "initInject.w",
+					"h": "start.h"
+				},
+				"css": {
+					"fill": "#3e6b94"
+				},
+				"label": "Has template options",
+				"pinTo": "initInject"
+			},
+			"compile": {
+				"position": {
+					"x": "-974.6979248046875",
+					"y": "219.95169128417967",
+					"w": "has_template_opt.w",
+					"h": "has_template_opt.h"
+				},
+				"css": {
+					"fill": "#3e6b94"
+				},
+				"label": "Compile template into render function",
+				"pinTo": "has_template_opt"
+			},
+			"compileEl": {
+				"position": {
+					"x": "935.623583984375",
+					"y": "230.31021179199206",
+					"w": "compile.w",
+					"h": "compile.h"
+				},
+				"css": {
+					"fill": "#3e6b94"
+				},
+				"label": "Compile el's innerHTML as template",
+				"pinTo": "has_template_opt"
+			},
+			"createApp": {
+				"position": {
+					"x": "16.001007080078125",
+					"y": "455.72773712158187",
+					"w": "has_template_opt.w",
+					"h": "has_template_opt.h"
+				},
+				"css": {},
+				"label": "Create app.$el and append it to el",
+				"pinTo": "has_template_opt"
+			},
+			"mounted": {
+				"position": {
+					"x": "116.21414291381836",
+					"y": "256.45748046874996",
+					"w": "createApp.w/2",
+					"h": "createApp.h"
+				},
+				"css": {},
+				"label": "Mounted",
+				"pinTo": "createApp"
+			},
+			"unmounted": {
+				"position": {
+					"x": "-3.1570281982421875",
+					"y": "321.73018554687496",
+					"w": "mounted.w",
+					"h": "mounted.h"
+				},
+				"css": {
+					"fill": "#3e6b94"
+				},
+				"label": "Unmounted",
+				"pinTo": "mounted"
+			},
+			"virtualRerender": {
+				"position": {
+					"x": "605.9753051757814",
+					"y": "-17.4097900390625",
+					"w": "mounted.w*2",
+					"h": "mounted.h"
+				},
+				"css": {
+					"fill": "#3e6b94"
+				},
+				"label": "Virtual DOM re-rendered and patch",
+				"pinTo": "mounted"
+			},
+			"line_0_1": {
+				"css": {}
+			},
+			"->": {
+				"css": {
+					"fill": "none",
+					"text": {
+						"background-color": "#83c683ff",
+						"padding": "20px",
+						"border-radius": "12px",
+						"color": "white"
+					}
+				}
+			},
+			"created": {
+				"position": {
+					"x": "-594.8689837646484",
+					"y": "195.76747985839847",
+					"w": "beforeCreate.w",
+					"h": "beforeCreate.h"
+				},
+				"css": {
+					"fill": "none",
+					"color": "red",
+					"stroke": "red"
+				},
+				"pinTo": "initInject",
+				"label": "created"
+			},
+			"line_2": {
+				"css": {
+					"fill": "none",
+					"stroke": "red",
+					"stroke-dasharray": 3
+				}
+			},
+			"line_2_11": {
+				"label": "YES"
+			},
+			"line_2_12": {
+				"label": "NO"
+			}
+		}
+	}
+}
