@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Block, BlockStyle, isLineBlockElement, isRectPositioning, Positioning, RectPositioning } from "coya-core";
-import { computed, Ref, Slot, useSlots } from "vue";
+import { computed, Ref, useSlots } from "vue";
 import {getCurrentEditor} from "coya-editor-new";
 import { deepAssign, fastDeepEqual } from "coya-util";
 import coyaRectNode from "./Nodes/CoyaRectNode.vue";

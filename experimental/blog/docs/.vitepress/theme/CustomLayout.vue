@@ -10,6 +10,8 @@ const { Layout } = DefaultTheme;
 
 const { state, setConfig }  = useCoyaData();
 
+const { frontmatter } = useData();
+
 const activeConfig = computed(() => state.config);
 
 window.addEventListener('hashchange', (e) => {
@@ -33,8 +35,10 @@ const assets = staticAssets({
 </script>
 
 <template>
-    <Layout />
-    <div id="coya">
+    <div :class="{'basis-full': !frontmatter.useCoya}">
+        <Layout  />
+    </div>
+    <div v-if="frontmatter.useCoya" id="coya">
         <div v-if="activeConfig" :key="activeConfig.name">
             <Coya
                 :config="activeConfig"
