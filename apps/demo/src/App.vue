@@ -59,7 +59,7 @@ const activeConfig = ref(null);
         </template>
         <template #coya-block_3>
             <p class="pl-5">Ad Networks:</p>
-            <slider class="w-full pr-2 pl-2" v-model="case1.numbs.val2" :max="3000" :step="5"/>
+            <slider class="w-full pr-2 pl-2" v-model="case1.numbs.val3" :max="3000" :step="5"/>
         </template>
         <template #coya-case2_1>
             <p class="pl-5">Value:</p>
