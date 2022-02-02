@@ -353,8 +353,11 @@ const coyaSlots = computed(() =>
                             :defaultArrowStyle="defaultArrowStyle"
                             :positioning="item.pos"
                             :debug="debug"
-                            :component="coyaSlots[item.block.id]"
-                        />
+                        >
+                            <template v-if="!!coyaSlots[item.block.id]">
+                                <slot :name="`coya-${item.block.id}`"></slot>
+                            </template>
+                        </CoyaNode>
                         <template v-if="debug">
                             <rect
                                 :x="item.pos.x"

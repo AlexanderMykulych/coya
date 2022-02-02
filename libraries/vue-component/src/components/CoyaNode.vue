@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Block, BlockStyle, isLineBlockElement, isRectPositioning, Positioning, RectPositioning } from "coya-core";
-import { computed, Ref, Slot } from "vue";
+import { computed, Ref, Slot, useSlots } from "vue";
 import {getCurrentEditor} from "coya-editor-new";
 import { deepAssign, fastDeepEqual } from "coya-util";
 import coyaRectNode from "./Nodes/CoyaRectNode.vue";
@@ -15,8 +15,9 @@ const props = defineProps<{
     defaultArrowStyle?: BlockStyle;
     defaultRectStyle?: BlockStyle;
     disableWrap?: boolean;
-    component?: Slot;
 }>();
+
+const slots = useSlots();
 
 const rectPosition = computed(() => <RectPositioning>props.positioning);
 const isRect = eagerComputed(() => isRectPositioning(props.positioning));
@@ -73,8 +74,11 @@ const preparedStyle = computed(() => calculateStyle());
         :block="block"
         :block-style="preparedStyle"
         :positioning="rectPosition"
-        :component="component"
-    />
+    >
+        <template v-if="!!slots.default">
+            <slot></slot>
+        </template>
+    </CoyaRectNode>
     <DebugNode
         v-if="!!blockDebug"
         :value="blockDebug"

@@ -1,15 +1,16 @@
 <script lang="ts" setup>
 import { asyncComputed } from '@vueuse/core';
 import { Block, BlockStyle, EnterSetting, RectPositioning } from 'coya-core';
-import { computed, onMounted, reactive, ref } from 'vue';
+import { computed, onMounted, reactive, ref, useSlots } from 'vue';
 import { useAssets } from '../../logic/useAssets';
 
 const props = defineProps<{
     block: Block;
     positioning: RectPositioning;
     blockStyle: BlockStyle;
-    component?: Slot;
 }>();
+
+const slots = useSlots();
 
 const { getText, getImgUrl } = useAssets();
 
@@ -119,7 +120,7 @@ const label = computed(() =>props.block.label);
                         "
                         class="w-full h-full flex justify-center items-center"
                     >
-                        <component v-if="!!component" :is="component" />
+                        <slot v-if="!!slots.default" />
                         <Code v-else-if="isCode" :code="blockStyle.code" :label="label" :style="textStyle"/>
                         <iframe
                             v-else-if="isIFrame"
