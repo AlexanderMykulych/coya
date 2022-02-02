@@ -120,7 +120,7 @@ const label = computed(() =>props.block.label);
                         "
                         class="w-full h-full flex justify-center items-center"
                     >
-                        <slot v-if="!!slots.default" />
+                        <slot v-if="!!slots[block.id]" :name="block.id" />
                         <Code v-else-if="isCode" :code="blockStyle.code" :label="label" :style="textStyle"/>
                         <iframe
                             v-else-if="isIFrame"

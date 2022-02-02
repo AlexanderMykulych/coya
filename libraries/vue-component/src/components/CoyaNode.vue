@@ -75,8 +75,8 @@ const preparedStyle = computed(() => calculateStyle());
         :block-style="preparedStyle"
         :positioning="rectPosition"
     >
-        <template v-if="!!slots.default">
-            <slot></slot>
+        <template v-if="!!slots[block.id]" #[block.id]>
+            <slot :name="block.id"></slot>
         </template>
     </CoyaRectNode>
     <DebugNode
