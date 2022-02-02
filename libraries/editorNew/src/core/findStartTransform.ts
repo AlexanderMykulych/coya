@@ -58,18 +58,23 @@ export const getScale = ({ minX, minY, maxX, maxY, svgHeight, svgWidth }) => {
     minY -= deltaY;
     maxX += deltaX;
     maxY += deltaY;
-    const scale1 = svgWidth / (maxX - minX);
-    const scale2 = svgHeight / (maxY - minY);
+    const w = maxX - minX;
+    const h = maxY - minY;
+    const scale1 = svgWidth / w;
+    const scale2 = svgHeight / h;
     const scale = Math.min(scale1, scale2);
+
+    const newW = w * scale;
+    const newH = h * scale;
     return {
-        x: -minX * scale,
-        y: -minY * scale,
+        x: -minX * scale + (svgWidth - newW) / 2,
+        y: -minY * scale + (svgHeight - newH) / 2,
         x1: minX,
         y1: minY,
         x2: maxX,
         y2: maxY,
-        w: maxX - minX,
-        h: maxY - minY,
+        w,
+        h,
         scale,
     };
 }
