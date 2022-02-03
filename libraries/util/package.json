@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.9.19",
   "license": "MIT",
   "main": "dist/coya-util.es.js",
   "typings": "dist/src/index.d.ts",

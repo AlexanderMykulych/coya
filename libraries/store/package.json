@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "coya-store",
-  "version": "0.0.0",
+  "version": "0.9.19",
   "main": "dist/coya-store.es.js",
   "module": "dist/coya-store.es.js",
   "types": "dist/coya-store.es.d.ts",

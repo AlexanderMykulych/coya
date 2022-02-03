@@ -1,5 +1,5 @@
 {
-    "version": "0.9.18",
+    "version": "0.9.19",
     "license": "MIT",
     "main": "dist/coya-core.cjs.js",
     "typings": "dist/src/index.d.ts",
@@ -82,7 +82,7 @@
         "@types/lodash": "^4.14.172",
         "@types/node": "^17.0.8",
         "@vueuse/core": "^7.5.3",
-        "coya-util": "~0.1.0",
+        "coya-util": "~0.9.19",
         "csstype": "^3.0.8",
         "curved-arrows": "^0.1.0",
         "jest": "^27.0.6",
@@ -91,6 +91,6 @@
         "stylis": "^4.0.10",
         "vite": "^2.8.0-beta.3",
         "vue": "^3.2.26",
-        "coya-arrow": "~0.9.18"
+        "coya-arrow": "~0.9.19"
     }
 }

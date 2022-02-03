@@ -1,7 +1,7 @@
 {
     "private": false,
     "name": "coya-arrow",
-    "version": "0.9.18",
+    "version": "0.9.19",
     "main": "dist/coya-arrow.es.js",
     "typings": "dist/src/logic/libEntry.d.ts",
     "module": "dist/coya-arrow.es.js",
