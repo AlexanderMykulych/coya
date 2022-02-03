@@ -121,7 +121,7 @@ class ReactiveEffect {
     if (!this.active) {
       return this.fn();
     }
-    if (!effectStack.includes(this)) {
+    if (!effectStack.length || !effectStack.includes(this)) {
       try {
         effectStack.push(activeEffect = this);
         enableTracking();
@@ -203,7 +203,7 @@ function track(target, type, key) {
   }
   let depsMap = targetMap.get(target);
   if (!depsMap) {
-    targetMap.set(target, depsMap = new Map());
+    targetMap.set(target, depsMap = /* @__PURE__ */ new Map());
   }
   let dep = depsMap.get(key);
   if (!dep) {
@@ -339,6 +339,8 @@ function createGetter(isReadonly2 = false, shallow = false) {
       return !isReadonly2;
     } else if (key === "__v_isReadonly") {
       return isReadonly2;
+    } else if (key === "__v_isShallow") {
+      return shallow;
     } else if (key === "__v_raw" && receiver === (isReadonly2 ? shallow ? shallowReadonlyMap : readonlyMap : shallow ? shallowReactiveMap : reactiveMap).get(target)) {
       return target;
     }
@@ -370,9 +372,14 @@ const set$1 = /* @__PURE__ */ createSetter();
 function createSetter(shallow = false) {
   return function set2(target, key, value, receiver) {
     let oldValue = target[key];
+    if (isReadonly(oldValue) && isRef(oldValue) && !isRef(value)) {
+      return false;
+    }
     if (!shallow && !isReadonly(value)) {
-      value = toRaw(value);
-      oldValue = toRaw(oldValue);
+      if (!isShallow(value)) {
+        value = toRaw(value);
+        oldValue = toRaw(oldValue);
+      }
       if (!isArray$1(target) && isRef(oldValue) && !isRef(value)) {
         oldValue.value = value;
         return true;
@@ -428,7 +435,7 @@ const readonlyHandlers = {
 };
 const toShallow = (value) => value;
 const getProto = (v) => Reflect.getPrototypeOf(v);
-function get$1$1(target, key, isReadonly2 = false, isShallow = false) {
+function get$1$1(target, key, isReadonly2 = false, isShallow2 = false) {
   target = target["__v_raw"];
   const rawTarget = toRaw(target);
   const rawKey = toRaw(key);
@@ -437,7 +444,7 @@ function get$1$1(target, key, isReadonly2 = false, isShallow = false) {
   }
   !isReadonly2 && track(rawTarget, "get", rawKey);
   const { has: has2 } = getProto(rawTarget);
-  const wrap = isShallow ? toShallow : isReadonly2 ? toReadonly : toReactive;
+  const wrap = isShallow2 ? toShallow : isReadonly2 ? toReadonly : toReactive;
   if (has2.call(rawTarget, key)) {
     return wrap(target.get(key));
   } else if (has2.call(rawTarget, rawKey)) {
@@ -514,19 +521,19 @@ function clear() {
   }
   return result;
 }
-function createForEach(isReadonly2, isShallow) {
+function createForEach(isReadonly2, isShallow2) {
   return function forEach(callback, thisArg) {
     const observed = this;
     const target = observed["__v_raw"];
     const rawTarget = toRaw(target);
-    const wrap = isShallow ? toShallow : isReadonly2 ? toReadonly : toReactive;
+    const wrap = isShallow2 ? toShallow : isReadonly2 ? toReadonly : toReactive;
     !isReadonly2 && track(rawTarget, "iterate", ITERATE_KEY);
     return target.forEach((value, key) => {
       return callback.call(thisArg, wrap(value), wrap(key), observed);
     });
   };
 }
-function createIterableMethod(method, isReadonly2, isShallow) {
+function createIterableMethod(method, isReadonly2, isShallow2) {
   return function(...args) {
     const target = this["__v_raw"];
     const rawTarget = toRaw(target);
@@ -534,7 +541,7 @@ function createIterableMethod(method, isReadonly2, isShallow) {
     const isPair = method === "entries" || method === Symbol.iterator && targetIsMap;
     const isKeyOnly = method === "keys" && targetIsMap;
     const innerIterator = target[method](...args);
-    const wrap = isShallow ? toShallow : isReadonly2 ? toReadonly : toReactive;
+    const wrap = isShallow2 ? toShallow : isReadonly2 ? toReadonly : toReactive;
     !isReadonly2 && track(rawTarget, "iterate", isKeyOnly ? MAP_KEY_ITERATE_KEY : ITERATE_KEY);
     return {
       next() {
@@ -672,7 +679,7 @@ function getTargetType(value) {
   return value["__v_skip"] || !Object.isExtensible(value) ? 0 : targetTypeMap(toRawType(value));
 }
 function reactive(target) {
-  if (target && target["__v_isReadonly"]) {
+  if (isReadonly(target)) {
     return target;
   }
   return createReactiveObject(target, false, mutableHandlers, mutableCollectionHandlers, reactiveMap);
@@ -708,6 +715,9 @@ function isReactive(value) {
 function isReadonly(value) {
   return !!(value && value["__v_isReadonly"]);
 }
+function isShallow(value) {
+  return !!(value && value["__v_isShallow"]);
+}
 function toRaw(observed) {
   const raw = observed && observed["__v_raw"];
   return raw ? toRaw(raw) : observed;
@@ -737,23 +747,25 @@ function isRef(r) {
   return Boolean(r && r.__v_isRef === true);
 }
 class ComputedRefImpl {
-  constructor(getter, _setter, isReadonly2) {
+  constructor(getter, _setter, isReadonly2, isSSR) {
     this._setter = _setter;
     this.dep = void 0;
-    this._dirty = true;
     this.__v_isRef = true;
+    this._dirty = true;
     this.effect = new ReactiveEffect(getter, () => {
       if (!this._dirty) {
         this._dirty = true;
         triggerRefValue(this);
       }
     });
+    this.effect.computed = this;
+    this.effect.active = this._cacheable = !isSSR;
     this["__v_isReadonly"] = isReadonly2;
   }
   get value() {
     const self2 = toRaw(this);
     trackRefValue(self2);
-    if (self2._dirty) {
+    if (self2._dirty || !self2._cacheable) {
       self2._dirty = false;
       self2._value = self2.effect.run();
     }
@@ -763,7 +775,7 @@ class ComputedRefImpl {
     this._setter(newValue);
   }
 }
-function computed(getterOrOptions, debugOptions) {
+function computed(getterOrOptions, debugOptions, isSSR = false) {
   let getter;
   let setter;
   const onlyGetter = isFunction$1(getterOrOptions);
@@ -774,7 +786,7 @@ function computed(getterOrOptions, debugOptions) {
     getter = getterOrOptions.get;
     setter = getterOrOptions.set;
   }
-  const cRef = new ComputedRefImpl(getter, setter, onlyGetter || !setter);
+  const cRef = new ComputedRefImpl(getter, setter, onlyGetter || !setter, isSSR);
   return cRef;
 }
 Promise.resolve();
@@ -893,7 +905,7 @@ function doWatch(source, cb, { immediate, deep, onTrack, onTrigger } = {}) {
   stopWatcher.effect = runner;
   return stopWatcher;
 }
-function traverse(value, seen = new Set()) {
+function traverse(value, seen = /* @__PURE__ */ new Set()) {
   if (!isObject$1(value) || seen.has(value))
     return value;
   seen.add(value);
@@ -1127,24 +1139,18 @@ function _mergeNamespaces$1(n, m) {
   });
   return Object.freeze(n);
 }
-var DebugType;
-(function(DebugType2) {
+var DebugType = /* @__PURE__ */ ((DebugType2) => {
   DebugType2["Select"] = "select";
   DebugType2["Line"] = "line";
   DebugType2["StartPhase"] = "start_phase";
-})(DebugType || (DebugType = {}));
-var BlockElementType;
-(function(BlockElementType2) {
+  return DebugType2;
+})(DebugType || {});
+var BlockElementType = /* @__PURE__ */ ((BlockElementType2) => {
   BlockElementType2["Rect"] = "rect";
   BlockElementType2["Line"] = "line";
   BlockElementType2["Highlight"] = "highlight";
-})(BlockElementType || (BlockElementType = {}));
-var PositioningSystem;
-(function(PositioningSystem2) {
-  PositioningSystem2["Default"] = "def";
-  PositioningSystem2["Grid"] = "grid";
-  PositioningSystem2["Dagre"] = "grid";
-})(PositioningSystem || (PositioningSystem = {}));
+  return BlockElementType2;
+})(BlockElementType || {});
 function isConnectActionSetting(obj) {
   if (obj) {
     const connect = obj;
@@ -1158,8 +1164,7 @@ function isHideBlocksActionSetting(obj) {
 function isHasLabel(obj) {
   return !!obj && typeof obj.label === "string";
 }
-var ActionType;
-(function(ActionType2) {
+var ActionType = /* @__PURE__ */ ((ActionType2) => {
   ActionType2["Connect"] = "connect";
   ActionType2["AddNewBlock"] = "newBlock";
   ActionType2["ChangePosition"] = "changePosition";
@@ -1168,24 +1173,21 @@ var ActionType;
   ActionType2["RemoveHighlight"] = "removeHighlight";
   ActionType2["HideBlock"] = "hide";
   ActionType2["ChangeBlockStyle"] = "changeBlockStyle";
-})(ActionType || (ActionType = {}));
-var ChangeType;
-(function(ChangeType2) {
+  ActionType2["Show"] = "show";
+  return ActionType2;
+})(ActionType || {});
+var ChangeType = /* @__PURE__ */ ((ChangeType2) => {
   ChangeType2[ChangeType2["AddNewBlock"] = 0] = "AddNewBlock";
   ChangeType2[ChangeType2["ChangeStyle"] = 1] = "ChangeStyle";
   ChangeType2[ChangeType2["RemoveBlock"] = 2] = "RemoveBlock";
   ChangeType2[ChangeType2["ChangePosition"] = 3] = "ChangePosition";
-})(ChangeType || (ChangeType = {}));
-var ChangeOwnerType;
-(function(ChangeOwnerType2) {
-  ChangeOwnerType2[ChangeOwnerType2["Phase"] = 0] = "Phase";
-  ChangeOwnerType2[ChangeOwnerType2["Editor"] = 1] = "Editor";
-})(ChangeOwnerType || (ChangeOwnerType = {}));
-var MessageCommand;
-(function(MessageCommand2) {
+  return ChangeType2;
+})(ChangeType || {});
+var MessageCommand = /* @__PURE__ */ ((MessageCommand2) => {
   MessageCommand2["Select"] = "select";
   MessageCommand2["Save"] = "save";
-})(MessageCommand || (MessageCommand = {}));
+  return MessageCommand2;
+})(MessageCommand || {});
 function addHighlightActionExecutor(_, action) {
   var _a;
   const val = action.value;
@@ -1356,37 +1358,71 @@ function changeBlockStyleExecutor(_, action) {
     }
   }));
 }
-[{
-  type: ActionType.Connect,
-  executor: connectActionExecutor,
-  debugger: connectActionDebugger,
-  blockRenamer: connectBlockRenamer
-}, {
-  type: ActionType.AddNewBlock,
-  executor: addNewBlockActionExecutor,
-  debugger: addNewBlockActionDebugger,
-  blockRenamer: addNewBlockBlockRenamer
-}, {
-  type: ActionType.ChangePosition,
-  executor: changeBlockPositionActionExecutor
-}, {
-  type: ActionType.ChangeLabel,
-  executor: changeLabelActionExecutor,
-  debugger: changeLabelActionDebugger
-}, {
-  type: ActionType.Highlight,
-  executor: addHighlightActionExecutor
-}, {
-  type: ActionType.RemoveHighlight,
-  executor: removeHighlightActionExecutor
-}, {
-  type: ActionType.HideBlock,
-  executor: hideBlocksActionExecutor,
-  debugger: hideBlocksActionDebugger
-}, {
-  type: ActionType.ChangeBlockStyle,
-  executor: changeBlockStyleExecutor
-}];
+const showActionExecutor = (_, action) => {
+  const val = action.value;
+  return Object.entries(val).map(([key, value]) => ({
+    type: ChangeType.ChangeStyle,
+    setting: {
+      blockId: key,
+      newStyle: {
+        css: {
+          display: value ? void 0 : "none"
+        }
+      }
+    }
+  }));
+};
+const showBlockRenamer = (actionSetting, oldVal, value) => {
+  if (actionSetting[oldVal]) {
+    actionSetting[value] = actionSetting[oldVal];
+    delete actionSetting[oldVal];
+  }
+};
+[
+  {
+    type: ActionType.Connect,
+    executor: connectActionExecutor,
+    debugger: connectActionDebugger,
+    blockRenamer: connectBlockRenamer
+  },
+  {
+    type: ActionType.AddNewBlock,
+    executor: addNewBlockActionExecutor,
+    debugger: addNewBlockActionDebugger,
+    blockRenamer: addNewBlockBlockRenamer
+  },
+  {
+    type: ActionType.ChangePosition,
+    executor: changeBlockPositionActionExecutor
+  },
+  {
+    type: ActionType.ChangeLabel,
+    executor: changeLabelActionExecutor,
+    debugger: changeLabelActionDebugger
+  },
+  {
+    type: ActionType.Highlight,
+    executor: addHighlightActionExecutor
+  },
+  {
+    type: ActionType.RemoveHighlight,
+    executor: removeHighlightActionExecutor
+  },
+  {
+    type: ActionType.HideBlock,
+    executor: hideBlocksActionExecutor,
+    debugger: hideBlocksActionDebugger
+  },
+  {
+    type: ActionType.ChangeBlockStyle,
+    executor: changeBlockStyleExecutor
+  },
+  {
+    type: ActionType.Show,
+    executor: showActionExecutor,
+    blockRenamer: showBlockRenamer
+  }
+];
 function getDefaultExportFromCjs(x) {
   return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, "default") ? x["default"] : x;
 }
@@ -5597,7 +5633,7 @@ var layout_min$1 = { exports: {} };
         Object.defineProperty(e2, "__esModule", { value: true }), e2.Lookup = void 0;
         var r2 = n2(6078), i = function() {
           function t3() {
-            this._map = new Map();
+            this._map = /* @__PURE__ */ new Map();
           }
           return t3.prototype.getMap = function() {
             return this._map;
@@ -5887,7 +5923,7 @@ var layout_min$1 = { exports: {} };
         Object.defineProperty(e2, "__esModule", { value: true }), e2.Request = void 0;
         var r2 = n2(23), i = function() {
           function t3(t4, e3, n3, i2, o) {
-            this.id = r2.id(), this.serviceIdentifier = t4, this.parentContext = e3, this.parentRequest = n3, this.target = o, this.childRequests = [], this.bindings = Array.isArray(i2) ? i2 : [i2], this.requestScope = n3 === null ? new Map() : null;
+            this.id = r2.id(), this.serviceIdentifier = t4, this.parentContext = e3, this.parentRequest = n3, this.target = o, this.childRequests = [], this.bindings = Array.isArray(i2) ? i2 : [i2], this.requestScope = n3 === null ? /* @__PURE__ */ new Map() : null;
           }
           return t3.prototype.addChildRequest = function(e3, n3, r3) {
             var i2 = new t3(e3, this.parentContext, this, n3, r3);
@@ -13335,7 +13371,7 @@ var layout_min$1 = { exports: {} };
             this.constructor = t3;
           }
           c(t3, e3), t3.prototype = e3 === null ? Object.create(e3) : (n2.prototype = e3.prototype, new n2());
-        }), x = new Map(), w = function(e3, n2) {
+        }), x = /* @__PURE__ */ new Map(), w = function(e3, n2) {
           if (x.get(e3) && console.warn("The layout with the name " + e3 + " exists already, it will be overridden"), l(n2)) {
             var r2 = function(t3) {
               function e4(e5) {
@@ -13951,7 +13987,7 @@ var layout_min$1 = { exports: {} };
         }
         var vt = Math.PI * (3 - Math.sqrt(5));
         function gt(t3) {
-          var e3, n2 = 1, r2 = 1e-3, i = 1 - Math.pow(r2, 1 / 300), o2 = 0, a2 = 0.6, u2 = new Map(), s2 = st(l2), c2 = Y("tick", "end"), f2 = function() {
+          var e3, n2 = 1, r2 = 1e-3, i = 1 - Math.pow(r2, 1 / 300), o2 = 0, a2 = 0.6, u2 = /* @__PURE__ */ new Map(), s2 = st(l2), c2 = Y("tick", "end"), f2 = function() {
             let t4 = 1;
             return () => (t4 = (1664525 * t4 + 1013904223) % ht) / ht;
           }();
@@ -23448,7 +23484,7 @@ void main() {
           }, t3.MIN_DIST = 50, t3.DEFAULT_CELL_W = 80, t3.DEFAULT_CELL_H = 80, t3;
         }();
         const ld = fd;
-        var hd = 1e7, dd = 1.5707963267948966, pd = new Map(), vd = 0.8;
+        var hd = 1e7, dd = 1.5707963267948966, pd = /* @__PURE__ */ new Map(), vd = 0.8;
         function gd(t3, e3) {
           var n2 = (pd.get(t3.id) || []).find(function(t4) {
             return t4.source === e3.id || t4.target === e3.id;
@@ -23476,7 +23512,7 @@ void main() {
           return e3;
         }
         function md(t3, e3, n2, r2) {
-          var i = new Map();
+          var i = /* @__PURE__ */ new Map();
           n2.forEach(function(t4, e4) {
             i.set(t4.id, t4);
           });
@@ -24040,7 +24076,7 @@ function sortBy(arr, key) {
 }
 function uniq(arr, cache) {
   if (cache === void 0) {
-    cache = new Map();
+    cache = /* @__PURE__ */ new Map();
   }
   var r = [];
   if (Array.isArray(arr)) {
@@ -24497,7 +24533,7 @@ var memoize = function(f, resolver) {
     cache.set(key, result);
     return result;
   };
-  memoized.cache = new Map();
+  memoized.cache = /* @__PURE__ */ new Map();
   return memoized;
 };
 var MAX_MIX_LEVEL = 5;

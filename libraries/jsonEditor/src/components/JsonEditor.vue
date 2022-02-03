@@ -1,15 +1,12 @@
 <script lang="ts" setup>
 import * as monaco from 'monaco-editor';
-import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker.js?worker&inline';
-import jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker.js?worker&inline';
-import cssWorker from 'monaco-editor/esm/vs/language/css/css.worker.js?worker&inline';
-import { onMounted, ref, shallowRef, watch, computed } from 'vue';
+import * as editorWorker from 'monaco-editor/esm/vs/editor/editor.worker.js?worker&inline';
+import * as cssWorker from 'monaco-editor/esm/vs/language/css/css.worker.js?worker&inline';
+import * as jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker.js?worker&inline';
+import { onMounted, ref, shallowRef, watch } from 'vue';
 import { configureEditor } from './configureEditor';
-import { useDebouncedRef } from './widgets/useDebounceRef';
-import { debounce } from 'debounce';
-import { JsonAstRow, WidgetFilter } from './WidgetConfig';
+import { WidgetFilter } from './WidgetConfig';
 import { fastDeepEqual, whatChanged } from 'coya-util';
-import { map } from 'cypress/types/bluebird';
 
 const props = defineProps<{
     modelValue: any;
