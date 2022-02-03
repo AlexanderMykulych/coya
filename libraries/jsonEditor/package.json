@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "coya-json-editor",
-  "version": "0.9.18",
+  "version": "0.9.19",
   "module": "dist/coya-json-editor.es.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production vite build --debug",
@@ -16,7 +16,7 @@
     "@types/debounce": "^1.2.1",
     "@vueuse/core": "^7.5.3",
     "@vueuse/head": "^0.7.4",
-    "coya-util": "~0.1.0",
+    "coya-util": "~0.9.19",
     "debounce": "^1.2.1",
     "json-to-ast": "^2.1.0",
     "monaco-editor": "^0.30.1",

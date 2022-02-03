@@ -20,8 +20,8 @@
         "vue-demi": "^0.12.1",
         "vue-i18n": "^9.1.9",
         "vue-router": "^4.0.12",
-        "coya-core": "~0.9.18",
-        "coya-vue-component": "~0.9.18"
+        "coya-core": "~0.9.19",
+        "coya-vue-component": "~0.9.19"
     },
     "devDependencies": {
         "@antfu/eslint-config": "^0.16.0",

@@ -12,7 +12,7 @@
     {
         "policyName": "main",
         "definitionName": "lockStepVersion",
-        "version": "0.9.18",
+        "version": "0.9.19",
         "nextBump": "patch",
         "mainProject": "coya-core"
       }
