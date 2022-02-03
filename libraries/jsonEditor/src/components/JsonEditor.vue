@@ -1,8 +1,5 @@
 <script lang="ts" setup>
 import * as monaco from 'monaco-editor';
-import * as editorWorker from 'monaco-editor/esm/vs/editor/editor.worker.js?worker&inline';
-import * as cssWorker from 'monaco-editor/esm/vs/language/css/css.worker.js?worker&inline';
-import * as jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker.js?worker&inline';
 import { onMounted, ref, shallowRef, watch } from 'vue';
 import { configureEditor } from './configureEditor';
 import { WidgetFilter } from './WidgetConfig';
@@ -18,17 +15,6 @@ const props = defineProps<{
 const emit = defineEmits(['changeAttr', 'set-editor', 'set-editor-config', 'update:modelValue']);
 const editorEl = ref(null);
 
-self.MonacoEnvironment = {
-    getWorker(_, label) {
-        if (label === 'json') {
-            return new jsonWorker();
-        }
-        if (label === 'css' || label === 'scss' || label === 'less') {
-            return new cssWorker();
-        }
-        return new editorWorker();
-    },
-};
 const editor = shallowRef<monaco.editor.IStandaloneCodeEditor | null>(null);
 
 const jsonValue = ref(JSON.stringify(props.modelValue, null, '\t'));
