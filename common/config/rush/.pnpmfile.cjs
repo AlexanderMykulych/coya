@@ -13,9 +13,6 @@
  * "rush update --full" so that PNPM will recalculate all version selections.
  */
 module.exports = {
-  hooks: {
-    readPackage
-  }
 };
 
 /**
