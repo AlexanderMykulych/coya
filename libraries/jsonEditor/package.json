@@ -1,5 +1,5 @@
 {
-  "private": true,
+  "private": false,
   "name": "coya-json-editor",
   "version": "0.9.18",
   "module": "dist/coya-json-editor.es.js",

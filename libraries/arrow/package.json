@@ -1,5 +1,5 @@
 {
-    "private": true,
+    "private": false,
     "name": "coya-arrow",
     "version": "0.9.18",
     "main": "dist/coya-arrow.es.js",
