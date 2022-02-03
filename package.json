@@ -11,6 +11,10 @@
         "vue": "cd \"./libraries/vue-component/\" && pnpm dev",
         "editor": "cd \"./libraries/editorNew/\" && pnpm dev",
         "blog": "cd \"./experimental/blog/\" && pnpm dev",
-        "tsa": "cd \"./libraries/cli/typescript-analizer/\" && pnpm test"
+        "tsa": "cd \"./libraries/cli/typescript-analizer/\" && pnpm test",
+        "prepare": "husky install"
+    },
+    "devDependencies": {
+        "husky": "^7.0.0"
     }
 }
