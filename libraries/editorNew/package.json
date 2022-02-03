@@ -1,6 +1,6 @@
 {
   "name": "coya-editor-new",
-  "version": "0.9.19",
+  "version": "0.9.20",
   "module": "dist/coya-editor.es.js",
   "scripts": {
     "dev": "vite --host",
@@ -10,10 +10,10 @@
   "dependencies": {
     "@types/debounce": "^1.2.1",
     "@vueuse/core": "^7.5.3",
-    "coya-arrow": "~0.9.19",
-    "coya-core": "~0.9.19",
-    "coya-json-editor": "~0.9.19",
-    "coya-util": "~0.9.19",
+    "coya-arrow": "~0.9.20",
+    "coya-core": "~0.9.20",
+    "coya-json-editor": "~0.9.20",
+    "coya-util": "~0.9.20",
     "debounce": "^1.2.1",
     "dom-to-image": "^2.6.0",
     "unplugin-auto-import": "^0.5.10",
