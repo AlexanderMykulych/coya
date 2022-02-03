@@ -58,16 +58,25 @@ const paths = computed(() => {
     return rc.value.toPaths(rc.value.path(path.value, cssStyle.value));
 });
 
+const arrowPaths = computed(() => {
+    if (!rc.value) {
+        return;
+    }
+    return rc.value
+        .toPaths(
+            rc.value
+                .path(
+                    `M0 ${-meta.value.arrowHeadSize} L${meta.value.arrowHeadSize * 2} 0 L0 ${meta.value.arrowHeadSize}`,
+                    cssStyle.value
+                )
+        );
+});
 </script>
 
 <template>
     <g :style="cssStyle" ref="gEl">
         <path v-for="path in paths" v-bind="path"/>
-        <polyline
-            :points="`0,${-meta.arrowHeadSize} ${meta.arrowHeadSize * 2},0, 0,${meta.arrowHeadSize}`"
-            :transform="`translate(${metaResult.x2}, ${metaResult.y2}) rotate(${metaResult.ae})`"
-            :style="cssStyle"
-        />
+        <path v-for="path in arrowPaths" v-bind="path" :transform="`translate(${metaResult.x2}, ${metaResult.y2}) rotate(${metaResult.ae})`"/>
         
         <Text
             :css="cssStyle"
