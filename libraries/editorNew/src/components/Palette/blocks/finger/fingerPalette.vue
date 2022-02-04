@@ -3,5 +3,5 @@
 </script>
 
 <template>
-    <i-tabler:hand-finger />
+  <i-tabler:hand-finger />
 </template>

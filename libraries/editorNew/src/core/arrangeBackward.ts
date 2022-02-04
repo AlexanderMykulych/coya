@@ -1,9 +1,9 @@
-import { ArchitectureDescription } from "coya-core";
+import type { ArchitectureDescription } from 'coya-core';
 
 export const arrangeBackward = (blockId: string | undefined, config: ArchitectureDescription) => {
-    if (!blockId && config?.blocks) {
+    if (!blockId && config?.blocks)
         return;
-    }
+
     const entries = Object.entries(config.blocks);
     const firstEntry = entries[0];
     const blockEntryIndex = entries.findIndex(x => x[0] === blockId);
@@ -15,9 +15,9 @@ export const arrangeBackward = (blockId: string | undefined, config: Architectur
     config.blocks = Object.fromEntries(entries);
 };
 export const arrangeForward = (blockId: string | undefined, config: ArchitectureDescription) => {
-    if (!blockId && config?.blocks) {
+    if (!blockId && config?.blocks)
         return;
-    }
+
     const entries = Object.entries(config.blocks);
     const lastEntry = entries[entries.length - 1];
     const blockEntryIndex = entries.findIndex(x => x[0] === blockId);

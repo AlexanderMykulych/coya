@@ -1,19 +1,21 @@
 <script lang="ts" setup>
-import {
+import type {
     BlockElementDescription,
-    BlockElementType,
     LinePositioning,
     Positioning,
     RectPositioning,
+} from 'coya-core';
+import {
+    BlockElementType,
 } from 'coya-core';
 import { computed } from 'vue';
 import { EditorMode, PinType } from '../../core/types';
 import { useCurrentEditorState } from '../../core/useCurrentEditorState';
 
 const props = defineProps<{
-    position: Positioning;
-    block: BlockElementDescription;
-    hidePins: boolean;
+    position: Positioning
+    block: BlockElementDescription
+    hidePins: boolean
 }>();
 const emit = defineEmits(['pinPress']);
 const padding = 10;
@@ -101,28 +103,28 @@ const clickPin = (pinType: PinType) => emit('pinPress', pinType);
 </script>
 
 <template>
-    <rect
-        :x="preparedPosition.x"
-        :y="preparedPosition.y"
-        :width="preparedPosition.w"
-        :height="preparedPosition.h"
-        fill="#00d0ff4a"
-        stroke="black"
-        stroke-dasharray="5 5"
-    />
-    <rect
-        v-if="!hidePins"
-        v-for="(pin, index) in pins"
-        :key="index"
-        :x="pin.x"
-        :y="pin.y"
-        :width="pinW"
-        :height="pinW"
-        fill="white"
-        stroke="black"
-        :class="pin.class"
-        @mousedown="clickPin(pin.type)"
-    />
+  <rect
+    :x="preparedPosition.x"
+    :y="preparedPosition.y"
+    :width="preparedPosition.w"
+    :height="preparedPosition.h"
+    fill="#00d0ff4a"
+    stroke="black"
+    stroke-dasharray="5 5"
+  />
+  <rect
+    v-for="(pin, index) in pins"
+    v-if="!hidePins"
+    :key="index"
+    :x="pin.x"
+    :y="pin.y"
+    :width="pinW"
+    :height="pinW"
+    fill="white"
+    stroke="black"
+    :class="pin.class"
+    @mousedown="clickPin(pin.type)"
+  />
 </template>
 
 <style>

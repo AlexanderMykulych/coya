@@ -1,36 +1,35 @@
-import { computed, reactive, ref } from "vue";
-import { CurrentEditorState, Editor, getCurrentEditor, MakeChangeAction } from ".";
-import { Action, ActionType, BlockElementDescription, BlockStyle, isArray } from "coya-core";
-import { isNotNullOrUndefined, isNullOrUndefined } from "coya-util";
-import { executeActions } from "coya-core";
-import { ArchitectureDescription } from "coya-core";
-import { applyPositioning } from "coya-core";
-import { renameBlock } from "./renameBlock";
-import { debounce } from "debounce";
-import { prepareNum } from "./prepareNum";
-import { reconnectArrow } from "./reconnectArrow";
-import { LayoutConfig } from "../components/AppMenu/layouts";
-import { removeBlockById } from "./removeBlockById";
-import { findStartTransform, findTransform } from "./findStartTransform";
-import { set } from "./set";
-import { createComputed } from "./createComputed";
-import { isWebUrl } from "./isWebUrl";
-import { arrangeBackward, arrangeForward } from "./arrangeBackward";
-import { createSharedComposable, tryOnScopeDispose } from "@vueuse/core";
-import { lib } from "./domToImage";
+import { computed, reactive, ref } from 'vue';
+import type { ArchitectureDescription, BlockElementDescription, BlockStyle } from 'coya-core';
+import { Action, ActionType, applyPositioning, executeActions, isArray } from 'coya-core';
+import { isNotNullOrUndefined, isNullOrUndefined } from 'coya-util';
+import { debounce } from 'debounce';
+import { createSharedComposable, tryOnScopeDispose } from '@vueuse/core';
+import type { LayoutConfig } from '../components/AppMenu/layouts';
+import { renameBlock } from './renameBlock';
+import { reconnectArrow } from './reconnectArrow';
+import { removeBlockById } from './removeBlockById';
+import { findStartTransform, findTransform } from './findStartTransform';
+import { set } from './set';
+import { createComputed } from './createComputed';
+import { isWebUrl } from './isWebUrl';
+import { arrangeBackward, arrangeForward } from './arrangeBackward';
+import { prepareNum } from './prepareNum';
+import { lib } from './domToImage';
+import { getCurrentEditor } from '.';
+import type { CurrentEditorState, Editor, MakeChangeAction } from '.';
 
 export function useCurrentEditorState(): CurrentEditorState {
     const editor = getCurrentEditor();
     return useEditorState(editor);
 }
-let editorsState: Array<{editor: Editor, composable: () => CurrentEditorState,}> = [];
+let editorsState: Array<{ editor: Editor; composable: () => CurrentEditorState }> = [];
 export function useEditorState(editor: Editor): CurrentEditorState {
     const item = editorsState.find(x => x.editor === editor);
     if (!item) {
         const composable = createSharedComposable(() => _useEditorState(editor));
         editorsState.push({
             editor,
-            composable
+            composable,
         });
         tryOnScopeDispose(() => editorsState = editorsState.filter(x => x.editor !== editor));
         return composable();
@@ -43,24 +42,27 @@ function _useEditorState(editor: Editor): CurrentEditorState {
             if (editor.architecture?.currentPhase === null) {
                 executeActions(diagram, actions.map((x, index) => ({
                     actionId: index,
-                    action: x.action
+                    action: x.action,
                 })), 0);
-            } else {
+            }
+            else {
                 const phaseConfig = diagram.phases?.[editor.architecture.currentPhase];
                 if (phaseConfig) {
                     actions
                         .filter(x => !x.applyChangesToDiagram)
                         .forEach(({ action }) => {
-                            if (!!phaseConfig[action.name]) {
+                            if (phaseConfig[action.name]) {
                                 if (isArray(phaseConfig[action.name])) {
                                     phaseConfig[action.name].push(action.value);
-                                } else {
+                                }
+                                else {
                                     phaseConfig[action.name] = [
                                         phaseConfig[action.name],
-                                        action.value
+                                        action.value,
                                     ];
                                 }
-                            } else {
+                            }
+                            else {
                                 phaseConfig[action.name] = action.value;
                             }
                         });
@@ -71,36 +73,40 @@ function _useEditorState(editor: Editor): CurrentEditorState {
                             .filter(x => x.applyChangesToDiagram)
                             .map((x, index) => ({
                                 actionId: index,
-                                action: x.action
+                                action: x.action,
                             })),
-                        0
+                        0,
                     );
                 }
             }
         };
         const blockId = computed(() => editor.state.selectedNodeIds?.[0]);
-        const configActiveNode = computed(() => !!blockId.value ? ({
-            style: computed({
-                get: () => editor.config.style?.blocks?.[blockId.value],
-                set: val => editor.config.style.blocks[blockId.value] = val,
-            }),
-            block: computed({
-                get: () => editor.config?.blocks?.[blockId.value],
-                set: val => editor.config.blocks[blockId.value] = val
-            }),
-        }) : null);
-        const initConfigActiveNode = computed(() => !!blockId.value ? ({
-            style: computed({
-                get: () => editor.initialConfig.style?.blocks?.[blockId.value],
-                set: val => editor.initialConfig.style.blocks[blockId.value] = val,
-            }),
-            block: computed({
-                get: () => editor.initialConfig?.blocks?.[blockId.value],
-                set: val => editor.initialConfig.blocks[blockId.value] = val
-            }),
-        }) : null);
+        const configActiveNode = computed(() => blockId.value
+            ? ({
+                style: computed({
+                    get: () => editor.config.style?.blocks?.[blockId.value],
+                    set: val => editor.config.style.blocks[blockId.value] = val,
+                }),
+                block: computed({
+                    get: () => editor.config?.blocks?.[blockId.value],
+                    set: val => editor.config.blocks[blockId.value] = val,
+                }),
+            })
+            : null);
+        const initConfigActiveNode = computed(() => blockId.value
+            ? ({
+                style: computed({
+                    get: () => editor.initialConfig.style?.blocks?.[blockId.value],
+                    set: val => editor.initialConfig.style.blocks[blockId.value] = val,
+                }),
+                block: computed({
+                    get: () => editor.initialConfig?.blocks?.[blockId.value],
+                    set: val => editor.initialConfig.blocks[blockId.value] = val,
+                }),
+            })
+            : null);
         const getBlockRealPosition = (blockId: string) => editor.architecture?.style?.positioning?.find(x => x.blockId === blockId)?.position;
-        
+
         const selectNode = (id: string) => editor.state.selectedNodeIds = [id];
         const activeNode = reactive({
             name: computed({
@@ -111,11 +117,11 @@ function _useEditorState(editor: Editor): CurrentEditorState {
                         renameBlock(editor.initialConfig, blockId.value, val);
                         selectNode(val);
                     }
-                }, 800)
+                }, 800),
             }),
             ...createComputed(
                 configActiveNode,
-                [configActiveNode, initConfigActiveNode,],
+                [configActiveNode, initConfigActiveNode],
                 [
                     ['style.value.position.x', prepareNum],
                     ['style.value.position.y', prepareNum],
@@ -134,57 +140,59 @@ function _useEditorState(editor: Editor): CurrentEditorState {
                     'style.value.iframe',
                     'style.value.code',
                     'style.value.img',
-                ]
+                ],
             ),
             label: computed({
                 get: () =>
                     configActiveNode.value?.style?.value?.label
                     ?? (
-                        typeof configActiveNode.value?.block.value === "string"
+                        typeof configActiveNode.value?.block.value === 'string'
                             ? configActiveNode.value?.block.value
                             : null
                     )
                     ?? configActiveNode.value?.block.value?.label,
                 set: (val: string | null) => {
-                    if (typeof configActiveNode.value?.block.value === "string") {
-                        set(configActiveNode.value, "block.value", val);
-                        set(initConfigActiveNode.value, "block.value", val);
-                    } else if (typeof configActiveNode.value?.style?.value?.label) {
-                        set(configActiveNode.value, "style.value.label", val);
-                        set(initConfigActiveNode.value, "style.value.label", val);
-                    } else if (typeof configActiveNode.value?.block.value.label) {
-                        set(configActiveNode.value, "block.value.label", val);
-                        set(initConfigActiveNode.value, "block.value.label", val);
+                    if (typeof configActiveNode.value?.block.value === 'string') {
+                        set(configActiveNode.value, 'block.value', val);
+                        set(initConfigActiveNode.value, 'block.value', val);
                     }
-                }
+                    else if (typeof configActiveNode.value?.style?.value?.label) {
+                        set(configActiveNode.value, 'style.value.label', val);
+                        set(initConfigActiveNode.value, 'style.value.label', val);
+                    }
+                    else if (typeof configActiveNode.value?.block.value.label) {
+                        set(configActiveNode.value, 'block.value.label', val);
+                        set(initConfigActiveNode.value, 'block.value.label', val);
+                    }
+                },
             }),
             from: computed({
                 get: () => configActiveNode.value?.block.value?.from,
-                set: debounce(val => {
+                set: debounce((val) => {
                     if (blockId.value) {
                         reconnectArrow(
                             editor.config,
                             editor.initialConfig,
                             blockId.value,
                             val,
-                            "from",
+                            'from',
                         );
                     }
-                }, 800)
+                }, 800),
             }),
             to: computed({
                 get: () => configActiveNode.value?.block.value?.to,
-                set: debounce(val => {
+                set: debounce((val) => {
                     if (blockId.value) {
                         reconnectArrow(
                             editor.config,
                             editor.initialConfig,
                             blockId.value,
                             val,
-                            "to",
+                            'to',
                         );
                     }
-                }, 800)
+                }, 800),
             }),
         });
 
@@ -196,13 +204,13 @@ function _useEditorState(editor: Editor): CurrentEditorState {
             makeChangeToDiagram(editor.initialConfig, actions);
             editor.architecture.toPhase(editor.architecture.currentPhase);
         };
-        const getNewUniqBlockName = (prefix: string = 'block_') => {
+        const getNewUniqBlockName = (prefix = 'block_') => {
             let index = 1;
             const getName = () => `${prefix}${index}`;
             let name = getName();
             const isBlockExist = (name: string) =>
-                Object.keys(editor.architecture.style?.blocks || {}).some(x => x === name) ||
-                editor.architecture?.blocks.some((x: any) => x.id === name);
+                Object.keys(editor.architecture.style?.blocks || {}).includes(name)
+                || editor.architecture?.blocks.some((x: any) => x.id === name);
             while (isBlockExist(name)) {
                 index++;
                 name = getName();
@@ -216,10 +224,12 @@ function _useEditorState(editor: Editor): CurrentEditorState {
                     action: {
                         name: ActionType.AddNewBlock,
                         value: {
-                            [blockName]: isNullOrUndefined(block) ? blockName : {
-                                label: blockName,
-                                ...block
-                            },
+                            [blockName]: isNullOrUndefined(block)
+                                ? blockName
+                                : {
+                                    label: blockName,
+                                    ...block,
+                                },
                         },
                     },
                 },
@@ -234,7 +244,7 @@ function _useEditorState(editor: Editor): CurrentEditorState {
                 },
             ]);
             return blockName;
-        }
+        };
         return {
             isOneNodeSelected: computed(() => !!blockId.value),
             initPhases: computed({
@@ -242,22 +252,22 @@ function _useEditorState(editor: Editor): CurrentEditorState {
                 set: debounce((val: any) => {
                     editor.config.phases = val;
                     editor.initialConfig.phases = val;
-                }, 400)
+                }, 400),
             }),
             phases: computed(() => {
                 let index = 0;
                 return {
-                    items: editor.config.phases?.map(group => {
+                    items: editor.config.phases?.map((group) => {
                         return Object
                             .keys(group)
                             .map(phaseKey => ({
                                 phaseKey,
                                 config: group[phaseKey],
-                                index: index++
+                                index: index++,
                             }));
                     }),
-                    totalCount: index + 1
-                }
+                    totalCount: index + 1,
+                };
             }),
             activeNode,
             activeBlockSetting: computed(() => blockId.value ? editor.config.blocks?.[blockId.value] : null),
@@ -274,7 +284,7 @@ function _useEditorState(editor: Editor): CurrentEditorState {
             getNewUniqBlockName,
             selectedNode: computed({
                 get: () => editor.state.selectedNodeIds?.[0],
-                set: (val) => !!val ? selectNode(val) : null,
+                set: val => val ? selectNode(val) : null,
             }),
             showDebugWindow: computed({
                 get: () => editor.showDebugWindow,
@@ -286,18 +296,18 @@ function _useEditorState(editor: Editor): CurrentEditorState {
                     ...layout.config,
                     activeEl: blockId.value,
                 });
-                editor.initialConfig.style = JSON.parse(JSON.stringify(editor.config.style))
+                editor.initialConfig.style = JSON.parse(JSON.stringify(editor.config.style));
             },
             getBlockRealPosition,
             removeBlock: (id?: string) => {
-                if (isNullOrUndefined(id)) {
+                if (isNullOrUndefined(id))
                     id = blockId.value;
-                }
+
                 if (id) {
                     editor.state.selectedNodeIds = [];
-                    if (editor.state.hover?.hoveredBlockId === id) {
+                    if (editor.state.hover?.hoveredBlockId === id)
                         editor.state.hover = null;
-                    }
+
                     removeBlockById(editor.config, editor.architecture, id);
                     removeBlockById(editor.initialConfig, editor.architecture, id);
                 }
@@ -315,36 +325,35 @@ function _useEditorState(editor: Editor): CurrentEditorState {
                 const history = editor.history;
                 const length = history.items.length;
                 if (isNullOrUndefined(history.current)) {
-                    if (length > 0) {
+                    if (length > 0)
                         history.current = 1;
-                    }
-                } else if (length >= history.current + 1) {
+                }
+                else if (length >= history.current + 1) {
                     history.current++;
                 }
             },
             redoChange: () => {
                 const history = editor.history;
                 const length = history.items.length;
-                if (isNullOrUndefined(history.current)) {
+                if (isNullOrUndefined(history.current))
                     return;
-                }
-                if (history.current > 1) {
+
+                if (history.current > 1)
                     history.current--;
-                } else if (history.current === 1) {
+                else if (history.current === 1)
                     history.current = undefined;
-                }
             },
             diagramRect,
             scaleToStart: (blocks?: string[]) => {
                 let rect = diagramRect.value;
-                if (isNotNullOrUndefined(blocks)) {
+                if (isNotNullOrUndefined(blocks))
                     rect = findTransform(editor.architecture, editor.svg, blocks);
-                }
+
                 editor.zoomState.translate.x = rect.x;
                 editor.zoomState.translate.y = rect.y;
                 editor.zoomState.scale = rect.scale;
             },
-            copy: async () => {
+            copy: async() => {
                 if (blockId.value) {
                     const activeBlockPos = getBlockRealPosition(blockId.value);
                     const pinTo = configActiveNode.value?.style?.value?.pinTo;
@@ -356,7 +365,7 @@ function _useEditorState(editor: Editor): CurrentEditorState {
                         y -= pinBlockPos.y;
                     }
                     const data = JSON.stringify({
-                        type: "coya/block",
+                        type: 'coya/block',
                         block: {
                             value: configActiveNode.value?.block?.value,
                             style: {
@@ -365,33 +374,34 @@ function _useEditorState(editor: Editor): CurrentEditorState {
                                     ...configActiveNode.value?.style?.value?.position,
                                     x,
                                     y,
-                                }
+                                },
                             },
                         },
                     });
                     await navigator.clipboard.write([
                         new ClipboardItem({
-                            "text/plain": new Blob([data], {type: 'text/plain'})
+                            'text/plain': new Blob([data], { type: 'text/plain' }),
                         }),
                     ]);
                 }
             },
-            paste: async () => {
+            paste: async() => {
                 const clipItems = await navigator.clipboard.read();
-                clipItems?.forEach(item => {
-                    item.types.forEach(async type => {
+                clipItems?.forEach((item) => {
+                    item.types.forEach(async(type) => {
                         const itemData = await item.getType(type);
                         switch (type) {
-                            case "text/plain":
+                            case 'text/plain':
                                 const dataStr = await itemData.text();
                                 try {
                                     const data = JSON.parse(dataStr);
-                                    if (data && data.type === "coya/block") {
+                                    if (data && data.type === 'coya/block') {
                                         const blockName = addNewBlock(data.block.style, data.block.value);
                                         selectNode(blockName);
                                     }
                                     return;
-                                } catch { }
+                                }
+                                catch { }
                                 if (isWebUrl(dataStr)) {
                                     addNewBlock({
                                         position: {
@@ -414,10 +424,10 @@ function _useEditorState(editor: Editor): CurrentEditorState {
                                         h: 100,
                                     },
                                 }, {
-                                    label: dataStr
+                                    label: dataStr,
                                 });
                                 break;
-                            case "image/png":
+                            case 'image/png':
                                 const imgArray = await itemData.arrayBuffer();
                                 const name = await editor.assets.create({
                                     name: 'image',
@@ -433,15 +443,15 @@ function _useEditorState(editor: Editor): CurrentEditorState {
                                         h: 100,
                                     },
                                     img: name,
-                                }, {label: ""});
+                                }, { label: '' });
                                 break;
                             default:
-                                console.log(`type: ${type} is not supported! Sorry:(`)
+                                console.log(`type: ${type} is not supported! Sorry:(`);
                         }
-                    })
-                })
+                    });
+                });
 
-                console.log("paste:", clipItems);
+                console.log('paste:', clipItems);
             },
             addNewBlock,
             arrangeBackward: (id?: string) => {
@@ -460,11 +470,11 @@ function _useEditorState(editor: Editor): CurrentEditorState {
                     editor.state.isViewMode = val;
                 },
             }),
-            saveToImage: async () => {
-                var scale = 4;
+            saveToImage: async() => {
+                const scale = 4;
                 const png = await lib.toPng(editor.svg, {
                     prepareNode: (node: Element) => {
-                        const workEl = node.getElementsByClassName("coya-work-el");
+                        const workEl = node.getElementsByClassName('coya-work-el');
                         const translate = `translate(${diagramRect.value.x} ${diagramRect.value.y}) scale(${diagramRect.value.scale})`;
                         if (workEl && workEl.length > 0) {
                             workEl[0].style.transform = '';
@@ -472,12 +482,11 @@ function _useEditorState(editor: Editor): CurrentEditorState {
                         }
                         const container = document.createElement('div');
                         container.append(node);
-                        const elements = container.getElementsByClassName("editor-svg");
+                        const elements = container.getElementsByClassName('editor-svg');
                         for (let i = 0; i < elements.length; i++) {
                             const el = elements.item(i);
-                            if (el) {
+                            if (el)
                                 el.remove();
-                            }
                         }
                         return container;
                     },
@@ -485,23 +494,20 @@ function _useEditorState(editor: Editor): CurrentEditorState {
                     height: editor.svg!.clientHeight * scale,
                     style: {
                         transform: `scale(${scale})`,
-                        transformOrigin: 'top left'
-                    }
+                        transformOrigin: 'top left',
+                    },
                 });
-                var a = document.createElement('a');
+                const a = document.createElement('a');
                 a.href = png;
-                a.id = "tempAtoDelete"
+                a.id = 'tempAtoDelete';
                 a.download = `${editor.config?.name ?? 'coya_img'}.png`;
                 document.body.appendChild(a);
                 a.click();
-                let aToDelete = document.getElementById("tempAtoDelete");
-                if (aToDelete) {
+                const aToDelete = document.getElementById('tempAtoDelete');
+                if (aToDelete)
                     document.body.removeChild(aToDelete);
-                }
             },
         };
     }
-    throw "no editor state";
+    throw 'no editor state';
 }
-
-

@@ -1,22 +1,22 @@
-import { ArchitectureDescription, BlockElementType } from "coya-core";
-import { isNotNullOrUndefined } from "coya-util";
-import { replaceBlock } from "./replaceBlock";
+import type { ArchitectureDescription } from 'coya-core';
+import { BlockElementType } from 'coya-core';
+import { isNotNullOrUndefined } from 'coya-util';
+import { replaceBlock } from './replaceBlock';
 
 export const renameBlock = (architecture: ArchitectureDescription, oldVal: string, value: string) => {
     const toDeleteActions: any[] = [];
     if (isNotNullOrUndefined(architecture.blocks[oldVal])) {
         architecture.blocks[value] = architecture.blocks[oldVal];
         Object.values(architecture.blocks)
-            .forEach(x => {
+            .forEach((x) => {
                 if (!!x?.type && x.type === BlockElementType.Line) {
-                    if (x.to === oldVal) {
+                    if (x.to === oldVal)
                         x.to = value;
-                    }
-                    if (x.from === oldVal) {
+
+                    if (x.from === oldVal)
                         x.from = value;
-                    }
                 }
-            })
+            });
         toDeleteActions.push(() => delete architecture.blocks[oldVal]);
     }
     replaceBlock(architecture, oldVal, value);
@@ -29,5 +29,4 @@ export const renameBlock = (architecture: ArchitectureDescription, oldVal: strin
         }
     }
     toDeleteActions.forEach(x => x());
-}
-
+};

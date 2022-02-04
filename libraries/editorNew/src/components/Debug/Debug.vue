@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { ref, reactive, computed } from 'vue';
-import { useCurrentEditorState } from '../../core/useCurrentEditorState';
+import { computed, reactive, ref } from 'vue';
 import JsonEditor from 'coya-json-editor';
+import { useCurrentEditorState } from '../../core/useCurrentEditorState';
 import 'coya-json-editor/dist/style.css';
 
 const {
@@ -31,7 +31,7 @@ const obj = computed(() => {
         case 'zoom':
             return {
                 transform: zoomState.value,
-                rect: diagramRect.value
+                rect: diagramRect.value,
             };
         case 'config':
             return activeConfig.value;
@@ -49,16 +49,16 @@ const obj = computed(() => {
 </script>
 
 <template>
-    <div class="border-2 rounded-md p-3 bg-white h-full flex flex-col">
-        <div class="flex flex-row">
-            <i-ph:rectangle-bold class="mr-2" @click="tab = 'block'" />
-            <i-ic:baseline-mouse @click="tab = 'mouse'" />
-            <i-icon-park-outline:zoom @click="tab = 'zoom'" />
-            <i-mdi:family-tree @click="tab = 'config'" />
-            <i-grommet-icons:document-config @click="tab = 'initConfig'" />
-            <i-grommet-icons:document-config @click="tab = 'arch'" />
-            <i-ic:outline-history @click="tab = 'history'" />
-        </div>
-        <JsonEditor :config="jsonEditorConfig" :modelValue="obj" />
+  <div class="border-2 rounded-md p-3 bg-white h-full flex flex-col">
+    <div class="flex flex-row">
+      <i-ph:rectangle-bold class="mr-2" @click="tab = 'block'" />
+      <i-ic:baseline-mouse @click="tab = 'mouse'" />
+      <i-icon-park-outline:zoom @click="tab = 'zoom'" />
+      <i-mdi:family-tree @click="tab = 'config'" />
+      <i-grommet-icons:document-config @click="tab = 'initConfig'" />
+      <i-grommet-icons:document-config @click="tab = 'arch'" />
+      <i-ic:outline-history @click="tab = 'history'" />
     </div>
+    <JsonEditor :config="jsonEditorConfig" :model-value="obj" />
+  </div>
 </template>

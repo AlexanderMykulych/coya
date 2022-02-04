@@ -3,5 +3,5 @@
 </script>
 
 <template>
-    <i-mdi:arrow-top-left-thin />
+  <i-mdi:arrow-top-left-thin />
 </template>

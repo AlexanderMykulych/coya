@@ -1,3 +1,3 @@
-declare module vue {
-    
+declare namespace vue {
+
 }

@@ -1,13 +1,14 @@
 <script lang="ts" setup>
 import { computed, onMounted, onScopeDispose, ref } from 'vue';
+import { useDebounce } from '@vueuse/core';
 import { useCurrentEditorState } from '../../core/useCurrentEditorState';
-import { Predef, PredefBlock, PredefCategory } from './../PredefinedSetting/PredefinedSetting';
+import type { PredefBlock } from './../PredefinedSetting/PredefinedSetting';
+import { Predef, PredefCategory } from './../PredefinedSetting/PredefinedSetting';
 import { onWheelHorScroll } from './onWheelHorScroll';
-import {useDebounce} from '@vueuse/core';
 
 const props = defineProps<{
-    preparedPredefs: PredefBlock[];
-    config: any;
+    preparedPredefs: PredefBlock[]
+    config: any
 }>();
 
 const { activeNode } = useCurrentEditorState();
@@ -25,27 +26,26 @@ const selectCategory = (category: string) => {
 };
 
 const filteredPredefs = computed(() => {
-    if (activeCategory.value) {
+    if (activeCategory.value)
         return props.preparedPredefs?.filter((x: any) => x.category === activeCategory.value);
-    }
+
     return props.preparedPredefs;
 });
 const debouncedPredef = useDebounce(filteredPredefs, 400);
 
 const applyPredef = (predef: PredefBlock) => {
     activeNode.css = {
-        ...predef.item.blockStyle.css
+        ...predef.item.blockStyle.css,
     };
 };
 </script>
 
 <template>
-    <div class="flex flex-nowrap h-full space-x-2 items-center">
-        <template v-if="showCategory">
-            <div
-                @wheel.stop.prevent="onWheelHorScroll"
-                ref="scrollEl"
-                class="
+  <div class="flex flex-nowrap h-full space-x-2 items-center">
+    <template v-if="showCategory">
+      <div
+        ref="scrollEl"
+        class="
                     pl-5
                     pr-5
                     flex flex-nowrap
@@ -58,11 +58,12 @@ const applyPredef = (predef: PredefBlock) => {
                     scrollbar-track-gray-100
                     css-widget-scrollbar
                 "
-            >
-                <div
-                    v-for="category in categories"
-                    style="min-width: 100px; height: 90%;"
-                    class="
+        @wheel.stop.prevent="onWheelHorScroll"
+      >
+        <div
+          v-for="category in categories"
+          style="min-width: 100px; height: 90%;"
+          class="
                         h-full
                         flex
                         justify-center
@@ -71,25 +72,25 @@ const applyPredef = (predef: PredefBlock) => {
                         bg-white
                         shadow-lg
                     "
-                    @click="selectCategory(category.key)"
-                >
-                    <div class="flex flex-col justify-center">
-                        <span
-                        class="text-center text-gray-600 underline-solid">
-                            {{ category.name }}
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </template>
-        <template v-else>
-            <button @click="showCategory = true">
-                <i-ph:arrow-square-left-fill />
-            </button>
-            <div
-                @wheel.stop.prevent="onWheelHorScroll"
-                ref="scrollEl"
-                class="
+          @click="selectCategory(category.key)"
+        >
+          <div class="flex flex-col justify-center">
+            <span
+              class="text-center text-gray-600 underline-solid"
+            >
+              {{ category.name }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </template>
+    <template v-else>
+      <button @click="showCategory = true">
+        <i-ph:arrow-square-left-fill />
+      </button>
+      <div
+        ref="scrollEl"
+        class="
                     flex flex-nowrap
                     space-x-2
                     h-full
@@ -100,27 +101,28 @@ const applyPredef = (predef: PredefBlock) => {
                     scrollbar-track-gray-100
                     css-widget-scrollbar
                 "
+        @wheel.stop.prevent="onWheelHorScroll"
+      >
+        {{ !debouncedPredef || debouncedPredef.length === 0 ? "Comming soon..." : "" }}
+        <template v-for="predef in debouncedPredef" :key="predef.name">
+          <div style="min-width: 200px" @click.stop.prevent="applyPredef(predef)">
+            <svg
+              width="90%"
+              height="90%"
+              :viewBox="`0 0 ${predef?.item?.positioning?.w} ${predef?.item?.positioning?.h}`"
             >
-                {{!debouncedPredef || debouncedPredef.length === 0 ? "Comming soon..." : "" }}
-                <template v-for="predef in debouncedPredef" :key="predef.name">
-                    <div style="min-width: 200px" @click.stop.prevent="applyPredef(predef)">
-                        <svg
-                            width="90%"
-                            height="90%"
-                            :viewBox="`0 0 ${predef?.item?.positioning?.w} ${predef?.item?.positioning?.h}`"
-                        >
-                            <slot
-                                v-if="config.path === 'css'"
-                                name="preview"
-                                :key="predef.name"
-                                :item="predef.item"
-                            ></slot>
-                        </svg>
-                    </div>
-                </template>
-            </div>
+              <slot
+                v-if="config.path === 'css'"
+                :key="predef.name"
+                name="preview"
+                :item="predef.item"
+              />
+            </svg>
+          </div>
         </template>
-    </div>
+      </div>
+    </template>
+  </div>
 </template>
 
 <style scoped>

@@ -1,4 +1,5 @@
-import { Architecture, ArchitectureDescription, BlockElementType } from 'coya-core';
+import type { Architecture, ArchitectureDescription } from 'coya-core';
+import { BlockElementType } from 'coya-core';
 import { isNotNullOrUndefined } from 'coya-util';
 import { replaceBlock } from './replaceBlock';
 
@@ -7,18 +8,17 @@ export const removeBlockById = (
     realArch: Architecture,
     blockId: string,
 ) => {
-    
     if (architecture.blocks) {
         Object.entries(architecture.blocks)
             .filter(
                 ([key, val]) =>
-                    val?.type === BlockElementType.Line &&
-                    (val.from === blockId || val.to === blockId) &&
-                    key !== blockId,
+                    val?.type === BlockElementType.Line
+                    && (val.from === blockId || val.to === blockId)
+                    && key !== blockId,
             )
             .forEach(([key]) => removeBlockById(architecture, realArch, key));
     }
-    
+
     if (architecture.style?.blocks) {
         Object.entries(architecture.style.blocks)
             .forEach(([key, value]) => {
@@ -32,11 +32,11 @@ export const removeBlockById = (
                 }
             });
     }
-    if (isNotNullOrUndefined(architecture.blocks[blockId])) {
+    if (isNotNullOrUndefined(architecture.blocks[blockId]))
         delete architecture.blocks[blockId];
-    }
-    if (architecture.style?.blocks?.[blockId]) {
+
+    if (architecture.style?.blocks?.[blockId])
         delete architecture.style?.blocks?.[blockId];
-    }
+
     replaceBlock(architecture, blockId, '_');
 };

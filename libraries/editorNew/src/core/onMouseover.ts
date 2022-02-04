@@ -1,10 +1,10 @@
-import { EnabledEditor } from "./types";
+import type { EnabledEditor } from './types';
 
-export function onMouseover(editor: EnabledEditor, { attrs }: { attrs: any; }, event: MouseEvent) {
+export function onMouseover(editor: EnabledEditor, { attrs }: { attrs: any }, event: MouseEvent) {
     editor.state.hover = {
-        hoveredBlockId: attrs.block.id
+        hoveredBlockId: attrs.block.id,
     };
 }
-export function onMouseleave(editor: EnabledEditor, { attrs }: { attrs: any; }, event: MouseEvent) {
+export function onMouseleave(editor: EnabledEditor, { attrs }: { attrs: any }, event: MouseEvent) {
     editor.state.hover = null;
 }

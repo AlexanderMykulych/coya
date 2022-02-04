@@ -1,13 +1,13 @@
 <script lang="ts" setup>
-import { RectPositioning } from "coya-core";
-import { computed, ref } from "vue";
-import { useCurrentEditorState } from "../../core/useCurrentEditorState";
+import type { RectPositioning } from 'coya-core';
+import { computed, ref } from 'vue';
+import { useCurrentEditorState } from '../../core/useCurrentEditorState';
 
 const props = defineProps<{
-    position: RectPositioning,
+    position: RectPositioning
     id: string
 }>();
-const $emit = defineEmits(["click", "mousedown"]);
+const $emit = defineEmits(['click', 'mousedown']);
 const padding = 20;
 
 const { state, activeNode } = useCurrentEditorState();
@@ -19,7 +19,6 @@ const preparedPosition = computed(() => ({
     h: Number(props.position.h) + padding * 2,
 }));
 
-
 const rectPos = computed(() => ({
     x: preparedPosition.value.x,
     y: preparedPosition.value.y,
@@ -28,31 +27,30 @@ const rectPos = computed(() => ({
 }));
 
 const hovered = ref(false);
-const fill = computed(() => hovered.value ? "rgb(0, 0, 0, 0.1)" : "rgb(0, 0, 0, 0)");
+const fill = computed(() => hovered.value ? 'rgb(0, 0, 0, 0.1)' : 'rgb(0, 0, 0, 0)');
 
 const isPinBlock = computed(() => activeNode.pinTo === props.id);
 </script>
 
 <template>
-    <rect
-        :x="rectPos.x"
-        :y="rectPos.y"
-        :width="rectPos.w"
-        :height="rectPos.h"
-        :fill="fill"
-        @mouseover="hovered = true"
-        @mouseleave="hovered = false"
-        @click="$emit('click', $event)"
-        @mousedown="$emit('mousedown', $event)"
-    />
-    <i-ph:push-pin-fill
-        v-if="isPinBlock"
-        :x="position.x"
-        :y="position.y"
-        width="35"
-        height="35"
-    ></i-ph:push-pin-fill>
-    
+  <rect
+    :x="rectPos.x"
+    :y="rectPos.y"
+    :width="rectPos.w"
+    :height="rectPos.h"
+    :fill="fill"
+    @mouseover="hovered = true"
+    @mouseleave="hovered = false"
+    @click="$emit('click', $event)"
+    @mousedown="$emit('mousedown', $event)"
+  />
+  <i-ph:push-pin-fill
+    v-if="isPinBlock"
+    :x="position.x"
+    :y="position.y"
+    width="35"
+    height="35"
+  />
 </template>
 
 <style>

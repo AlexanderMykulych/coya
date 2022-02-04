@@ -1,9 +1,9 @@
-import { inject } from "vue";
-import { Editor } from "./types";
+import { inject } from 'vue';
+import type { Editor } from './types';
 
 export function getCurrentEditor() {
-    const editor: Editor = inject<Editor>("coya-editor", {
-        enable: false
+    const editor: Editor = inject<Editor>('coya-editor', {
+        enable: false,
     });
     return editor;
 }

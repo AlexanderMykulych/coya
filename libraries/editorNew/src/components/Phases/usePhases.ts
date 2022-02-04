@@ -1,6 +1,6 @@
-import { isNotNullOrUndefined, isNullOrUndefined } from "coya-util";
-import { computed } from "vue";
-import { useCurrentEditorState } from "../../core/useCurrentEditorState";
+import { isNotNullOrUndefined, isNullOrUndefined } from 'coya-util';
+import { computed } from 'vue';
+import { useCurrentEditorState } from '../../core/useCurrentEditorState';
 
 export function usePhases() {
     const { phases, architecture, initPhases } = useCurrentEditorState();
@@ -9,35 +9,33 @@ export function usePhases() {
     const isLastPhaseActive = computed(() => phaseCount.value && currentPhase.value === phaseCount.value - 1);
     const isStartPhaseActive = computed(() => isNullOrUndefined(currentPhase.value));
     const setCurrentPhase = (index: number | null) => {
-        if (isNotNullOrUndefined(index) && index < 0) {
+        if (isNotNullOrUndefined(index) && index < 0)
             index = null;
-        }
+
         architecture!.toPhase(index);
     };
     const setNextPhase = () => {
         const index = currentPhase.value;
         if (isNotNullOrUndefined(index)) {
-            if (isNotNullOrUndefined(phaseCount.value) && phaseCount.value - 1 > index) {
+            if (isNotNullOrUndefined(phaseCount.value) && phaseCount.value - 1 > index)
                 setCurrentPhase(index + 1);
-            }
-        } else {
+        }
+        else {
             setCurrentPhase(0);
         }
-    }
+    };
     const setPrevPhase = () => {
         const index = currentPhase.value;
-        if (isNotNullOrUndefined(index)) {
+        if (isNotNullOrUndefined(index))
             setCurrentPhase(index - 1);
-        }
-    }
+    };
     const setLastPhase = () => {
-        if (phaseCount.value) {
+        if (phaseCount.value)
             setCurrentPhase(phaseCount.value - 1);
-        }
-    }
+    };
     const addNewPhase = (afterPhaseIndex?: number) => {
         initPhases.value?.splice((afterPhaseIndex ?? initPhases.value.length) + 1, 0, {});
-    }
+    };
 
     return {
         setCurrentPhase,

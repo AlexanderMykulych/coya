@@ -1,25 +1,24 @@
-import { onScopeDispose, reactive, watch } from "vue";
-import { getMousePosition } from "./getMousePosition";
-import { SvgRef, MouseState } from "./types";
-
+import { onScopeDispose, reactive, watch } from 'vue';
+import { getMousePosition } from './getMousePosition';
+import type { MouseState, SvgRef } from './types';
 
 export function useSvgMouse(svg: SvgRef) {
     const mouse = reactive<MouseState>({
         position: {
             x: 0,
-            y: 0
+            y: 0,
         },
         pressed: false,
         pressedPosition: {
             x: 0,
-            y: 0
+            y: 0,
         },
         leave: true,
         palette: {
-            pressed: false
-        }
+            pressed: false,
+        },
     });
-    watch(() => svg.value, svgEl => {
+    watch(() => svg.value, (svgEl) => {
         if (svgEl) {
             const onMouseMoveListener = (event: MouseEvent) => {
                 const { x, y } = getMousePosition(svgEl, event);
@@ -42,15 +41,15 @@ export function useSvgMouse(svg: SvgRef) {
                 mouse.leave = true;
             };
 
-            svgEl.addEventListener("mousemove", onMouseMoveListener);
-            svgEl.addEventListener("mousedown", onMouseDownListener);
-            svgEl.addEventListener("mouseup", onMouseUpListener);
-            svgEl.addEventListener("mouseleave", onMouseLeaveListener);
+            svgEl.addEventListener('mousemove', onMouseMoveListener);
+            svgEl.addEventListener('mousedown', onMouseDownListener);
+            svgEl.addEventListener('mouseup', onMouseUpListener);
+            svgEl.addEventListener('mouseleave', onMouseLeaveListener);
             onScopeDispose(() => {
-                svgEl.removeEventListener("mousemove", onMouseMoveListener);
-                svgEl.removeEventListener("mousedown", onMouseDownListener);
-                svgEl.removeEventListener("mouseup", onMouseUpListener);
-                svgEl.removeEventListener("mouseleave", onMouseLeaveListener);
+                svgEl.removeEventListener('mousemove', onMouseMoveListener);
+                svgEl.removeEventListener('mousedown', onMouseDownListener);
+                svgEl.removeEventListener('mouseup', onMouseUpListener);
+                svgEl.removeEventListener('mouseleave', onMouseLeaveListener);
             });
         }
     }, { immediate: true });

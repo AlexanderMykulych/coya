@@ -1,11 +1,11 @@
-import { RectPositioning } from "coya-core";
-import { EnabledEditor } from "./types";
-import { PinType } from ".";
+import type { RectPositioning } from 'coya-core';
+import type { EnabledEditor } from './types';
+import { PinType } from '.';
 
 export function calculatePinDragResult(editor: EnabledEditor): RectPositioning {
-    if (!editor.state.drag) {
+    if (!editor.state.drag)
         return {};
-    }
+
     const { x, y } = editor!.mouseState.position;
     const init = editor.state.drag.originPosition;
     switch (editor.state.pins.selectedPinType) {

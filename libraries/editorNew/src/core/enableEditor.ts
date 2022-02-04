@@ -1,16 +1,17 @@
-import { ActionType, Change, makeChange, AssetConfig } from "coya-core";
-import { effectScope, onScopeDispose, provide, reactive, ref, watch, computed, markRaw } from "vue";
-import { EnabledEditor, EnableEditorParameters } from "./types";
-import { wrapEditorNode } from "./wrapEditorNode";
-import editorComponent from "../components/editorComponent.vue";
-import { useSvgMouse } from "./useSvgMouse";
-import { useEditorState } from "./useCurrentEditorState";
-import { getMousePosition } from "./getMousePosition";
-import { EditorMode } from ".";
-import { debouncedWatch, useMagicKeys } from "@vueuse/core";
-import { listenHotKeys } from "./listenHotKeys";
-import { deepCopy, isNotNullOrUndefined, setValueByPath, whatChanged } from "coya-util";
-import { findStartTransform } from "./findStartTransform";
+import type { Change } from 'coya-core';
+import { ActionType, AssetConfig, makeChange } from 'coya-core';
+import { computed, effectScope, markRaw, onScopeDispose, provide, reactive, ref, watch } from 'vue';
+import { debouncedWatch, useMagicKeys } from '@vueuse/core';
+import { deepCopy, isNotNullOrUndefined, setValueByPath, whatChanged } from 'coya-util';
+import editorComponent from '../components/editorComponent.vue';
+import type { EnableEditorParameters, EnabledEditor } from './types';
+import { wrapEditorNode } from './wrapEditorNode';
+import { useSvgMouse } from './useSvgMouse';
+import { useEditorState } from './useCurrentEditorState';
+import { getMousePosition } from './getMousePosition';
+import { listenHotKeys } from './listenHotKeys';
+import { findStartTransform } from './findStartTransform';
+import { EditorMode } from '.';
 
 export function enableEditor({ svg, config, id, initialConfig, architecture, workEl, assets }: EnableEditorParameters) {
     const scope = effectScope();
@@ -18,9 +19,9 @@ export function enableEditor({ svg, config, id, initialConfig, architecture, wor
         const editor: EnabledEditor = reactive<EnabledEditor>({
             id,
             enable: true,
-            wrap: (node) => wrapEditorNode(editor, node),
+            wrap: node => wrapEditorNode(editor, node),
             state: {
-                pins: {}
+                pins: {},
             },
             svg: svg as any,
             workEl: (workEl || svg) as any,
@@ -44,7 +45,7 @@ export function enableEditor({ svg, config, id, initialConfig, architecture, wor
         listenSvgEvents(editor);
         listenHotKeys(editor);
         enableHistory(editor);
-        provide("coya-editor", editor);
+        provide('coya-editor', editor);
         return editor;
     });
     return editor;
@@ -52,7 +53,7 @@ export function enableEditor({ svg, config, id, initialConfig, architecture, wor
 
 function listenSvgEvents(editor: EnabledEditor) {
     const { makeChange, getNewUniqBlockName, addNewBlock } = useEditorState(editor);
-    watch(() => editor.svg, svgEl => {
+    watch(() => editor.svg, (svgEl) => {
         if (svgEl) {
             const onMouseClickListener = (_: MouseEvent) => {
                 editor.state.selectedNodeIds = undefined;
@@ -65,27 +66,26 @@ function listenSvgEvents(editor: EnabledEditor) {
                             x: x - 150,
                             y: y - 50,
                             w: 300,
-                            h: 100
+                            h: 100,
                         },
                     });
                 }
             };
-            svgEl.addEventListener("click", onMouseClickListener);
+            svgEl.addEventListener('click', onMouseClickListener);
 
-            svgEl.addEventListener("dblclick", onDblClick);
+            svgEl.addEventListener('dblclick', onDblClick);
 
             onScopeDispose(() => {
-                svgEl.removeEventListener("click", onMouseClickListener);
-                svgEl.removeEventListener("dblclick", onDblClick);
+                svgEl.removeEventListener('click', onMouseClickListener);
+                svgEl.removeEventListener('dblclick', onDblClick);
             });
         }
     }, { immediate: true });
 
-    watch(() => editor.workEl, val => {
-        if (val) {
+    watch(() => editor.workEl, (val) => {
+        if (val)
             enableZoom(editor, val);
-        }
-    }, { immediate: true })
+    }, { immediate: true });
     watch(() => editor.state.arrowState?.end, (val, oldVal) => {
         if (val && !oldVal && editor.state.arrowState && editor.state.arrowState.start) {
             makeChange({
@@ -94,15 +94,14 @@ function listenSvgEvents(editor: EnabledEditor) {
                     value: {
                         from: editor.state.arrowState.start,
                         to: val,
-                        name: getNewUniqBlockName("line_"),
+                        name: getNewUniqBlockName('line_'),
                     },
-                }
+                },
             });
             editor.state.arrowState = null;
             editor.state.mode = EditorMode.None;
         }
     });
-
 }
 
 export function enableHistory(editor: EnabledEditor) {
@@ -123,7 +122,7 @@ export function enableHistory(editor: EnabledEditor) {
                 editor.history.current = undefined;
             }
             editor.history.items.push({
-                type: "changes",
+                type: 'changes',
                 changes,
             });
             lastItem = deepCopy(val);
@@ -136,12 +135,12 @@ export function enableHistory(editor: EnabledEditor) {
     watch(() => editor.history.current, (val, oldVal) => {
         let index = editor.history.items.length - (val === undefined ? 0 : val);
         const isRedo = val === undefined || (oldVal !== undefined && val < oldVal);
-        if (isRedo) {
+        if (isRedo)
             index -= 1;
-        }
+
         if (index >= 0 && index < editor.history.items.length) {
             const { changes } = editor.history.items[index];
-            changes.forEach(change => {
+            changes.forEach((change) => {
                 const appliedVal = isRedo ? change.val : change.oldVal;
                 setFromHistory = true;
                 setValueByPath(editor.initialConfig, appliedVal, change.fullPath);
@@ -149,19 +148,19 @@ export function enableHistory(editor: EnabledEditor) {
             });
         }
     }, {
-        flush: "sync",
+        flush: 'sync',
     });
 }
 function enableZoom(editor: EnabledEditor, zoomElement: SVGGraphicsElement) {
     const svg = editor.svg;
-    if (!svg) {
+    if (!svg)
         return;
-    }
-    var scrollSensitivity = 0.3;
+
+    const scrollSensitivity = 0.3;
     const startTransform = findStartTransform(editor.architecture, svg);
     const translate = reactive({
         x: startTransform.x,
-        y: startTransform.y
+        y: startTransform.y,
     });
     const scale = ref(startTransform.scale);
     const minScale = 0.01;
@@ -173,13 +172,14 @@ function enableZoom(editor: EnabledEditor, zoomElement: SVGGraphicsElement) {
         const oldScale = scale.value;
         if (Math.abs(event.wheelDeltaY) > 100 && event.wheelDeltaX === 0) {
             const newScale = oldScale + Math.sign(event.wheelDelta) * scrollSensitivity;
-            if (newScale <= minScale || newScale >= maxScale) {
+            if (newScale <= minScale || newScale >= maxScale)
                 return;
-            }
+
             scale.value = newScale;
             translate.x = (translate.x - x) * scale.value / oldScale + x;
             translate.y = (translate.y - y) * scale.value / oldScale + y;
-        } else {
+        }
+        else {
             const newX = event.deltaX;
             const newY = event.deltaY;
             translate.x = (translate.x - newX) * 1;
@@ -187,7 +187,7 @@ function enableZoom(editor: EnabledEditor, zoomElement: SVGGraphicsElement) {
         }
     };
     const mouseState = editor.mouseState;
-    watch(() => mouseState.position, val => {
+    watch(() => mouseState.position, (val) => {
         if (
             mouseState.pressed
             && mouseState.pressedPosition
@@ -200,7 +200,7 @@ function enableZoom(editor: EnabledEditor, zoomElement: SVGGraphicsElement) {
         }
     }, { deep: true });
 
-    svg["onmousewheel"] = (e) => {
+    svg.onmousewheel = (e) => {
         e.preventDefault();
         zoom(e);
     };
@@ -209,10 +209,9 @@ function enableZoom(editor: EnabledEditor, zoomElement: SVGGraphicsElement) {
         translate,
         scale,
     });
-    watch(() => transform.value, val => {
-        zoomElement.setAttribute("transform", val);
+    watch(() => transform.value, (val) => {
+        zoomElement.setAttribute('transform', val);
     }, {
         immediate: true,
     });
 }
-

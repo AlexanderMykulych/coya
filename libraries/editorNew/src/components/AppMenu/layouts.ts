@@ -1,14 +1,14 @@
-import { PositioningDefaults, PositioningStrategy } from "coya-core";
+import type { PositioningDefaults, PositioningStrategy } from 'coya-core';
 export interface LayoutConfig {
-    name: string;
-    type: PositioningStrategy;
-    config: Partial<PositioningDefaults>;
+    name: string
+    type: PositioningStrategy
+    config: Partial<PositioningDefaults>
 }
 const dagreDef = {
     ranksep: 100,
     nodesep: 100,
     workerEnabled: true,
-}
+};
 const treeDef = {
     getHeight: function getHeight() {
         return 200;
@@ -22,73 +22,73 @@ const treeDef = {
     getHGap: function getHGap() {
         return 100;
     },
-}
+};
 export const layouts: LayoutConfig[] = [{
-    name: "dagre1",
-    type: "Dagre",
-    config: {
-        layout: {
-            ...dagreDef
-        }
-    }
-}, {
-    name: "dagre2",
-    type: "Dagre",
+    name: 'dagre1',
+    type: 'Dagre',
     config: {
         layout: {
             ...dagreDef,
-            rankdir: "LR",
-        }
-    }
+        },
+    },
 }, {
-    name: "grid",
-    type: "Grid",
+    name: 'dagre2',
+    type: 'Dagre',
+    config: {
+        layout: {
+            ...dagreDef,
+            rankdir: 'LR',
+        },
+    },
+}, {
+    name: 'grid',
+    type: 'Grid',
     config: {
         layout: {
             ...dagreDef,
             preventOverlap: true,
             nodeSize: 550,
-        }
-    }
+        },
+    },
 }, {
-    name: "CompactBox",
-    type: "CompactBox",
+    name: 'CompactBox',
+    type: 'CompactBox',
     config: {
         layout: {
-            ...treeDef
-        }
-    }
+            ...treeDef,
+        },
+    },
 }, {
-    name: "Dendrogram",
-    type: "Dendrogram",
+    name: 'Dendrogram',
+    type: 'Dendrogram',
     config: {
         layout: {
-            ...treeDef
-        }
-    }
+            ...treeDef,
+        },
+    },
 }, {
-    name: "Indented",
-    type: "Indented",
+    name: 'Indented',
+    type: 'Indented',
     config: {
         layout: {
-            ...treeDef
-        }
-    }
+            ...treeDef,
+        },
+    },
 }, {
-    name: "Mindmap",
-    type: "Mindmap",
+    name: 'Mindmap',
+    type: 'Mindmap',
     config: {
         layout: {
-            ...treeDef
-        }
-    }
+            ...treeDef,
+        },
+    },
 }, {
-    name: "Random",
-    type: "Random",
+    name: 'Random',
+    type: 'Random',
     config: {
         layout: {
             width: 3000,
             height: 3000,
-        }
-    }
-},]
+        },
+    },
+}];

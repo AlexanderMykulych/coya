@@ -2,5 +2,5 @@
 </script>
 
 <template>
-    <i-cil:rectangle />
+  <i-cil:rectangle />
 </template>

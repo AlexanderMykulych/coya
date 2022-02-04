@@ -1,13 +1,13 @@
 <script lang="ts" setup>
-import { getCurrentEditor } from '../core';
 import { computed, onScopeDispose, reactive, ref, watch } from 'vue';
+import { getCurrentEditor } from '../core';
+import { useCurrentEditorState } from '../core/useCurrentEditorState';
 import Palette from './Palette/Palette.vue';
 import Phases from './Phases/Phases.vue';
 import PhasesJson from './Phases/PhasesJson.vue';
 import NodeSetting from './NodeSetting/NodeSetting.vue';
 import AppMenu from './AppMenu/AppMenu.vue';
 import Debug from './Debug/Debug.vue';
-import { useCurrentEditorState } from '../core/useCurrentEditorState';
 import 'coya-json-editor/dist/style.css';
 
 const teleportEl = ref(null);
@@ -43,9 +43,9 @@ if (editor.enable) {
     watch(
         () => editor.svg,
         (svg) => {
-            if (!svg) {
+            if (!svg)
                 return;
-            }
+
             calculateSvgSize(svg);
             const resizer = new ResizeObserver(() => {
                 calculateSvgSize(svg);
@@ -77,7 +77,7 @@ const phasesContainerStyle = computed(() => ({
     x: `${phasesMargin.value}px`,
     y: `${svgPosition.h - 90}px`,
     width: `${svgPosition.w - phasesMargin.value * 2}px`,
-    height: `70px`,
+    height: '70px',
     w: svgPosition.w,
 }));
 const nodeSettingWidth = computed(() => editor.enable && editor.state.isViewMode ? 120 : 400);
@@ -85,7 +85,7 @@ const nodeSettingContainerStyle = computed(() => ({
     x: `${svgPosition.w - nodeSettingWidth.value - phasesMargin.value}px`,
     y: `${svgPosition.h / 2.5}px`,
     width: `${nodeSettingWidth.value}px`,
-    height: `300px`,
+    height: '300px',
 }));
 
 const appMenu = reactive({
@@ -101,8 +101,8 @@ const appMenuContainerStyle = computed(() => ({
 const leftAppMenuContainerStyle = computed(() => ({
     x: `${leftMenuPos.x}px`,
     y: `${appMenu.y}px`,
-    width: `1px`,
-    height: `1px`,
+    width: '1px',
+    height: '1px',
 }));
 
 const debugContainerStyle = computed(() => ({
@@ -118,122 +118,122 @@ const phasesJsonContainerStyle = computed(() => ({
     x: appMenuContainerStyle.value.x,
     y: `${appMenu.y + appMenu.h + 10}px`,
     width: `${nodeSettingWidth.value}px`,
-    height: `1px`,
+    height: '1px',
 }));
-const { mouseState, state, isOneNodeSelected, showDebugWindow, diagramRect } =
-    useCurrentEditorState();
+const { mouseState, state, isOneNodeSelected, showDebugWindow, diagramRect }
+    = useCurrentEditorState();
 </script>
 
 <template>
-    <Teleport v-if="!!editor.enable && editor.svg" :to="editor.svg">
-        <svg
-            class="editor-svg"
-            :viewBox="`0 0 ${svgPosition.w} ${svgPosition.h}`"
-            :x="svgViewBox.x"
-            :y="svgViewBox.y"
-            @keydown.stop
-            @keypress.stop
-            @keyup.stop
+  <Teleport v-if="!!editor.enable && editor.svg" :to="editor.svg">
+    <svg
+      class="editor-svg"
+      :viewBox="`0 0 ${svgPosition.w} ${svgPosition.h}`"
+      :x="svgViewBox.x"
+      :y="svgViewBox.y"
+      @keydown.stop
+      @keypress.stop
+      @keyup.stop
+    >
+      <slot name="before" />
+      <foreignObject
+        class="node"
+        :style="appMenuContainerStyle"
+        @click.stop.prevent
+        @mousedown.stop.prevent
+      >
+        <body
+          xmlns="http://www.w3.org/1999/xhtml"
+          :style="appMenuContainerStyle"
+          @click.stop.prevent
         >
-            <slot name="before" />
-            <foreignObject
-                class="node"
-                :style="appMenuContainerStyle"
-                @click.stop.prevent
-                @mousedown.stop.prevent
-            >
-                <body
-                    xmlns="http://www.w3.org/1999/xhtml"
-                    :style="appMenuContainerStyle"
-                    @click.stop.prevent
-                >
-                    <AppMenu>
-                        <template #center>
-                            <slot name="menu" />
-                        </template>
-                    </AppMenu>
-                </body>
-            </foreignObject>
-
-            <foreignObject
-                class="node"
-                :style="leftAppMenuContainerStyle"
-                style="overflow: visible"
-                @click.stop.prevent
-                @mousedown.stop.prevent
-            >
-                <body
-                    xmlns="http://www.w3.org/1999/xhtml"
-                    :style="leftAppMenuContainerStyle"
-                    @click.stop.prevent
-                >
-                    <slot name="left-menu"></slot>
-                </body>
-            </foreignObject>
-            <template v-if="!editor.state.isViewMode">
-                <foreignObject
-                    class="node"
-                    :style="paletteContainerStyle"
-                    @click.stop.prevent
-                    @mousedown.stop.prevent
-                >
-                    <body
-                        xmlns="http://www.w3.org/1999/xhtml"
-                        :style="paletteContainerStyle"
-                    >
-                        <Palette />
-                    </body>
-                </foreignObject>
-                <foreignObject
-                    class="node"
-                    :style="phasesJsonContainerStyle"
-                    style="overflow: visible"
-                    @click.stop.prevent
-                    @mousedown.stop.prevent
-                >
-                    <body
-                        xmlns="http://www.w3.org/1999/xhtml"
-                        :style="phasesJsonContainerStyle"
-                        @click.stop.prevent
-                    >
-                        <PhasesJson />
-                    </body>
-                </foreignObject>
-                <foreignObject
-                    class="node"
-                    :style="nodeSettingContainerStyle"
-                    v-if="isOneNodeSelected"
-                    @click.stop.prevent
-                    @mousedown.stop.prevent
-                >
-                    <body
-                        xmlns="http://www.w3.org/1999/xhtml"
-                        :style="nodeSettingContainerStyle"
-                        @click.stop.prevent
-                    >
-                        <NodeSetting>
-                            <template #preview="slotData">
-                                <slot name="preview" v-bind="slotData" />
-                            </template>
-                        </NodeSetting>
-                    </body>
-                </foreignObject>
-                <foreignObject
-                    v-if="showDebugWindow"
-                    class="node"
-                    :style="debugContainerStyle"
-                    @click.stop.prevent
-                    @mousedown.stop.prevent
-                >
-                    <body
-                        xmlns="http://www.w3.org/1999/xhtml"
-                        :style="debugContainerStyle"
-                        @click.stop.prevent
-                    >
-                        <Debug />
-                    </body>
-                </foreignObject>
+          <AppMenu>
+            <template #center>
+              <slot name="menu" />
             </template>
-        </svg>
-    </Teleport>
+          </AppMenu>
+        </body>
+      </foreignObject>
+
+      <foreignObject
+        class="node"
+        :style="leftAppMenuContainerStyle"
+        style="overflow: visible"
+        @click.stop.prevent
+        @mousedown.stop.prevent
+      >
+        <body
+          xmlns="http://www.w3.org/1999/xhtml"
+          :style="leftAppMenuContainerStyle"
+          @click.stop.prevent
+        >
+          <slot name="left-menu" />
+        </body>
+      </foreignObject>
+      <template v-if="!editor.state.isViewMode">
+        <foreignObject
+          class="node"
+          :style="paletteContainerStyle"
+          @click.stop.prevent
+          @mousedown.stop.prevent
+        >
+          <body
+            xmlns="http://www.w3.org/1999/xhtml"
+            :style="paletteContainerStyle"
+          >
+            <Palette />
+          </body>
+        </foreignObject>
+        <foreignObject
+          class="node"
+          :style="phasesJsonContainerStyle"
+          style="overflow: visible"
+          @click.stop.prevent
+          @mousedown.stop.prevent
+        >
+          <body
+            xmlns="http://www.w3.org/1999/xhtml"
+            :style="phasesJsonContainerStyle"
+            @click.stop.prevent
+          >
+            <PhasesJson />
+          </body>
+        </foreignObject>
+        <foreignObject
+          v-if="isOneNodeSelected"
+          class="node"
+          :style="nodeSettingContainerStyle"
+          @click.stop.prevent
+          @mousedown.stop.prevent
+        >
+          <body
+            xmlns="http://www.w3.org/1999/xhtml"
+            :style="nodeSettingContainerStyle"
+            @click.stop.prevent
+          >
+            <NodeSetting>
+              <template #preview="slotData">
+                <slot name="preview" v-bind="slotData" />
+              </template>
+            </NodeSetting>
+          </body>
+        </foreignObject>
+        <foreignObject
+          v-if="showDebugWindow"
+          class="node"
+          :style="debugContainerStyle"
+          @click.stop.prevent
+          @mousedown.stop.prevent
+        >
+          <body
+            xmlns="http://www.w3.org/1999/xhtml"
+            :style="debugContainerStyle"
+            @click.stop.prevent
+          >
+            <Debug />
+          </body>
+        </foreignObject>
+      </template>
+    </svg>
+  </Teleport>
 </template>

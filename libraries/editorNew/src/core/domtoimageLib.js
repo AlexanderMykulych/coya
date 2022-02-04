@@ -2,39 +2,38 @@
 export default () => {
     const global = {};
 
-    var util = newUtil();
-    var inliner = newInliner();
-    var fontFaces = newFontFaces();
-    var images = newImages();
+    const util = newUtil();
+    const inliner = newInliner();
+    const fontFaces = newFontFaces();
+    const images = newImages();
 
     // Default impl options
-    var defaultOptions = {
+    const defaultOptions = {
         // Default is to fail on error, no placeholder
         imagePlaceholder: undefined,
         // Default cache bust is false, it will use the cache
-        cacheBust: false
+        cacheBust: false,
     };
 
-    var domtoimage = {
-        toSvg: toSvg,
-        toPng: toPng,
-        toJpeg: toJpeg,
-        toBlob: toBlob,
-        toPixelData: toPixelData,
+    const domtoimage = {
+        toSvg,
+        toPng,
+        toJpeg,
+        toBlob,
+        toPixelData,
         impl: {
-            fontFaces: fontFaces,
-            images: images,
-            util: util,
-            inliner: inliner,
-            options: {}
-        }
+            fontFaces,
+            images,
+            util,
+            inliner,
+            options: {},
+        },
     };
 
     if (typeof module !== 'undefined')
         module.exports = domtoimage;
     else
         global.domtoimage = domtoimage;
-
 
     /**
      * @param {Node} node - The DOM Node object to render
@@ -55,13 +54,13 @@ export default () => {
         options = options || {};
         copyOptions(options);
         return Promise.resolve(node)
-            .then(function (node) {
+            .then((node) => {
                 return cloneNode(node, options.filter, true);
             })
             .then(embedFonts)
             .then(inlineImages)
             .then(applyOptions)
-            .then(function (clone) {
+            .then((clone) => {
                 return makeSvgDataUri(clone,
                     options.width || util.width(node),
                     options.height || util.height(node),
@@ -72,13 +71,14 @@ export default () => {
         function applyOptions(clone) {
             if (options.bgcolor) clone.style.backgroundColor = options.bgcolor;
 
-            if (options.width) clone.style.width = options.width + 'px';
-            if (options.height) clone.style.height = options.height + 'px';
+            if (options.width) clone.style.width = `${options.width}px`;
+            if (options.height) clone.style.height = `${options.height}px`;
 
-            if (options.style)
-                Object.keys(options.style).forEach(function (property) {
+            if (options.style) {
+                Object.keys(options.style).forEach((property) => {
                     clone.style[property] = options.style[property];
                 });
+            }
 
             return clone;
         }
@@ -91,12 +91,12 @@ export default () => {
      * */
     function toPixelData(node, options) {
         return draw(node, options || {})
-            .then(function (canvas) {
+            .then((canvas) => {
                 return canvas.getContext('2d').getImageData(
                     0,
                     0,
                     util.width(node),
-                    util.height(node)
+                    util.height(node),
                 ).data;
             });
     }
@@ -108,7 +108,7 @@ export default () => {
      * */
     function toPng(node, options) {
         return draw(node, options || {})
-            .then(function (canvas) {
+            .then((canvas) => {
                 return canvas.toDataURL();
             });
     }
@@ -121,7 +121,7 @@ export default () => {
     function toJpeg(node, options) {
         options = options || {};
         return draw(node, options)
-            .then(function (canvas) {
+            .then((canvas) => {
                 return canvas.toDataURL('image/jpeg', options.quality || 1.0);
             });
     }
@@ -138,36 +138,34 @@ export default () => {
 
     function copyOptions(options) {
         // Copy options to impl options for use in impl
-        if(typeof(options.imagePlaceholder) === 'undefined') {
+        if (typeof (options.imagePlaceholder) === 'undefined')
             domtoimage.impl.options.imagePlaceholder = defaultOptions.imagePlaceholder;
-        } else {
+        else
             domtoimage.impl.options.imagePlaceholder = options.imagePlaceholder;
-        }
 
-        if(typeof(options.cacheBust) === 'undefined') {
+        if (typeof (options.cacheBust) === 'undefined')
             domtoimage.impl.options.cacheBust = defaultOptions.cacheBust;
-        } else {
+        else
             domtoimage.impl.options.cacheBust = options.cacheBust;
-        }
     }
 
     function draw(domNode, options) {
         return toSvg(domNode, options)
             .then(util.makeImage)
             .then(util.delay(100))
-            .then(function (image) {
-                var canvas = newCanvas(domNode);
+            .then((image) => {
+                const canvas = newCanvas(domNode);
                 canvas.getContext('2d').drawImage(image, 0, 0);
                 return canvas;
             });
 
         function newCanvas(domNode) {
-            var canvas = document.createElement('canvas');
+            const canvas = document.createElement('canvas');
             canvas.width = options.width || util.width(domNode);
             canvas.height = options.height || util.height(domNode);
 
             if (options.bgcolor) {
-                var ctx = canvas.getContext('2d');
+                const ctx = canvas.getContext('2d');
                 ctx.fillStyle = options.bgcolor;
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
             }
@@ -181,10 +179,10 @@ export default () => {
 
         return Promise.resolve(node)
             .then(makeNodeCopy)
-            .then(function (clone) {
+            .then((clone) => {
                 return cloneChildren(node, clone, filter);
             })
-            .then(function (clone) {
+            .then((clone) => {
                 return processClone(node, clone);
             });
 
@@ -194,22 +192,22 @@ export default () => {
         }
 
         function cloneChildren(original, clone, filter) {
-            var children = original.childNodes;
+            const children = original.childNodes;
             if (children.length === 0) return Promise.resolve(clone);
 
             return cloneChildrenInOrder(clone, util.asArray(children), filter)
-                .then(function () {
+                .then(() => {
                     return clone;
                 });
 
             function cloneChildrenInOrder(parent, children, filter) {
-                var done = Promise.resolve();
-                children.forEach(function (child) {
+                let done = Promise.resolve();
+                children.forEach((child) => {
                     done = done
-                        .then(function () {
+                        .then(() => {
                             return cloneNode(child, filter);
                         })
-                        .then(function (childClone) {
+                        .then((childClone) => {
                             if (childClone) parent.appendChild(childClone);
                         });
                 });
@@ -225,7 +223,7 @@ export default () => {
                 .then(clonePseudoElements)
                 .then(copyUserInput)
                 .then(fixSvg)
-                .then(function () {
+                .then(() => {
                     return clone;
                 });
 
@@ -237,11 +235,11 @@ export default () => {
                     else copyProperties(source, target);
 
                     function copyProperties(source, target) {
-                        util.asArray(source).forEach(function (name) {
+                        util.asArray(source).forEach((name) => {
                             target.setProperty(
                                 name,
                                 source.getPropertyValue(name),
-                                source.getPropertyPriority(name)
+                                source.getPropertyPriority(name),
                             );
                         });
                     }
@@ -249,42 +247,41 @@ export default () => {
             }
 
             function clonePseudoElements() {
-                [':before', ':after'].forEach(function (element) {
+                [':before', ':after'].forEach((element) => {
                     clonePseudoElement(element);
                 });
 
                 function clonePseudoElement(element) {
-                    var style = window.getComputedStyle(original, element);
-                    var content = style.getPropertyValue('content');
+                    const style = window.getComputedStyle(original, element);
+                    const content = style.getPropertyValue('content');
 
                     if (content === '' || content === 'none') return;
 
-                    var className = util.uid();
-                    clone.className = clone.className + ' ' + className;
-                    var styleElement = document.createElement('style');
+                    const className = util.uid();
+                    clone.className = `${clone.className} ${className}`;
+                    const styleElement = document.createElement('style');
                     styleElement.appendChild(formatPseudoElementStyle(className, element, style));
                     clone.appendChild(styleElement);
 
                     function formatPseudoElementStyle(className, element, style) {
-                        var selector = '.' + className + ':' + element;
-                        var cssText = style.cssText ? formatCssText(style) : formatCssProperties(style);
-                        return document.createTextNode(selector + '{' + cssText + '}');
+                        const selector = `.${className}:${element}`;
+                        const cssText = style.cssText ? formatCssText(style) : formatCssProperties(style);
+                        return document.createTextNode(`${selector}{${cssText}}`);
 
                         function formatCssText(style) {
-                            var content = style.getPropertyValue('content');
-                            return style.cssText + ' content: ' + content + ';';
+                            const content = style.getPropertyValue('content');
+                            return `${style.cssText} content: ${content};`;
                         }
 
                         function formatCssProperties(style) {
-
-                            return util.asArray(style)
+                            return `${util.asArray(style)
                                 .map(formatProperty)
-                                .join('; ') + ';';
+                                .join('; ')};`;
 
                             function formatProperty(name) {
-                                return name + ': ' +
-                                    style.getPropertyValue(name) +
-                                    (style.getPropertyPriority(name) ? ' !important' : '');
+                                return `${name}: ${
+                                    style.getPropertyValue(name)
+                                }${style.getPropertyPriority(name) ? ' !important' : ''}`;
                             }
                         }
                     }
@@ -293,7 +290,7 @@ export default () => {
 
             function copyUserInput() {
                 if (original instanceof HTMLTextAreaElement) clone.innerHTML = original.value;
-                if (original instanceof HTMLInputElement) clone.setAttribute("value", original.value);
+                if (original instanceof HTMLInputElement) clone.setAttribute('value', original.value);
             }
 
             function fixSvg() {
@@ -301,8 +298,8 @@ export default () => {
                 clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
 
                 if (!(clone instanceof SVGRectElement)) return;
-                ['width', 'height'].forEach(function (attribute) {
-                    var value = clone.getAttribute(attribute);
+                ['width', 'height'].forEach((attribute) => {
+                    const value = clone.getAttribute(attribute);
                     if (!value) return;
 
                     clone.style.setProperty(attribute, value);
@@ -313,8 +310,8 @@ export default () => {
 
     function embedFonts(node) {
         return fontFaces.resolveAll()
-            .then(function (cssText) {
-                var styleNode = document.createElement('style');
+            .then((cssText) => {
+                const styleNode = document.createElement('style');
                 node.appendChild(styleNode);
                 styleNode.appendChild(document.createTextNode(cssText));
                 return node;
@@ -323,7 +320,7 @@ export default () => {
 
     function inlineImages(node) {
         return images.inlineAll(node)
-            .then(function () {
+            .then(() => {
                 return node;
             });
     }
@@ -331,40 +328,40 @@ export default () => {
     function makeSvgDataUri(node, width, height, prepareNode) {
         node = prepareNode ? prepareNode(node) : node;
         return Promise.resolve(node)
-            .then(function (node) {
+            .then((node) => {
                 node.setAttribute('xmlns', 'http://www.w3.org/1999/xhtml');
                 return new XMLSerializer().serializeToString(node);
             })
             .then(util.escapeXhtml)
-            .then(function (xhtml) {
-                return '<foreignObject x="0" y="0" width="100%" height="100%">' + xhtml + '</foreignObject>';
+            .then((xhtml) => {
+                return `<foreignObject x="0" y="0" width="100%" height="100%">${xhtml}</foreignObject>`;
             })
-            .then(function (foreignObject) {
-                return '<svg xmlns="http://www.w3.org/2000/svg" width="' + width + '" height="' + height + '">' +
-                    foreignObject + '</svg>';
+            .then((foreignObject) => {
+                return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">${
+                    foreignObject}</svg>`;
             })
-            .then(function (svg) {
-                return 'data:image/svg+xml;charset=utf-8,' + svg;
+            .then((svg) => {
+                return `data:image/svg+xml;charset=utf-8,${svg}`;
             });
     }
 
     function newUtil() {
         return {
-            escape: escape,
-            parseExtension: parseExtension,
-            mimeType: mimeType,
-            dataAsUrl: dataAsUrl,
-            isDataUrl: isDataUrl,
-            canvasToBlob: canvasToBlob,
-            resolveUrl: resolveUrl,
-            getAndEncode: getAndEncode,
+            escape,
+            parseExtension,
+            mimeType,
+            dataAsUrl,
+            isDataUrl,
+            canvasToBlob,
+            resolveUrl,
+            getAndEncode,
             uid: uid(),
-            delay: delay,
-            asArray: asArray,
-            escapeXhtml: escapeXhtml,
-            makeImage: makeImage,
-            width: width,
-            height: height
+            delay,
+            asArray,
+            escapeXhtml,
+            makeImage,
+            width,
+            height,
         };
 
         function mimes() {
@@ -372,31 +369,31 @@ export default () => {
              * Only WOFF and EOT mime types for fonts are 'real'
              * see http://www.iana.org/assignments/media-types/media-types.xhtml
              */
-            var WOFF = 'application/font-woff';
-            var JPEG = 'image/jpeg';
+            const WOFF = 'application/font-woff';
+            const JPEG = 'image/jpeg';
 
             return {
-                'woff': WOFF,
-                'woff2': WOFF,
-                'ttf': 'application/font-truetype',
-                'eot': 'application/vnd.ms-fontobject',
-                'png': 'image/png',
-                'jpg': JPEG,
-                'jpeg': JPEG,
-                'gif': 'image/gif',
-                'tiff': 'image/tiff',
-                'svg': 'image/svg+xml'
+                woff: WOFF,
+                woff2: WOFF,
+                ttf: 'application/font-truetype',
+                eot: 'application/vnd.ms-fontobject',
+                png: 'image/png',
+                jpg: JPEG,
+                jpeg: JPEG,
+                gif: 'image/gif',
+                tiff: 'image/tiff',
+                svg: 'image/svg+xml',
             };
         }
 
         function parseExtension(url) {
-            var match = /\.([^\.\/]*?)$/g.exec(url);
+            const match = /\.([^\.\/]*?)$/g.exec(url);
             if (match) return match[1];
             else return '';
         }
 
         function mimeType(url) {
-            var extension = parseExtension(url).toLowerCase();
+            const extension = parseExtension(url).toLowerCase();
             return mimes()[extension] || '';
         }
 
@@ -405,34 +402,35 @@ export default () => {
         }
 
         function toBlob(canvas) {
-            return new Promise(function (resolve) {
-                var binaryString = window.atob(canvas.toDataURL().split(',')[1]);
-                var length = binaryString.length;
-                var binaryArray = new Uint8Array(length);
+            return new Promise((resolve) => {
+                const binaryString = window.atob(canvas.toDataURL().split(',')[1]);
+                const length = binaryString.length;
+                const binaryArray = new Uint8Array(length);
 
-                for (var i = 0; i < length; i++)
+                for (let i = 0; i < length; i++)
                     binaryArray[i] = binaryString.charCodeAt(i);
 
                 resolve(new Blob([binaryArray], {
-                    type: 'image/png'
+                    type: 'image/png',
                 }));
             });
         }
 
         function canvasToBlob(canvas) {
-            if (canvas.toBlob)
-                return new Promise(function (resolve) {
+            if (canvas.toBlob) {
+                return new Promise((resolve) => {
                     canvas.toBlob(resolve);
                 });
+            }
 
             return toBlob(canvas);
         }
 
         function resolveUrl(url, baseUrl) {
-            var doc = document.implementation.createHTMLDocument();
-            var base = doc.createElement('base');
+            const doc = document.implementation.createHTMLDocument();
+            const base = doc.createElement('base');
             doc.head.appendChild(base);
-            var a = doc.createElement('a');
+            const a = doc.createElement('a');
             doc.body.appendChild(a);
             base.href = baseUrl;
             a.href = url;
@@ -440,22 +438,22 @@ export default () => {
         }
 
         function uid() {
-            var index = 0;
+            let index = 0;
 
-            return function () {
-                return 'u' + fourRandomChars() + index++;
+            return function() {
+                return `u${fourRandomChars()}${index++}`;
 
                 function fourRandomChars() {
                     /* see http://stackoverflow.com/a/6248722/2519373 */
-                    return ('0000' + (Math.random() * Math.pow(36, 4) << 0).toString(36)).slice(-4);
+                    return (`0000${(Math.random() * Math.pow(36, 4) << 0).toString(36)}`).slice(-4);
                 }
             };
         }
 
         function makeImage(uri) {
-            return new Promise(function (resolve, reject) {
-                var image = new Image();
-                image.onload = function () {
+            return new Promise((resolve, reject) => {
+                const image = new Image();
+                image.onload = function() {
                     resolve(image);
                 };
                 image.onerror = reject;
@@ -464,15 +462,15 @@ export default () => {
         }
 
         function getAndEncode(url) {
-            var TIMEOUT = 30000;
-            if(domtoimage.impl.options.cacheBust) {
+            const TIMEOUT = 30000;
+            if (domtoimage.impl.options.cacheBust) {
                 // Cache bypass so we dont have CORS issues with cached images
                 // Source: https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest#Bypassing_the_cache
-                url += ((/\?/).test(url) ? "&" : "?") + (new Date()).getTime();
+                url += ((/\?/).test(url) ? '&' : '?') + (new Date()).getTime();
             }
 
-            return new Promise(function (resolve) {
-                var request = new XMLHttpRequest();
+            return new Promise((resolve) => {
+                const request = new XMLHttpRequest();
 
                 request.onreadystatechange = done;
                 request.ontimeout = timeout;
@@ -481,41 +479,38 @@ export default () => {
                 request.open('GET', url, true);
                 request.send();
 
-                var placeholder;
-                if(domtoimage.impl.options.imagePlaceholder) {
-                    var split = domtoimage.impl.options.imagePlaceholder.split(/,/);
-                    if(split && split[1]) {
+                let placeholder;
+                if (domtoimage.impl.options.imagePlaceholder) {
+                    const split = domtoimage.impl.options.imagePlaceholder.split(/,/);
+                    if (split && split[1])
                         placeholder = split[1];
-                    }
                 }
 
                 function done() {
                     if (request.readyState !== 4) return;
 
                     if (request.status !== 200) {
-                        if(placeholder) {
+                        if (placeholder)
                             resolve(placeholder);
-                        } else {
-                            fail('cannot fetch resource: ' + url + ', status: ' + request.status);
-                        }
+                        else
+                            fail(`cannot fetch resource: ${url}, status: ${request.status}`);
 
                         return;
                     }
 
-                    var encoder = new FileReader();
-                    encoder.onloadend = function () {
-                        var content = encoder.result.split(/,/)[1];
+                    const encoder = new FileReader();
+                    encoder.onloadend = function() {
+                        const content = encoder.result.split(/,/)[1];
                         resolve(content);
                     };
                     encoder.readAsDataURL(request.response);
                 }
 
                 function timeout() {
-                    if(placeholder) {
+                    if (placeholder)
                         resolve(placeholder);
-                    } else {
-                        fail('timeout of ' + TIMEOUT + 'ms occured while fetching resource: ' + url);
-                    }
+                    else
+                        fail(`timeout of ${TIMEOUT}ms occured while fetching resource: ${url}`);
                 }
 
                 function fail(message) {
@@ -526,7 +521,7 @@ export default () => {
         }
 
         function dataAsUrl(content, type) {
-            return 'data:' + type + ';base64,' + content;
+            return `data:${type};base64,${content}`;
         }
 
         function escape(string) {
@@ -534,9 +529,9 @@ export default () => {
         }
 
         function delay(ms) {
-            return function (arg) {
-                return new Promise(function (resolve) {
-                    setTimeout(function () {
+            return function(arg) {
+                return new Promise((resolve) => {
+                    setTimeout(() => {
                         resolve(arg);
                     }, ms);
                 });
@@ -544,9 +539,9 @@ export default () => {
         }
 
         function asArray(arrayLike) {
-            var array = [];
-            var length = arrayLike.length;
-            for (var i = 0; i < length; i++) array.push(arrayLike[i]);
+            const array = [];
+            const length = arrayLike.length;
+            for (let i = 0; i < length; i++) array.push(arrayLike[i]);
             return array;
         }
 
@@ -555,33 +550,33 @@ export default () => {
         }
 
         function width(node) {
-            var leftBorder = px(node, 'border-left-width');
-            var rightBorder = px(node, 'border-right-width');
+            const leftBorder = px(node, 'border-left-width');
+            const rightBorder = px(node, 'border-right-width');
             return node.scrollWidth + leftBorder + rightBorder;
         }
 
         function height(node) {
-            var topBorder = px(node, 'border-top-width');
-            var bottomBorder = px(node, 'border-bottom-width');
+            const topBorder = px(node, 'border-top-width');
+            const bottomBorder = px(node, 'border-bottom-width');
             return node.scrollHeight + topBorder + bottomBorder;
         }
 
         function px(node, styleProperty) {
-            var value = window.getComputedStyle(node).getPropertyValue(styleProperty);
+            const value = window.getComputedStyle(node).getPropertyValue(styleProperty);
             return parseFloat(value.replace('px', ''));
         }
     }
 
     function newInliner() {
-        var URL_REGEX = /url\(['"]?([^'"]+?)['"]?\)/g;
+        const URL_REGEX = /url\(['"]?([^'"]+?)['"]?\)/g;
 
         return {
-            inlineAll: inlineAll,
-            shouldProcess: shouldProcess,
+            inlineAll,
+            shouldProcess,
             impl: {
-                readUrls: readUrls,
-                inline: inline
-            }
+                readUrls,
+                inline,
+            },
         };
 
         function shouldProcess(string) {
@@ -589,31 +584,31 @@ export default () => {
         }
 
         function readUrls(string) {
-            var result = [];
-            var match;
-            while ((match = URL_REGEX.exec(string)) !== null) {
+            const result = [];
+            let match;
+            while ((match = URL_REGEX.exec(string)) !== null)
                 result.push(match[1]);
-            }
-            return result.filter(function (url) {
+
+            return result.filter((url) => {
                 return !util.isDataUrl(url);
             });
         }
 
         function inline(string, url, baseUrl, get) {
             return Promise.resolve(url)
-                .then(function (url) {
+                .then((url) => {
                     return baseUrl ? util.resolveUrl(url, baseUrl) : url;
                 })
                 .then(get || util.getAndEncode)
-                .then(function (data) {
+                .then((data) => {
                     return util.dataAsUrl(data, util.mimeType(url));
                 })
-                .then(function (dataUrl) {
-                    return string.replace(urlAsRegex(url), '$1' + dataUrl + '$3');
+                .then((dataUrl) => {
+                    return string.replace(urlAsRegex(url), `$1${dataUrl}$3`);
                 });
 
             function urlAsRegex(url) {
-                return new RegExp('(url\\([\'"]?)(' + util.escape(url) + ')([\'"]?\\))', 'g');
+                return new RegExp(`(url\\(['"]?)(${util.escape(url)})(['"]?\\))`, 'g');
             }
         }
 
@@ -622,10 +617,10 @@ export default () => {
 
             return Promise.resolve(string)
                 .then(readUrls)
-                .then(function (urls) {
-                    var done = Promise.resolve(string);
-                    urls.forEach(function (url) {
-                        done = done.then(function (string) {
+                .then((urls) => {
+                    let done = Promise.resolve(string);
+                    urls.forEach((url) => {
+                        done = done.then((string) => {
                             return inline(string, url, baseUrl, get);
                         });
                     });
@@ -640,22 +635,22 @@ export default () => {
 
     function newFontFaces() {
         return {
-            resolveAll: resolveAll,
+            resolveAll,
             impl: {
-                readAll: readAll
-            }
+                readAll,
+            },
         };
 
         function resolveAll() {
             return readAll(document)
-                .then(function (webFonts) {
+                .then((webFonts) => {
                     return Promise.all(
-                        webFonts.map(function (webFont) {
+                        webFonts.map((webFont) => {
                             return webFont.resolve();
-                        })
+                        }),
                     );
                 })
-                .then(function (cssStrings) {
+                .then((cssStrings) => {
                     return cssStrings.join('\n');
                 });
         }
@@ -664,27 +659,28 @@ export default () => {
             return Promise.resolve(util.asArray(document.styleSheets))
                 .then(getCssRules)
                 .then(selectWebFontRules)
-                .then(function (rules) {
+                .then((rules) => {
                     return rules.map(newWebFont);
                 });
 
             function selectWebFontRules(cssRules) {
                 return cssRules
-                    .filter(function (rule) {
+                    .filter((rule) => {
                         return rule.type === CSSRule.FONT_FACE_RULE;
                     })
-                    .filter(function (rule) {
+                    .filter((rule) => {
                         return inliner.shouldProcess(rule.style.getPropertyValue('src'));
                     });
             }
 
             function getCssRules(styleSheets) {
-                var cssRules = [];
-                styleSheets.forEach(function (sheet) {
+                const cssRules = [];
+                styleSheets.forEach((sheet) => {
                     try {
                         util.asArray(sheet.cssRules || []).forEach(cssRules.push.bind(cssRules));
-                    } catch (e) {
-                        console.log('Error while reading CSS rules from ' + sheet.href, e.toString());
+                    }
+                    catch (e) {
+                        console.log(`Error while reading CSS rules from ${sheet.href}`, e.toString());
                     }
                 });
                 return cssRules;
@@ -693,12 +689,12 @@ export default () => {
             function newWebFont(webFontRule) {
                 return {
                     resolve: function resolve() {
-                        var baseUrl = (webFontRule.parentStyleSheet || {}).href;
+                        const baseUrl = (webFontRule.parentStyleSheet || {}).href;
                         return inliner.inlineAll(webFontRule.cssText, baseUrl);
                     },
-                    src: function () {
+                    src() {
                         return webFontRule.style.getPropertyValue('src');
-                    }
+                    },
                 };
             }
         }
@@ -706,15 +702,15 @@ export default () => {
 
     function newImages() {
         return {
-            inlineAll: inlineAll,
+            inlineAll,
             impl: {
-                newImage: newImage
-            }
+                newImage,
+            },
         };
 
         function newImage(element) {
             return {
-                inline: inline
+                inline,
             };
 
             function inline(get) {
@@ -722,11 +718,11 @@ export default () => {
 
                 return Promise.resolve(element.src)
                     .then(get || util.getAndEncode)
-                    .then(function (data) {
+                    .then((data) => {
                         return util.dataAsUrl(data, util.mimeType(element.src));
                     })
-                    .then(function (dataUrl) {
-                        return new Promise(function (resolve, reject) {
+                    .then((dataUrl) => {
+                        return new Promise((resolve, reject) => {
                             element.onload = resolve;
                             element.onerror = reject;
                             element.src = dataUrl;
@@ -739,31 +735,31 @@ export default () => {
             if (!(node instanceof Element)) return Promise.resolve(node);
 
             return inlineBackground(node)
-                .then(function () {
-                    if (node instanceof HTMLImageElement)
-                        return newImage(node).inline();
-                    else
+                .then(() => {
+                    if (node instanceof HTMLImageElement) { return newImage(node).inline(); }
+                    else {
                         return Promise.all(
-                            util.asArray(node.childNodes).map(function (child) {
+                            util.asArray(node.childNodes).map((child) => {
                                 return inlineAll(child);
-                            })
+                            }),
                         );
+                    }
                 });
 
             function inlineBackground(node) {
-                var background = node.style.getPropertyValue('background');
+                const background = node.style.getPropertyValue('background');
 
                 if (!background) return Promise.resolve(node);
 
                 return inliner.inlineAll(background)
-                    .then(function (inlined) {
+                    .then((inlined) => {
                         node.style.setProperty(
                             'background',
                             inlined,
-                            node.style.getPropertyPriority('background')
+                            node.style.getPropertyPriority('background'),
                         );
                     })
-                    .then(function () {
+                    .then(() => {
                         return node;
                     });
             }

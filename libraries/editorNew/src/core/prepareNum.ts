@@ -1,4 +1,4 @@
-import { isString } from "coya-core";
+import { isString } from 'coya-core';
 
 export function prepareNum(val: string | Number) {
     const num = Number(val);

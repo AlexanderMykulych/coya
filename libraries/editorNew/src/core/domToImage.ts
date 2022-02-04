@@ -1,3 +1,3 @@
-import domtoimage from "./domtoimageLib.js";
+import domtoimage from './domtoimageLib.js';
 
 export const lib = domtoimage().domtoimage;
