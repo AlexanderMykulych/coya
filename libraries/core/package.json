@@ -51,22 +51,10 @@
             "limit": "10 KB"
         }
     ],
-    "pnpm": {
-        "overrides": {
-            "typescript": "^4.5.5",
-            "@typescript-eslint/eslint-plugin": "^4.29.3",
-            "@typescript-eslint/parser": "^4.29.3"
-        }
-    },
-    "resolutions": {
-        "**/typescript": "^4.4.3",
-        "**/@typescript-eslint/eslint-plugin": "^4.29.3",
-        "**/@typescript-eslint/parser": "^4.29.3"
-    },
     "devDependencies": {
         "@size-limit/preset-small-lib": "^7.0.5",
         "@types/jest": "^27.0.1",
-        "@typescript-eslint/eslint-plugin": "^4.29.3",
+        "@typescript-eslint/eslint-plugin": "^5.10.2",
         "@typescript-eslint/parser": "^4.29.3",
         "eslint": "^8.6.0",
         "husky": "^7.0.4",

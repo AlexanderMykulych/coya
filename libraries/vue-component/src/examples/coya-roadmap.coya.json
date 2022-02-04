@@ -289,6 +289,18 @@
 			"type": "line",
 			"label": "",
 			"sourcePhase": 0
+		},
+		"block_26": {
+			"label": "block_26",
+			"sourcePhase": 0
+		},
+		"line_25": {
+			"from": "block_12",
+			"to": "block_26",
+			"name": "line_25",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
 		}
 	},
 	"phases": [],
@@ -595,6 +607,22 @@
 					"h": 100
 				},
 				"label": "dependabot"
+			},
+			"block_26": {
+				"position": {
+					"x": "522.9351196289062",
+					"y": "16.776123046875",
+					"w": 300,
+					"h": 100
+				},
+				"label": "shapes",
+				"pinTo": "block_12",
+				"css": {
+					"stroke": "#4b4b4bff",
+					"fill": "#4cb050ff",
+					"fillStyle": "solid",
+					"color": "#ffffffff"
+				}
 			}
 		}
 	}

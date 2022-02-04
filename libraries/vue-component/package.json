@@ -10,7 +10,8 @@
   "scripts": {
     "dev": "vite --port 3333 --open",
     "build": "cross-env NODE_ENV=production vite build --debug",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint \"**/*.{vue,ts,js}\""
   },
   "dependencies": {
     "@headlessui/vue": "^1.4.0",
@@ -40,7 +41,7 @@
     "@iconify/json": "^1.1.406",
     "@types/node": "^17.0.8",
     "@types/prismjs": "^1.16.6",
-    "@typescript-eslint/eslint-plugin": "^4.29.3",
+    "@typescript-eslint/eslint-plugin": "^5.10.2",
     "@vitejs/plugin-vue": "^2.0.1",
     "@vue/compiler-sfc": "^3.2.26",
     "cross-env": "^7.0.3",
@@ -54,6 +55,7 @@
     "vite-plugin-components": "^0.13.2",
     "vite-plugin-icons": "^0.6.5",
     "vite-plugin-pages": "^0.20.0-beta.3",
-    "vite-plugin-windicss": "^1.6.3"
+    "vite-plugin-windicss": "^1.6.3",
+    "eslint-plugin-react": "^7.28.0"
   }
 }
