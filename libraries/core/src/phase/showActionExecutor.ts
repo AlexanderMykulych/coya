@@ -1,5 +1,6 @@
-import { ShowBlockActionSetting } from "../descriptionTypes";
-import { Action, Change, ChangeType } from "../types";
+import type { ShowBlockActionSetting } from '../descriptionTypes';
+import type { Action, Change } from '../types';
+import { ChangeType } from '../types';
 
 export const showActionExecutor = (_: number, action: Action): Change[] | null => {
     const val = action.value as ShowBlockActionSetting;
@@ -11,10 +12,10 @@ export const showActionExecutor = (_: number, action: Action): Change[] | null =
                 blockId: key,
                 newStyle: {
                     css: {
-                        display: value ? undefined : "none",
+                        display: value ? undefined : 'none',
                     },
-                }
-            }
+                },
+            },
         }));
 };
 
@@ -23,4 +24,4 @@ export const showBlockRenamer = (actionSetting: ShowBlockActionSetting, oldVal: 
         actionSetting[value] = actionSetting[oldVal];
         delete actionSetting[oldVal];
     }
-}
+};

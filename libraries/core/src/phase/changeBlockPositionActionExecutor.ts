@@ -1,6 +1,6 @@
-import { ChangeBlockPositionActionSetting } from "../descriptionTypes";
-import { Action, Change, ChangeType } from "../types";
-
+import type { ChangeBlockPositionActionSetting } from '../descriptionTypes';
+import type { Action, Change } from '../types';
+import { ChangeType } from '../types';
 
 export function changeBlockPositionActionExecutor(_: number, action: Action): Change[] | null {
     const val = action.value as ChangeBlockPositionActionSetting;
@@ -11,8 +11,8 @@ export function changeBlockPositionActionExecutor(_: number, action: Action): Ch
             setting: {
                 blockId: key,
                 newStyle: {
-                    position: val[key]
-                }
-            }
+                    position: val[key],
+                },
+            },
         }));
 }

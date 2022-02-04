@@ -1,9 +1,9 @@
-declare module "stylis" {
+declare module 'stylis' {
     export const serialize: any;
     export const stringify: any;
     export const compile: any;
 }
-declare module "@antv/layout/dist/layout.min.js" {
+declare module '@antv/layout/dist/layout.min.js' {
     export const CircularLayout: any;
     export const DagreLayout: any;
     export const Edge: any;
@@ -14,6 +14,6 @@ declare module "@antv/layout/dist/layout.min.js" {
     export const RandomLayout: any;
 }
 
-declare module "@antv/hierarchy/dist/hierarchy.min.js" {
+declare module '@antv/hierarchy/dist/hierarchy.min.js' {
     export const Hierarchy: any;
 }

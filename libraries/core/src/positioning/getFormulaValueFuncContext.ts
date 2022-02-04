@@ -1,15 +1,15 @@
-import { Ref, unref } from "vue";
-import { TransformSetting } from "..";
-import { BlockPositioning, FormulaValueFuncContext } from "../types";
-import { findClosestPoints } from "./alg/findClosestPoints";
-import { getBoxToBoxArrow, getBoxToBoxArrowPath } from "coya-arrow";
+import type { Ref } from 'vue';
+import { unref } from 'vue';
+import { getBoxToBoxArrow, getBoxToBoxArrowPath } from 'coya-arrow';
+import type { TransformSetting } from '..';
+import type { BlockPositioning, FormulaValueFuncContext } from '../types';
+import { findClosestPoints } from './alg/findClosestPoints';
 
-
-const globalObjectNames = ['document', 'window',]
+const globalObjectNames = ['document', 'window'];
 export function getFormulaValueFuncContext(blocksPositioning: Ref<BlockPositioning[]>,
     setting: TransformSetting): FormulaValueFuncContext {
     const blocks = blocksPositioning.value.map(x => x.blockId);
-    const emptyObjects = globalObjectNames.filter(x => !blocks.some(y => x === y));
+    const emptyObjects = globalObjectNames.filter(x => !blocks.includes(x));
 
     return {
         blockNamesAsFuncParams: [...blocks, '_', ...emptyObjects].join(','),
@@ -27,8 +27,8 @@ export function getFormulaValueFuncContext(blocksPositioning: Ref<BlockPositioni
                         findClosestPoints,
                         getBoxToBoxArrow,
                         getBoxToBoxArrowPath,
-                    }
+                    },
                 },
-            ]
+            ],
     };
 }

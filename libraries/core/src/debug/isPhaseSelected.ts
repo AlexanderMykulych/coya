@@ -1,7 +1,7 @@
-import { ActionDebugInfo, SelectedProperties } from "../types";
+import type { ActionDebugInfo, SelectedProperties } from '../types';
 
 export function isPhaseSelected(selected: SelectedProperties) {
-    return selected.properties?.[0]?.name === "phases";
+    return selected.properties?.[0]?.name === 'phases';
 }
 
 export function getPhaseIndex(selected: SelectedProperties) {

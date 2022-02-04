@@ -1,38 +1,38 @@
-import { Ref } from "vue";
-import { AddNewBlockActionSetting, ChangeBlockPositionActionSetting, ChangeLabelActionSetting, ConnectActionSetting, HideBlocksActionSetting, HighlightActionSetting } from ".";
-import { DebugAction, DebugSetting, LineDebugAction } from "./debugTypes";
-import {
-    GlobalDebugSetting, EnterSetting, ViewBoxSetting,
-    ActionSetting, ArchitectureDescription,
-    BlockElementDescription, BlockGroupDescriptions,
-    BlockStyle, LineBlockElementDescription,
-    StyleCss, FormulaValue, TransformSetting,
-    BlockStyleActionSetting
-} from "./descriptionTypes";
+import type { Ref } from 'vue';
+import type { DebugAction, DebugSetting, LineDebugAction } from './debugTypes';
+import type {
+    ActionSetting, ArchitectureDescription, BlockElementDescription,
+    BlockGroupDescriptions, BlockStyle,
+    BlockStyleActionSetting, EnterSetting,
+    FormulaValue, GlobalDebugSetting,
+    LineBlockElementDescription, StyleCss, TransformSetting,
+    ViewBoxSetting,
+} from './descriptionTypes';
+import type { AddNewBlockActionSetting, ChangeBlockPositionActionSetting, ChangeLabelActionSetting, ConnectActionSetting, HideBlocksActionSetting, HighlightActionSetting } from '.';
 
 export type NumberValue = number | Ref<number>;
 export type StringValue = string | Ref<string>;
 
 type IdValue = string;
 export interface Identifiable {
-    id: IdValue;
+    id: IdValue
 }
 export interface BlockElement extends Identifiable {
-    label: StringValue;
-    parentId?: IdValue;
-    enter: EnterSetting;
-    debug?: DebugSetting;
+    label: StringValue
+    parentId?: IdValue
+    enter: EnterSetting
+    debug?: DebugSetting
 }
 
 export type ExcludeProp<T, U> = {
     [Property in keyof T as Exclude<Property, U>]: T[Property]
-}
-export interface LineBlockElement extends ExcludeProp<LineBlockElementDescription, "label">, Identifiable {
-    label: StringValue;
+};
+export interface LineBlockElement extends ExcludeProp<LineBlockElementDescription, 'label'>, Identifiable {
+    label: StringValue
 }
 
 export interface ParentBlockElement extends BlockElement {
-    children: Block[];
+    children: Block[]
 }
 
 export type ContainerBlock = BlockElement | ParentBlockElement;
@@ -51,8 +51,8 @@ export enum ActionType {
     Show = 'show',
 }
 export interface BaseAction<TActionType extends ActionType, TActionValue extends ActionSetting> {
-    name: TActionType;
-    value: TActionValue;
+    name: TActionType
+    value: TActionValue
 }
 export interface AddNewBlockAction extends BaseAction<ActionType.AddNewBlock, AddNewBlockActionSetting> {}
 
@@ -63,7 +63,7 @@ export interface ConnectAction extends BaseAction<ActionType.Connect, ConnectAct
 export interface HideBlockAction extends BaseAction<ActionType.HideBlock, HideBlocksActionSetting> {}
 export interface HighlightAction extends BaseAction<ActionType.Highlight, HighlightActionSetting> {}
 export interface RemoveHighlightAction extends BaseAction<ActionType.RemoveHighlight, HideBlocksActionSetting> {}
-export type Action = 
+export type Action =
     | AddNewBlockAction
     | ChangeLableAction
     | ChangeBlockPositionAction
@@ -73,81 +73,78 @@ export type Action =
     | ChangeBlockStyleAction
     | RemoveHighlightAction;
 export interface Phase {
-    dependsOnPhaseId: IdValue | null;
-    action: Action;
+    dependsOnPhaseId: IdValue | null
+    action: Action
 }
 export type Phases = Phase[];
 export interface Animation extends Identifiable {
 }
-export interface BlocksStyle {
-    [name: string]: BlockStyle;
-}
+export type BlocksStyle = Record<string, BlockStyle>;
 export interface Style extends Identifiable {
-    positioning: BlockPositioning[];
-    blocks?: BlocksStyle;
-    debug?: GlobalDebugSetting;
-    css?: StyleCss;
+    positioning: BlockPositioning[]
+    blocks?: BlocksStyle
+    debug?: GlobalDebugSetting
+    css?: StyleCss
 }
 export interface PointPosition {
-    x: NumberValue;
-    y: NumberValue;
+    x: NumberValue
+    y: NumberValue
 }
 export interface RectPositioning {
-    x: NumberValue;
-    y: NumberValue;
-    w: NumberValue;
-    h: NumberValue;
-    top: PointPosition;
-    bottom: PointPosition;
-    right: PointPosition;
-    left: PointPosition;
+    x: NumberValue
+    y: NumberValue
+    w: NumberValue
+    h: NumberValue
+    top: PointPosition
+    bottom: PointPosition
+    right: PointPosition
+    left: PointPosition
 }
 
 export interface CirclePositioning {
-    cx: NumberValue;
-    cy: NumberValue;
-    radius: NumberValue;
+    cx: NumberValue
+    cy: NumberValue
+    radius: NumberValue
 }
 export interface LinePositioning {
-    x1: NumberValue;
-    y1: NumberValue;
-    x2: NumberValue;
-    y2: NumberValue;
-    meta?: any;
+    x1: NumberValue
+    y1: NumberValue
+    x2: NumberValue
+    y2: NumberValue
+    meta?: any
 }
 
 export type Positioning = RectPositioning | CirclePositioning | LinePositioning;
 export interface BlockPositioning {
-    blockId: IdValue;
-    position: Positioning;
+    blockId: IdValue
+    position: Positioning
 }
 
 export interface ArchitectureData {
-    blocks: Block[];
-    style?: Style | null;
+    blocks: Block[]
+    style?: Style | null
 
 }
 export interface Architecture extends RefsType<ArchitectureData> {
-    name: string;
-    phases: PhaseId[];
-    currentPhase: Ref<PhaseId> | null;
-    next: () => PhaseId;
-    back: () => PhaseId;
-    debugSelect: (select: SelectedProperties) => void;
-    toPhase: (phase: number | null) => void;
-    debugState?: Ref<DebugStateContainer | undefined>;
+    name: string
+    phases: PhaseId[]
+    currentPhase: Ref<PhaseId> | null
+    next: () => PhaseId
+    back: () => PhaseId
+    debugSelect: (select: SelectedProperties) => void
+    toPhase: (phase: number | null) => void
+    debugState?: Ref<DebugStateContainer | undefined>
 }
 export type RefsType<T> = {
     [P in keyof T]?: Ref<T[P]>;
-}
+};
 export interface TransitionalArchitecture extends ArchitectureDescription {
 }
 
 export type PhaseId = number | null | undefined;
 export interface CurrentPhaseInfo {
-    current: PhaseId;
+    current: PhaseId
 }
-
 
 export enum ChangeType {
     AddNewBlock = 0,
@@ -156,16 +153,16 @@ export enum ChangeType {
     ChangePosition = 3,
 }
 export interface AddBlockChangeSetting {
-    blockSettings: BlockGroupDescriptions | BlockElementDescription | null;
-    newBlockId: string;
+    blockSettings: BlockGroupDescriptions | BlockElementDescription | null
+    newBlockId: string
 }
 export interface ChangeBlockStyleSetting {
-    blockId: string;
+    blockId: string
     newStyle: Partial<BlockStyle>
 }
 export interface ChangeBlockLabelSetting {
-    blockId: string;
-    label: string;
+    blockId: string
+    label: string
 }
 export interface RemoveBlocksSetting {
 
@@ -174,148 +171,145 @@ export type ChangeSetting = AddBlockChangeSetting | ChangeBlockStyleSetting | Ch
 
 export enum ChangeOwnerType {
     Phase = 0,
-    Editor = 1
+    Editor = 1,
 }
 export interface BaseChangeOwner {
-    type: ChangeOwnerType;
+    type: ChangeOwnerType
 }
 export interface PhaseChangeOwner extends BaseChangeOwner {
-    type: ChangeOwnerType.Phase;
-    phaseId: number;
-    actionIndex: number;
+    type: ChangeOwnerType.Phase
+    phaseId: number
+    actionIndex: number
 }
 export interface EditorChangeOwner extends BaseChangeOwner {
-    type: ChangeOwnerType.Editor;
+    type: ChangeOwnerType.Editor
 }
 export type ChangeOwner = PhaseChangeOwner | EditorChangeOwner;
 export interface BaseChange {
-    type: ChangeType;
-    owner?: ChangeOwner;
+    type: ChangeType
+    owner?: ChangeOwner
 }
 export interface AddBlockChange extends BaseChange {
-    type: ChangeType.AddNewBlock;
-    setting: AddBlockChangeSetting;
+    type: ChangeType.AddNewBlock
+    setting: AddBlockChangeSetting
 }
 export interface ChangeBlockStyle extends BaseChange {
-    type: ChangeType.ChangeStyle;
-    setting: ChangeBlockStyleSetting;
+    type: ChangeType.ChangeStyle
+    setting: ChangeBlockStyleSetting
 }
 export interface RemoveBlocks extends BaseChange {
-    type: ChangeType.RemoveBlock;
-    setting: RemoveBlocksSetting;
+    type: ChangeType.RemoveBlock
+    setting: RemoveBlocksSetting
 }
 export interface ChangePosition extends BaseChange {
-    type: ChangeType.ChangePosition;
+    type: ChangeType.ChangePosition
     setting: {
-        blockId: string;
-        x: number | FormulaValue;
-        y: number | FormulaValue;
-        w: number | FormulaValue;
-        h: number | FormulaValue;
-    };
+        blockId: string
+        x: number | FormulaValue
+        y: number | FormulaValue
+        w: number | FormulaValue
+        h: number | FormulaValue
+    }
 }
 export type Change = AddBlockChange | ChangeBlockStyle | RemoveBlocks | ChangePosition;
 export interface PhaseIndex {
-    getNextPhaseById(current: PhaseId): PhaseIndexItem | undefined;
-    getPhaseById(current: PhaseId): PhaseIndexItem | undefined;
-    phases: PhaseId[];
-    getPhaseIndex(phase?: number | string | null): number;
-    findPhaseIdBy: (func: (phaseIndex: PhaseIndexItem) => boolean) => PhaseId;
+    getNextPhaseById(current: PhaseId): PhaseIndexItem | undefined
+    getPhaseById(current: PhaseId): PhaseIndexItem | undefined
+    phases: PhaseId[]
+    getPhaseIndex(phase?: number | string | null): number
+    findPhaseIdBy: (func: (phaseIndex: PhaseIndexItem) => boolean) => PhaseId
 }
 export interface PhaseIndexItem {
-    phaseId: number;
-    hasNext: boolean;
-    actions: PhaseIndexItemAction[];
+    phaseId: number
+    hasNext: boolean
+    actions: PhaseIndexItemAction[]
 }
 
 export interface PhaseIndexItemAction {
-    action: Action;
-    actionId: number;
-    actionIndex: number;
+    action: Action
+    actionId: number
+    actionIndex: number
 }
 
 export interface ActionExecutorContext {
-    indexItem: PhaseIndexItem;
-    architecture: ArchitectureDescription;
-    phaseIndex: PhaseIndex;
+    indexItem: PhaseIndexItem
+    architecture: ArchitectureDescription
+    phaseIndex: PhaseIndex
 }
 
 export interface FormulaSystemContext {
-    viewBox: ViewBoxSetting;
-    fn: {
-        [name: string]: any;
-    }
+    viewBox: ViewBoxSetting
+    fn: Record<string, any>
 }
 export interface FormulaValueFuncContext {
-    blockNamesAsFuncParams: string;
-    blocksValues: any[];
+    blockNamesAsFuncParams: string
+    blocksValues: any[]
 }
 
 export interface PropertiesConfig {
-    name: string;
-    index: number;
+    name: string
+    index: number
 }
 export interface SelectedProperties {
-    properties: PropertiesConfig[];
-    file: string;
+    properties: PropertiesConfig[]
+    file: string
 }
-
 
 export enum MessageCommand {
-    Select = "select",
-    Save = "save"
+    Select = 'select',
+    Save = 'save',
 }
 export interface BaseDebugMessage {
-    command: MessageCommand;
+    command: MessageCommand
 }
 export interface SelectDebugMessage extends BaseDebugMessage {
-    command: MessageCommand.Select;
-    data: SelectedProperties;
+    command: MessageCommand.Select
+    data: SelectedProperties
 }
 export interface SaveDebugMessage extends BaseDebugMessage {
-    command: MessageCommand.Save;
-    data: ArchitectureDescription;
-    id?: string;
+    command: MessageCommand.Save
+    data: ArchitectureDescription
+    id?: string
 }
 export type DebugMessage = SelectDebugMessage | SaveDebugMessage;
 export interface DebugStateContainer {
-    selectedBlocks?: string[] | null;
-    lines?: LineDebugAction[];
+    selectedBlocks?: string[] | null
+    lines?: LineDebugAction[]
 }
 
 export type ActionItemExecutor = (phaseId: number, action: Action, actionIndex: number) => Change[] | null;
 
 export interface ActionItem {
-    type: ActionType;
-    executor: ActionItemExecutor;
-    debugger?: (debugInfo: any) => DebugAction[];
-    blockRenamer?: (actionSetting: any, oldVal: string, val: string) => void;
+    type: ActionType
+    executor: ActionItemExecutor
+    debugger?: (debugInfo: any) => DebugAction[]
+    blockRenamer?: (actionSetting: any, oldVal: string, val: string) => void
 }
 export type ActionList = ActionItem[];
 
 export interface ActionDebugInfo {
-    action: string;
-    actionProperty: string;
-    actionValue: string;
+    action: string
+    actionProperty: string
+    actionValue: string
 }
 
 export interface DebugSelectContext {
-    style: Ref<Style>;
-    blocks: Ref<Block[]>;
-    phaseIndex: PhaseIndex;
-    transformSetting: TransformSetting;
+    style: Ref<Style>
+    blocks: Ref<Block[]>
+    phaseIndex: PhaseIndex
+    transformSetting: TransformSetting
 }
 export interface TransformationResult {
-    architecture: Ref<Architecture>;
-    config: Ref<ArchitectureDescription>;
+    architecture: Ref<Architecture>
+    config: Ref<ArchitectureDescription>
 }
 
 export interface AssetConfig {
     create: (config: {
-        name: string;
-        content: any;
-        ext: string;
-        mime?: string;
-    }) => Promise<string>;
-    load: (name: string) => Promise<Blob>;
+        name: string
+        content: any
+        ext: string
+        mime?: string
+    }) => Promise<string>
+    load: (name: string) => Promise<Blob>
 }

@@ -1,36 +1,40 @@
-import { DebugAction, DebugType, StartPhaseDebugAction } from "../debugTypes";
-import { actionExecutors } from "../phase/actionExecutors";
-import { isNotNullOrUndefined } from "coya-util";
-import { ActionType, DebugSelectContext, SelectedProperties } from "../types";
-import { getSelectedBlockId, isBlockSelected } from "./isBlockSelected";
-import { getActionInfo, getPhaseIndex, isPhaseSelected } from "./isPhaseSelected";
-import { getStyleBlockSelected, isStyleBlockSelected, isStylePositionSelected, isStyleSelected } from "./isStyleSelected";
-import { getStylePositionDebugActions } from "./getStylePositionDebugActions";
+import { isNotNullOrUndefined } from 'coya-util';
+import type { DebugAction, StartPhaseDebugAction } from '../debugTypes';
+import { DebugType } from '../debugTypes';
+import { actionExecutors } from '../phase/actionExecutors';
+import type { DebugSelectContext, SelectedProperties } from '../types';
+import { ActionType } from '../types';
+import { getSelectedBlockId, isBlockSelected } from './isBlockSelected';
+import { getActionInfo, getPhaseIndex, isPhaseSelected } from './isPhaseSelected';
+import { getStyleBlockSelected, isStyleBlockSelected, isStylePositionSelected, isStyleSelected } from './isStyleSelected';
+import { getStylePositionDebugActions } from './getStylePositionDebugActions';
 
 export function getDebugActions(selected: SelectedProperties, context: DebugSelectContext): DebugAction[] {
     if (isBlockSelected(selected)) {
         return [
             {
                 type: DebugType.Select,
-                blockIds: [getSelectedBlockId(selected)].filter(isNotNullOrUndefined)
-            }
-        ]
+                blockIds: [getSelectedBlockId(selected)].filter(isNotNullOrUndefined),
+            },
+        ];
     }
     if (isPhaseSelected(selected)) {
         const index = getPhaseIndex(selected);
-        const items = isNotNullOrUndefined(index) ? [
+        const items = isNotNullOrUndefined(index)
+            ? [
             <StartPhaseDebugAction>{
                 type: DebugType.StartPhase,
-                phaseId: index
-            }
-        ] : [];
+                phaseId: index,
+            },
+            ]
+            : [];
         const actionInfo = getActionInfo(selected);
         if (actionInfo.action) {
             const action = actionExecutors.find(x => x.type === actionInfo.action);
             if (action && action.debugger) {
                 return [
                     ...action.debugger(actionInfo),
-                    ...items
+                    ...items,
                 ];
             }
         }
@@ -42,7 +46,7 @@ export function getDebugActions(selected: SelectedProperties, context: DebugSele
             const blockId = getStyleBlockSelected(selected);
             items.push({
                 type: DebugType.Select,
-                blockIds: [blockId]
+                blockIds: [blockId],
             });
             const block = context.blocks.value.find(x => x.id === blockId);
             if (!block) {
@@ -51,14 +55,14 @@ export function getDebugActions(selected: SelectedProperties, context: DebugSele
                         item
                             .actions
                             .some(action =>
-                                action.action.name === ActionType.AddNewBlock &&
-                                isNotNullOrUndefined((action.action.value as any)[blockId])
-                            )
+                                action.action.name === ActionType.AddNewBlock
+                                && isNotNullOrUndefined((action.action.value as any)[blockId]),
+                            ),
                     );
                 if (phaseId) {
                     items.push({
                         type: DebugType.StartPhase,
-                        phaseId
+                        phaseId,
                     });
                 }
             }
@@ -66,8 +70,8 @@ export function getDebugActions(selected: SelectedProperties, context: DebugSele
         if (isStylePositionSelected(selected)) {
             return [
                 ...items,
-                ...getStylePositionDebugActions(selected, context)
-            ]
+                ...getStylePositionDebugActions(selected, context),
+            ];
         }
         return items;
     }

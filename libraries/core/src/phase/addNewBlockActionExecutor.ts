@@ -1,7 +1,9 @@
-import { ActionDebugInfo } from "..";
-import { DebugAction, DebugType } from "../debugTypes";
-import { AddNewBlockActionSetting } from "../descriptionTypes";
-import { Action, Change, ChangeType } from "../types";
+import type { ActionDebugInfo } from '..';
+import type { DebugAction } from '../debugTypes';
+import { DebugType } from '../debugTypes';
+import type { AddNewBlockActionSetting } from '../descriptionTypes';
+import type { Action, Change } from '../types';
+import { ChangeType } from '../types';
 
 export function addNewBlockActionExecutor(_: number, action: Action): Change[] | null {
     const val = action.value as AddNewBlockActionSetting;
@@ -11,15 +13,15 @@ export function addNewBlockActionExecutor(_: number, action: Action): Change[] |
             type: ChangeType.AddNewBlock,
             setting: {
                 newBlockId: key,
-                blockSettings: val[key]
-            }
+                blockSettings: val[key],
+            },
         }));
 }
 export function addNewBlockActionDebugger(actionInfo: ActionDebugInfo): DebugAction[] {
     if (actionInfo.actionProperty) {
         return [{
             type: DebugType.Select,
-            blockIds: [actionInfo.actionProperty]
+            blockIds: [actionInfo.actionProperty],
         }];
     }
     return [];

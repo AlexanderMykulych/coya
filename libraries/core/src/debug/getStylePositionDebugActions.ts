@@ -1,18 +1,18 @@
-import { ref, unref } from "vue";
-import { DebugAction, DebugType, LineDebugAction } from "../debugTypes";
-import { CustomContextBuilderFunc } from "../descriptionTypes";
-import { getFormulaValue } from "../positioning/getFormulaValue";
-import { DebugSelectContext, SelectedProperties } from "../types";
-import { getColor } from "./colors";
-
+import { ref, unref } from 'vue';
+import type { DebugAction, LineDebugAction } from '../debugTypes';
+import { DebugType } from '../debugTypes';
+import type { CustomContextBuilderFunc } from '../descriptionTypes';
+import { getFormulaValue } from '../positioning/getFormulaValue';
+import type { DebugSelectContext, SelectedProperties } from '../types';
+import { getColor } from './colors';
 
 export function getStylePositionDebugActions(selected: SelectedProperties, debugContext: DebugSelectContext): DebugAction[] {
     const posAttr = selected.properties?.[4]?.name;
     const posValue = selected.properties?.[5]?.name;
     const blockId = selected.properties?.[2]?.name;
-    if (!posAttr || !posValue) {
+    if (!posAttr || !posValue)
         return [];
-    }
+
     const posNumber = Number(posValue);
     if (!isNaN(posNumber)) {
         return [{
@@ -20,42 +20,42 @@ export function getStylePositionDebugActions(selected: SelectedProperties, debug
             lineType: posAttr as any,
             value: posNumber,
             color: getColor(),
-            label: `${blockId}.${posAttr}`
+            label: `${blockId}.${posAttr}`,
         }];
     }
     if (posValue && debugContext.style.value?.positioning) {
         try {
             const affectedBlocks: LineDebugAction[] = [];
             const addAffectedBlock = (key: string, value: number, blockId: string) => {
-                if ((key === "x" || key === "y") && !affectedBlocks.some(x => x.value === value)) {
+                if ((key === 'x' || key === 'y') && !affectedBlocks.some(x => x.value === value)) {
                     affectedBlocks.push({
                         type: DebugType.Line,
                         value,
                         color: getColor(),
                         lineType: key,
-                        label: `${blockId}.${key}: ${Math.floor(value)}`
-                    })
+                        label: `${blockId}.${key}: ${Math.floor(value)}`,
+                    });
                 }
             };
             const customContextBuilderFunc: CustomContextBuilderFunc = (pos, setting) => {
-                const posProxy = pos.value.map(x => {
+                const posProxy = pos.value.map((x) => {
                     const pos: any = x.position;
-                    let res: any = {};
+                    const res: any = {};
                     Object
                         .keys(pos)
-                        .forEach(key => {
+                        .forEach((key) => {
                             Object.defineProperty(res, key, {
                                 get: () => {
                                     const res = pos[key];
                                     addAffectedBlock(key, unref(res), x.blockId);
                                     return res;
-                                }
+                                },
                             });
                         });
                     return res;
                 });
                 return {
-                    blockNamesAsFuncParams: `${pos.value.map(x => x.blockId).join(", ")}, _`,
+                    blockNamesAsFuncParams: `${pos.value.map(x => x.blockId).join(', ')}, _`,
                     blocksValues: [
                         ...posProxy,
                         {
@@ -64,24 +64,25 @@ export function getStylePositionDebugActions(selected: SelectedProperties, debug
                                 y: unref(setting.viewBox.y),
                                 w: unref(setting.viewBox.w),
                                 h: unref(setting.viewBox.h),
-                            }
-                        }
-                    ]
+                            },
+                        },
+                    ],
                 };
             };
             const result = getFormulaValue(posValue, ref(debugContext.style.value.positioning), {
                 ...debugContext.transformSetting,
-                customContextBuilderFunc
+                customContextBuilderFunc,
             });
             return [{
                 type: DebugType.Line,
                 lineType: posAttr as any,
                 value: unref(result),
                 color: getColor(),
-                label: `${blockId}.${posAttr}`
+                label: `${blockId}.${posAttr}`,
             },
             ...affectedBlocks];
-        } catch (e) {
+        }
+        catch (e) {
             console.error(`debug. formula is: ${posValue}, ${e}`);
         }
     }

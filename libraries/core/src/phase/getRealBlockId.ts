@@ -1,13 +1,13 @@
-import { ArchitectureDescription } from "..";
+import type { ArchitectureDescription } from '..';
 /**
  * examples:
  * $all
  * $sys_const
  * b1
- * @param blockIdFromSetting 
- * @param architecture 
- * @param action 
- * @returns 
+ * @param blockIdFromSetting
+ * @param architecture
+ * @param action
+ * @returns
  */
 export const getRealBlockId = (
     blockIdFromSetting: string,
@@ -27,4 +27,4 @@ export const getRealBlockId = (
         }
     }
     action(blockIdFromSetting);
-}
+};

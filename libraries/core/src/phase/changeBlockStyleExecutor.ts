@@ -1,6 +1,6 @@
-import { BlockStyleActionSetting } from "../descriptionTypes";
-import { Action, Change, ChangeType } from "../types";
-
+import type { BlockStyleActionSetting } from '../descriptionTypes';
+import type { Action, Change } from '../types';
+import { ChangeType } from '../types';
 
 export function changeBlockStyleExecutor(_: number, action: Action): Change[] | null {
     const val = action.value as BlockStyleActionSetting;
@@ -10,7 +10,7 @@ export function changeBlockStyleExecutor(_: number, action: Action): Change[] | 
             type: ChangeType.ChangeStyle,
             setting: {
                 blockId: key,
-                newStyle: val[key]
-            }
+                newStyle: val[key],
+            },
         }));
 }

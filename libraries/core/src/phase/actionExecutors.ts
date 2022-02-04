@@ -1,14 +1,15 @@
-import { ActionList, ActionType } from "../types";
-import { addHighlightActionExecutor } from "./addHighlightActionExecutor";
-import { addNewBlockActionDebugger, addNewBlockActionExecutor, addNewBlockBlockRenamer } from "./addNewBlockActionExecutor";
-import { changeBlockPositionActionExecutor } from "./changeBlockPositionActionExecutor";
-import { changeLabelActionDebugger, changeLabelActionExecutor } from "./changeLabelActionExecutor";
-import { connectActionDebugger, connectActionExecutor, connectBlockRenamer } from "./connectActionExecutor";
-import { hideBlocksActionDebugger, hideBlocksActionExecutor } from "./hideBlocksActionExecutor";
-import { removeHighlightActionExecutor } from "./removeHighlightActionExecutor";
-import { changeBlockStyleExecutor } from "./changeBlockStyleExecutor";
-import { showActionExecutor, showBlockRenamer } from "./showActionExecutor";
-import { hideActionExecutor } from "./hideActionExecutor";
+import type { ActionList } from '../types';
+import { ActionType } from '../types';
+import { addHighlightActionExecutor } from './addHighlightActionExecutor';
+import { addNewBlockActionDebugger, addNewBlockActionExecutor, addNewBlockBlockRenamer } from './addNewBlockActionExecutor';
+import { changeBlockPositionActionExecutor } from './changeBlockPositionActionExecutor';
+import { changeLabelActionDebugger, changeLabelActionExecutor } from './changeLabelActionExecutor';
+import { connectActionDebugger, connectActionExecutor, connectBlockRenamer } from './connectActionExecutor';
+import { hideBlocksActionDebugger, hideBlocksActionExecutor } from './hideBlocksActionExecutor';
+import { removeHighlightActionExecutor } from './removeHighlightActionExecutor';
+import { changeBlockStyleExecutor } from './changeBlockStyleExecutor';
+import { showActionExecutor, showBlockRenamer } from './showActionExecutor';
+import { hideActionExecutor } from './hideActionExecutor';
 
 export const actionExecutors: ActionList = [
     {

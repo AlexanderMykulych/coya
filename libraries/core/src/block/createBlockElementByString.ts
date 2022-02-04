@@ -1,14 +1,13 @@
-import { deepCopy } from "coya-util";
-import { EnterSetting } from "..";
-import { BlockElementDescription, BlockStyle } from "../descriptionTypes";
-import { BlockElement } from "../types";
-
+import { deepCopy } from 'coya-util';
+import type { EnterSetting } from '..';
+import type { BlockElementDescription, BlockStyle } from '../descriptionTypes';
+import type { BlockElement } from '../types';
 
 export function createBlockElementByString(id: string, label: string, blockStyle?: BlockStyle): BlockElement {
     return {
         id,
         label: blockStyle?.label ?? label,
-        enter: getDefaultEnter()
+        enter: getDefaultEnter(),
     };
 }
 
@@ -16,18 +15,18 @@ export function createBlockElementByDescription(id: string, element: BlockElemen
     return {
         label: blockStyle?.label ?? element.label ?? id,
         enter: deepCopy(element.enter) ?? getDefaultEnter(),
-        id
+        id,
     };
 }
 
 export function getDefaultEnter(): EnterSetting {
     return {
         from: {
-            opacity: 0
+            opacity: 0,
         },
         to: {
             opacity: 1,
-            duration: 3
-        }
+            duration: 3,
+        },
     };
 }

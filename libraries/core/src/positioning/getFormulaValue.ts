@@ -1,20 +1,21 @@
-import { Ref, ref, computed } from "vue";
-import { TransformSetting } from "..";
-import { FormulaValue } from "../descriptionTypes";
-import { isFormulaValue } from "../typeGuards";
-import { BlockPositioning } from "../types";
-import { getFormulaValueFuncContext } from "./getFormulaValueFuncContext";
+import type { Ref } from 'vue';
+import { computed, ref } from 'vue';
+import type { TransformSetting } from '..';
+import type { FormulaValue } from '../descriptionTypes';
+import { isFormulaValue } from '../typeGuards';
+import type { BlockPositioning } from '../types';
+import { getFormulaValueFuncContext } from './getFormulaValueFuncContext';
 
 export function getFormulaValue(
     val: number | FormulaValue | undefined,
     positioning: Ref<BlockPositioning[]>,
-    setting: TransformSetting
+    setting: TransformSetting,
 ): Ref<any> {
-    if (typeof val === "number") {
+    if (typeof val === 'number')
         return ref(val);
-    }
+
     if (isFormulaValue(val)) {
-        let formula = typeof val === "string" ? val : val.formula;
+        const formula = typeof val === 'string' ? val : val.formula;
         const defaultValue = setting.defaultValue !== undefined ? setting.defaultValue : 0;
         return computed(() => {
             const contextBuilderFunc = setting.customContextBuilderFunc ?? getFormulaValueFuncContext;
@@ -22,7 +23,8 @@ export function getFormulaValue(
             try {
                 const fn = Function(`"use strict";return (function(${context.blockNamesAsFuncParams}){return ${formula};})`)();
                 return fn.apply(null, context.blocksValues) || 0;
-            } catch (e) {
+            }
+            catch (e) {
                 console.warn(e);
                 return defaultValue;
             }

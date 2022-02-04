@@ -1,34 +1,35 @@
-import { ArchitectureDescription, BlockElementType } from "../../descriptionTypes";
-import * as layout  from "@antv/layout/dist/layout.min.js";
-import { Edge, Model, Node, OutModel } from "@antv/layout";
-import { GraphPositioningStrategy, PositioningDefaults } from "./positioning";
+import * as layout from '@antv/layout/dist/layout.min.js';
+import type { Edge, Model, Node, OutModel } from '@antv/layout';
+import type { ArchitectureDescription } from '../../descriptionTypes';
+import { BlockElementType } from '../../descriptionTypes';
+import type { GraphPositioningStrategy, PositioningDefaults } from './positioning';
 const { CircularLayout, DagreLayout, GridLayout, RandomLayout } = layout;
 export function applyGraphPositioning(arch: ArchitectureDescription, strategy: GraphPositioningStrategy, defaults: PositioningDefaults) {
     let layout: any = null;
     switch (strategy) {
-        case "Dagre":
+        case 'Dagre':
             layout = new DagreLayout({
-                type: "dagre",
+                type: 'dagre',
                 nodeSize: defaults.blockW,
-                ...(defaults.layout || {})
+                ...(defaults.layout || {}),
             });
             break;
-        case "Circular":
+        case 'Circular':
             layout = new CircularLayout({
-                type: "circular",
-                ...(defaults.layout || {})
+                type: 'circular',
+                ...(defaults.layout || {}),
             });
             break;
-        case "Grid":
+        case 'Grid':
             layout = new GridLayout({
-                type: "grid",
-                ...(defaults.layout || {})
+                type: 'grid',
+                ...(defaults.layout || {}),
             });
             break;
         default:
             layout = new RandomLayout({
-                type: "random",
-                ...(defaults.layout || {})
+                type: 'random',
+                ...(defaults.layout || {}),
             });
     }
     const data = coyaToG6(arch);
@@ -45,29 +46,30 @@ export function coyaToG6(arch: ArchitectureDescription): Model {
                 if (arch.blocks[val.from] && arch.blocks[val.to]) {
                     edges.push({
                         source: val.from,
-                        target: val.to
+                        target: val.to,
                     });
                 }
-            } else {
+            }
+            else {
                 nodes.push({ id });
             }
         });
     return {
         nodes,
-        edges
+        edges,
     };
 }
 export function applyG6ToCoya(g6Model: OutModel, arch: ArchitectureDescription, defaults: PositioningDefaults) {
     const blocks = arch.style!.blocks!;
-    g6Model.nodes?.forEach(x => {
-        if (!blocks[x.id]) {
+    g6Model.nodes?.forEach((x) => {
+        if (!blocks[x.id])
             blocks[x.id] = {};
-        }
+
         blocks[x.id].position = {
             x: `${x.x}`,
             y: `${x.y}`,
             w: `${defaults.blockW}`,
-            h: `${defaults.blockH}`
+            h: `${defaults.blockH}`,
         };
     });
 }

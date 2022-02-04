@@ -1,24 +1,24 @@
-import { BlockPositioning, LineBlockElement } from "../types";
-import { computed, Ref } from "vue";
-import { BlockStyle, FormulaValue } from "../descriptionTypes";
-import { getFormulaValue } from "./getFormulaValue";
-import { TransformSetting } from "..";
+import type { Ref } from 'vue';
+import { computed } from 'vue';
+import type { BlockPositioning, LineBlockElement } from '../types';
+import type { BlockStyle, FormulaValue } from '../descriptionTypes';
+import type { TransformSetting } from '..';
+import { getFormulaValue } from './getFormulaValue';
 
 export function lineBlockPosition(blocksPositions: Ref<BlockPositioning[]>, block: LineBlockElement,
     setting: TransformSetting, blockStyle?: BlockStyle): BlockPositioning {
-   
     const getValueByCtx = (x?: number | FormulaValue, def?: any) =>
         getFormulaValue(x, blocksPositions, { defaultValue: def, ...setting });
     const arrowHeadSize = 10;
     const fromBlock = getBlockName(block.from);
     const toBlock = getBlockName(block.to);
-    let str = "";
-    if (hasSpecificPoint(block.from)) {
+    let str = '';
+    if (hasSpecificPoint(block.from))
         str += `, startPoint: ${block.from}`;
-    }
-    if (hasSpecificPoint(block.to)) {
+
+    if (hasSpecificPoint(block.to))
         str += `, endPoint: ${block.to}`;
-    }
+
     const boxs = `${block.from}.x, ${fromBlock}.y, ${fromBlock}.w, ${fromBlock}.h, ${toBlock}.x, ${toBlock}.y, ${toBlock}.w, ${toBlock}.h`;
     const meta = getValueByCtx(`_.fn.getBoxToBoxArrowPath(${boxs}, {padEnd: ${arrowHeadSize}, padStart: ${arrowHeadSize} ${str} })`, {});
 
@@ -39,19 +39,19 @@ export function lineBlockPosition(blocksPositions: Ref<BlockPositioning[]>, bloc
             h: computed(() => Math.abs(y1.value - y2.value)),
             meta: computed(() => ({
                 ...meta.value,
-                arrowHeadSize
-            }))
-        }
+                arrowHeadSize,
+            })),
+        },
     };
 }
 const getBlockName = (str: string) => {
-    return str.split(".")?.[0];
-}
-const hasSpecificPoint  = (str: string) => {
-    return str.split(".").length === 2;
-}
+    return str.split('.')?.[0];
+};
+const hasSpecificPoint = (str: string) => {
+    return str.split('.').length === 2;
+};
 const getDefaultPosition = (blockId: string) => ({
-    blockId: blockId,
+    blockId,
     position: {
         x1: 0,
         y1: 0,
@@ -64,7 +64,7 @@ const getDefaultPosition = (blockId: string) => ({
         meta: {
             arrowHeadSize: 0,
             results: {},
-            path: "",
+            path: '',
         },
     },
 });

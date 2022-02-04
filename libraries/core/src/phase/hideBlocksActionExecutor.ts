@@ -1,6 +1,8 @@
-import { DebugAction, DebugType } from "../debugTypes";
-import { isHideBlocksActionSetting } from "../typeGuards";
-import { Action, ActionDebugInfo, Change, ChangeType } from "../types";
+import type { DebugAction } from '../debugTypes';
+import { DebugType } from '../debugTypes';
+import { isHideBlocksActionSetting } from '../typeGuards';
+import type { Action, ActionDebugInfo, Change } from '../types';
+import { ChangeType } from '../types';
 
 export function hideBlocksActionExecutor(_: number, action: Action): Change[] | null {
     if (isHideBlocksActionSetting(action.value)) {
@@ -10,10 +12,10 @@ export function hideBlocksActionExecutor(_: number, action: Action): Change[] | 
                 blockId: action.value,
                 newStyle: {
                     css: {
-                        display: "none"
-                    }
-                }
-            }
+                        display: 'none',
+                    },
+                },
+            },
         }];
     }
     return [];
@@ -23,7 +25,7 @@ export function hideBlocksActionDebugger(actionInfo: ActionDebugInfo): DebugActi
     if (actionInfo.actionProperty) {
         return [{
             type: DebugType.Select,
-            blockIds: [actionInfo.actionProperty]
+            blockIds: [actionInfo.actionProperty],
         }];
     }
     return [];
