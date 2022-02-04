@@ -13,8 +13,8 @@
         "blog": "cd \"./experimental/blog/\" && pnpm dev",
         "tsa": "cd \"./libraries/cli/typescript-analizer/\" && pnpm test",
         "prepare": "husky install",
-        "lint": "eslint \"libraries/vue-component\" -c .eslintrc",
-        "lint-fix": "eslint \"libraries/editorNew\" -c .eslintrc --fix"
+        "lint": "eslint \"libraries/**/*.{vue,ts,js}\" -c .eslintrc --ignore-path .eslintignore --debug",
+        "lint-fix": "eslint \"libraries/**/*.{vue,ts,js}\" -c .eslintrc --ignore-path .eslintignore --fix"
     },
     "devDependencies": {
         "@antfu/eslint-config": "^0.16.1",

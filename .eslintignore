@@ -1,3 +1,7 @@
-dist
-node_modules
-public
+**/dist/**
+**/node_modules/**
+**/public/**
+libraries/cli/**
+libraries/gif/**
+libraries/vscode/**
+libraries/vue-component/src/examples/**

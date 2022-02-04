@@ -29,6 +29,6 @@ const paths = strictComputed(
 
 <template>
   <g ref="gEl" :style="css">
-    <path v-for="path in paths" v-bind="path" />
+    <path v-for="(path, index) in paths" v-bind="path" :key="index" />
   </g>
 </template>

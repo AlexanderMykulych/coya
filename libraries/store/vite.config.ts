@@ -1,21 +1,21 @@
-import path from 'path'
-import { defineConfig } from 'vite'
-import Vue from '@vitejs/plugin-vue'
-import Pages from 'vite-plugin-pages'
-import Layouts from 'vite-plugin-vue-layouts'
-import Icons from 'unplugin-icons/vite'
-import IconsResolver from 'unplugin-icons/resolver'
-import Components from 'unplugin-vue-components/vite'
-import AutoImport from 'unplugin-auto-import/vite'
-import Markdown from 'vite-plugin-md'
-import WindiCSS from 'vite-plugin-windicss'
-import VueI18n from '@intlify/vite-plugin-vue-i18n'
-import Inspect from 'vite-plugin-inspect'
-import Prism from 'markdown-it-prism'
-import LinkAttributes from 'markdown-it-link-attributes'
-import dts from 'vite-dts'
+import path from 'path';
+import { defineConfig } from 'vite';
+import Vue from '@vitejs/plugin-vue';
+import Pages from 'vite-plugin-pages';
+import Layouts from 'vite-plugin-vue-layouts';
+import Icons from 'unplugin-icons/vite';
+import IconsResolver from 'unplugin-icons/resolver';
+import Components from 'unplugin-vue-components/vite';
+import AutoImport from 'unplugin-auto-import/vite';
+import Markdown from 'vite-plugin-md';
+import WindiCSS from 'vite-plugin-windicss';
+import VueI18n from '@intlify/vite-plugin-vue-i18n';
+import Inspect from 'vite-plugin-inspect';
+import Prism from 'markdown-it-prism';
+import LinkAttributes from 'markdown-it-link-attributes';
+import dts from 'vite-dts';
 
-const markdownWrapperClasses = 'prose prose-sm m-auto text-left'
+const markdownWrapperClasses = 'prose prose-sm m-auto text-left';
 
 export default defineConfig({
     resolve: {
@@ -89,7 +89,7 @@ export default defineConfig({
             markdownItSetup(md) {
                 // https://prismjs.com/
                 // @ts-expect-error types mismatch
-                md.use(Prism)
+                md.use(Prism);
                 // @ts-expect-error types mismatch
                 md.use(LinkAttributes, {
                     pattern: /^https?:\/\//,
@@ -97,7 +97,7 @@ export default defineConfig({
                         target: '_blank',
                         rel: 'noopener',
                     },
-                })
+                });
             },
         }),
 
@@ -144,18 +144,18 @@ export default defineConfig({
             external: ['vue', 'pinia'],
             output: {
                 globals: {
-                    vue: 'Vue'
+                    vue: 'Vue',
                 },
                 format: 'es',
             },
         },
         lib: {
-            entry: path.join(__dirname, "/src/libEntry.ts"),
-            name: "coya-store",
-            fileName: (format) => `coya-store.${format}.js`,
-            formats: ['es']
+            entry: path.join(__dirname, '/src/libEntry.ts'),
+            name: 'coya-store',
+            fileName: format => `coya-store.${format}.js`,
+            formats: ['es'],
         },
         minify: false,
         sourcemap: true,
-    }
-})
+    },
+});

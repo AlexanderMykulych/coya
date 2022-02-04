@@ -1,16 +1,15 @@
-export async function verifyPermission(dirHandle: FileSystemDirectoryHandle, retryIfError: boolean = true) {
+export async function verifyPermission(dirHandle: FileSystemDirectoryHandle, retryIfError = true) {
     const options = {
-        mode: 'readwrite'
+        mode: 'readwrite',
     };
     // Check if permission was already granted. If so, return true.
     try {
-        if ((await dirHandle.queryPermission(options)) === 'granted') {
+        if ((await dirHandle.queryPermission(options)) === 'granted')
             return true;
-        }
+
         // Request permission. If the user grants permission, return true.
-        if ((await dirHandle.requestPermission(options)) === 'granted') {
+        if ((await dirHandle.requestPermission(options)) === 'granted')
             return true;
-        }
     }
     catch (e) {
         console.log(e);

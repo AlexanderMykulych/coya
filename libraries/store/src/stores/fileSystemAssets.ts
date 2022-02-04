@@ -1,4 +1,4 @@
-import { useCoyaStore } from "./useCoyaStore";
+import { useCoyaStore } from './useCoyaStore';
 
 export const fileSystemAssets = () => {
     const store = useCoyaStore();
@@ -7,6 +7,6 @@ export const fileSystemAssets = () => {
         assets: {
             create: store.activeProject.createAsset,
             load: store.activeProject.loadAsset,
-        }
+        },
     };
 };

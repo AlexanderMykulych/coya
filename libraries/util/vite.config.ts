@@ -1,25 +1,25 @@
-import { defineConfig } from 'vite'
 import path from 'path';
-import dts from "vite-plugin-dts";
+import { defineConfig } from 'vite';
+import dts from 'vite-plugin-dts';
 
-const resolvePath = (str: string) => path.resolve(__dirname, str)
+const resolvePath = (str: string) => path.resolve(__dirname, str);
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [
-        dts()
+        dts(),
     ],
     build: {
         rollupOptions: {
             output: {
-                format: 'es'
+                format: 'es',
             },
         },
         sourcemap: true,
         lib: {
-            entry: resolvePath("/src/index.ts"),
-            name: "coya-util",
-            fileName: (format) => `coya-util.${format}.js`,
-            formats: ['es']
+            entry: resolvePath('/src/index.ts'),
+            name: 'coya-util',
+            fileName: format => `coya-util.${format}.js`,
+            formats: ['es'],
         },
-    }
-})
+    },
+});

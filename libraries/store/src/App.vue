@@ -3,5 +3,5 @@
 </script>
 
 <template>
-    <Projects />
+  <Projects />
 </template>

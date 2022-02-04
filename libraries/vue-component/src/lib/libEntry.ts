@@ -2,7 +2,7 @@ import 'virtual:windi-base.css';
 import 'virtual:windi-components.css';
 import './../styles/main.css';
 import 'virtual:windi-utilities.css';
-import Prism from 'prismjs';
+import 'prismjs';
 import { startSocketClient } from '../socket';
 import Coya from './../components/Coya.vue';
 import App from './../App.vue';
