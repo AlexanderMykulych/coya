@@ -3,9 +3,13 @@ import type { WidgetConfig } from '../WidgetConfig';
 import { widgetMaping } from './widgetMaping';
 import formulaWidget from './formulaWidget.vue';
 
-const props = defineProps<{ widgetConfig: WidgetConfig }>();
+const props = defineProps<{
+    widgetConfig: WidgetConfig
+    rootPath?: string
+}>();
 const component = computed(() => {
-    const config = widgetMaping.find(x => x.path.test(props.widgetConfig.path));
+    const root = props.rootPath ? `${props.rootPath}.` : '';
+    const config = widgetMaping.find(x => x.path.test(`${root}${props.widgetConfig.path}`));
     if (config)
         return config.component;
 

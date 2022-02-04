@@ -5,3 +5,5 @@ libraries/cli/**
 libraries/gif/**
 libraries/vscode/**
 libraries/vue-component/src/examples/**
+**/components.d.ts
+**/auto-imports.d.ts

@@ -34,6 +34,7 @@ const cleanLabel = () => (activeNode.label = '');
 
 <template>
   <div class="flex justify-start pb-2">
+    <slot name="before"/>
     <button @click="activatePinMode">
       <i-ph:push-pin-simple-fill v-if="isPinned" />
       <i-ph:push-pin-bold v-else />

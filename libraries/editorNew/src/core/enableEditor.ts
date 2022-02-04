@@ -19,7 +19,7 @@ export function enableEditor({ svg, config, id, initialConfig, architecture, wor
         const editor: EnabledEditor = reactive<EnabledEditor>({
             id,
             enable: true,
-            wrap: node => wrapEditorNode(editor, node),
+            wrap: node => markRaw(wrapEditorNode(editor, node)),
             state: {
                 pins: {},
             },

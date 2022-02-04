@@ -15,6 +15,15 @@ export function analizeAst(editorValue: string): AstAnalizingResult {
                     start: value.loc?.start,
                     end: value.loc?.end,
                 },
+                ...[parent === ''
+                    ? {
+                        path: parent,
+                        type: value.type,
+                        start: value.loc?.end,
+                        end: value.loc?.end,
+                        isEnd: true,
+                    }
+                    : undefined],
                 ...value
                     .children
                     .flatMap((x) => {
@@ -43,6 +52,13 @@ export function analizeAst(editorValue: string): AstAnalizingResult {
                     start: value.loc?.start,
                     end: value.loc?.end,
                     type: value.type,
+                });
+                rows.push({
+                    path: parent,
+                    start: value.loc?.end,
+                    end: value.loc?.end,
+                    type: value.type,
+                    isEnd: true,
                 });
             }
             return [

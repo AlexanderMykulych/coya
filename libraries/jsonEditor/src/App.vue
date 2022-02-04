@@ -3,7 +3,7 @@ import { changeValue } from 'coya-util';
 import type { ChangedItem } from 'coya-util/dist/src/ChangedItem';
 import { reactive, ref, toRef } from 'vue';
 
-const val = ref([{
+const val = ref({
     init: {
         position: {
             x: '20',
@@ -17,7 +17,7 @@ const val = ref([{
         label: '',
     },
     label: '',
-}]);
+});
 const jsonRows = reactive({
     rows: {},
     ast: {},
@@ -31,7 +31,7 @@ const setConfig = ({ analizingResult, configs }) => {
 };
 
 const allowedPath = ref(null);
-const allowAll = ref(false);
+const allowAll = ref(true);
 const widgetFilter = ({ path }) => {
     if (allowAll.value)
         return true;

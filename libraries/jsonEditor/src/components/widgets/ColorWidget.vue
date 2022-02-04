@@ -12,11 +12,11 @@ const changeColor = (color: string) => emit('valueChange', color);
 </script>
 
 <template>
-  <div>
+  <div class="flex">
     <ColorPicker
       :is-widget="false"
-      format="hex8"
       :pure-color="color"
+      format="hex8"
       @update:pureColor="changeColor"
     />
   </div>
@@ -47,5 +47,10 @@ const changeColor = (color: string) => emit('valueChange', color);
 }
 .hu-color-picker {
     box-sizing: content-box;
+}
+:deep(.vc-color-wrap) {
+    width: 20px;
+    height: 19px;
+    margin-left: 5px;
 }
 </style>

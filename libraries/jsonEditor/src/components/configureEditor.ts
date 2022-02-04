@@ -1,9 +1,7 @@
-import type * as monaco from 'monaco-editor';
 import { reactive } from 'vue';
-import { setValueByPath } from 'coya-util';
-import type { ConfigureEditorOption, JsonAstRow, WidgetConfig, WidgetFilterConfig } from './WidgetConfig';
-import { createWidget } from './createWidget';
+import type { ConfigureEditorOption, JsonAstRow } from './WidgetConfig';
 import { analizeAst } from './analizeAst';
+import { getAndApplyConfig } from './getAndApplyConfig';
 
 export function configureEditor({ editor, widgetConfig }: ConfigureEditorOption) {
     const getAndApplyConfigLoc = (row: JsonAstRow, index: number) => getAndApplyConfig(editor, row, index, widgetConfig);
@@ -45,42 +43,5 @@ export function configureEditor({ editor, widgetConfig }: ConfigureEditorOption)
     return {
         analizingResult,
         configs,
-    };
-}
-
-function getAndApplyConfig(
-    editor: monaco.editor.IStandaloneCodeEditor,
-    row: JsonAstRow,
-    index: number,
-    widgetFilterConfig?: WidgetFilterConfig,
-) {
-    if (!widgetFilterConfig?.activateDefaultWidget)
-        return;
-
-    const config: WidgetConfig = reactive<WidgetConfig>({
-        row,
-        position: {
-            column: computed(() => 100) as any,
-            lineNumber: computed(() => config.row?.start.line) as any,
-        },
-        path: computed(() => config.row?.path) as any,
-        id: `widget_${index}`,
-        index,
-    });
-    const { sideDom, zoneDom } = createWidget(editor, config, widgetFilterConfig);
-    return {
-        config,
-        sideDom,
-        zoneDom,
-        onValueChange: (value) => {
-            const obj = JSON.parse(editor.getValue());
-            if (obj && config.row) {
-                config.row.value = value;
-                setValueByPath(obj, value, config.row.path);
-                editor._savingByWidget = true;
-                editor.setValue(JSON.stringify(obj, null, '\t'));
-                editor._savingByWidget = false;
-            }
-        },
     };
 }
