@@ -1,6 +1,7 @@
 import * as monaco from 'monaco-editor';
 import { watch } from 'vue';
-import { WidgetChangeCallback, WidgetConfig } from './WidgetConfig';
+import type { WidgetConfig } from './WidgetConfig';
+import { WidgetChangeCallback } from './WidgetConfig';
 import { createVueDomElement } from './createVueDomElement';
 
 export function createCommonWidget(widgetConfig: WidgetConfig, editor: monaco.editor.IStandaloneCodeEditor) {
@@ -24,7 +25,7 @@ export function createCommonWidget(widgetConfig: WidgetConfig, editor: monaco.ed
 
     const initConfig = createMonacoConfig(widgetConfig);
 
-    watch(() => widgetConfig, value => {
+    watch(() => widgetConfig, (value) => {
         const config = createMonacoConfig(value);
         editor.layoutContentWidget(config);
     }, {

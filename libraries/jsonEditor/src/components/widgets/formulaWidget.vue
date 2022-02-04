@@ -1,17 +1,17 @@
 <script lang="ts" setup>
-import { computed, reactive, onScopeDispose } from 'vue';
-import { WidgetConfig } from '../WidgetConfig';
+import { computed, onScopeDispose, reactive } from 'vue';
+import type { WidgetConfig } from '../WidgetConfig';
 
 const props = defineProps<{ widgetConfig: WidgetConfig }>();
 const emit = defineEmits(['valueChange']);
 const numbValue = computed(() => Number(props.widgetConfig.row.value));
 const isNumber = computed(() => !isNaN(numbValue.value));
-const isString = computed(() => typeof props.widgetConfig.row.value === "string");
+const isString = computed(() => typeof props.widgetConfig.row.value === 'string');
 const coef = 3;
 const clickInfo = reactive({
     enabled: false,
     x: 0,
-    initValue: 0
+    initValue: 0,
 });
 const onMousedown = (event: MouseEvent) => {
     clickInfo.initValue = Number(props.widgetConfig.row.value);
@@ -25,7 +25,7 @@ const onMouseup = (event: MouseEvent) => {
         event.stopImmediatePropagation();
     }
     clickInfo.enabled = false;
-}
+};
 const onMousemove = (event: MouseEvent) => {
     if (clickInfo.enabled) {
         const res = clickInfo.initValue + (event.x - clickInfo.x) * coef;
@@ -38,30 +38,30 @@ const onClick = (event: MouseEvent) => {
         event.stopPropagation();
         event.stopImmediatePropagation();
     }
-}
-window.addEventListener("mouseup", onMouseup);
-window.addEventListener("mousemove", onMousemove);
-window.addEventListener("click", onClick);
+};
+window.addEventListener('mouseup', onMouseup);
+window.addEventListener('mousemove', onMousemove);
+window.addEventListener('click', onClick);
 
 onScopeDispose(() => {
-    window.removeEventListener("mouseup", onMouseup);
-    window.removeEventListener("mousemove", onMousemove);
-    window.removeEventListener("click", onClick);
+    window.removeEventListener('mouseup', onMouseup);
+    window.removeEventListener('mousemove', onMousemove);
+    window.removeEventListener('click', onClick);
 });
 </script>
 
 <template>
-    <div class="text-dark-100 w-full h-3.5 flex">
-        <div v-if="isNumber" class="cursor-ew-resize inline-block">
-            <i-uil:arrows-resize @mousedown="onMousedown" />
-        </div>
-        <!-- <input
+  <div class="text-dark-100 w-full h-3.5 flex">
+    <div v-if="isNumber" class="cursor-ew-resize inline-block">
+      <i-uil:arrows-resize @mousedown="onMousedown" />
+    </div>
+    <!-- <input
         :value="widgetConfig.row.value"
         type="text"
         class="bg-gray-600 text-white"
         @input="$emit('valueChange', $event?.target?.value)"
         />-->
-    </div>
+  </div>
 </template>
 
 <style>

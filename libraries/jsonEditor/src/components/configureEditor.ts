@@ -1,24 +1,24 @@
-import * as monaco from 'monaco-editor';
+import type * as monaco from 'monaco-editor';
 import { reactive } from 'vue';
-import { ConfigureEditorOption, JsonAstRow, WidgetConfig, WidgetFilterConfig } from './WidgetConfig';
+import { setValueByPath } from 'coya-util';
+import type { ConfigureEditorOption, JsonAstRow, WidgetConfig, WidgetFilterConfig } from './WidgetConfig';
 import { createWidget } from './createWidget';
-import { analizeAst } from "./analizeAst";
-import { setValueByPath } from "coya-util";
+import { analizeAst } from './analizeAst';
 
 export function configureEditor({ editor, widgetConfig }: ConfigureEditorOption) {
     const getAndApplyConfigLoc = (row: JsonAstRow, index: number) => getAndApplyConfig(editor, row, index, widgetConfig);
     const analizingResult = reactive(analizeAst(editor.getValue()));
-    
+
     const configs = ref(
         analizingResult.rows
             ?.map((x, index) => getAndApplyConfigLoc(x, index))
-            .filter(x => !!x)
+            .filter(x => !!x),
     );
 
-    editor.onDidChangeModelContent(_ => {
-        if (editor["_savingByWidget"]) {
+    editor.onDidChangeModelContent((_) => {
+        if (editor._savingByWidget)
             return;
-        }
+
         const { ast, rows: result } = analizeAst(editor.getValue());
         analizingResult.ast = ast;
         analizingResult.rows = result;
@@ -26,9 +26,9 @@ export function configureEditor({ editor, widgetConfig }: ConfigureEditorOption)
         analizingResult.rows?.forEach((x, index) => {
             if (configs.value.length <= index) {
                 const res = getAndApplyConfigLoc(x, index);
-                if (!res) {
+                if (!res)
                     return;
-                }
+
                 configs.value.push(res);
             }
             const { config } = configs.value[index];
@@ -39,12 +39,12 @@ export function configureEditor({ editor, widgetConfig }: ConfigureEditorOption)
         if (configs.value.length > analizingResult.rows.length) {
             configs.value
                 .slice(analizingResult.rows.length)
-                .forEach(x => x!.config.row = undefined)
+                .forEach(x => x!.config.row = undefined);
         }
     });
     return {
         analizingResult,
-        configs
+        configs,
     };
 }
 
@@ -54,9 +54,9 @@ function getAndApplyConfig(
     index: number,
     widgetFilterConfig?: WidgetFilterConfig,
 ) {
-    if (!widgetFilterConfig?.activateDefaultWidget) {
+    if (!widgetFilterConfig?.activateDefaultWidget)
         return;
-    }
+
     const config: WidgetConfig = reactive<WidgetConfig>({
         row,
         position: {
@@ -66,8 +66,8 @@ function getAndApplyConfig(
         path: computed(() => config.row?.path) as any,
         id: `widget_${index}`,
         index,
-    })
-    const {sideDom, zoneDom} = createWidget(editor, config, widgetFilterConfig)
+    });
+    const { sideDom, zoneDom } = createWidget(editor, config, widgetFilterConfig);
     return {
         config,
         sideDom,
@@ -77,10 +77,10 @@ function getAndApplyConfig(
             if (obj && config.row) {
                 config.row.value = value;
                 setValueByPath(obj, value, config.row.path);
-                editor["_savingByWidget"] = true;
+                editor._savingByWidget = true;
                 editor.setValue(JSON.stringify(obj, null, '\t'));
-                editor["_savingByWidget"] = false;
+                editor._savingByWidget = false;
             }
-        }
+        },
     };
 }

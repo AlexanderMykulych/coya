@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { computed, ref } from 'vue';
 import { ColorPicker } from 'vue3-colorpicker';
 import 'vue3-colorpicker/style.css';
-import { WidgetConfig } from '../WidgetConfig';
 import { hexToRgba } from 'coya-util';
+import type { WidgetConfig } from '../WidgetConfig';
 
 const props = defineProps<{ widgetConfig: WidgetConfig }>();
 const emit = defineEmits(['valueChange']);
@@ -12,21 +12,21 @@ const open = ref(false);
 const color = computed(() => props.widgetConfig?.row?.value);
 const updateColor = (val: any) => {
     const alpha = Math.round((Math.round(val.rgba.a * 100) / 100) * 255);
-    var hexAlpha = (alpha + 0x10000).toString(16).substr(-2).toUpperCase();
+    const hexAlpha = (alpha + 0x10000).toString(16).substr(-2).toUpperCase();
     emit('valueChange', val.hex + hexAlpha);
 };
 const changeColor = (color: string) => emit('valueChange', color);
 </script>
 
 <template>
-    <div>
-        <ColorPicker
-            :isWidget="false"
-            format="hex8"
-            @update:pureColor="changeColor"
-            :pureColor="color"
-        />
-    </div>
+  <div>
+    <ColorPicker
+      :is-widget="false"
+      format="hex8"
+      :pure-color="color"
+      @update:pureColor="changeColor"
+    />
+  </div>
 </template>
 
 <style scoped>

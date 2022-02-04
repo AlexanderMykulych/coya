@@ -1,5 +1,6 @@
-import parse, { ValueNode, PropertyNode } from 'json-to-ast';
-import { AstAnalizingResult } from './WidgetConfig';
+import type { PropertyNode, ValueNode } from 'json-to-ast';
+import parse from 'json-to-ast';
+import type { AstAnalizingResult } from './WidgetConfig';
 
 export function analizeAst(editorValue: string): AstAnalizingResult {
     const ast = parse(editorValue);
@@ -15,10 +16,9 @@ export function analizeAst(editorValue: string): AstAnalizingResult {
                 },
                 ...value
                     .children
-                    .flatMap(x => {
-                        if (x.type === 'Property') {
+                    .flatMap((x) => {
+                        if (x.type === 'Property')
                             return analizeChildrens(`${parent}${parent ? '.' : ''}${x.key.value}`, x.value, x);
-                        }
                     })
                     .filter(x => !!x),
             ];
@@ -32,7 +32,8 @@ export function analizeAst(editorValue: string): AstAnalizingResult {
                 end: node.loc?.end,
                 type: value.type,
             };
-        } else if (value.type === "Array") {
+        }
+        else if (value.type === 'Array') {
             const rows = [];
             if (parent === '') {
                 rows.push({
@@ -47,9 +48,8 @@ export function analizeAst(editorValue: string): AstAnalizingResult {
                 ...value
                     .children
                     .flatMap((x, index) => {
-                        if (x.type === 'Object') {
+                        if (x.type === 'Object')
                             return analizeChildrens(`${parent}${parent ? '.' : ''}${index}`, x);
-                        }
                     })
                     .filter(x => !!x),
             ];
@@ -57,6 +57,6 @@ export function analizeAst(editorValue: string): AstAnalizingResult {
     };
     return {
         ast,
-        rows: analizeChildrens('', ast)
+        rows: analizeChildrens('', ast),
     };
 }

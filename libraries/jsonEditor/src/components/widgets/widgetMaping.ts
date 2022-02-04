@@ -1,12 +1,12 @@
-import ColorWidget from './ColorWidget.vue'
+import ColorWidget from './ColorWidget.vue';
 
 export const widgetMaping = [{
     path: /css\.fill/,
-    component: ColorWidget
+    component: ColorWidget,
 }, {
     path: /css\..*color/,
-    component: ColorWidget
+    component: ColorWidget,
 }, {
     path: /css\.stroke$/,
-    component: ColorWidget
-}]
+    component: ColorWidget,
+}];

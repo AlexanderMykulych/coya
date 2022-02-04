@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { changeValue, setValueByPath } from 'coya-util';
-import { ref, computed, toRef, reactive } from 'vue';
-import { ChangedItem } from 'coya-util/src/whatChanged';
+import { computed, reactive, ref, toRef } from 'vue';
+import type { ChangedItem } from 'coya-util/src/whatChanged';
 
 const val = ref([{
     init: {
@@ -32,12 +32,11 @@ const prepX = computed({
         return val.value.init?.position?.x;
     },
     set(newVal: string) {
-        if (val.value.init.position.x) {
+        if (val.value.init.position.x)
             val.value.init.position.x = newVal;
-        }
     },
 });
-let jsonRows = reactive({
+const jsonRows = reactive({
     rows: {},
     ast: {},
     configs: [],
@@ -54,9 +53,9 @@ const setConfig = ({ analizingResult, configs }) => {
 const allowedPath = ref(null);
 const allowAll = ref(false);
 const widgetFilter = ({ path }) => {
-    if (allowAll.value) {
+    if (allowAll.value)
         return true;
-    }
+
     if (path.endsWith('.css')) {
         return {
             heightInLines: 5,
@@ -83,32 +82,34 @@ const onChangeAttr = (changes: ChangedItem[]) => {
 </script>
 
 <template>
-    <div class="grid grid-cols-2 h-full">
-        <div class="grid grid-cols-1 grid-rows-2">
-            <div>
-                <input type="text" v-model="allowedPath" /> <button @click="showConfigs = !showConfigs">switch</button>
-                <JsonEditor v-if="showConfigs" style="height: 500px" :modelValue="jsonRows.configs" />
-                <JsonEditor v-else style="height: 500px" :modelValue="jsonRows.rows" />
-            </div>
-            <div>
-                <JsonEditor style="height: 500px" :modelValue="jsonRows.ast" />
-            </div>
-        </div>
-        <JsonEditor
-            :modelValue="val"
-            @changeAttr="onChangeAttr"
-            @set-editor-config="setConfig"
-            :activateDefaultWidget="true"
-            :widgetFilter="widgetFilter"
-        >
-            <template #widget="{ config }">
-                <!-- {{config.id}} -->
-            </template>
-            <template #line-widget="{ config }">
-                <div class="bg-red-200 h-full">
-                    {{ config.row.path }}
-                </div>
-            </template>
-        </JsonEditor>
+  <div class="grid grid-cols-2 h-full">
+    <div class="grid grid-cols-1 grid-rows-2">
+      <div>
+        <input v-model="allowedPath" type="text"> <button @click="showConfigs = !showConfigs">
+          switch
+        </button>
+        <JsonEditor v-if="showConfigs" style="height: 500px" :model-value="jsonRows.configs" />
+        <JsonEditor v-else style="height: 500px" :model-value="jsonRows.rows" />
+      </div>
+      <div>
+        <JsonEditor style="height: 500px" :model-value="jsonRows.ast" />
+      </div>
     </div>
+    <JsonEditor
+      :model-value="val"
+      :activate-default-widget="true"
+      :widget-filter="widgetFilter"
+      @changeAttr="onChangeAttr"
+      @set-editor-config="setConfig"
+    >
+      <template #widget="{ config }">
+        <!-- {{config.id}} -->
+      </template>
+      <template #line-widget="{ config }">
+        <div class="bg-red-200 h-full">
+          {{ config.row.path }}
+        </div>
+      </template>
+    </JsonEditor>
+  </div>
 </template>

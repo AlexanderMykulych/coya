@@ -3,16 +3,16 @@
 // Read more: https://github.com/vuejs/vue-next/pull/3399
 
 declare module 'vue' {
-  export interface GlobalComponents {
-    ColorWidget: typeof import('./components/widgets/ColorWidget.vue')['default']
-    Footer: typeof import('./components/Footer.vue')['default']
-    FormulaWidget: typeof import('./components/widgets/formulaWidget.vue')['default']
-    'IUil:arrowsResize': typeof import('~icons/uil/arrows-resize')['default']
-    JsonEditor: typeof import('./components/JsonEditor.vue')['default']
-    README: typeof import('./components/README.md')['default']
-    TestWidget: typeof import('./components/widgets/testWidget.vue')['default']
-    WrapperWidget: typeof import('./components/widgets/wrapperWidget.vue')['default']
-  }
+    export interface GlobalComponents {
+        ColorWidget: typeof import('./components/widgets/ColorWidget.vue')['default']
+        Footer: typeof import('./components/Footer.vue')['default']
+        FormulaWidget: typeof import('./components/widgets/formulaWidget.vue')['default']
+        'IUil:arrowsResize': typeof import('~icons/uil/arrows-resize')['default']
+        JsonEditor: typeof import('./components/JsonEditor.vue')['default']
+        README: typeof import('./components/README.md')['default']
+        TestWidget: typeof import('./components/widgets/testWidget.vue')['default']
+        WrapperWidget: typeof import('./components/widgets/wrapperWidget.vue')['default']
+    }
 }
 
-export { }
+export { };

@@ -1,22 +1,22 @@
-import path from 'path'
-import { defineConfig } from 'vite'
-import Vue from '@vitejs/plugin-vue'
-import Pages from 'vite-plugin-pages'
-import Layouts from 'vite-plugin-vue-layouts'
-import Icons from 'unplugin-icons/vite'
-import IconsResolver from 'unplugin-icons/resolver'
-import Components from 'unplugin-vue-components/vite'
-import AutoImport from 'unplugin-auto-import/vite'
-import Markdown from 'vite-plugin-md'
-import WindiCSS from 'vite-plugin-windicss'
-import VueI18n from '@intlify/vite-plugin-vue-i18n'
-import Inspect from 'vite-plugin-inspect'
-import Prism from 'markdown-it-prism'
-import LinkAttributes from 'markdown-it-link-attributes'
+import path from 'path';
+import { defineConfig } from 'vite';
+import Vue from '@vitejs/plugin-vue';
+import Pages from 'vite-plugin-pages';
+import Layouts from 'vite-plugin-vue-layouts';
+import Icons from 'unplugin-icons/vite';
+import IconsResolver from 'unplugin-icons/resolver';
+import Components from 'unplugin-vue-components/vite';
+import AutoImport from 'unplugin-auto-import/vite';
+import Markdown from 'vite-plugin-md';
+import WindiCSS from 'vite-plugin-windicss';
+import VueI18n from '@intlify/vite-plugin-vue-i18n';
+import Inspect from 'vite-plugin-inspect';
+import Prism from 'markdown-it-prism';
+import LinkAttributes from 'markdown-it-link-attributes';
 
-const markdownWrapperClasses = 'prose prose-sm m-auto text-left'
+const markdownWrapperClasses = 'prose prose-sm m-auto text-left';
 
-const prefix = `monaco-editor/esm/vs`;
+const prefix = 'monaco-editor/esm/vs';
 export default defineConfig({
     resolve: {
         alias: {
@@ -87,7 +87,7 @@ export default defineConfig({
             'vue-router',
             '@vueuse/core',
             '@vueuse/head',
-            "vue-color-kit",
+            'vue-color-kit',
         ],
         exclude: [
             'vue-demi',
@@ -98,7 +98,7 @@ export default defineConfig({
             external: ['vue', 'coya-util'],
             output: {
                 globals: {
-                    vue: 'Vue'
+                    vue: 'Vue',
                 },
                 format: 'es',
                 manualChunks: {
@@ -108,13 +108,13 @@ export default defineConfig({
                     tsWorker: [`${prefix}/language/typescript/ts.worker`],
                     editorWorker: [`${prefix}/editor/editor.worker`],
                 },
-            }
+            },
         },
         lib: {
-            entry: path.resolve(__dirname, "/src/libMain.ts"),
-            name: "coya-json-editor",
-            fileName: (format) => `coya-json-editor.${format}.js`,
-            formats: ['es']
+            entry: path.resolve(__dirname, '/src/libMain.ts'),
+            name: 'coya-json-editor',
+            fileName: format => `coya-json-editor.${format}.js`,
+            formats: ['es'],
         },
-    }
-})
+    },
+});

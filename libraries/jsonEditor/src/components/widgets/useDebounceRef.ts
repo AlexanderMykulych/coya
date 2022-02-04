@@ -3,18 +3,18 @@ export function useDebouncedRef(value: any, delay = 200) {
     return customRef((track, trigger) => {
         return {
             get() {
-                track()
-                return value
+                track();
+                return value;
             },
             set(newValue) {
-                if (timeout) {
-                    clearTimeout(timeout)
-                }
+                if (timeout)
+                    clearTimeout(timeout);
+
                 timeout = setTimeout(() => {
-                    value = newValue
-                    trigger()
-                }, delay)
-            }
-        }
-    })
+                    value = newValue;
+                    trigger();
+                }, delay);
+            },
+        };
+    });
 }

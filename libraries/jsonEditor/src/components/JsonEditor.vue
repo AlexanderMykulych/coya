@@ -1,16 +1,16 @@
 <script lang="ts" setup>
 import * as monaco from 'monaco-editor';
 import { onMounted, ref, shallowRef, watch } from 'vue';
-import { configureEditor } from './configureEditor';
-import { WidgetFilter } from './WidgetConfig';
 import { fastDeepEqual, whatChanged } from 'coya-util';
+import { configureEditor } from './configureEditor';
+import type { WidgetFilter } from './WidgetConfig';
 
 const props = defineProps<{
-    modelValue: any;
-    config?: any;
-    activateDefaultWidget?: boolean;
-    emitFullObject?: boolean;
-    widgetFilter?: WidgetFilter;
+    modelValue: any
+    config?: any
+    activateDefaultWidget?: boolean
+    emitFullObject?: boolean
+    widgetFilter?: WidgetFilter
 }>();
 const emit = defineEmits(['changeAttr', 'set-editor', 'set-editor-config', 'update:modelValue']);
 const editorEl = ref(null);
@@ -24,9 +24,8 @@ const editorConfig = ref(null);
 debouncedWatch(
     () => props.modelValue,
     (val: any) => {
-        if (!fastDeepEqual(JSON.parse(jsonValue.value), val)) {
+        if (!fastDeepEqual(JSON.parse(jsonValue.value), val))
             jsonValue.value = JSON.stringify(val, null, '\t');
-        }
     },
     {
         debounce: 200,
@@ -52,9 +51,8 @@ onMounted(() => {
                     const changed = whatChanged(props.modelValue, val, false);
                     if (changed.length > 0) {
                         emit('changeAttr', changed);
-                        if (props.emitFullObject) {
+                        if (props.emitFullObject)
                             emit('update:modelValue', val);
-                        }
                     }
                 }
             });
@@ -69,9 +67,8 @@ onMounted(() => {
             watch(
                 () => jsonValue.value,
                 (val) => {
-                    if (val && val !== editor.value?.getValue()) {
+                    if (val && val !== editor.value?.getValue())
                         editor.value?.setValue(val);
-                    }
                 },
             );
         }
@@ -81,40 +78,40 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="h-full">
-        <div ref="editorEl" class="h-full text-left json-editor" />
-        <template v-if="editorConfig?.configs?.length > 0">
-            <Teleport
-                v-for="config in editorConfig?.configs"
-                :to="config.sideDom"
-                :key="config.config.id"
-            >
-                <div class="flex" v-if="config.config.row">
-                    <slot
-                        name="widget"
-                        :config="config.config"
-                        :valueChange="config.onValueChange"
-                    />
-                    <wrapperWidget
-                        :widgetConfig="config.config"
-                        @valueChange="config.onValueChange"
-                    />
-                </div>
-            </Teleport>
-            <Teleport
-                v-for="config in editorConfig?.configs"
-                :to="config.zoneDom"
-                :key="config.config.id"
-            >
-                <slot
-                    name="line-widget"
-                    v-if="!!config.config.row"
-                    :config="config.config"
-                    :valueChange="config.onValueChange"
-                />
-            </Teleport>
-        </template>
-    </div>
+  <div class="h-full">
+    <div ref="editorEl" class="h-full text-left json-editor" />
+    <template v-if="editorConfig?.configs?.length > 0">
+      <Teleport
+        v-for="config in editorConfig?.configs"
+        :key="config.config.id"
+        :to="config.sideDom"
+      >
+        <div v-if="config.config.row" class="flex">
+          <slot
+            name="widget"
+            :config="config.config"
+            :valueChange="config.onValueChange"
+          />
+          <wrapperWidget
+            :widget-config="config.config"
+            @valueChange="config.onValueChange"
+          />
+        </div>
+      </Teleport>
+      <Teleport
+        v-for="config in editorConfig?.configs"
+        :key="config.config.id"
+        :to="config.zoneDom"
+      >
+        <slot
+          v-if="!!config.config.row"
+          name="line-widget"
+          :config="config.config"
+          :valueChange="config.onValueChange"
+        />
+      </Teleport>
+    </template>
+  </div>
 </template>
 
 <style scoped>
