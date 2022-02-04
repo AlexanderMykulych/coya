@@ -1,6 +1,6 @@
 <script setup lang="ts">
-const props = defineProps<{ name: string }>()
-const router = useRouter()
+const props = defineProps<{ name: string }>();
+const router = useRouter();
 </script>
 
 <template>

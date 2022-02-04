@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-const props = defineProps<{ x: number, y: number }>();
+const props = defineProps<{ x: number; y: number }>();
 const width = ref(50);
 const height = ref(14);
 
@@ -11,37 +11,37 @@ const prepX = computed(() => props.x.toFixed(1));
 const prepY = computed(() => props.y.toFixed(1));
 
 const style = reactive({
-    fontSize: "8px"
+    fontSize: '8px',
 });
 </script>
 
 <template>
-    <svg :x="calcX" :y="calcY" :width="width" :height="height" pointer-events="none">
-        <g>
-            <rect
-                width="100%"
-                height="100%"
-                x="0"
-                y="0"
-                fill="#32b9f83d"
-                stroke-width="0.2"
-                stroke="black"
-            />
-            <foreignObject
-                style="overflow: visible; text-align: left;"
-                pointer-events="none"
-                width="100%"
-                height="100%"
-                requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
-            >
-                <div xmlns="http://www.w3.org/1999/xhtml">
-                    <div class="pos-cnt" :style="style">
-                        <div>[{{ prepX }}; {{ prepY }}]</div>
-                    </div>
-                </div>
-            </foreignObject>
-        </g>
-    </svg>
+  <svg :x="calcX" :y="calcY" :width="width" :height="height" pointer-events="none">
+    <g>
+      <rect
+        width="100%"
+        height="100%"
+        x="0"
+        y="0"
+        fill="#32b9f83d"
+        stroke-width="0.2"
+        stroke="black"
+      />
+      <foreignObject
+        style="overflow: visible; text-align: left;"
+        pointer-events="none"
+        width="100%"
+        height="100%"
+        requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
+      >
+        <div xmlns="http://www.w3.org/1999/xhtml">
+          <div class="pos-cnt" :style="style">
+            <div>[{{ prepX }}; {{ prepY }}]</div>
+          </div>
+        </div>
+      </foreignObject>
+    </g>
+  </svg>
 </template>
 
 <style scoped>

@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import gear from "/src/assets/gear.svg"
+import gear from '/src/assets/gear.svg';
 
 </script>
 
 <template>
-    <div class="def-debug">
-        <img :src="gear" class="debug-img" />
-        <p>Select node</p>
-    </div>
+  <div class="def-debug">
+    <img :src="gear" class="debug-img">
+    <p>Select node</p>
+  </div>
 </template>
 
 <style scoped>

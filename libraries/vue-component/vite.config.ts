@@ -1,14 +1,13 @@
-import path from 'path'
-import { defineConfig } from 'vite'
-import Vue from '@vitejs/plugin-vue'
-import Pages from 'vite-plugin-pages'
-import ViteIcons, { ViteIconsResolver } from 'vite-plugin-icons'
-import ViteComponents from 'vite-plugin-components'
-import WindiCSS from 'vite-plugin-windicss'
-import AutoImport from 'unplugin-auto-import/vite'
+import path from 'path';
+import { defineConfig } from 'vite';
+import Vue from '@vitejs/plugin-vue';
+import Pages from 'vite-plugin-pages';
+import ViteIcons, { ViteIconsResolver } from 'vite-plugin-icons';
+import ViteComponents from 'vite-plugin-components';
+import WindiCSS from 'vite-plugin-windicss';
+import AutoImport from 'unplugin-auto-import/vite';
 // import dts from 'vite-plugin-dts';
 import dts from 'vite-dts';
-
 
 export default defineConfig({
     resolve: {
@@ -72,29 +71,29 @@ export default defineConfig({
         include: [
             'vue',
             'vue-router',
-            '@vueuse/core'
+            '@vueuse/core',
         ],
         exclude: [
-            'vue-demi'
+            'vue-demi',
         ],
     },
     build: {
         rollupOptions: {
-            external: ['vue', "pinia"],
+            external: ['vue', 'pinia'],
             output: {
                 // Provide global variables to use in the UMD build
                 // for externalized deps
                 globals: {
-                    vue: 'Vue'
-                }
-            }
+                    vue: 'Vue',
+                },
+            },
         },
         lib: {
-            entry: path.join(__dirname, "/src/lib/libEntry.ts"),
-            name: "Coya",
-            fileName: (format) => `coya.${format}.js`,
-            formats: ['es']
+            entry: path.join(__dirname, '/src/lib/libEntry.ts'),
+            name: 'Coya',
+            fileName: format => `coya.${format}.js`,
+            formats: ['es'],
         },
-        minify: false
-    }
-})
+        minify: false,
+    },
+});

@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import { Block, BlockStyle, EnterSetting, RectPositioning } from "coya-core";
-import { computed, onMounted, ref, watch } from "vue";
-import { gsap } from "gsap";
+import type { Block, BlockStyle, EnterSetting, RectPositioning } from 'coya-core';
+import { computed, onMounted, ref, watch } from 'vue';
+import { gsap } from 'gsap';
 
-const props = defineProps<{ block: Block, positioning: RectPositioning, blockStyle: BlockStyle }>();
+const props = defineProps<{ block: Block; positioning: RectPositioning; blockStyle: BlockStyle }>();
 const cssStyle = computed(() => props.blockStyle?.css ?? {});
 const el = ref(null);
 const tagEl = ref(null);
@@ -25,11 +25,11 @@ onMounted(() => {
         gsap.to(tagEl.value, { duration: 0, attr: { width: pos.w, height: pos.h } });
         gsap.to(textEl.value, { duration: 0, attr: { x: linePosX.value, y: linePosY.value } });
     }
-    watch(() => props.positioning.x, newVal => {
+    watch(() => props.positioning.x, (newVal) => {
         gsap.to(el.value, { duration: 3, attr: { x: newVal } });
         gsap.to(textEl.value, { duration: 3, attr: { x: newVal + props.positioning.w / 2 } });
     });
-    watch(() => props.positioning.y, newVal => {
+    watch(() => props.positioning.y, (newVal) => {
         gsap.to(el.value, { duration: 3, attr: { y: newVal } });
         gsap.to(textEl.value, { duration: 3, attr: { y: newVal + props.positioning.h } });
     });
@@ -37,27 +37,29 @@ onMounted(() => {
         gsap.to(el.value, { duration: 3, attr: { width: newVal } });
         gsap.to(tagEl.value, { duration: 3, attr: { width: newVal } });
     });
-    watch(() => props.positioning.h, newVal => {
+    watch(() => props.positioning.h, (newVal) => {
         gsap.to(el.value, { duration: 3, attr: { height: newVal } });
         gsap.to(tagEl.value, { duration: 3, attr: { height: newVal } });
     });
 });
 
 const textStyle = ref({
-    fontSize: "4px"
+    fontSize: '4px',
 });
 </script>
 
 <template>
-    <g>
-        <svg :id="block.id" :style="cssStyle" ref="el">
-            <image :href="blockStyle.svgUrl" ref="tagEl" />
-        </svg>
-        <text
-            :style="textStyle"
-            ref="textEl"
-            dominant-baseline="hanging"
-            text-anchor="middle"
-        >{{ block.label }}</text>
-    </g>
+  <g>
+    <svg :id="block.id" ref="el" :style="cssStyle">
+      <image ref="tagEl" :href="blockStyle.svgUrl" />
+    </svg>
+    <text
+      ref="textEl"
+      :style="textStyle"
+      dominant-baseline="hanging"
+      text-anchor="middle"
+    >
+      {{ block.label }}
+    </text>
+  </g>
 </template>

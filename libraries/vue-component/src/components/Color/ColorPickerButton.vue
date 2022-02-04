@@ -3,29 +3,29 @@ import { ref } from 'vue';
 import { ColorPicker } from 'vue-color-kit';
 import 'vue-color-kit/dist/vue-color-kit.css';
 
-defineProps<{modelValue: string}>();
+defineProps<{ modelValue: string }>();
 
 const open = ref(false);
-function prepareColor({r, g, b, a}: {r: number; g: number; b: number; a: number;}) {
+function prepareColor({ r, g, b, a }: { r: number; g: number; b: number; a: number }) {
     return `rgba(${r}, ${g}, ${b}, ${a})`;
 }
 </script>
 
 <template>
-    <div>
-        <button class="border-2" @click="open = !open">
-            <ic:twotone-border-color :color="modelValue" />
-        </button>
-        <Teleport to="body">
-            <div class="modal-mask" v-if="open" @click="open = false">
-                <div class="modal-wrapper">
-                    <div class="modal-container">
-                        <ColorPicker @click.stop :color="modelValue" @changeColor="val => $emit('update:modelValue', prepareColor(val.rgba))"/>
-                    </div>
-                </div>
-            </div>
-        </Teleport>
-    </div>
+  <div>
+    <button class="border-2" @click="open = !open">
+      <ic:twotone-border-color :color="modelValue" />
+    </button>
+    <Teleport to="body">
+      <div v-if="open" class="modal-mask" @click="open = false">
+        <div class="modal-wrapper">
+          <div class="modal-container">
+            <ColorPicker :color="modelValue" @click.stop @changeColor="val => $emit('update:modelValue', prepareColor(val.rgba))" />
+          </div>
+        </div>
+      </div>
+    </Teleport>
+  </div>
 </template>
 
 <style>

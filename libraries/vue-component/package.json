@@ -1,12 +1,12 @@
 {
   "name": "coya-vue-component",
   "version": "0.9.20",
-  "module": "dist/coya.es.js",
-  "main": "dist/coya.es.js",
-  "types": "dist/coya.es.d.ts",
   "files": [
     "dist"
   ],
+  "main": "dist/coya.es.js",
+  "module": "dist/coya.es.js",
+  "types": "dist/coya.es.d.ts",
   "scripts": {
     "dev": "vite --port 3333 --open",
     "build": "cross-env NODE_ENV=production vite build --debug",
@@ -46,6 +46,7 @@
     "@vue/compiler-sfc": "^3.2.26",
     "cross-env": "^7.0.3",
     "eslint": "^8.6.0",
+    "eslint-plugin-react": "^7.28.0",
     "pnpm": "^6.26.1",
     "postcss-nesting": "^10.1.2",
     "postcss-partial-import": "^4.1.0",
@@ -55,7 +56,6 @@
     "vite-plugin-components": "^0.13.2",
     "vite-plugin-icons": "^0.6.5",
     "vite-plugin-pages": "^0.20.0-beta.3",
-    "vite-plugin-windicss": "^1.6.3",
-    "eslint-plugin-react": "^7.28.0"
+    "vite-plugin-windicss": "^1.6.3"
   }
 }

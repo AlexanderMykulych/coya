@@ -1,4 +1,4 @@
-import { Ref } from "vue";
+import type { Ref } from 'vue';
 
 export function useMousePosition(svgRef: Ref<SVGSVGElement | null>) {
     const x = ref(0);
@@ -6,9 +6,9 @@ export function useMousePosition(svgRef: Ref<SVGSVGElement | null>) {
 
     onMounted(() => {
         const svg = svgRef.value;
-        if (!svg) {
+        if (!svg)
             return;
-        }
+
         // Create an SVGPoint for future math
         const pt = svg.createSVGPoint();
         // Get point in global SVG space
@@ -17,16 +17,15 @@ export function useMousePosition(svgRef: Ref<SVGSVGElement | null>) {
             return pt.matrixTransform(svg?.getScreenCTM()?.inverse());
         }
 
-        svg.addEventListener('mousemove', function (evt) {
-            var loc = cursorPoint(evt);
+        svg.addEventListener('mousemove', (evt) => {
+            const loc = cursorPoint(evt);
             x.value = loc.x;
             y.value = loc.y;
         }, false);
-
     });
 
     return {
         x,
-        y
+        y,
     };
 }

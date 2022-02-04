@@ -1,13 +1,14 @@
 <script lang="ts" setup>
 import { asyncComputed } from '@vueuse/core';
-import { Block, BlockStyle, EnterSetting, RectPositioning } from 'coya-core';
+import type { Block, BlockStyle, RectPositioning } from 'coya-core';
+import { EnterSetting } from 'coya-core';
 import { computed, onMounted, reactive, ref, useSlots } from 'vue';
 import { useAssets } from '../../logic/useAssets';
 
 const props = defineProps<{
-    block: Block;
-    positioning: RectPositioning;
-    blockStyle: BlockStyle;
+    block: Block
+    positioning: RectPositioning
+    blockStyle: BlockStyle
 }>();
 
 const slots = useSlots();
@@ -16,7 +17,7 @@ const { getText, getImgUrl } = useAssets();
 
 // image
 const imgUrl = asyncComputed(
-    async () => await getImgUrl(props.blockStyle?.img),
+    async() => await getImgUrl(props.blockStyle?.img),
 );
 
 // code
@@ -41,7 +42,6 @@ const cssStyle = computed(() => ({
 const gEl = ref<SVGSVGElement | null>(null);
 const groupEl = ref<SVGSVGElement | null>(null);
 
-
 onMounted(() => {
     const enter = props.block.enter;
     if (enter && enter.from && enter.to) {
@@ -49,11 +49,11 @@ onMounted(() => {
 });
 
 const textBlockStyle = reactive({
-    display: 'flex',
+    'display': 'flex',
     'align-items': 'unsafe center',
     'justify-content': 'unsafe center',
-    width: computed(() => `${props.positioning.w - 2}px`),
-    height: computed(() => `${props.positioning.h - 2}px`),
+    'width': computed(() => `${props.positioning.w - 2}px`),
+    'height': computed(() => `${props.positioning.h - 2}px`),
     'padding-top': 0,
     'margin-left': 0,
 });
@@ -73,44 +73,44 @@ const textStyle = computed(() => {
     }
 });
 
-const label = computed(() =>props.block.label);
+const label = computed(() => props.block.label);
 </script>
 
 <template>
-    <g ref="groupEl" class="rect-node">
-        <svg
-            ref="gEl"
-            :x="positioning.x"
-            :y="positioning.y"
-            :width="positioning.w"
-            :height="positioning.h"
+  <g ref="groupEl" class="rect-node">
+    <svg
+      ref="gEl"
+      :x="positioning.x"
+      :y="positioning.y"
+      :width="positioning.w"
+      :height="positioning.h"
+    >
+      <Rough :w="positioning.w" :h="positioning.h" :css="cssStyle" class="rect-node" />
+
+      <image
+        v-if="imgUrl"
+        :href="imgUrl"
+        x="15"
+        y="15"
+        :width="positioning.w - 30"
+        :height="positioning.h - 30"
+        :style="cssStyle"
+      />
+      <foreignObject
+        style="overflow: visible; text-align: left"
+        pointer-events="none"
+        :style="cssStyle"
+        width="100%"
+        height="100%"
+        requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
+      >
+        <div
+          xmlns="http://www.w3.org/1999/xhtml"
+          :style="textBlockStyle"
+          class="w-full h-full"
         >
-            <Rough :w="positioning.w" :h="positioning.h" :css="cssStyle" class="rect-node" />
-            
-            <image
-                v-if="imgUrl"
-                :href="imgUrl"
-                x="15"
-                y="15"
-                :width="positioning.w - 30"
-                :height="positioning.h - 30"
-                :style="cssStyle"
-            />
-            <foreignObject
-                style="overflow: visible; text-align: left"
-                pointer-events="none"
-                :style="cssStyle"
-                width="100%"
-                height="100%"
-                requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"
-            >
-                <div
-                    xmlns="http://www.w3.org/1999/xhtml"
-                    :style="textBlockStyle"
-                    class="w-full h-full"
-                >
-                    <div
-                        style="
+          <div
+            style="
                             box-sizing: border-box;
                             text-align: center;
                             line-height: 1.2;
@@ -118,27 +118,27 @@ const label = computed(() =>props.block.label);
                             white-space: normal;
                             word-wrap: normal;
                         "
-                        class="w-full h-full flex justify-center items-center"
-                    >
-                        <slot v-if="!!slots[block.id]" :name="block.id" />
-                        <Code v-else-if="isCode" :code="blockStyle.code" :label="label" :style="textStyle"/>
-                        <iframe
-                            v-else-if="isIFrame"
-                            :src="iFrameSrc"
-                            frameborder="0" 
-                            class="w-full h-full"
-                        />
-                        <p
-                            v-else
-                            :style="textStyle"
-                            class="h-max"
-                            v-html="label"
-                        ></p>
-                    </div>
-                </div>
-            </foreignObject>
-        </svg>
-    </g>
+            class="w-full h-full flex justify-center items-center"
+          >
+            <slot v-if="!!slots[block.id]" :name="block.id" />
+            <Code v-else-if="isCode" :code="blockStyle.code" :label="label" :style="textStyle" />
+            <iframe
+              v-else-if="isIFrame"
+              :src="iFrameSrc"
+              frameborder="0"
+              class="w-full h-full"
+            />
+            <p
+              v-else
+              :style="textStyle"
+              class="h-max"
+              v-html="label"
+            />
+          </div>
+        </div>
+      </foreignObject>
+    </svg>
+  </g>
 </template>
 
 <style>

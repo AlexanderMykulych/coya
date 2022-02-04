@@ -12,6 +12,6 @@ export function useNodeDetails() {
         onClick: (item) => {
             clickedItem.value = item;
         },
-        item: computed(() => hoveredItem.value ?? clickedItem.value)
-    }
+        item: computed(() => hoveredItem.value ?? clickedItem.value),
+    };
 }

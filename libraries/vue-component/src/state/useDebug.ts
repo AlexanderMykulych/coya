@@ -1,17 +1,17 @@
-import { SelectedProperties } from "coya-core";
+import type { SelectedProperties } from 'coya-core';
 
 const state = reactive<DebugState>({
-    selected: null
+    selected: null,
 });
 export function useDebug() {
     return {
         state,
         selectEvent: (data: SelectedProperties) => {
             state.selected = data;
-        }
-    }
+        },
+    };
 }
 
 export interface DebugState {
-    selected: SelectedProperties | null;
+    selected: SelectedProperties | null
 }
