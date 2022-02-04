@@ -1,4 +1,5 @@
 <script setup lang="ts">
+/* eslint-disable */
 import { Architecture } from 'coya-core';
 import {
     computed,
@@ -218,10 +219,10 @@ const config = ref({
         },
     },
 });
-const architecture = <Ref<Architecture>>(<any>ref({
+const architecture = ref({
     currentPhase: ref(null),
     toPhase: (index) => (architecture.value.currentPhase = index),
-}));
+}) as any as Ref<Architecture>;
 let editor = shallowRef();
 const viewBox = reactive({
     x: 0,
@@ -243,22 +244,6 @@ onMounted(() => {
     const svgSize = svgEl.value.getBoundingClientRect();
     viewBox.w = svgSize.width;
     viewBox.h = svgSize.height;
-    // svgEl.value["onmousewheel"] = (e) => {
-    //     e.preventDefault();
-    //     var w = viewBox.w;
-    //     var h = viewBox.h;
-    //     var mx = e.offsetX;
-    //     var my = e.offsetY;
-    //     var dw = w * Math.sign(e.deltaY) * 0.05;
-    //     var dh = h * Math.sign(e.deltaY) * 0.05;
-    //     var dx = dw * mx / svgSize.width;
-    //     var dy = dh * my / svgSize.height;
-    //     viewBox.x = viewBox.x + dx;
-    //     viewBox.y = viewBox.y + dy;
-    //     viewBox.w = viewBox.w - dw;
-    //     viewBox.h = viewBox.h - dh;
-    //     svgEl.value.dispatchEvent(new CustomEvent("onViewBoxChange", { detail: { viewBox } }));
-    // }
 });
 const block = {
     id: 'start',

@@ -1,6 +1,7 @@
+/* eslint-disable */
 import { BlockElementType, ChangeOwnerType, ChangeType } from 'coya-core';
 import type { SetupContext } from 'vue';
-import { computed, h, reactive, watch } from 'vue';
+import { computed, h, watch } from 'vue';
 import { isNotNullOrUndefined } from 'coya-util';
 import HoverWrapperLine from '../components/Wrap/HoverWrapperLine.vue';
 import HoverWrapper from '../components/Wrap/HoverWrapper.vue';
@@ -23,7 +24,6 @@ export function wrapEditorNode(editor: Editor, node: any) {
             const blockId = computed(() => attrs?.block?.id);
             const isSelected = computed(() => editor.state.selectedNodeIds?.some(x => x === blockId.value) ?? false);
             const isDragged = computed(() => editor.mouseState.pressed && isSelected.value && editor.state.drag);
-            const isHovered = computed(() => editor.state.hover?.hoveredBlockId === blockId.value);
             const blockStyle = computed(() => editor.architecture.style?.blocks?.[blockId.value]);
             const pinToPos = computed(() => {
                 const pinTo = blockStyle.value?.pinTo;
@@ -32,13 +32,6 @@ export function wrapEditorNode(editor: Editor, node: any) {
 
                 return null;
             });
-            const overflowCoyaRectAttrs = computed(() => reactive({
-                x: attrs.positioning.x,
-                y: attrs.positioning.y,
-                width: attrs.positioning.w,
-                height: attrs.positioning.h,
-                fill: '#00d0ff4a',
-            }));
             watch(() => editor.mouseState.pressed, (val) => {
                 if (!val) {
                     editor.state.drag = undefined;

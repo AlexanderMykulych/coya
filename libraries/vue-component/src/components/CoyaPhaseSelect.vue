@@ -1,4 +1,5 @@
 <script setup lang="ts">
+/* eslint-disable */
 defineProps<{ phases?: string[]; modelValue: string }>();
 
 </script>

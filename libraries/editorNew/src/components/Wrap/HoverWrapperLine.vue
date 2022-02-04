@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+/* eslint-disable */
 import { getBoxToBoxArrowPath } from 'coya-arrow';
 import type { LinePositioning } from 'coya-core';
 import { computed, ref } from 'vue';

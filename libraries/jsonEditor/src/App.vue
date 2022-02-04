@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { changeValue, setValueByPath } from 'coya-util';
-import { computed, reactive, ref, toRef } from 'vue';
-import type { ChangedItem } from 'coya-util/src/whatChanged';
+import { changeValue } from 'coya-util';
+import type { ChangedItem } from 'coya-util/dist/src/ChangedItem';
+import { reactive, ref, toRef } from 'vue';
 
 const val = ref([{
     init: {
@@ -18,32 +18,12 @@ const val = ref([{
     },
     label: '',
 }]);
-const prepVal = computed({
-    get() {
-        return JSON.stringify(val.value, null, '\t');
-    },
-    set(newVal: string) {
-        val.value = JSON.parse(newVal);
-    },
-});
-
-const prepX = computed({
-    get() {
-        return val.value.init?.position?.x;
-    },
-    set(newVal: string) {
-        if (val.value.init.position.x)
-            val.value.init.position.x = newVal;
-    },
-});
 const jsonRows = reactive({
     rows: {},
     ast: {},
     configs: [],
 });
 const showConfigs = ref(false);
-const jsonRowsStr = computed(() => JSON.stringify(jsonRows.rows, null, '\t'));
-const jsonAstStr = computed(() => JSON.stringify(jsonRows.ast, null, '\t'));
 const setConfig = ({ analizingResult, configs }) => {
     jsonRows.rows = toRef(analizingResult, 'rows');
     jsonRows.ast = toRef(analizingResult, 'ast');
@@ -75,8 +55,6 @@ const widgetFilter = ({ path }) => {
     }
 };
 const onChangeAttr = (changes: ChangedItem[]) => {
-    console.log(changes);
-
     changeValue(val.value, changes);
 };
 </script>
@@ -99,10 +77,10 @@ const onChangeAttr = (changes: ChangedItem[]) => {
       :model-value="val"
       :activate-default-widget="true"
       :widget-filter="widgetFilter"
-      @changeAttr="onChangeAttr"
       @set-editor-config="setConfig"
+      @changeAttr="onChangeAttr"
     >
-      <template #widget="{ config }">
+      <template #widget>
         <!-- {{config.id}} -->
       </template>
       <template #line-widget="{ config }">

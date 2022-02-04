@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+/* eslint-disable */
 import { computed } from 'vue';
 import type { SelectEvent } from '../../core';
 import { EditorMode } from '../../core';

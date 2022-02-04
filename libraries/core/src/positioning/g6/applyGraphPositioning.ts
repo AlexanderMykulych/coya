@@ -1,3 +1,4 @@
+/* eslint-disable */
 import * as layout from '@antv/layout/dist/layout.min.js';
 import type { Edge, Model, Node, OutModel } from '@antv/layout';
 import type { ArchitectureDescription } from '../../descriptionTypes';

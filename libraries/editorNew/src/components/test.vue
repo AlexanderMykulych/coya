@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+/* eslint-disable */
 import type { RectPositioning } from 'coya-core';
 
 const props = defineProps<{ positioning: RectPositioning }>();

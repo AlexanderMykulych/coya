@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+/* eslint-disable */
 import type { RectPositioning } from 'coya-core';
 import { computed, ref } from 'vue';
 import { useCurrentEditorState } from '../../core/useCurrentEditorState';

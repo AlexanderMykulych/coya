@@ -17,19 +17,7 @@ const cssStyle = computed(() => ({
     seed,
     ...(props.blockStyle?.css ?? {}),
 }));
-const textEl = ref(null);
 const gEl = ref(null);
-const lineTextX = computed(() => {
-    const width = Math.abs(props.positioning.x2 - props.positioning.x1) / 2;
-    const x = Math.min(props.positioning.x1, props.positioning.x2);
-    return x + width;
-});
-const lineTextY = computed(() => {
-    const height = Math.abs(props.positioning.y2 - props.positioning.y1) / 2;
-    const y = Math.min(props.positioning.y1, props.positioning.y2);
-    return y + height + 5;
-});
-
 const enableStraitLine = ref(true);
 const meta = computed(() => props.positioning.meta);
 const metaResult = computed(() => props.positioning.meta.results);
@@ -74,8 +62,8 @@ const arrowPaths = computed(() => {
 
 <template>
   <g ref="gEl" :style="cssStyle">
-    <path v-for="path in paths" v-bind="path" />
-    <path v-for="path in arrowPaths" v-bind="path" :transform="`translate(${metaResult.x2}, ${metaResult.y2}) rotate(${metaResult.ae})`" />
+    <path v-for="(pathItem, index) in paths" v-bind="pathItem" :key="index" />
+    <path v-for="(pathItem, index) in arrowPaths" v-bind="pathItem" :key="index" :transform="`translate(${metaResult.x2}, ${metaResult.y2}) rotate(${metaResult.ae})`" />
 
     <Text
       :css="cssStyle"

@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+/* eslint-disable */
 import { computed, reactive, ref } from 'vue';
 import JsonEditor from 'coya-json-editor';
 import type { ChangedItem } from 'coya-util';

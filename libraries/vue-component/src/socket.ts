@@ -10,8 +10,6 @@ export function startSocketClient() {
         const message = JSON.parse(event.data) as DebugMessage;
         if (message.command === MessageCommand.Select)
             selectEvent(message.data as SelectedProperties);
-
-        console.log(message.command, message.data);
     });
 }
 export function saveConfig(id: string | undefined, config: any) {

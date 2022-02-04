@@ -46,6 +46,7 @@ const createNewCoya = async() => {
         >
           <li
             v-for="file in store.activeProject.coyaFiles"
+            :key="file.name"
             class="py-3 sm:py-4"
           >
             <div class="flex items-center space-x-4">

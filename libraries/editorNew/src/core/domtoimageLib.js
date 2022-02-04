@@ -586,6 +586,7 @@ export default () => {
         function readUrls(string) {
             const result = [];
             let match;
+            // eslint-disable-next-line no-cond-assign
             while ((match = URL_REGEX.exec(string)) !== null)
                 result.push(match[1]);
 
@@ -680,6 +681,7 @@ export default () => {
                         util.asArray(sheet.cssRules || []).forEach(cssRules.push.bind(cssRules));
                     }
                     catch (e) {
+                        // eslint-disable-next-line no-console
                         console.log(`Error while reading CSS rules from ${sheet.href}`, e.toString());
                     }
                 });

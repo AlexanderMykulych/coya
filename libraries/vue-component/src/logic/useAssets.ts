@@ -5,6 +5,11 @@ export function provideAssets(assets: AssetConfig) {
     provide(assetsKey, assets);
 }
 
+const defaultAssets = {
+    load: () => undefined,
+    create: () => undefined,
+};
+
 export function useAssets() {
     const assets = inject<AssetConfig | undefined>(assetsKey) ?? defaultAssets;
     return {
@@ -33,15 +38,10 @@ export function useAssets() {
 }
 function blobToBase64(blob: Blob) {
     return blob
-        ? new Promise((resolve, _) => {
+        ? new Promise((resolve) => {
             const reader = new FileReader();
             reader.onloadend = () => resolve(reader.result);
             reader.readAsDataURL(blob);
         })
         : '';
 }
-
-const defaultAssets = {
-    load: () => undefined,
-    create: () => undefined,
-};

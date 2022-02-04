@@ -6,7 +6,17 @@
   "rules": {
     "@typescript-eslint/indent": ["error", 4],
     "@typescript-eslint/semi": ["error", "always"],
-
-    "semi": ["error", "always"]
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+    "error", 
+        {
+            "argsIgnorePattern": "^_",
+            "varsIgnorePattern": "^_",
+            "caughtErrorsIgnorePattern": "^_"
+        }
+    ],
+    "vue/v-on-event-hyphenation": "off",
+    "semi": ["error", "always"],
+    "eslint-comments/no-unlimited-disable": "off"
   }
 }

@@ -1,3 +1,4 @@
+import { isNotNullOrUndefined } from 'coya-util';
 import type { PropertyNode, ValueNode } from 'json-to-ast';
 import parse from 'json-to-ast';
 import type { AstAnalizingResult } from './WidgetConfig';
@@ -19,8 +20,9 @@ export function analizeAst(editorValue: string): AstAnalizingResult {
                     .flatMap((x) => {
                         if (x.type === 'Property')
                             return analizeChildrens(`${parent}${parent ? '.' : ''}${x.key.value}`, x.value, x);
+                        return null;
                     })
-                    .filter(x => !!x),
+                    .filter(isNotNullOrUndefined),
             ];
         }
         else if (value.type === 'Literal' && node) {
@@ -50,8 +52,9 @@ export function analizeAst(editorValue: string): AstAnalizingResult {
                     .flatMap((x, index) => {
                         if (x.type === 'Object')
                             return analizeChildrens(`${parent}${parent ? '.' : ''}${index}`, x);
+                        return null;
                     })
-                    .filter(x => !!x),
+                    .filter(isNotNullOrUndefined),
             ];
         }
     };

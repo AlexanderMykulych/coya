@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import type {
+    AssetConfig,
     CurrentPhaseInfo,
     RectPositioning,
 } from 'coya-core';
 import {
-    Architecture,
-    ArchitectureDescription,
     transformToArchitecture,
 } from 'coya-core';
 import {
@@ -22,9 +21,7 @@ import { useNodeDetails } from '../logic/useNodeDetails';
 import { useMousePosition } from '../logic/useSvgMousePosition';
 import { useDebug } from '../state/useDebug';
 import 'coya-editor-new/dist/style.css';
-import { saveConfig } from '../socket';
 import { useCurrentPhase } from '../state/useCurrentPhase';
-import type { AssetConfig } from '../logic/useAssets';
 import { provideAssets } from '../logic/useAssets';
 
 const props = defineProps<{
@@ -131,9 +128,6 @@ const save = () =>
 const { x, y } = useMousePosition(coyaSvgEl);
 const debug = computed(() => arch.value?.style?.debug?.enable ?? false);
 
-const viewBox = computed(() => {
-    return `${vX.value} ${vY.value} ${width.value} ${height.value}`;
-});
 const res = useNodeDetails();
 
 const style = document.createElement('style');

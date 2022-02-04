@@ -2,7 +2,6 @@
 import type { LineDebugAction } from 'coya-core';
 
 const props = defineProps<{ line: LineDebugAction }>();
-const svgInfo = inject('svgInfo');
 
 const lineTextX = computed(() => {
     if (props.line.lineType === 'y')
@@ -10,23 +9,6 @@ const lineTextX = computed(() => {
 
     return props.line.value;
 });
-const lineTextY = computed(() => {
-    if (props.line.lineType === 'y')
-        return props.line.value - (props.line.value > 20 ? 5 : -5);
-
-    return svgInfo?.viewBox?.h - 30 ?? 20;
-});
-
-const textStyle = computed(() => ({
-    'fontSize': '0.8em',
-    'dominant-baseline': props.line.lineType === 'x' ? 'middle' : undefined,
-    'text-anchor': props.line.lineType === 'x' ? 'middle' : undefined,
-    'display': 'inline-block',
-    'align-items': 'unsafe center',
-    'justify-content': 'unsafe center',
-    'padding-top': `${lineTextY.value}px`,
-    'margin-left': `${lineTextX.value}px`,
-}));
 </script>
 
 <template>

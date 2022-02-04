@@ -26,6 +26,7 @@ export function deepAssign<T>(...objects: object[]): T {
     const target = objects.shift();
     let source: any;
 
+    // eslint-disable-next-line no-cond-assign
     while (source = objects.shift())
         deepMergeInner(target, source);
 

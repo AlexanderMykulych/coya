@@ -7,7 +7,7 @@ const images = ['.png', '.gif'];
 export const staticAssets = (config: StaticAssetsConfig) => {
     return {
         assets: {
-            create: async(name: string, content: string) => { },
+            create: () => { },
             load: async(name: string) => {
                 if (!name)
                     return;

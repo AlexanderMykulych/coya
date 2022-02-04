@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { isNotNullOrUndefined, isNullOrUndefined } from 'coya-util';
 import { DebugType } from '../debugTypes';
 import type { ArchitectureDescription, BlockGroupDescriptions } from '../descriptionTypes';

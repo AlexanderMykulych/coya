@@ -1,5 +1,4 @@
 import path from 'path';
-import { triggerAsyncId } from 'async_hooks';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import WindiCSS from 'vite-plugin-windicss';

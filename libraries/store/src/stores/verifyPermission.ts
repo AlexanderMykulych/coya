@@ -12,7 +12,6 @@ export async function verifyPermission(dirHandle: FileSystemDirectoryHandle, ret
             return true;
     }
     catch (e) {
-        console.log(e);
         if (retryIfError) {
             await timeout(2000);
             return verifyPermission(dirHandle, false);

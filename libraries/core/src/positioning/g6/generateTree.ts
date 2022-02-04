@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { isNotNullOrUndefined } from 'coya-util';
 import Hierarchy from '@antv/hierarchy';
 import type { ArchitectureDescription, LineBlockElementDescription } from '../../descriptionTypes';

@@ -1,8 +1,7 @@
 <script lang="ts" setup>
 import { asyncComputed } from '@vueuse/core';
 import type { Block, BlockStyle, RectPositioning } from 'coya-core';
-import { EnterSetting } from 'coya-core';
-import { computed, onMounted, reactive, ref, useSlots } from 'vue';
+import { computed, reactive, ref, useSlots } from 'vue';
 import { useAssets } from '../../logic/useAssets';
 
 const props = defineProps<{
@@ -13,7 +12,7 @@ const props = defineProps<{
 
 const slots = useSlots();
 
-const { getText, getImgUrl } = useAssets();
+const { getImgUrl } = useAssets();
 
 // image
 const imgUrl = asyncComputed(
@@ -42,12 +41,6 @@ const cssStyle = computed(() => ({
 const gEl = ref<SVGSVGElement | null>(null);
 const groupEl = ref<SVGSVGElement | null>(null);
 
-onMounted(() => {
-    const enter = props.block.enter;
-    if (enter && enter.from && enter.to) {
-    }
-});
-
 const textBlockStyle = reactive({
     'display': 'flex',
     'align-items': 'unsafe center',
@@ -71,6 +64,7 @@ const textStyle = computed(() => {
             ...textStyle,
         };
     }
+    return null;
 });
 
 const label = computed(() => props.block.label);

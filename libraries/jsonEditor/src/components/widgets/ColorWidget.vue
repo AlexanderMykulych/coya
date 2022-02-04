@@ -1,20 +1,13 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 import { ColorPicker } from 'vue3-colorpicker';
 import 'vue3-colorpicker/style.css';
-import { hexToRgba } from 'coya-util';
 import type { WidgetConfig } from '../WidgetConfig';
 
 const props = defineProps<{ widgetConfig: WidgetConfig }>();
 const emit = defineEmits(['valueChange']);
 
-const open = ref(false);
 const color = computed(() => props.widgetConfig?.row?.value);
-const updateColor = (val: any) => {
-    const alpha = Math.round((Math.round(val.rgba.a * 100) / 100) * 255);
-    const hexAlpha = (alpha + 0x10000).toString(16).substr(-2).toUpperCase();
-    emit('valueChange', val.hex + hexAlpha);
-};
 const changeColor = (color: string) => emit('valueChange', color);
 </script>
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { LineDebugAction } from 'coya-core';
 
-const props = defineProps<{ lines: LineDebugAction[] }>();
+defineProps<{ lines: LineDebugAction[] }>();
 const style = reactive({
     strokeWidth: 1,
 });

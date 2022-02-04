@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { isNotNullOrUndefined } from 'coya-util';
 import type { ArchitectureDescription } from '../descriptionTypes';
 import type { Change, PhaseIndexItemAction } from '../types';

@@ -1,9 +1,11 @@
 <script setup lang="ts">
+/* eslint-disable */
 import { ref } from 'vue';
 import { ColorPicker } from 'vue-color-kit';
 import 'vue-color-kit/dist/vue-color-kit.css';
 
 defineProps<{ modelValue: string }>();
+defineEmits(['update:modelValue']);
 
 const open = ref(false);
 function prepareColor({ r, g, b, a }: { r: number; g: number; b: number; a: number }) {

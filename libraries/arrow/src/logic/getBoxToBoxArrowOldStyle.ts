@@ -1,3 +1,4 @@
+/* eslint-disable */
 import type { ArrowDescriptor, ArrowOptions } from './ArrowDescriptor';
 import { getBoxSideByPoint } from './getBoxSideByPoint';
 import type {

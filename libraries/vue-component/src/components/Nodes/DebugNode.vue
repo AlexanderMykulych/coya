@@ -2,14 +2,12 @@
 import type { Block, BlockStyle, RectPositioning } from 'coya-core';
 
 const props = defineProps<{ block: Block; positioning: RectPositioning; blockStyle: BlockStyle }>();
-const el = ref(null);
 
 const style = reactive({
     strokeWidth: 0.6,
     stroke: 'blue',
 });
 
-const text = computed(() => `${props.block.id}`);
 const points = computed(() => {
     const items = [{
         pos: props.positioning,
@@ -69,6 +67,7 @@ const points = computed(() => {
     <template v-for="(point, index) in points">
       <circle
         v-if="point.pos"
+        :key="index"
         :cx="point.pos.x"
         :cy="point.pos.y"
         fill="yellow"
@@ -76,6 +75,7 @@ const points = computed(() => {
       />
       <textSvg
         v-if="point.pos"
+        :key="index"
         :x="point.pos.x + (point.indentX ?? 0)"
         :y="point.pos.y + (point.indentY ?? -20)"
       >

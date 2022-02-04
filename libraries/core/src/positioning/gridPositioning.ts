@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { isNotNullOrUndefined } from 'coya-util';
 import type { Ref } from 'vue';
 import { computed, ref } from 'vue';

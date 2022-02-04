@@ -1,15 +1,16 @@
 <script setup="emit" lang="ts">
+/* eslint-disable */
 import { computed, defineEmits } from 'vue';
 import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue';
 
-const { items, modelValue } = defineProps<{ items: any[]; itemText: string; modelValue: number; label: string }>();
+const props = defineProps<{ items: any[]; itemText: string; modelValue: number; label: string }>();
 const emit = defineEmits(['update:modelValue']);
 
 const selectItem = (index: number) => {
     emit('update:modelValue', index);
 };
 
-const selected = computed(() => items[modelValue]);
+const selected = computed(() => props.items[props.modelValue]);
 </script>
 <template>
   <Listbox as="div" :model-value="selected" @update:model-value="selectItem">

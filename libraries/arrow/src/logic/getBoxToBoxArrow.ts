@@ -1,3 +1,4 @@
+/* eslint-disable */
 import getBoxToBoxArrowOldStyle from './getBoxToBoxArrowOldStyle';
 export interface getBoxToBoxArrowRes {
     x1: number

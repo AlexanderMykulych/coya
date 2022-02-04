@@ -28,7 +28,7 @@ const store = useCoyaStore();
           role="list"
           class="divide-y divide-gray-200 dark:divide-gray-700"
         >
-          <li v-for="project in store.projects" class="py-3 sm:py-4">
+          <li v-for="project in store.projects" :key="project.name" class="py-3 sm:py-4">
             <div class="flex items-center space-x-4">
               <div class="flex-shrink-0">
                 <ph:folder-fill />

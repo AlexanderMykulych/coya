@@ -1,6 +1,7 @@
-import { computed, reactive, ref } from 'vue';
+/* eslint-disable */
+import { computed, reactive } from 'vue';
 import type { ArchitectureDescription, BlockElementDescription, BlockStyle } from 'coya-core';
-import { Action, ActionType, applyPositioning, executeActions, isArray } from 'coya-core';
+import { ActionType, applyPositioning, executeActions, isArray } from 'coya-core';
 import { isNotNullOrUndefined, isNullOrUndefined } from 'coya-util';
 import { debounce } from 'debounce';
 import { createSharedComposable, tryOnScopeDispose } from '@vueuse/core';
@@ -8,7 +9,8 @@ import type { LayoutConfig } from '../components/AppMenu/layouts';
 import { renameBlock } from './renameBlock';
 import { reconnectArrow } from './reconnectArrow';
 import { removeBlockById } from './removeBlockById';
-import { findStartTransform, findTransform } from './findStartTransform';
+import { findStartTransform } from './findStartTransform';
+import { findTransform } from './findTransform';
 import { set } from './set';
 import { createComputed } from './createComputed';
 import { isWebUrl } from './isWebUrl';

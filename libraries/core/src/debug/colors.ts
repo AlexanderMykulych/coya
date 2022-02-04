@@ -1,3 +1,4 @@
+/* eslint-disable */
 export const colors = [
     '5d737e',
     '64b6ac',

@@ -1,9 +1,9 @@
 <script lang="ts" setup>
+/* eslint-disable */
 import { computed, onScopeDispose, reactive, ref, watch } from 'vue';
 import { getCurrentEditor } from '../core';
 import { useCurrentEditorState } from '../core/useCurrentEditorState';
 import Palette from './Palette/Palette.vue';
-import Phases from './Phases/Phases.vue';
 import PhasesJson from './Phases/PhasesJson.vue';
 import NodeSetting from './NodeSetting/NodeSetting.vue';
 import AppMenu from './AppMenu/AppMenu.vue';

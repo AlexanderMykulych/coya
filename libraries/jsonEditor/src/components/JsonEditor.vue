@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+/* eslint-disable */
 import * as monaco from 'monaco-editor';
 import { onMounted, ref, shallowRef, watch } from 'vue';
 import { fastDeepEqual, whatChanged } from 'coya-util';

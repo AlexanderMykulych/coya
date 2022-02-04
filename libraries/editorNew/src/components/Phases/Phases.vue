@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+/* eslint-disable */
 import { computed, onMounted, reactive, ref } from 'vue';
 import { useCurrentEditorState } from '../../core/useCurrentEditorState';
 import { useSvgMouse } from '../../core/useSvgMouse';

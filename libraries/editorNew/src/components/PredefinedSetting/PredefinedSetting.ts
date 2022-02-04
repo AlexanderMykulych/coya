@@ -1,3 +1,4 @@
+/* eslint-disable */
 export enum PredefCategory {
     Color = 'color',
     Shape = 'shape',

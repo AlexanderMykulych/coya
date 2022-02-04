@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+/* eslint-disable */
 import { computed, onMounted, onScopeDispose, ref } from 'vue';
 import { useDebounce } from '@vueuse/core';
 import { useCurrentEditorState } from '../../core/useCurrentEditorState';

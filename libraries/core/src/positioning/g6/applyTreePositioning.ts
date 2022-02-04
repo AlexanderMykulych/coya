@@ -1,3 +1,4 @@
+/* eslint-disable */
 import type { ArchitectureDescription } from '../../descriptionTypes';
 import type { PositioningDefaults, TreePositioningStrategy } from './positioning';
 import { generateTree } from './generateTree';

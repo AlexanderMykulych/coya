@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+/* eslint-disable */
 import type { WidgetConfig } from 'coya-json-editor';
 import { computed } from 'vue';
 import { usePhases } from '../usePhases';

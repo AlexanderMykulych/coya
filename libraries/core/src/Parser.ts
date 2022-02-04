@@ -1,3 +1,4 @@
+/* eslint-disable */
 import type { Ref } from 'vue';
 import { computed, isRef, reactive, ref } from 'vue';
 import { deepCopy, isNotNullOrUndefined } from 'coya-util';

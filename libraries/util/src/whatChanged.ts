@@ -39,8 +39,6 @@ export function whatChanged(initObj: any, changedObj: any, findFirst = true): Ch
                     oldVal: val1,
                     val: val2,
                 });
-                if (findFirst)
-                    return;
             }
         });
     };

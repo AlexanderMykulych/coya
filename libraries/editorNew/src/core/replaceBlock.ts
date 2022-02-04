@@ -1,3 +1,4 @@
+/* eslint-disable */
 import type { ArchitectureDescription } from 'coya-core';
 import { BlockElementType, actionExecutors, isArray } from 'coya-core';
 

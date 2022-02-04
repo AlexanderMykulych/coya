@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { watch, watchEffect } from 'vue';
 import { useMagicKeys, whenever } from '@vueuse/core';
 import type { EnabledEditor } from './types';

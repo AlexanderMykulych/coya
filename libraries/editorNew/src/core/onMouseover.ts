@@ -1,3 +1,4 @@
+/* eslint-disable */
 import type { EnabledEditor } from './types';
 
 export function onMouseover(editor: EnabledEditor, { attrs }: { attrs: any }, event: MouseEvent) {

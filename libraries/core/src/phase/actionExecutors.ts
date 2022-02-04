@@ -1,3 +1,4 @@
+/* eslint-disable */
 import type { ActionList } from '../types';
 import { ActionType } from '../types';
 import { addHighlightActionExecutor } from './addHighlightActionExecutor';

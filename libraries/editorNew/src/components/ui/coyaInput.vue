@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+/* eslint-disable */
 const props = defineProps<{
     label: string
     modelValue: any

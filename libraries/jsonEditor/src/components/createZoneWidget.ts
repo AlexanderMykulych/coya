@@ -1,7 +1,6 @@
 import type * as monaco from 'monaco-editor';
 import { watch } from 'vue';
 import type { WidgetConfig, WidgetFilterConfig } from './WidgetConfig';
-import { WidgetChangeCallback } from './WidgetConfig';
 import { createVueDomElement } from './createVueDomElement';
 
 export function createZoneWidget(

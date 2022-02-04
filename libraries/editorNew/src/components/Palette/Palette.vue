@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+/* eslint-disable */
 import { ActionType } from 'coya-core';
 import { computed, watch } from 'vue';
 import { getBoxToBoxArrowPath } from 'coya-arrow';

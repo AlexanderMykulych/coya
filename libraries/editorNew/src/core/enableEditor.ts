@@ -1,7 +1,7 @@
 import type { Change } from 'coya-core';
-import { ActionType, AssetConfig, makeChange } from 'coya-core';
+import { ActionType, makeChange } from 'coya-core';
 import { computed, effectScope, markRaw, onScopeDispose, provide, reactive, ref, watch } from 'vue';
-import { debouncedWatch, useMagicKeys } from '@vueuse/core';
+import { debouncedWatch } from '@vueuse/core';
 import { deepCopy, isNotNullOrUndefined, setValueByPath, whatChanged } from 'coya-util';
 import editorComponent from '../components/editorComponent.vue';
 import type { EnableEditorParameters, EnabledEditor } from './types';

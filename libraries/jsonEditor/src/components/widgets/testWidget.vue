@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { WidgetConfig } from '../WidgetConfig';
 
-const props = defineProps<{ widgetConfig: WidgetConfig }>();
+defineProps<{ widgetConfig: WidgetConfig }>();
 
 </script>
 

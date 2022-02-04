@@ -1,3 +1,4 @@
+/* eslint-disable */
 import type { Action, ActionSetting, Architecture, ArchitectureDescription, AssetConfig, BlockElementDescription, BlockStyle, Change, PhaseAction, RectPositioning } from 'coya-core';
 import { ActionType, applyPositioning } from 'coya-core';
 import type { ChangedItem } from 'coya-util/dist/src/ChangedItem';
