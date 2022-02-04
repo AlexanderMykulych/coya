@@ -1,17 +1,17 @@
-import getBoxToBoxArrow from './getBoxToBoxArrowOldStyle'
-import {
+import getBoxToBoxArrow from './getBoxToBoxArrowOldStyle';
+import type {
     ArrowDescriptor,
-    ArrowOptions
-} from "./ArrowDescriptor"
+    ArrowOptions,
+} from './ArrowDescriptor';
 
 /**
  * Get parameters to draw an S-curved line between two points.
- * 
- * @param x0 
- * @param y0 
- * @param x1 
- * @param y1 
- * @param userOptions 
+ *
+ * @param x0
+ * @param y0
+ * @param x1
+ * @param y1
+ * @param userOptions
  * @returns [sx, sy, c1x, c1y, c2x, c2y, ex, ey, ae, as]
  * @example
  * const arrowHeadSize = 9
@@ -26,7 +26,7 @@ export default function getArrow(
     y0: number,
     x1: number,
     y1: number,
-    userOptions?: ArrowOptions
+    userOptions?: ArrowOptions,
 ): ArrowDescriptor {
-    return getBoxToBoxArrow(x0, y0, 0, 0, x1, y1, 0, 0, userOptions)
+    return getBoxToBoxArrow(x0, y0, 0, 0, x1, y1, 0, 0, userOptions);
 }

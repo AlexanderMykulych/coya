@@ -1,14 +1,16 @@
-import { ArrowOptions, ArrowDescriptor } from './ArrowDescriptor'
-import { getBoxSideByPoint } from './getBoxSideByPoint'
+import type { ArrowDescriptor, ArrowOptions } from './ArrowDescriptor';
+import { getBoxSideByPoint } from './getBoxSideByPoint';
+import type {
+    RectSide,
+    Vec2,
+} from './utils';
 import {
     angleOf,
     controlPointOf,
     distanceOf,
     growBox,
     isPointInBox,
-    RectSide,
-    Vec2,
-} from './utils'
+} from './utils';
 
 /**
  * Get parameters to draw an S-curved line between two boxes.
@@ -39,69 +41,69 @@ export default function getBoxToBoxArrowOldStyle(
     y1: number,
     w1: number,
     h1: number,
-    userOptions?: ArrowOptions
+    userOptions?: ArrowOptions,
 ): ArrowDescriptor {
     const options = {
         padStart: 0,
         padEnd: 0,
         controlPointStretch: 50,
         ...userOptions,
-    }
+    };
 
     /** Points of start box. */
-    const startBox = { x: x0, y: y0, w: w0, h: h0 }
+    const startBox = { x: x0, y: y0, w: w0, h: h0 };
     const startAtTop = {
         x: x0 + w0 / 2,
         y: y0,
-    }
+    };
     const startAtBottom = {
         x: x0 + w0 / 2,
         y: y0 + h0,
-    }
+    };
     const startAtLeft = {
         x: x0,
         y: y0 + h0 / 2,
-    }
+    };
     const startAtRight = {
         x: x0 + w0,
         y: y0 + h0 / 2,
-    }
+    };
 
     /** Points of end box. */
-    const endBox = { x: x1, y: y1, w: w1, h: h1 }
-    const endAtTop = { x: x1 + w1 / 2, y: y1 }
+    const endBox = { x: x1, y: y1, w: w1, h: h1 };
+    const endAtTop = { x: x1 + w1 / 2, y: y1 };
     const endAtBottom = {
         x: x1 + w1 / 2,
         y: y1 + h1,
-    }
-    const endAtLeft = { x: x1, y: y1 + h1 / 2 }
+    };
+    const endAtLeft = { x: x1, y: y1 + h1 / 2 };
     const endAtRight = {
         x: x1 + w1,
         y: y1 + h1 / 2,
-    }
+    };
 
-    const sides: RectSide[] = ['top', 'right', 'bottom', 'left']
-    const startPoints = [startAtTop, startAtRight, startAtBottom, startAtLeft]
-    const endPoints = [endAtTop, endAtRight, endAtBottom, endAtLeft]
+    const sides: RectSide[] = ['top', 'right', 'bottom', 'left'];
+    const startPoints = [startAtTop, startAtRight, startAtBottom, startAtLeft];
+    const endPoints = [endAtTop, endAtRight, endAtBottom, endAtLeft];
 
-    let shortestDistance = 1 / 0
+    let shortestDistance = 1 / 0;
     let bestStartPoint = userOptions?.startPoint ?? startAtTop;
     let bestEndPoint = userOptions?.endPoint ?? endAtTop;
     let bestStartSide = null;
     let bestEndSide = null;
-    const keepOutZone = 15
+    const keepOutZone = 15;
     for (let startSideId = 0; startSideId < sides.length; startSideId++) {
-        const startPoint = startPoints[startSideId]
-        if (isPointInBox(startPoint, growBox(endBox, keepOutZone))) continue
+        const startPoint = startPoints[startSideId];
+        if (isPointInBox(startPoint, growBox(endBox, keepOutZone))) continue;
 
         for (let endSideId = 0; endSideId < sides.length; endSideId++) {
-            const endPoint = endPoints[endSideId]
+            const endPoint = endPoints[endSideId];
 
-            if (isPointInBox(endPoint, growBox(startBox, keepOutZone))) continue
+            if (isPointInBox(endPoint, growBox(startBox, keepOutZone))) continue;
 
-            const d = distanceOf(startPoint, endPoint)
+            const d = distanceOf(startPoint, endPoint);
             if (d < shortestDistance) {
-                shortestDistance = d
+                shortestDistance = d;
                 if (!userOptions?.startPoint) {
                     bestStartPoint = startPoint;
                     bestStartSide = sides[startSideId];
@@ -122,14 +124,14 @@ export default function getBoxToBoxArrowOldStyle(
         bestStartPoint,
         bestEndPoint,
         bestStartSide,
-        options.controlPointStretch
-    )
+        options.controlPointStretch,
+    );
     const controlPointForEndPoint = controlPointOf(
         bestEndPoint,
         bestStartPoint,
         bestEndSide,
-        options.controlPointStretch
-    )
+        options.controlPointStretch,
+    );
 
     return [
         bestStartPoint.x,
@@ -142,34 +144,34 @@ export default function getBoxToBoxArrowOldStyle(
         bestEndPoint.y,
         angleOf(bestEndSide),
         angleOf(bestStartSide),
-    ]
+    ];
 }
 
 const preparePad = (side: RectSide, point: Vec2, pad?: number) => {
-    if (!pad) {
+    if (!pad)
         return point;
-    }
+
     const multiplier = 2.5;
     switch (side) {
-        case "top":
+        case 'top':
             return {
                 x: point.x,
                 y: point.y - multiplier * pad,
             };
-        case "bottom":
+        case 'bottom':
             return {
                 x: point.x,
                 y: point.y + multiplier * pad,
             };
-        case "left":
+        case 'left':
             return {
                 x: point.x - multiplier * pad,
                 y: point.y,
             };
-        case "right":
+        case 'right':
             return {
                 x: point.x + multiplier * pad,
                 y: point.y,
             };
     }
-}
+};

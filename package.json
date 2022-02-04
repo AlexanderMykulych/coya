@@ -14,7 +14,7 @@
         "tsa": "cd \"./libraries/cli/typescript-analizer/\" && pnpm test",
         "prepare": "husky install",
         "lint": "eslint \"libraries/vue-component\" -c .eslintrc",
-        "lint-fix": "eslint \"libraries/core\" -c .eslintrc --fix"
+        "lint-fix": "eslint \"libraries/arrow\" -c .eslintrc --fix"
     },
     "devDependencies": {
         "@antfu/eslint-config": "^0.16.1",

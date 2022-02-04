@@ -1,21 +1,21 @@
-import path from 'path'
-import { defineConfig } from 'vite'
-import Vue from '@vitejs/plugin-vue'
-import Pages from 'vite-plugin-pages'
-import Layouts from 'vite-plugin-vue-layouts'
-import Icons from 'unplugin-icons/vite'
-import IconsResolver from 'unplugin-icons/resolver'
-import Components from 'unplugin-vue-components/vite'
-import AutoImport from 'unplugin-auto-import/vite'
-import Markdown from 'vite-plugin-md'
-import WindiCSS from 'vite-plugin-windicss'
-import VueI18n from '@intlify/vite-plugin-vue-i18n'
-import Inspect from 'vite-plugin-inspect'
-import Prism from 'markdown-it-prism'
-import LinkAttributes from 'markdown-it-link-attributes'
-import dts from 'vite-plugin-dts'
+import path from 'path';
+import { defineConfig } from 'vite';
+import Vue from '@vitejs/plugin-vue';
+import Pages from 'vite-plugin-pages';
+import Layouts from 'vite-plugin-vue-layouts';
+import Icons from 'unplugin-icons/vite';
+import IconsResolver from 'unplugin-icons/resolver';
+import Components from 'unplugin-vue-components/vite';
+import AutoImport from 'unplugin-auto-import/vite';
+import Markdown from 'vite-plugin-md';
+import WindiCSS from 'vite-plugin-windicss';
+import VueI18n from '@intlify/vite-plugin-vue-i18n';
+import Inspect from 'vite-plugin-inspect';
+import Prism from 'markdown-it-prism';
+import LinkAttributes from 'markdown-it-link-attributes';
+import dts from 'vite-plugin-dts';
 
-const markdownWrapperClasses = 'prose prose-sm m-auto text-left'
+const markdownWrapperClasses = 'prose prose-sm m-auto text-left';
 
 export default defineConfig({
     resolve: {
@@ -90,14 +90,14 @@ export default defineConfig({
             headEnabled: true,
             markdownItSetup(md) {
                 // https://prismjs.com/
-                md.use(Prism)
+                md.use(Prism);
                 md.use(LinkAttributes, {
                     pattern: /^https?:\/\//,
                     attrs: {
                         target: '_blank',
                         rel: 'noopener',
                     },
-                })
+                });
             },
         }),
 
@@ -108,7 +108,7 @@ export default defineConfig({
             include: [path.resolve(__dirname, 'locales/**')],
         }),
         dts({
-            include: ["src"],
+            include: ['src'],
         }),
 
         // https://github.com/antfu/vite-plugin-inspect
@@ -151,18 +151,18 @@ export default defineConfig({
     },
     build: {
         rollupOptions: {
-            external: ['vue', "@vueuse/core"],
+            external: ['vue', '@vueuse/core'],
             output: {
-                format: 'es'
+                format: 'es',
             },
         },
         sourcemap: true,
         lib: {
-            entry: path.resolve(__dirname, "/src/logic/libEntry.ts"),
-            name: "coya-arrow",
-            fileName: (format) => `coya-arrow.${format}.js`,
-            formats: ['es']
+            entry: path.resolve(__dirname, '/src/logic/libEntry.ts'),
+            name: 'coya-arrow',
+            fileName: format => `coya-arrow.${format}.js`,
+            formats: ['es'],
         },
         minify: false,
-    }
-})
+    },
+});

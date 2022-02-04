@@ -3,12 +3,12 @@
 // Read more: https://github.com/vuejs/vue-next/pull/3399
 
 declare module 'vue' {
-  export interface GlobalComponents {
-    CarbonCampsite: typeof import('~icons/carbon/campsite')['default']
-    CarbonDicomOverlay: typeof import('~icons/carbon/dicom-overlay')['default']
-    CarbonPedestrian: typeof import('~icons/carbon/pedestrian')['default']
-    CarbonWarning: typeof import('~icons/carbon/warning')['default']
-  }
+    export interface GlobalComponents {
+        CarbonCampsite: typeof import('~icons/carbon/campsite')['default']
+        CarbonDicomOverlay: typeof import('~icons/carbon/dicom-overlay')['default']
+        CarbonPedestrian: typeof import('~icons/carbon/pedestrian')['default']
+        CarbonWarning: typeof import('~icons/carbon/warning')['default']
+    }
 }
 
-export { }
+export { };
