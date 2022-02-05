@@ -6,6 +6,7 @@ import IconsResolver from 'unplugin-icons/resolver';
 import Components from 'unplugin-vue-components/vite';
 import AutoImport from 'unplugin-auto-import/vite';
 import WindiCSS from 'vite-plugin-windicss';
+import { FileSystemIconLoader } from 'unplugin-icons/loaders';
 
 const markdownWrapperClasses = 'prose prose-sm m-auto text-left';
 
@@ -45,7 +46,11 @@ export default defineConfig({
             resolvers: [
                 // auto import icons
                 // https://github.com/antfu/unplugin-icons
-                IconsResolver(),
+                IconsResolver({
+                    customCollections: [
+                        'my-icons',
+                    ],
+                }),
             ],
 
             dts: 'src/components.d.ts',
@@ -54,6 +59,11 @@ export default defineConfig({
         // https://github.com/antfu/unplugin-icons
         Icons({
             autoInstall: true,
+            customCollections: {
+                'my-icons': FileSystemIconLoader(
+                    './src/assets',
+                ),
+            },
         }),
 
         // https://github.com/antfu/vite-plugin-windicss

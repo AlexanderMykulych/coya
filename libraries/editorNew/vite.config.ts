@@ -5,6 +5,7 @@ import WindiCSS from 'vite-plugin-windicss';
 import Icons from 'unplugin-icons/vite';
 import IconsResolver from 'unplugin-icons/resolver';
 import Components from 'unplugin-vue-components/vite';
+import { FileSystemIconLoader } from 'unplugin-icons/loaders';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,12 +16,21 @@ export default defineConfig({
                 /\.vue\??/, // .vue
                 /\.ts\??/, // .vue
             ],
-            resolvers: IconsResolver(),
+            resolvers: IconsResolver({
+                customCollections: [
+                    'my-icons',
+                ],
+            }),
             dts: 'src/auto-imports.d.ts',
         }),
         Icons({
             autoInstall: true,
             compiler: 'vue3',
+            customCollections: {
+                'my-icons': FileSystemIconLoader(
+                    './src/assets',
+                ),
+            },
         }),
         WindiCSS({
             config: {

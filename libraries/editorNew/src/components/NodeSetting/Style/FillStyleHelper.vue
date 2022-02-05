@@ -16,7 +16,7 @@ const apply = (style: string) => applyStyle(css => ({
 </script>
 
 <template>
-  <div>
+  <div @click.stop>
     <template v-if="!open">
       <div @click="open = true">
         Fill style
@@ -24,16 +24,16 @@ const apply = (style: string) => applyStyle(css => ({
     </template>
     <template v-else>
       <button @click="apply('solid')">
-        <i-la:square-solid />
+        <i-my-icons-solid />
       </button>
       <button @click="apply('hachure')">
-        <i-la:square-solid />
+        <i-my-icons-hachure />
       </button>
       <button @click="apply('cross-hatch')">
-        <i-la:square-solid />
+        <i-my-icons-cross-hatch />
       </button>
       <button @click="applyStyle({fillStyle: undefined, fill: 'none'})">
-        <i-la:square />
+        <i-my-icons-empty />
       </button>
     </template>
   </div>
