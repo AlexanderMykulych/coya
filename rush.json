@@ -485,13 +485,13 @@
     },
     {
       "packageName": "coya-ts-cli",
-      "projectFolder": "libraries/cli/typescript",
+      "projectFolder": "experimental/cli/typescript",
       "versionPolicyName": "rnd",
       "reviewCategory": "rnd"
     },
     {
       "packageName": "coya-ts-analizer",
-      "projectFolder": "libraries/cli/typescript-analizer",
+      "projectFolder": "experimental/cli/typescript-analizer",
       "versionPolicyName": "rnd",
       "reviewCategory": "rnd"
     },
