@@ -653,7 +653,7 @@
 			},
 			"block_14": {
 				"position": {
-					"x": "164.21778869628906",
+					"x": "161.8518829345703",
 					"y": "45.248592019081116",
 					"w": "660.6896820068359",
 					"h": "124.64999806880951"
@@ -663,7 +663,7 @@
 					"color": "black",
 					"stroke": "none"
 				},
-				"label": "External systems",
+				"label": "External apps",
 				"pinTo": "block_15"
 			},
 			"block_17": {

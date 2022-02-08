@@ -36,6 +36,17 @@
             ],
             "outFiles": ["${workspaceFolder}/out/test/**/*.js"],
             "preLaunchTask": "${defaultBuildTask}"
+        },
+        {
+            "type": "pwa-node",
+            "request": "launch",
+            "name": "Debug Current Test File",
+            "autoAttachChildProcesses": true,
+            "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
+            "program": "${workspaceRoot}/experimental/cli/ts-analyzer/node_modules/vitest/vitest.mjs",
+            "args": ["run", "${relativeFile}"],
+            "smartStep": true,
+            "console": "integratedTerminal"
         }
     ],
     "compounds": []
