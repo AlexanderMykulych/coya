@@ -38,7 +38,7 @@ const widgetFilter = ({ path, isEnd }) => isEnd && someHelpers.value
     @update:modelValue="activeNode.css = $event"
   >
     <template #line-widget="{ config }">
-      <StyleHelper v-if="config.row.isEnd" class="mt-2" />
+      <StyleHelper v-if="config.row.isEnd" />
     </template>
   </JsonEditor>
 </template>

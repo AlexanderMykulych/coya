@@ -2,7 +2,7 @@
 import * as monaco from 'monaco-editor';
 import { onMounted, ref, shallowRef, watch } from 'vue';
 import { fastDeepEqual, whatChanged } from 'coya-util';
-import EditorWorker from 'monaco-editor/esm/vs/editor/editor.worker.js?worker';
+import EditorWorker from 'monaco-editor/esm/vs/editor/editor.worker.js?worker&inline';
 import CssWorker from 'monaco-editor/esm/vs/language/css/css.worker.js?worker&inline';
 import JsonWorker from 'monaco-editor/esm/vs/language/json/json.worker.js?worker&inline';
 import type { WidgetFilter } from './WidgetConfig';

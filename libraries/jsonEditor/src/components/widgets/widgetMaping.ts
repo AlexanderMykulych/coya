@@ -1,16 +1,16 @@
-import ColorWidget from './ColorWidget.vue';
 import FillStyleWidget from './FillStyleWidget.vue';
 
+const colorWidgetAsync = defineAsyncComponent(() => import('./ColorWidget.vue'));
 export const widgetMaping = [{
     path: /css\.fill$/,
-    component: ColorWidget,
+    component: colorWidgetAsync,
 }, {
     path: /css\.fillStyle$/,
     component: FillStyleWidget,
 }, {
     path: /css\..*color/,
-    component: ColorWidget,
+    component: colorWidgetAsync,
 }, {
     path: /css\.stroke$/,
-    component: ColorWidget,
+    component: colorWidgetAsync,
 }];
