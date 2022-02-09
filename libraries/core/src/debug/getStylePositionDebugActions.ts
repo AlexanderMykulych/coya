@@ -1,9 +1,9 @@
 import { ref, unref } from 'vue';
 import type { DebugAction, LineDebugAction } from '../debugTypes';
-import { DebugType } from '../debugTypes';
-import type { CustomContextBuilderFunc } from '../descriptionTypes';
-import { getFormulaValue } from '../positioning/getFormulaValue';
 import type { DebugSelectContext, SelectedProperties } from '../types';
+import type { CustomContextBuilderFunc } from '../descriptionTypes';
+import { DebugType } from '../debugTypes';
+import { getFormulaValue } from '../positioning/getFormulaValue';
 import { getColor } from './colors';
 
 export function getStylePositionDebugActions(selected: SelectedProperties, debugContext: DebugSelectContext): DebugAction[] {

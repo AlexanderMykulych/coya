@@ -25,10 +25,17 @@ export async function flushStore() {
         defaultAccessMode: neo4j.session.WRITE,
     });
     console.log(store);
-    await session.writeTransaction(async work => {
-        for (const item of store) {
+    for (const item of store) {
+        if (item.node1.name === item.node2.name) {
+            // console.log("test", item.node1.name)
+            continue;
+        }
+        await session.writeTransaction(async work => {
+            console.log("test", item.node1.name, item.node2.name)
+
             const node1 = prepareNeoNode(item.node1, 'node1');
             const node2 = prepareNeoNode(item.node2, 'node2');
+
             var result = await work.run(`
                 MERGE (n1:Node {${node1.queryStr}})
                 MERGE (n2:Node {${node2.queryStr}})
@@ -36,9 +43,8 @@ export async function flushStore() {
                 ...node1.param,
                 ...node2.param,
             });
-            console.log("result", result);
-        }
-    });
+        });
+    }
     await session.close();
 }
 
