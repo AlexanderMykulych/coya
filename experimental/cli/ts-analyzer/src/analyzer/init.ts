@@ -1,13 +1,17 @@
 import * as ts from "typescript";
+import { addRelation } from "./addRelation";
 
 export const init = () => {
     return 'inited';
 }
 
 export const analyze = (projPath: string) => {
-    const container = getSourceFile(projPath) as SourceContainer;
-    if (container.sourceFile) {
-        analyzeSourceFile(container);
+    const container = getSourceFile(projPath) as ProgramContainer;
+    if (container.program) {
+        container
+            .program
+            .getSourceFiles()
+            .forEach(sourceFile => analyzeSourceFile({sourceFile, checker: container.checker}));
     }
     return null;
 }
@@ -29,7 +33,7 @@ export const getSourceFile = (projPath: string) => {
     const filePath = program.getRootFileNames()[0];
     const checker = program.getTypeChecker();
     return {
-        sourceFile: program.getSourceFile(filePath),
+        program,
         checker,
     };
 }
@@ -41,13 +45,26 @@ export function analyzeSourceFile({sourceFile, checker}: SourceContainer) {
             if (item.valueDeclaration) {
                 visitNodes(item.valueDeclaration, node => {
                     if (ts.isIdentifier(node)) {
-                        console.log(node.kind, node.getText());
                         const nodeSymbol = checker.getSymbolAtLocation(node);
-                        const importDeclaration = nodeSymbol
-                            ?.declarations
-                            ?.find(x => ts.isImportSpecifier(x));
-                        if (importDeclaration) {
-                            console.log(importDeclaration.getFullText());
+                        if (nodeSymbol) {
+                            const nodeType = checker.getTypeOfSymbolAtLocation(nodeSymbol, node);
+                            const importSpecifier = nodeSymbol
+                                ?.declarations
+                                ?.find(x => ts.isImportSpecifier(x));
+                            if (importSpecifier && ts.isImportSpecifier(importSpecifier)) {
+                                const moduleSymbol = nodeType.getSymbol();
+                                if (moduleSymbol) {
+                                    const moduleSourceFile = moduleSymbol.valueDeclaration!.getSourceFile();
+                                    addRelation({
+                                        filePath: sourceFile.path,
+                                        name: item.getName(),
+                                    }, {
+                                        filePath: moduleSourceFile.path,
+                                        name: moduleSymbol.getEscapedName(),
+                                    })
+                                    // console.log(checker.typeToString(checker.getTypeOfSymbolAtLocation(moduleSymbol, moduleSourceFile)));
+                                }
+                            }
                         }
                     }
                 });
@@ -60,6 +77,10 @@ function visitNodes(node: ts.Node, visitor: (x: ts.Node) => void) {
         visitor(visitedNode);
         visitNodes(visitedNode, visitor);
     });
+}
+export interface ProgramContainer {
+    program: ts.Program
+    checker: ts.TypeChecker
 }
 export interface SourceContainer {
     sourceFile: ts.SourceFile

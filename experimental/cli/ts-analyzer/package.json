@@ -20,6 +20,7 @@
     "@oclif/core": "^1",
     "@oclif/plugin-help": "^5",
     "@oclif/plugin-plugins": "^2.0.1",
+    "neo4j-driver": "^4.4.2",
     "vitest": "^0.2.7"
   },
   "devDependencies": {
