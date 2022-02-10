@@ -1,0 +1,104 @@
+{
+	"name": "test2",
+	"blocks": {
+		"block_1": "Block",
+		"block_2": {
+			"label": "block_2",
+			"sourcePhase": 0
+		},
+		"line_1": {
+			"from": "block_1",
+			"to": "block_2",
+			"name": "line_1",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_3": {
+			"label": "block_3",
+			"sourcePhase": 0
+		},
+		"line_2": {
+			"from": "block_2",
+			"to": "block_3",
+			"name": "line_2",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_4": {
+			"label": "block_4",
+			"sourcePhase": 0
+		},
+		"line_4": {
+			"from": "block_2",
+			"to": "block_4",
+			"name": "line_4",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_5": {
+			"label": "block_5",
+			"sourcePhase": 0
+		},
+		"line_5": {
+			"from": "block_2",
+			"to": "block_5",
+			"name": "line_5",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_6": {
+			"label": "block_6",
+			"sourcePhase": 0
+		},
+		"line_6": {
+			"from": "block_5",
+			"to": "block_6",
+			"name": "line_6",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_7": {
+			"from": "block_5",
+			"to": "block_2",
+			"name": "line_7",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_8": {
+			"from": "block_6",
+			"to": "document",
+			"name": "line_8",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"document": {
+			"label": "block_7",
+			"sourcePhase": 0
+		}
+	},
+	"phases": [],
+	"style": {
+		"layout": {
+			"type": "Mindmap"
+		},
+		"blocks": {
+			"_": {
+				"css": {
+					"fontSize": "2.1em",
+					"rx": "49",
+					"border-radius": "10px"
+				}
+			},
+			"->": {
+				"css": {}
+			}
+		}
+	}
+}
