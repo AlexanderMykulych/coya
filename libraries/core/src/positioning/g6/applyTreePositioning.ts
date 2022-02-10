@@ -16,15 +16,17 @@ export function applyTreePositioning(
 function applyG6TreeToCoya(arch: ArchitectureDescription, tree: any, defaults: Partial<PositioningDefaults>) {
     const blocks = arch.style?.blocks!;
     const applier = (item: any) => {
-        if (!blocks[item.id])
+        if (item.id !== '__root') {
+            if (!blocks[item.id])
             blocks[item.id] = {};
-
-        blocks[item.id].position = {
-            x: `${item.x}`,
-            y: `${item.y}`,
-            w: `${defaults.blockW}`,
-            h: `${defaults.blockH}`,
-        };
+            
+            blocks[item.id].position = {
+                x: `${item.x}`,
+                y: `${item.y}`,
+                w: `${defaults.blockW}`,
+                h: `${defaults.blockH}`,
+            };
+        }
         item.children?.forEach(applier);
     };
     applier(tree);

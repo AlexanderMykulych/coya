@@ -42,14 +42,6 @@
 			"label": "block_5",
 			"sourcePhase": 0
 		},
-		"line_5": {
-			"from": "block_2",
-			"to": "block_5",
-			"name": "line_5",
-			"type": "line",
-			"label": "",
-			"sourcePhase": 0
-		},
 		"block_6": {
 			"label": "block_6",
 			"sourcePhase": 0
@@ -58,14 +50,6 @@
 			"from": "block_5",
 			"to": "block_6",
 			"name": "line_6",
-			"type": "line",
-			"label": "",
-			"sourcePhase": 0
-		},
-		"line_7": {
-			"from": "block_5",
-			"to": "block_2",
-			"name": "line_7",
 			"type": "line",
 			"label": "",
 			"sourcePhase": 0

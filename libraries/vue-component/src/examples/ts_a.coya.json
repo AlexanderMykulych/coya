@@ -1,0 +1,1062 @@
+{
+	"name": "coya-ts-analyzer",
+	"blocks": {
+		"b_41": "createElementVNode",
+		"b_42": "ShapeFlags",
+		"b_145": "addHighlightActionExecutor",
+		"b_146": "ChangeType",
+		"b_147": "BlockElementType",
+		"b_148": "addNewBlockActionExecutor",
+		"b_149": "addNewBlockActionDebugger",
+		"b_150": "DebugType",
+		"b_151": "changeBlockPositionActionExecutor",
+		"b_152": "isBlockElementDescription",
+		"b_153": "isNotNullOrUndefined",
+		"b_154": "isRectPositioning",
+		"b_155": "isNullOrUndefined",
+		"b_156": "isLineBlockElementDescription",
+		"b_157": "isLineBlockElement",
+		"b_158": "changeLabelActionExecutor",
+		"b_159": "isHasLabel",
+		"b_160": "changeLabelActionDebugger",
+		"b_161": "connectActionExecutor",
+		"b_162": "isConnectActionSetting",
+		"b_163": "connectActionDebugger",
+		"b_164": "hideBlocksActionExecutor",
+		"b_165": "isHideBlocksActionSetting",
+		"b_166": "hideBlocksActionDebugger",
+		"b_167": "removeHighlightActionExecutor",
+		"b_168": "changeBlockStyleExecutor",
+		"b_169": "showActionExecutor",
+		"b_170": "hideActionExecutor",
+		"b_171": "actionExecutors",
+		"b_172": "ActionType",
+		"b_173": "connectBlockRenamer",
+		"b_174": "addNewBlockBlockRenamer",
+		"b_175": "__function",
+		"b_176": "makeChange",
+		"b_177": "ChangeOwnerType",
+		"b_180": "__function",
+		"b_181": "deepAssign",
+		"b_182": "executeActions",
+		"b_183": "startPhases",
+		"b_184": "GridLayout",
+		"b_185": "Base",
+		"b_186": "RandomLayout",
+		"b_187": "GForceLayout",
+		"b_188": "ForceLayout",
+		"b_189": "CircularLayout",
+		"b_190": "DagreLayout",
+		"b_191": "RadialLayout",
+		"b_192": "ConcentricLayout",
+		"b_193": "MDSLayout",
+		"b_194": "FruchtermanLayout",
+		"b_195": "FruchtermanGPULayout",
+		"b_196": "GForceGPULayout",
+		"b_197": "ComboForceLayout",
+		"b_198": "ForceAtlas2Layout",
+		"b_199": "ERLayout",
+		"b_200": "Layout",
+		"b_201": "coyaToG6",
+		"b_202": "generateTree",
+		"b_203": "applyTreePositioning",
+		"b_204": "applyPositioning",
+		"b_205": "applyGraphPositioning",
+		"b_206": "createBlockElementByDescription",
+		"b_207": "deepCopy",
+		"b_208": "blockGroupDescriptionsToBlock",
+		"b_209": "isString",
+		"b_210": "createBlockElementByString",
+		"b_211": "createLineElementByDescription",
+		"b_212": "isContainerBlock",
+		"b_213": "getDefaultEnter",
+		"b_214": "findPointsDistance",
+		"b_215": "unref",
+		"b_216": "getFormulaValueFuncContext",
+		"b_217": "getFormulaValue",
+		"b_218": "ref",
+		"b_219": "isFormulaValue",
+		"b_220": "computed",
+		"b_221": "lineBlockPosition",
+		"b_222": "gridPositioning",
+		"b_223": "styleDescriptionToArchitectureStyle",
+		"b_224": "prepareCss",
+		"b_225": "buildPhasesIndex",
+		"b_226": "getStylePositionDebugActions",
+		"b_227": "__function",
+		"b_228": "getDebugActions",
+		"b_229": "isBlockSelected",
+		"b_230": "getSelectedBlockId",
+		"b_231": "isPhaseSelected",
+		"b_232": "getPhaseIndex",
+		"b_233": "getActionInfo",
+		"b_234": "Array",
+		"b_235": "isStyleSelected",
+		"b_236": "isStyleBlockSelected",
+		"b_237": "getStyleBlockSelected",
+		"b_238": "isStylePositionSelected",
+		"b_239": "transformToArchitecture",
+		"b_240": "isRef",
+		"b_241": "isArchitectureDescription",
+		"b_242": "transformDescriptionToArchitecture",
+		"b_243": "reactive",
+		"b_244": "BlockGroupDescriptionsToBlock",
+		"b_245": "getNumber",
+		"b_246": "autoPositioning",
+		"b_247": "isParentBlockElement",
+		"b_248": "default",
+		"b_249": "SourceMapConsumer",
+		"b_250": "printHttpServerUrls",
+		"b_251": "Server",
+		"b_252": "send",
+		"b_253": "IncomingMessage",
+		"b_254": "ServerResponse",
+		"b_255": "WebSocket",
+		"b_256": "EventEmitter",
+		"b_257": "URL",
+		"b_258": "ClientRequest",
+		"a_10": {
+			"from": "b_41",
+			"to": "b_42",
+			"type": "line",
+			"label": ""
+		},
+		"a_138": {
+			"from": "b_145",
+			"to": "b_147",
+			"type": "line",
+			"label": ""
+		},
+		"a_137": {
+			"from": "b_145",
+			"to": "b_146",
+			"type": "line",
+			"label": ""
+		},
+		"a_139": {
+			"from": "b_148",
+			"to": "b_146",
+			"type": "line",
+			"label": ""
+		},
+		"a_140": {
+			"from": "b_149",
+			"to": "b_150",
+			"type": "line",
+			"label": ""
+		},
+		"a_141": {
+			"from": "b_151",
+			"to": "b_146",
+			"type": "line",
+			"label": ""
+		},
+		"a_142": {
+			"from": "b_152",
+			"to": "b_153",
+			"type": "line",
+			"label": ""
+		},
+		"a_144": {
+			"from": "b_154",
+			"to": "b_155",
+			"type": "line",
+			"label": ""
+		},
+		"a_143": {
+			"from": "b_154",
+			"to": "b_153",
+			"type": "line",
+			"label": ""
+		},
+		"a_145": {
+			"from": "b_156",
+			"to": "b_147",
+			"type": "line",
+			"label": ""
+		},
+		"a_146": {
+			"from": "b_157",
+			"to": "b_147",
+			"type": "line",
+			"label": ""
+		},
+		"a_148": {
+			"from": "b_158",
+			"to": "b_159",
+			"type": "line",
+			"label": ""
+		},
+		"a_147": {
+			"from": "b_158",
+			"to": "b_146",
+			"type": "line",
+			"label": ""
+		},
+		"a_149": {
+			"from": "b_160",
+			"to": "b_150",
+			"type": "line",
+			"label": ""
+		},
+		"a_152": {
+			"from": "b_161",
+			"to": "b_147",
+			"type": "line",
+			"label": ""
+		},
+		"a_151": {
+			"from": "b_161",
+			"to": "b_146",
+			"type": "line",
+			"label": ""
+		},
+		"a_150": {
+			"from": "b_161",
+			"to": "b_162",
+			"type": "line",
+			"label": ""
+		},
+		"a_153": {
+			"from": "b_163",
+			"to": "b_150",
+			"type": "line",
+			"label": ""
+		},
+		"a_155": {
+			"from": "b_164",
+			"to": "b_146",
+			"type": "line",
+			"label": ""
+		},
+		"a_154": {
+			"from": "b_164",
+			"to": "b_165",
+			"type": "line",
+			"label": ""
+		},
+		"a_156": {
+			"from": "b_166",
+			"to": "b_150",
+			"type": "line",
+			"label": ""
+		},
+		"a_157": {
+			"from": "b_167",
+			"to": "b_146",
+			"type": "line",
+			"label": ""
+		},
+		"a_158": {
+			"from": "b_168",
+			"to": "b_146",
+			"type": "line",
+			"label": ""
+		},
+		"a_159": {
+			"from": "b_169",
+			"to": "b_146",
+			"type": "line",
+			"label": ""
+		},
+		"a_160": {
+			"from": "b_170",
+			"to": "b_146",
+			"type": "line",
+			"label": ""
+		},
+		"a_176": {
+			"from": "b_171",
+			"to": "b_175",
+			"type": "line",
+			"label": ""
+		},
+		"a_175": {
+			"from": "b_171",
+			"to": "b_168",
+			"type": "line",
+			"label": ""
+		},
+		"a_174": {
+			"from": "b_171",
+			"to": "b_166",
+			"type": "line",
+			"label": ""
+		},
+		"a_173": {
+			"from": "b_171",
+			"to": "b_164",
+			"type": "line",
+			"label": ""
+		},
+		"a_172": {
+			"from": "b_171",
+			"to": "b_167",
+			"type": "line",
+			"label": ""
+		},
+		"a_171": {
+			"from": "b_171",
+			"to": "b_145",
+			"type": "line",
+			"label": ""
+		},
+		"a_170": {
+			"from": "b_171",
+			"to": "b_160",
+			"type": "line",
+			"label": ""
+		},
+		"a_169": {
+			"from": "b_171",
+			"to": "b_158",
+			"type": "line",
+			"label": ""
+		},
+		"a_168": {
+			"from": "b_171",
+			"to": "b_151",
+			"type": "line",
+			"label": ""
+		},
+		"a_167": {
+			"from": "b_171",
+			"to": "b_174",
+			"type": "line",
+			"label": ""
+		},
+		"a_166": {
+			"from": "b_171",
+			"to": "b_149",
+			"type": "line",
+			"label": ""
+		},
+		"a_165": {
+			"from": "b_171",
+			"to": "b_148",
+			"type": "line",
+			"label": ""
+		},
+		"a_164": {
+			"from": "b_171",
+			"to": "b_173",
+			"type": "line",
+			"label": ""
+		},
+		"a_163": {
+			"from": "b_171",
+			"to": "b_163",
+			"type": "line",
+			"label": ""
+		},
+		"a_162": {
+			"from": "b_171",
+			"to": "b_161",
+			"type": "line",
+			"label": ""
+		},
+		"a_161": {
+			"from": "b_171",
+			"to": "b_172",
+			"type": "line",
+			"label": ""
+		},
+		"a_181": {
+			"from": "b_176",
+			"to": "b_153",
+			"type": "line",
+			"label": ""
+		},
+		"a_180": {
+			"from": "b_176",
+			"to": "b_181",
+			"type": "line",
+			"label": ""
+		},
+		"a_179": {
+			"from": "b_176",
+			"to": "b_180",
+			"type": "line",
+			"label": ""
+		},
+		"a_178": {
+			"from": "b_176",
+			"to": "b_177",
+			"type": "line",
+			"label": ""
+		},
+		"a_177": {
+			"from": "b_176",
+			"to": "b_146",
+			"type": "line",
+			"label": ""
+		},
+		"a_183": {
+			"from": "b_182",
+			"to": "b_176",
+			"type": "line",
+			"label": ""
+		},
+		"a_182": {
+			"from": "b_182",
+			"to": "b_153",
+			"type": "line",
+			"label": ""
+		},
+		"a_184": {
+			"from": "b_183",
+			"to": "b_182",
+			"type": "line",
+			"label": ""
+		},
+		"a_185": {
+			"from": "b_184",
+			"to": "b_185",
+			"type": "line",
+			"label": ""
+		},
+		"a_186": {
+			"from": "b_186",
+			"to": "b_185",
+			"type": "line",
+			"label": ""
+		},
+		"a_187": {
+			"from": "b_187",
+			"to": "b_185",
+			"type": "line",
+			"label": ""
+		},
+		"a_188": {
+			"from": "b_188",
+			"to": "b_185",
+			"type": "line",
+			"label": ""
+		},
+		"a_189": {
+			"from": "b_189",
+			"to": "b_185",
+			"type": "line",
+			"label": ""
+		},
+		"a_190": {
+			"from": "b_190",
+			"to": "b_185",
+			"type": "line",
+			"label": ""
+		},
+		"a_191": {
+			"from": "b_191",
+			"to": "b_185",
+			"type": "line",
+			"label": ""
+		},
+		"a_192": {
+			"from": "b_192",
+			"to": "b_185",
+			"type": "line",
+			"label": ""
+		},
+		"a_193": {
+			"from": "b_193",
+			"to": "b_185",
+			"type": "line",
+			"label": ""
+		},
+		"a_194": {
+			"from": "b_194",
+			"to": "b_185",
+			"type": "line",
+			"label": ""
+		},
+		"a_195": {
+			"from": "b_195",
+			"to": "b_185",
+			"type": "line",
+			"label": ""
+		},
+		"a_196": {
+			"from": "b_196",
+			"to": "b_185",
+			"type": "line",
+			"label": ""
+		},
+		"a_197": {
+			"from": "b_197",
+			"to": "b_185",
+			"type": "line",
+			"label": ""
+		},
+		"a_198": {
+			"from": "b_198",
+			"to": "b_185",
+			"type": "line",
+			"label": ""
+		},
+		"a_199": {
+			"from": "b_199",
+			"to": "b_185",
+			"type": "line",
+			"label": ""
+		},
+		"a_200": {
+			"from": "b_200",
+			"to": "b_185",
+			"type": "line",
+			"label": ""
+		},
+		"a_201": {
+			"from": "b_201",
+			"to": "b_147",
+			"type": "line",
+			"label": ""
+		},
+		"a_203": {
+			"from": "b_202",
+			"to": "b_153",
+			"type": "line",
+			"label": ""
+		},
+		"a_202": {
+			"from": "b_202",
+			"to": "b_147",
+			"type": "line",
+			"label": ""
+		},
+		"a_204": {
+			"from": "b_203",
+			"to": "b_202",
+			"type": "line",
+			"label": ""
+		},
+		"a_206": {
+			"from": "b_204",
+			"to": "b_205",
+			"type": "line",
+			"label": ""
+		},
+		"a_205": {
+			"from": "b_204",
+			"to": "b_203",
+			"type": "line",
+			"label": ""
+		},
+		"a_207": {
+			"from": "b_206",
+			"to": "b_207",
+			"type": "line",
+			"label": ""
+		},
+		"a_218": {
+			"from": "b_208",
+			"to": "b_150",
+			"type": "line",
+			"label": ""
+		},
+		"a_217": {
+			"from": "b_208",
+			"to": "b_153",
+			"type": "line",
+			"label": ""
+		},
+		"a_216": {
+			"from": "b_208",
+			"to": "b_213",
+			"type": "line",
+			"label": ""
+		},
+		"a_215": {
+			"from": "b_208",
+			"to": "b_212",
+			"type": "line",
+			"label": ""
+		},
+		"a_214": {
+			"from": "b_208",
+			"to": "b_206",
+			"type": "line",
+			"label": ""
+		},
+		"a_213": {
+			"from": "b_208",
+			"to": "b_211",
+			"type": "line",
+			"label": ""
+		},
+		"a_212": {
+			"from": "b_208",
+			"to": "b_156",
+			"type": "line",
+			"label": ""
+		},
+		"a_211": {
+			"from": "b_208",
+			"to": "b_152",
+			"type": "line",
+			"label": ""
+		},
+		"a_210": {
+			"from": "b_208",
+			"to": "b_210",
+			"type": "line",
+			"label": ""
+		},
+		"a_209": {
+			"from": "b_208",
+			"to": "b_209",
+			"type": "line",
+			"label": ""
+		},
+		"a_208": {
+			"from": "b_208",
+			"to": "b_155",
+			"type": "line",
+			"label": ""
+		},
+		"a_219": {
+			"from": "b_214",
+			"to": "b_215",
+			"type": "line",
+			"label": ""
+		},
+		"a_220": {
+			"from": "b_216",
+			"to": "b_215",
+			"type": "line",
+			"label": ""
+		},
+		"a_224": {
+			"from": "b_217",
+			"to": "b_216",
+			"type": "line",
+			"label": ""
+		},
+		"a_223": {
+			"from": "b_217",
+			"to": "b_220",
+			"type": "line",
+			"label": ""
+		},
+		"a_222": {
+			"from": "b_217",
+			"to": "b_219",
+			"type": "line",
+			"label": ""
+		},
+		"a_221": {
+			"from": "b_217",
+			"to": "b_218",
+			"type": "line",
+			"label": ""
+		},
+		"a_226": {
+			"from": "b_221",
+			"to": "b_220",
+			"type": "line",
+			"label": ""
+		},
+		"a_225": {
+			"from": "b_221",
+			"to": "b_217",
+			"type": "line",
+			"label": ""
+		},
+		"a_234": {
+			"from": "b_222",
+			"to": "b_153",
+			"type": "line",
+			"label": ""
+		},
+		"a_233": {
+			"from": "b_222",
+			"to": "b_220",
+			"type": "line",
+			"label": ""
+		},
+		"a_232": {
+			"from": "b_222",
+			"to": "b_221",
+			"type": "line",
+			"label": ""
+		},
+		"a_231": {
+			"from": "b_222",
+			"to": "b_212",
+			"type": "line",
+			"label": ""
+		},
+		"a_230": {
+			"from": "b_222",
+			"to": "b_219",
+			"type": "line",
+			"label": ""
+		},
+		"a_229": {
+			"from": "b_222",
+			"to": "b_217",
+			"type": "line",
+			"label": ""
+		},
+		"a_228": {
+			"from": "b_222",
+			"to": "b_218",
+			"type": "line",
+			"label": ""
+		},
+		"a_227": {
+			"from": "b_222",
+			"to": "b_157",
+			"type": "line",
+			"label": ""
+		},
+		"a_237": {
+			"from": "b_223",
+			"to": "b_207",
+			"type": "line",
+			"label": ""
+		},
+		"a_236": {
+			"from": "b_223",
+			"to": "b_222",
+			"type": "line",
+			"label": ""
+		},
+		"a_235": {
+			"from": "b_223",
+			"to": "b_224",
+			"type": "line",
+			"label": ""
+		},
+		"a_239": {
+			"from": "b_225",
+			"to": "b_155",
+			"type": "line",
+			"label": ""
+		},
+		"a_238": {
+			"from": "b_225",
+			"to": "b_220",
+			"type": "line",
+			"label": ""
+		},
+		"a_244": {
+			"from": "b_226",
+			"to": "b_218",
+			"type": "line",
+			"label": ""
+		},
+		"a_243": {
+			"from": "b_226",
+			"to": "b_217",
+			"type": "line",
+			"label": ""
+		},
+		"a_242": {
+			"from": "b_226",
+			"to": "b_215",
+			"type": "line",
+			"label": ""
+		},
+		"a_241": {
+			"from": "b_226",
+			"to": "b_227",
+			"type": "line",
+			"label": ""
+		},
+		"a_240": {
+			"from": "b_226",
+			"to": "b_150",
+			"type": "line",
+			"label": ""
+		},
+		"a_258": {
+			"from": "b_228",
+			"to": "b_226",
+			"type": "line",
+			"label": ""
+		},
+		"a_257": {
+			"from": "b_228",
+			"to": "b_238",
+			"type": "line",
+			"label": ""
+		},
+		"a_256": {
+			"from": "b_228",
+			"to": "b_172",
+			"type": "line",
+			"label": ""
+		},
+		"a_255": {
+			"from": "b_228",
+			"to": "b_237",
+			"type": "line",
+			"label": ""
+		},
+		"a_254": {
+			"from": "b_228",
+			"to": "b_236",
+			"type": "line",
+			"label": ""
+		},
+		"a_253": {
+			"from": "b_228",
+			"to": "b_235",
+			"type": "line",
+			"label": ""
+		},
+		"a_252": {
+			"from": "b_228",
+			"to": "b_234",
+			"type": "line",
+			"label": ""
+		},
+		"a_251": {
+			"from": "b_228",
+			"to": "b_233",
+			"type": "line",
+			"label": ""
+		},
+		"a_250": {
+			"from": "b_228",
+			"to": "b_232",
+			"type": "line",
+			"label": ""
+		},
+		"a_249": {
+			"from": "b_228",
+			"to": "b_231",
+			"type": "line",
+			"label": ""
+		},
+		"a_248": {
+			"from": "b_228",
+			"to": "b_153",
+			"type": "line",
+			"label": ""
+		},
+		"a_247": {
+			"from": "b_228",
+			"to": "b_230",
+			"type": "line",
+			"label": ""
+		},
+		"a_246": {
+			"from": "b_228",
+			"to": "b_150",
+			"type": "line",
+			"label": ""
+		},
+		"a_245": {
+			"from": "b_228",
+			"to": "b_229",
+			"type": "line",
+			"label": ""
+		},
+		"a_263": {
+			"from": "b_239",
+			"to": "b_241",
+			"type": "line",
+			"label": ""
+		},
+		"a_262": {
+			"from": "b_239",
+			"to": "b_220",
+			"type": "line",
+			"label": ""
+		},
+		"a_261": {
+			"from": "b_239",
+			"to": "b_207",
+			"type": "line",
+			"label": ""
+		},
+		"a_260": {
+			"from": "b_239",
+			"to": "b_218",
+			"type": "line",
+			"label": ""
+		},
+		"a_259": {
+			"from": "b_239",
+			"to": "b_240",
+			"type": "line",
+			"label": ""
+		},
+		"a_272": {
+			"from": "b_242",
+			"to": "b_243",
+			"type": "line",
+			"label": ""
+		},
+		"a_271": {
+			"from": "b_242",
+			"to": "b_150",
+			"type": "line",
+			"label": ""
+		},
+		"a_270": {
+			"from": "b_242",
+			"to": "b_228",
+			"type": "line",
+			"label": ""
+		},
+		"a_269": {
+			"from": "b_242",
+			"to": "b_207",
+			"type": "line",
+			"label": ""
+		},
+		"a_268": {
+			"from": "b_242",
+			"to": "b_183",
+			"type": "line",
+			"label": ""
+		},
+		"a_267": {
+			"from": "b_242",
+			"to": "b_153",
+			"type": "line",
+			"label": ""
+		},
+		"a_266": {
+			"from": "b_242",
+			"to": "b_223",
+			"type": "line",
+			"label": ""
+		},
+		"a_265": {
+			"from": "b_242",
+			"to": "b_225",
+			"type": "line",
+			"label": ""
+		},
+		"a_264": {
+			"from": "b_242",
+			"to": "b_220",
+			"type": "line",
+			"label": ""
+		},
+		"a_273": {
+			"from": "b_244",
+			"to": "b_208",
+			"type": "line",
+			"label": ""
+		},
+		"a_274": {
+			"from": "b_245",
+			"to": "b_240",
+			"type": "line",
+			"label": ""
+		},
+		"a_283": {
+			"from": "b_246",
+			"to": "b_153",
+			"type": "line",
+			"label": ""
+		},
+		"a_282": {
+			"from": "b_246",
+			"to": "b_245",
+			"type": "line",
+			"label": ""
+		},
+		"a_281": {
+			"from": "b_246",
+			"to": "b_154",
+			"type": "line",
+			"label": ""
+		},
+		"a_280": {
+			"from": "b_246",
+			"to": "b_247",
+			"type": "line",
+			"label": ""
+		},
+		"a_279": {
+			"from": "b_246",
+			"to": "b_220",
+			"type": "line",
+			"label": ""
+		},
+		"a_278": {
+			"from": "b_246",
+			"to": "b_221",
+			"type": "line",
+			"label": ""
+		},
+		"a_277": {
+			"from": "b_246",
+			"to": "b_157",
+			"type": "line",
+			"label": ""
+		},
+		"a_276": {
+			"from": "b_246",
+			"to": "b_212",
+			"type": "line",
+			"label": ""
+		},
+		"a_275": {
+			"from": "b_246",
+			"to": "b_218",
+			"type": "line",
+			"label": ""
+		},
+		"a_284": {
+			"from": "b_248",
+			"to": "b_249",
+			"type": "line",
+			"label": ""
+		},
+		"a_285": {
+			"from": "b_250",
+			"to": "b_251",
+			"type": "line",
+			"label": ""
+		},
+		"a_287": {
+			"from": "b_252",
+			"to": "b_254",
+			"type": "line",
+			"label": ""
+		},
+		"a_286": {
+			"from": "b_252",
+			"to": "b_253",
+			"type": "line",
+			"label": ""
+		},
+		"a_291": {
+			"from": "b_255",
+			"to": "b_258",
+			"type": "line",
+			"label": ""
+		},
+		"a_290": {
+			"from": "b_255",
+			"to": "b_253",
+			"type": "line",
+			"label": ""
+		},
+		"a_289": {
+			"from": "b_255",
+			"to": "b_257",
+			"type": "line",
+			"label": ""
+		},
+		"a_288": {
+			"from": "b_255",
+			"to": "b_256",
+			"type": "line",
+			"label": ""
+		}
+	},
+	"phases": [],
+	"style": {
+		"layout": {
+			"type": "Mindmap"
+		},
+		"blocks": {}
+	}
+}

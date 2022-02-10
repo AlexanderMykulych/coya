@@ -19,22 +19,41 @@ export function generateTree(
     const treeBuilder = (id: string) => {
         if (!tree[id])
             tree[id] = { id };
-
         const item = tree[id];
         const children = edges
             .filter(x => x.from === id)
             .map((x) => {
-                if (!tree[x.to] && !!arch.blocks[x.to])
+                if (!tree[x.to] && !!arch.blocks[x.to]) {
                     return treeBuilder(x.to);
+                }
+                return tree[x.to];
             })
             .filter(isNotNullOrUndefined);
         item.children = children;
+        children.forEach(x => x.hasParent = true);
         return item;
     };
 
-    const rootEl = defaults.activeEl || Object.keys(arch.blocks)?.[0];
-    let root = treeBuilder(rootEl);
-    root = tree[rootEl];
+    const rootEls = defaults.activeEl ? [defaults.activeEl] :
+        Object.entries(arch.blocks)
+            .filter(([_, val]) => val?.type !== 'line')
+            .map(([key]) => key);
+    
+    rootEls.forEach(treeBuilder)
+
+    const roots = Object.values(tree)
+            .filter((x: any) => !x.hasParent);
+    let root;
+    if (roots.length > 1) {
+        const rootId = '__root';
+        tree[rootId] = {
+            id: rootId,
+            children: roots,
+        };
+        root = tree[rootId];
+    } else {
+        root = roots[0];
+    }
     const layoutConfig = defaults.layout;
     switch (strategy) {
         case 'Dendrogram':

@@ -1,10 +1,6 @@
 import { RelationNode, Relation } from "./RelationNode";
-import neo4j, { Driver } from 'neo4j-driver';
-
-let driver: Driver | undefined;
-function initNeo4jDriver() {
-    driver = neo4j.driver('neo4j://localhost', neo4j.auth.basic('neo4j', 'test'))
-}
+import neo4j from 'neo4j-driver';
+import { initNeo4jDriver } from "./driver";
 
 const store: any[] = [];
 export function addRelation(node1: RelationNode, node2: RelationNode, relation?: Relation) {
@@ -17,14 +13,11 @@ export function addRelation(node1: RelationNode, node2: RelationNode, relation?:
     }
 }
 export async function flushStore() {
-    if (!driver) {
-        initNeo4jDriver();
-    }
-    var session = driver!.session({
+    const driver = initNeo4jDriver();
+    const session = driver!.session({
         database: 'neo4j',
         defaultAccessMode: neo4j.session.WRITE,
     });
-    console.log(store);
     for (const item of store) {
         if (item.node1.name === item.node2.name) {
             // console.log("test", item.node1.name)
