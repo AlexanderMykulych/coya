@@ -126,6 +126,7 @@ export interface StyleDescription {
     debug?: GlobalDebugSetting
     positioning?: PositioningSystem
     css?: StyleCss
+    layout?: any
 }
 
 export enum PositioningSystem {

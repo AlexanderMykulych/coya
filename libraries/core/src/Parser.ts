@@ -11,11 +11,13 @@ import { startPhases } from './phase/startPhases';
 import { buildPhasesIndex } from './phase/buildPhasesIndex';
 import { getDebugActions } from './debug/getDebugActions';
 import { DebugType } from './debugTypes';
+import { applyPositioning } from '.';
 
 export function transformToArchitecture(description: Ref<unknown> | unknown, setting: TransformSetting): TransformationResult {
     const refDescription = isRef(description) ? description : ref(description);
     const value = refDescription.value;
     const transitionalArchitectureRef = ref<ArchitectureDescription>(deepCopy(value));
+    preprocessArchitecture(transitionalArchitectureRef);
     transitionalArchitectureRef.value!.debugState = <DebugStateContainer>{
         selected: null,
     };
@@ -131,4 +133,26 @@ export function transformDescriptionToArchitecture(
 
 export function BlockGroupDescriptionsToBlock(description: ArchitectureDescription): Block[] {
     return blockGroupDescriptionsToBlock(description);
+}
+
+export function preprocessArchitecture(architecture: Ref<ArchitectureDescription>) {
+    const layout = architecture.value.style?.layout;
+    if (layout) {
+        applyPositioning(architecture.value, layout.type, {
+            layout: {
+                getHeight: function getHeight() {
+                    return layout.default?.height ?? 200;
+                },
+                getWidth: function getWidth() {
+                    return layout.default?.width ?? 500;
+                },
+                getVGap: function getVGap() {
+                    return layout.default?.vGap ?? 50;
+                },
+                getHGap: function getHGap() {
+                    return layout.default?.hGap ?? 100;
+                },
+            }
+        });
+    }
 }
