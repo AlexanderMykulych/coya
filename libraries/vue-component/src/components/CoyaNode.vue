@@ -13,8 +13,6 @@ const props = defineProps<{
     positioning: Positioning
     blockStyle?: BlockStyle
     debug?: boolean
-    defaultArrowStyle?: BlockStyle
-    defaultRectStyle?: BlockStyle
     disableWrap?: boolean
 }>();
 
@@ -32,48 +30,37 @@ const editor = getCurrentEditor();
 const CoyaRectNode = props.disableWrap ? coyaRectNode : editor.wrap(coyaRectNode);
 const CoyaLineNode = props.disableWrap ? coyaLineNode : editor.wrap(coyaLineNode);
 
-const calculateStyle = () => {
-    if (isRect.value)
-        return deepAssign({}, props.defaultRectStyle || {}, props.blockStyle || {});
-
-    if (isLine.value)
-        return deepAssign({}, props.defaultArrowStyle || {}, props.blockStyle || {});
-
-    return props.blockStyle;
-};
-
-const preparedStyle = computed(() => calculateStyle());
 </script>
 
 <template>
   <CoyaLineNode
     v-if="isLine"
     :block="block"
-    :block-style="preparedStyle"
+    :block-style="props.blockStyle"
     :positioning="rectPosition"
   />
   <CoyaImageNode
     v-else-if="isCustomSvgUrl"
     :block="block"
-    :block-style="preparedStyle"
+    :block-style="props.blockStyle"
     :positioning="rectPosition"
   />
   <CoyaSvgNode
     v-else-if="isCustomSvg"
     :block="block"
-    :block-style="preparedStyle"
+    :block-style="props.blockStyle"
     :positioning="rectPosition"
   />
   <CoyaSvgTagNode
     v-else-if="!!svgTag"
     :block="block"
-    :block-style="preparedStyle"
+    :block-style="props.blockStyle"
     :positioning="rectPosition"
   />
   <CoyaRectNode
     v-else-if="isRect"
     :block="block"
-    :block-style="preparedStyle"
+    :block-style="props.blockStyle"
     :positioning="rectPosition"
   >
     <template v-if="!!slots[block.id]" #[block.id]>
@@ -84,7 +71,7 @@ const preparedStyle = computed(() => calculateStyle());
     v-if="!!blockDebug"
     :value="blockDebug"
     :block="block"
-    :block-style="preparedStyle"
+    :block-style="props.blockStyle"
     :positioning="rectPosition"
   />
 </template>

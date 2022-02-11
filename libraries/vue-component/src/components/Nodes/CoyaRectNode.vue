@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { asyncComputed } from '@vueuse/core';
 import type { Block, BlockStyle, RectPositioning } from 'coya-core';
-import { computed, reactive, ref, useSlots } from 'vue';
+import { computed, reactive, ref, unref, useSlots } from 'vue';
 import { useAssets } from '../../logic/useAssets';
 
 const props = defineProps<{
@@ -50,14 +50,17 @@ const textBlockStyle = reactive({
     'padding-top': 0,
     'margin-left': 0,
 });
+const label = computed(() => props.block.label);
 const textStyle = computed(() => {
     const textStyle = props.blockStyle?.css?.text;
     if (textStyle) {
         if (textStyle.fontSize === 'auto') {
-            const fontSize = computed(() => `${props.positioning.w / 6}px`);
+            const length = unref(label.value)?.length;
+            const fontSizeByW = computed(() => `${props.positioning.w / (length * 0.4)}px`);
+            const fontSizeByH = computed(() => `${props.positioning.h}px`);
             return reactive({
                 ...textStyle,
-                fontSize,
+                fontSize: computed(() => `min(${fontSizeByW.value}, ${fontSizeByH.value})`),
             });
         }
         return {
@@ -67,7 +70,6 @@ const textStyle = computed(() => {
     return null;
 });
 
-const label = computed(() => props.block.label);
 </script>
 
 <template>
@@ -122,6 +124,7 @@ const label = computed(() => props.block.label);
               frameborder="0"
               class="w-full h-full"
             />
+
             <p
               v-else
               :style="textStyle"

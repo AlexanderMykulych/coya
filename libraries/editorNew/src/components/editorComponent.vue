@@ -233,6 +233,21 @@ const { mouseState, state, isOneNodeSelected, showDebugWindow, diagramRect }
             <Debug />
           </body>
         </foreignObject>
+        <foreignObject
+          v-if="editor.state.openLayoutSetting"
+          class="node"
+          :style="debugContainerStyle"
+          @click.stop.prevent
+          @mousedown.stop.prevent
+        >
+          <body
+            xmlns="http://www.w3.org/1999/xhtml"
+            :style="debugContainerStyle"
+            @click.stop.prevent
+          >
+            <LayoutSetting />
+          </body>
+        </foreignObject>
       </template>
     </svg>
   </Teleport>

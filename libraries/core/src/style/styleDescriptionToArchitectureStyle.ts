@@ -1,4 +1,5 @@
 import { deepAssign, deepCopy } from 'coya-util';
+import { computed, reactive } from 'vue';
 import type { ArchitectureDescription, StyleDescription, TransformSetting } from '../descriptionTypes';
 import type { Block, BlocksStyle, Style } from '../types';
 import { gridPositioning } from '../positioning/gridPositioning';
@@ -22,14 +23,30 @@ function generateBlocksStyle(style: StyleDescription): BlocksStyle | undefined {
     if (!style.blocks)
         return style.blocks;
 
-    return Object.fromEntries(
+    const styleBlocks = Object.fromEntries(
         Object.entries(style.blocks)
             .map(([key, value]) => {
                 const prepVal = Object.fromEntries(
                     Object.entries(value)
                         .filter(([vKey, _]) => vKey !== 'position'),
                 );
-                return [key, deepAssign({}, prepVal)];
+                const css = computed(() => {
+                    const get: string = prepVal.css?.get ?? '_';
+                    if (get) {
+                        const parentStyle = styleBlocks[get]?.css;
+                        return {
+                            ...parentStyle,
+                            ...prepVal.css,
+                        };
+                    }
+                    return null;
+                });
+                return [key, reactive({
+                    ...deepAssign({}, prepVal),
+                    css,
+                })];
             }),
     );
+
+    return styleBlocks;
 }

@@ -293,12 +293,20 @@ function _useEditorState(editor: Editor): CurrentEditorState {
                 set: (val: boolean) => editor.showDebugWindow = val,
             }),
             zoomState: computed(() => editor.zoomState),
-            applyPositioning: (layout: LayoutConfig) => {
-                applyPositioning(editor.config, layout.type, {
-                    ...layout.config,
-                    activeEl: blockId.value,
-                });
-                editor.initialConfig.style = JSON.parse(JSON.stringify(editor.config.style));
+            applyPositioning: (layout: LayoutConfig, forceApply?: boolean) => {
+                if (layout.settingComponent && !forceApply) {
+                    if (editor.state.openLayoutSetting === layout.name) {
+                        editor.state.openLayoutSetting = undefined;
+                        return
+                    }
+                    editor.state.openLayoutSetting = layout.name;
+                } else {
+                    applyPositioning(editor.config, layout.type, {
+                        ...layout.config,
+                        activeEl: blockId.value,
+                    });
+                    editor.initialConfig.style = JSON.parse(JSON.stringify(editor.config.style));
+                }
             },
             getBlockRealPosition,
             removeBlock: (id?: string) => {

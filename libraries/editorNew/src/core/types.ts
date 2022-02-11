@@ -47,6 +47,7 @@ export interface EnabledEditorState {
     arrowState?: ArrowState | null
     onSelect?: (select: SelectEvent) => void
     isViewMode?: boolean
+    openLayoutSetting?: string
 }
 
 export interface PinState {

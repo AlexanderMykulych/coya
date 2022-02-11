@@ -63,19 +63,21 @@ const selectLayout = (layout: LayoutConfig) => applyPositioning(layout);
   </div>
   <div
     v-else
-    class="border-2 rounded-md bg-white h-full flex flex-row justify-between overflow-x-auto overflow-y-hidden scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100"
-    @wheel.stop.prevent="onWheelHorScroll"
+    class="border-2 rounded-md bg-white h-full flex flex-row justify-between"
+    
   >
     <button class="border-2" @click="openLayouts = false">
       <i-mdi:graph class="pb-1" />
     </button>
-    <button
-      v-for="layout in layouts"
-      class="w-20 border-2 mr-3 break-words"
-      @click="selectLayout(layout)"
-    >
-      {{ layout.name }}
-    </button>
+    <div class="flex flex-row justify-between overflow-x-auto overflow-y-hidden scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100" @wheel.stop.prevent="onWheelHorScroll">
+        <button
+        v-for="layout in layouts"
+        class="w-20 border-2 mr-3 break-words"
+        @click="selectLayout(layout)"
+        >
+        {{ layout.name }}
+        </button>
+    </div>
   </div>
 </template>
 

@@ -85,7 +85,6 @@ const style = reactive({
       @set-editor="editor = $event.value"
     >
       <template #line-widget="{ config }">
-        {{ config.path }}
         <template v-if="isPhasePath(config.path)">
           <PhaseBar :config="config" />
         </template>

@@ -190,8 +190,6 @@ const coyaSlots = computed(() =>
         <CoyaNode
           :block="item.block"
           :block-style="item.blockStyle"
-          :default-rect-style="defaultRectStyle"
-          :default-arrow-style="defaultArrowStyle"
           :positioning="item.positioning"
           :disable-wrap="true"
         />
@@ -345,8 +343,6 @@ const coyaSlots = computed(() =>
             <CoyaNode
               :block="item.block"
               :block-style="item.style"
-              :default-rect-style="defaultRectStyle"
-              :default-arrow-style="defaultArrowStyle"
               :positioning="item.pos"
               :debug="debug"
             >

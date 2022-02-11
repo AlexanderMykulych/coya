@@ -1,8 +1,12 @@
 import type { PositioningDefaults, PositioningStrategy } from 'coya-core';
+import type { Component } from 'vue';
+import { defineAsyncComponent } from 'vue';
+
 export interface LayoutConfig {
     name: string
     type: PositioningStrategy
     config: Partial<PositioningDefaults>
+    settingComponent?: Component
 }
 const dagreDef = {
     ranksep: 100,
@@ -40,6 +44,7 @@ export const layouts: LayoutConfig[] = [{
             rankdir: 'LR',
         },
     },
+    settingComponent: defineAsyncComponent(() => import('./DagreSetting.vue')),
 }, {
     name: 'grid',
     type: 'Grid',
