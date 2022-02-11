@@ -62,7 +62,7 @@
     "posttest": "yarn lint",
     "prepack": "yarn build && oclif manifest && oclif readme",
     "test-cli": "mocha --forbid-only \"test/**/*.test.ts\"",
-    "test": "vitest -r ./test/analyzer/",
+    "test": "vitest -r ./test/analyzer/ -t init",
     "version": "oclif readme && git add README.md"
   },
   "engines": {

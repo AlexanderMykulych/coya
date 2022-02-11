@@ -11,40 +11,85 @@ export async function generateDiagram() {
         defaultAccessMode: neo4j.session.READ,
     });
 
-    const nodesResult = await session.run(`MATCH (n:Node) RETURN n`);
-    const relsResult = await session.run(`MATCH (n1:Node)-[r]->(n2: Node) RETURN r`);
+    const nodesResult = await session.run(`
+        MATCH (n1:FsUnit)-[*0..]->(n)
+        where n1.name = 'libraries'
+        RETURN n`);
+    const relsResult = await session.run(`
+        MATCH p = (n1:FsUnit)-[*1..]->(n)
+        where n1.name = 'libraries'
+        with relationships(p) as rs
+        unwind rs as r
+        return distinct r
+    `);
 
     session.close();
 
-    const blocks = Object.fromEntries(
-        nodesResult
+    const blocks = nodesResult
             .records
             .map(x => x.get('n'))
-            .map(x => [getBlockId(x.identity), x.properties.name])
-    );
+            .map(x => [getBlockId(x.identity), x.properties]);
+    const coyaBlocks = Object.fromEntries(blocks.map(([key, val]) => [key, val.name]));
     const arrows = Object.fromEntries(relsResult
         .records
         .map(x => x.get('r'))
         .map(x => [getArrowId(x.identity), {
             from: getBlockId(x.start.toString()),
             to: getBlockId(x.end.toString()),
-			type: 'line',
-			label: '',
+            type: 'line',
+            label: '',
         }])
     );
-    
+
     const diagram = {
         name: 'coya-ts-analyzer',
         blocks: {
-            ...blocks,
+            ...coyaBlocks,
             ...arrows,
         },
         phases: [],
         style: {
             layout: {
-                type: "Mindmap"
+                type: "Dagre"
             },
-            blocks: {},
+            blocks: {
+                _: {
+                    css: {
+                        text: {
+                            fontSize: 'auto',
+                        }
+                    }
+                },
+                _folder: {
+                    css: {
+                        fillStyle: 'solid',
+                        color: '#ffffffff',
+                        fill: '#f67c01ff',
+                    }
+                },
+                _file: {
+                    css: {
+                        fillStyle: 'solid',
+                        color: '#ffffffff',
+                        fill: '#008781ff',
+                    }
+                },
+                _func: {
+                    css: {
+                        fillStyle: 'solid',
+                        color: '#ffffffff',
+                        fill: '#2097f3ff',
+                    }
+                },
+                ...Object.fromEntries(
+                    blocks.map(([key, val]) => [key, {
+                            css: {
+                                get: val.isFile === true ? '_file' :
+                                    val.isFile === false ? '_folder' : '_func',
+                            }
+                        }]),
+                )
+            },
         }
     };
     saveCoyaConfig('/home/alex/RiderProjects/Coya/Coya/libraries/vue-component/src/examples/ts_a.coya.json', diagram);
