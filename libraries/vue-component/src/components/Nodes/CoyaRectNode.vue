@@ -50,6 +50,16 @@ const textBlockStyle = reactive({
     'padding-top': 0,
     'margin-left': 0,
 });
+const textContainerStyle = computed(() => ({
+    'justify-content': 'center',
+    'box-sizing': 'border-box',
+    'text-align': 'center',
+    'line-height': 1.2,
+    'pointer-events': 'all',
+    'white-space': 'normal',
+    'word-wrap': 'normal',
+    ...props.blockStyle?.css?.container,
+}));
 const label = computed(() => props.block.label);
 const textStyle = computed(() => {
     const textStyle = props.blockStyle?.css?.text;
@@ -106,15 +116,8 @@ const textStyle = computed(() => {
           class="w-full h-full"
         >
           <div
-            style="
-                            box-sizing: border-box;
-                            text-align: center;
-                            line-height: 1.2;
-                            pointer-events: all;
-                            white-space: normal;
-                            word-wrap: normal;
-                        "
-            class="w-full h-full flex justify-center items-center"
+            class="w-full h-full flex items-center"
+            :style="textContainerStyle"
           >
             <slot v-if="!!slots[block.id]" :name="block.id" />
             <Code v-else-if="isCode" :code="blockStyle.code" :label="label" :style="textStyle" />

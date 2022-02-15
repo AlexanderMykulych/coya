@@ -5,12 +5,11 @@ export const arrangeBackward = (blockId: string | undefined, config: Architectur
         return;
 
     const entries = Object.entries(config.blocks);
-    const firstEntry = entries[0];
-    const blockEntryIndex = entries.findIndex(x => x[0] === blockId);
-    const blockEntry = entries[blockEntryIndex];
-    if (firstEntry && blockEntry) {
-        entries[0] = blockEntry;
-        entries[blockEntryIndex] = firstEntry;
+    const blockEntryIndex = entries.findIndex(([x]) => x === blockId);
+    if (blockEntryIndex > -1) {
+        const blockEntry = entries[blockEntryIndex];
+        entries.splice(blockEntryIndex, 1);
+        entries.unshift(blockEntry);
     }
     config.blocks = Object.fromEntries(entries);
 };
@@ -19,12 +18,11 @@ export const arrangeForward = (blockId: string | undefined, config: Architecture
         return;
 
     const entries = Object.entries(config.blocks);
-    const lastEntry = entries[entries.length - 1];
     const blockEntryIndex = entries.findIndex(x => x[0] === blockId);
-    const blockEntry = entries[blockEntryIndex];
-    if (lastEntry && blockEntry) {
-        entries[entries.length - 1] = blockEntry;
-        entries[blockEntryIndex] = lastEntry;
+    if (blockEntryIndex > -1) {
+        const blockEntry = entries[blockEntryIndex];
+        entries.splice(blockEntryIndex, 1);
+        entries.push(blockEntry);
     }
     config.blocks = Object.fromEntries(entries);
 };

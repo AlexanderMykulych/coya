@@ -55,6 +55,9 @@ declare module 'vue' {
     'IPh:pushPinFill': typeof import('~icons/ph/push-pin-fill')['default']
     'IPh:pushPinSimpleFill': typeof import('~icons/ph/push-pin-simple-fill')['default']
     'IPh:rectangleBold': typeof import('~icons/ph/rectangle-bold')['default']
+    'IPh:textAlignJustify': typeof import('~icons/ph/text-align-justify')['default']
+    'IPh:textAlignLeft': typeof import('~icons/ph/text-align-left')['default']
+    'IPh:textAlignRight': typeof import('~icons/ph/text-align-right')['default']
     'ISimpleLineIcons:magicWand': typeof import('~icons/simple-line-icons/magic-wand')['default']
     'ITabler:handFinger': typeof import('~icons/tabler/hand-finger')['default']
     'IVscodeIcons:fileTypeStyle': typeof import('~icons/vscode-icons/file-type-style')['default']
@@ -70,6 +73,7 @@ declare module 'vue' {
     StyleHelper: typeof import('./components/NodeSetting/StyleHelper.vue')['default']
     StyleSetting: typeof import('./components/NodeSetting/StyleSetting.vue')['default']
     Test: typeof import('./components/test.vue')['default']
+    TextAlignHelper: typeof import('./components/NodeSetting/Style/TextAlignHelper.vue')['default']
     WrapperRect: typeof import('./components/Wrap/WrapperRect.vue')['default']
   }
 }

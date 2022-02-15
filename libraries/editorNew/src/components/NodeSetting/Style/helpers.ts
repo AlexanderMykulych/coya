@@ -17,6 +17,11 @@ export const helpers = [{
     }),
     component: defineAsyncComponent(() => import('./FillStyleHelper.vue')),
 }, {
+    label: 'Text align',
+    canHelp: () => true,
+    applyHelp: (css: Record<string, any>) => css,
+    component: defineAsyncComponent(() => import('./TextAlignHelper.vue')),
+}, {
     label: 'Text color',
     canHelp: (css: Record<string, any>) => isNullOrUndefined(css?.color),
     applyHelp: (css: Record<string, any>) => ({

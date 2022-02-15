@@ -45,7 +45,7 @@ function _useEditorState(editor: Editor): CurrentEditorState {
                 executeActions(diagram, actions.map((x, index) => ({
                     actionId: index,
                     action: x.action,
-                })), 0);
+                })), undefined);
             }
             else {
                 const phaseConfig = diagram.phases?.[editor.architecture.currentPhase];
@@ -154,15 +154,13 @@ function _useEditorState(editor: Editor): CurrentEditorState {
                     )
                     ?? configActiveNode.value?.block.value?.label,
                 set: (val: string | null) => {
-                    if (typeof configActiveNode.value?.block.value === 'string') {
-                        set(configActiveNode.value, 'block.value', val);
-                        set(initConfigActiveNode.value, 'block.value', val);
-                    }
-                    else if (typeof configActiveNode.value?.style?.value?.label) {
+                    if (typeof configActiveNode.value?.style?.value?.label === 'string') {
                         set(configActiveNode.value, 'style.value.label', val);
                         set(initConfigActiveNode.value, 'style.value.label', val);
-                    }
-                    else if (typeof configActiveNode.value?.block.value.label) {
+                    } else if (typeof configActiveNode.value?.block.value === 'string') {
+                        set(configActiveNode.value, 'block.value', val);
+                        set(initConfigActiveNode.value, 'block.value', val);
+                    } else if (typeof configActiveNode.value?.block.value.label === 'string') {
                         set(configActiveNode.value, 'block.value.label', val);
                         set(initConfigActiveNode.value, 'block.value.label', val);
                     }

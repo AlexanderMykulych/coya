@@ -106,7 +106,7 @@
 					"h": "250"
 				},
 				"css": {
-					"fill": "#fff59cff"
+					"fill": "#4cb050ff"
 				}
 			},
 			"block_2": {
@@ -136,14 +136,16 @@
 			"block_4": {
 				"position": {
 					"x": "1341.8033447265625",
-					"y": "-849.6503639221191",
-					"w": "1013.6800537109375",
-					"h": "780.8687324523926"
+					"y": "-853.0960121154785",
+					"w": "2232.6197509765625",
+					"h": "652.0218086242676"
 				},
 				"css": {
 					"get": "block_2",
-					"stroke": "#fb8c00ff"
-				}
+					"stroke": "#fb8c00ff",
+					"font-size": "111"
+				},
+				"label": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus volutpat eget tortor eget fringilla. Vivamus congue nulla vel ligula faucibus, ut blandit neque accumsan. Phasellus vel euismod nunc"
 			},
 			"block_5": {
 				"position": {

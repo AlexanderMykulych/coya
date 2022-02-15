@@ -277,7 +277,7 @@ export interface DebugStateContainer {
     lines?: LineDebugAction[]
 }
 
-export type ActionItemExecutor = (phaseId: number, action: Action, actionIndex: number) => Change[] | null;
+export type ActionItemExecutor = (phaseId: number | undefined, action: Action, actionIndex: number) => Change[] | null;
 
 export interface ActionItem {
     type: ActionType
