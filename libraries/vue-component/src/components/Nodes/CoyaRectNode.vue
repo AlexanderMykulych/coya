@@ -91,8 +91,6 @@ const textStyle = computed(() => {
       :width="positioning.w"
       :height="positioning.h"
     >
-      <Rough :w="positioning.w" :h="positioning.h" :css="cssStyle" class="rect-node" />
-
       <image
         v-if="imgUrl"
         :href="imgUrl"
@@ -140,6 +138,7 @@ const textStyle = computed(() => {
           </div>
         </div>
       </foreignObject>
+      <Rough :w="positioning.w" :h="positioning.h" :css="cssStyle" class="rect-node" />
     </svg>
   </g>
 </template>

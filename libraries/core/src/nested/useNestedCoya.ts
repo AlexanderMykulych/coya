@@ -45,5 +45,5 @@ export const useNestedCoya = (coyaConfig: CoyaConfig, initRef?: Ref<CoyaConfig[]
     return childrens;
 };
 export const getNestedCoyaChildrenFromContext = (context: TransformContext, name: string) => {
-    return context.nestedChildrens?.value?.find(x => x.name === name);
+    return computed(() => context.nestedChildrens?.value?.find(x => x.name === name));
 };

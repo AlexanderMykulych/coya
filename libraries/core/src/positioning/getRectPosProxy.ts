@@ -16,7 +16,7 @@ export function getRectPosProxy(target, scale, translate, parentPos) {
             } else if (attr === 'top') {
                 return getRectPosProxy(res, scale, translate, parentPos);
             }
-            return res;
+            return getRectPosProxy(res, scale, translate, parentPos);
         },
     });
 }
