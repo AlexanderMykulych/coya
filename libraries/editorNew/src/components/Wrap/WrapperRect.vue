@@ -20,10 +20,10 @@ const props = defineProps<{
 }>();
 const emit = defineEmits(['pinPress']);
 const padding = 10;
-const pinW = 8;
-const pinCW = pinW / 2;
+const pinW = computed(() => 8 / zoomState.value.scale);
+const pinCW = computed(() => pinW.value / 2);
 
-const { state, activeNode } = useCurrentEditorState();
+const { state, activeNode, zoomState } = useCurrentEditorState();
 
 const preparedPosition = computed(() => {
     switch (props.block.type) {
@@ -52,50 +52,50 @@ const preparedPosition = computed(() => {
 });
 const pins = computed(() => [
     {
-        x: preparedPosition.value.x - pinCW,
-        y: preparedPosition.value.y - pinCW,
+        x: preparedPosition.value.x - pinCW.value,
+        y: preparedPosition.value.y - pinCW.value,
         class: 'cursor-nwse-resize',
         type: PinType.TopLeft,
     },
     {
-        x: preparedPosition.value.x - pinCW,
-        y: preparedPosition.value.y + preparedPosition.value.h - pinCW,
+        x: preparedPosition.value.x - pinCW.value,
+        y: preparedPosition.value.y + preparedPosition.value.h - pinCW.value,
         class: 'cursor-nesw-resize',
         type: PinType.BottomLeft,
     },
     {
-        x: preparedPosition.value.x + preparedPosition.value.w - pinCW,
-        y: preparedPosition.value.y + preparedPosition.value.h - pinCW,
+        x: preparedPosition.value.x + preparedPosition.value.w - pinCW.value,
+        y: preparedPosition.value.y + preparedPosition.value.h - pinCW.value,
         class: 'cursor-nwse-resize',
         type: PinType.BottomRight,
     },
     {
-        x: preparedPosition.value.x + preparedPosition.value.w - pinCW,
-        y: preparedPosition.value.y - pinCW,
+        x: preparedPosition.value.x + preparedPosition.value.w - pinCW.value,
+        y: preparedPosition.value.y - pinCW.value,
         class: 'cursor-nesw-resize',
         type: PinType.TopRight,
     },
     {
-        x: preparedPosition.value.x + preparedPosition.value.w / 2 - pinCW,
-        y: preparedPosition.value.y - pinCW,
+        x: preparedPosition.value.x + preparedPosition.value.w / 2 - pinCW.value,
+        y: preparedPosition.value.y - pinCW.value,
         class: 'cursor-ns-resize',
         type: PinType.Top,
     },
     {
-        x: preparedPosition.value.x + preparedPosition.value.w / 2 - pinCW,
-        y: preparedPosition.value.y + preparedPosition.value.h - pinCW,
+        x: preparedPosition.value.x + preparedPosition.value.w / 2 - pinCW.value,
+        y: preparedPosition.value.y + preparedPosition.value.h - pinCW.value,
         class: 'cursor-ns-resize',
         type: PinType.Bottom,
     },
     {
-        x: preparedPosition.value.x - pinCW,
-        y: preparedPosition.value.y + preparedPosition.value.h / 2 - pinCW,
+        x: preparedPosition.value.x - pinCW.value,
+        y: preparedPosition.value.y + preparedPosition.value.h / 2 - pinCW.value,
         class: 'cursor-ew-resize',
         type: PinType.Left,
     },
     {
-        x: preparedPosition.value.x + preparedPosition.value.w - pinCW,
-        y: preparedPosition.value.y + preparedPosition.value.h / 2 - pinCW,
+        x: preparedPosition.value.x + preparedPosition.value.w - pinCW.value,
+        y: preparedPosition.value.y + preparedPosition.value.h / 2 - pinCW.value,
         class: 'cursor-ew-resize',
         type: PinType.Right,
     },
