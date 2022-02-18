@@ -6,9 +6,12 @@ import type {
 } from 'coya-core';
 import {
     transformToArchitecture,
+
+    useNestedCoya,
 } from 'coya-core';
 import {
     computed,
+    inject,
     onMounted,
     provide,
     reactive,
@@ -27,13 +30,13 @@ import { provideAssets } from '../logic/useAssets';
 const props = defineProps<{
     config: string | Object
     id: string
-    assets: AssetConfig
+    assets?: AssetConfig
 }>();
 const emit = defineEmits(['update:config', 'update:controller']);
 const slots = useSlots();
 
 // assets
-provideAssets(props.assets);
+const assets = provideAssets(props.assets);
 
 const preparedConfig = reactive({
     config: null,
@@ -75,6 +78,7 @@ const height = computed(() => {
 
     return 0;
 });
+const nestedChildrens = ref([]);
 const { architecture: arch, config } = transformToArchitecture(
     preparedConfig.config,
     {
@@ -85,8 +89,18 @@ const { architecture: arch, config } = transformToArchitecture(
             h: height,
         },
         currentPhase,
+        contextGetter: () => ({
+            nestedChildrens,
+        }),
     },
 );
+
+useNestedCoya({
+    name: props.id,
+    arch,
+    config,
+    editor,
+}, nestedChildrens);
 
 editor.value = enableEditor({
     svg: coyaSvgEl,
@@ -95,7 +109,7 @@ editor.value = enableEditor({
     initialConfig,
     architecture: arch,
     id: props.id,
-    assets: props.assets,
+    assets,
 });
 const editorController = useEditorState(editor.value);
 emit('update:controller', editorController);
@@ -179,6 +193,7 @@ const coyaSlots = computed(() =>
             .map(([key, value]) => [key.slice(coyaSlotsKey.length), value]),
     ),
 );
+
 </script>
 <template>
   <div class="grid grid-cols-4 grid-rows-12 h-full hwf">

@@ -18,6 +18,7 @@
     "vue/v-on-event-hyphenation": "off",
     "semi": ["error", "always"],
     "eslint-comments/no-unlimited-disable": "off",
-    "curly": "off"
+    "curly": "off",
+    "@typescript-eslint/brace-style": "off"
   }
 }

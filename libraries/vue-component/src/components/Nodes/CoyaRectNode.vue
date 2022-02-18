@@ -12,7 +12,7 @@ const props = defineProps<{
 
 const slots = useSlots();
 
-const { getImgUrl } = useAssets();
+const { getImgUrl, getText } = useAssets();
 
 // image
 const imgUrl = asyncComputed(
@@ -113,7 +113,6 @@ const textStyle = computed(() => {
         <div
           xmlns="http://www.w3.org/1999/xhtml"
           :style="textBlockStyle"
-          class="w-full h-full"
         >
           <div
             class="w-full h-full flex items-center"
@@ -127,7 +126,11 @@ const textStyle = computed(() => {
               frameborder="0"
               class="w-full h-full"
             />
-
+            <CoyaNested
+              v-else-if="blockStyle.coya"
+              :id="block.id"
+              :coya="blockStyle.coya"
+            />
             <p
               v-else
               :style="textStyle"

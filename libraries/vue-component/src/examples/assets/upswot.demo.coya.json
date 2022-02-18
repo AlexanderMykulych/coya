@@ -1,0 +1,1076 @@
+{
+	"name": "upswot",
+	"blocks": {
+		"block_26": {
+			"label": "block_26",
+			"sourcePhase": 0
+		},
+		"block_2": {
+			"label": "block_1",
+			"sourcePhase": 0
+		},
+		"block_3": {
+			"label": "block_1",
+			"sourcePhase": 0
+		},
+		"line_1": {
+			"from": "block_2",
+			"to": "block_3",
+			"name": "line_1",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_4": {
+			"label": "block_1",
+			"sourcePhase": 0
+		},
+		"line_2": {
+			"from": "block_2",
+			"to": "block_4",
+			"name": "line_2",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_5": {
+			"label": "block_1",
+			"sourcePhase": 0
+		},
+		"line_3": {
+			"from": "block_3",
+			"to": "block_5",
+			"name": "line_3",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_6": {
+			"label": "block_1",
+			"sourcePhase": 0
+		},
+		"line_4": {
+			"from": "block_4",
+			"to": "block_6",
+			"name": "line_4",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_7": {
+			"label": "block_1",
+			"sourcePhase": 0
+		},
+		"block_8": {
+			"label": "block_1",
+			"sourcePhase": 0
+		},
+		"block_9": {
+			"label": "block_1",
+			"sourcePhase": 0
+		},
+		"line_5": {
+			"from": "block_7",
+			"to": "block_8",
+			"name": "line_5",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_6": {
+			"from": "block_7",
+			"to": "block_9",
+			"name": "line_6",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_10": {
+			"label": "block_1",
+			"sourcePhase": 0
+		},
+		"block_11": {
+			"label": "block_1",
+			"sourcePhase": 0
+		},
+		"line_7": {
+			"from": "block_8",
+			"to": "block_10.top",
+			"name": "line_7",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_8": {
+			"from": "block_9",
+			"to": "block_11",
+			"name": "line_8",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_13": {
+			"label": "block_1",
+			"sourcePhase": 0
+		},
+		"block_15": {
+			"label": "block_15",
+			"sourcePhase": 0
+		},
+		"block_16": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_14": {
+			"label": "block_1",
+			"sourcePhase": 0
+		},
+		"block_17": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_18": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_19": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_20": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_21": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_22": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_23": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_24": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_25": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_16": {
+			"from": "block_23",
+			"to": "block_22",
+			"name": "line_16",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_27": {
+			"label": "block_1",
+			"sourcePhase": 0
+		},
+		"line_11": {
+			"from": "block_17",
+			"to": "block_18",
+			"name": "line_11",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_10": {
+			"from": "block_18",
+			"to": "block_19",
+			"name": "line_10",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_12": {
+			"from": "block_19",
+			"to": "block_21",
+			"name": "line_12",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_13": {
+			"from": "block_21",
+			"to": "block_24",
+			"name": "line_13",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_14": {
+			"from": "block_24",
+			"to": "block_22",
+			"name": "line_14",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_15": {
+			"from": "block_21",
+			"to": "block_23",
+			"name": "line_15",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_1": {
+			"label": "block_1"
+		},
+		"line_17": {
+			"from": "block_17",
+			"to": "block_15",
+			"name": "line_17",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_28": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_18": {
+			"from": "block_28",
+			"to": "block_23",
+			"name": "line_18",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_29": {
+			"label": "block_1",
+			"sourcePhase": 0
+		},
+		"block_12": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_30": {
+			"label": "block_30",
+			"sourcePhase": 0
+		},
+		"block_31": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_32": {
+			"label": "block_32",
+			"sourcePhase": 0
+		},
+		"line_9": {
+			"from": "block_12.top",
+			"to": "block_30.left",
+			"name": "line_9",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_19": {
+			"from": "block_32",
+			"to": "block_31",
+			"name": "line_19",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_20": {
+			"from": "block_31",
+			"to": "block_30",
+			"name": "line_20",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_21": {
+			"from": "block_30",
+			"to": "block_31",
+			"name": "line_21",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_22": {
+			"from": "block_31",
+			"to": "block_32",
+			"name": "line_22",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_33": {
+			"label": "<iframe src=\"https://docs.google.com/presentation/d/e/2PACX-1vTtJSONUM0UM0YVKrshgmaAUIRKNfAytQzSP-mugWheWcGE435OfmqHpIShdwwRrOtlpZT2fjP_qRwc/embed?start=false&loop=false&delayms=3000\" frameborder=\"0\" width=\"1440\" height=\"839\" allowfullscreen=\"true\" mozallowfullscreen=\"true\" webkitallowfullscreen=\"true\"></iframe>",
+			"sourcePhase": 0
+		},
+		"block_34": {
+			"label": "block_34",
+			"sourcePhase": 0
+		},
+		"block_35": {
+			"label": "block_1",
+			"sourcePhase": 0
+		},
+		"block_37": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"insight1": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_36": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_23": {
+			"from": "insight1",
+			"to": "block_37",
+			"name": "line_23",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_24": {
+			"from": "insight1",
+			"to": "block_36",
+			"name": "line_24",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_38": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_25": {
+			"from": "insight1",
+			"to": "block_38",
+			"name": "line_25",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_39": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_26": {
+			"from": "block_37",
+			"to": "block_39",
+			"name": "line_26",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_27": {
+			"from": "block_36",
+			"to": "block_39",
+			"name": "line_27",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"line_28": {
+			"from": "block_38",
+			"to": "block_39",
+			"name": "line_28",
+			"type": "line",
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_40": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_41": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_42": {
+			"label": "block_42",
+			"sourcePhase": 0
+		},
+		"block_43": {
+			"label": "block_1",
+			"sourcePhase": 0
+		},
+		"block_44": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_45": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_46": {
+			"label": "",
+			"sourcePhase": 0
+		},
+		"block_47": {
+			"label": "",
+			"sourcePhase": 0
+		}
+	},
+	"phases": [],
+	"style": {
+		"blocks": {
+			"_": {
+				"css": {
+					"color": "#ffffffff",
+					"fontSize": "2.1em",
+					"rx": "49",
+					"stroke": "#212121ff",
+					"fillStyle": "solid",
+					"border-radius": "10px",
+					"text": {
+						"fontSize": "auto"
+					},
+					"fill": "none"
+				}
+			},
+			"block_1": {
+				"position": {
+					"x": "-311.29791259765625",
+					"y": "-701.9214477539062",
+					"w": "198.3541259765625",
+					"h": "59.82672119140625"
+				},
+				"css": {
+					"fill": "none",
+					"color": "black",
+					"stroke": "none",
+					"text": {
+						"color": "#5d35b0ff"
+					}
+				},
+				"label": "Project/Hosting"
+			},
+			"block_2": {
+				"position": {
+					"x": "-352.9847717285156",
+					"y": "110.81976318359375",
+					"w": "142.9726104736328",
+					"h": "31.55517578125"
+				},
+				"css": {
+					"fill": "none",
+					"color": "black",
+					"stroke": "none",
+					"text": {
+						"color": "#5d35b0ff"
+					}
+				},
+				"label": "Project",
+				"pinTo": "block_1"
+			},
+			"block_3": {
+				"position": {
+					"x": "-82.77932739257812",
+					"y": "273.9164123535156",
+					"w": "157.32850646972656",
+					"h": "45.68963623046875"
+				},
+				"css": {
+					"fill": "none",
+					"color": "black",
+					"stroke": "none"
+				},
+				"label": "PoC",
+				"pinTo": "block_2"
+			},
+			"block_4": {
+				"position": {
+					"x": "24.023178100585938",
+					"y": "274.3401794433594",
+					"w": "210.77685546875",
+					"h": "36.82481384277344"
+				},
+				"css": {
+					"fill": "none",
+					"color": "black",
+					"stroke": "none"
+				},
+				"label": "Pilot",
+				"pinTo": "block_2"
+			},
+			"block_5": {
+				"position": {
+					"x": "-65.66545104980469",
+					"y": "439.7079654932022",
+					"w": "123.4024658203125",
+					"h": "51.3473482131958"
+				},
+				"css": {
+					"fill": "none",
+					"color": "black",
+					"stroke": "none"
+				},
+				"label": "Dummy data",
+				"pinTo": "block_2"
+			},
+			"block_6": {
+				"position": {
+					"x": "73.707763671875",
+					"y": "448.63009893894196",
+					"w": "123.4024658203125",
+					"h": "51.3473482131958"
+				},
+				"css": {
+					"fill": "none",
+					"color": "black",
+					"stroke": "none"
+				},
+				"label": "Real data",
+				"pinTo": "block_2"
+			},
+			"block_7": {
+				"position": {
+					"x": "328.15605545043945",
+					"y": "131.64202880859375",
+					"w": "142.9726104736328",
+					"h": "31.55517578125"
+				},
+				"css": {
+					"fill": "none",
+					"color": "black",
+					"stroke": "none",
+					"text": {
+						"color": "#5d35b0ff"
+					}
+				},
+				"label": "Hosting",
+				"pinTo": "block_1"
+			},
+			"block_8": {
+				"position": {
+					"x": "-91.66085922718048",
+					"y": "263.53607177734375",
+					"w": "157.32850646972656",
+					"h": "45.68963623046875"
+				},
+				"css": {
+					"fill": "none",
+					"color": "black",
+					"stroke": "none"
+				},
+				"label": "upSWOT",
+				"pinTo": "block_7"
+			},
+			"block_9": {
+				"position": {
+					"x": "62.59431457519531",
+					"y": "260.2046356201172",
+					"w": "157.32850646972656",
+					"h": "45.68963623046875"
+				},
+				"css": {
+					"fill": "none",
+					"color": "black",
+					"stroke": "none"
+				},
+				"label": "Bank",
+				"pinTo": "block_7"
+			},
+			"block_10": {
+				"position": {
+					"x": "-102.46039915084839",
+					"y": "429.5480155944824",
+					"w": "157.32850646972656",
+					"h": "45.68963623046875"
+				},
+				"css": {
+					"fill": "none",
+					"color": "black",
+					"stroke": "none"
+				},
+				"label": "1 week",
+				"pinTo": "block_7"
+			},
+			"block_11": {
+				"position": {
+					"x": "74.5398817062378",
+					"y": "433.6409912109375",
+					"w": "137.3685541152954",
+					"h": "77.6203842163086"
+				},
+				"css": {
+					"fill": "none",
+					"color": "black",
+					"stroke": "none"
+				},
+				"label": "2 week/Docker-compose",
+				"pinTo": "block_7"
+			},
+			"block_13": {
+				"position": {
+					"x": "-537.0178298950195",
+					"y": "196.32464599609375",
+					"w": "444.6602249145508",
+					"h": "218.25811767578125"
+				},
+				"css": {
+					"fill": "none",
+					"color": "black",
+					"stroke": "none",
+					"text": {
+						"color": "#5d35b0ff"
+					}
+				},
+				"label": "Arhitecture overview"
+			},
+			"block_15": {
+				"position": {
+					"x": "-1579.2536010742188",
+					"y": "568.4828796386719",
+					"w": "981.4320755004883",
+					"h": "797.0318298339844"
+				},
+				"label": "",
+				"css": {
+					"fill": "none"
+				}
+			},
+			"block_16": {
+				"position": {
+					"x": "25.127079010009766",
+					"y": "211.29568481445312",
+					"w": "919.4421043395996",
+					"h": "553.6527709960938"
+				},
+				"img": "image_15.png",
+				"css": {
+					"margine": "50px",
+					"fill": "none"
+				},
+				"label": "asd",
+				"pinTo": "block_15"
+			},
+			"block_14": {
+				"position": {
+					"x": "161.8518829345703",
+					"y": "45.248592019081116",
+					"w": "660.6896820068359",
+					"h": "124.64999806880951"
+				},
+				"css": {
+					"fill": "none",
+					"color": "black",
+					"stroke": "none"
+				},
+				"label": "External apps",
+				"pinTo": "block_15"
+			},
+			"block_17": {
+				"position": {
+					"x": "111.32865142822266",
+					"y": "376.3173522949219",
+					"w": "182.54907417297363",
+					"h": "186.89517211914062"
+				},
+				"img": "image_16.png",
+				"css": {
+					"fill": "none",
+					"stroke": "none"
+				},
+				"pinTo": "block_26"
+			},
+			"block_18": {
+				"position": {
+					"x": "439.2356719970703",
+					"y": "-154.74560546875",
+					"w": "196.27783203125",
+					"h": "192.30191040039062"
+				},
+				"img": "image_17.png",
+				"css": {
+					"fill": "none",
+					"stroke": "none"
+				},
+				"pinTo": "block_17"
+			},
+			"block_19": {
+				"position": {
+					"x": "390.5060052871704",
+					"y": "-142.22531127929688",
+					"w": "202.63236141204834",
+					"h": "185.53875732421875"
+				},
+				"img": "image_18.png",
+				"css": {
+					"fill": "none",
+					"stroke": "none"
+				},
+				"pinTo": "block_18"
+			},
+			"block_20": {
+				"position": {
+					"x": "241.19144344329834",
+					"y": "23.05609130859375",
+					"w": "136.79412841796875",
+					"h": "148.118896484375"
+				},
+				"img": "image_19.png",
+				"css": {
+					"fill": "none",
+					"stroke": "none"
+				},
+				"pinTo": "block_19"
+			},
+			"block_21": {
+				"position": {
+					"x": "3.04794979095459",
+					"y": "318.2843933105469",
+					"w": "181.0897216796875",
+					"h": "202.63870239257812"
+				},
+				"img": "image_20.png",
+				"css": {
+					"fill": "none",
+					"stroke": "none"
+				},
+				"pinTo": "block_19"
+			},
+			"block_22": {
+				"position": {
+					"x": "0.910400390625",
+					"y": "259.2822570800781",
+					"w": "182.885498046875",
+					"h": "200.8428955078125"
+				},
+				"img": "image_21.png",
+				"css": {
+					"fill": "none",
+					"stroke": "none"
+				},
+				"pinTo": "block_21"
+			},
+			"block_23": {
+				"position": {
+					"x": "-435.3332824707031",
+					"y": "129.51409912109375",
+					"w": "177.32510375976562",
+					"h": "191.00137329101562"
+				},
+				"img": "image_22.png",
+				"css": {
+					"fill": "none",
+					"stroke": "none"
+				},
+				"pinTo": "block_21"
+			},
+			"block_24": {
+				"position": {
+					"x": "343.757080078125",
+					"y": "77.61868286132812",
+					"w": "190.390380859375",
+					"h": "197.798828125"
+				},
+				"img": "image_23.png",
+				"css": {
+					"fill": "none",
+					"stroke": "none"
+				},
+				"pinTo": "block_21"
+			},
+			"block_25": {
+				"position": {
+					"x": "190.390380859375",
+					"y": "0",
+					"w": "block_24.w",
+					"h": "block_24.h"
+				},
+				"img": "image_24.png",
+				"css": {
+					"fill": "none",
+					"stroke": "none"
+				},
+				"pinTo": "block_24"
+			},
+			"block_26": {
+				"position": {
+					"x": "1292.1005325317383",
+					"y": "-124.11038208007812",
+					"w": "1707.0258102416992",
+					"h": "892.5147094726562"
+				},
+				"pinTo": "block_15",
+				"label": ""
+			},
+			"block_27": {
+				"position": {
+					"x": "21.002216339111328",
+					"y": "44.374751687049866",
+					"w": "461.899658203125",
+					"h": "77.82449758052826"
+				},
+				"css": {
+					"fill": "none",
+					"color": "black",
+					"stroke": "none"
+				},
+				"label": "upSWOT",
+				"pinTo": "block_26"
+			},
+			"block_28": {
+				"position": {
+					"x": "-275.4339599609375",
+					"y": "1618.51220703125",
+					"w": "1312.489891052246",
+					"h": "610.6322021484375"
+				},
+				"img": "image_1.png"
+			},
+			"block_29": {
+				"position": {
+					"x": "9602.667991638184",
+					"y": "-1161.0400695800781",
+					"w": "734.0866470336914",
+					"h": "199.16079711914062"
+				},
+				"css": {
+					"fill": "none",
+					"color": "black",
+					"stroke": "none",
+					"text": {
+						"color": "#5d35b0ff"
+					}
+				},
+				"label": "IFrame integration"
+			},
+			"block_12": {
+				"position": {
+					"x": "-716.3396224975586",
+					"y": "510.6991424560547",
+					"w": "1142.87841796875",
+					"h": "610.4035034179688"
+				},
+				"img": "image_2.png",
+				"pinTo": "block_29"
+			},
+			"block_30": {
+				"position": {
+					"x": "1770.523193359375",
+					"y": "-256.974853515625",
+					"w": "344.71728515625",
+					"h": "150.78363037109375"
+				},
+				"css": {
+					"color": "#000000ff"
+				},
+				"label": "Interner - bank App",
+				"pinTo": "block_12"
+			},
+			"block_31": {
+				"position": {
+					"x": "1787.55712890625",
+					"y": "307.1190643310547",
+					"w": "225.2294921875",
+					"h": "217.15298461914062"
+				},
+				"img": "image_22.png",
+				"css": {
+					"fill": "none",
+					"stroke": "none"
+				},
+				"pinTo": "block_12"
+			},
+			"block_32": {
+				"position": {
+					"x": "799.638427734375",
+					"y": "201.7960205078125",
+					"w": "345.194580078125",
+					"h": "399.70452880859375"
+				},
+				"pinTo": "block_12",
+				"css": {
+					"fill": "#83c68369"
+				},
+				"label": ""
+			},
+			"line_9": {
+				"label": "Request"
+			},
+			"block_33": {
+				"position": {
+					"x": "5357.3336181640625",
+					"y": "-913.3575994372368",
+					"w": "1190.1490478515625",
+					"h": "789.6509038805962"
+				},
+				"label": "",
+				"iframe": "https://docs.google.com/presentation/d/e/2PACX-1vTtJSONUM0UM0YVKrshgmaAUIRKNfAytQzSP-mugWheWcGE435OfmqHpIShdwwRrOtlpZT2fjP_qRwc/embed?start=false&loop=false&delayms=3000"
+			},
+			"block_34": {
+				"position": {
+					"x": "6608.487548828125",
+					"y": "-936.8747253417969",
+					"w": "1225.373779296875",
+					"h": "821.8696899414062"
+				},
+				"label": "",
+				"iframe": "https://demo.upswot.com/fsnb_new/#/"
+			},
+			"block_35": {
+				"position": {
+					"x": "7726.024192810059",
+					"y": "-54.1890983581543",
+					"w": "734.0866470336914",
+					"h": "199.16079711914062"
+				},
+				"css": {
+					"fill": "none",
+					"color": "black",
+					"stroke": "none",
+					"text": {
+						"color": "#5d35b0ff"
+					}
+				},
+				"label": "Insights map"
+			},
+			"block_37": {
+				"position": {
+					"x": "1579.80078125",
+					"y": "-400.8667297363281",
+					"w": "insight1.w",
+					"h": "insight1.h"
+				},
+				"img": "image_34.png",
+				"pinTo": "insight1"
+			},
+			"insight1": {
+				"position": {
+					"x": "-1353.1560287475586",
+					"y": "760.6928329467773",
+					"w": "837.35498046875",
+					"h": "193.61468505859375"
+				},
+				"img": "image_33.png",
+				"pinTo": "block_35"
+			},
+			"block_36": {
+				"position": {
+					"x": "1562.4609375",
+					"y": "-0.30877685546875",
+					"w": "insight1.w",
+					"h": "insight1.h"
+				},
+				"img": "image_35.png",
+				"pinTo": "insight1"
+			},
+			"block_38": {
+				"position": {
+					"x": "1562.4609375",
+					"y": "431.461669921875",
+					"w": "insight1.w",
+					"h": "insight1.h"
+				},
+				"img": "image_36.png",
+				"pinTo": "insight1"
+			},
+			"block_39": {
+				"position": {
+					"x": "1476.05712890625",
+					"y": "-17.72955322265625",
+					"w": "insight1.w",
+					"h": "insight1.h"
+				},
+				"img": "image_37.png",
+				"pinTo": "block_36"
+			},
+			"block_40": {
+				"position": {
+					"x": "112.2626953125",
+					"y": "330.9903564453125",
+					"w": "insight1.w",
+					"h": "insight1.h"
+				},
+				"img": "image_38.png",
+				"pinTo": "block_42"
+			},
+			"block_41": {
+				"position": {
+					"x": "113.828125",
+					"y": "539.3482666015625",
+					"w": "insight1.w",
+					"h": "insight1.h"
+				},
+				"img": "image_39.png",
+				"pinTo": "block_42"
+			},
+			"block_42": {
+				"position": {
+					"x": "-1095.4538803100586",
+					"y": "1606.5081787109375",
+					"w": "3123.37744140625",
+					"h": "867.0462646484375"
+				},
+				"label": "",
+				"pinTo": "block_35"
+			},
+			"block_43": {
+				"position": {
+					"x": "-132.6349868774414",
+					"y": "29.175430297851562",
+					"w": "734.0866470336914",
+					"h": "199.16079711914062"
+				},
+				"css": {
+					"fill": "none",
+					"color": "black",
+					"stroke": "none",
+					"text": {
+						"color": "#5d35b0ff"
+					}
+				},
+				"label": "Backlog",
+				"pinTo": "block_42"
+			},
+			"block_44": {
+				"position": {
+					"x": "1121.90283203125",
+					"y": "332.3013916015625",
+					"w": "insight1.w",
+					"h": "insight1.h"
+				},
+				"img": "image_39.png",
+				"pinTo": "block_42"
+			},
+			"block_45": {
+				"position": {
+					"x": "1128.43603515625",
+					"y": "528.2886962890625",
+					"w": "insight1.w",
+					"h": "insight1.h"
+				},
+				"img": "image_39.png",
+				"pinTo": "block_42"
+			},
+			"block_46": {
+				"position": {
+					"x": "2108.373046875",
+					"y": "338.8343505859375",
+					"w": "insight1.w",
+					"h": "insight1.h"
+				},
+				"img": "image_39.png",
+				"pinTo": "block_42"
+			},
+			"block_47": {
+				"position": {
+					"x": "2114.90625",
+					"y": "534.8216552734375",
+					"w": "insight1.w",
+					"h": "insight1.h"
+				},
+				"img": "image_39.png",
+				"pinTo": "block_42"
+			}
+		}
+	}
+}

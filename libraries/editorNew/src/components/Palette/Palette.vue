@@ -97,14 +97,18 @@ const arrow = computed(() => {
                 indentY = -indentY;
 
             return getBoxToBoxArrowPath(
-                x1,
-                y1,
-                startBlockPos.value.w,
-                startBlockPos.value.h,
-                x2 + indentX,
-                y2 + indentY,
-                0,
-                0,
+                {
+                    x: x1,
+                    y: y1,
+                    w: startBlockPos.value.w,
+                    h: startBlockPos.value.h,
+                },
+                {
+                    x: x2 + indentX,
+                    y: y2 + indentY,
+                    w: 0,
+                    h: 0,
+                },
                 {
                     padEnd: arrowHeadSize,
                 },

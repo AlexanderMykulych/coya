@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { computed, reactive } from 'vue';
-import type { ArchitectureDescription, BlockElementDescription, BlockStyle } from 'coya-core';
+import { ArchitectureDescription, BlockElementDescription, BlockStyle, useCoyaSetting, useCoyaSetting } from 'coya-core';
 import { ActionType, applyPositioning, executeActions, isArray } from 'coya-core';
 import { isNotNullOrUndefined, isNullOrUndefined } from 'coya-util';
 import { debounce } from 'debounce';
@@ -141,6 +141,7 @@ function _useEditorState(editor: Editor): CurrentEditorState {
                     'style.value.pinTo',
                     'style.value.iframe',
                     'style.value.code',
+                    'style.value.coya',
                     'style.value.img',
                 ],
             ),
@@ -245,6 +246,8 @@ function _useEditorState(editor: Editor): CurrentEditorState {
             ]);
             return blockName;
         };
+
+        const {readOnly} = useCoyaSetting();
         return {
             isOneNodeSelected: computed(() => !!blockId.value),
             initPhases: computed({
@@ -472,7 +475,7 @@ function _useEditorState(editor: Editor): CurrentEditorState {
             },
             isViewMode: computed({
                 get() {
-                    return editor.state.isViewMode ?? false;
+                    return readOnly?.value || (editor.state.isViewMode ?? false);
                 },
                 set(val: boolean) {
                     editor.state.isViewMode = val;

@@ -11,8 +11,6 @@ export function lineBlockPosition(blocksPositions: Ref<BlockPositioning[]>, bloc
     const getValueByCtx = (x?: number | FormulaValue, def?: any) =>
         getFormulaValue(x, blocksPositions, { defaultValue: def, ...setting });
     const arrowHeadSize = 10;
-    const fromBlock = getBlockName(block.from);
-    const toBlock = getBlockName(block.to);
     let str = '';
     if (hasSpecificPoint(block.from))
         str += `, startPoint: ${block.from}`;
@@ -20,8 +18,7 @@ export function lineBlockPosition(blocksPositions: Ref<BlockPositioning[]>, bloc
     if (hasSpecificPoint(block.to))
         str += `, endPoint: ${block.to}`;
 
-    const boxs = `${block.from}.x, ${fromBlock}.y, ${fromBlock}.w, ${fromBlock}.h, ${toBlock}.x, ${toBlock}.y, ${toBlock}.w, ${toBlock}.h`;
-    const meta = getValueByCtx(`_.fn.getBoxToBoxArrowPath(${boxs}, {padEnd: ${arrowHeadSize}, padStart: ${arrowHeadSize} ${str} })`, {});
+    const meta = getValueByCtx(`_.fn.getBoxToBoxArrowPath(${block.from}, ${block.to}, {padEnd: ${arrowHeadSize}, padStart: ${arrowHeadSize} ${str} })`, {});
 
     const x1 = computed(() => meta.value.results.x1);
     const y1 = computed(() => meta.value.results.y1);
@@ -45,27 +42,13 @@ export function lineBlockPosition(blocksPositions: Ref<BlockPositioning[]>, bloc
         },
     };
 }
-const getBlockName = (str: string) => {
-    return str.split('.')?.[0];
-};
+
+const specificNames = ['top', 'left', 'right', 'bottom'];
 const hasSpecificPoint = (str: string) => {
-    return str.split('.').length === 2;
+    const dotLastIndex = str.lastIndexOf('.');
+    if (dotLastIndex > -1) {
+        const lastPart = str.substring(dotLastIndex);
+        return specificNames.some(x => x === lastPart);
+    }
+    return false;
 };
-const getDefaultPosition = (blockId: string) => ({
-    blockId,
-    position: {
-        x1: 0,
-        y1: 0,
-        x2: 0,
-        y2: 0,
-        x: 0,
-        y: 0,
-        w: 0,
-        h: 0,
-        meta: {
-            arrowHeadSize: 0,
-            results: {},
-            path: '',
-        },
-    },
-});

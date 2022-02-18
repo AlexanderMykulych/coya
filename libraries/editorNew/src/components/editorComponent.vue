@@ -80,7 +80,7 @@ const phasesContainerStyle = computed(() => ({
     height: '70px',
     w: svgPosition.w,
 }));
-const nodeSettingWidth = computed(() => editor.enable && editor.state.isViewMode ? 120 : 400);
+const nodeSettingWidth = computed(() => editor.enable && isViewMode.value ? 120 : 400);
 const nodeSettingContainerStyle = computed(() => ({
     x: `${svgPosition.w - nodeSettingWidth.value - phasesMargin.value}px`,
     y: `${svgPosition.h / 2.5}px`,
@@ -120,7 +120,7 @@ const phasesJsonContainerStyle = computed(() => ({
     width: `${nodeSettingWidth.value}px`,
     height: '1px',
 }));
-const { mouseState, state, isOneNodeSelected, showDebugWindow, diagramRect }
+const { isViewMode, isOneNodeSelected, showDebugWindow }
     = useCurrentEditorState();
 </script>
 
@@ -170,7 +170,7 @@ const { mouseState, state, isOneNodeSelected, showDebugWindow, diagramRect }
           <slot name="left-menu" />
         </body>
       </foreignObject>
-      <template v-if="!editor.state.isViewMode">
+      <template v-if="!isViewMode">
         <foreignObject
           class="node"
           :style="paletteContainerStyle"

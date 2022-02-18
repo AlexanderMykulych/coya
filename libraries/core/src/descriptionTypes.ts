@@ -109,6 +109,7 @@ export interface BlockStyle {
     svgTag?: keyof SVGElementTagNameMap
     img?: string
     code?: string
+    coya?: string
     css?: Properties
     position?: Position
     pinTo?: string
@@ -151,9 +152,11 @@ export interface ViewBoxSetting {
 }
 
 export type CustomContextBuilderFunc = (blocksPositioning: Ref<BlockPositioning[]>, setting: TransformSetting) => FormulaValueFuncContext;
+export type TransformContext = Record<string, any>;
 export interface TransformSetting {
     viewBox: ViewBoxSetting
     customContextBuilderFunc?: CustomContextBuilderFunc
     currentPhase: CurrentPhaseInfo
     defaultValue?: any
+    contextGetter: () => TransformContext
 }

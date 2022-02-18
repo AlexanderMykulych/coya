@@ -13,6 +13,7 @@ import { onSelectBlockClick } from './onSelectBlockClick';
 import { onArrowBlockClick } from './onArrowBlockClick';
 import { onMousedown } from './onMousedown';
 import { EditorMode } from '.';
+import { useEditorState } from './useCurrentEditorState';
 
 export function wrapEditorNode(editor: Editor, node: any) {
     return {
@@ -20,6 +21,8 @@ export function wrapEditorNode(editor: Editor, node: any) {
             const attrs = context.attrs as any;
             if (!editor.enable)
                 return h(node, attrs, context.slots);
+            const { isViewMode } = useEditorState(editor);
+
 
             const blockId = computed(() => attrs?.block?.id);
             const isSelected = computed(() => editor.state.selectedNodeIds?.some(x => x === blockId.value) ?? false);
@@ -97,7 +100,7 @@ export function wrapEditorNode(editor: Editor, node: any) {
             const isLine = computed(() => attrs.block.type === BlockElementType.Line);
             // select
             const isSelectMode = computed(() => editor.state.mode === EditorMode.Select);
-            const isViewMode = computed(() => editor.state.isViewMode);
+            
             // arrow end
             return () =>
                 h(

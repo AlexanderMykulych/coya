@@ -52,14 +52,14 @@ export function enableEditor({ svg, config, id, initialConfig, architecture, wor
 }
 
 function listenSvgEvents(editor: EnabledEditor) {
-    const { makeChange, getNewUniqBlockName, addNewBlock } = useEditorState(editor);
+    const { makeChange, getNewUniqBlockName, addNewBlock, isViewMode } = useEditorState(editor);
     watch(() => editor.svg, (svgEl) => {
         if (svgEl) {
             const onMouseClickListener = (_: MouseEvent) => {
                 editor.state.selectedNodeIds = undefined;
             };
             const onDblClick = (e: MouseEvent) => {
-                if (e.target === svgEl && !editor.state.isViewMode) {
+                if (e.target === svgEl && !isViewMode.value) {
                     const { x, y } = getMousePosition(svgEl, e);
                     addNewBlock({
                         position: {
@@ -156,30 +156,28 @@ function enableZoom(editor: EnabledEditor, zoomElement: SVGGraphicsElement) {
     if (!svg)
         return;
 
-    const scrollSensitivity = 0.3;
     const startTransform = findStartTransform(editor.architecture, svg);
     const translate = reactive({
         x: startTransform.x,
         y: startTransform.y,
     });
     const scale = ref(startTransform.scale);
-    const minScale = 0.01;
-    const maxScale = 20;
+    const minScale = 0.0001;
+    const maxScale = 40;
     const transform = computed(() => !isNaN(translate.x) && !isNaN(translate.y) && !isNaN(scale.value) ? `translate(${translate.x} ${translate.y}) scale(${scale.value})` : '');
 
     const zoom = (event: WheelEvent) => {
         const { x, y } = getMousePosition(svg, event, true);
         const oldScale = scale.value;
         if (Math.abs(event.wheelDeltaY) > 100 && event.wheelDeltaX === 0) {
-            const newScale = oldScale + Math.sign(event.wheelDelta) * scrollSensitivity;
+            const newScale = oldScale + Math.sign(event.wheelDelta) * (oldScale * 0.1);
             if (newScale <= minScale || newScale >= maxScale)
                 return;
 
             scale.value = newScale;
             translate.x = (translate.x - x) * scale.value / oldScale + x;
             translate.y = (translate.y - y) * scale.value / oldScale + y;
-        }
-        else {
+        } else {
             const newX = event.deltaX;
             const newY = event.deltaY;
             translate.x = (translate.x - newX) * 1;

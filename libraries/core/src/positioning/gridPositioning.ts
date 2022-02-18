@@ -2,10 +2,12 @@
 import { isNotNullOrUndefined } from 'coya-util';
 import type { Ref } from 'vue';
 import { computed, ref } from 'vue';
+import { getNestedCoyaChildrenFromContext } from '..';
 import type { FormulaValue } from '../descriptionTypes';
 import { isContainerBlock, isFormulaValue, isLineBlockElement } from '../typeGuards';
 import type { BlockPositioning } from '../types';
 import { getFormulaValue } from './getFormulaValue';
+import { getPositionProxy } from './getPositionProxy';
 import { lineBlockPosition } from './lineBlockPosition';
 import type { AutoPositioningSetting } from './types';
 
@@ -59,38 +61,41 @@ export function gridPositioning(option: AutoPositioningSetting): BlockPositionin
                 };
             }
             const blockId = block.id;
+            const position = {
+                x: computed(() => getValueByCtx(pos.x).value + indentX.value + pinToBlockPos.x.value),
+                y: computed(() => getValueByCtx(pos.y).value + indentY.value + pinToBlockPos.y.value),
+                w: computed(() => getValueByCtx(pos.w).value + indentX.value),
+                h: computed(() => getValueByCtx(pos.h).value + indentY.value),
+                top: {
+                    x: computed(() => getValueByCtx(pos.top?.x ?? `${blockId}.x + ${blockId}.w / 2`).value),
+                    y: computed(() => getValueByCtx(pos.top?.y ?? `${blockId}.y`).value),
+                    w: 0,
+                    h: 0,
+                },
+                bottom: {
+                    x: computed(() => getValueByCtx(pos.top?.x ?? `${blockId}.top.x`).value),
+                    y: computed(() => getValueByCtx(pos.top?.y ?? `${blockId}.y + ${blockId}.h`).value),
+                    w: 0,
+                    h: 0,
+                },
+                right: {
+                    x: computed(() => getValueByCtx(pos.top?.x ?? `${blockId}.x + ${blockId}.w`).value),
+                    y: computed(() => getValueByCtx(pos.top?.y ?? `${blockId}.y + ${blockId}.h / 2`).value),
+                    w: 0,
+                    h: 0,
+                },
+                left: {
+                    x: computed(() => getValueByCtx(pos.top?.x ?? `${blockId}.x`).value),
+                    y: computed(() => getValueByCtx(pos.top?.y ?? `${blockId}.right.y`).value),
+                    w: 0,
+                    h: 0,
+                },
+            };
+            const context = option.setting.contextGetter();
+            const childrenBlocks = getNestedCoyaChildrenFromContext(context, blockId);
             return <BlockPositioning>{
                 blockId,
-                position: {
-                    x: computed(() => getValueByCtx(pos.x).value + indentX.value + pinToBlockPos.x.value),
-                    y: computed(() => getValueByCtx(pos.y).value + indentY.value + pinToBlockPos.y.value),
-                    w: computed(() => getValueByCtx(pos.w).value + indentX.value),
-                    h: computed(() => getValueByCtx(pos.h).value + indentY.value),
-                    top: {
-                        x: computed(() => getValueByCtx(pos.top?.x ?? `${blockId}.x + ${blockId}.w / 2`).value),
-                        y: computed(() => getValueByCtx(pos.top?.y ?? `${blockId}.y`).value),
-                        w: 0,
-                        h: 0,
-                    },
-                    bottom: {
-                        x: computed(() => getValueByCtx(pos.top?.x ?? `${blockId}.top.x`).value),
-                        y: computed(() => getValueByCtx(pos.top?.y ?? `${blockId}.y + ${blockId}.h`).value),
-                        w: 0,
-                        h: 0,
-                    },
-                    right: {
-                        x: computed(() => getValueByCtx(pos.top?.x ?? `${blockId}.x + ${blockId}.w`).value),
-                        y: computed(() => getValueByCtx(pos.top?.y ?? `${blockId}.y + ${blockId}.h / 2`).value),
-                        w: 0,
-                        h: 0,
-                    },
-                    left: {
-                        x: computed(() => getValueByCtx(pos.top?.x ?? `${blockId}.x`).value),
-                        y: computed(() => getValueByCtx(pos.top?.y ?? `${blockId}.right.y`).value),
-                        w: 0,
-                        h: 0,
-                    },
-                },
+                position: getPositionProxy(position, childrenBlocks),
             };
         }
         return null;

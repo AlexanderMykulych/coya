@@ -313,3 +313,7 @@ export interface AssetConfig {
     }) => Promise<string>
     load: (name: string) => Promise<Blob>
 }
+
+export interface CoyaSetting {
+    readOnly?: boolean
+}

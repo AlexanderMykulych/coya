@@ -1,8 +1,14 @@
 import type { AssetConfig } from 'coya-core';
+import { inject, provide } from 'vue';
 
 const assetsKey = 'coyaAssets';
-export function provideAssets(assets: AssetConfig) {
-    provide(assetsKey, assets);
+export function provideAssets(assets?: AssetConfig) {
+    if (!assets) {
+        assets = inject(assetsKey, assets);
+    } else {
+        provide(assetsKey, assets);
+    }
+    return assets;
 }
 
 const defaultAssets = {
