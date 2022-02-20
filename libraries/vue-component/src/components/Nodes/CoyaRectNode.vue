@@ -100,6 +100,7 @@ const textStyle = computed(() => {
         :height="positioning.h - 30"
         :style="cssStyle"
       />
+      <Rough :w="positioning.w" :h="positioning.h" :css="cssStyle" class="rect-node" />
       <foreignObject
         style="overflow: visible; text-align: left"
         pointer-events="none"
@@ -138,7 +139,6 @@ const textStyle = computed(() => {
           </div>
         </div>
       </foreignObject>
-      <Rough :w="positioning.w" :h="positioning.h" :css="cssStyle" class="rect-node" />
     </svg>
   </g>
 </template>
