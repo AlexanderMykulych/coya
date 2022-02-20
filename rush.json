@@ -514,6 +514,12 @@
       "reviewCategory": "production"
     },
     {
+      "packageName": "neo4j-coya-generator",
+      "projectFolder": "libraries/neo4j-coya-generator",
+      "versionPolicyName": "main",
+      "reviewCategory": "production"
+    },
+    {
       "packageName": "demo",
       "projectFolder": "apps/demo",
       "reviewCategory": "apps"

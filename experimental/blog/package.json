@@ -19,6 +19,6 @@
     "windicss": "^3.4.3"
   },
   "devDependencies": {
-    "unocss": "^0.22.6"
+    "unocss": "^0.24.3"
   }
 }

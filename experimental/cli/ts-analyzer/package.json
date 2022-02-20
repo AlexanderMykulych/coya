@@ -21,15 +21,15 @@
     "@oclif/plugin-help": "^5",
     "@oclif/plugin-plugins": "^2.0.1",
     "neo4j-driver": "^4.4.2",
-    "vitest": "^0.2.7"
+    "vitest": "^0.3.2"
   },
   "devDependencies": {
     "@oclif/test": "^2",
     "@types/chai": "^4",
     "@types/mocha": "^9.0.0",
-    "@types/node": "^16.9.4",
+    "@types/node": "^17.0.17",
     "chai": "^4",
-    "eslint": "^7.32.0",
+    "eslint": "^8.8.0",
     "eslint-config-oclif": "^4",
     "eslint-config-oclif-typescript": "^1.0.2",
     "globby": "^11",
