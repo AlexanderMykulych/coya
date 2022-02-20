@@ -22,7 +22,7 @@ const emit = defineEmits(['pinPress']);
 const padding = 10;
 const pinW = computed(() => 8 / zoomState.value.scale);
 const pinCW = computed(() => pinW.value / 2);
-
+const strokeWidth = computed(() => pinW.value * 0.1)
 const { state, activeNode, zoomState } = useCurrentEditorState();
 
 const preparedPosition = computed(() => {
@@ -121,9 +121,10 @@ const clickPin = (pinType: PinType) => emit('pinPress', pinType);
     :y="pin.y"
     :width="pinW"
     :height="pinW"
+    :stroke-width="strokeWidth"
+    :class="pin.class"
     fill="white"
     stroke="black"
-    :class="pin.class"
     @mousedown="clickPin(pin.type)"
   />
 </template>

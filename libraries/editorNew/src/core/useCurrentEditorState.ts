@@ -247,7 +247,7 @@ function _useEditorState(editor: Editor): CurrentEditorState {
             return blockName;
         };
 
-        const {readOnly} = useCoyaSetting();
+        const { readOnly } = useCoyaSetting();
         return {
             isOneNodeSelected: computed(() => !!blockId.value),
             initPhases: computed({

@@ -9,6 +9,7 @@ import NodeSetting from './NodeSetting/NodeSetting.vue';
 import AppMenu from './AppMenu/AppMenu.vue';
 import Debug from './Debug/Debug.vue';
 import 'coya-json-editor/dist/style.css';
+import { useCoyaSetting } from 'coya-core';
 
 const teleportEl = ref(null);
 const svgPosition = reactive({
@@ -122,10 +123,12 @@ const phasesJsonContainerStyle = computed(() => ({
 }));
 const { isViewMode, isOneNodeSelected, showDebugWindow }
     = useCurrentEditorState();
+
+const { readOnly } = useCoyaSetting();
 </script>
 
 <template>
-  <Teleport v-if="!!editor.enable && editor.svg" :to="editor.svg">
+  <Teleport v-if="!!editor.enable && editor.svg && !readOnly" :to="editor.svg">
     <svg
       class="editor-svg"
       :viewBox="`0 0 ${svgPosition.w} ${svgPosition.h}`"
