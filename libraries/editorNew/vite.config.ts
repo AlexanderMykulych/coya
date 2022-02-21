@@ -6,6 +6,7 @@ import Icons from 'unplugin-icons/vite';
 import IconsResolver from 'unplugin-icons/resolver';
 import Components from 'unplugin-vue-components/vite';
 import { FileSystemIconLoader } from 'unplugin-icons/loaders';
+import dts from 'vite-dts';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -39,6 +40,7 @@ export default defineConfig({
                 ],
             },
         }),
+        dts(),
     ],
     build: {
         rollupOptions: {
@@ -55,7 +57,7 @@ export default defineConfig({
         },
         sourcemap: true,
         lib: {
-            entry: path.resolve(__dirname, '/src/libMain.ts'),
+            entry: path.join(__dirname, '/src/libMain.ts'),
             name: 'coya-editor',
             fileName: format => `coya-editor.${format}.js`,
             formats: ['es'],

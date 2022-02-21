@@ -481,4 +481,9 @@ const coyaSlots = computed(() =>
         opacity: 1;
     }
 }
+@keyframes move {
+  100% {
+    offset-distance: 100%;
+  }
+}
 </style>

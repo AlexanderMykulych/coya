@@ -2,6 +2,8 @@
 import { asyncComputed } from '@vueuse/core';
 import type { Block, BlockStyle, RectPositioning } from 'coya-core';
 import { computed, reactive, ref, unref, useSlots } from 'vue';
+import { useCurrentEditorState } from 'coya-editor-new';
+import { svgPathCommander } from 'coya-util';
 import { useAssets } from '../../logic/useAssets';
 
 const props = defineProps<{
@@ -11,6 +13,8 @@ const props = defineProps<{
 }>();
 
 const slots = useSlots();
+
+const { architecture } = useCurrentEditorState();
 
 const { getImgUrl, getText } = useAssets();
 
@@ -79,17 +83,55 @@ const textStyle = computed(() => {
     }
     return null;
 });
-
+const animationStyle = computed(() => {
+    const anim: { type: string; lineId: string } = props.blockStyle?.css?.anim;
+    if (anim?.type === 'move-by-path') {
+        const line = architecture.style.positioning.find(x => x.blockId === anim.lineId);
+        if (line) {
+            const path = line.position?.meta?.path;
+            if (path) {
+                const commander = new svgPathCommander(path);
+                const firstPoint = svgPathCommander.getPointAtLength(path, 0);
+                const svgPath = commander.transform({
+                    translate: [props.positioning.x - firstPoint.x, props.positioning.y - firstPoint.y],
+                    rotate: 0,
+                    scale: 0,
+                    skew: 0,
+                    origin: [0, 0],
+                }).toString();
+                return {
+                    'offset-path': `path("${svgPath}")`,
+                    'animation': 'move 3s linear infinite',
+                    svgPath,
+                };
+            }
+        }
+    }
+});
+const preperedPos = computed(() => {
+    if (animationStyle.value) {
+        return {
+            x: 0,
+            y: 0,
+            w: props.positioning.w,
+            h: props.positioning.h,
+        };
+    }
+    return props.positioning;
+});
 </script>
 
 <template>
-  <g ref="groupEl" class="rect-node">
+  <g
+    ref="groupEl" class="rect-node"
+    :style="animationStyle"
+  >
     <svg
       ref="gEl"
-      :x="positioning.x"
-      :y="positioning.y"
-      :width="positioning.w"
-      :height="positioning.h"
+      :x="preperedPos.x"
+      :y="preperedPos.y"
+      :width="preperedPos.w"
+      :height="preperedPos.h"
     >
       <image
         v-if="imgUrl"
@@ -139,6 +181,7 @@ const textStyle = computed(() => {
           </div>
         </div>
       </foreignObject>
+
     </svg>
   </g>
 </template>

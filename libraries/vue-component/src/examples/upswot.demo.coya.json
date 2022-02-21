@@ -415,6 +415,35 @@
 		"block_47": {
 			"label": "",
 			"sourcePhase": 0
+		},
+		"block_48": {
+			"label": ""
+		},
+		"block_49": {
+			"label": ""
+		},
+		"line_29": {
+			"from": "block_49",
+			"to": "block_48",
+			"name": "line_29",
+			"type": "line",
+			"label": ""
+		},
+		"block_50": {
+			"label": ""
+		},
+		"line_30": {
+			"from": "block_50",
+			"to": "block_48",
+			"name": "line_30",
+			"type": "line",
+			"label": ""
+		},
+		"block_51": {
+			"label": ""
+		},
+		"block_52": {
+			"label": ""
 		}
 	},
 	"phases": [],
@@ -1070,6 +1099,82 @@
 				},
 				"img": "image_39.png",
 				"pinTo": "block_42"
+			},
+			"block_48": {
+				"position": {
+					"x": "33.02174758911133",
+					"y": "3049.472442626953",
+					"w": "182.54907417297363",
+					"h": "186.89517211914062"
+				},
+				"img": "image_16.png",
+				"css": {
+					"fill": "none",
+					"stroke": "none"
+				},
+				"pinTo": "block_26"
+			},
+			"block_49": {
+				"position": {
+					"x": "-1487.0830078125",
+					"y": "2922.435546875",
+					"w": "304.469970703125",
+					"h": "248.53173828125"
+				},
+				"img": "image_48.png",
+				"css": {
+					"stroke": "none",
+					"fill": "none"
+				}
+			},
+			"block_50": {
+				"position": {
+					"x": "-1466.089111328125",
+					"y": "3827.611572265625",
+					"w": "220.013427734375",
+					"h": "186.646240234375"
+				},
+				"img": "image_49.png",
+				"css": {
+					"stroke": "none",
+					"fill": "none"
+				}
+			},
+			"block_51": {
+				"position": {
+					"x": "272.26409912109375",
+					"y": "63.0703125",
+					"w": "117.6407470703125",
+					"h": "123.4384765625"
+				},
+				"img": "image_51.png",
+				"css": {
+					"stroke": "none",
+					"fill": "none",
+					"anim": {
+						"type": "move-by-path",
+						"lineId": "line_29"
+					}
+				},
+				"pinTo": "block_49"
+			},
+			"block_52": {
+				"position": {
+					"x": "203.28936767578125",
+					"y": "31.018310546875",
+					"w": "117.6407470703125",
+					"h": "123.4384765625"
+				},
+				"img": "image_51.png",
+				"css": {
+					"stroke": "none",
+					"fill": "none",
+					"anim": {
+						"type": "move-by-path",
+						"lineId": "line_30"
+					}
+				},
+				"pinTo": "block_50"
 			}
 		}
 	}

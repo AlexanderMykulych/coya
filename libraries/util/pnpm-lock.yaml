@@ -5,6 +5,7 @@ specifiers:
   curved-arrows: ^0.1.0
   hex-to-rgba: ^2.0.1
   rollup-plugin-typescript2: ^0.31.1
+  svg-path-commander: ^0.1.25
   vite: ^2.7.10
   vite-plugin-dts: ^0.9.7
 
@@ -13,6 +14,7 @@ dependencies:
   curved-arrows: 0.1.0
   hex-to-rgba: 2.0.1
   rollup-plugin-typescript2: 0.31.1
+  svg-path-commander: 0.1.25
   vite: 2.7.10
   vite-plugin-dts: 0.9.7
 
@@ -146,6 +148,10 @@ packages:
   /curved-arrows/0.1.0:
     resolution: {integrity: sha512-FchrDNr8b3ijJOycRM3iT0tc7d5NJSJ5e1fPZibTv73N2yXcgIbSi858R+QfCPRbrjqSWXnR8OaUUu9w+TxTRg==}
     engines: {node: '>=10'}
+    dev: false
+
+  /dommatrix/0.0.24:
+    resolution: {integrity: sha512-PatEhAW5pIHr28MvFQGV5iiHNloqvecQZlxs7/8s/eulLqZI3uVqPkrO7YDuqsebovr/9mmcWDSWzVG4amEZgQ==}
     dev: false
 
   /esbuild-android-arm64/0.13.15:
@@ -652,6 +658,12 @@ packages:
   /source-map-js/1.0.1:
     resolution: {integrity: sha512-4+TN2b3tqOCd/kaGRJ/sTYA0tR0mdXx26ipdolxcwtJVqEnqNYvlCAt1q3ypy4QMlYus+Zh34RNtYLoq2oQ4IA==}
     engines: {node: '>=0.10.0'}
+    dev: false
+
+  /svg-path-commander/0.1.25:
+    resolution: {integrity: sha512-zMCDjrA+m6QI/ecoul7yfX5jEl2OHAd5Rw7/VDrt3+lrwE+swFYIztYiRpVHa2z65CJ9OJHUlaldABm6rrSWWA==}
+    dependencies:
+      dommatrix: 0.0.24
     dev: false
 
   /to-regex-range/5.0.1:

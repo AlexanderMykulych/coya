@@ -1,3 +1,4 @@
+import SVGPathCommander from 'svg-path-commander';
 export * from './setValueByPath';
 export * from './whatChanged';
 export * from './deepAssign';
@@ -7,3 +8,4 @@ export * from './isNotNullOrUndefined';
 export * from './isNullOrUndefined';
 export * from './hexToRgba';
 export * from './groupBy';
+export const svgPathCommander = SVGPathCommander;

@@ -12,10 +12,10 @@ export function onMousedown(editor: EnabledEditor, { attrs }: { attrs: any }, ev
             movePoint: clickPoint,
             originPosition: { x, y, w, h },
             originConfigPosition: {
-                x: Number(originConfigPosition.x),
-                y: Number(originConfigPosition.y),
-                w: Number(originConfigPosition.w),
-                h: Number(originConfigPosition.h),
+                x: Number(originConfigPosition?.x),
+                y: Number(originConfigPosition?.y),
+                w: Number(originConfigPosition?.w),
+                h: Number(originConfigPosition?.h),
             },
             clickDeltaPoint: {
                 x: clickPoint.x - x,
