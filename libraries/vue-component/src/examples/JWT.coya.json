@@ -1,0 +1,109 @@
+{
+	"name": "JWT",
+	"blocks": {
+		"block_1": "1.",
+		"block_3": {
+			"label": ""
+		},
+		"block_2": {
+			"label": "Browser"
+		},
+		"line_1": {
+			"from": "block_3",
+			"to": "block_2",
+			"name": "line_1",
+			"type": "line",
+			"label": ""
+		},
+		"block_4": {
+			"label": ""
+		},
+		"line_2": {
+			"from": "block_2",
+			"to": "block_4",
+			"name": "line_2",
+			"type": "line",
+			"label": ""
+		},
+		"block_5": {
+			"label": "upSWOT Admin"
+		}
+	},
+	"phases": [],
+	"style": {
+		"blocks": {
+			"_": {
+				"css": {
+					"fontSize": "2.1em",
+					"rx": "49",
+					"border-radius": "10px"
+				}
+			},
+			"block_1": {
+				"position": {
+					"x": "-461.1745910644531",
+					"y": "-166.60097122192383",
+					"w": "130.269287109375",
+					"h": "109.23075103759766"
+				},
+				"css": {
+					"stroke": "none",
+					"fill": "none",
+					"text": {
+						"fontSize": "auto"
+					}
+				}
+			},
+			"block_3": {
+				"position": {
+					"x": "37.975616455078125",
+					"y": "174.04781544208527",
+					"w": "120.7998046875",
+					"h": "124.66414487361908"
+				},
+				"img": "image_46.png",
+				"pinTo": "block_1",
+				"css": {
+					"stroke": "none",
+					"fill": "none"
+				}
+			},
+			"block_2": {
+				"position": {
+					"x": "340.58412259817123",
+					"y": "-37.11340534687042",
+					"w": "201.47205233573914",
+					"h": "198.23436450958252"
+				},
+				"img": "image_47.png",
+				"css": {
+					"stroke": "none",
+					"fill": "none"
+				},
+				"pinTo": "block_3"
+			},
+			"block_4": {
+				"position": {
+					"x": "565.3945121765137",
+					"y": "-147.64567375183105",
+					"w": "865.5031767487526",
+					"h": "507.8396701812744"
+				},
+				"pinTo": "block_2"
+			},
+			"block_5": {
+				"position": {
+					"x": "-224.2788681089878",
+					"y": "36.02050590515137",
+					"w": "477.216064453125",
+					"h": "232.2281494140625"
+				},
+				"css": {
+					"stroke": "none",
+					"fill": "none"
+				},
+				"pinTo": "block_4.bottom"
+			}
+		}
+	}
+}

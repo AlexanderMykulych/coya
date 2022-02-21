@@ -2,7 +2,7 @@ import type { RectPositioning } from 'coya-core';
 import type { EnabledEditor } from './types';
 import { PinType } from '.';
 
-export function calculatePinDragResult(editor: EnabledEditor): RectPositioning {
+export function calculatePinDragResult(editor: EnabledEditor): Partial<RectPositioning> {
     if (!editor.state.drag)
         return {};
 

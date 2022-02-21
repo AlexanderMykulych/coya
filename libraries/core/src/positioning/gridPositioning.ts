@@ -50,20 +50,23 @@ export function gridPositioning(option: AutoPositioningSetting): BlockPositionin
             const indentY = (getValueByCtx(pos.indentY) ?? ref(0));
 
             const pinTo = blockStyle.pinTo;
-            let pinToBlockPos = {
-                x: ref(0),
-                y: ref(0),
-            };
+            let pinToBlockPos = ref({
+                x: 0,
+                y: 0,
+            });
             if (pinTo) {
-                pinToBlockPos = {
-                    x: computed(() => blocksPositioning.value.find(x => x.blockId === pinTo)?.position?.x ?? 0),
-                    y: computed(() => blocksPositioning.value.find(x => x.blockId === pinTo)?.position?.y ?? 0),
-                };
+                pinToBlockPos = computed(() => {
+                    const point = getValueByCtx(pinTo);
+                    return {
+                        x: point.value.x,
+                        y: point.value.y,
+                    }
+                });
             }
             const blockId = block.id;
             const position = {
-                x: computed(() => getValueByCtx(pos.x).value + indentX.value + pinToBlockPos.x.value),
-                y: computed(() => getValueByCtx(pos.y).value + indentY.value + pinToBlockPos.y.value),
+                x: computed(() => getValueByCtx(pos.x).value + indentX.value + pinToBlockPos.value.x),
+                y: computed(() => getValueByCtx(pos.y).value + indentY.value + pinToBlockPos.value.y),
                 w: computed(() => getValueByCtx(pos.w).value + indentX.value),
                 h: computed(() => getValueByCtx(pos.h).value + indentY.value),
                 top: {

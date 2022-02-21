@@ -16,6 +16,7 @@ export interface DragState {
     clickPoint: Point
     movePoint: Point
     originPosition: RectPositioning
+    originConfigPosition: RectPositioning
     clickDeltaPoint: Point
 }
 export interface HoverState {

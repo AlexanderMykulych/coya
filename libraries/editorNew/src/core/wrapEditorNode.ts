@@ -35,6 +35,7 @@ export function wrapEditorNode(editor: Editor, node: any) {
 
                 return null;
             });
+            const blockConfigPos = computed(() => editor.config.style?.blocks?.[blockId]?.position);
             watch(() => editor.mouseState.pressed, (val) => {
                 if (!val) {
                     editor.state.drag = undefined;
@@ -45,20 +46,22 @@ export function wrapEditorNode(editor: Editor, node: any) {
                 ? ({
                     x: editor!.mouseState.position.x - editor.state.drag!.clickDeltaPoint.x,
                     y: editor!.mouseState.position.y - editor.state.drag!.clickDeltaPoint.y,
+                    deltaX: editor!.mouseState.position.x - editor.state.drag!.originPosition.x,
+                    deltaY: editor!.mouseState.position.y - editor.state.drag!.originPosition.y,
                 })
                 : null);
             watch(() => newPosition.value, (val, oldVal) => {
                 if (val && val !== oldVal && oldVal) {
-                    let { x: pX, y: pY } = val;
+                    let { x: pX, y: pY, deltaX, deltaY } = val;
 
                     if (editor.state.pins.selectedPinType) {
                         let { x, y, w, h } = calculatePinDragResult(editor);
-                        if (pinToPos.value) {
-                            if (isNotNullOrUndefined(x))
-                                x -= pinToPos.value.x;
-
-                            if (isNotNullOrUndefined(y))
-                                y -= pinToPos.value.y;
+                        const originPos = editor.state.drag?.originPosition;
+                        if (isNotNullOrUndefined(x)) {
+                            x = editor.state.drag!.originConfigPosition.x + (x - originPos.x) - editor.state.drag!.clickDeltaPoint.x;
+                        }
+                        if (isNotNullOrUndefined(y)) {
+                            y = editor.state.drag!.originConfigPosition.y + (y - originPos.y) - editor.state.drag!.clickDeltaPoint.y;
                         }
                         editor.makeChange({
                             type: ChangeType.ChangePosition,
@@ -75,16 +78,14 @@ export function wrapEditorNode(editor: Editor, node: any) {
                         });
                     }
                     else {
-                        if (pinToPos.value) {
-                            pX -= pinToPos.value.x;
-                            pY -= pinToPos.value.y;
-                        }
+                        const newX = editor.state.drag?.originConfigPosition.x + deltaX - editor.state.drag?.clickDeltaPoint.x;
+                        const newY = editor.state.drag?.originConfigPosition.y + deltaY - editor.state.drag?.clickDeltaPoint.y;
                         editor.makeChange({
                             type: ChangeType.ChangePosition,
                             setting: {
                                 blockId: blockId.value,
-                                x: `${pX}`,
-                                y: `${pY}`,
+                                x: newX,
+                                y: newY,
                             },
                             owner: {
                                 type: ChangeOwnerType.Editor,
