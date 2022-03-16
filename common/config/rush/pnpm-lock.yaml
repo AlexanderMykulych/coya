@@ -109,6 +109,7 @@ specifiers:
   roughjs: ^4.5.2
   size-limit: ^7.0.5
   stylis: ^4.0.10
+  svg-path-commander: ^0.1.25
   tsdx: ^0.14.1
   tslib: ^2.3.1
   tsup: ^5.11.10
@@ -255,6 +256,7 @@ dependencies:
   roughjs: 4.5.2
   size-limit: 7.0.8
   stylis: 4.0.13
+  svg-path-commander: 0.1.25
   tsdx: 0.14.1_@types+node@17.0.18
   tslib: 2.3.1
   tsup: 5.11.13_typescript@4.5.5
@@ -2186,8 +2188,8 @@ packages:
       vue-i18n:
         optional: true
     dependencies:
-      '@intlify/message-compiler': 9.2.0-beta.30
-      '@intlify/shared': 9.2.0-beta.30
+      '@intlify/message-compiler': 9.2.0-beta.32
+      '@intlify/shared': 9.2.0-beta.32
       jsonc-eslint-parser: 1.4.1
       source-map: 0.6.1
       vue-i18n: 9.1.9_vue@3.2.31
@@ -2222,11 +2224,11 @@ packages:
       source-map: 0.6.1
     dev: false
 
-  /@intlify/message-compiler/9.2.0-beta.30:
-    resolution: {integrity: sha512-2kj/0nLIFrgiO86f9VifcUUcV8LdzXt4YYPIujx/LkTEQOuSFUo/bNiMaG1hyfiU/8mfq6tsaWKjoOZjeao1eQ==}
+  /@intlify/message-compiler/9.2.0-beta.32:
+    resolution: {integrity: sha512-7OOHIhOmOM4nqe3KfEuE65xLwawwBGg/pCFByzayf0jARoHkeaA7v/eKsUJVJMEakeF2pNstx06AvfecijgPzg==}
     engines: {node: '>= 12'}
     dependencies:
-      '@intlify/shared': 9.2.0-beta.30
+      '@intlify/shared': 9.2.0-beta.32
       source-map: 0.6.1
     dev: false
 
@@ -2249,8 +2251,8 @@ packages:
     engines: {node: '>= 10'}
     dev: false
 
-  /@intlify/shared/9.2.0-beta.30:
-    resolution: {integrity: sha512-E1WHRTIlUEse3d/6t1pAagSXRxmeVeNIhx5kT80dfpYxw8lOnCWV9wLve2bq9Fkv+3TD2I5j+CdN7jvSl3LdsA==}
+  /@intlify/shared/9.2.0-beta.32:
+    resolution: {integrity: sha512-lVaHnKFNg16eWlfDLzDFLapurrf0WK7xLWEkz8DMYNIXJshRQOZCkH7sQaqtONPoOT0LqjyPo1+sV0Wq85/HRQ==}
     engines: {node: '>= 12'}
     dev: false
 
@@ -2268,7 +2270,7 @@ packages:
         optional: true
     dependencies:
       '@intlify/bundle-utils': 2.2.0_vue-i18n@9.1.9
-      '@intlify/shared': 9.2.0-beta.30
+      '@intlify/shared': 9.2.0-beta.32
       '@rollup/pluginutils': 4.1.2
       debug: 4.3.3
       fast-glob: 3.2.11
@@ -2293,7 +2295,7 @@ packages:
         optional: true
     dependencies:
       '@intlify/bundle-utils': 2.2.0_vue-i18n@9.1.9
-      '@intlify/shared': 9.2.0-beta.30
+      '@intlify/shared': 9.2.0-beta.32
       '@rollup/pluginutils': 4.1.2
       debug: 4.3.3
       fast-glob: 3.2.11
@@ -6021,6 +6023,10 @@ packages:
     engines: {node: '>= 4'}
     dependencies:
       domelementtype: 2.2.0
+    dev: false
+
+  /dommatrix/0.0.24:
+    resolution: {integrity: sha512-PatEhAW5pIHr28MvFQGV5iiHNloqvecQZlxs7/8s/eulLqZI3uVqPkrO7YDuqsebovr/9mmcWDSWzVG4amEZgQ==}
     dev: false
 
   /domutils/2.8.0:
@@ -12741,6 +12747,12 @@ packages:
     engines: {node: '>= 0.4'}
     dev: false
 
+  /svg-path-commander/0.1.25:
+    resolution: {integrity: sha512-zMCDjrA+m6QI/ecoul7yfX5jEl2OHAd5Rw7/VDrt3+lrwE+swFYIztYiRpVHa2z65CJ9OJHUlaldABm6rrSWWA==}
+    dependencies:
+      dommatrix: 0.0.24
+    dev: false
+
   /symbol-tree/3.2.4:
     resolution: {integrity: sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==}
     dev: false
@@ -15407,7 +15419,7 @@ packages:
     dev: false
 
   file:projects/coya-editor-new.tgz_@vue+compiler-sfc@3.2.29:
-    resolution: {integrity: sha512-NfacCJxrx4tPB573RtWnaOzGCvRSR9ucim+AsbsGzZT7pQl9QX/wGO2Jrubyepbz7hQ6FcS5cVpRTKxx5rF8nw==, tarball: file:projects/coya-editor-new.tgz}
+    resolution: {integrity: sha512-0G3yCnGNsJKeu7fpaVjqf46+4R+t+XnpfgK+zD/lKshgR+bMozj/KtUQ5lcEdKBzaM6YJLeIQql9w18hayu9fg==, tarball: file:projects/coya-editor-new.tgz}
     id: file:projects/coya-editor-new.tgz
     name: '@rush-temp/coya-editor-new'
     version: 0.0.0
@@ -15423,6 +15435,7 @@ packages:
       unplugin-icons: 0.13.0_433701b14cb8202000d66df1de929c2f
       unplugin-vue-components: 0.17.18_vite@2.8.4+vue@3.2.31
       vite: 2.8.4
+      vite-dts: 1.0.4_vite@2.8.4
       vite-plugin-windicss: 1.6.3_vite@2.8.4
       vue: 3.2.31
       vue-tsc: 0.30.6_typescript@4.5.5
@@ -15686,7 +15699,7 @@ packages:
     dev: false
 
   file:projects/coya-util.tgz_@types+node@17.0.18:
-    resolution: {integrity: sha512-10Ro1NbB4RIGyD4fH3fF3c6eJZPRM5YK2fn7YYqCRh4dkUQwcyzBucFj27B73oTzP4wB4K6PaFYjTsjFehayNQ==, tarball: file:projects/coya-util.tgz}
+    resolution: {integrity: sha512-20uSJjv63DCYs1/olmiaHQ61FoVRs/urexRiMv3CPaFSUhdAEbe2L8hT7wga+BoFbO9tAwe6ErmNNb9IjIdVDw==, tarball: file:projects/coya-util.tgz}
     id: file:projects/coya-util.tgz
     name: '@rush-temp/coya-util'
     version: 0.0.0
@@ -15698,6 +15711,7 @@ packages:
       husky: 7.0.4
       rollup-plugin-typescript2: 0.31.2_f3bd4037939c2ed2942ba074291f8ef2
       size-limit: 7.0.8
+      svg-path-commander: 0.1.25
       tsdx: 0.14.1_@types+node@17.0.18
       tslib: 2.3.1
       typescript: 4.5.5
@@ -15964,7 +15978,7 @@ packages:
     dev: false
 
   file:projects/neo4j-coya-generator.tgz_@vue+compiler-sfc@3.2.29:
-    resolution: {integrity: sha512-TobzKe1ZK6ETxu6K2SrFlblX7alSnRRdjf0hYUs3bZ7dK2peD+3IVDDl3FOyDsLHw6uPkM+CBH9ijW9mlKIzrw==, tarball: file:projects/neo4j-coya-generator.tgz}
+    resolution: {integrity: sha512-0bBPJWrBV+gzgxHVfdM4LlG+cCnOpHe2oolQTf4k7E0CMj2SQ3MobKuzhHkfKqe0+/EItSd3KRHrTCQ+agUUqA==, tarball: file:projects/neo4j-coya-generator.tgz}
     id: file:projects/neo4j-coya-generator.tgz
     name: '@rush-temp/neo4j-coya-generator'
     version: 0.0.0
@@ -15978,6 +15992,7 @@ packages:
       '@vueuse/core': 7.6.2_vue@3.2.31
       eslint: 8.8.0
       jsdom: 19.0.0
+      monaco-editor: 0.30.1
       neo4j-driver: 4.4.2
       pnpm: 6.31.0
       typescript: 4.5.5

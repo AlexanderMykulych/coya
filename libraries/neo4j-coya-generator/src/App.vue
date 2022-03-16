@@ -29,6 +29,7 @@ return apoc.agg.graph(p) as graph
 <template>
   <main font-sans p="x-4 y-10" text="center gray-700 dark:gray-200" w-full h-full>
     <!-- {{ coya }} -->
-    <Coya v-if="coya" :config="coya" class="w-full h-full" />
+    <!-- <Coya v-if="coya" :config="coya" class="w-full h-full" /> -->
+    <QueryDiagram />
   </main>
 </template>

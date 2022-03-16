@@ -5,7 +5,10 @@
 declare module 'vue' {
   export interface GlobalComponents {
     Counter: typeof import('./src/components/Counter.vue')['default']
+    Diagram: typeof import('./src/components/Diagram.vue')['default']
     Footer: typeof import('./src/components/Footer.vue')['default']
+    Query: typeof import('./src/components/Query.vue')['default']
+    QueryDiagram: typeof import('./src/components/QueryDiagram.vue')['default']
   }
 }
 

@@ -54,7 +54,20 @@ export default defineConfig({
             ],
         }),
     ],
-
+    build: {
+        rollupOptions: {
+            external: ['vue', 'pinia'],
+            output: {
+                // Provide global variables to use in the UMD build
+                // for externalized deps
+                globals: {
+                    vue: 'Vue',
+                },
+                manualChunks: {},
+            },
+        },
+        minify: false,
+    },
     // https://github.com/vitest-dev/vitest
     test: {
         environment: 'jsdom',

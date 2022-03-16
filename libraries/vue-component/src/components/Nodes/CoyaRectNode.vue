@@ -181,7 +181,6 @@ const preperedPos = computed(() => {
           </div>
         </div>
       </foreignObject>
-
     </svg>
   </g>
 </template>
