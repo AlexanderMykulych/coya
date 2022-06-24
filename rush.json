@@ -22,8 +22,7 @@
    * The next field selects which package manager should be installed and determines its version.
    * Rush installs its own local copy of the package manager to ensure that your build process
    * is fully isolated from whatever tools are present in the local environment.
-   *
-   * Specify one of: "pnpmVersion", "npmVersion", or "yarnVersion".  See the Rush documentation
+   *   * Specify one of: "pnpmVersion", "npmVersion", or "yarnVersion".  See the Rush documentation
    * for details about these alternatives.
    */
   "pnpmVersion": "6.3.0",
@@ -124,7 +123,7 @@
    * LTS schedule: https://nodejs.org/en/about/releases/
    * LTS versions: https://nodejs.org/en/download/releases/
    */
-  "nodeSupportedVersionRange": ">=12.13.0 <13.0.0 || >=14.15.0 <16.13.1",
+  "nodeSupportedVersionRange": ">=12.13.0 <13.0.0 || >=14.15.0 <=16.15.0",
 
   /**
    * Odd-numbered major versions of Node.js are experimental.  Even-numbered releases
