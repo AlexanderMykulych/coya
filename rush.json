@@ -529,6 +529,11 @@
         "packageName": "coya-rnd-blog",
         "projectFolder": "experimental/blog",
         "reviewCategory": "rnd"
+    },
+    {
+      "packageName": "coya-ts-analyzer",
+      "projectFolder": "libraries/code-analyzers/ts-analyzer",
+      "reviewCategory": "code-analyzers"
     }
   ]
 }
