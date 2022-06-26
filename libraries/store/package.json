@@ -42,7 +42,7 @@
     "@vitejs/plugin-vue": "^2.2.0",
     "@vue/compiler-sfc": "^3.2.26",
     "@vue/server-renderer": "^3.2.26",
-    "@vue/test-utils": "^2.0.0-rc.18",
+    "@vue/test-utils": "^2.0.1",
     "critters": "^0.0.16",
     "cross-env": "^7.0.3",
     "cypress": "^9.2.1",
@@ -64,7 +64,7 @@
     "vite-plugin-vue-layouts": "^0.5.0",
     "vite-plugin-windicss": "^1.6.3",
     "vite-ssg": "^0.17.6",
-    "vitest": "^0.3.2",
+    "vitest": "^0.16.0",
     "vue-tsc": "^0.30.2"
   }
 }
