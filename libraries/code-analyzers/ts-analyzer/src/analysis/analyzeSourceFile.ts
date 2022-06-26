@@ -74,37 +74,38 @@ function analizeNode(params: NodeAnalyzeParams) {
     const nodeSymbol = checker.getSymbolAtLocation(node);
     if (nodeSymbol) {
       const nodeType = checker.getTypeOfSymbolAtLocation(nodeSymbol, node);
-      const importSpecifier = nodeSymbol
+      nodeSymbol
         ?.declarations
-        ?.find(x => ts.isImportSpecifier(x));
-      if (importSpecifier && ts.isImportSpecifier(importSpecifier)) {
-        const moduleSymbol = nodeType.getSymbol();
-        if (moduleSymbol) {
-          const moduleSourceFile = moduleSymbol.valueDeclaration!.getSourceFile();
-          addCodeInfo({
-            type: CodeInfoType.Relationship,
-            from: {
-              type: CodeInfoType.Entity,
-              entityType: EntityType.File,
-              filePath: getSourceFilePath(sourceFile),
-              name: symbol.getName(),
-            },
-            to: {
-              type: CodeInfoType.Entity,
-              entityType: EntityType.File,
-              filePath: getSourceFilePath(moduleSourceFile),
-              name: importSpecifier.propertyName?.getText() ?? importSpecifier.name.getText(),
+        ?.forEach(importSpecifier => {
+          if (ts.isImportSpecifier(importSpecifier)) {
+            const moduleSymbol = nodeType.getSymbol();
+            if (moduleSymbol) {
+              const moduleSourceFile = moduleSymbol.valueDeclaration!.getSourceFile();
+              addCodeInfo({
+                type: CodeInfoType.Relationship,
+                from: {
+                  type: CodeInfoType.Entity,
+                  entityType: EntityType.File,
+                  filePath: getSourceFilePath(sourceFile),
+                  name: symbol.getName(),
+                },
+                to: {
+                  type: CodeInfoType.Entity,
+                  entityType: EntityType.File,
+                  filePath: getSourceFilePath(moduleSourceFile),
+                  name: importSpecifier.propertyName?.getText() ?? importSpecifier.name.getText(),
+                }
+              })
+    
+              const exportedModuleSymbol = checker.getSymbolAtLocation(moduleSourceFile)!
+              analizeSourceFileSymbol({
+                ...params,
+                symbol: exportedModuleSymbol,
+                sourceFile: moduleSourceFile,
+              })
             }
-          })
-
-          const exportedModuleSymbol = checker.getSymbolAtLocation(moduleSourceFile)!
-          analizeSourceFileSymbol({
-            ...params,
-            symbol: exportedModuleSymbol,
-            sourceFile: moduleSourceFile,
-          })
-        }
-      }
+          }
+        })
     }
   }
 }

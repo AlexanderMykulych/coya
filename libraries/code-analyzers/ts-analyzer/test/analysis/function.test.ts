@@ -47,16 +47,15 @@ describe('Analyze functions', () => {
 
     const funcs = codeInfos.filter((x): x is FunctionEntity => x.type === CodeInfoType.Entity && x.entityType === EntityType.Function)
 
-    expect(funcs).lengthOf(4)
     expect(funcs).toEqual(expect.arrayContaining([
       expect.objectContaining({ name: 'func1' }),
       expect.objectContaining({ name: 'func2' }),
       expect.objectContaining({ name: 'func1_1' }),
       expect.objectContaining({ name: 'func2_1' }),
+      expect.objectContaining({ name: 'func3' }),
     ]))
 
     const relations = codeInfos.filter((x): x is Relationship => x.type === CodeInfoType.Relationship)
-    expect(relations).lengthOf(2)
     expect(relations).toEqual(expect.arrayContaining([
       expect.objectContaining({
         from: expect.objectContaining({
@@ -65,7 +64,31 @@ describe('Analyze functions', () => {
         to: expect.objectContaining({
           name: 'func2'
         })
-      })
+      }),
+      expect.objectContaining({
+        from: expect.objectContaining({
+          name: 'func3'
+        }),
+        to: expect.objectContaining({
+          name: 'func2'
+        })
+      }),
+      expect.objectContaining({
+        from: expect.objectContaining({
+          name: 'func4'
+        }),
+        to: expect.objectContaining({
+          name: 'func2'
+        })
+      }),
+      expect.objectContaining({
+        from: expect.objectContaining({
+          name: 'func4'
+        }),
+        to: expect.objectContaining({
+          name: 'func3'
+        })
+      }),
     ]))
   })
 })

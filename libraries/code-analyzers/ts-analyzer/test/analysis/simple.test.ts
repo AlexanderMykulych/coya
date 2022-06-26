@@ -5,7 +5,7 @@ import { CodeInfoType, Relationship } from '../../src/analysis/types'
 
 describe('simple projects', () => {
   const simpleProjectPath = `${__dirname}/cases/01_simple`
-  it('should return program with non empty source files', () => {
+  it('should do base analysis', () => {
     const { program, checker, config } = getProgramAndChecker(simpleProjectPath)
 
     const rootFile = program.getRootFileNames().find(x => x.endsWith('/main.ts'))!
@@ -18,7 +18,7 @@ describe('simple projects', () => {
     expect(sourceFile).not.empty
   })
 
-  it('should analyze add function and get relationsip', () => {
+  it('should get relationsip', () => {
     const { program, checker } = getProgramAndChecker(simpleProjectPath)
 
     const rootFile = program.getRootFileNames().find(x => x.endsWith('/main.ts'))!
