@@ -1,4 +1,4 @@
-import type { TypeChecker, SourceFile } from 'typescript'
+import type { TypeChecker, SourceFile, Symbol, Node } from 'typescript'
 import type { getProgramAndChecker } from './getProgramAndChecker'
 
 export type ProgramContainer = ReturnType<typeof getProgramAndChecker>
@@ -40,3 +40,17 @@ export enum CodeInfoType {
 }
 
 export type CodeInfo = Relationship | Entity
+
+export interface SourceFileAnalyzeParams {
+  symbol: Symbol
+  checker: TypeChecker
+  sourceFile:  SourceFile
+  addCodeInfo: (codeInfo: CodeInfo) => void
+  canAnalyze: (sourceFile: SourceFile) => boolean
+}
+export interface SymbolAnalyzeParams extends SourceFileAnalyzeParams {
+}
+
+export interface NodeAnalyzeParams extends SourceFileAnalyzeParams {
+  node: Node
+}

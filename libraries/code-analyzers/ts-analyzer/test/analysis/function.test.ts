@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { getProgramAndChecker } from '../../src/analysis/getProgramAndChecker'
 import { analyzeSourceFile } from '../../src/analysis/analyzeSourceFile'
-import { CodeInfoType, EntityType, FunctionEntity } from '../../src/analysis/types'
+import { CodeInfoType, EntityType, FunctionEntity, Relationship } from '../../src/analysis/types'
 
 describe('Analyze functions', () => {
   const funcProjectPath = `${__dirname}/cases/02_function`
@@ -53,6 +53,19 @@ describe('Analyze functions', () => {
       expect.objectContaining({ name: 'func2' }),
       expect.objectContaining({ name: 'func1_1' }),
       expect.objectContaining({ name: 'func2_1' }),
+    ]))
+
+    const relations = codeInfos.filter((x): x is Relationship => x.type === CodeInfoType.Relationship)
+    expect(relations).lengthOf(2)
+    expect(relations).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        from: expect.objectContaining({
+          name: 'func1'
+        }),
+        to: expect.objectContaining({
+          name: 'func2'
+        })
+      })
     ]))
   })
 })

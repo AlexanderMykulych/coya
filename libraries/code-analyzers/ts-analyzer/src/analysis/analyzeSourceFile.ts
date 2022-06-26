@@ -1,7 +1,10 @@
 import * as ts from "typescript";
-import { CodeInfo, CodeInfoType, EntityType, SourceContainer } from "./types";
+import {
+  CodeInfo, CodeInfoType, EntityType,
+  SourceContainer, SourceFileAnalyzeParams,
+  SymbolAnalyzeParams, NodeAnalyzeParams
+} from "./types";
 import { visitNodes } from "./visitNodes";
-
 
 export function analyzeSourceFile({ sourceFile, checker }: SourceContainer) {
   const symbol = checker.getSymbolAtLocation(sourceFile);
@@ -32,19 +35,7 @@ export function analyzeSourceFile({ sourceFile, checker }: SourceContainer) {
   return results
 }
 
-interface SourceFileAnalyzeParams {
-  symbol: ts.Symbol
-  checker: ts.TypeChecker
-  sourceFile: ts.SourceFile
-  addCodeInfo: (codeInfo: CodeInfo) => void
-  canAnalyze: (sourceFile: ts.SourceFile) => boolean
-}
-interface SymbolAnalyzeParams extends SourceFileAnalyzeParams {
-}
 
-interface NodeAnalyzeParams extends SourceFileAnalyzeParams {
-  node: ts.Node
-}
 
 function analizeSourceFileSymbol(params: SourceFileAnalyzeParams) {
   if (params.canAnalyze(params.sourceFile)) {
@@ -102,7 +93,7 @@ function analizeNode(params: NodeAnalyzeParams) {
               type: CodeInfoType.Entity,
               entityType: EntityType.File,
               filePath: getSourceFilePath(moduleSourceFile),
-              name: moduleSymbol.getEscapedName().toString(),
+              name: importSpecifier.propertyName?.getText() ?? importSpecifier.name.getText(),
             }
           })
 
