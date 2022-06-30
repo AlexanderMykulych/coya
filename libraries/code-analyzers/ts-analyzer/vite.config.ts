@@ -23,21 +23,6 @@ export default defineConfig({
     // https://github.com/hannoeru/vite-plugin-pages
     Pages(),
 
-    // https://github.com/antfu/unplugin-auto-import
-    AutoImport({
-      imports: [
-        'vue',
-        'vue/macros',
-        'vue-router',
-        '@vueuse/core',
-      ],
-      dts: true,
-      dirs: [
-        './src/composables',
-      ],
-      vueTemplate: true,
-    }),
-
     // https://github.com/antfu/vite-plugin-components
     Components({
       dts: true,
@@ -46,11 +31,12 @@ export default defineConfig({
     // https://github.com/antfu/unocss
     // see unocss.config.ts for config
     Unocss(),
-    Inspect()
+    Inspect(),
   ],
 
   // https://github.com/vitest-dev/vitest
   test: {
     environment: 'jsdom',
+    testTimeout: 10_000_000
   },
 })

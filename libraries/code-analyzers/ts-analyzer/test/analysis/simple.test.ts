@@ -1,16 +1,17 @@
-import { describe, expect, it } from 'vitest'
+import path from 'path'
+import { describe, expect, it, test } from 'vitest'
 import { getProgramAndChecker } from '../../src/analysis/getProgramAndChecker'
-import { analyzeSourceFile } from '../../src/analysis/analyzeSourceFile'
-import { CodeInfoType, Relationship } from '../../src/analysis/types'
+import type { Relationship } from '../../src/analysis/types'
+import { CodeInfoType } from '../../src/analysis/types'
+import { analyzeFile } from '../../src/analysis/analyzeFile'
 
 describe('simple projects', () => {
-  const simpleProjectPath = `${__dirname}/cases/01_simple`
+  const simpleProjectPath = path.join(__dirname, '/cases/01_simple')
   it('should do base analysis', () => {
     const { program, checker, config } = getProgramAndChecker(simpleProjectPath)
 
     const rootFile = program.getRootFileNames().find(x => x.endsWith('/main.ts'))!
     const sourceFile = program.getSourceFile(rootFile)
-
 
     expect(program).not.empty
     expect(checker).not.empty
@@ -18,15 +19,10 @@ describe('simple projects', () => {
     expect(sourceFile).not.empty
   })
 
-  it('should get relationsip', () => {
-    const { program, checker } = getProgramAndChecker(simpleProjectPath)
-
-    const rootFile = program.getRootFileNames().find(x => x.endsWith('/main.ts'))!
-    const sourceFile = program.getSourceFile(rootFile)!
-
-    const result = analyzeSourceFile({
-      sourceFile,
-      checker,
+  test('should get relationsip', async() => {
+    const result = await analyzeFile({
+      path: simpleProjectPath,
+      file: '/main.ts',
     })
 
     expect(result).not.empty

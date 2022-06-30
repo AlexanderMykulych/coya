@@ -1,3 +1,5 @@
-import cmp from 'cmp.vue'
+import cmp from './cmp.vue'
 
-export const cmpFunc = () => cmp
+export const cmpFunc = () => {
+  return cmp
+}

@@ -1,22 +1,19 @@
-import { describe, expect, it } from 'vitest'
+import path from 'path'
+import { describe, expect, it, test } from 'vitest'
 import { getProgramAndChecker } from '../../src/analysis/getProgramAndChecker'
 import { analyzeSourceFile } from '../../src/analysis/analyzeSourceFile'
-import { CodeInfoType, EntityType, FunctionEntity, Relationship } from '../../src/analysis/types'
+import type { FunctionEntity, Relationship } from '../../src/analysis/types'
+import { CodeInfoType, EntityType } from '../../src/analysis/types'
+import { analyzeFile } from '../../src/analysis/analyzeFile'
 
 describe('Analyze functions', () => {
-  const funcProjectPath = `${__dirname}/cases/02_function`
-  it('should get functions', () => {
-    const { program, checker } = getProgramAndChecker(funcProjectPath)
-
-    const rootFile = program.getRootFileNames().find(x => x.endsWith('/func.ts'))!
-    const sourceFile = program.getSourceFile(rootFile)!
-
-    const codeInfos = analyzeSourceFile({
-      sourceFile,
-      checker,
+  const funcProjectPath = path.join(__dirname, '/cases/02_function')
+  test('should get functions', async() => {
+    const codeInfos = await analyzeFile({
+      path: funcProjectPath,
+      file: '/func.ts',
     })
 
-    expect(sourceFile).not.empty
     expect(codeInfos).not.empty
 
     const funcs = codeInfos.filter((x): x is FunctionEntity => x.type === CodeInfoType.Entity && x.entityType === EntityType.Function)
@@ -30,19 +27,13 @@ describe('Analyze functions', () => {
     ]))
   })
 
-  const funcRelationProjectPath = `${__dirname}/cases/03_function_relation`
-  it('should get function with relations', () => {
-    const { program, checker } = getProgramAndChecker(funcRelationProjectPath)
-
-    const rootFile = program.getRootFileNames().find(x => x.endsWith('/main.ts'))!
-    const sourceFile = program.getSourceFile(rootFile)!
-
-    const codeInfos = analyzeSourceFile({
-      sourceFile,
-      checker,
+  const funcRelationProjectPath = path.join(__dirname, '/cases/03_function_relation')
+  test('should get function with relations', async() => {
+    const codeInfos = await analyzeFile({
+      path: funcRelationProjectPath,
+      file: '/main.ts',
     })
 
-    expect(sourceFile).not.empty
     expect(codeInfos).not.empty
 
     const funcs = codeInfos.filter((x): x is FunctionEntity => x.type === CodeInfoType.Entity && x.entityType === EntityType.Function)
@@ -59,36 +50,36 @@ describe('Analyze functions', () => {
     expect(relations).toEqual(expect.arrayContaining([
       expect.objectContaining({
         from: expect.objectContaining({
-          name: 'func1'
+          name: 'func1',
         }),
         to: expect.objectContaining({
-          name: 'func2'
-        })
+          name: 'func2',
+        }),
       }),
       expect.objectContaining({
         from: expect.objectContaining({
-          name: 'func3'
+          name: 'func3',
         }),
         to: expect.objectContaining({
-          name: 'func2'
-        })
+          name: 'func2',
+        }),
       }),
       expect.objectContaining({
         from: expect.objectContaining({
-          name: 'func4'
+          name: 'func4',
         }),
         to: expect.objectContaining({
-          name: 'func2'
-        })
+          name: 'func2',
+        }),
       }),
       expect.objectContaining({
         from: expect.objectContaining({
-          name: 'func4'
+          name: 'func4',
         }),
         to: expect.objectContaining({
-          name: 'func3'
-        })
+          name: 'func3',
+        }),
       }),
     ]))
-  })
+  }, 10_000_000)
 })

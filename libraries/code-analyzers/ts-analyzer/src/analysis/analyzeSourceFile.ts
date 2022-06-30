@@ -1,13 +1,14 @@
-import * as ts from "typescript";
-import {
-  CodeInfo, CodeInfoType, EntityType,
-  SourceContainer, SourceFileAnalyzeParams,
-  SymbolAnalyzeParams, NodeAnalyzeParams
-} from "./types";
-import { visitNodes } from "./visitNodes";
+import * as ts from 'typescript'
+import type {
+  CodeInfo,
+  NodeAnalyzeParams, SourceContainer,
+  SourceFileAnalyzeParams, SymbolAnalyzeParams,
+} from './types'
+import { CodeInfoType, EntityType } from './types'
+import { visitNodes } from './visitNodes'
 
 export function analyzeSourceFile({ sourceFile, checker }: SourceContainer) {
-  const symbol = checker.getSymbolAtLocation(sourceFile);
+  const symbol = checker.getSymbolAtLocation(sourceFile)
   const results: CodeInfo[] = []
   const analizedFiles: string[] = []
   if (symbol) {
@@ -16,9 +17,8 @@ export function analyzeSourceFile({ sourceFile, checker }: SourceContainer) {
     }
     const startSourceFileAnalization = (sourceFile: ts.SourceFile) => {
       const path = getSourceFilePath(sourceFile)
-      if (analizedFiles.some(x => x === path)) {
+      if (analizedFiles.includes(path))
         return false
-      }
 
       analizedFiles.push(path)
 
@@ -30,12 +30,10 @@ export function analyzeSourceFile({ sourceFile, checker }: SourceContainer) {
       addCodeInfo,
       sourceFile,
       canAnalyze: startSourceFileAnalization,
-    });
+    })
   }
   return results
 }
-
-
 
 function analizeSourceFileSymbol(params: SourceFileAnalyzeParams) {
   if (params.canAnalyze(params.sourceFile)) {
@@ -57,30 +55,30 @@ function analizeSymbol(params: SymbolAnalyzeParams) {
         type: CodeInfoType.Entity,
         entityType: EntityType.Function,
         name: symbol.getName(),
-        typeString: typeString,
+        typeString,
         filePath: getSourceFilePath(sourceFile),
       })
     }
     visitNodes(symbol.valueDeclaration, node => analizeNode({
       ...params,
       node,
-    }));
+    }))
   }
 }
 
 function analizeNode(params: NodeAnalyzeParams) {
-  const { node, checker, addCodeInfo, sourceFile, symbol } = params;
+  const { node, checker, addCodeInfo, sourceFile, symbol } = params
   if (ts.isIdentifier(node)) {
-    const nodeSymbol = checker.getSymbolAtLocation(node);
+    const nodeSymbol = checker.getSymbolAtLocation(node)
     if (nodeSymbol) {
-      const nodeType = checker.getTypeOfSymbolAtLocation(nodeSymbol, node);
+      const nodeType = checker.getTypeOfSymbolAtLocation(nodeSymbol, node)
       nodeSymbol
         ?.declarations
-        ?.forEach(importSpecifier => {
+        ?.forEach((importSpecifier) => {
           if (ts.isImportSpecifier(importSpecifier)) {
-            const moduleSymbol = nodeType.getSymbol();
+            const moduleSymbol = nodeType.getSymbol()
             if (moduleSymbol) {
-              const moduleSourceFile = moduleSymbol.valueDeclaration!.getSourceFile();
+              const moduleSourceFile = moduleSymbol.valueDeclaration!.getSourceFile()
               addCodeInfo({
                 type: CodeInfoType.Relationship,
                 from: {
@@ -94,9 +92,9 @@ function analizeNode(params: NodeAnalyzeParams) {
                   entityType: EntityType.File,
                   filePath: getSourceFilePath(moduleSourceFile),
                   name: importSpecifier.propertyName?.getText() ?? importSpecifier.name.getText(),
-                }
+                },
               })
-    
+
               const exportedModuleSymbol = checker.getSymbolAtLocation(moduleSourceFile)!
               analizeSourceFileSymbol({
                 ...params,
@@ -111,7 +109,6 @@ function analizeNode(params: NodeAnalyzeParams) {
 }
 
 function getSourceFilePath(sourceFile: ts.SourceFile): string {
-  // @ts-ignore
+  // @ts-expect-error
   return sourceFile.path
 }
-

@@ -11,10 +11,12 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@types/deasync": "~0.1.2",
     "@vueuse/core": "^7.6.1",
+    "vite-node": "~0.16.0",
+    "vite-plugin-inspect": "^0.3.13",
     "vue": "^3.2.30",
-    "vue-router": "^4.0.12",
-    "vite-plugin-inspect": "^0.3.13"
+    "vue-router": "^4.0.12"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.16.1",

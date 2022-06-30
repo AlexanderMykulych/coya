@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
-    "module": "commonjs"
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true
   },
   "include": ["./"],
   "exclude": [
