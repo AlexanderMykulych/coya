@@ -22,20 +22,13 @@ export async function analyzeFile({ file, path: projPath }: AnalyzeFileParams) {
   const server = await createServer(viteConfig)
   await server.pluginContainer.buildStart({})
 
-  // const testid = '/Users/alexandermykulych/Dev/coya/libraries/code-analyzers/ts-analyzer/test/analysis/cases/04_vue/cmp.vue'
-  // const res = await server.transformRequest(testid)
-  // console.log(res.code)
-  // const test = await server.transformRequest(testid, { ssr: false })
-  // const module = server.moduleGraph.getModuleById(testid)
-
-
   const confPath = path.resolve(projPath, 'tsconfig.json')
+
   const { config } = ts.readConfigFile(confPath, ts.sys.readFile)
   const { options, fileNames } = ts.parseJsonConfigFileContent(config, ts.sys, projPath)
 
   options.noEmit = true
   options.skipLibCheck = true
-  // const host = ts.createCompilerHost(options)
   const host = ts.createWatchCompilerHost(
     fileNames,
     options,
@@ -43,7 +36,7 @@ export async function analyzeFile({ file, path: projPath }: AnalyzeFileParams) {
   );
 
   const cache = new Map<string, string>()
-  const viteWaitings: Promise<void>[] = []
+  const viteWaitings: Promise<string>[] = []
 
   host.watchFile = function(path: string, callback: ts.FileWatcherCallback, pollingInterval?: number, options?: ts.CompilerOptions): ts.FileWatcher {
     const prepPath = path.replace('.vue.ts', '.vue')
@@ -53,6 +46,7 @@ export async function analyzeFile({ file, path: projPath }: AnalyzeFileParams) {
         cache.set(path, val.code)
         callback(path, ts.FileWatcherEventKind.Changed)
       }
+      return path
     })
     viteWaitings.push(viteWaiting)
 
@@ -89,8 +83,7 @@ export async function analyzeFile({ file, path: projPath }: AnalyzeFileParams) {
   
   const checker = program.getTypeChecker()
 
-  const rootFile = program.getRootFileNames().find(x => x.endsWith(file))!
-  const sourceFile = program.getSourceFile(rootFile)!
+  const sourceFile = program.getSourceFiles().find(x => x.fileName.indexOf(file) > -1)!
   console.log('files', program.getSourceFiles().map(x => x.fileName).filter(x => x.indexOf('.pnpm') < 0))
   const codeInfos = analyzeSourceFile({
     sourceFile,
