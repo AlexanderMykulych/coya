@@ -3,6 +3,10 @@ const props = defineProps<{
   initial: number
 }>()
 
+const emit = defineEmits(['test', 'test2'])
+
+emit()
+
 const { count, inc, dec } = useCounter(props.initial)
 </script>
 

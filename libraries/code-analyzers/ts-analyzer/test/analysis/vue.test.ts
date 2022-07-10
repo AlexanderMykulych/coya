@@ -3,7 +3,7 @@ import { expect, test } from 'vitest'
 import { analyzeFile } from '../../src/analysis/analyzeFile'
 
 const funcProjectPath = path.join(__dirname, '/cases/04_vue')
-test('should get function and vue components', async() => {
+test.skip('should get function and vue components', async() => {
   const codeInfos = await analyzeFile({
     path: funcProjectPath,
     file: '/main.ts',
@@ -12,7 +12,7 @@ test('should get function and vue components', async() => {
   expect(codeInfos).not.empty
 })
 
-test('should get vue components', async() => {
+test.skip('should get vue components', async() => {
   const codeInfos = await analyzeFile({
     path: funcProjectPath,
     file: '/cmp.vue',

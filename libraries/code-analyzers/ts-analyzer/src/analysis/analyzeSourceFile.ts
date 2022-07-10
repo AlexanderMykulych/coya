@@ -7,7 +7,8 @@ import type {
 import { CodeInfoType, EntityType } from './types'
 import { visitNodes } from './visitNodes'
 
-export function analyzeSourceFile({ sourceFile, checker }: SourceContainer) {
+export function analyzeSourceFile({ sourceFile, project }: SourceContainer) {
+  const checker = project.getTypeChecker().compilerObject
   const symbol = checker.getSymbolAtLocation(sourceFile)
   const results: CodeInfo[] = []
   const analizedFiles: string[] = []

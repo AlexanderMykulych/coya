@@ -8,14 +8,18 @@ import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import Unocss from 'unocss/vite'
 import Inspect from 'vite-plugin-inspect'
+import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
+import { esbuildCommonjs } from '@originjs/vite-plugin-commonjs'
 
 export default defineConfig({
   resolve: {
     alias: {
       '~/': `${path.resolve(__dirname, 'src')}/`,
+      'code-block-writer': `code-block-writer/esm/mod.js`,
     },
   },
   plugins: [
+    // viteCommonjs(),
     Vue({
       reactivityTransform: true,
     }),

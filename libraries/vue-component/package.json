@@ -25,7 +25,7 @@
     "gsap": "latest",
     "pinia": "^2.0.9",
     "postcss-nested-import": "^0.1.0",
-    "prismjs": "^1.25.0",
+    "prismjs": "1.28.0",
     "rollup-plugin-svg": "^2.0.0",
     "roughjs": "^4.5.2",
     "vite-dts": "^1.0.4",

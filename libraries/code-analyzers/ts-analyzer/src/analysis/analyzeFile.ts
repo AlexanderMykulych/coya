@@ -3,6 +3,7 @@ import ts from 'typescript'
 import { createServer, InlineConfig } from 'vite'
 import { analyzeSourceFile } from './analyzeSourceFile'
 import { tsAnalyzerVitePlugin } from './vite/tsAnalyzerVitePlugin'
+import { Project } from 'ts-morph'
 
 interface AnalyzeFileParams {
   file: string
@@ -10,17 +11,28 @@ interface AnalyzeFileParams {
 }
 
 export async function analyzeFile({ file, path: projPath }: AnalyzeFileParams) {
-  const viteConfig = <InlineConfig>{
-    optimizeDeps: {
-      disabled: true,
-    },
-    base: projPath,
-    root: projPath,
-    plugins: await tsAnalyzerVitePlugin(),
-  }
 
-  const server = await createServer(viteConfig)
-  await server.pluginContainer.buildStart({})
+  const project = new Project({
+    tsConfigFilePath: path.resolve(projPath, 'tsconfig.json'),
+    compilerOptions: {
+      noEmit: true,
+    },
+  })
+
+  const sourceFile = project.getSourceFiles().find(x => x.getFilePath().indexOf(file) > -1)!
+  console.log('files', project.getSourceFiles().map(x => x.getFilePath()).filter(x => x.indexOf('.pnpm') < 0))
+
+  const codeInfos = analyzeSourceFile({
+    sourceFile: sourceFile.compilerNode,
+    checker: project.getTypeChecker().compilerObject,
+    project,
+  })
+
+  return codeInfos
+}
+
+export async function analyzeFile_old({ file, path: projPath }: AnalyzeFileParams) {
+  const server = await getViteServer(projPath)
 
   const confPath = path.resolve(projPath, 'tsconfig.json')
 
@@ -94,3 +106,18 @@ export async function analyzeFile({ file, path: projPath }: AnalyzeFileParams) {
   watchProgram.close()
   return codeInfos
 }
+async function getViteServer(projPath: string) {
+  const viteConfig = <InlineConfig>{
+    optimizeDeps: {
+      disabled: true,
+    },
+    base: projPath,
+    root: projPath,
+    plugins: await tsAnalyzerVitePlugin(),
+  }
+
+  const server = await createServer(viteConfig)
+  await server.pluginContainer.buildStart({})
+  return server
+}
+

@@ -1,10 +1,11 @@
 import type { TypeChecker, SourceFile, Symbol, Node } from 'typescript'
 import type { getProgramAndChecker } from './getProgramAndChecker'
+import type { Project } from 'ts-morph'
 
 export type ProgramContainer = ReturnType<typeof getProgramAndChecker>
 export interface SourceContainer {
   sourceFile: SourceFile
-  checker: TypeChecker
+  project: Project
 }
 
 interface BaseEntity {
