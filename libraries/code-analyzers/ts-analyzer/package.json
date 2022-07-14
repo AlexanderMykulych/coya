@@ -14,14 +14,17 @@
     "@originjs/vite-plugin-commonjs": "^1.0.3",
     "@types/deasync": "~0.1.2",
     "@vueuse/core": "^7.6.1",
+    "browser-vite": "2.7.0-browser.11",
     "clipboard": "2.0.11",
     "prismjs": "1.28.0",
+    "sass": "1.53.0",
     "vite-node": "~0.16.0",
     "vite-plugin-inspect": "^0.3.13",
     "vue": "^3.2.30",
     "vue-prism-editor": "2.0.0-alpha.2",
     "vue-router": "^4.0.12",
-    "vue3-json-viewer": "2.2.2"
+    "vue3-json-viewer": "2.2.2",
+    "vite-plugin-dts": "~1.2.1"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.16.1",

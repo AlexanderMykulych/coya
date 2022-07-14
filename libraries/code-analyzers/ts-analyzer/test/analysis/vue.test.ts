@@ -1,10 +1,10 @@
 import path from 'path'
 import { expect, test } from 'vitest'
-import { analyzeFile } from '../../src/analysis/analyzeFile'
+import { analyze } from '../../src/analysis/analyze'
 
 const funcProjectPath = path.join(__dirname, '/cases/04_vue')
 test.skip('should get function and vue components', async() => {
-  const codeInfos = await analyzeFile({
+  const codeInfos = await analyze({
     path: funcProjectPath,
     file: '/main.ts',
   })
@@ -13,7 +13,7 @@ test.skip('should get function and vue components', async() => {
 })
 
 test.skip('should get vue components', async() => {
-  const codeInfos = await analyzeFile({
+  const codeInfos = await analyze({
     path: funcProjectPath,
     file: '/cmp.vue',
   })

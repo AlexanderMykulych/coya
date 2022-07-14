@@ -1,17 +1,18 @@
-import type { TypeChecker, SourceFile, Symbol, Node } from 'typescript'
+import type { Symbol, Node } from 'typescript'
 import type { getProgramAndChecker } from './getProgramAndChecker'
-import type { Project } from 'ts-morph'
+import type { Project, SourceFile, TypeChecker } from 'ts-morph'
 
 export type ProgramContainer = ReturnType<typeof getProgramAndChecker>
 export interface SourceContainer {
   sourceFile: SourceFile
   project: Project
 }
-
+export type EntityId = string
 interface BaseEntity {
   type: CodeInfoType.Entity
-  name: string
   filePath: string
+  id: EntityId
+  entityType: EntityType
 }
 export interface FileEntity extends BaseEntity {
   entityType: EntityType.File
@@ -22,17 +23,22 @@ export interface FunctionEntity extends BaseEntity {
   typeString: string
 }
 
-export type Entity = FileEntity | FunctionEntity;
+export type Entity = FileEntity | FunctionEntity | BaseEntity;
 
 export enum EntityType {
   File = 'file',
-  Function = 'function'
+  Function = 'function',
+  ImportDeclaration = 'import_declaration',
+}
+export enum RelationType {
+  Import = 'import',
 }
 
 export interface Relationship {
   type: CodeInfoType.Relationship
-  from: Entity
-  to: Entity
+  relationType: RelationType
+  from: EntityId
+  to: EntityId
 }
 
 export enum CodeInfoType {

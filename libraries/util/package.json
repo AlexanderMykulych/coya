@@ -58,6 +58,6 @@
     "rollup-plugin-typescript2": "^0.31.1",
     "svg-path-commander": "^0.1.25",
     "vite": "^2.8.0",
-    "vite-plugin-dts": "^0.9.9"
+    "vite-plugin-dts": "~1.2.1"
   }
 }

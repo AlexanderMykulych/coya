@@ -1,39 +1,56 @@
-import * as ts from 'typescript'
+import { SourceFile } from 'ts-morph'
 import type {
-  CodeInfo,
-  NodeAnalyzeParams, SourceContainer,
+  NodeAnalyzeParams,
   SourceFileAnalyzeParams, SymbolAnalyzeParams,
-} from './types'
-import { CodeInfoType, EntityType } from './types'
+} from '../types'
+import { CodeInfoType, EntityType } from '../types'
+import { functionAnalizer } from './functionAnalizer'
+import { getSourceFileId } from './identifier/getSourceFileId'
+import { importAnalizer } from './importAnalizer'
 import { visitNodes } from './visitNodes'
 
-export function analyzeSourceFile({ sourceFile, project }: SourceContainer) {
-  const checker = project.getTypeChecker().compilerObject
-  const symbol = checker.getSymbolAtLocation(sourceFile)
-  const results: CodeInfo[] = []
-  const analizedFiles: string[] = []
-  if (symbol) {
-    const addCodeInfo = (codeInfo: CodeInfo) => {
-      results.push(codeInfo)
-    }
-    const startSourceFileAnalization = (sourceFile: ts.SourceFile) => {
-      const path = getSourceFilePath(sourceFile)
-      if (analizedFiles.includes(path))
-        return false
+export function analyzeSourceFile(sourceFile: SourceFile) {
 
-      analizedFiles.push(path)
+  const analizers = [
+    importAnalizer,
+    functionAnalizer,
+  ]
 
-      return true
-    }
-    analizeSourceFileSymbol({
-      symbol,
-      checker,
-      addCodeInfo,
-      sourceFile,
-      canAnalyze: startSourceFileAnalization,
-    })
-  }
-  return results
+  return [
+    ...analizers.flatMap(analizer => analizer(sourceFile)),
+    {
+      type: CodeInfoType.Entity,
+      id: getSourceFileId(sourceFile)!,
+      entityType: EntityType.File,
+      filePath: sourceFile.getFilePath(),
+    },
+  ]
+  // const checker = project.getTypeChecker()
+  // const symbol = checker.getSymbolAtLocation(sourceFile)
+  // const results: CodeInfo[] = []
+  // const analizedFiles: string[] = []
+  // if (symbol) {
+  //   const addCodeInfo = (codeInfo: CodeInfo) => {
+  //     results.push(codeInfo)
+  //   }
+  //   const startSourceFileAnalysis = (sourceFile: SourceFile) => {
+  //     const path = getSourceFilePath(sourceFile)
+  //     if (analizedFiles.includes(path))
+  //       return false
+
+  //     analizedFiles.push(path)
+
+  //     return true
+  //   }
+  //   analizeSourceFileSymbol({
+  //     symbol,
+  //     checker,
+  //     addCodeInfo,
+  //     sourceFile,
+  //     canAnalyze: startSourceFileAnalysis,
+  //   })
+  // }
+  // return results
 }
 
 function analizeSourceFileSymbol(params: SourceFileAnalyzeParams) {
