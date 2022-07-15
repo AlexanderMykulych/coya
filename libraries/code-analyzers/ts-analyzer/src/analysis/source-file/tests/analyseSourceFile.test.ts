@@ -1,7 +1,7 @@
 import { InMemoryFileSystemHost, Project } from "ts-morph";
 import { expect, test } from "vitest";
 import { objectExpect } from "../../../../test/analysis/utils/objectExpect";
-import { CodeInfoType, Entity, EntityType, Relationship, RelationType } from "../../types";
+import { CodeInfo, CodeInfoType, Entity, EntityType, Relationship, RelationType } from "../../types";
 import { analyzeSourceFile } from "../analyzeSourceFile";
 import { importAnalizer } from "../importAnalizer";
 
@@ -39,11 +39,11 @@ const obj = {
 project.createSourceFile(
   'dep1.ts',
 `
-export default (a: number) => a + 1
+export function fn1(a: number) { return a + 1 }
 `
 )
 
-test('analyze imports', () => {
+test('should get all imports', () => {
 
   const codeInfos = importAnalizer(sourceFile)
 
@@ -57,11 +57,11 @@ test('analyze imports', () => {
   ]))
 })
 
-test.only('analize source file entities', () => {
+test('should get entities', () => {
 
   const entities = analyzeSourceFile(sourceFile)
 
-  expect(entities).toEqual(expect.arrayContaining<Entity>([
+  expect(entities).toEqual(expect.arrayContaining<CodeInfo>([
     objectExpect<Entity>({
       type: CodeInfoType.Entity,
       entityType: EntityType.File,
@@ -108,4 +108,78 @@ test.only('analize source file entities', () => {
       id: '/main.ts/obj/chl2/mainFn7'
     }),
   ]))
+})
+
+test('should find function -> function relation', () => {
+
+  const project = new Project({
+    useInMemoryFileSystem: true,
+  })
+  const sourceFile = project.createSourceFile(
+    'main.ts',
+    `
+import { fn1 } from './dep1'
+export function mainFn() {
+  return fn1(1)
+}
+const mainFn2 = () => fn1(1)
+const obj = {
+  mainFn3() {
+    return fn1(1)
+  },
+  chl1: {
+    chl2: {
+      mainFn4: () => fn1(1),
+    }
+  }
+}
+function mainFn5() {
+  const mainFn6 = () => fn1()
+  return mainFn6
+}
+`)
+  project.createSourceFile(
+    'dep1.ts',
+  `
+export function fn1(a: number) { return a + 1 }
+`)
+
+  const entities = analyzeSourceFile(sourceFile)
+
+  expect(entities).toEqual(
+    expect.arrayContaining(
+      [
+        objectExpect<Relationship>({
+          type: CodeInfoType.Relationship,
+          from: '/main.ts/mainFn',
+          to: '/dep1.ts/fn1',
+        }),
+        objectExpect<Relationship>({
+          type: CodeInfoType.Relationship,
+          from: '/main.ts/mainFn2',
+          to: '/dep1.ts/fn1',
+        }),
+        objectExpect<Relationship>({
+          type: CodeInfoType.Relationship,
+          from: '/main.ts/obj/mainFn3',
+          to: '/dep1.ts/fn1',
+        }),
+        objectExpect<Relationship>({
+          type: CodeInfoType.Relationship,
+          from: '/main.ts/obj/chl1/chl2/mainFn4',
+          to: '/dep1.ts/fn1',
+        }),
+        objectExpect<Relationship>({
+          type: CodeInfoType.Relationship,
+          from: '/main.ts/mainFn5/mainFn6',
+          to: '/dep1.ts/fn1',
+        }),
+        objectExpect<Relationship>({
+          type: CodeInfoType.Relationship,
+          from: '/main.ts/mainFn5',
+          to: '/dep1.ts/fn1',
+        }),
+      ]
+    )
+  )
 })

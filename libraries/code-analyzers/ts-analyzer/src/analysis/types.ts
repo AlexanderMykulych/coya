@@ -36,7 +36,7 @@ export enum RelationType {
 
 export interface Relationship {
   type: CodeInfoType.Relationship
-  relationType: RelationType
+  relationType?: RelationType
   from: EntityId
   to: EntityId
 }
