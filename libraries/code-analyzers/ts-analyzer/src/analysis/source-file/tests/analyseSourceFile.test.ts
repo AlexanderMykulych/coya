@@ -1,4 +1,4 @@
-import { InMemoryFileSystemHost, Project } from "ts-morph";
+import { Project } from "ts-morph";
 import { expect, test } from "vitest";
 import { objectExpect } from "../../../../test/analysis/utils/objectExpect";
 import { CodeInfo, CodeInfoType, Entity, EntityType, Relationship, RelationType } from "../../types";
