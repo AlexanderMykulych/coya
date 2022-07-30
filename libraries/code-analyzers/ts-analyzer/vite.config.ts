@@ -41,6 +41,9 @@ export default defineConfig({
   // https://github.com/vitest-dev/vitest
   test: {
     environment: 'jsdom',
-    testTimeout: 10_000_000
+    testTimeout: 10_000_000,
+    coverage: {
+      reporter: ['text', 'json', 'html']
+    }
   },
 })

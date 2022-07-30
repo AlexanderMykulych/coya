@@ -1,0 +1,118 @@
+// Vitest Snapshot v1
+
+exports[`should analyze simple ts project 1`] = `
+[
+  {
+    "from": "/index.ts",
+    "relationType": "import",
+    "to": "/util.ts",
+    "type": "relationship",
+  },
+  {
+    "code": "import { fn1 } from './util'",
+    "entityType": "file",
+    "filePath": "/util.ts",
+    "id": "/util.ts",
+    "type": "entity",
+  },
+  {
+    "entityType": "file",
+    "filePath": "/index.ts",
+    "id": "/index.ts",
+    "type": "entity",
+  },
+  {
+    "entityType": "function",
+    "filePath": "/util.ts",
+    "id": "/util.ts/fn1",
+    "type": "entity",
+  },
+]
+`;
+
+exports[`should analyze vue-ts project 1`] = `
+[
+  {
+    "from": "/cmp.vue.ts",
+    "relationType": "import",
+    "to": "/util.ts",
+    "type": "relationship",
+  },
+  {
+    "code": "import { fn1 } from './util';",
+    "entityType": "file",
+    "filePath": "/util.ts",
+    "id": "/util.ts",
+    "type": "entity",
+  },
+  {
+    "from": "/cmp.vue.ts",
+    "relationType": "import",
+    "to": "vue",
+    "type": "relationship",
+  },
+  {
+    "code": "import { toDisplayString as _toDisplayString, openBlock as _openBlock, createElementBlock as _createElementBlock } from \\"vue\\"",
+    "entityType": "file",
+    "filePath": "<unknown>",
+    "id": "vue",
+    "type": "entity",
+  },
+  {
+    "entityType": "function",
+    "filePath": "/cmp.vue.ts",
+    "id": "/cmp.vue.ts/render",
+    "type": "entity",
+  },
+  {
+    "from": "/cmp.vue.ts/render",
+    "to": "<imported>: openBlock as _openBlock",
+    "type": "relationship",
+  },
+  {
+    "from": "/cmp.vue.ts/render",
+    "to": "<imported>: createElementBlock as _createElementBlock",
+    "type": "relationship",
+  },
+  {
+    "from": "/cmp.vue.ts/render",
+    "to": "<imported>: toDisplayString as _toDisplayString",
+    "type": "relationship",
+  },
+  {
+    "entityType": "function",
+    "filePath": "/cmp.vue.ts",
+    "id": "/cmp.vue.ts/setup",
+    "type": "entity",
+  },
+  {
+    "from": "/cmp.vue.ts/setup",
+    "to": "/cmp.vue.ts",
+    "type": "relationship",
+  },
+  {
+    "entityType": "file",
+    "filePath": "/cmp.vue.ts",
+    "id": "/cmp.vue.ts",
+    "type": "entity",
+  },
+  {
+    "from": "/index.ts",
+    "relationType": "import",
+    "to": "/cmp.vue.ts",
+    "type": "relationship",
+  },
+  {
+    "entityType": "file",
+    "filePath": "/index.ts",
+    "id": "/index.ts",
+    "type": "entity",
+  },
+  {
+    "entityType": "function",
+    "filePath": "/util.ts",
+    "id": "/util.ts/fn1",
+    "type": "entity",
+  },
+]
+`;

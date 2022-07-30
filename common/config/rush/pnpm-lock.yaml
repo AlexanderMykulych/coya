@@ -53,6 +53,7 @@ specifiers:
   '@typescript-eslint/parser': ^4.29.3
   '@unocss/reset': ^0.24.3
   '@vitejs/plugin-vue': ^2.2.0
+  '@vitest/ui': ~0.18.1
   '@vue-reactivity/watch': ^0.1.6
   '@vue/compiler-sfc': ^3.2.26
   '@vue/reactivity': ^3.2.12
@@ -130,7 +131,7 @@ specifiers:
   vite-dts: ^1.0.4
   vite-node: ~0.16.0
   vite-plugin-components: ^0.13.2
-  vite-plugin-dts: ^0.9.9
+  vite-plugin-dts: ~1.2.1
   vite-plugin-icons: ^0.6.5
   vite-plugin-inspect: ^0.3.13
   vite-plugin-md: ^0.11.7
@@ -176,20 +177,20 @@ dependencies:
   '@rollup/plugin-node-resolve': 13.1.3
   '@rollup/plugin-typescript': 8.3.0_tslib@2.3.1+typescript@4.7.4
   '@rush-temp/coya': file:projects/coya.tgz_sass@1.53.0
-  '@rush-temp/coya-arrow': file:projects/coya-arrow.tgz_jsdom@19.0.0+sass@1.53.0
-  '@rush-temp/coya-core': file:projects/coya-core.tgz_5d9bc602578aa5c67fceccb3f2c6529e
+  '@rush-temp/coya-arrow': file:projects/coya-arrow.tgz_9b73bdb838d67d73a4b39d1d94a0e92a
+  '@rush-temp/coya-core': file:projects/coya-core.tgz_5244be8cb074fa08a9e797a6bc11dc7c
   '@rush-temp/coya-editor-new': file:projects/coya-editor-new.tgz_50697448409fbba138e8c7fb0bc4e9a6
   '@rush-temp/coya-json-editor': file:projects/coya-json-editor.tgz_sass@1.53.0
   '@rush-temp/coya-rnd-blog': file:projects/coya-rnd-blog.tgz_sass@1.53.0
-  '@rush-temp/coya-store': file:projects/coya-store.tgz_jsdom@19.0.0+sass@1.53.0
-  '@rush-temp/coya-ts-analizer': file:projects/coya-ts-analizer.tgz_jsdom@19.0.0+sass@1.53.0
+  '@rush-temp/coya-store': file:projects/coya-store.tgz_9b73bdb838d67d73a4b39d1d94a0e92a
+  '@rush-temp/coya-ts-analizer': file:projects/coya-ts-analizer.tgz_9b73bdb838d67d73a4b39d1d94a0e92a
   '@rush-temp/coya-ts-analyzer': file:projects/coya-ts-analyzer.tgz_@vue+compiler-sfc@3.2.29
   '@rush-temp/coya-ts-cli': file:projects/coya-ts-cli.tgz
   '@rush-temp/coya-util': file:projects/coya-util.tgz_@types+node@17.0.18+sass@1.53.0
   '@rush-temp/coya-vite-proj': file:projects/coya-vite-proj.tgz_sass@1.53.0
   '@rush-temp/coya-vue-component': file:projects/coya-vue-component.tgz_53dafe0559a1c20e68b53a0057f2e9f8
-  '@rush-temp/demo': file:projects/demo.tgz_jsdom@19.0.0+sass@1.53.0
-  '@rush-temp/neo4j-coya-generator': file:projects/neo4j-coya-generator.tgz_50697448409fbba138e8c7fb0bc4e9a6
+  '@rush-temp/demo': file:projects/demo.tgz_9b73bdb838d67d73a4b39d1d94a0e92a
+  '@rush-temp/neo4j-coya-generator': file:projects/neo4j-coya-generator.tgz_7585962bc5916df2f5d5b6a9cc5fa22b
   '@size-limit/preset-small-lib': 7.0.8_size-limit@7.0.8
   '@types/deasync': 0.1.2
   '@types/debounce': 1.2.1
@@ -210,6 +211,7 @@ dependencies:
   '@typescript-eslint/parser': 4.33.0_eslint@8.18.0+typescript@4.7.4
   '@unocss/reset': 0.24.4
   '@vitejs/plugin-vue': 2.3.3_vite@2.9.13+vue@3.2.37
+  '@vitest/ui': 0.18.1
   '@vue-reactivity/watch': 0.1.6_@vue+reactivity@3.2.29
   '@vue/compiler-sfc': 3.2.29
   '@vue/reactivity': 3.2.29
@@ -287,7 +289,7 @@ dependencies:
   vite-dts: 1.0.4_vite@2.9.13
   vite-node: 0.16.0_sass@1.53.0
   vite-plugin-components: 0.13.3_vite@2.9.13
-  vite-plugin-dts: 0.9.9_vite@2.9.13
+  vite-plugin-dts: 1.2.1_vite@2.9.13
   vite-plugin-icons: 0.6.5_d15d7ca3a40d3f1988159cc5dea2fcad
   vite-plugin-inspect: 0.3.13_vite@2.9.13
   vite-plugin-md: 0.11.7_vite@2.9.13
@@ -298,7 +300,7 @@ dependencies:
   vite-plugin-windicss: 1.6.3_vite@2.9.13
   vite-ssg: 0.17.9_91ace0593bc72da07c7e49b8463d46fe
   vitepress: 0.21.6_sass@1.53.0
-  vitest: 0.16.0_jsdom@19.0.0+sass@1.53.0
+  vitest: 0.16.0_9b73bdb838d67d73a4b39d1d94a0e92a
   vscode-test: 1.6.1
   vue: 3.2.37
   vue-color-kit: 1.0.5_vue@3.2.37
@@ -2220,8 +2222,8 @@ packages:
       vue-i18n:
         optional: true
     dependencies:
-      '@intlify/message-compiler': 9.2.0-beta.37
-      '@intlify/shared': 9.2.0-beta.37
+      '@intlify/message-compiler': 9.2.0-beta.40
+      '@intlify/shared': 9.2.0-beta.40
       jsonc-eslint-parser: 1.4.1
       source-map: 0.6.1
       vue-i18n: 9.1.9_vue@3.2.37
@@ -2256,11 +2258,11 @@ packages:
       source-map: 0.6.1
     dev: false
 
-  /@intlify/message-compiler/9.2.0-beta.37:
-    resolution: {integrity: sha512-7V5bJ5b5OqYTOa+Pfl4ugB6p/16yB4R/37i5vIaPzNW3Lhg8hdNoo+mtLPp1VKs1zmgpSjYi/rvDobGkHJvr2g==}
+  /@intlify/message-compiler/9.2.0-beta.40:
+    resolution: {integrity: sha512-6QWTSYewmkew4nsRqgkwTVuGFKzxVCOK8EXsPt15N+tN1g+OYjC3PfGA2dPB6cVkNxqA9mV/hNK02uHPWU9t0A==}
     engines: {node: '>= 14'}
     dependencies:
-      '@intlify/shared': 9.2.0-beta.37
+      '@intlify/shared': 9.2.0-beta.40
       source-map: 0.6.1
     dev: false
 
@@ -2283,8 +2285,8 @@ packages:
     engines: {node: '>= 10'}
     dev: false
 
-  /@intlify/shared/9.2.0-beta.37:
-    resolution: {integrity: sha512-TVh69KwsY1A4Vo/ODJEp9NPW9O6zO1id4hwohaMdcibPdTp9ieX00QU9OiPRJ8Iz6W6A9xjU0Q30RAX1ba4+5g==}
+  /@intlify/shared/9.2.0-beta.40:
+    resolution: {integrity: sha512-xWz+SFjgt/LfaSbbHVn+V7gmvX4ZNP3cIFta790GWZ/tEgwJeC3tkV7i45iUbZ4ZimOerFgKH05b7qvJlKb6RQ==}
     engines: {node: '>= 14'}
     dev: false
 
@@ -2302,7 +2304,7 @@ packages:
         optional: true
     dependencies:
       '@intlify/bundle-utils': 3.1.0_vue-i18n@9.1.9
-      '@intlify/shared': 9.2.0-beta.37
+      '@intlify/shared': 9.2.0-beta.40
       '@rollup/pluginutils': 4.1.2
       debug: 4.3.3
       fast-glob: 3.2.11
@@ -2716,11 +2718,22 @@ packages:
     engines: {node: '>=6.0.0'}
     dev: false
 
+  /@jridgewell/sourcemap-codec/1.4.14:
+    resolution: {integrity: sha512-XPSJHWmi394fuUuzDnGz1wiKqWfo1yXecHQMRf2l6hztTO+nPru658AyDngaBe7isIxEkRsPR3FZh+s7iVa4Uw==}
+    dev: false
+
   /@jridgewell/trace-mapping/0.2.6:
     resolution: {integrity: sha512-rVJf5dSMEBxnDEwtAT5x8+p6tZ+xU6Ocm+cR1MYL2gMsRi4MMzVf9Pvq6JaxIsEeKAyYmo2U+yPQN4QfdTfFnA==}
     dependencies:
       '@jridgewell/resolve-uri': 3.0.4
       sourcemap-codec: 1.4.8
+    dev: false
+
+  /@jridgewell/trace-mapping/0.3.14:
+    resolution: {integrity: sha512-bJWEfQ9lPTvm3SneWwRFVLzrh6nhjwqw7TUFFBEMzwvg7t7PCDenf2lDwqo4NQXzdpgBXyFgDWnQA+2vkruksQ==}
+    dependencies:
+      '@jridgewell/resolve-uri': 3.0.4
+      '@jridgewell/sourcemap-codec': 1.4.14
     dev: false
 
   /@microsoft/api-extractor-model/7.21.0:
@@ -3208,15 +3221,6 @@ packages:
   /@tootallnate/once/2.0.0:
     resolution: {integrity: sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==}
     engines: {node: '>= 10'}
-    dev: false
-
-  /@ts-morph/common/0.12.3:
-    resolution: {integrity: sha512-4tUmeLyXJnJWvTFOKtcNJ1yh0a3SsTLi2MUoyj8iUNznFRN1ZquaNe7Oukqrnki2FzZkm0J9adCNLDZxUzvj+w==}
-    dependencies:
-      fast-glob: 3.2.11
-      minimatch: 3.0.4
-      mkdirp: 1.0.4
-      path-browserify: 1.0.1
     dev: false
 
   /@ts-morph/common/0.13.0:
@@ -4053,6 +4057,12 @@ packages:
     dependencies:
       vite: 2.9.13_sass@1.53.0
       vue: 3.2.37
+    dev: false
+
+  /@vitest/ui/0.18.1:
+    resolution: {integrity: sha512-JgYewAWfx9fN/cjOW6fPh63j9EDiHmDpVXzvp7UJeza+26QoYHXVsgjCmnzP/jjH3i/LkOXlJLqEJw/nJQ+IJg==}
+    dependencies:
+      sirv: 2.0.2
     dev: false
 
   /@volar/code-gen/0.30.6:
@@ -5449,6 +5459,25 @@ packages:
   /bytes/3.1.1:
     resolution: {integrity: sha512-dWe4nWO/ruEOY7HkUJ5gFt1DCFV9zPRoJr8pV0/ASQermOZjtq8jMjOprC0Kd10GLN+l7xaUPvxzJFWtxGu8Fg==}
     engines: {node: '>= 0.8'}
+    dev: false
+
+  /c8/7.12.0:
+    resolution: {integrity: sha512-CtgQrHOkyxr5koX1wEUmN/5cfDa2ckbHRA4Gy5LAL0zaCFtVWJS5++n+w4/sr2GWGerBxgTjpKeDclk/Qk6W/A==}
+    engines: {node: '>=10.12.0'}
+    hasBin: true
+    dependencies:
+      '@bcoe/v8-coverage': 0.2.3
+      '@istanbuljs/schema': 0.1.3
+      find-up: 5.0.0
+      foreground-child: 2.0.0
+      istanbul-lib-coverage: 3.2.0
+      istanbul-lib-report: 3.0.0
+      istanbul-reports: 3.1.5
+      rimraf: 3.0.2
+      test-exclude: 6.0.0
+      v8-to-istanbul: 9.0.1
+      yargs: 16.2.0
+      yargs-parser: 20.2.9
     dev: false
 
   /cac/6.7.12:
@@ -8334,6 +8363,14 @@ packages:
     resolution: {integrity: sha512-ZBbtRiapkZYLsqoPyZOR+uPfto0GRMNQN1GwzZtZt7iZvPPbDDQV0JF5Hx4o/QFQ5c0vyuoZ98T8RSBbopzWtA==}
     dev: false
 
+  /foreground-child/2.0.0:
+    resolution: {integrity: sha512-dCIq9FpEcyQyXKCkyzmlPTFNgrCzPudOe+mhvJU5zAtlBnGVy2yKxtfsxK2tQBThwq225jcvBjpw1Gr40uzZCA==}
+    engines: {node: '>=8.0.0'}
+    dependencies:
+      cross-spawn: 7.0.3
+      signal-exit: 3.0.7
+    dev: false
+
   /forever-agent/0.6.1:
     resolution: {integrity: sha1-+8cfDEGt6zf5bFd60e1C2P2sypE=}
     dev: false
@@ -9638,6 +9675,14 @@ packages:
 
   /istanbul-reports/3.1.3:
     resolution: {integrity: sha512-x9LtDVtfm/t1GFiLl3NffC7hz+I1ragvgX1P/Lg1NlIagifZDKUkuuaAxH/qpwj2IuEfD8G2Bs/UKp+sZ/pKkg==}
+    engines: {node: '>=8'}
+    dependencies:
+      html-escaper: 2.0.2
+      istanbul-lib-report: 3.0.0
+    dev: false
+
+  /istanbul-reports/3.1.5:
+    resolution: {integrity: sha512-nUsEMa9pBt/NOHqbcbeJEgqIlY/K7rVWUX6Lql2orY5e9roQOthbR3vtY4zzf2orPELg80fnxxk9zUyPlgwD1w==}
     engines: {node: '>=8'}
     dependencies:
       html-escaper: 2.0.2
@@ -14365,13 +14410,6 @@ packages:
       yargs-parser: 18.1.3
     dev: false
 
-  /ts-morph/13.0.3:
-    resolution: {integrity: sha512-pSOfUMx8Ld/WUreoSzvMFQG5i9uEiWIsBYjpU9+TTASOeUa89j5HykomeqVULm1oqWtBdleI3KEFRLrlA3zGIw==}
-    dependencies:
-      '@ts-morph/common': 0.12.3
-      code-block-writer: 11.0.0
-    dev: false
-
   /ts-morph/14.0.0:
     resolution: {integrity: sha512-tO8YQ1dP41fw8GVmeQAdNsD8roZi1JMqB7YwZrqU856DvmG5/710e41q2XauzTYrygH9XmMryaFeLo+kdCziyA==}
     dependencies:
@@ -15035,6 +15073,15 @@ packages:
       source-map: 0.7.3
     dev: false
 
+  /v8-to-istanbul/9.0.1:
+    resolution: {integrity: sha512-74Y4LqY74kLE6IFyIjPtkSTWzUZmj8tdHT9Ii/26dvQ6K9Dl2NbEfj0XgU2sHCtKgt5VupqhlO/5aWuqS+IY1w==}
+    engines: {node: '>=10.12.0'}
+    dependencies:
+      '@jridgewell/trace-mapping': 0.3.14
+      '@types/istanbul-lib-coverage': 2.0.4
+      convert-source-map: 1.8.0
+    dev: false
+
   /validate-npm-package-license/3.0.4:
     resolution: {integrity: sha512-DpKm2Ui/xN7/HQKCtpZxoRWBhZ9Z0kqtygG8XCgNQ8ZlDnxuQmWhj566j8fN4Cu3/JmbhsDo7fcAJq4s9h27Ew==}
     dependencies:
@@ -15100,18 +15147,6 @@ packages:
       vite: 2.9.13_sass@1.53.0
     transitivePeerDependencies:
       - supports-color
-    dev: false
-
-  /vite-plugin-dts/0.9.9_vite@2.9.13:
-    resolution: {integrity: sha512-HzLTCBbsN9gotphtIe97TCigeco6aGLBoeSHdxD9QGGl8prO7uykus0fphLkjWCbFlrerb8Uxp9fu82BfIiaIg==}
-    engines: {node: '>=12.0.0'}
-    peerDependencies:
-      vite: '>=2.4.4'
-    dependencies:
-      fast-glob: 3.2.11
-      fs-extra: 10.0.0
-      ts-morph: 13.0.3
-      vite: 2.9.13_sass@1.53.0
     dev: false
 
   /vite-plugin-dts/1.2.1_vite@2.9.13:
@@ -15403,7 +15438,7 @@ packages:
       - stylus
     dev: false
 
-  /vitest/0.16.0_jsdom@19.0.0+sass@1.53.0:
+  /vitest/0.16.0_17c1b95c292063ea96c1081708912ed3:
     resolution: {integrity: sha512-Ntp6jrM8wf2NMtamMBLkRBBdeqHkgAH/WMh5Xryts1j2ft2D8QZQbiSVFkSl4WmEQzcPP0YM069g/Ga1vtnEtg==}
     engines: {node: '>=v14.16.0'}
     hasBin: true
@@ -15425,6 +15460,45 @@ packages:
       '@types/chai': 4.3.1
       '@types/chai-subset': 1.3.3
       '@types/node': 18.0.0
+      '@vitest/ui': 0.18.1
+      c8: 7.12.0
+      chai: 4.3.6
+      debug: 4.3.4
+      jsdom: 19.0.0
+      local-pkg: 0.4.1
+      tinypool: 0.2.1
+      tinyspy: 0.3.3
+      vite: 2.9.13_sass@1.53.0
+    transitivePeerDependencies:
+      - less
+      - sass
+      - stylus
+      - supports-color
+    dev: false
+
+  /vitest/0.16.0_9b73bdb838d67d73a4b39d1d94a0e92a:
+    resolution: {integrity: sha512-Ntp6jrM8wf2NMtamMBLkRBBdeqHkgAH/WMh5Xryts1j2ft2D8QZQbiSVFkSl4WmEQzcPP0YM069g/Ga1vtnEtg==}
+    engines: {node: '>=v14.16.0'}
+    hasBin: true
+    peerDependencies:
+      '@vitest/ui': '*'
+      c8: '*'
+      happy-dom: '*'
+      jsdom: '*'
+    peerDependenciesMeta:
+      '@vitest/ui':
+        optional: true
+      c8:
+        optional: true
+      happy-dom:
+        optional: true
+      jsdom:
+        optional: true
+    dependencies:
+      '@types/chai': 4.3.1
+      '@types/chai-subset': 1.3.3
+      '@types/node': 18.0.0
+      '@vitest/ui': 0.18.1
       chai: 4.3.6
       debug: 4.3.4
       jsdom: 19.0.0
@@ -16307,6 +16381,11 @@ packages:
     engines: {node: '>=10'}
     dev: false
 
+  /yargs-parser/20.2.9:
+    resolution: {integrity: sha512-y11nGElTIV+CT3Zv9t7VKl+Q3hTQoT9a1Qzezhhl6Rp21gJ/IVTW7Z3y9EWXhuUBC2Shnf+DX0antecpAwSP8w==}
+    engines: {node: '>=10'}
+    dev: false
+
   /yargs-parser/21.0.0:
     resolution: {integrity: sha512-z9kApYUOCwoeZ78rfRYYWdiU/iNL6mwwYlkkZfJoyMR1xps+NEBX5X7XmRpxkZHhXJ6+Ey00IwKxBBSW9FIjyA==}
     engines: {node: '>=12'}
@@ -16405,7 +16484,7 @@ packages:
         optional: true
     dev: false
 
-  file:projects/coya-arrow.tgz_jsdom@19.0.0+sass@1.53.0:
+  file:projects/coya-arrow.tgz_9b73bdb838d67d73a4b39d1d94a0e92a:
     resolution: {integrity: sha512-ck+iuKMOAULja8TBVpJykIizI/AVBID0VXDUBHASJdWzmWH3BBf/DJWRKElgkpRsPOCelWMTNxeIazxb1b6AKw==, tarball: file:projects/coya-arrow.tgz}
     id: file:projects/coya-arrow.tgz
     name: '@rush-temp/coya-arrow'
@@ -16447,7 +16526,7 @@ packages:
       vite-plugin-vue-layouts: 0.5.0_2562b5b547eb62bb06cd0dcf53f29baf
       vite-plugin-windicss: 1.6.3_vite@2.9.13
       vite-ssg: 0.17.9_91ace0593bc72da07c7e49b8463d46fe
-      vitest: 0.16.0_jsdom@19.0.0+sass@1.53.0
+      vitest: 0.16.0_9b73bdb838d67d73a4b39d1d94a0e92a
       vue: 3.2.37
       vue-demi: 0.12.1_vue@3.2.37
       vue-i18n: 9.1.9_vue@3.2.37
@@ -16479,7 +16558,7 @@ packages:
       - webpack
     dev: false
 
-  file:projects/coya-core.tgz_5d9bc602578aa5c67fceccb3f2c6529e:
+  file:projects/coya-core.tgz_5244be8cb074fa08a9e797a6bc11dc7c:
     resolution: {integrity: sha512-sjarJp7bvuSTUsvq1Bn7HBKT5PvYVy8uB8ZkBMFixrR1h9C09P9G98PbK7rWV+11dZ4Bb0KMjnSbZ0dLKkpSRQ==, tarball: file:projects/coya-core.tgz}
     id: file:projects/coya-core.tgz
     name: '@rush-temp/coya-core'
@@ -16507,7 +16586,7 @@ packages:
       typescript: 4.7.4
       vite: 2.9.13_sass@1.53.0
       vite-plugin-dts: 1.2.1_vite@2.9.13
-      vitest: 0.16.0_jsdom@19.0.0+sass@1.53.0
+      vitest: 0.16.0_9b73bdb838d67d73a4b39d1d94a0e92a
       vue: 3.2.37
     transitivePeerDependencies:
       - '@types/babel__core'
@@ -16668,7 +16747,7 @@ packages:
       - supports-color
     dev: false
 
-  file:projects/coya-store.tgz_jsdom@19.0.0+sass@1.53.0:
+  file:projects/coya-store.tgz_9b73bdb838d67d73a4b39d1d94a0e92a:
     resolution: {integrity: sha512-Lm8eSwPwyQqwu3WS5/CJXc3sSgPr0YCXTaF7tI2gFGsKoxBxRlAk/QzbGfhQtdU3fpLQVkCJ4uMMzaOd6KVIOA==, tarball: file:projects/coya-store.tgz}
     id: file:projects/coya-store.tgz
     name: '@rush-temp/coya-store'
@@ -16715,7 +16794,7 @@ packages:
       vite-plugin-vue-layouts: 0.5.0_2562b5b547eb62bb06cd0dcf53f29baf
       vite-plugin-windicss: 1.6.3_vite@2.9.13
       vite-ssg: 0.17.9_91ace0593bc72da07c7e49b8463d46fe
-      vitest: 0.16.0_jsdom@19.0.0+sass@1.53.0
+      vitest: 0.16.0_9b73bdb838d67d73a4b39d1d94a0e92a
       vue: 3.2.37
       vue-demi: 0.12.1_vue@3.2.37
       vue-i18n: 9.1.9_vue@3.2.37
@@ -16747,7 +16826,7 @@ packages:
       - webpack
     dev: false
 
-  file:projects/coya-ts-analizer.tgz_jsdom@19.0.0+sass@1.53.0:
+  file:projects/coya-ts-analizer.tgz_9b73bdb838d67d73a4b39d1d94a0e92a:
     resolution: {integrity: sha512-ulILKNpWRN4E1ptJhQtnnSA9/zNW9s7Vdv2WM8Ogg/hrwKCP3uH/bxuWRpigXE0zquUsKLC7kHbrV3047Wd0ew==, tarball: file:projects/coya-ts-analizer.tgz}
     id: file:projects/coya-ts-analizer.tgz
     name: '@rush-temp/coya-ts-analizer'
@@ -16765,7 +16844,7 @@ packages:
       tslib: 2.3.1
       typescript: 4.7.4
       vite: 2.9.13_sass@1.53.0
-      vitest: 0.16.0_jsdom@19.0.0+sass@1.53.0
+      vitest: 0.16.0_9b73bdb838d67d73a4b39d1d94a0e92a
     transitivePeerDependencies:
       - '@types/babel__core'
       - '@vitest/ui'
@@ -16782,7 +16861,7 @@ packages:
     dev: false
 
   file:projects/coya-ts-analyzer.tgz_@vue+compiler-sfc@3.2.29:
-    resolution: {integrity: sha512-OdA6CFUyaUzpj6klf3vd7ghcOX4HcGfyB5PkheD2IOxX4X/Ld6dmeQL7EC480lXZ7VW24zWUNiNeydUc1bAc2Q==, tarball: file:projects/coya-ts-analyzer.tgz}
+    resolution: {integrity: sha512-OKe1SsVxPDyC2yNixPMvwjnXloQ+/mjRSjPbBEe+McYtQnXFCcpTzyWX5Mg7SA25/WwlMhEWyQ+gLkar63HD8A==, tarball: file:projects/coya-ts-analyzer.tgz}
     id: file:projects/coya-ts-analyzer.tgz
     name: '@rush-temp/coya-ts-analyzer'
     version: 0.0.0
@@ -16794,9 +16873,11 @@ packages:
       '@types/node': 17.0.18
       '@unocss/reset': 0.24.4
       '@vitejs/plugin-vue': 2.3.3_vite@2.9.13+vue@3.2.37
+      '@vitest/ui': 0.18.1
       '@vue/test-utils': 2.0.1_vue@3.2.37
       '@vueuse/core': 7.6.2_vue@3.2.37
       browser-vite: 2.7.0-browser.11_sass@1.53.0+typescript@4.7.4
+      c8: 7.12.0
       clipboard: 2.0.11
       deasync: 0.1.26
       eslint: 8.18.0
@@ -16815,7 +16896,7 @@ packages:
       vite-plugin-dts: 1.2.1_vite@2.9.13
       vite-plugin-inspect: 0.3.13_vite@2.9.13
       vite-plugin-pages: 0.20.2_0f7bb73fcac4f2d5744265d6765ee7a6
-      vitest: 0.16.0_jsdom@19.0.0+sass@1.53.0
+      vitest: 0.16.0_17c1b95c292063ea96c1081708912ed3
       vue: 3.2.37
       vue-prism-editor: 2.0.0-alpha.2_vue@3.2.37
       vue-router: 4.0.16_vue@3.2.37
@@ -16824,11 +16905,9 @@ packages:
     transitivePeerDependencies:
       - '@babel/parser'
       - '@babel/traverse'
-      - '@vitest/ui'
       - '@vue/compiler-sfc'
       - '@vue/composition-api'
       - bufferutil
-      - c8
       - canvas
       - debug
       - esbuild
@@ -17070,7 +17149,7 @@ packages:
       - utf-8-validate
     dev: false
 
-  file:projects/demo.tgz_jsdom@19.0.0+sass@1.53.0:
+  file:projects/demo.tgz_9b73bdb838d67d73a4b39d1d94a0e92a:
     resolution: {integrity: sha512-q9igeMeZhp9SmVbFQhJqwEOhz9aIx1peoIUnrm4eOMM1sEhh0D/ReJo328fcGbCeeKTnAKWUDhKieZ8lzItRGg==, tarball: file:projects/demo.tgz}
     id: file:projects/demo.tgz
     name: '@rush-temp/demo'
@@ -17114,7 +17193,7 @@ packages:
       vite-plugin-vue-layouts: 0.5.0_2562b5b547eb62bb06cd0dcf53f29baf
       vite-plugin-windicss: 1.6.3_vite@2.9.13
       vite-ssg: 0.17.9_91ace0593bc72da07c7e49b8463d46fe
-      vitest: 0.16.0_jsdom@19.0.0+sass@1.53.0
+      vitest: 0.16.0_9b73bdb838d67d73a4b39d1d94a0e92a
       vue: 3.2.37
       vue-demi: 0.12.1_vue@3.2.37
       vue-echarts: 6.0.2_echarts@5.3.0+vue@3.2.37
@@ -17148,7 +17227,7 @@ packages:
       - webpack
     dev: false
 
-  file:projects/neo4j-coya-generator.tgz_50697448409fbba138e8c7fb0bc4e9a6:
+  file:projects/neo4j-coya-generator.tgz_7585962bc5916df2f5d5b6a9cc5fa22b:
     resolution: {integrity: sha512-XMqgS1h/7SMvoUXrXAkg19V7/Dz6Mzq4dSNO17UXabfyvtEwhLstqrjIho7ZB4xD813NCz8nSL19vF8rKimTww==, tarball: file:projects/neo4j-coya-generator.tgz}
     id: file:projects/neo4j-coya-generator.tgz
     name: '@rush-temp/neo4j-coya-generator'
@@ -17172,7 +17251,7 @@ packages:
       unplugin-vue-components: 0.17.18_vite@2.9.13+vue@3.2.37
       vite: 2.9.13_sass@1.53.0
       vite-plugin-pages: 0.20.2_0f7bb73fcac4f2d5744265d6765ee7a6
-      vitest: 0.16.0_jsdom@19.0.0+sass@1.53.0
+      vitest: 0.16.0_9b73bdb838d67d73a4b39d1d94a0e92a
       vue: 3.2.37
       vue-router: 4.0.16_vue@3.2.37
     transitivePeerDependencies:

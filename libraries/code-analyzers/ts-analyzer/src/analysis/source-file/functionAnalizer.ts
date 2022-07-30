@@ -1,4 +1,4 @@
-import { SyntaxKind, Node, FunctionDeclaration, Identifier} from "ts-morph";
+import { SyntaxKind, Node, FunctionDeclaration, Identifier, SourceFile } from "ts-morph";
 import { CodeInfo, CodeInfoType, EntityType, Relationship } from "../types";
 import { getArrowFunctionId } from "./identifier/getArrowFunctionId";
 import { getFunctionDeclarationId } from "./identifier/getFunctionDeclarationId";
@@ -23,7 +23,7 @@ function functionDeclarationAnalyzer(node: Node): CodeInfo[] {
           type: CodeInfoType.Entity,
           entityType: EntityType.Function,
           id,
-          filePath: node.getSourceFile().getFilePath(),
+          filePath: getFilePath(node.getSourceFile()),
         },
         ...getNestedRelations(node, id),
       ])
@@ -37,7 +37,7 @@ function arrowDeclarationAnalyzer(node: Node): CodeInfo[] {
           type: CodeInfoType.Entity,
           entityType: EntityType.Function,
           id,
-          filePath: node.getSourceFile().getFilePath(),
+          filePath: getFilePath(node.getSourceFile()),
         },
         ...getNestedRelations(node, id),
       ]
@@ -53,7 +53,7 @@ function methodDeclarationAnalyzer(node: Node): CodeInfo[] {
           type: CodeInfoType.Entity,
           entityType: EntityType.Function,
           id,
-          filePath: node.getSourceFile().getFilePath(),
+          filePath: getFilePath(node.getSourceFile()),
         },
         ...getNestedRelations(node, id),
       ]
@@ -76,8 +76,12 @@ function getNestedRelations(node: Node, nodeId: string): CodeInfo[] {
 
 function getImportedIdentifierId(ident: Identifier): string {
   const importSpecifier = ident.getSymbol()!.getDeclarations()?.[0]
-  if (importSpecifier.isKind(SyntaxKind.ImportSpecifier)) {
+  if (importSpecifier.isKind(SyntaxKind.ImportSpecifier) && ident.getImplementations()[0]) {
     return getParentId(ident.getImplementations()[0].getNode())
   }
-  return '<imported>'
+  return `<imported>:${importSpecifier.getFullText()}`
+}
+
+function getFilePath(sourceFile: SourceFile): string {
+  return sourceFile.getFilePath().toString()
 }

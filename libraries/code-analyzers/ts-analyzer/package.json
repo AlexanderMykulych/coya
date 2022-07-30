@@ -24,7 +24,9 @@
     "vue-prism-editor": "2.0.0-alpha.2",
     "vue-router": "^4.0.12",
     "vue3-json-viewer": "2.2.2",
-    "vite-plugin-dts": "~1.2.1"
+    "vite-plugin-dts": "~1.2.1",
+    "@vitest/ui": "~0.18.1",
+    "c8": "~7.12.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.16.1",

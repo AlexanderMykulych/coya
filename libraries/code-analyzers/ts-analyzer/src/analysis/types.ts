@@ -61,3 +61,14 @@ export interface SymbolAnalyzeParams extends SourceFileAnalyzeParams {
 export interface NodeAnalyzeParams extends SourceFileAnalyzeParams {
   node: Node
 }
+
+export type FileText = {
+  file: string
+  text: string
+}
+
+export interface FileProcessor {
+  isMatch(file: FileText): boolean
+  process(file: FileText): Promise<FileText>
+  processFilePath(filePath: string): string
+}

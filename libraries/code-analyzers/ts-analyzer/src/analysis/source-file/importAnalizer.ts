@@ -16,7 +16,7 @@ export function importAnalizer(sourceFile: SourceFile): CodeInfo[] {
           type: CodeInfoType.Entity,
           id: getSourceFileId(x.getModuleSpecifierSourceFile()) ?? x.getModuleSpecifierValue(),
           entityType: EntityType.File,
-          filePath: x.getSourceFile().getFilePath(),
+          filePath: x.getModuleSpecifierSourceFile()?.getFilePath() ?? '<unknown>',
           code: x.getText(),
         },
       ])

@@ -1,0 +1,23 @@
+// Vitest Snapshot v1
+
+exports[`should process vue file 1`] = `
+"import { fn1 } from './util';
+
+export default {
+  setup(__props, { expose }) {
+  expose();
+
+const val = ref(fn1(1))
+
+const __returned__ = { val, fn1 }
+Object.defineProperty(__returned__, '__isScriptSetup', { enumerable: false, value: true })
+return __returned__
+}
+
+}
+import { toDisplayString as _toDisplayString, openBlock as _openBlock, createElementBlock as _createElementBlock } from \\"vue\\"
+
+export function render(_ctx, _cache) {
+  return (_openBlock(), _createElementBlock(\\"div\\", null, _toDisplayString(_ctx.val), 1 /* TEXT */))
+}"
+`;

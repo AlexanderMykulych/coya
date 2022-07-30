@@ -1,0 +1,1 @@
+export const fn1 = (a: number) => a + 1
