@@ -44,6 +44,7 @@ export default defineConfig({
     testTimeout: 10_000_000,
     coverage: {
       reporter: ['text', 'json', 'html']
-    }
+    },
+    threads: false,
   },
 })

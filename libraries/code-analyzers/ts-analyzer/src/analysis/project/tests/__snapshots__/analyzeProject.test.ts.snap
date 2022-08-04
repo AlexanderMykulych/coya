@@ -66,17 +66,7 @@ exports[`should analyze vue-ts project 1`] = `
   },
   {
     "from": "/cmp.vue.ts/render",
-    "to": "<imported>: openBlock as _openBlock",
-    "type": "relationship",
-  },
-  {
-    "from": "/cmp.vue.ts/render",
-    "to": "<imported>: createElementBlock as _createElementBlock",
-    "type": "relationship",
-  },
-  {
-    "from": "/cmp.vue.ts/render",
-    "to": "<imported>: toDisplayString as _toDisplayString",
+    "to": "vue",
     "type": "relationship",
   },
   {

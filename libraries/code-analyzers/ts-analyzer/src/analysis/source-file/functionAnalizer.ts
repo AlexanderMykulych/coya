@@ -1,9 +1,10 @@
-import { SyntaxKind, Node, FunctionDeclaration, Identifier, SourceFile } from "ts-morph";
+import { SyntaxKind, Node, FunctionDeclaration, Identifier, SourceFile, ImportDeclaration, ImportSpecifier } from "ts-morph";
 import { CodeInfo, CodeInfoType, EntityType, Relationship } from "../types";
 import { getArrowFunctionId } from "./identifier/getArrowFunctionId";
 import { getFunctionDeclarationId } from "./identifier/getFunctionDeclarationId";
 import { getMethodDeclarationId } from "./identifier/getMethodDeclarationId";
 import { getParentId } from "./identifier/getParentId";
+import { getImportDeclarationId } from "./identifier/getImportDeclarationId";
 
 export function functionAnalizer(node: Node): CodeInfo[] {
 
@@ -75,9 +76,14 @@ function getNestedRelations(node: Node, nodeId: string): CodeInfo[] {
 }
 
 function getImportedIdentifierId(ident: Identifier): string {
-  const importSpecifier = ident.getSymbol()!.getDeclarations()?.[0]
+  const importSpecifier = ident.getSymbol()!.getDeclarations()?.[0] as ImportSpecifier
   if (importSpecifier.isKind(SyntaxKind.ImportSpecifier) && ident.getImplementations()[0]) {
     return getParentId(ident.getImplementations()[0].getNode())
+  }
+  const importDeclaration = importSpecifier.getImportDeclaration()
+  const id = getImportDeclarationId(importDeclaration)
+  if (importDeclaration && id) {
+    return id
   }
   return `<imported>:${importSpecifier.getFullText()}`
 }
