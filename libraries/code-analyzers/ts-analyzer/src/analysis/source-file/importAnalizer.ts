@@ -1,23 +1,23 @@
 import { SourceFile } from "ts-morph"
-import { CodeInfo, CodeInfoType, EntityType, RelationType } from "../types"
-import { getSourceFileId } from "./identifier/getSourceFileId"
+import { CodeInfo, CodeInfoType, RelationType } from "../types"
+import { getNodeInfo } from "./identifier/getNodeId"
 
 export function importAnalizer(sourceFile: SourceFile): CodeInfo[] {
   return sourceFile
-      .getImportDeclarations()
-      .flatMap<CodeInfo>(x => [
+    .getImportDeclarations()
+    .map(x => ({
+      entityFrom: getNodeInfo(sourceFile),
+      entityTo: getNodeInfo(x.getModuleSpecifierSourceFile() ?? x)
+    }))
+    .flatMap<CodeInfo>(({ entityFrom, entityTo }) =>
+      [
         {
-          from: getSourceFileId(sourceFile)!,
-          to: getSourceFileId(x.getModuleSpecifierSourceFile()) ?? x.getModuleSpecifierValue(),
+          from: entityFrom.id,
+          to: entityTo.id,
           type: CodeInfoType.Relationship,
           relationType: RelationType.Import,
         },
-        {
-          type: CodeInfoType.Entity,
-          id: getSourceFileId(x.getModuleSpecifierSourceFile()) ?? x.getModuleSpecifierValue(),
-          entityType: EntityType.File,
-          filePath: x.getModuleSpecifierSourceFile()?.getFilePath() ?? '<unknown>',
-          code: x.getText(),
-        },
+        entityFrom,
+        entityTo,
       ])
 }

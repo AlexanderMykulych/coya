@@ -1,63 +1,22 @@
-import { SyntaxKind, Node, FunctionDeclaration, Identifier, SourceFile, ImportDeclaration, ImportSpecifier } from "ts-morph";
-import { CodeInfo, CodeInfoType, EntityType, Relationship } from "../types";
-import { getArrowFunctionId } from "./identifier/getArrowFunctionId";
-import { getFunctionDeclarationId } from "./identifier/getFunctionDeclarationId";
-import { getMethodDeclarationId } from "./identifier/getMethodDeclarationId";
-import { getParentId } from "./identifier/getParentId";
-import { getImportDeclarationId } from "./identifier/getImportDeclarationId";
+import type { Identifier, Node } from 'ts-morph'
+import { SyntaxKind } from 'ts-morph'
+import { CodeInfo, RelationType } from '../types'
+import { CodeInfoType } from '../types'
+import { getNodeInfo } from './identifier/getNodeId'
 
 export function functionAnalizer(node: Node): CodeInfo[] {
-
   return [
-    ...functionDeclarationAnalyzer(node),
-    ...arrowDeclarationAnalyzer(node),
-    ...methodDeclarationAnalyzer(node),
+    SyntaxKind.FunctionDeclaration,
+    SyntaxKind.ArrowFunction,
+    SyntaxKind.MethodDeclaration,
   ]
-}
-
-function functionDeclarationAnalyzer(node: Node): CodeInfo[] {
-  return node.getDescendantsOfKind(SyntaxKind.FunctionDeclaration)
-    .map(x => ({ node: x, id: getFunctionDeclarationId(x)}))
-    .flatMap<CodeInfo>(({ node, id }) =>
-      [
-        {
-          type: CodeInfoType.Entity,
-          entityType: EntityType.Function,
-          id,
-          filePath: getFilePath(node.getSourceFile()),
-        },
-        ...getNestedRelations(node, id),
-      ])
-}
-function arrowDeclarationAnalyzer(node: Node): CodeInfo[] {
-  return node.getDescendantsOfKind(SyntaxKind.ArrowFunction)
-    .map(x => ({ node: x, id: getArrowFunctionId(x)}))
-    .flatMap<CodeInfo>(({ node, id }) =>
-      [
-        {
-          type: CodeInfoType.Entity,
-          entityType: EntityType.Function,
-          id,
-          filePath: getFilePath(node.getSourceFile()),
-        },
-        ...getNestedRelations(node, id),
-      ]
-  )
-}
-
-function methodDeclarationAnalyzer(node: Node): CodeInfo[] {
-  return node.getDescendantsOfKind(SyntaxKind.MethodDeclaration)
-  .map(x => ({ node: x, id: getMethodDeclarationId(x)}))
-    .flatMap<CodeInfo>(({ node, id }) =>
-      [
-        {
-          type: CodeInfoType.Entity,
-          entityType: EntityType.Function,
-          id,
-          filePath: getFilePath(node.getSourceFile()),
-        },
-        ...getNestedRelations(node, id),
-      ]
+    .flatMap(kind => node.getDescendantsOfKind(kind)
+      .map(x => ({ node: x, entity: getNodeInfo(x) }))
+      .flatMap<CodeInfo>(({ node, entity }) =>
+        [
+          entity,
+          ...getNestedRelations(node, entity.id),
+        ])
   )
 }
 
@@ -67,27 +26,17 @@ function getNestedImportedIdentifiers(node: Node): Identifier[] {
 }
 
 function getNestedRelations(node: Node, nodeId: string): CodeInfo[] {
-  return getNestedImportedIdentifiers(node)
-    .map<Relationship>(x => ({
-      to: getImportedIdentifierId(x),
+  const entities = getNestedImportedIdentifiers(node)
+    .map(x => getNodeInfo(x))
+  const relations = entities
+    .map<CodeInfo>(x => ({
+      to: x.id,
       from: nodeId,
       type: CodeInfoType.Relationship,
+      relationType: RelationType.Use,
     }))
-}
-
-function getImportedIdentifierId(ident: Identifier): string {
-  const importSpecifier = ident.getSymbol()!.getDeclarations()?.[0] as ImportSpecifier
-  if (importSpecifier.isKind(SyntaxKind.ImportSpecifier) && ident.getImplementations()[0]) {
-    return getParentId(ident.getImplementations()[0].getNode())
-  }
-  const importDeclaration = importSpecifier.getImportDeclaration()
-  const id = getImportDeclarationId(importDeclaration)
-  if (importDeclaration && id) {
-    return id
-  }
-  return `<imported>:${importSpecifier.getFullText()}`
-}
-
-function getFilePath(sourceFile: SourceFile): string {
-  return sourceFile.getFilePath().toString()
+  return [
+    ...entities,
+    ...relations,
+  ]
 }

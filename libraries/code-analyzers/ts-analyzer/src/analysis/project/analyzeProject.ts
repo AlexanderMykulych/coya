@@ -1,14 +1,14 @@
-import path from "path"
-import { Project } from "ts-morph"
-import { processors } from "../processors"
-import { fileTraverser } from "../import/fileTraverser"
-import { analyzeSourceFile } from "../source-file/analyzeSourceFile"
-import { CodeInfo, FileProcessor, FileText } from "../types"
-import { getEntryPoint, readFile } from "./getEntryPoint"
-import { deduplicate } from "./deduplicate"
+import path from 'path'
+import { Project } from 'ts-morph'
+import { processors } from '../processors'
+import { fileTraverser } from '../import/fileTraverser'
+import { analyzeSourceFile } from '../source-file/analyzeSourceFile'
+import type { CodeInfo, FileProcessor, FileText } from '../types'
+import { getEntryPoint, readFile } from './getEntryPoint'
+import { deduplicate } from './deduplicate'
 
 export async function analyzeProject(projPath: string): Promise<CodeInfo[]> {
-  var project = new Project({
+  const project = new Project({
     useInMemoryFileSystem: true,
     compilerOptions: {
       allowJs: true,
@@ -39,7 +39,6 @@ export async function analyzeProject(projPath: string): Promise<CodeInfo[]> {
   return []
 }
 
-
 async function processFile(file: FileText) {
   let resultFile: FileText = file
   let notUsedProcessors = [
@@ -54,7 +53,7 @@ async function processFile(file: FileText) {
       notUsedProcessors = notUsedProcessors.filter(x => x !== processor)
       resultFile = await processor.process(file)
     }
-  } while (!!processor)
+  } while (processor)
 
   return resultFile
 }

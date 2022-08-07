@@ -1,6 +1,6 @@
-import type { Symbol, Node } from 'typescript'
-import type { getProgramAndChecker } from './getProgramAndChecker'
+import type { Node, Symbol } from 'typescript'
 import type { Project, SourceFile, TypeChecker } from 'ts-morph'
+import type { getProgramAndChecker } from './getProgramAndChecker'
 
 export type ProgramContainer = ReturnType<typeof getProgramAndChecker>
 export interface SourceContainer {
@@ -8,13 +8,14 @@ export interface SourceContainer {
   project: Project
 }
 export type EntityId = string
-interface BaseEntity {
+export interface BaseEntity<TSource = Entity> {
   type: CodeInfoType.Entity
   filePath: string
   id: EntityId
   entityType: EntityType
+  source: TSource | '<unknown>'
 }
-export interface FileEntity extends BaseEntity {
+export interface FileEntity extends BaseEntity<undefined> {
   entityType: EntityType.File
 }
 
@@ -23,20 +24,23 @@ export interface FunctionEntity extends BaseEntity {
   typeString: string
 }
 
-export type Entity = FileEntity | FunctionEntity | BaseEntity;
+export type Entity = FileEntity | FunctionEntity | BaseEntity
 
 export enum EntityType {
   File = 'file',
   Function = 'function',
+  Variable = 'variable',
   ImportDeclaration = 'import_declaration',
 }
 export enum RelationType {
   Import = 'import',
+  Use = 'use',
+  DeclaredIn = 'declaredIn',
 }
 
 export interface Relationship {
   type: CodeInfoType.Relationship
-  relationType?: RelationType
+  relationType: RelationType
   from: EntityId
   to: EntityId
 }
@@ -51,7 +55,7 @@ export type CodeInfo = Relationship | Entity
 export interface SourceFileAnalyzeParams {
   symbol: Symbol
   checker: TypeChecker
-  sourceFile:  SourceFile
+  sourceFile: SourceFile
   addCodeInfo: (codeInfo: CodeInfo) => void
   canAnalyze: (sourceFile: SourceFile) => boolean
 }
@@ -62,7 +66,7 @@ export interface NodeAnalyzeParams extends SourceFileAnalyzeParams {
   node: Node
 }
 
-export type FileText = {
+export interface FileText {
   file: string
   text: string
 }

@@ -19,6 +19,7 @@
     "semi": ["error", "always"],
     "eslint-comments/no-unlimited-disable": "off",
     "curly": "off",
-    "@typescript-eslint/brace-style": "off"
+    "@typescript-eslint/brace-style": "off",
+    "space-before-function-parent": "off"
   }
 }

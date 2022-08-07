@@ -14,25 +14,25 @@
   },
   "dependencies": {
     "@types/debounce": "^1.2.1",
-    "@vueuse/core": "^7.6.1",
+    "@vueuse/core": "^9.0.0",
     "coya-arrow": "~0.9.20",
     "coya-core": "~0.9.20",
     "coya-json-editor": "~0.9.20",
     "coya-util": "~0.9.20",
     "debounce": "^1.2.1",
     "dom-to-image": "^2.6.0",
-    "unplugin-auto-import": "^0.5.11",
+    "unplugin-auto-import": "0.10.1",
     "unplugin-icons": "^0.13.0",
-    "unplugin-vue-components": "^0.17.18",
+    "unplugin-vue-components": "0.21.2",
     "vite-dts": "^1.0.4",
     "vite-plugin-windicss": "^1.6.3",
-    "vue": "^3.2.30"
+    "vue": "^3.2.37"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^2.2.0",
+    "@vitejs/plugin-vue": "^3.0.1",
     "@windicss/plugin-scrollbar": "^1.2.3",
-    "typescript": "^4.5.5",
-    "vite": "^2.8.0",
-    "vue-tsc": "^0.30.2"
+    "typescript": "^4.7.4",
+    "vite": "^3.0.3",
+    "vue-tsc": "0.39.0"
   }
 }

@@ -183,3 +183,36 @@ export function fn1(a: number) { return a + 1 }
     )
   )
 })
+test('should find one function -> function relation', () => {
+
+  const project = new Project({
+    useInMemoryFileSystem: true,
+  })
+  const sourceFile = project.createSourceFile(
+    'main.ts',
+    `
+import { fn1 } from './dep1'
+export function mainFn() {
+  return fn1(1)
+}
+`)
+  project.createSourceFile(
+    'dep1.ts',
+    `
+export function fn1(a: number) { return a + 1 }
+`)
+
+  const entities = analyzeSourceFile(sourceFile)
+
+  expect(entities).toEqual(
+    expect.arrayContaining(
+      [
+        objectExpect<Relationship>({
+          type: CodeInfoType.Relationship,
+          from: '/main.ts/mainFn',
+          to: '/dep1.ts/fn1',
+        }),
+      ]
+    )
+  )
+})
