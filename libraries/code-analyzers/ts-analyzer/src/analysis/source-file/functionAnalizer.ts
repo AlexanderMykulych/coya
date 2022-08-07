@@ -22,7 +22,18 @@ export function functionAnalizer(node: Node): CodeInfo[] {
 
 function getNestedImportedIdentifiers(node: Node): Identifier[] {
   return node.getDescendantsOfKind(SyntaxKind.Identifier)
-    .filter(child => child.getSymbol()?.getDeclarations()?.[0]?.isKind(SyntaxKind.ImportSpecifier))
+    .filter(child => {
+      const dec = child.getSymbol()?.getDeclarations()?.[0]
+      if (dec) {
+        if (dec.isKind(SyntaxKind.ImportSpecifier)) {
+          return true
+        }
+        if (dec.getSourceFile() !== node.getSourceFile()) {
+          return true
+        }
+      }
+      return false
+    })
 }
 
 function getNestedRelations(node: Node, nodeId: string): CodeInfo[] {

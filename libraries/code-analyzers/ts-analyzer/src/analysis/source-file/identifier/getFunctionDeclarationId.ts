@@ -1,7 +1,6 @@
 import { FunctionDeclaration } from "ts-morph";
 import { CodeInfoType, EntityType, FunctionEntity } from "../../types";
-import { getNodeInfo } from "./getNodeId";
-import { getParentId } from "./getParentId";
+import { getParentId, getParentsInfo } from "./getParentId";
 
 export function getFunctionDeclarationId(fnDec: FunctionDeclaration): FunctionEntity {
   const sourceFile = fnDec.getSourceFile()
@@ -12,7 +11,7 @@ export function getFunctionDeclarationId(fnDec: FunctionDeclaration): FunctionEn
     type: CodeInfoType.Entity,
     typeString: fnDec.getType().getText(),
     source: sourceFile
-      ? getNodeInfo(sourceFile)
-      : '<unknown>'
+      ? getParentsInfo(sourceFile)
+      : []
   }
 }

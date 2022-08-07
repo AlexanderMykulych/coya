@@ -1,7 +1,6 @@
 import { ImportSpecifier } from "ts-morph";
 import { BaseEntity, CodeInfoType, EntityType } from "../../types";
-import { getNodeInfo } from "./getNodeId";
-import { getParentId } from "./getParentId";
+import { getParentId, getParentsInfo } from "./getParentId";
 
 export function getImportSpecifierId(node: ImportSpecifier): BaseEntity {
   const moduleSourceFile = node.getImportDeclaration()?.getModuleSpecifierSourceFile()
@@ -11,7 +10,7 @@ export function getImportSpecifierId(node: ImportSpecifier): BaseEntity {
     filePath: moduleSourceFile?.getFilePath() ?? '<unknown>',
     type: CodeInfoType.Entity,
     source: moduleSourceFile
-      ? getNodeInfo(moduleSourceFile)
-      : '<unknown>'
+      ? getParentsInfo(moduleSourceFile)
+      : []
   }
 }

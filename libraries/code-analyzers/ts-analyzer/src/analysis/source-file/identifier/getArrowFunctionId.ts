@@ -1,7 +1,7 @@
 import { ArrowFunction } from "ts-morph";
 import { EntityType, FunctionEntity, CodeInfoType } from "../../types";
 import { getNodeInfo } from "./getNodeId";
-import { getParentId } from "./getParentId";
+import { getParentId, getParentsInfo } from "./getParentId";
 
 export function getArrowFunctionId(arrowFn: ArrowFunction): FunctionEntity {
   const sourceFile = arrowFn.getSourceFile()
@@ -11,6 +11,8 @@ export function getArrowFunctionId(arrowFn: ArrowFunction): FunctionEntity {
     typeString: arrowFn.getType().getText(),
     type: CodeInfoType.Entity,
     filePath: sourceFile.getFilePath(),
-    source: getNodeInfo(sourceFile) ?? '<unknown>'
+    source: sourceFile
+      ? getParentsInfo(sourceFile)
+      : []
   }
 }

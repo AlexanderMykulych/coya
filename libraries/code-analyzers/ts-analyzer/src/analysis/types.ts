@@ -13,9 +13,9 @@ export interface BaseEntity<TSource = Entity> {
   filePath: string
   id: EntityId
   entityType: EntityType
-  source: TSource | '<unknown>'
+  source: TSource[]
 }
-export interface FileEntity extends BaseEntity<undefined> {
+export interface FileEntity extends BaseEntity {
   entityType: EntityType.File
 }
 
@@ -30,12 +30,13 @@ export enum EntityType {
   File = 'file',
   Function = 'function',
   Variable = 'variable',
+  Property = 'property',
   ImportDeclaration = 'import_declaration',
 }
 export enum RelationType {
   Import = 'import',
   Use = 'use',
-  DeclaredIn = 'declaredIn',
+  Parent = 'parent',
 }
 
 export interface Relationship {

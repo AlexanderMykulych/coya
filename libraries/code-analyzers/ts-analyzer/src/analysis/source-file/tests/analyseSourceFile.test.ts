@@ -1,7 +1,7 @@
 import { Project } from "ts-morph";
 import { expect, test } from "vitest";
 import { objectExpect } from "../../../../test/analysis/utils/objectExpect";
-import { CodeInfo, CodeInfoType, Entity, EntityType, Relationship, RelationType } from "../../types";
+import { BaseEntity, CodeInfo, CodeInfoType, Entity, EntityType, Relationship, RelationType } from "../../types";
 import { analyzeSourceFile } from "../analyzeSourceFile";
 import { importAnalizer } from "../importAnalizer";
 
@@ -211,6 +211,72 @@ export function fn1(a: number) { return a + 1 }
           type: CodeInfoType.Relationship,
           from: '/main.ts/mainFn',
           to: '/dep1.ts/fn1',
+        }),
+      ]
+    )
+  )
+})
+
+test('should find function to inObject function relation', () => {
+
+  const project = new Project({
+    useInMemoryFileSystem: true,
+  })
+  const sourceFile = project.createSourceFile(
+    'main.ts',
+    `
+import { getService } from "./service"
+
+export function fn1(a: number) {
+  const service = getService()
+  return service.prop1.method1(a, 1)
+}
+
+`)
+  project.createSourceFile(
+    'service.ts',
+    `
+export function getService() {
+  return {
+    prop1: {
+      method1(a: number, b: number) {
+        return (a + b) / 2
+      },
+    },
+  }
+}
+`)
+
+  const entities = analyzeSourceFile(sourceFile)
+
+  expect(entities).toEqual(
+    expect.arrayContaining(
+      [
+        objectExpect<BaseEntity>({
+          id: '/service.ts/getService/prop1/method1',
+        }),
+        objectExpect<Relationship>({
+          type: CodeInfoType.Relationship,
+          from: '/main.ts/fn1',
+          to: '/service.ts/getService/prop1/method1',
+        }),
+        objectExpect<Relationship>({
+          type: CodeInfoType.Relationship,
+          relationType: RelationType.Parent,
+          from: '/service.ts/getService',
+          to: '/service.ts/getService/prop1/method1',
+        }),
+        objectExpect<Relationship>({
+          type: CodeInfoType.Relationship,
+          relationType: RelationType.Parent,
+          from: '/service.ts',
+          to: '/service.ts/getService/prop1/method1',
+        }),
+        objectExpect<Relationship>({
+          type: CodeInfoType.Relationship,
+          relationType: RelationType.Parent,
+          from: '/service.ts',
+          to: '/service.ts/getService',
         }),
       ]
     )
