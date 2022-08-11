@@ -49,16 +49,16 @@ test('should analyze complex vue-ts project', async () => {
 
   expect(result).toEqual(expect.arrayContaining([
     expect.objectContaining({
-      id: '/service.ts/getService/method1',
+      id: '/services/service.ts/getService/method1',
       type: 'entity',
     }),
     expect.objectContaining({
-      id: '/util.ts/fn1',
+      id: '/utils/util.ts/fn1',
       type: 'entity',
     }),
     expect.objectContaining({
-      from: '/util.ts/fn1',
-      to: '/service.ts/getService/method1',
+      from: '/utils/util.ts/fn1',
+      to: '/services/service.ts/getService/method1',
     }),
   ]))
 })

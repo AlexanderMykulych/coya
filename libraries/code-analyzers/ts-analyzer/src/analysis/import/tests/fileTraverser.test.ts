@@ -30,3 +30,32 @@ test('should travers files in project', async () => {
 
   expect(sourceFiles).toHaveLength(3)
 })
+
+test('should travers files in project when nested forlders', async () => {
+  const project = new Project({
+    useInMemoryFileSystem: true,
+  })
+
+  const mainSourceFile = project.createSourceFile('main/main.ts', `
+  import fn from '../deps/dep1'
+
+  export default fn(1)
+  `)
+
+  await fileTraverser(mainSourceFile, (file: string) => {
+    if (file === './deps/dep1') {
+      return project.createSourceFile(`${file}.ts`, `
+        import fn from './dep2'
+        export default (a: number) => fn(a) + 1
+      `)
+    } else if (file === './deps/dep2') {
+      return project.createSourceFile(`${file}.ts`, `
+        export default (a: number) => a + 1
+      `)
+    }
+  })
+
+  const sourceFiles = project.getSourceFiles()
+
+  expect(sourceFiles).toHaveLength(3)
+})

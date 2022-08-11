@@ -282,3 +282,92 @@ export function getService() {
     )
   )
 })
+
+test('should find function to function relation in nested folder', () => {
+
+  const project = new Project({
+    useInMemoryFileSystem: true,
+  })
+  const sourceFile = project.createSourceFile(
+    'main.ts',
+    `
+import { serviceFn } from "./services/service"
+
+export function fn1(a: number) {
+  return serviceFn(a)
+}
+
+`)
+  project.createSourceFile(
+    'services/service.ts',
+    `
+export function serviceFn(a) {
+  return a + 1
+}
+`)
+
+  const entities = analyzeSourceFile(sourceFile)
+
+  expect(entities).toEqual(
+    expect.arrayContaining(
+      [
+        objectExpect<BaseEntity>({
+          id: '/services/service.ts/serviceFn',
+        }),
+        objectExpect<BaseEntity>({
+          id: '/main.ts/fn1',
+        }),
+        objectExpect<Relationship>({
+          type: CodeInfoType.Relationship,
+          from: '/main.ts/fn1',
+          to: '/services/service.ts/serviceFn',
+        }),
+      ]
+    )
+  )
+})
+
+test('should find function to function relation in nested for parent folder', () => {
+
+  const project = new Project({
+    useInMemoryFileSystem: true,
+  })
+  const sourceFile = project.createSourceFile(
+    'main/main.ts',
+    `
+import { serviceFn } from "../services/service"
+
+export function fn1(a: number) {
+  return serviceFn(a)
+}
+
+`)
+  project.createSourceFile(
+    'services/service.ts',
+    `
+export function serviceFn(a) {
+  return a + 1
+}
+`)
+
+  const entities = analyzeSourceFile(sourceFile)
+
+  expect(entities).toEqual(
+    expect.arrayContaining(
+      [
+        objectExpect<BaseEntity>({
+          id: '/services/service.ts/serviceFn',
+        }),
+        objectExpect<BaseEntity>({
+          id: '/main/main.ts/fn1',
+        }),
+        objectExpect<Relationship>({
+          type: CodeInfoType.Relationship,
+          from: '/main/main.ts/fn1',
+          to: '/services/service.ts/serviceFn',
+          relationType: RelationType.Use,
+        }),
+      ]
+    )
+  )
+})

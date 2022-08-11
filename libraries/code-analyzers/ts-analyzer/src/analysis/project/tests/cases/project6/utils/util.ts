@@ -1,4 +1,4 @@
-import { getService } from "./service"
+import { getService } from "../services/service"
 
 export function fn1(a: number) {
   const service = getService()

@@ -36,15 +36,6 @@ export function getParentsInfo(node: Node): Entity[] {
     ]
   }
 
-
-  // node.getParentWhile((parent) => {
-  //   if (importantKinds.some(x => parent.isKind(x)) && Node.hasName(parent)) {
-  //     result.unshift(getNodeInfo(parent))
-  //   }
-
-  //   return true
-  // })
-
   return [
     getNodeInfo(node.getSourceFile()),
   ]

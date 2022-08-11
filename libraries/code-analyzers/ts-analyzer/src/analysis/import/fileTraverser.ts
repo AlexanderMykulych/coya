@@ -1,3 +1,4 @@
+import path from "path";
 import { SourceFile } from "ts-morph";
 import { isPromise } from "util/types";
 import { getImportedFiles } from "./getImportedFiles";
@@ -10,6 +11,7 @@ export async function fileTraverser(sourceFile: SourceFile, fileAction: FileTrav
   const imports = getImportedFiles(sourceFile)
 
   for await (const file of imports) {
+
     let sourceFile = fileAction(file)
     if (isPromise(sourceFile)) {
       sourceFile = await sourceFile
