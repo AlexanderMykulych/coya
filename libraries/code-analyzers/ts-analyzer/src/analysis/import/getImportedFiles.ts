@@ -6,9 +6,12 @@ export function getImportedFiles(sourceFile: SourceFile) {
     .map(decl => {
       const importPath = decl.getLiteralText()
 
-      const rootPath = path.dirname(sourceFile.getFilePath())
+      if (importPath.startsWith('./') || importPath.startsWith('../')) {
+        const rootPath = path.dirname(sourceFile.getFilePath())
 
-      return `.${path.resolve(rootPath, importPath)}`
+        return `.${path.resolve(rootPath, importPath)}`
+      }
+      return importPath
     })
 }
 
