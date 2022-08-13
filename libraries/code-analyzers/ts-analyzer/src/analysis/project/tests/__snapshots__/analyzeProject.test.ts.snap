@@ -90,9 +90,34 @@ exports[`should analyze complex vue-ts project 1`] = `
     "typeString": "typeof import(\\"/utils/util\\").fn1",
   },
   {
+    "entityType": "variable",
+    "filePath": "/node_modules/typescript/lib/lib.es5.d.ts",
+    "id": "/node_modules/typescript/lib/lib.es5.d.ts/Object",
+    "type": "entity",
+  },
+  {
+    "entityType": "function",
+    "filePath": "/node_modules/typescript/lib/lib.es5.d.ts",
+    "id": "/node_modules/typescript/lib/lib.es5.d.ts/defineProperty",
+    "type": "entity",
+    "typeString": "<T>(o: T, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>) => T",
+  },
+  {
     "from": "/cmp.vue.ts/setup",
     "relationType": "use",
     "to": "/utils/util.ts/fn1",
+    "type": "relationship",
+  },
+  {
+    "from": "/cmp.vue.ts/setup",
+    "relationType": "use",
+    "to": "/node_modules/typescript/lib/lib.es5.d.ts/Object",
+    "type": "relationship",
+  },
+  {
+    "from": "/cmp.vue.ts/setup",
+    "relationType": "use",
+    "to": "/node_modules/typescript/lib/lib.es5.d.ts/defineProperty",
     "type": "relationship",
   },
   {
@@ -111,6 +136,24 @@ exports[`should analyze complex vue-ts project 1`] = `
     "from": "/utils/util.ts",
     "relationType": "parent",
     "to": "/utils/util.ts/fn1",
+    "type": "relationship",
+  },
+  {
+    "entityType": "file",
+    "filePath": "/node_modules/typescript/lib/lib.es5.d.ts",
+    "id": "/node_modules/typescript/lib/lib.es5.d.ts",
+    "type": "entity",
+  },
+  {
+    "from": "/node_modules/typescript/lib/lib.es5.d.ts",
+    "relationType": "parent",
+    "to": "/node_modules/typescript/lib/lib.es5.d.ts/Object",
+    "type": "relationship",
+  },
+  {
+    "from": "/node_modules/typescript/lib/lib.es5.d.ts",
+    "relationType": "parent",
+    "to": "/node_modules/typescript/lib/lib.es5.d.ts/defineProperty",
     "type": "relationship",
   },
   {
@@ -365,9 +408,34 @@ exports[`should analyze vue-ts project 1`] = `
     "typeString": "typeof import(\\"/util\\").fn1",
   },
   {
+    "entityType": "variable",
+    "filePath": "/node_modules/typescript/lib/lib.es5.d.ts",
+    "id": "/node_modules/typescript/lib/lib.es5.d.ts/Object",
+    "type": "entity",
+  },
+  {
+    "entityType": "function",
+    "filePath": "/node_modules/typescript/lib/lib.es5.d.ts",
+    "id": "/node_modules/typescript/lib/lib.es5.d.ts/defineProperty",
+    "type": "entity",
+    "typeString": "<T>(o: T, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>) => T",
+  },
+  {
     "from": "/cmp.vue.ts/setup",
     "relationType": "use",
     "to": "/util.ts/fn1",
+    "type": "relationship",
+  },
+  {
+    "from": "/cmp.vue.ts/setup",
+    "relationType": "use",
+    "to": "/node_modules/typescript/lib/lib.es5.d.ts/Object",
+    "type": "relationship",
+  },
+  {
+    "from": "/cmp.vue.ts/setup",
+    "relationType": "use",
+    "to": "/node_modules/typescript/lib/lib.es5.d.ts/defineProperty",
     "type": "relationship",
   },
   {
@@ -386,6 +454,24 @@ exports[`should analyze vue-ts project 1`] = `
     "from": "/util.ts",
     "relationType": "parent",
     "to": "/util.ts/fn1",
+    "type": "relationship",
+  },
+  {
+    "entityType": "file",
+    "filePath": "/node_modules/typescript/lib/lib.es5.d.ts",
+    "id": "/node_modules/typescript/lib/lib.es5.d.ts",
+    "type": "entity",
+  },
+  {
+    "from": "/node_modules/typescript/lib/lib.es5.d.ts",
+    "relationType": "parent",
+    "to": "/node_modules/typescript/lib/lib.es5.d.ts/Object",
+    "type": "relationship",
+  },
+  {
+    "from": "/node_modules/typescript/lib/lib.es5.d.ts",
+    "relationType": "parent",
+    "to": "/node_modules/typescript/lib/lib.es5.d.ts/defineProperty",
     "type": "relationship",
   },
   {

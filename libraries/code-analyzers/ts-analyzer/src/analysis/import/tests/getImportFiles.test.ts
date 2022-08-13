@@ -49,3 +49,20 @@ test('get external module', () => {
 
   expect(imports).toEqual(['vue'])
 })
+
+test.skip('get module with aliase import', () => {
+  const project = new Project({
+    useInMemoryFileSystem: true,
+    compilerOptions: {
+      moduleResolution: ModuleResolutionKind.Classic,
+      paths: {
+        '@/*': ['/*'],
+      }
+    }
+  });
+  const sourceFile = project.createSourceFile('main.ts', 'import def from "@/def"')
+
+  const imports = getImportedFiles(sourceFile)
+
+  expect(imports).toEqual(['vue'])
+})

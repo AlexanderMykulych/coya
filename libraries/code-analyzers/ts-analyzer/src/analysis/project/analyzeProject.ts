@@ -1,35 +1,25 @@
-import path from 'path'
 import { Project } from 'ts-morph'
 import { processors } from '../processors'
-import { fileTraverser } from '../import/fileTraverser'
 import { analyzeSourceFile } from '../source-file/analyzeSourceFile'
 import type { CodeInfo, FileProcessor, FileText } from '../types'
-import { getEntryPoint, readFile } from './getEntryPoint'
 import { deduplicate } from './deduplicate'
+import { initializeProject } from './initializeProject'
+import { CustomFileSystemHost } from './projectInitializer/CustomFileSystemHost'
 
 export async function analyzeProject(projPath: string): Promise<CodeInfo[]> {
+  const waiters: Promise<void>[] = []
+
   const project = new Project({
     useInMemoryFileSystem: true,
     compilerOptions: {
       allowJs: true,
+      rootDir: projPath,
     },
-    skipLoadingLibFiles: true,
-    skipFileDependencyResolution: true,
+    skipLoadingLibFiles: false,
+    // fileSystem: new CustomFileSystemHost((new Project()).getFileSystem(), waiters),
   })
 
-  const entryFile = await getEntryPoint(projPath)
-  if (entryFile) {
-    const entrySourceFile = project.createSourceFile(entryFile.file, entryFile.text)
-
-    await fileTraverser(entrySourceFile, async (filePath) => {
-      const file = await readFile(path.resolve(projPath, filePath), projPath)
-      if (file) {
-        const processedFile = await processFile(file)
-
-        return project.createSourceFile(processedFile.file, processedFile.text)
-      }
-    })
-
+  if (await initializeProject(projPath, project, 'custom')) {
     const codeInfos = project
       .getSourceFiles()
       .flatMap(x => analyzeSourceFile(x))
@@ -39,7 +29,7 @@ export async function analyzeProject(projPath: string): Promise<CodeInfo[]> {
   return []
 }
 
-async function processFile(file: FileText) {
+export async function processFile(file: FileText) {
   let resultFile: FileText = file
   let notUsedProcessors = [
     ...processors,

@@ -1,5 +1,5 @@
 import path from 'path'
-import { SourceFile } from 'ts-morph'
+import { SourceFile, ts } from 'ts-morph'
 
 export function getImportedFiles(sourceFile: SourceFile) {
   return getImportedModules(sourceFile)

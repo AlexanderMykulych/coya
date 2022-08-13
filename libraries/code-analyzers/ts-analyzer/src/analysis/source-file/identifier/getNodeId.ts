@@ -6,6 +6,7 @@ import { getIdentifierInfo } from './getIdentifierInfo'
 import { getImportDeclarationId } from './getImportDeclarationId'
 import { getImportSpecifierId } from './getImportSpecifierId'
 import { getMethodDeclarationId } from './getMethodDeclarationId'
+import { getMethodSignatureIndo } from './getMethodSignatureIndo'
 import { getPropertyAssignment } from './getPropertyAssignment'
 import { getSourceFileId } from './getSourceFileId'
 import { getVariableDeclarationId } from './getVariableDeclarationId'
@@ -40,6 +41,9 @@ export function getNodeInfo(node: Node): Entity {
   }
   if (node.isKind(SyntaxKind.PropertyAssignment)) {
     return getPropertyAssignment(node)
+  }
+  if (node.isKind(SyntaxKind.MethodSignature)) {
+    return getMethodSignatureIndo(node)
   }
   throw 'unknow node kind ' + node.getKindName()
 }
