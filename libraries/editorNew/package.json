@@ -26,7 +26,7 @@
     "unplugin-vue-components": "0.21.2",
     "vite-dts": "^1.0.4",
     "vite-plugin-windicss": "^1.6.3",
-    "vue": "^3.2.37"
+    "vue": "3.0.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.0.1",
