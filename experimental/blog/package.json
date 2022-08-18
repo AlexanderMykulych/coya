@@ -16,7 +16,12 @@
     "vite-plugin-restart": "^0.1.1",
     "vite-plugin-windicss": "^1.6.3",
     "vitepress": "^0.21.6",
-    "windicss": "^3.4.3"
+    "windicss": "^3.4.3",
+    "@vitejs/plugin-vue": "^3.0.1",
+    "@vue/compiler-sfc": "^3.2.31",
+    "unplugin-auto-import": "0.10.1",
+    "unplugin-vue-components": "0.21.2",
+    "vue": "^3.2.31"
   },
   "devDependencies": {
     "unocss": "0.44.7"

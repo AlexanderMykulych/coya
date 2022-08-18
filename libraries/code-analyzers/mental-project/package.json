@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@vueuse/core": "^9.0.0",
-    "vue": "3.0.1",
+    "vue": "^3.2.31",
     "vue-router": "^4.1.2",
     "coya-ts-analyzer": "~0.9.20",
     "neo4j-driver": "4.4.7",
@@ -37,7 +37,9 @@
     "vite": "^3.0.3",
     "vite-plugin-pages": "0.25.0",
     "vitest": "0.19.1",
-    "vue-tsc": "0.39.0"
+    "vue-tsc": "0.39.0",
+    "@vue/compiler-sfc": "^3.2.31",
+    "vue": "^3.2.31"
   },
   "eslintConfig": {
     "extends": "@antfu"

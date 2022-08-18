@@ -16,7 +16,7 @@
         "path-browserify": "^1.0.1",
         "pinia": "^2.0.9",
         "prism-theme-vars": "^0.2.2",
-        "vue": "3.0.1",
+        "vue": "^3.2.31",
         "vue-demi": "^0.12.1",
         "vue-i18n": "^9.1.9",
         "vue-router": "^4.1.2",
@@ -30,7 +30,7 @@
         "@types/markdown-it-link-attributes": "^3.0.1",
         "@types/nprogress": "^0.2.0",
         "@vitejs/plugin-vue": "^3.0.1",
-        "@vue/compiler-sfc": "^3.2.26",
+        "@vue/compiler-sfc": "^3.2.31",
         "@vue/server-renderer": "^3.2.26",
         "critters": "^0.0.16",
         "cross-env": "^7.0.3",
@@ -51,6 +51,7 @@
         "vite-plugin-vue-layouts": "^0.5.0",
         "vite-plugin-windicss": "^1.6.3",
         "vite-ssg": "^0.17.6",
-        "vue-tsc": "0.39.0"
+        "vue-tsc": "0.39.0",
+        "vue": "^3.2.31"
     }
 }

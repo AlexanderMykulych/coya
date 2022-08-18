@@ -30,7 +30,7 @@
     "roughjs": "^4.5.2",
     "vite-dts": "^1.0.4",
     "vite-plugin-dts": "~1.2.1",
-    "vue": "3.0.1",
+    "vue": "^3.2.31",
     "vue-color-kit": "^1.0.5",
     "vue-demi": "^0.12.1",
     "vue-router": "^4.1.2",
@@ -43,7 +43,7 @@
     "@types/prismjs": "^1.16.6",
     "@typescript-eslint/eslint-plugin": "^5.10.2",
     "@vitejs/plugin-vue": "^3.0.1",
-    "@vue/compiler-sfc": "^3.2.26",
+    "@vue/compiler-sfc": "^3.2.31",
     "cross-env": "^7.0.3",
     "eslint": "^8.20.0",
     "eslint-plugin-react": "^7.28.0",
@@ -56,6 +56,8 @@
     "vite-plugin-components": "^0.13.2",
     "vite-plugin-icons": "^0.6.5",
     "vite-plugin-pages": "0.25.0",
-    "vite-plugin-windicss": "^1.6.3"
+    "vite-plugin-windicss": "^1.6.3",
+    "unplugin-vue-components": "0.21.2",
+    "vue": "^3.2.31"
   }
 }

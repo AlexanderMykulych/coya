@@ -47,6 +47,19 @@
             "args": ["run", "${relativeFile}"],
             "smartStep": true,
             "console": "integratedTerminal"
+        },
+        {
+          "name": "Update-deps",
+          "type": "node",
+          "request": "launch",
+          "runtimeExecutable": "node",
+          "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"],
+
+          "args": ["common/scripts/update-packages.ts"],
+          
+          "cwd": "${workspaceRoot}",
+          "internalConsoleOptions": "openOnSessionStart",
+          "skipFiles": ["<node_internals>/**", "node_modules/**"]
         }
     ],
     "compounds": []
