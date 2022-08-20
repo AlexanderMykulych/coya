@@ -1,4 +1,4 @@
-import neo4j from 'neo4j-driver'
+import neo4j, { QueryResult } from 'neo4j-driver'
 import type { Driver } from 'neo4j-driver'
 import { groupBy } from 'coya-util'
 import { CodeInfo, CodeInfoType, Entity, Relationship } from '../analysis/types'
@@ -57,6 +57,18 @@ export function useNeo4j() {
           .map(x => tx.run(x.query, x.params))
       })
       await session.close()
+    },
+    async read(query: string, parameters?: any): Promise<QueryResult | null> {
+      const session = driver.session({ database })
+
+      let result: QueryResult | null = null
+      await session.readTransaction(async tx => {
+        result = await tx.run(query, parameters)
+      })
+
+      await session.close()
+
+      return result
     }
   }
 }

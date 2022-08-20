@@ -1,0 +1,8 @@
+// Vitest Snapshot v1
+
+exports[`neo4j is ready to work 1`] = `
+{
+  "address": "localhost:7687",
+  "version": "Neo4j/4.4.7",
+}
+`;

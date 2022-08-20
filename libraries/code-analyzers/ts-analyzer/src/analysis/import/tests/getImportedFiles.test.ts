@@ -16,7 +16,6 @@ test('should get all imports', async () => {
   `)
 
   const imports = getImportedFiles(sourceFile)
-  console.log(imports);
   
   expect(imports).toHaveLength(3)
 
