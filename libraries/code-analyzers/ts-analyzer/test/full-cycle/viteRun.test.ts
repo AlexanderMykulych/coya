@@ -6,5 +6,8 @@ test('run vite', async () => {
 
   await server.listen()
   server.printUrls()
+
   expect(server).not.empty
+
+  await server.close()
 })

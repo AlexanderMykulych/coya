@@ -1,27 +1,26 @@
-import { createServer, preview, PreviewServer, ViteDevServer } from "vite"
-import { afterAll, beforeAll, describe, test } from "vitest"
+import { createServer, ViteDevServer } from "vite"
+import { afterAll, beforeAll, describe, test, expect as vi_expect } from "vitest"
 import { chromium } from 'playwright'
 import type { Browser, Page } from 'playwright'
 import { expect } from '@playwright/test'
 import { fileURLToPath } from "url"
+import { mkdir, writeFile } from "fs/promises"
+import path from "path"
+import { existsSync } from "fs"
 
 
-describe.skip('project to diagram', () => {
+describe('project to diagram', () => {
   let server: ViteDevServer
   let browser: Browser
   let page: Page
   const port = 5991
 
   beforeAll(async () => {
-    const root = fileURLToPath(new URL('../../', import.meta.url))
-    console.log(root);
+    const root = fileURLToPath(new URL('../../../../vue-component', import.meta.url))
 
     server = await createServer({
       root,
       configFile: `${root}/vite.config.ts`,
-      preview: {
-        port,
-      },
       server: {
         fs: {
           strict: false,
@@ -29,25 +28,32 @@ describe.skip('project to diagram', () => {
         port,
       }
     })
-    await server.listen()
 
+    await server.listen()
     server.printUrls()
     browser = await chromium.launch({
-      headless: false,
+      headless: true,
     })
     page = await browser.newPage()
   })
 
   afterAll(async () => {
     await browser.close()
-    await new Promise<void>((resolve, reject) => {
-      server.close(error => error ? reject(error) : resolve())
-    })
+    await server.close()
   })
 
   test('basic', async () => {
     await page.goto(`http://localhost:${port}`)
 
-    expect(page.locator('div')).toBeVisible()
+    await expect(page.locator('#app')).toBeVisible()
+
+    const screenshoot = await page.screenshot()
+
+    const folder = path.resolve(__dirname, './__screenshots__')
+
+    if (!existsSync(folder)) {
+      await mkdir(folder)
+    }
+    await writeFile(path.resolve(folder, './basic.png'), screenshoot)
   })
 })

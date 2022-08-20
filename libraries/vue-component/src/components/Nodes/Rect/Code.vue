@@ -40,10 +40,10 @@ const text = computed(() => codeHtml.value ?? props.label);
 </template>
 
 <style>
-.light {
+/* .light {
     @import "src/styles/prism-vs-light.css";
 }
 .dark {
     @import "src/styles/prism-vs-dark.css";
-}
+} */
 </style>
