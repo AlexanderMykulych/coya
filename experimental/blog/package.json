@@ -12,7 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "coya-vue-component": "~0.9.20",
-    "vite": "^3.0.3",
+    "vite": "~3.0.9",
     "vite-plugin-restart": "^0.1.1",
     "vite-plugin-windicss": "^1.6.3",
     "vitepress": "^0.21.6",

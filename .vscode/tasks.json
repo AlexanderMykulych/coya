@@ -4,22 +4,6 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "pnpm watch",
-            "type": "shell",
-            "command": "cd ./libraries/vscode/coya && pnpm watch",
-            "isBackground": true,
-            "presentation": {
-                "reveal": "never"
-            },
-            "problemMatcher": {
-                "background": {
-                    "activeOnStart": false,
-                    "beginsPattern": "^.*Starting compilation.*",
-                    "endsPattern": "^.*Watching for file changes.*"
-                }
-            }
-        },
-        {
             "type": "npm",
             "script": "watch",
             "group": "build",

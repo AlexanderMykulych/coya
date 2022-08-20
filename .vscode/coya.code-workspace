@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+    {
+      "path": "../libraries/code-analyzers/ts-analyzer"
+    }
+  ],
+  "settings": {}
+}

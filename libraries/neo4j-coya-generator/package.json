@@ -29,7 +29,7 @@
         "unocss": "0.44.7",
         "unplugin-auto-import": "0.10.1",
         "unplugin-vue-components": "0.21.2",
-        "vite": "^3.0.3",
+        "vite": "~3.0.9",
         "vite-plugin-pages": "0.25.0",
         "vitest": "0.19.1",
         "@vue/compiler-sfc": "^3.2.31",

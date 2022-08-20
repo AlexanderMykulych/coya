@@ -10,9 +10,9 @@
     },
     "eslint.packageManager": "pnpm",
     "eslint.workingDirectories": [
-        { 
-			"directory": "libraries/vue-component", 
-			"changeProcessCWD": true
-		}
-	]
+      { 
+        "directory": "libraries/vue-component", 
+        "changeProcessCWD": true
+      }
+    ]
 }
