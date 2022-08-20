@@ -16,7 +16,7 @@
     "vue": "^3.2.31",
     "vue-router": "^4.1.2",
     "coya-ts-analyzer": "~0.9.20",
-    "neo4j-driver": "4.4.7",
+    "neo4j-driver": "~4.4.7",
     "coya-util": "~0.9.20"
   },
   "devDependencies": {

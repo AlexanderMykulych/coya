@@ -28,7 +28,9 @@
     "vite-plugin-dts": "~1.2.1",
     "@vitest/ui": "~0.18.1",
     "c8": "~7.12.0",
-    "chokidar": "~3.5.3"
+    "chokidar": "~3.5.3",
+    "neo4j-driver": "~4.4.7",
+    "coya-util": "~0.9.20"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.25.2",

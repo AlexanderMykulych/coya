@@ -539,11 +539,6 @@
       "packageName": "mental-project",
       "projectFolder": "libraries/code-analyzers/mental-project",
       "reviewCategory": "code-analyzers"
-    },
-    {
-      "packageName": "mental-project-server",
-      "projectFolder": "libraries/code-analyzers/mental-project-server",
-      "reviewCategory": "code-analyzers"
     }
   ]
 }

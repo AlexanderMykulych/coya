@@ -9,7 +9,7 @@
     },
     "dependencies": {
         "@vueuse/core": "^9.0.0",
-        "neo4j-driver": "4.4.7",
+        "neo4j-driver": "~4.4.7",
         "vue": "^3.2.31",
         "vue-router": "^4.1.2",
         "monaco-editor": "^0.30.1",
