@@ -12,9 +12,9 @@ describe.each([
   {
     projectPath: '/cases/03_function_relation',
   },
-  // {
-  //   projectPath: '/cases/04_vue',
-  // },
+  {
+    projectPath: '/cases/04_vue',
+  },
 ])('project: $projectPath', async ({ projectPath }) => {
   const fullProjectPath = path.join(__dirname, projectPath)
 
