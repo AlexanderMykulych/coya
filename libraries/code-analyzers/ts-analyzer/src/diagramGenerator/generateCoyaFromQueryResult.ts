@@ -18,7 +18,7 @@ export function generateCoyaFromGraphResult(result: QueryResult) {
           label: '',
         });
       });
-      graph.nodes.forEach(n => blocksMap.set(getBlockId(n.identity), n.properties));
+      graph.nodes.forEach(n => blocksMap.set(getBlockId(n.identity), `${n.identity}`));
     });
   // .forEach((item) => {
   //     const from = item.get('from');
@@ -35,7 +35,7 @@ export function generateCoyaFromGraphResult(result: QueryResult) {
   // });
 
   const blocksEntries = [...blocksMap.entries()];
-  const blocks = Object.fromEntries(blocksEntries.map(([key, node]) => [key, node.name]));
+  const blocks = Object.fromEntries(blocksEntries.map(([key, node]) => [key, key]));
   const arrows = Object.fromEntries(arrowsMap.entries());
   const diagram = {
     name: 'coya-ts-analyzer',

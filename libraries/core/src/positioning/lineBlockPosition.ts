@@ -20,10 +20,10 @@ export function lineBlockPosition(blocksPositions: Ref<BlockPositioning[]>, bloc
 
     const meta = getValueByCtx(`_.fn.getBoxToBoxArrowPath(${block.from}, ${block.to}, {padEnd: ${arrowHeadSize}, padStart: ${arrowHeadSize} ${str} })`, {});
 
-    const x1 = computed(() => meta.value.results.x1);
-    const y1 = computed(() => meta.value.results.y1);
-    const x2 = computed(() => meta.value.results.x2);
-    const y2 = computed(() => meta.value.results.y2);
+    const x1 = computed(() => meta.value?.results?.x1 ?? 0);
+    const y1 = computed(() => meta.value?.results?.y1 ?? 0);
+    const x2 = computed(() => meta.value?.results?.x2 ?? 0);
+    const y2 = computed(() => meta.value?.results?.y2 ?? 0);
     return {
         blockId: block.id,
         position: {

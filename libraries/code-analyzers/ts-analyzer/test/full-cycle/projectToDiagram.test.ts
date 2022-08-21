@@ -7,6 +7,7 @@ import { fileURLToPath } from "url"
 import { mkdir, writeFile } from "fs/promises"
 import path from "path"
 import { existsSync } from "fs"
+import { diagramGenerator } from "../../src/diagramGenerator/diagramGenerator"
 
 
 describe('project to diagram', () => {
@@ -16,7 +17,7 @@ describe('project to diagram', () => {
   const port = 5991
 
   beforeAll(async () => {
-    const root = fileURLToPath(new URL('../../../../vue-component', import.meta.url))
+    const root = fileURLToPath(new URL('../../../mental-project', import.meta.url))
 
     server = await createServer({
       root,
@@ -43,9 +44,16 @@ describe('project to diagram', () => {
   })
 
   test('basic', async () => {
-    await page.goto(`http://localhost:${port}`)
+    const fullProjectPath = path.join(__dirname, '/cases/01_simple')
 
-    await expect(page.locator('#app')).toBeVisible()
+    const { coya } = await diagramGenerator(fullProjectPath)
+
+    await page.goto(`http://localhost:${port}/diagram`)
+
+    await page.evaluate((config) => window.coyaConfig = config, coya)
+
+    await expect(page.locator('.coya-container')).toBeVisible()
+    await page.waitForTimeout(1500)
 
     const screenshoot = await page.screenshot()
 

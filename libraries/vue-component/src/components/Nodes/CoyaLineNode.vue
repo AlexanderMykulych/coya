@@ -61,7 +61,7 @@ const arrowPaths = computed(() => {
 </script>
 
 <template>
-  <g ref="gEl" :style="cssStyle">
+  <g v-if="metaResult" ref="gEl" :style="cssStyle">
     <path v-for="(pathItem, index) in paths" v-bind="pathItem" :key="index" />
     <path v-for="(pathItem, index) in arrowPaths" v-bind="pathItem" :key="index" :transform="`translate(${metaResult.x2}, ${metaResult.y2}) rotate(${metaResult.ae})`" />
 
