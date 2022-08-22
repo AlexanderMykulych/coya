@@ -43,8 +43,23 @@ describe('project to diagram', () => {
     await server.close()
   })
 
-  test('basic', async () => {
-    const fullProjectPath = path.join(__dirname, '/cases/01_simple')
+  test
+    .each([
+      {
+        projectPath: '/cases/01_simple',
+      },
+      {
+        projectPath: '/cases/02_function',
+      },
+      {
+        projectPath: '/cases/03_function_relation',
+      },
+      {
+        projectPath: '/cases/04_vue',
+      },
+    ])
+    ('should create screenshot for: $projectPath', async ({projectPath}) => {
+      const fullProjectPath = path.join(__dirname, projectPath)
 
     const { coya } = await diagramGenerator(fullProjectPath)
 
@@ -62,6 +77,6 @@ describe('project to diagram', () => {
     if (!existsSync(folder)) {
       await mkdir(folder)
     }
-    await writeFile(path.resolve(folder, './basic.png'), screenshoot)
+      await writeFile(path.resolve(folder, `${projectPath.replaceAll('/', '_')}.png`), screenshoot)
   })
 })
