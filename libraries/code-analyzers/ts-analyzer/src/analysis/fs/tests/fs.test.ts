@@ -6,32 +6,32 @@ const testCases = [
   {
     path: './сases/case_error',
     name: 'one error',
-    result: [
+    result: expect.arrayContaining([
       expect.objectContaining({
         type: 'error',
       })
-    ],
+    ]),
   },
   {
     path: './сases/case_02',
     name: 'one folder',
-    result: [
+    result: expect.arrayContaining([
       expect.objectContaining({
         type: 'folder',
         relativePath: 'folder',
       })
-    ],
+    ]),
   },
   {
     path: './сases/case_01',
     name: 'one file',
-    result: [
+    result: expect.arrayContaining([
       expect.objectContaining({
         type: 'file',
         filename: 'file.ts',
         relativePath: 'file.ts',
       })
-    ],
+    ]),
   },
   {
     path: './сases/case_04',

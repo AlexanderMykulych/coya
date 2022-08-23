@@ -169,6 +169,12 @@ exports[`should analyze complex vue-ts project 1`] = `
     "type": "entity",
   },
   {
+    "entityType": "file",
+    "filePath": "/package.json",
+    "id": "/package.json",
+    "type": "entity",
+  },
+  {
     "entityType": "function",
     "filePath": "/services/service.ts",
     "id": "/services/service.ts/getService",

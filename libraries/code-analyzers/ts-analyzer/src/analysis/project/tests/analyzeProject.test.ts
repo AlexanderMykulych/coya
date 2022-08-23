@@ -1,5 +1,6 @@
 import path from 'path'
 import { expect, test } from 'vitest'
+import { analyze } from '../../analyze'
 import { analyzeProject } from '../analyzeProject'
 
 test('should analyze simple ts project', async () => {
@@ -36,7 +37,7 @@ test('should analyze vue-ts project', async () => {
 })
 
 test('should analyze complex vue-ts project', async () => {
-  const result = await analyzeProject(path.resolve(__dirname, './cases/project6'))
+  const result = await analyze(path.resolve(__dirname, './cases/project6'))
 
   expect(result).toMatchSnapshot()
 

@@ -41,6 +41,12 @@ export async function getAllFSUnits(basePath: string, callback: FsUnitsCallback)
   }
 
   await getAll(basePath)
+  callback({
+    type: 'folder',
+    filepath: basePath,
+    relativePath: '.',
+    foldername: '<root>',
+  })
 }
 
 export async function getAllFSUnitsFlat(basePath: string): Promise<FsUnit[]> {

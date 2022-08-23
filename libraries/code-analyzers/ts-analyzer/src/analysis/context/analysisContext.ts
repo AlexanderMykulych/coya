@@ -33,7 +33,7 @@ export async function createContext(rootDir: string): Promise<AnalysisContext> {
       const foldersTasks = fsUnits
         .filter((x): x is FolderFsUnit => x.type === "folder")
         .map(async x => ({
-          isMatch: Promise.resolve(predicate(createFolderItem(x))),
+          isMatch: await predicate(createFolderItem(x)),
           folder: x,
         }))
 
@@ -76,9 +76,13 @@ export function createNestedContext(path: FolderFsUnit, context: AnalysisContext
 function createFolderItem(folder: FolderFsUnit): FolderItem {
   return {
     async containsFile(fileName) {
-      const stats = await stat(resolve(folder.filepath, fileName))
+      try {
+        const stats = await stat(resolve(folder.filepath, fileName))
 
-      return !!stats
+        return !!stats
+      } catch (e) {
+        return false
+      }
     },
     folder,
   }

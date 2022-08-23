@@ -1,3 +1,4 @@
+import { relative } from "path";
 import { Project } from "ts-morph";
 import type { AnalysisContext } from "../context/analysisContext";
 import { FileFsUnit, FolderFsUnit } from "../fs/types";
@@ -34,7 +35,13 @@ export function getAnalysisPlugins(): AnalysisPlugin[] {
           if (file) {
             const processedFile = await processFile(file)
 
-            project.createSourceFile(processedFile.file, processedFile.text)
+            project.createSourceFile(
+              relative(context.rootDir, processedFile.file),
+              `
+              /* coya-meta:${JSON.stringify(fileUnit)} */
+              ${processedFile.text}
+              `,
+            )
           }
         }
 
