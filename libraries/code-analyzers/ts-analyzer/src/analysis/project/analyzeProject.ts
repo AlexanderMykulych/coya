@@ -14,7 +14,6 @@ export async function analyzeProject(projPath: string): Promise<CodeInfo[]> {
       rootDir: projPath,
     },
     skipLoadingLibFiles: false,
-    // fileSystem: new CustomFileSystemHost((new Project()).getFileSystem(), waiters),
   })
 
   if (await initializeProject(projPath, project, 'custom')) {

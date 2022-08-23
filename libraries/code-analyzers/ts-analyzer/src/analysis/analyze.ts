@@ -1,31 +1,40 @@
-import path from 'path'
-import { analyzeSourceFile } from './source-file/analyzeSourceFile'
-import { Project } from 'ts-morph'
+import { AnalysisContext, createContext, createNestedContext } from './context/analysisContext'
+import { AnalysisPlugin, getAnalysisPlugins } from './plugins/getAnalysisPlugins'
 import { CodeInfo } from './types'
-import { readFile } from './file/readFile'
 
-interface AnalyzeFileParams {
-  file: string
-  path: string
+export async function analyze(basePath: string): Promise<CodeInfo[]> {
+  const context = await createContext(basePath)
+
+  const plugins = getAnalysisPlugins()
+
+  const initTasks = plugins
+    .filter(x => x.init)
+    .map(x => x.init!(context))
+
+  await Promise.all(initTasks)
+
+  const preparedPluginsWithContext = await preparePlugins(plugins, context)
+
+  const runTasks = preparedPluginsWithContext
+    .map(({ plugin, context }) => plugin.run(context))
+
+  await Promise.all(runTasks)
+
+  return context.result
 }
 
-export async function analyze({ file, path: projPath }: AnalyzeFileParams): Promise<CodeInfo[]> {
-  const project = new Project({
-    useInMemoryFileSystem: true,
-    tsConfigFilePath: path.resolve(projPath, 'tsconfig.json'),
-    compilerOptions: {
-      noEmit: true,
-      allowJs: true,
-    },
-  })
+async function preparePlugins(plugins: AnalysisPlugin[], context: AnalysisContext):
+  Promise<{ plugin: AnalysisPlugin, context: AnalysisContext }[]> {
+  const result: {plugin: AnalysisPlugin, context: AnalysisContext}[] = []
 
-  const content = await readFile(path.resolve(projPath, file))
-  const sourceFile = project.createSourceFile(file, content)
+  for await (const plugin of plugins) {
+    const folders = await plugin.matchFolders(context)
 
-  const codeInfos = analyzeSourceFile({
-    sourceFile: sourceFile,
-    project,
-  })
+    folders.forEach(folder => result.push({
+      context: createNestedContext(folder, context),
+      plugin,
+    }))
+  }
 
-  return codeInfos
+  return result
 }

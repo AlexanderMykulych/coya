@@ -21,14 +21,14 @@ export async function getEntryPoint(projectPath: string): Promise<FileText | nul
 }
 
 
-export async function readFile(filePath: string, basePath: string): Promise<FileText | null> {
+export async function readFile(filePath: string, basePath?: string): Promise<FileText | null> {
   if (!path.extname(filePath)) {
     filePath = `${filePath}.ts`
   }
   try {
     const textBuff = await fs.readFile(filePath)
     return {
-      file: getRelativePath(basePath, filePath),
+      file: basePath ? getRelativePath(basePath, filePath) : filePath,
       text: textBuff.toString(),
     }
   } catch (e) {
