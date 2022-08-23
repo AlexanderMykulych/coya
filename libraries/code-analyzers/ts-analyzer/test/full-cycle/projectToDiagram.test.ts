@@ -61,22 +61,22 @@ describe('project to diagram', () => {
     ('should create screenshot for: $projectPath', async ({projectPath}) => {
       const fullProjectPath = path.join(__dirname, projectPath)
 
-    const { coya } = await diagramGenerator(fullProjectPath)
+      const { coya } = await diagramGenerator(fullProjectPath)
 
-    await page.goto(`http://localhost:${port}/diagram`)
+      await page.goto(`http://localhost:${port}/diagram`)
 
-    await page.evaluate((config) => window.coyaConfig = config, coya)
+      await page.evaluate((config) => window.coyaConfig = config, coya)
 
-    await expect(page.locator('.coya-container')).toBeVisible()
-    await page.waitForTimeout(1500)
+      await expect(page.locator('.coya-container')).toBeVisible()
+      await page.waitForTimeout(1500)
 
-    const screenshoot = await page.screenshot()
+      const screenshoot = await page.screenshot()
 
-    const folder = path.resolve(__dirname, './__screenshots__')
+      const folder = path.resolve(__dirname, './__screenshots__')
 
-    if (!existsSync(folder)) {
-      await mkdir(folder)
-    }
+      if (!existsSync(folder)) {
+        await mkdir(folder)
+      }
       await writeFile(path.resolve(folder, `${projectPath.replaceAll('/', '_')}.png`), screenshoot)
-  })
+    })
 })

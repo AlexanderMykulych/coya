@@ -4,10 +4,8 @@ import { analyzeSourceFile } from '../source-file/analyzeSourceFile'
 import type { CodeInfo, FileProcessor, FileText } from '../types'
 import { deduplicate } from './deduplicate'
 import { initializeProject } from './initializeProject'
-import { CustomFileSystemHost } from './projectInitializer/CustomFileSystemHost'
 
 export async function analyzeProject(projPath: string): Promise<CodeInfo[]> {
-  const waiters: Promise<void>[] = []
 
   const project = new Project({
     useInMemoryFileSystem: true,
