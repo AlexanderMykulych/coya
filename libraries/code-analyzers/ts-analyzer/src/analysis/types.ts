@@ -28,6 +28,7 @@ export type Entity = FileEntity | FunctionEntity | BaseEntity
 
 export enum EntityType {
   File = 'file',
+  Folder = 'folder',
   Function = 'function',
   Variable = 'variable',
   Property = 'property',

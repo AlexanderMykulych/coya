@@ -1,7 +1,7 @@
 import { stat } from "fs/promises";
 import { resolve } from "path";
 import { getAllFSUnitsFlat } from "../fs/fs";
-import { FileFsUnit, FolderFsUnit } from "../fs/types";
+import { FileFsUnit, FolderFsUnit, FsUnit } from "../fs/types";
 import { deduplicate } from "../project/deduplicate";
 import type { CodeInfo } from "../types";
 
@@ -16,8 +16,9 @@ export interface AnalysisContext {
   rootDir: string
 
   files: FileFsUnit[]
+  fsUnits: FsUnit[]
 
-  filterFolders: (predicate: (folderItem: FolderItem) => boolean | Promise<boolean>) => Promise<FolderFsUnit[]>
+  getFolders: (predicate: (folderItem: FolderItem) => boolean | Promise<boolean>) => Promise<FolderFsUnit[]>
 
   addCodeInfos: (codeInfos: CodeInfo[]) => Promise<void>
 }
@@ -29,7 +30,9 @@ export async function createContext(rootDir: string): Promise<AnalysisContext> {
   return {
     rootDir,
     files: fsUnits.filter((x): x is FileFsUnit => x.type === 'file'),
-    async filterFolders(predicate) {
+    async getFolders(predicate) {
+      predicate ??= () => true
+
       const foldersTasks = fsUnits
         .filter((x): x is FolderFsUnit => x.type === "folder")
         .map(async x => ({
@@ -53,7 +56,8 @@ export async function createContext(rootDir: string): Promise<AnalysisContext> {
     },
     get result() {
       return resultCodeInfos
-    }
+    },
+    fsUnits,
   }
 }
 
@@ -64,12 +68,13 @@ export function createNestedContext(path: FolderFsUnit, context: AnalysisContext
     get files() {
       return context.files.filter(x => x.filepath.startsWith(path.filepath))
     },
-    filterFolders(predicate) {
-      return context.filterFolders(async x => x.folder.filepath.startsWith(path.filepath) && await predicate(x))
+    getFolders(predicate) {
+      return context.getFolders(async x => x.folder.filepath.startsWith(path.filepath) && await predicate(x))
     },
     get result() {
       return context.result
     },
+    fsUnits: context.fsUnits.filter(x => x.type !== 'error' ? x.filepath.startsWith(path.filepath) : x),
   }
 }
 
