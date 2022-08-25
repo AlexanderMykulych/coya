@@ -57,6 +57,9 @@ describe('project to diagram', () => {
       {
         projectPath: '/cases/04_vue',
       },
+      {
+        projectPath: '/cases/05_vite',
+      },
     ])
     ('should create screenshot for: $projectPath', async ({projectPath}) => {
       const fullProjectPath = path.join(__dirname, projectPath)

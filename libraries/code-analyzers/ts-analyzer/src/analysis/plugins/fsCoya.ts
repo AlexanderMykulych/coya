@@ -14,7 +14,7 @@ export default definePlugin({
       .filter((x): x is FileFsUnit | FolderFsUnit => x.type === 'file' || x.type === 'folder')
       .map(x => ({
         ...x,
-        id: `/${x.relativePath}`,
+        id: x.relativePath === '.' ? '/' : `/${x.relativePath}`,
       }))
 
     const entities = units.map<CodeInfo>(x => ({

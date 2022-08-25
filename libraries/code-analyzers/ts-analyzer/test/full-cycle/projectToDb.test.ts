@@ -15,7 +15,7 @@ describe.each([
   {
     projectPath: '/cases/04_vue',
   },
-])('project: $projectPath', async ({ projectPath }) => {
+])('project to db: $projectPath', async ({ projectPath }) => {
   const fullProjectPath = path.join(__dirname, projectPath)
 
   const { db } = await insertProjectInfoToDb(fullProjectPath)

@@ -1,0 +1,10 @@
+{
+  "name": "name",
+  "description": "description",
+  "authors": "author",
+  "version": "1.0.0",
+  "main": "pathToMain",
+  "dependencies": {
+    "vue": "^3.2.37"
+  }
+}

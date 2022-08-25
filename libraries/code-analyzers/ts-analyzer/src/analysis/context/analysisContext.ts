@@ -10,6 +10,12 @@ export interface FolderItem {
   folder: FolderFsUnit
 }
 
+export interface AnalysisContextHooks {
+  onBeforeAdd(calback: (codeInfo: CodeInfo) => CodeInfo | void): AnalysisContextHooks
+
+  beforeAdd(codeInfo: CodeInfo): CodeInfo
+}
+
 export interface AnalysisContext {
   result: CodeInfo[]
 
@@ -17,6 +23,7 @@ export interface AnalysisContext {
 
   files: FileFsUnit[]
   fsUnits: FsUnit[]
+  hooks: AnalysisContextHooks
 
   getFolders: (predicate: (folderItem: FolderItem) => boolean | Promise<boolean>) => Promise<FolderFsUnit[]>
 
@@ -27,6 +34,9 @@ export async function createContext(rootDir: string): Promise<AnalysisContext> {
   const fsUnits = await getAllFSUnitsFlat(rootDir)
 
   let resultCodeInfos: CodeInfo[] = []
+
+  const hooks = createHookManager()
+
   return {
     rootDir,
     files: fsUnits.filter((x): x is FileFsUnit => x.type === 'file'),
@@ -47,6 +57,8 @@ export async function createContext(rootDir: string): Promise<AnalysisContext> {
         .map(x => x.folder)
     },
     addCodeInfos(codeInfos: CodeInfo[]) {
+      codeInfos = codeInfos.map(x => hooks.beforeAdd(x))
+
       resultCodeInfos = deduplicate([
         ...resultCodeInfos,
         ...codeInfos,
@@ -58,6 +70,7 @@ export async function createContext(rootDir: string): Promise<AnalysisContext> {
       return resultCodeInfos
     },
     fsUnits,
+    hooks,
   }
 }
 
@@ -75,6 +88,7 @@ export function createNestedContext(path: FolderFsUnit, context: AnalysisContext
       return context.result
     },
     fsUnits: context.fsUnits.filter(x => x.type !== 'error' ? x.filepath.startsWith(path.filepath) : x),
+    hooks: context.hooks,
   }
 }
 
@@ -90,5 +104,23 @@ function createFolderItem(folder: FolderFsUnit): FolderItem {
       }
     },
     folder,
+  }
+}
+
+function createHookManager(): AnalysisContextHooks {
+  const onBeforeAdd: Parameters<AnalysisContextHooks["onBeforeAdd"]>[0][] = []
+
+  return {
+    onBeforeAdd(callback) {
+      onBeforeAdd.push(callback)
+
+      return this
+    },
+
+    beforeAdd(codeInfo: CodeInfo) {
+      onBeforeAdd.forEach(x => codeInfo = x(codeInfo) ?? codeInfo)
+
+      return codeInfo
+    }
   }
 }

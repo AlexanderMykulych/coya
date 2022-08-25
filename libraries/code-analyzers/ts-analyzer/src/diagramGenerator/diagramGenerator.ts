@@ -4,7 +4,7 @@ import { insertProjectInfoToDb } from "./insertProjectInfoToDb";
 export async function diagramGenerator(path: string) {
   const { db } = await insertProjectInfoToDb(path)
 
-  const graph = await db.read('match p = (n1)-[*..]->() return apoc.agg.graph(p) as graph')
+  const graph = await db.read('match p = (n1)-[*0..]->() return apoc.agg.graph(p) as graph')
 
   if (!graph) {
     throw 'graph is empty'
