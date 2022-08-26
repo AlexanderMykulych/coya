@@ -16,14 +16,18 @@ export interface AnalysisContextHooks {
   beforeAdd(codeInfo: CodeInfo): CodeInfo
 }
 
+export interface AnalysisContextStore {
+  get<T>(key: string): T
+  set<T>(key: string, value: T): void
+}
+
 export interface AnalysisContext {
   result: CodeInfo[]
-
   rootDir: string
-
   files: FileFsUnit[]
   fsUnits: FsUnit[]
   hooks: AnalysisContextHooks
+  store: AnalysisContextStore
 
   getFolders: (predicate: (folderItem: FolderItem) => boolean | Promise<boolean>) => Promise<FolderFsUnit[]>
 
@@ -71,6 +75,7 @@ export async function createContext(rootDir: string): Promise<AnalysisContext> {
     },
     fsUnits,
     hooks,
+    store: createStore(),
   }
 }
 
@@ -89,6 +94,7 @@ export function createNestedContext(path: FolderFsUnit, context: AnalysisContext
     },
     fsUnits: context.fsUnits.filter(x => x.type !== 'error' ? x.filepath.startsWith(path.filepath) : x),
     hooks: context.hooks,
+    store: createStore(),
   }
 }
 
@@ -122,5 +128,18 @@ function createHookManager(): AnalysisContextHooks {
 
       return codeInfo
     }
+  }
+}
+
+function createStore(): AnalysisContextStore {
+  const store: Record<string, any> = {}
+
+  return {
+    get<T>(key: string) {
+      return store[key] as unknown as T
+    },
+    set(key, val) {
+      store[key] = val
+    },
   }
 }
