@@ -1,4 +1,4 @@
-import { AnalysisPlugin } from "./getAnalysisPlugins";
+import type { AnalysisPlugin } from "./types";
 
 export function definePlugin(pluginConfig: AnalysisPlugin): AnalysisPlugin {
   return pluginConfig

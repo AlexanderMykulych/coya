@@ -116,7 +116,7 @@ const testCases = [
 test.each(testCases)
   ('should read $name', async ({ path, result }) => {
     const folderDir = resolve(__dirname, path)
-    const units = await getAllFSUnitsFlat(folderDir)
+    const units = await getAllFSUnitsFlat(folderDir, true)
 
     expect(units).toEqual(result)
   })

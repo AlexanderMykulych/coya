@@ -1,6 +1,6 @@
 import { readdir, stat } from "fs/promises";
 import { basename, join, relative } from "path";
-import type { FsUnit, FsUnitsCallback } from "./types";
+import type { FileOrFolderFsUnit, FsUnit, FsUnitsCallback } from "./types";
 
 const bannedDirs = [
   '.history',
@@ -60,10 +60,15 @@ export async function getAllFSUnits(basePath: string, callback: FsUnitsCallback)
   })
 }
 
-export async function getAllFSUnitsFlat(basePath: string): Promise<FsUnit[]> {
+export async function getAllFSUnitsFlat(basePath: string, withErrors: true): Promise<FsUnit[]>
+export async function getAllFSUnitsFlat(basePath: string): Promise<FileOrFolderFsUnit[]>
+export async function getAllFSUnitsFlat(basePath: string, withErrors?: true): Promise<(FsUnit | FileOrFolderFsUnit)[]> {
   const results: FsUnit[] = []
 
   await getAllFSUnits(basePath, unit => results.push(unit))
 
-  return results
+  return withErrors
+    ? results
+    : results
+      .filter((x): x is FileOrFolderFsUnit => x.type === 'file' || x.type === 'folder')
 }

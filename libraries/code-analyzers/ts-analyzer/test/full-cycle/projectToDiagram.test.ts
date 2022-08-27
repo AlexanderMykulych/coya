@@ -11,7 +11,7 @@ import fp from 'find-free-port'
 import { generateCoyaDiagram } from "../../src/diagramGenerator/generateCoyaDiagram"
 
 
-describe('project to diagram', async () => {
+describe.skip('project to diagram', async () => {
   let server: ViteDevServer
   let browser: Browser
   let page: Page

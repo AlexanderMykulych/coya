@@ -15,6 +15,7 @@ export interface ErrorFsUnitResult {
   error: Error
 }
 
-export type FsUnit = FileFsUnit  | FolderFsUnit | ErrorFsUnitResult
+export type FileOrFolderFsUnit = FileFsUnit | FolderFsUnit
+export type FsUnit = FileOrFolderFsUnit | ErrorFsUnitResult
 
 export type FsUnitsCallback = (unit: FsUnit) => void

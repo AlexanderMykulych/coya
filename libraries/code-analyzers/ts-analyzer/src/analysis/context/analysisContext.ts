@@ -1,9 +1,11 @@
 import { stat } from "fs/promises";
 import { resolve } from "path";
 import { getAllFSUnitsFlat } from "../fs/fs";
-import { FileFsUnit, FolderFsUnit, FsUnit } from "../fs/types";
+import { FileFsUnit, FileOrFolderFsUnit, FolderFsUnit, FsUnit } from "../fs/types";
 import { deduplicate } from "../project/deduplicate";
 import type { CodeInfo } from "../types";
+import { createHookManager } from "./hook/createHookManager";
+import { createStore } from "./store/createStore";
 
 export interface FolderItem {
   containsFile: (fileName: string) => Promise<boolean>
@@ -26,7 +28,7 @@ export interface AnalysisContext {
   result: CodeInfo[]
   rootDir: string
   files: FileFsUnit[]
-  fsUnits: FsUnit[]
+  fsUnits: FileOrFolderFsUnit[]
   hooks: AnalysisContextHooks
   store: AnalysisContextStore
 
@@ -80,25 +82,6 @@ export async function createContext(rootDir: string): Promise<AnalysisContext> {
   }
 }
 
-export function createNestedContext(path: FolderFsUnit, context: AnalysisContext): AnalysisContext {
-  return {
-    rootDir: path.filepath,
-    addCodeInfos: context.addCodeInfos,
-    get files() {
-      return context.files.filter(x => x.filepath.startsWith(path.filepath))
-    },
-    getFolders(predicate) {
-      return context.getFolders(async x => x.folder.filepath.startsWith(path.filepath) && await predicate(x))
-    },
-    get result() {
-      return context.result
-    },
-    fsUnits: context.fsUnits.filter(x => x.type !== 'error' ? x.filepath.startsWith(path.filepath) : x),
-    hooks: context.hooks,
-    store: createStore(),
-  }
-}
-
 function createFolderItem(folder: FolderFsUnit): FolderItem {
   return {
     async containsFile(fileName) {
@@ -114,40 +97,4 @@ function createFolderItem(folder: FolderFsUnit): FolderItem {
   }
 }
 
-function createHookManager(): AnalysisContextHooks {
-  const onBeforeAdd: Parameters<AnalysisContextHooks["onBeforeAdd"]>[0][] = []
 
-  return {
-    onBeforeAdd(callback) {
-      onBeforeAdd.push(callback)
-
-      return this
-    },
-
-    beforeAdd(codeInfo: CodeInfo) {
-      onBeforeAdd.forEach(x => codeInfo = x(codeInfo) ?? codeInfo)
-
-      return codeInfo
-    }
-  }
-}
-
-function createStore(): AnalysisContextStore {
-  const store: Record<string, any> = {}
-
-  return {
-    get<T>(key: string, defValue: T) {
-      return store[key] as unknown as T ?? defValue
-    },
-    set(key, val) {
-      store[key] = val
-    },
-    addToCollection(key, value) {
-      if (!store[key]) {
-        store[key] = []
-      }
-
-      store[key].push(value)
-    }
-  }
-}
