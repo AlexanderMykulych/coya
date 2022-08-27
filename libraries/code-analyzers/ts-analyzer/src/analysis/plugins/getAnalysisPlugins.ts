@@ -1,7 +1,7 @@
 import type { AnalysisContext } from "../context/analysisContext";
 import { FolderFsUnit } from "../fs/types";
 import fsCoya from "./fsCoya";
-import tsJsCoya from "./tsJsCoya";
+import tsJsCoya from "./TsJs/tsJsCoya";
 
 export interface AnalysisPlugin {
   name: string
