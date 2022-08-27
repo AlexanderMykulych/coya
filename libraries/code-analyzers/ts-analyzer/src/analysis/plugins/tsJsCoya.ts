@@ -47,24 +47,34 @@ export default definePlugin({
     })
 
     for await (const fileUnit of context.files) {
+      if (project.getSourceFile(relative(context.rootDir, fileUnit.filepath))) {
+        continue
+      }
+
       const file = await readFile(fileUnit.filepath)
       if (file) {
         const processedFile = await processFile(file)
 
-        const relativeNewFile = relative(context.rootDir, processedFile.file)
-        const relativeOldFile = relative(context.rootDir, file.file)
+        if (processedFile.file.endsWith('.ts') || processedFile.file.endsWith('.js')) {
 
-        if (relativeOldFile !== relativeNewFile) {
-          context.store.addToCollection<FileMap>('files', {
-            originFile: `/${relativeOldFile}`,
-            resultFile: `/${relativeNewFile}`,
-          })
+          const relativeNewFile = relative(context.rootDir, processedFile.file)
+          const relativeOldFile = relative(context.rootDir, file.file)
+
+          if (relativeOldFile !== relativeNewFile) {
+            context.store.addToCollection<FileMap>('files', {
+              originFile: `/${relativeOldFile}`,
+              resultFile: `/${relativeNewFile}`,
+            })
+          }
+
+          project.createSourceFile(
+            relativeNewFile,
+            processedFile.text,
+            {
+              overwrite: true,
+            },
+          )
         }
-
-        project.createSourceFile(
-          relativeNewFile,
-          processedFile.text,
-        )
       }
     }
 

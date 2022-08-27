@@ -23,6 +23,7 @@ export interface PositioningDefaults {
     canvasH: number
     layout?: any
     activeEl?: string
+    rootName?: string
 }
 const _defaults: PositioningDefaults = {
     blockW: 500,

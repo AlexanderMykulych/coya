@@ -5,15 +5,15 @@ export default {
   async traspile(code: string): Promise<string> {
     const { descriptor } = parse(code)
 
-    const compiled = compileScript(descriptor, {
+    const compiled = descriptor.script || descriptor.scriptSetup ? compileScript(descriptor, {
       id: `1`
-    })
+    }) : null
 
     const template = descriptor.template?.content ? compileTemplate({
       source: descriptor.template.content,
     } as any) : null
     
-    const result = `${compiled.content}\n${template?.code}`
+    const result = `${compiled?.content ?? '// no <script> tag'}\n${template?.code}`
 
     return Promise.resolve(result)
   }

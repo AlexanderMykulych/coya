@@ -3,6 +3,7 @@ import type { Entity } from '../../types'
 import { getArrowFunctionId } from './getArrowFunctionId'
 import { getFunctionDeclarationId } from './getFunctionDeclarationId'
 import { getIdentifierInfo } from './getIdentifierInfo'
+import { getIgnoredNode } from './getIgnoredNode'
 import { getImportDeclarationId } from './getImportDeclarationId'
 import { getImportSpecifierId } from './getImportSpecifierId'
 import { getMethodDeclarationId } from './getMethodDeclarationId'
@@ -45,5 +46,5 @@ export function getNodeInfo(node: Node): Entity {
   if (node.isKind(SyntaxKind.MethodSignature)) {
     return getMethodSignatureIndo(node)
   }
-  throw 'unknow node kind ' + node.getKindName()
+  return getIgnoredNode(node)
 }

@@ -42,8 +42,8 @@ export function useNeo4j() {
           .filter((x): x is Relationship => x.type === CodeInfoType.Relationship)
           .map(r => ({
             query: `
-            MATCH (e1 { id: "${r.from}"})
-            MATCH (e2 { id: "${r.to}"})
+            MATCH (e1 { id: $from})
+            MATCH (e2 { id: $to})
             CALL apoc.create.relationship(e1, "Relation", $relation, e2)
             YIELD rel
             RETURN rel

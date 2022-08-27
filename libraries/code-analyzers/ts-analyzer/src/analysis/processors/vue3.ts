@@ -6,11 +6,15 @@ export default <FileProcessor>{
     return file.file.endsWith('.vue')
   },
   async process(file) {
-    const code = await vue3Traspiler.traspile(file.text)
+    try {
+      const code = await vue3Traspiler.traspile(file.text)
 
-    return {
-      file: `${file.file}.ts`,
-      text: code,
+      return {
+        file: `${file.file}.ts`,
+        text: code,
+      }
+    } catch (e) {
+      throw new Error(`file: ${file.file}, ${e}`, { cause: e as Error});
     }
   },
   processFilePath(filePath: string) {

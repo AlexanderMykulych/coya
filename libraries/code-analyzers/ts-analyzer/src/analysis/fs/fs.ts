@@ -2,8 +2,19 @@ import { readdir, stat } from "fs/promises";
 import { basename, join, relative } from "path";
 import type { FsUnit, FsUnitsCallback } from "./types";
 
+const bannedDirs = [
+  '.history',
+  'node_modules',
+  '.git',
+]
+
 export async function getAllFSUnits(basePath: string, callback: FsUnitsCallback) {
   const getAll = async (path: string) => {
+    const dir = basename(path)
+    if (bannedDirs.includes(dir)) {
+      return
+    }
+  
     try {
       const files = await readdir(path)
 

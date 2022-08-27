@@ -24,7 +24,16 @@ export interface FunctionEntity extends BaseEntity {
   typeString: string
 }
 
-export type Entity = FileEntity | FunctionEntity | BaseEntity
+export interface UnknownEntity extends BaseEntity {
+  code: string
+  [k: `meta_${string}`]: any
+}
+
+export type Entity =
+  | FileEntity
+  | FunctionEntity
+  | UnknownEntity
+  | BaseEntity
 
 export enum EntityType {
   File = 'file',
@@ -33,6 +42,7 @@ export enum EntityType {
   Variable = 'variable',
   Property = 'property',
   ImportDeclaration = 'import_declaration',
+  Unknown = 'unknown',
 }
 export enum RelationType {
   Import = 'import',

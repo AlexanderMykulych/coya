@@ -1,4 +1,5 @@
 import type { QueryResult } from 'neo4j-driver';
+import { applyPositioning } from 'coya-core'
 
 const getBlockId = (id: string) => `b_${id}`;
 const getArrowId = (id: string) => `a_${id}`;
@@ -45,9 +46,6 @@ export function generateCoyaFromGraphResult(result: QueryResult) {
     },
     phases: [],
     style: {
-      layout: {
-        type: 'Dagre',
-      },
       blocks: {
         _: {
           css: {
@@ -90,6 +88,9 @@ export function generateCoyaFromGraphResult(result: QueryResult) {
         ),
       },
     },
-  };
+  }
+
+  applyPositioning(diagram, 'Dagre')
+
   return diagram;
 }

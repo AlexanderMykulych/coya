@@ -8,7 +8,7 @@
         "src"
     ],
     "main": "dist/coya-core.cjs.js",
-    "typings": "dist/src/index.d.ts",
+    "typings": "src/index.ts",
     "engines": {
         "node": ">=10"
     },

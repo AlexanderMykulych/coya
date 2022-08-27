@@ -21,7 +21,7 @@ export function generateTree(
             tree[id] = { id };
         const item = tree[id];
         const children = edges
-            .filter(x => x.from === id)
+            .filter(x => x.from === id && x.to !== id)
             .map((x) => {
                 if (!tree[x.to] && !!arch.blocks[x.to]) {
                     return treeBuilder(x.to);
@@ -41,8 +41,11 @@ export function generateTree(
     
     rootEls.forEach(treeBuilder)
 
-    const roots = Object.values(tree)
-            .filter((x: any) => !x.hasParent);
+  const roots = defaults.rootName
+    ? Object.values(tree).filter((x: any) => x.id === defaults.rootName)
+    : Object.values(tree)
+      .filter((x: any) => !x.hasParent);
+
     let root;
     if (roots.length > 1) {
         const rootId = '__root';
