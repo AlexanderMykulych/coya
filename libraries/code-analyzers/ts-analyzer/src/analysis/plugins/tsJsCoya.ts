@@ -7,18 +7,30 @@ import { analyzeSourceFile } from "../source-file/analyzeSourceFile";
 import { CodeInfo, CodeInfoType } from "../types";
 import { definePlugin } from "./definePlugin";
 
+type FileMap = {
+  originFile: string
+  resultFile: string
+}
+
 export default definePlugin({
   name: 'ts-js-coya',
   matchFolders: (context) =>
     context.getFolders(x => x.folder.relativePath === '.'),
   init(context: AnalysisContext): Promise<void> {
+    const normalizeId = (id: string) => {
+      const files = context.store.get<FileMap[]>('files', [])
+      const fileMap = files.find(x => id.startsWith(x.resultFile))
+
+      return fileMap ? id.replace(fileMap.resultFile, fileMap.originFile) : id
+    }
+
     context.hooks.onBeforeAdd((codeInfo: CodeInfo) => {
       if (codeInfo.type === CodeInfoType.Entity) {
-        codeInfo.id = codeInfo.id.replace('.vue.ts', '.vue')
-        codeInfo.filePath = codeInfo.filePath.replace('.vue.ts', '.vue')
+        codeInfo.id = normalizeId(codeInfo.id)
+        codeInfo.filePath = normalizeId(codeInfo.filePath)
       } else {
-        codeInfo.to = codeInfo.to.replace('.vue.ts', '.vue')
-        codeInfo.from = codeInfo.from.replace('.vue.ts', '.vue')
+        codeInfo.to = normalizeId(codeInfo.to)
+        codeInfo.from = normalizeId(codeInfo.from)
       }
     })
 
@@ -39,12 +51,19 @@ export default definePlugin({
       if (file) {
         const processedFile = await processFile(file)
 
+        const relativeNewFile = relative(context.rootDir, processedFile.file)
+        const relativeOldFile = relative(context.rootDir, file.file)
+
+        if (relativeOldFile !== relativeNewFile) {
+          context.store.addToCollection<FileMap>('files', {
+            originFile: `/${relativeOldFile}`,
+            resultFile: `/${relativeNewFile}`,
+          })
+        }
+
         project.createSourceFile(
-          relative(context.rootDir, processedFile.file),
-          `
-              /* coya-meta:${JSON.stringify(fileUnit)} */
-              ${processedFile.text}
-              `,
+          relativeNewFile,
+          processedFile.text,
         )
       }
     }

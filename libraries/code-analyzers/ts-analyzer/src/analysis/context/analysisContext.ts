@@ -17,8 +17,9 @@ export interface AnalysisContextHooks {
 }
 
 export interface AnalysisContextStore {
-  get<T>(key: string): T
+  get<T>(key: string, defValue: T): T
   set<T>(key: string, value: T): void
+  addToCollection<T>(key: string, value: T): void
 }
 
 export interface AnalysisContext {
@@ -135,11 +136,18 @@ function createStore(): AnalysisContextStore {
   const store: Record<string, any> = {}
 
   return {
-    get<T>(key: string) {
-      return store[key] as unknown as T
+    get<T>(key: string, defValue: T) {
+      return store[key] as unknown as T ?? defValue
     },
     set(key, val) {
       store[key] = val
     },
+    addToCollection(key, value) {
+      if (!store[key]) {
+        store[key] = []
+      }
+
+      store[key].push(value)
+    }
   }
 }

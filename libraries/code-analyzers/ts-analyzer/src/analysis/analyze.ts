@@ -7,13 +7,12 @@ export async function analyze(basePath: string): Promise<CodeInfo[]> {
 
   const plugins = getAnalysisPlugins()
 
-  const initTasks = plugins
-    .filter(x => x.init)
-    .map(x => x.init!(context))
+  const preparedPluginsWithContext = await preparePlugins(plugins, context)
+
+  const initTasks = preparedPluginsWithContext
+    .map(({ plugin, context }) => plugin.init && plugin.init(context))
 
   await Promise.all(initTasks)
-
-  const preparedPluginsWithContext = await preparePlugins(plugins, context)
 
   const runTasks = preparedPluginsWithContext
     .map(({ plugin, context }) => plugin.run(context))
