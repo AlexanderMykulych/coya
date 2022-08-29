@@ -18,19 +18,22 @@ export interface AnalysisContextHooks {
   beforeAdd(codeInfo: CodeInfo): CodeInfo
 }
 
-export interface AnalysisContextStore {
-  get<T>(key: string, defValue: T): T
-  set<T>(key: string, value: T): void
-  addToCollection<T>(key: string, value: T): void
+export type ArrayElementType<T> = T extends (infer E)[] ? E : T;
+
+export interface AnalysisContextStore<TStore = any> {
+  get<Key extends keyof TStore>(key: Key): TStore[Key] | undefined
+  get<Key extends keyof TStore>(key: Key, defValue: NonNullable<TStore[Key]>): NonNullable<TStore[Key]>
+  set<Key extends keyof TStore>(key: Key, value: NonNullable<TStore[Key]>): void
+  addToCollection<Key extends keyof TStore>(key: Key, value: NonNullable<ArrayElementType<TStore[Key]>>): void
 }
 
-export interface AnalysisContext {
+export interface AnalysisContext<TStore = any> {
   result: CodeInfo[]
   rootDir: string
   files: FileFsUnit[]
   fsUnits: FileOrFolderFsUnit[]
   hooks: AnalysisContextHooks
-  store: AnalysisContextStore
+  store: AnalysisContextStore<Partial<TStore>>
 
   getFolders: (predicate: (folderItem: FolderItem) => boolean | Promise<boolean>) => Promise<FolderFsUnit[]>
 

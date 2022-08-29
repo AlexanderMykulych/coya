@@ -1,12 +1,11 @@
 import { relative } from "path"
 import { Project } from "ts-morph"
-import { AnalysisContext } from "../../context/analysisContext"
-import { processFile } from "../../project/analyzeProject"
 import { readFile } from "../../project/getEntryPoint"
 import { analyzeSourceFile } from "../../source-file/analyzeSourceFile"
-import { FileMap } from "./types"
+import { processFile } from "./plugins/processFile"
+import type { TsJsAnalysisContext } from "./types"
 
-export async function run(context: AnalysisContext): Promise < void> {
+export async function run(context: TsJsAnalysisContext): Promise < void> {
   const project = new Project({
     useInMemoryFileSystem: true,
     compilerOptions: {
@@ -23,7 +22,7 @@ export async function run(context: AnalysisContext): Promise < void> {
 
     const file = await readFile(fileUnit.filepath)
     if (file) {
-      const processedFile = await processFile(file)
+      const processedFile = await processFile(file, context)
 
       if (processedFile.file.endsWith('.ts') || processedFile.file.endsWith('.js')) {
 
@@ -31,7 +30,7 @@ export async function run(context: AnalysisContext): Promise < void> {
         const relativeOldFile = relative(context.rootDir, file.file)
 
         if (relativeOldFile !== relativeNewFile) {
-          context.store.addToCollection<FileMap>('files', {
+          context.store.addToCollection('files', {
             originFile: `/${relativeOldFile}`,
             resultFile: `/${relativeNewFile}`,
           })

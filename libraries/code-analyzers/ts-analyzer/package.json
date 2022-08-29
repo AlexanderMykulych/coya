@@ -35,7 +35,9 @@
     "playwright": "~1.25.0",
     "vite": "~3.0.9",
     "coya-core": "~0.9.20",
-    "find-free-port": "~2.0.0"
+    "find-free-port": "~2.0.0",
+    "types-package-json": "~2.0.39",
+    "vue-template-compiler": "~2.7.10"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.25.2",

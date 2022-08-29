@@ -1,6 +1,6 @@
 import { dirname } from "path";
 import type { AnalysisContext } from "../../context/analysisContext";
-import type { FileFsUnit, FolderFsUnit, FsUnit } from "../../fs/types";
+import type { FileFsUnit, FolderFsUnit } from "../../fs/types";
 import { CodeInfo, CodeInfoType, EntityType, Relationship, RelationType } from "../../types";
 import { definePlugin } from "../definePlugin";
 

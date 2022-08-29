@@ -1,10 +1,19 @@
-import { AnalysisContext } from "../../context/analysisContext"
+import { readFile } from "../../project/getEntryPoint"
 import { CodeInfo, CodeInfoType } from "../../types"
-import { FileMap } from "./types"
+import type { FileMap, TsJsAnalysisContext } from "./types"
+import type { PackageJson } from 'types-package-json'
+import { onAnalyzePackageJson } from "./plugins/plugins"
 
-export function init(context: AnalysisContext): Promise<void> {
+export async function init(context: TsJsAnalysisContext): Promise<void> {
+
+  await analyzePackageJson(context)
+
+  subscribesOnHooks(context)
+}
+
+function subscribesOnHooks(context: TsJsAnalysisContext) {
   const normalizeId = (id: string) => {
-    const files = context.store.get<FileMap[]>('files', [])
+    const files = context.store.get('files', [])
     const fileMap = files.find(x => id.startsWith(x.resultFile))
 
     return fileMap ? id.replace(fileMap.resultFile, fileMap.originFile) : id
@@ -19,6 +28,24 @@ export function init(context: AnalysisContext): Promise<void> {
       codeInfo.from = normalizeId(codeInfo.from)
     }
   })
-
-  return Promise.resolve()
 }
+
+async function analyzePackageJson(context: TsJsAnalysisContext) {
+  const packageFile = context.files.find(x => x.filename === 'package.json')
+  if (packageFile) {
+    const file = await readFile(packageFile.filepath)
+    if (file) {
+      setDependencyInfos(file.text, context)
+    }
+  }
+}
+
+function setDependencyInfos(packageJsonText: string, context: TsJsAnalysisContext) {
+  const packageJson = JSON.parse(packageJsonText) as PackageJson
+
+  onAnalyzePackageJson({
+    context,
+    packageJson,
+  })
+}
+

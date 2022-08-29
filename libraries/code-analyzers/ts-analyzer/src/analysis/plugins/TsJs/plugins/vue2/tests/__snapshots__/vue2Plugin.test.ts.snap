@@ -1,0 +1,432 @@
+// Vitest Snapshot v1
+
+exports[`s 1`] = `
+{
+  "file": "/Users/alexandermykulych/Dev/coya/libraries/code-analyzers/ts-analyzer/src/analysis/plugins/TsJs/plugins/vue2/tests/cmp1.vue.ts",
+  "text": "
+import { fn1 } from './utils/util';
+
+export default {
+  data() {
+    return {
+      val: fn1(1)
+    }
+  }
+}
+
+import { toDisplayString as _toDisplayString, openBlock as _openBlock, createElementBlock as _createElementBlock } from \\"vue\\"
+
+export function render(_ctx, _cache) {
+  return (_openBlock(), _createElementBlock(\\"div\\", null, _toDisplayString(_ctx.val), 1 /* TEXT */))
+}",
+}
+`;
+
+exports[`should render vue2 component: ./cmp1.vue 1`] = `
+{
+  "file": "/Users/alexandermykulych/Dev/coya/libraries/code-analyzers/ts-analyzer/src/analysis/plugins/TsJs/plugins/vue2/tests/cmp1.vue.ts",
+  "text": "
+import { fn1 } from './utils/util';
+
+export default {
+  data() {
+    return {
+      val: fn1(1)
+    }
+  }
+}
+
+import { toDisplayString as _toDisplayString, openBlock as _openBlock, createElementBlock as _createElementBlock } from \\"vue\\"
+
+export function render(_ctx, _cache) {
+  return (_openBlock(), _createElementBlock(\\"div\\", null, _toDisplayString(_ctx.val), 1 /* TEXT */))
+}",
+}
+`;
+
+exports[`should render vue2 component: ./cmp2.vue 1`] = `
+{
+  "file": "/Users/alexandermykulych/Dev/coya/libraries/code-analyzers/ts-analyzer/src/analysis/plugins/TsJs/plugins/vue2/tests/cmp2.vue.ts",
+  "text": "
+import Vue from 'vue'
+
+import NavBar from '@/mobile/layouts/partials/NavBar/NavBar.vue'
+import { TabBar } from '@/mobile/layouts/partials/TabBar'
+import { apiMy } from '@/shared/api'
+import { AppStateService } from '@/shared/services'
+
+export default Vue.extend({
+  components: {
+    NavBar,
+    TabBar,
+  },
+  props: {
+    fillContainer: {
+      default: false,
+      type: Boolean,
+    },
+    hideTabBar: {
+      default: false,
+      type: Boolean,
+    },
+    hideNotifications: {
+      default: false,
+      type: Boolean,
+    },
+    hideProfile: {
+      default: false,
+      type: Boolean,
+    },
+  },
+  data() {
+    return {
+      stat: {},
+    }
+  },
+  created() {
+    if (!AppStateService.isTU) {
+      this.getStat()
+    }
+  },
+  methods: {
+    getStat() {
+      apiMy.getMyStat().then((resp) => {
+        this.stat = resp.counters || {}
+      })
+    },
+  },
+})
+
+import { renderSlot as _renderSlot, resolveComponent as _resolveComponent, createVNode as _createVNode, normalizeClass as _normalizeClass, createElementVNode as _createElementVNode, createCommentVNode as _createCommentVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \\"vue\\"
+
+const _hoisted_1 = { class: \\"main-layout\\" }
+
+export function render(_ctx, _cache) {
+  const _component_NavBar = _resolveComponent(\\"NavBar\\")
+  const _component_TabBar = _resolveComponent(\\"TabBar\\")
+
+  return (_openBlock(), _createElementBlock(\\"div\\", _hoisted_1, [
+    _renderSlot(_ctx.$slots, \\"popup\\"),
+    _renderSlot(_ctx.$slots, \\"nav-bar\\", {}, () => [
+      _createVNode(_component_NavBar, {
+        notifications: _ctx.stat.notifications,
+        hideNotifications: _ctx.hideNotifications,
+        hideProfile: _ctx.hideProfile
+      }, null, 8 /* PROPS */, [\\"notifications\\", \\"hideNotifications\\", \\"hideProfile\\"])
+    ]),
+    _renderSlot(_ctx.$slots, \\"notification\\"),
+    _createElementVNode(\\"div\\", {
+      class: _normalizeClass([\\"main-container\\", { 'main-container_full': _ctx.fillContainer }])
+    }, [
+      _renderSlot(_ctx.$slots, \\"content\\")
+    ], 2 /* CLASS */),
+    (!_ctx.hideTabBar)
+      ? _renderSlot(_ctx.$slots, \\"tab-bar\\", { key: 0 }, () => [
+          _createVNode(_component_TabBar, {
+            stats: _ctx.stat.sidebar
+          }, null, 8 /* PROPS */, [\\"stats\\"])
+        ])
+      : _createCommentVNode(\\"v-if\\", true)
+  ]))
+}",
+}
+`;
+
+exports[`should render vue2 component: ./cmp3.vue 1`] = `
+{
+  "file": "/Users/alexandermykulych/Dev/coya/libraries/code-analyzers/ts-analyzer/src/analysis/plugins/TsJs/plugins/vue2/tests/cmp3.vue.ts",
+  "text": "
+import { eventSubtypes, UserWebTracker } from '@socialtechnologies/tracking-web'
+import { Component, Vue, Watch } from 'vue-property-decorator'
+import { Getter } from 'vuex-class'
+
+import { Site } from '@/common/types/api'
+import { ConfirmEmailModal, ConfirmEmailModalProps } from '@/components/modal/confirmEmail'
+import SwitchMobile from '@/components/switch-mobile/SwitchMobile.vue'
+import { getTrackingResult } from '@/helpers/track/banner'
+import { NotificationsContainerDesktop } from '@/modules/Notifications'
+import BillingVerification from '@/pages/billingVerification/BillingVerification.vue'
+import router from '@/router'
+import { FingerprintService } from '@/service'
+import BannersService from '@/service/banner/BannersService'
+import { apiPushClient, apiSettings } from '@/shared/api'
+import ContactUs from '@/shared/components/contactUs/ContactUs.vue'
+import {
+  AutoFreeCreditsModal,
+  AutoFreeCreditsModalProps,
+} from '@/shared/components/modal/autoFreeCredits'
+import StreamOverlay from '@/shared/components/streamOverlay/StreamOverlay.vue'
+import { fireIframePixels, initPingdom, initGTMScript } from '@/shared/helpers'
+import {
+  ConfirmEmailService,
+  MirrorsService,
+  AppStateService,
+  CreditsService,
+  HotjarService,
+  SendiosService,
+  ModalService,
+} from '@/shared/services'
+import LocalStorage, { LOCALS } from '@/shared/services/localStorage/LocalStorage'
+import subscribeOnSocketEventsEngagement from '@/subscribeOnSocketEventsEngagement'
+
+import RedirectService from './services/RedirectService'
+
+@Component({
+  router,
+  components: {
+    NotificationsContainerDesktop,
+    SwitchMobile,
+    BillingVerification,
+    ContactUs,
+    StreamOverlay,
+  },
+})
+export default class RootRU extends Vue {
+  @Getter('mirrorConfig') mirrorConfig: Site.MirrorConfig
+  @Getter('myProfile') myProfile: Site.PersonalProfile
+  @Getter('isProfileDeactivated') isProfileDeactivated: boolean
+  @Getter('isLoggedIn') isLoggedIn: boolean
+
+  isAdBlockDetected = false
+  isLoading = true
+  isConfirmEmailPopupShown = false
+
+  created(): void {
+    this.checkAfterRouterChange()
+    this.testToAddBlockerPlugin()
+    initPingdom()
+    this.checkCanSendEmail()
+
+    this.isLoading = false
+    HotjarService.checkAndInitForMirror(AppStateService.siteMirror, 'desktop')
+  }
+
+  async mounted(): Promise<void> {
+    await RedirectService.resolveForceRedirect()
+    fireIframePixels(['email_confirm'])
+
+    if (this.isLoggedIn) {
+      await this.loggedUserInitialization()
+
+      this.$nextTick(() => initGTMScript())
+    }
+  }
+
+  checkAfterRouterChange(): void {
+    let prevPage = null
+
+    router.afterEach((to) => {
+      UserWebTracker.trackEventResult([eventSubtypes.Banner.Product], getTrackingResult())
+
+      if (this.isProfileDeactivated) {
+        return
+      }
+
+      if (prevPage !== to.name && !to.meta.isPublic) {
+        prevPage = to.name
+      }
+      BannersService.setIdGirl(to.path, to.name)
+
+      if (!to.meta.isPreProduct) {
+        SendiosService.popup()
+
+        if (BannersService.isAllowedMirror()) {
+          BannersService.requestNotificationBanner(to.name)
+        }
+
+        if (!MirrorsService.isEthnic(AppStateService.siteMirror)) {
+          this.showConfirmPopupIfAvailable(to.name)
+        }
+
+        this.showAutoFreeCreditsPopupIfAvailable()
+      }
+    })
+  }
+
+  showAutoFreeCreditsPopupIfAvailable(): void {
+    if (!this.isConfirmEmailPopupShown && CreditsService.shouldAutoFreeCreditsPopupBeShown()) {
+      CreditsService.removeAutoFreeCreditsPopupStatus()
+      this.$store.commit('SHOW_AUTO_FREE_CREDITS_POPUP')
+
+      if (CreditsService.isDisabledAutoGetFreeCreditsPopup) {
+        this.$store.commit('HIDE_AUTO_FREE_CREDITS_POPUP')
+      } else {
+        if (!MirrorsService.isEthnic(AppStateService.siteMirror)) return
+
+        ModalService.openModal<AutoFreeCreditsModalProps>({
+          component: AutoFreeCreditsModal,
+          props: {
+            onClose: () => {
+              this.showConfirmPopupIfAvailable(this.$route.name)
+
+              this.$store.commit('HIDE_AUTO_FREE_CREDITS_POPUP')
+            },
+          },
+          params: {
+            clickToClose: false,
+          },
+        })
+      }
+    }
+  }
+
+  showConfirmPopupIfAvailable(route: string): void {
+    const shouldShowConfirmEmail = ConfirmEmailService.shouldShowConfirmEmail(this.myProfile)
+
+    const shouldShowBlockingConfirmEmail = ConfirmEmailService.shouldShowBlockingConfirmEmail(
+      this.myProfile,
+      route,
+    )
+    const params = {
+      clickToClose: true,
+      width: 608,
+    }
+
+    if (shouldShowConfirmEmail || shouldShowBlockingConfirmEmail) {
+      this.isConfirmEmailPopupShown = true
+      this.$store.commit('SHOW_EMAIL_CONFIRM_POPUP')
+
+      ModalService.openModal<ConfirmEmailModalProps>({
+        component: ConfirmEmailModal,
+        props: {
+          profile: this.myProfile,
+          onClose: this.onConfirmEmailClosing.bind(this),
+          isClosingAvailable: !shouldShowBlockingConfirmEmail,
+        },
+        params,
+      })
+    }
+  }
+
+  /**
+   * plich-10537
+   */
+  async checkCanSendEmail(): Promise<void> {
+    const GIBRALTAR_COUNTRY_ID = 2411586
+
+    if (
+      this.myProfile.id_country === GIBRALTAR_COUNTRY_ID
+      && !LocalStorage.get(LOCALS.MARKETING_LOCATION)
+    ) {
+      await apiSettings.notificationsSettings({
+        break: 'forever',
+      })
+      LocalStorage.set(LOCALS.MARKETING_LOCATION, 1)
+    }
+  }
+
+  testToAddBlockerPlugin(): void {
+    // adBlockEnabled test
+    let adBlockEnabled = false
+    const testAd = document.createElement('div')
+
+    testAd.innerHTML = '&nbsp;'
+    testAd.className = 'adsbox'
+    document.body.appendChild(testAd)
+
+    window.setTimeout(() => {
+      if (testAd.offsetHeight === 0) {
+        adBlockEnabled = true
+      }
+      document.body.removeChild(testAd)
+      // eslint-disable-next-line no-console
+      console.log('AdBlock Enabled? ', adBlockEnabled)
+
+      if (adBlockEnabled) {
+        this.isAdBlockDetected = true
+      }
+    }, 100)
+  }
+
+  async loggedUserInitialization(): Promise<void> {
+    apiPushClient.init()
+    await CreditsService.checkFraudUser()
+
+    subscribeOnSocketEventsEngagement()
+
+    await FingerprintService.init()
+
+    HotjarService.checkAndInit({
+      mirror: AppStateService.siteMirror,
+      mirrorType: 'desktop',
+      userData: {
+        id: this.myProfile.id,
+        dateCreated: this.myProfile.date_created,
+      },
+    })
+    await this.processFreeCreditsIfAvailable()
+  }
+
+  async processFreeCreditsIfAvailable(): Promise<void> {
+    if (CreditsService.areFreeCreditsAvailable) {
+      await CreditsService.autoGetFreeCredits()
+
+      if (!this.$router.currentRoute.meta.isPreProduct) {
+        this.showAutoFreeCreditsPopupIfAvailable()
+      }
+    }
+  }
+
+  private onConfirmEmailClosing(): void {
+    this.isConfirmEmailPopupShown = false
+    this.$store.commit('HIDE_EMAIL_CONFIRM_POPUP')
+  }
+
+  @Watch('isLoggedIn')
+  async onChangeLogin(val): Promise<void> {
+    if (val) {
+      await this.loggedUserInitialization()
+    }
+  }
+}
+
+import { resolveComponent as _resolveComponent, createVNode as _createVNode, openBlock as _openBlock, createBlock as _createBlock, createCommentVNode as _createCommentVNode, createElementVNode as _createElementVNode, withModifiers as _withModifiers, toDisplayString as _toDisplayString, createElementBlock as _createElementBlock } from \\"vue\\"
+
+const _hoisted_1 = { class: \\"main-app-content\\" }
+const _hoisted_2 = {
+  key: 1,
+  class: \\"overlay\\"
+}
+const _hoisted_3 = { class: \\"popup\\" }
+const _hoisted_4 = /*#__PURE__*/_createElementVNode(\\"h2\\", null, \\"Adblock detected\\", -1 /* HOISTED */)
+const _hoisted_5 = { class: \\"content\\" }
+
+export function render(_ctx, _cache) {
+  const _component_SwitchMobile = _resolveComponent(\\"SwitchMobile\\")
+  const _component_NotificationsContainerDesktop = _resolveComponent(\\"NotificationsContainerDesktop\\")
+  const _component_router_view = _resolveComponent(\\"router-view\\")
+  const _component_ContactUs = _resolveComponent(\\"ContactUs\\")
+  const _component_BillingVerification = _resolveComponent(\\"BillingVerification\\")
+  const _component_StreamOverlay = _resolveComponent(\\"StreamOverlay\\")
+
+  return (_openBlock(), _createElementBlock(\\"div\\", _hoisted_1, [
+    _createVNode(_component_SwitchMobile),
+    _createVNode(_component_NotificationsContainerDesktop),
+    _createVNode(_component_router_view),
+    (_ctx.isLoggedIn && _ctx.myProfile.is_premium)
+      ? (_openBlock(), _createBlock(_component_ContactUs, { key: 0 }))
+      : _createCommentVNode(\\"v-if\\", true),
+    (_ctx.isAdBlockDetected)
+      ? (_openBlock(), _createElementBlock(\\"div\\", _hoisted_2, [
+          _createElementVNode(\\"div\\", _hoisted_3, [
+            _hoisted_4,
+            _createElementVNode(\\"a\\", {
+              class: \\"close\\",
+              href: \\"#\\",
+              \\"data-test-id\\": \\"file:r-u click:is-ad-block-detected-false ×\\",
+              onClick: _cache[0] || (_cache[0] = _withModifiers($event => (_ctx.isAdBlockDetected = false), [\\"prevent\\"]))
+            }, \\"×\\"),
+            _createElementVNode(\\"div\\", _hoisted_5, \\" Please, disable your AdBlock in order \\" + _toDisplayString(_ctx.mirrorConfig.mirror.name) + \\" to work properly! \\", 1 /* TEXT */)
+          ])
+        ]))
+      : _createCommentVNode(\\"v-if\\", true),
+    (_ctx.isLoggedIn)
+      ? (_openBlock(), _createBlock(_component_BillingVerification, { key: 2 }))
+      : _createCommentVNode(\\"v-if\\", true),
+    (_ctx.isLoggedIn)
+      ? (_openBlock(), _createBlock(_component_StreamOverlay, { key: 3 }))
+      : _createCommentVNode(\\"v-if\\", true)
+  ]))
+}",
+}
+`;
