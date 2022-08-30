@@ -1,6 +1,6 @@
 import vue3Traspiler from "../../../../transpilers/vue3/vue3Traspiler";
 import { definePlugin } from "../definePlugin";
-import { AnalysisContextStore } from "./types";
+import type { AnalysisContextStore } from "./types";
 
 export default definePlugin<AnalysisContextStore>({
   name: 'vue2-sfc-processor',
@@ -19,7 +19,7 @@ export default definePlugin<AnalysisContextStore>({
   on: {
     analyzePackageJson({ packageJson, context }) {
       const vueVersion = packageJson?.dependencies?.['vue']
-      context.store.set('isVue2', !vueVersion || vueVersion.startsWith('2.'))
-    }
+      context.store.set('isVue2', vueVersion?.startsWith('2.') ?? false)
+    },
   }
 })

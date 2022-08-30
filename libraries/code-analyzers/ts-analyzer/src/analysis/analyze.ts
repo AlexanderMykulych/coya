@@ -1,7 +1,8 @@
 import { AnalysisContext, createContext } from './context/analysisContext'
 import { createNestedContext } from "./context/createNestedContext"
-import { AnalysisPlugin, getAnalysisPlugins } from './plugins/getAnalysisPlugins'
-import { CodeInfo } from './types'
+import { getAnalysisPlugins } from './plugins/getAnalysisPlugins'
+import type { AnalysisPlugin } from './plugins/types'
+import type { CodeInfo } from './types'
 
 export async function analyze(basePath: string): Promise<CodeInfo[]> {
   const context = await createContext(basePath)

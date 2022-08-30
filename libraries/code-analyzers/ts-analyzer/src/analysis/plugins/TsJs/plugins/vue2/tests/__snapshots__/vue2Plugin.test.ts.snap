@@ -1,27 +1,5 @@
 // Vitest Snapshot v1
 
-exports[`s 1`] = `
-{
-  "file": "/Users/alexandermykulych/Dev/coya/libraries/code-analyzers/ts-analyzer/src/analysis/plugins/TsJs/plugins/vue2/tests/cmp1.vue.ts",
-  "text": "
-import { fn1 } from './utils/util';
-
-export default {
-  data() {
-    return {
-      val: fn1(1)
-    }
-  }
-}
-
-import { toDisplayString as _toDisplayString, openBlock as _openBlock, createElementBlock as _createElementBlock } from \\"vue\\"
-
-export function render(_ctx, _cache) {
-  return (_openBlock(), _createElementBlock(\\"div\\", null, _toDisplayString(_ctx.val), 1 /* TEXT */))
-}",
-}
-`;
-
 exports[`should render vue2 component: ./cmp1.vue 1`] = `
 {
   "file": "/Users/alexandermykulych/Dev/coya/libraries/code-analyzers/ts-analyzer/src/analysis/plugins/TsJs/plugins/vue2/tests/cmp1.vue.ts",

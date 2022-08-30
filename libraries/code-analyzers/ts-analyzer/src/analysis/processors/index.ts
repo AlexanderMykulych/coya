@@ -1,6 +1,4 @@
-import { FileProcessor } from "../types";
-import packageJson from "./packageJson";
-import typescript from "./typescript";
+import type { FileProcessor } from "../types";
 import vue3 from "./vue3";
 
 export const processors: FileProcessor[] = [

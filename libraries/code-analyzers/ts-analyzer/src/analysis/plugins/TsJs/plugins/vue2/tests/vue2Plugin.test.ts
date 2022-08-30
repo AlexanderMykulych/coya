@@ -19,7 +19,7 @@ files.forEach(fileName => {
           get: (name: string) => name === 'isVue2',
         }
       }
-    })
+    } as any)
 
     expect(result).toMatchSnapshot()
   })

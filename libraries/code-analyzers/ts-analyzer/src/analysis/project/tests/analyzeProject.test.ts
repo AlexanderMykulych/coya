@@ -1,16 +1,15 @@
 import path from 'path'
 import { expect, test } from 'vitest'
 import { analyze } from '../../analyze'
-import { analyzeProject } from '../analyzeProject'
 
 test('should analyze simple ts project', async () => {
-  const result = await analyzeProject(path.resolve(__dirname, './cases/project4'))
+  const result = await analyze(path.resolve(__dirname, './cases/project4'))
 
   expect(result).toMatchSnapshot()
 })
 
 test('should analyze vue-ts project', async () => {
-  const result = await analyzeProject(path.resolve(__dirname, './cases/project5'))
+  const result = await analyze(path.resolve(__dirname, './cases/project5'))
 
   expect(result).toMatchSnapshot()
 
@@ -23,7 +22,7 @@ test('should analyze vue-ts project', async () => {
 
   expect(result).toEqual(expect.arrayContaining([
     expect.objectContaining({
-      id: '/cmp.vue.ts',
+      id: '/cmp.vue',
       type: 'entity',
     }),
     expect.objectContaining({

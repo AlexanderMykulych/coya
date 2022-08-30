@@ -1,5 +1,4 @@
 import { analyze } from "../analysis/analyze";
-import { analyzeProject } from "../analysis/project/analyzeProject";
 import { useNeo4j } from "../neo4j/useNeo4j";
 
 

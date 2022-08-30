@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "typecheck": "vue-tsc --noEmit",
     "preview": "vite preview",
-    "test": "vitest"
+    "test": "vitest",
+    "test:diagram": "WITH_DIAGRAM=true vitest"
   },
   "dependencies": {
     "@originjs/vite-plugin-commonjs": "^1.0.3",

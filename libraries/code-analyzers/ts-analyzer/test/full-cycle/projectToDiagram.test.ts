@@ -11,7 +11,9 @@ import fp from 'find-free-port'
 import { generateCoyaDiagram } from "../../src/diagramGenerator/generateCoyaDiagram"
 
 
-describe.skip('project to diagram', async () => {
+describe
+  .runIf(process.env.WITH_DIAGRAM === 'true')
+  ('project to diagram', async () => {
   let server: ViteDevServer
   let browser: Browser
   let page: Page
@@ -84,12 +86,12 @@ describe.skip('project to diagram', async () => {
 
       const { coya } = await generateCoyaDiagram(fullProjectPath)
 
-      await page.goto(`http://localhost:${port}/diagram`)
 
+      await page.goto(`http://localhost:${port}/diagram`)
       await page.evaluate((config) => window.coyaConfig = config, coya)
 
       await expect(page.locator('.coya-container')).toBeVisible({timeout: 150_000})
-      await page.waitForTimeout(1500)
+      await page.waitForTimeout(500)
 
       const screenshoot = await page.screenshot()
 
