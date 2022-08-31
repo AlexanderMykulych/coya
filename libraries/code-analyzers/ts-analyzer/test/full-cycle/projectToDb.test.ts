@@ -1,5 +1,5 @@
 import path from 'path'
-import { test, expect, describe } from 'vitest'
+import { test, expect, describe, beforeAll } from 'vitest'
 import { insertProjectInfoToDb } from '../../src/diagramGenerator/insertProjectInfoToDb'
 
 describe.each([
@@ -16,9 +16,15 @@ describe.each([
     projectPath: '/cases/04_vue',
   },
 ])('project to db: $projectPath', async ({ projectPath }) => {
-  const fullProjectPath = path.join(__dirname, projectPath)
 
-  const { db } = await insertProjectInfoToDb(fullProjectPath)
+  let db: Awaited<ReturnType<typeof insertProjectInfoToDb>>['db']
+
+  beforeAll(async () => {
+    const fullProjectPath = path.join(__dirname, projectPath)
+  
+    const { db: dataBase } = await insertProjectInfoToDb(fullProjectPath)
+    db = dataBase
+  }, -1)
 
   test(`should return project info entities from db: ${projectPath}`, async () => {
 

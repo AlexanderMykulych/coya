@@ -1,6 +1,6 @@
-import { promises as fs } from "fs";
+import { stat, readFile as fsReadFile } from "fs/promises";
 import path from "path";
-import { FileText } from "../types";
+import type { FileText } from "../types";
 import { getRelativePath } from "./getRelativePath";
 
 const entryFiles = ['index.js', 'index.ts'] as const
@@ -9,7 +9,7 @@ export async function getEntryPoint(projectPath: string): Promise<FileText | nul
   for await (const file of entryFiles) {
     const filePath = path.resolve(projectPath, file)
     try {
-      const res = await fs.stat(filePath)
+      const res = await stat(filePath)
       if (res) {
         return await readFile(filePath, projectPath)
       }
@@ -26,7 +26,10 @@ export async function readFile(filePath: string, basePath?: string): Promise<Fil
     filePath = `${filePath}.ts`
   }
   try {
-    const textBuff = await fs.readFile(filePath)
+    const textBuff = await fsReadFile(filePath, {
+      flag: 'r',
+      encoding: 'utf-8',
+    })
     return {
       file: basePath ? getRelativePath(basePath, filePath) : filePath,
       text: textBuff.toString(),

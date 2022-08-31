@@ -20,29 +20,31 @@ export async function run(context: TsJsAnalysisContext): Promise < void> {
       continue
     }
 
-    const file = await readFile(fileUnit.filepath)
-    if (file) {
-      const processedFile = await processFile(file, context)
+    if (fileUnit.filepath.endsWith('.ts') || fileUnit.filepath.endsWith('.vue')) {
+      const file = await readFile(fileUnit.filepath)
+      if (file) {
+        const processedFile = await processFile(file, context)
 
-      if (processedFile.file.endsWith('.ts') || processedFile.file.endsWith('.js')) {
+        if (processedFile.file.endsWith('.ts') || processedFile.file.endsWith('.js')) {
 
-        const relativeNewFile = relative(context.rootDir, processedFile.file)
-        const relativeOldFile = relative(context.rootDir, file.file)
+          const relativeNewFile = relative(context.rootDir, processedFile.file)
+          const relativeOldFile = relative(context.rootDir, file.file)
 
-        if (relativeOldFile !== relativeNewFile) {
-          context.store.addToCollection('files', {
-            originFile: `/${relativeOldFile}`,
-            resultFile: `/${relativeNewFile}`,
-          })
+          if (relativeOldFile !== relativeNewFile) {
+            context.store.addToCollection('files', {
+              originFile: `/${relativeOldFile}`,
+              resultFile: `/${relativeNewFile}`,
+            })
+          }
+          
+          project.createSourceFile(
+            relativeNewFile,
+            processedFile.text,
+            {
+              overwrite: true,
+            },
+          )
         }
-
-        project.createSourceFile(
-          relativeNewFile,
-          processedFile.text,
-          {
-            overwrite: true,
-          },
-        )
       }
     }
   }
