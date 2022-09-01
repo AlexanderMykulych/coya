@@ -1,5 +1,6 @@
-import { ImportSpecifier } from "ts-morph";
+import type { ImportSpecifier } from "ts-morph";
 import { BaseEntity, CodeInfoType, EntityType } from "../../types";
+import { getLocation } from "./getLocation";
 import { getParentId, getParentsInfo } from "./getParentId";
 
 export function getImportSpecifierId(node: ImportSpecifier): BaseEntity {
@@ -11,6 +12,7 @@ export function getImportSpecifierId(node: ImportSpecifier): BaseEntity {
     type: CodeInfoType.Entity,
     source: moduleSourceFile
       ? getParentsInfo(moduleSourceFile)
-      : []
+      : [],
+    ...getLocation(node),
   }
 }

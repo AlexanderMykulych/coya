@@ -1,5 +1,5 @@
-import { Identifier } from "ts-morph";
-import { Entity } from "../../types";
+import type { Identifier } from "ts-morph";
+import type { Entity } from "../../types";
 import { getNodeInfo } from "./getNodeId";
 
 export function getIdentifierInfo(node: Identifier): Entity {

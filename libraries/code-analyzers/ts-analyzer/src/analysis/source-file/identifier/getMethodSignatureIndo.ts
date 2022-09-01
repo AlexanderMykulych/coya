@@ -1,5 +1,6 @@
 import type { MethodSignature } from "ts-morph";
 import { EntityType, FunctionEntity, CodeInfoType } from "../../types";
+import { getLocation } from "./getLocation";
 import { getParentId, getParentsInfo } from "./getParentId";
 
 export function getMethodSignatureIndo(method: MethodSignature): FunctionEntity {
@@ -10,6 +11,7 @@ export function getMethodSignatureIndo(method: MethodSignature): FunctionEntity 
     typeString: method.getType().getText(),
     type: CodeInfoType.Entity,
     filePath: sourceFile.getFilePath(),
-    source: getParentsInfo(method) ?? []
+    source: getParentsInfo(method) ?? [],
+    ...getLocation(method),
   }
 }

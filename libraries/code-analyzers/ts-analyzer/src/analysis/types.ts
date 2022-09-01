@@ -8,7 +8,20 @@ export interface SourceContainer {
   project: Project
 }
 export type EntityId = string
-export interface BaseEntity<TSource = Entity> {
+
+export interface EntityLogLocation {
+  logStart: number
+  code: string
+}
+export interface EntityLocation extends Partial<EntityLogLocation>{
+  start: number
+  end: number
+  lineStart: number
+  lineEnd: number
+  kind: string
+}
+
+export interface BaseEntity<TSource = Entity> extends EntityLocation {
   type: CodeInfoType.Entity
   filePath: string
   id: EntityId

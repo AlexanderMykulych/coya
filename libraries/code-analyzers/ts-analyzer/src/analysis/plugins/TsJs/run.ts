@@ -1,11 +1,13 @@
 import { relative } from "path"
 import { Project } from "ts-morph"
+import { progress } from "../../../progress/progress"
 import { readFile } from "../../project/getEntryPoint"
 import { analyzeSourceFile } from "../../source-file/analyzeSourceFile"
+import { addSourceFileToProject } from "./addSourceFileToProject"
 import { processFile } from "./plugins/processFile"
 import type { TsJsAnalysisContext } from "./types"
 
-export async function run(context: TsJsAnalysisContext): Promise < void> {
+async function _run(context: TsJsAnalysisContext): Promise<void> {
   const project = new Project({
     useInMemoryFileSystem: true,
     compilerOptions: {
@@ -36,14 +38,8 @@ export async function run(context: TsJsAnalysisContext): Promise < void> {
               resultFile: `/${relativeNewFile}`,
             })
           }
-          
-          project.createSourceFile(
-            relativeNewFile,
-            processedFile.text,
-            {
-              overwrite: true,
-            },
-          )
+
+          addSourceFileToProject(project, relativeNewFile, processedFile.text)
         }
       }
     }
@@ -55,3 +51,5 @@ export async function run(context: TsJsAnalysisContext): Promise < void> {
 
   await context.addCodeInfos(codeInfos)
 }
+
+export const run = progress('ts-js. run', _run)

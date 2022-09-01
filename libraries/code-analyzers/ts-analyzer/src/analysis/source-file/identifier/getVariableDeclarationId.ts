@@ -1,5 +1,6 @@
-import { VariableDeclaration } from "ts-morph";
+import type { VariableDeclaration } from "ts-morph";
 import { EntityType, BaseEntity, CodeInfoType } from "../../types";
+import { getLocation } from "./getLocation";
 import { getParentId, getParentsInfo } from "./getParentId";
 
 export function getVariableDeclarationId(v: VariableDeclaration): BaseEntity {
@@ -11,6 +12,7 @@ export function getVariableDeclarationId(v: VariableDeclaration): BaseEntity {
     type: CodeInfoType.Entity,
     source: sourceFile
       ? getParentsInfo(sourceFile)
-      : []
+      : [],
+    ...getLocation(v),
   }
 }

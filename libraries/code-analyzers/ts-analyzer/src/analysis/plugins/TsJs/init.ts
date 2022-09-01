@@ -3,8 +3,9 @@ import { CodeInfo, CodeInfoType } from "../../types"
 import type { FileMap, TsJsAnalysisContext } from "./types"
 import type { PackageJson } from 'types-package-json'
 import { onAnalyzePackageJson } from "./plugins/plugins"
+import { progress } from "../../../progress/progress"
 
-export async function init(context: TsJsAnalysisContext): Promise<void> {
+async function _init(context: TsJsAnalysisContext): Promise<void> {
 
   await analyzePackageJson(context)
 
@@ -49,3 +50,4 @@ function setDependencyInfos(packageJsonText: string, context: TsJsAnalysisContex
   })
 }
 
+export const init = progress('ts-js. init', _init)

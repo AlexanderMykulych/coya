@@ -1,5 +1,6 @@
 import { readdir, stat } from "fs/promises";
 import { basename, join, relative } from "path";
+import { progress } from "../../progress/progress";
 import type { FileOrFolderFsUnit, FsUnit, FsUnitsCallback } from "./types";
 
 const bannedDirs = [
@@ -60,9 +61,9 @@ export async function getAllFSUnits(basePath: string, callback: FsUnitsCallback)
   })
 }
 
-export async function getAllFSUnitsFlat(basePath: string, withErrors: true): Promise<FsUnit[]>
-export async function getAllFSUnitsFlat(basePath: string): Promise<FileOrFolderFsUnit[]>
-export async function getAllFSUnitsFlat(basePath: string, withErrors?: true): Promise<(FsUnit | FileOrFolderFsUnit)[]> {
+async function _getAllFSUnitsFlat(basePath: string, withErrors: true): Promise<FsUnit[]>
+async function _getAllFSUnitsFlat(basePath: string): Promise<FileOrFolderFsUnit[]>
+async function _getAllFSUnitsFlat(basePath: string, withErrors?: true): Promise<(FsUnit | FileOrFolderFsUnit)[]> {
   const results: FsUnit[] = []
 
   await getAllFSUnits(basePath, unit => results.push(unit))
@@ -72,3 +73,5 @@ export async function getAllFSUnitsFlat(basePath: string, withErrors?: true): Pr
     : results
       .filter((x): x is FileOrFolderFsUnit => x.type === 'file' || x.type === 'folder')
 }
+
+export const getAllFSUnitsFlat = progress('fs. getAllFSUnitsFlat', _getAllFSUnitsFlat)

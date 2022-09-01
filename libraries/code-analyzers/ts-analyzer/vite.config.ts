@@ -43,5 +43,6 @@ export default defineConfig({
       reporter: ['text', 'json', 'html']
     },
     threads: false,
+    setupFiles: ['./setup.vitest.ts'],
   },
 })

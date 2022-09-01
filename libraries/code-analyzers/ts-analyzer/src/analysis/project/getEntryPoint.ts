@@ -1,5 +1,6 @@
 import { stat, readFile as fsReadFile } from "fs/promises";
 import path from "path";
+import { progress } from "../../progress/progress";
 import type { FileText } from "../types";
 import { getRelativePath } from "./getRelativePath";
 
@@ -21,7 +22,7 @@ export async function getEntryPoint(projectPath: string): Promise<FileText | nul
 }
 
 
-export async function readFile(filePath: string, basePath?: string): Promise<FileText | null> {
+async function _readFile(filePath: string, basePath?: string): Promise<FileText | null> {
   if (!path.extname(filePath)) {
     filePath = `${filePath}.ts`
   }
@@ -40,3 +41,5 @@ export async function readFile(filePath: string, basePath?: string): Promise<Fil
 
   return null
 }
+
+export const readFile = progress('readFile', _readFile)

@@ -1,4 +1,4 @@
-import { SourceFile } from "ts-morph";
+import type { SourceFile } from "ts-morph";
 import { CodeInfoType, EntityType, FileEntity } from "../../types";
 
 export function getSourceFileId(sourceFile?: SourceFile): FileEntity {

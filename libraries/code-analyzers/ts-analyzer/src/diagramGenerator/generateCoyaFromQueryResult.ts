@@ -1,10 +1,11 @@
 import type { QueryResult } from 'neo4j-driver';
 import { applyPositioning } from 'coya-core'
+import { progressSync } from '../progress/progress';
 
 const getBlockId = (id: string) => `b_${id}`;
 const getArrowId = (id: string) => `a_${id}`;
 
-export function generateCoyaFromGraphResult(result: QueryResult) {
+function _generateCoyaFromGraphResult(result: QueryResult) {
   const blocksMap = new Map<string, any>();
   const arrowsMap = new Map<string, any>();
   result
@@ -94,3 +95,5 @@ export function generateCoyaFromGraphResult(result: QueryResult) {
 
   return diagram;
 }
+
+export const generateCoyaFromGraphResult = progressSync('neo4j data to coya', _generateCoyaFromGraphResult)

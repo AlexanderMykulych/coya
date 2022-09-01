@@ -1,10 +1,11 @@
 import type { SourceFile } from 'ts-morph'
+import { progress } from '../../progress/progress'
 import { CodeInfo, CodeInfoType, Entity, Relationship, RelationType } from '../types'
 import { functionAnalizer } from './functionAnalizer'
 import { getNodeInfo } from './identifier/getNodeId'
 import { importAnalizer } from './importAnalizer'
 
-export function analyzeSourceFile(sourceFile: SourceFile): CodeInfo[] {
+function _analyzeSourceFile(sourceFile: SourceFile): CodeInfo[] {
   const analizers = [
     importAnalizer,
     functionAnalizer,
@@ -41,3 +42,5 @@ export function analyzeSourceFile(sourceFile: SourceFile): CodeInfo[] {
 
   return result
 }
+
+export const analyzeSourceFile = progress('analyzeSourceFile', _analyzeSourceFile)
