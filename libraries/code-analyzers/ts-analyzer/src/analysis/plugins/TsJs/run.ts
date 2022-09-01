@@ -1,7 +1,6 @@
 import { relative } from "path"
 import { Project } from "ts-morph"
 import { progress } from "../../../progress/progress"
-import { readFile } from "../../project/getEntryPoint"
 import { analyzeSourceFile } from "../../source-file/analyzeSourceFile"
 import { addSourceFileToProject } from "./addSourceFileToProject"
 import { processFile } from "./plugins/processFile"
@@ -23,7 +22,7 @@ async function _run(context: TsJsAnalysisContext): Promise<void> {
     }
 
     if (fileUnit.filepath.endsWith('.ts') || fileUnit.filepath.endsWith('.vue')) {
-      const file = await readFile(fileUnit.filepath)
+      const file = await context.readFile(fileUnit.filepath)
       if (file) {
         const processedFile = await processFile(file, context)
 

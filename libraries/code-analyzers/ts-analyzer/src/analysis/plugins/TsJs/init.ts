@@ -35,14 +35,14 @@ async function analyzePackageJson(context: TsJsAnalysisContext) {
   const packageFile = context.files.find(x => x.filename === 'package.json')
   if (packageFile) {
     const file = await readFile(packageFile.filepath)
-    if (file) {
-      setDependencyInfos(file.text, context)
-    }
+
+    setDependencyInfos(file?.text, context)
   }
+  setDependencyInfos(undefined, context)
 }
 
-function setDependencyInfos(packageJsonText: string, context: TsJsAnalysisContext) {
-  const packageJson = JSON.parse(packageJsonText) as PackageJson
+function setDependencyInfos(packageJsonText: string | undefined, context: TsJsAnalysisContext) {
+  const packageJson: PackageJson = packageJsonText ? JSON.parse(packageJsonText) : {}
 
   onAnalyzePackageJson({
     context,

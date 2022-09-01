@@ -3,21 +3,21 @@ import { test, expect, describe, beforeAll } from 'vitest'
 import { insertProjectInfoToDb } from '../../src/diagramGenerator/insertProjectInfoToDb'
 
 describe.each([
-  // {
-  //   projectPath: '/cases/01_simple',
-  // },
-  // {
-  //   projectPath: '/cases/02_function',
-  // },
-  // {
-  //   projectPath: '/cases/03_function_relation',
-  // },
-  // {
-  //   projectPath: '/cases/04_vue',
-  // },
   {
-    projectPath: '../../'
+    projectPath: '/cases/01_simple',
   },
+  {
+    projectPath: '/cases/02_function',
+  },
+  {
+    projectPath: '/cases/03_function_relation',
+  },
+  {
+    projectPath: '/cases/04_vue',
+  },
+  // {
+  //   projectPath: '../../'
+  // },
 ])('project to db: $projectPath', async ({ projectPath }) => {
 
   // let db: Awaited<ReturnType<typeof insertProjectInfoToDb>>['db']

@@ -1,0 +1,26 @@
+// Vitest Snapshot v1
+
+exports[`should transform ts code 1`] = `
+"
+function fn1() {/* /index.ts/fn1 */
+  return 1
+}
+const obj = {
+  fn1() {/* /index.ts/obj/fn1 */
+    return 2
+  },
+  fn2: () => 3,
+  fn3: () => {/* /index.ts/obj/fn3 */ return 4 },
+  fn4: () =>
+    {/* /index.ts/obj/fn4 */
+      return 4 },
+}
+class A {
+  method() {/* /index.ts/method */
+
+    return 5
+  }
+}
+const fn5 = () => {/* /index.ts/fn5 */ return 6 }
+  "
+`;

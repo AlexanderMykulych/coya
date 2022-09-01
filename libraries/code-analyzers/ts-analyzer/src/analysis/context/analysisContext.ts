@@ -1,11 +1,12 @@
 import { stat } from "fs/promises";
 import { resolve } from "path";
 import { getAllFSUnitsFlat } from "../fs/fs";
-import { FileFsUnit, FileOrFolderFsUnit, FolderFsUnit, FsUnit } from "../fs/types";
+import type { FileFsUnit, FileOrFolderFsUnit, FolderFsUnit } from "../fs/types";
 import { deduplicate } from "../project/deduplicate";
-import type { CodeInfo } from "../types";
+import type { CodeInfo, FileText } from "../types";
 import { createHookManager } from "./hook/createHookManager";
 import { createStore } from "./store/createStore";
+import { readFile } from "../project/getEntryPoint"
 
 export interface FolderItem {
   containsFile: (fileName: string) => Promise<boolean>
@@ -38,6 +39,7 @@ export interface AnalysisContext<TStore = any> {
   getFolders: (predicate: (folderItem: FolderItem) => boolean | Promise<boolean>) => Promise<FolderFsUnit[]>
 
   addCodeInfos: (codeInfos: CodeInfo[]) => Promise<void>
+  readFile(filePath: string): Promise<FileText | null>
 }
 
 export async function createContext(rootDir: string): Promise<AnalysisContext> {
@@ -82,6 +84,7 @@ export async function createContext(rootDir: string): Promise<AnalysisContext> {
     fsUnits,
     hooks,
     store: createStore(),
+    readFile,
   }
 }
 
@@ -100,4 +103,62 @@ function createFolderItem(folder: FolderFsUnit): FolderItem {
   }
 }
 
+export async function createContextForOneFile({ code, fileName }: { code: string, fileName: string }): Promise<AnalysisContext> {
+  let resultCodeInfos: CodeInfo[] = []
 
+  const hooks = createHookManager()
+
+  return {
+    rootDir: '.',
+    files: [{
+      filename: fileName,
+      filepath: `./${fileName}`,
+      relativePath: `./${fileName}`,
+      type: 'file',
+    }],
+    async getFolders(predicate) {
+      const folderUnits: FolderFsUnit[] = [{
+        filepath: '.',
+        foldername: '.',
+        relativePath: '.',
+        type: 'folder',
+      }]
+
+      predicate ??= () => true
+
+      const foldersTasks = folderUnits
+        .map(async x => ({
+          isMatch: await predicate(createFolderItem(x)),
+          folder: x,
+        }))
+
+      const folders = await Promise.all(foldersTasks)
+
+      return folders
+        .filter(x => x.isMatch)
+        .map(x => x.folder)
+    },
+    addCodeInfos(codeInfos: CodeInfo[]) {
+      codeInfos = codeInfos.map(x => hooks.beforeAdd(x))
+
+      resultCodeInfos = deduplicate([
+        ...resultCodeInfos,
+        ...codeInfos,
+      ])
+
+      return Promise.resolve()
+    },
+    get result() {
+      return resultCodeInfos
+    },
+    fsUnits: [],
+    hooks,
+    store: createStore(),
+    readFile(filePath) {
+      return Promise.resolve({
+        file: filePath,
+        text: code,
+      })
+    }
+  }
+}

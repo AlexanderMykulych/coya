@@ -130,6 +130,9 @@ exports[`should analyze complex vue-ts project 1`] = `
     "type": "entity",
   },
   {
+    "code": " {
+  return (_openBlock(), _createElementBlock(\\"div\\", null, _toDisplayString(_ctx.val), 1 /* TEXT */))
+}",
     "end": 540,
     "entityType": "function",
     "filePath": "/cmp.vue",
@@ -194,6 +197,15 @@ exports[`should analyze complex vue-ts project 1`] = `
     "type": "relationship",
   },
   {
+    "code": " {
+  expose();
+
+const val = ref(fn1(1))
+
+const __returned__ = { val, fn1 }
+Object.defineProperty(__returned__, '__isScriptSetup', { enumerable: false, value: true })
+return __returned__
+}",
     "end": 269,
     "entityType": "function",
     "filePath": "/cmp.vue",
@@ -201,11 +213,16 @@ exports[`should analyze complex vue-ts project 1`] = `
     "kind": "MethodDeclaration",
     "lineEnd": 12,
     "lineStart": 4,
+    "logStart": 83,
     "start": 56,
     "type": "entity",
     "typeString": "(__props: any, { expose }: { expose: any; }) => { val: any; fn1: typeof import(\\"/utils/util\\").fn1; }",
   },
   {
+    "code": " {
+  const service = getService()
+  return service.method1(a, service.prop1.method2(2))
+}",
     "end": 169,
     "entityType": "function",
     "filePath": "/utils/util.ts",
@@ -302,6 +319,18 @@ exports[`should analyze complex vue-ts project 1`] = `
     "type": "relationship",
   },
   {
+    "code": " {
+  return {
+    method1(a: number, b: number) {
+      return (a + b) / 2
+    },
+    prop1: {
+      method2(a: number) {
+        return a * a
+      }
+    }
+  }
+}",
     "end": 190,
     "entityType": "function",
     "filePath": "/services/service.ts",
@@ -315,6 +344,9 @@ exports[`should analyze complex vue-ts project 1`] = `
     "typeString": "typeof import(\\"/services/service\\").getService",
   },
   {
+    "code": " {
+      return (a + b) / 2
+    }",
     "end": 108,
     "entityType": "function",
     "filePath": "/services/service.ts",
@@ -322,11 +354,15 @@ exports[`should analyze complex vue-ts project 1`] = `
     "kind": "MethodDeclaration",
     "lineEnd": 5,
     "lineStart": 3,
+    "logStart": 76,
     "start": 46,
     "type": "entity",
     "typeString": "(a: number, b: number) => number",
   },
   {
+    "code": " {
+        return a * a
+      }",
     "end": 178,
     "entityType": "function",
     "filePath": "/services/service.ts",
@@ -334,6 +370,7 @@ exports[`should analyze complex vue-ts project 1`] = `
     "kind": "MethodDeclaration",
     "lineEnd": 9,
     "lineStart": 7,
+    "logStart": 148,
     "start": 129,
     "type": "entity",
     "typeString": "(a: number) => number",
@@ -560,6 +597,9 @@ exports[`should analyze complex vue2-ts project 1`] = `
     "type": "entity",
   },
   {
+    "code": " {
+  return (_openBlock(), _createElementBlock(\\"div\\", null, _toDisplayString(_ctx.val), 1 /* TEXT */))
+}",
     "end": 377,
     "entityType": "function",
     "filePath": "/cmp.vue",
@@ -624,6 +664,11 @@ exports[`should analyze complex vue2-ts project 1`] = `
     "type": "relationship",
   },
   {
+    "code": " {
+    return {
+      val: fn1(1)
+    }
+  }",
     "end": 106,
     "entityType": "function",
     "filePath": "/cmp.vue",
@@ -631,11 +676,16 @@ exports[`should analyze complex vue2-ts project 1`] = `
     "kind": "MethodDeclaration",
     "lineEnd": 9,
     "lineStart": 5,
+    "logStart": 64,
     "start": 57,
     "type": "entity",
     "typeString": "() => { val: number; }",
   },
   {
+    "code": " {
+  const service = getService()
+  return service.method1(a, service.prop1.method2(2))
+}",
     "end": 169,
     "entityType": "function",
     "filePath": "/utils/util.ts",
@@ -679,6 +729,18 @@ exports[`should analyze complex vue2-ts project 1`] = `
     "type": "relationship",
   },
   {
+    "code": " {
+  return {
+    method1(a: number, b: number) {
+      return (a + b) / 2
+    },
+    prop1: {
+      method2(a: number) {
+        return a * a
+      }
+    }
+  }
+}",
     "end": 190,
     "entityType": "function",
     "filePath": "/services/service.ts",
@@ -692,6 +754,9 @@ exports[`should analyze complex vue2-ts project 1`] = `
     "typeString": "typeof import(\\"/services/service\\").getService",
   },
   {
+    "code": " {
+      return (a + b) / 2
+    }",
     "end": 108,
     "entityType": "function",
     "filePath": "/services/service.ts",
@@ -699,11 +764,15 @@ exports[`should analyze complex vue2-ts project 1`] = `
     "kind": "MethodDeclaration",
     "lineEnd": 5,
     "lineStart": 3,
+    "logStart": 76,
     "start": 46,
     "type": "entity",
     "typeString": "(a: number, b: number) => number",
   },
   {
+    "code": " {
+        return a * a
+      }",
     "end": 178,
     "entityType": "function",
     "filePath": "/services/service.ts",
@@ -711,6 +780,7 @@ exports[`should analyze complex vue2-ts project 1`] = `
     "kind": "MethodDeclaration",
     "lineEnd": 9,
     "lineStart": 7,
+    "logStart": 148,
     "start": 129,
     "type": "entity",
     "typeString": "(a: number) => number",
@@ -930,23 +1000,121 @@ exports[`should analyze vue-ts project 1`] = `
     "type": "relationship",
   },
   {
-    "from": "/index.ts",
+    "from": "/cmp.vue",
     "relationType": "import",
-    "to": "./cmp.vue",
+    "to": "/util.ts",
     "type": "relationship",
   },
   {
-    "end": 27,
+    "from": "/cmp.vue",
+    "relationType": "import",
+    "to": "vue",
+    "type": "relationship",
+  },
+  {
+    "end": 392,
     "entityType": "import_declaration",
     "filePath": "<unknow>",
-    "id": "./cmp.vue",
+    "id": "vue",
     "kind": "ImportDeclaration",
-    "lineEnd": 1,
-    "lineStart": 1,
-    "start": 0,
+    "lineEnd": 15,
+    "lineStart": 15,
+    "start": 267,
     "type": "entity",
   },
   {
+    "code": " {
+  return (_openBlock(), _createElementBlock(\\"div\\", null, _toDisplayString(_ctx.val), 1 /* TEXT */))
+}",
+    "end": 534,
+    "entityType": "function",
+    "filePath": "/cmp.vue",
+    "id": "/cmp.vue/render",
+    "kind": "FunctionDeclaration",
+    "lineEnd": 19,
+    "lineStart": 17,
+    "logStart": 431,
+    "start": 394,
+    "type": "entity",
+    "typeString": "typeof import(\\"/cmp.vue\\").render",
+  },
+  {
+    "end": 336,
+    "entityType": "variable",
+    "filePath": "<unknown>",
+    "id": "/cmp.vue/openBlock",
+    "kind": "ImportSpecifier",
+    "lineEnd": 15,
+    "lineStart": 15,
+    "start": 313,
+    "type": "entity",
+  },
+  {
+    "end": 379,
+    "entityType": "variable",
+    "filePath": "<unknown>",
+    "id": "/cmp.vue/createElementBlock",
+    "kind": "ImportSpecifier",
+    "lineEnd": 15,
+    "lineStart": 15,
+    "start": 338,
+    "type": "entity",
+  },
+  {
+    "end": 311,
+    "entityType": "variable",
+    "filePath": "<unknown>",
+    "id": "/cmp.vue/toDisplayString",
+    "kind": "ImportSpecifier",
+    "lineEnd": 15,
+    "lineStart": 15,
+    "start": 276,
+    "type": "entity",
+  },
+  {
+    "from": "/cmp.vue/render",
+    "relationType": "use",
+    "to": "/cmp.vue/openBlock",
+    "type": "relationship",
+  },
+  {
+    "from": "/cmp.vue/render",
+    "relationType": "use",
+    "to": "/cmp.vue/createElementBlock",
+    "type": "relationship",
+  },
+  {
+    "from": "/cmp.vue/render",
+    "relationType": "use",
+    "to": "/cmp.vue/toDisplayString",
+    "type": "relationship",
+  },
+  {
+    "code": " {
+  expose();
+
+const val = ref(fn1(1))
+
+const __returned__ = { val, fn1 }
+Object.defineProperty(__returned__, '__isScriptSetup', { enumerable: false, value: true })
+return __returned__
+}",
+    "end": 263,
+    "entityType": "function",
+    "filePath": "/cmp.vue",
+    "id": "/cmp.vue/setup",
+    "kind": "MethodDeclaration",
+    "lineEnd": 12,
+    "lineStart": 4,
+    "logStart": 77,
+    "start": 50,
+    "type": "entity",
+    "typeString": "(__props: any, { expose }: { expose: any; }) => { val: any; fn1: typeof import(\\"/util\\").fn1; }",
+  },
+  {
+    "code": " {
+  return a + 1
+}",
     "end": 49,
     "entityType": "function",
     "filePath": "/util.ts",
@@ -960,9 +1128,86 @@ exports[`should analyze vue-ts project 1`] = `
     "typeString": "typeof import(\\"/util\\").fn1",
   },
   {
+    "end": 2069,
+    "entityType": "variable",
+    "filePath": "/node_modules/typescript/lib/lib.es5.d.ts",
+    "id": "/node_modules/typescript/lib/lib.es5.d.ts/Object",
+    "kind": "VariableDeclaration",
+    "lineEnd": 2,
+    "lineStart": 2,
+    "start": 2045,
+    "type": "entity",
+  },
+  {
+    "end": 1605,
+    "entityType": "function",
+    "filePath": "/node_modules/typescript/lib/lib.es5.d.ts",
+    "id": "/node_modules/typescript/lib/lib.es5.d.ts/defineProperty",
+    "kind": "MethodSignature",
+    "lineEnd": 2,
+    "lineStart": 2,
+    "start": 1522,
+    "type": "entity",
+    "typeString": "<T>(o: T, p: PropertyKey, attributes: PropertyDescriptor & ThisType<any>) => T",
+  },
+  {
+    "from": "/cmp.vue/setup",
+    "relationType": "use",
+    "to": "/util.ts/fn1",
+    "type": "relationship",
+  },
+  {
+    "from": "/cmp.vue/setup",
+    "relationType": "use",
+    "to": "/node_modules/typescript/lib/lib.es5.d.ts/Object",
+    "type": "relationship",
+  },
+  {
+    "from": "/cmp.vue/setup",
+    "relationType": "use",
+    "to": "/node_modules/typescript/lib/lib.es5.d.ts/defineProperty",
+    "type": "relationship",
+  },
+  {
+    "from": "/cmp.vue",
+    "relationType": "parent",
+    "to": "/cmp.vue/render",
+    "type": "relationship",
+  },
+  {
+    "from": "/cmp.vue",
+    "relationType": "parent",
+    "to": "/cmp.vue/setup",
+    "type": "relationship",
+  },
+  {
     "from": "/util.ts",
     "relationType": "parent",
     "to": "/util.ts/fn1",
+    "type": "relationship",
+  },
+  {
+    "entityType": "file",
+    "filePath": "/node_modules/typescript/lib/lib.es5.d.ts",
+    "id": "/node_modules/typescript/lib/lib.es5.d.ts",
+    "type": "entity",
+  },
+  {
+    "from": "/node_modules/typescript/lib/lib.es5.d.ts",
+    "relationType": "parent",
+    "to": "/node_modules/typescript/lib/lib.es5.d.ts/Object",
+    "type": "relationship",
+  },
+  {
+    "from": "/node_modules/typescript/lib/lib.es5.d.ts",
+    "relationType": "parent",
+    "to": "/node_modules/typescript/lib/lib.es5.d.ts/defineProperty",
+    "type": "relationship",
+  },
+  {
+    "from": "/index.ts",
+    "relationType": "import",
+    "to": "/cmp.vue",
     "type": "relationship",
   },
 ]

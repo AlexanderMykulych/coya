@@ -1,6 +1,6 @@
 import vue3Traspiler from "../../../../transpilers/vue3/vue3Traspiler";
 import { definePlugin } from "../definePlugin";
-import { AnalysisContextStore } from "./types";
+import type { AnalysisContextStore } from "./types";
 
 export default definePlugin<AnalysisContextStore>({
   name: 'vue3-sfc-processor',

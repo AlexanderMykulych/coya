@@ -3,21 +3,21 @@ import { test, expect } from 'vitest'
 import { generateCoyaDiagram } from '../../src/diagramGenerator/generateCoyaDiagram'
 
 test.each([
-  // {
-  //   projectPath: '/cases/01_simple',
-  // },
-  // {
-  //   projectPath: '/cases/02_function',
-  // },
-  // {
-  //   projectPath: '/cases/03_function_relation',
-  // },
-  // {
-  //   projectPath: '/cases/04_vue',
-  // },
   {
-    projectPath: '../../'
+    projectPath: '/cases/01_simple',
   },
+  {
+    projectPath: '/cases/02_function',
+  },
+  {
+    projectPath: '/cases/03_function_relation',
+  },
+  {
+    projectPath: '/cases/04_vue',
+  },
+  // {
+  //   projectPath: '../../'
+  // },
   // {
   //   projectPath: '../../../../../../../repo/plich/user-web'
   // },
@@ -26,6 +26,5 @@ test.each([
 
   const { coya } = await generateCoyaDiagram(fullProjectPath)
 
-  expect(coya).toMatchSnapshot()
   expect(Object.keys(coya.blocks).length).toBeGreaterThan(0)
 })
