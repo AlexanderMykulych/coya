@@ -531,6 +531,11 @@
         "reviewCategory": "rnd"
     },
     {
+        "packageName": "vitestTsAnalyzer",
+        "projectFolder": "experimental/vitestTsAnalyzer",
+        "reviewCategory": "rnd"
+    },
+    {
       "packageName": "coya-ts-analyzer",
       "projectFolder": "libraries/code-analyzers/ts-analyzer",
       "reviewCategory": "code-analyzers"

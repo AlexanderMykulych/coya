@@ -2,25 +2,72 @@
 
 exports[`should transform ts code 1`] = `
 "
-function fn1() {/* /index.ts/fn1 */
+function fn1() {
+try {
+/* \\"/index.ts/fn1\\" */
+
   return 1
+
+} finally {
+  /* \\"/index.ts/fn1\\" */
+}
 }
 const obj = {
-  fn1() {/* /index.ts/obj/fn1 */
+  fn1() {
+try {
+/* \\"/index.ts/obj/fn1\\" */
+
     return 2
-  },
+  
+} finally {
+  /* \\"/index.ts/obj/fn1\\" */
+}
+},
   fn2: () => 3,
-  fn3: () => {/* /index.ts/obj/fn3 */ return 4 },
+  fn3: () => {
+try {
+/* \\"/index.ts/obj/fn3\\" */
+ return 4 
+} finally {
+  /* \\"/index.ts/obj/fn3\\" */
+}
+},
   fn4: () =>
-    {/* /index.ts/obj/fn4 */
-      return 4 },
+    {
+try {
+/* \\"/index.ts/obj/fn4\\" */
+
+      return 4 
+} finally {
+  /* \\"/index.ts/obj/fn4\\" */
+}
+},
 }
 class A {
-  method() {/* /index.ts/method */
+  method() {
+try {
+/* \\"/index.ts/method\\" */
 
     return 5
-  }
+  
+} finally {
+  /* \\"/index.ts/method\\" */
 }
-const fn5 = () => {/* /index.ts/fn5 */ return 6 }
-  "
+}
+}
+const fn5 = () => {
+try {
+/* \\"/index.ts/fn5\\" */
+ return 6 
+} finally {
+  /* \\"/index.ts/fn5\\" */
+}
+}
+  
+
+
+
+
+
+"
 `;

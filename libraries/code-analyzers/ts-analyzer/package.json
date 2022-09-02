@@ -2,7 +2,9 @@
   "name": "coya-ts-analyzer",
   "version": "0.9.20",
   "packageManager": "pnpm@7.1.5",
-  "main": "index.ts",
+  "main": "./dist/coya-vitest-analyzer.js",
+  "typings": "index.ts",
+
   "scripts": {
     "build": "vite build",
     "dev": "vite --port 3333 --open",
@@ -38,7 +40,8 @@
     "coya-core": "~0.9.20",
     "find-free-port": "~2.0.0",
     "types-package-json": "~2.0.39",
-    "vue-template-compiler": "~2.7.10"
+    "vue-template-compiler": "~2.7.10",
+    "vite-plugin-commonjs-externals": "~0.1.1"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.25.2",

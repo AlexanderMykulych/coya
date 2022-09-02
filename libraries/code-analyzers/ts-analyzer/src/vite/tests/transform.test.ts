@@ -18,7 +18,6 @@ const obj = {
 }
 class A {
   method() {
-
     return 5
   }
 }

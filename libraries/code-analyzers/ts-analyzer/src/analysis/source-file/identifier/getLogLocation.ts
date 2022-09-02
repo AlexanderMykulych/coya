@@ -7,6 +7,7 @@ export function getLogLocation(node: Node): EntityLogLocation | undefined {
     if (body) {
       return {
         logStart: body.getStart(),
+        logEnd: body.getEnd(),
         code: body.getFullText(),
       }
     }
@@ -15,6 +16,7 @@ export function getLogLocation(node: Node): EntityLogLocation | undefined {
     if (body) {
       return {
         logStart: body.getStart(),
+        logEnd: body.getEnd(),
         code: body.getFullText(),
       }
     }

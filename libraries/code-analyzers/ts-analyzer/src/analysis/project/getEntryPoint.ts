@@ -7,7 +7,7 @@ import { getRelativePath } from "./getRelativePath";
 const entryFiles = ['index.js', 'index.ts'] as const
 
 export async function getEntryPoint(projectPath: string): Promise<FileText | null> {
-  for await (const file of entryFiles) {
+  for (const file of entryFiles) {
     const filePath = path.resolve(projectPath, file)
     try {
       const res = await stat(filePath)

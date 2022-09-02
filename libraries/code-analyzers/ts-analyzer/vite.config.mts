@@ -1,14 +1,17 @@
 /// <reference types="vitest" />
 
-import path from 'path'
-import { defineConfig } from 'vite'
+import path, { resolve } from 'path'
+import { defineConfig, UserConfigExport } from 'vite'
+import type { UserConfigExport as VitestUserConfig } from 'vitest/config'
 import Vue from '@vitejs/plugin-vue'
 import Pages from 'vite-plugin-pages'
 import Components from 'unplugin-vue-components/vite'
 import Unocss from 'unocss/vite'
 import Inspect from 'vite-plugin-inspect'
+import { nodeCoreModuleList } from './externals'
+import { vitestAnalyzerPlugin } from './src/vite/vitestAnalyzerPlugin'
 
-export default defineConfig({
+export default defineConfig((<UserConfigExport & VitestUserConfig>{
   resolve: {
     alias: {
       '~/': `${path.resolve(__dirname, 'src')}/`,
@@ -16,6 +19,9 @@ export default defineConfig({
     }
   },
   plugins: [
+    // commonjsExternals({
+    //   externals: nodeCoreModuleList,
+    // }),
     // viteCommonjs(),
     Vue({
       reactivityTransform: true,
@@ -32,9 +38,21 @@ export default defineConfig({
     // https://github.com/antfu/unocss
     // see unocss.config.ts for config
     Unocss(),
+    vitestAnalyzerPlugin(),
     Inspect(),
   ],
-
+  build: {
+    lib: {
+      entry: resolve(__dirname, 'index.ts'),
+      name: 'coya-vitest-analyzer',
+      fileName: 'coya-vitest-analyzer',
+      formats: ['cjs'],
+    },
+    minify: false,
+    rollupOptions: {
+      external: nodeCoreModuleList,
+    }
+  },
   // https://github.com/vitest-dev/vitest
   test: {
     environment: 'node',
@@ -45,4 +63,4 @@ export default defineConfig({
     threads: false,
     setupFiles: ['./setup.vitest.ts'],
   },
-})
+}) as UserConfigExport)

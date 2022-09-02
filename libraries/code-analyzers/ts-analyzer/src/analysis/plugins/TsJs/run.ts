@@ -16,7 +16,7 @@ async function _run(context: TsJsAnalysisContext): Promise<void> {
     skipLoadingLibFiles: false,
   })
 
-  for await(const fileUnit of context.files) {
+  for(const fileUnit of context.files) {
     if (project.getSourceFile(relative(context.rootDir, fileUnit.filepath))) {
       continue
     }

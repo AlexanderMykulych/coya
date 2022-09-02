@@ -1,8 +1,9 @@
 {
   "version": "0.9.20",
   "license": "MIT",
+  "type": "module",
   "main": "dist/coya-util.es.js",
-  "typings": "dist/src/index.d.ts",
+  "typings": "src/index.ts",
   "files": [
     "dist",
     "src"

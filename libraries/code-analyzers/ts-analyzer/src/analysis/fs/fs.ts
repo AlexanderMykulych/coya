@@ -19,7 +19,7 @@ export async function getAllFSUnits(basePath: string, callback: FsUnitsCallback)
     try {
       const files = await readdir(path)
 
-      for await (const filename of files) {
+      for (const filename of files) {
         var filepath = join(path, filename);
   
         const stats = await stat(filepath)

@@ -11,6 +11,7 @@ export type EntityId = string
 
 export interface EntityLogLocation {
   logStart: number
+  logEnd: number
   code: string
 }
 export interface EntityLocation extends Partial<EntityLogLocation>{
