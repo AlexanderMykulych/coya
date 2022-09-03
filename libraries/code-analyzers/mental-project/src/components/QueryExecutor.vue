@@ -9,6 +9,7 @@ const queryResult = ref<QueryResult | null>(null)
 const db = useNeo4j()
 
 const executeQuery = async () => {
+  queryResult.value = null
   queryResult.value = await db.read(query.value)
 }
 
@@ -35,7 +36,6 @@ const coya = computedAsync(() => queryResult.value ? generateCoyaFromGraphResult
         class="w-full h-full"
         id="diagram"
         :config="coya"
-        :key="coya"
       >
       </Coya>
     </div>
