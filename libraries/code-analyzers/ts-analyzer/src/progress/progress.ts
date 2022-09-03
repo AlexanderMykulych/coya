@@ -1,4 +1,5 @@
 import { groupBy } from 'coya-util'
+import { hrtime } from './process'
 
 interface BaseEvent {
   name: string
@@ -18,7 +19,7 @@ type Event = StartEvent | EndEvent
 
 let logs: Event[] = []
 
-export const progressTrackingEnabled = process.env.PROGRESS_TRACKING === 'true'
+export const progressTrackingEnabled = process.env?.PROGRESS_TRACKING === 'true'
 
 export function progress<T extends Function>(name: string, fn: T): T {
   if (progressTrackingEnabled) {
@@ -27,7 +28,7 @@ export function progress<T extends Function>(name: string, fn: T): T {
         name,
         type: 'start',
       })
-      const startTime = process.hrtime()
+      const startTime = hrtime()
 
 
       const result = await Promise.resolve(fn.apply(this, arguments))
@@ -35,7 +36,7 @@ export function progress<T extends Function>(name: string, fn: T): T {
       logs.push({
         name,
         type: 'end',
-        time: parseHrtimeToSeconds(process.hrtime(startTime))
+        time: parseHrtimeToSeconds(hrtime(startTime))
       })
 
       return result
@@ -76,7 +77,6 @@ export function clearProgress() {
 
 export function printProgress() {
   if (logs.length > 0) {
-    const starts = groupBy(logs.filter(x => x.type === 'start'), x => x.name)
     let ends = groupBy(logs.filter(x => x.type === 'end'), x => x.name)
 
     ends = Object.entries<EndEvent[]>(ends)

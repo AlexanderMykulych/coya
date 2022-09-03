@@ -14,5 +14,6 @@
         "directory": "libraries/vue-component", 
         "changeProcessCWD": true
       }
-    ]
+    ],
+    "unocss.root": "libraries/code-analyzers/mental-project"
 }

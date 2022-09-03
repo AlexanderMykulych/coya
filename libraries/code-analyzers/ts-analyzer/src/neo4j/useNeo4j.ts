@@ -4,10 +4,15 @@ import { getVerifyConnectionFn } from './verifyConnection'
 import { getInsertCodeInfosFn } from './insertCodeInfos'
 import { getReadFn } from './read'
 
+export { QueryResult } from 'neo4j-driver'
+
 let driver: Driver
 const database = 'neo4j'
+export type useNeo4jResult = ReturnType<typeof useNeo4j>
+
 export function useNeo4j() {
 
+  // driver ??= neo4j.driver('bolt://localhost:7687', neo4j.auth.basic('neo4j', 'test'))
   driver ??= neo4j.driver('neo4j://localhost:7687', neo4j.auth.basic('neo4j', 'test'))
 
   return {

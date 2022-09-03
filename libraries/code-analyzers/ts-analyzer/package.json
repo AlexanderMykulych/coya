@@ -2,7 +2,7 @@
   "name": "coya-ts-analyzer",
   "version": "0.9.20",
   "packageManager": "pnpm@7.1.5",
-  "main": "./dist/coya-vitest-analyzer.js",
+  "main": "index.ts",
   "typings": "index.ts",
 
   "scripts": {

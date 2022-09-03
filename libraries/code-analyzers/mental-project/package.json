@@ -18,7 +18,8 @@
     "coya-ts-analyzer": "~0.9.20",
     "neo4j-driver": "~4.4.7",
     "coya-util": "~0.9.20",
-    "coya-vue-component": "~0.9.20"
+    "coya-vue-component": "~0.9.20",
+    "monaco-editor": "~0.34.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.25.2",
