@@ -51,21 +51,27 @@ if ((typeof process === 'undefined' || typeof process.hrtime === 'undefined') &&
 const hrtime = typeof process.hrtime === 'undefined' ? (window.process.hrtime = _hrtime) : process.hrtime;
 
 const logs = []
+let enableCodeAnalisys = false
+globalThis.__enableCodeAnalisys = () => enableCodeAnalisys = true
 globalThis.__logStart = (id) => {
-  logs.push({
-    id,
-    type: 'start',
-    startTime: hrtime(),
-  })
+  if (enableCodeAnalisys) {
+    logs.push({
+      id,
+      type: 'start',
+      startTime: hrtime(),
+    })
+  }
 }
 globalThis.__logEnd = (id) => {
-  const start = findLast(logs, x => x.id === id && x.type === 'start')
-  const execTime = start?.startTime ? parseHrtimeToSeconds(hrtime(start.startTime)) : undefined
-  logs.push({
-    id,
-    type: 'end',
-    execTime,
-  })
+  if (enableCodeAnalisys) {
+    const start = findLast(logs, x => x.id === id && x.type === 'start')
+    const execTime = start?.startTime ? parseHrtimeToSeconds(hrtime(start.startTime)) : undefined
+    logs.push({
+      id,
+      type: 'end',
+      execTime,
+    })
+  }
 }
 globalThis.__getLogs = () => logs
 

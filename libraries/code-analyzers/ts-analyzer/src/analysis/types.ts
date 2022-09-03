@@ -43,11 +43,23 @@ export interface UnknownEntity extends BaseEntity {
   [k: `meta_${string}`]: any
 }
 
+export interface ActionEntity {
+  type: CodeInfoType.Entity
+  entityType: ActionEntityType.Call
+  id: EntityId
+  executionTime: number
+}
+
 export type Entity =
   | FileEntity
   | FunctionEntity
   | UnknownEntity
   | BaseEntity
+  | ActionEntity
+
+export enum ActionEntityType {
+  Call = 'call'
+}
 
 export enum EntityType {
   File = 'file',
@@ -62,6 +74,8 @@ export enum RelationType {
   Import = 'import',
   Use = 'use',
   Parent = 'parent',
+  CallEntity = 'call_entity',
+
 }
 
 export interface Relationship {
