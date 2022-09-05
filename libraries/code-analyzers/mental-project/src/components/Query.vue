@@ -4,12 +4,12 @@ import EditorWorker from 'monaco-editor/esm/vs/editor/editor.worker.js?worker&in
 import CssWorker from 'monaco-editor/esm/vs/language/css/css.worker.js?worker&inline';
 import JsonWorker from 'monaco-editor/esm/vs/language/json/json.worker.js?worker&inline';
 
-defineProps<{ modelValue: string | undefined }>();
+const props = defineProps<{ modelValue: string | undefined }>();
 const emit = defineEmits(['update:modelValue']);
 
 const cmp = ref();
 const editor = shallowRef();
-const value = ref<string | undefined>('');
+const value = ref<string | undefined>(props.modelValue ?? '');
 
 onMounted(() => {
     editor.value = monaco.editor.create(cmp.value, {

@@ -7,8 +7,14 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    BaseModal: typeof import('./src/components/BaseModal.vue')['default']
     Counter: typeof import('./src/components/Counter.vue')['default']
     Footer: typeof import('./src/components/Footer.vue')['default']
+    IFluentDelete24Filled: typeof import('~icons/fluent/delete24-filled')['default']
+    'IMaterialSymbols:deleteRounded': typeof import('~icons/material-symbols/delete-rounded')['default']
+    IMaterialSymbolsDeleteRounded: typeof import('~icons/material-symbols/delete-rounded')['default']
+    Modals: typeof import('./src/components/Modals.vue')['default']
+    NewDiagram: typeof import('./src/components/diagrams/NewDiagram.vue')['default']
     Query: typeof import('./src/components/Query.vue')['default']
     QueryExecutor: typeof import('./src/components/QueryExecutor.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

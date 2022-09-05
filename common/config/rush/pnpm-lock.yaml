@@ -102,13 +102,12 @@ specifiers:
   markdown-it-prism: ^2.2.2
   markdown-it-shiki: ^0.5.1
   mocha: ^8.4.0
-  monaco-editor: ^0.30.1
+  monaco-editor: ~0.34.0
   neo4j-driver: ~4.4.7
   nprogress: ^0.2.0
   os: ^0.1.2
   path-browserify: ^1.0.1
   picocolors: ^1.0.0
-  pinia: ^2.0.17
   playwright: ~1.25.0
   pnpm: ^7.8.0
   postcss-nested-import: ^0.1.0
@@ -136,7 +135,7 @@ specifiers:
   typescript: ^4.7.4
   unocss: ^0.45.5
   unplugin-auto-import: ^0.11.0
-  unplugin-icons: ^0.13.0
+  unplugin-icons: ~0.14.9
   unplugin-vue-components: ^0.22.0
   vite: ~3.0.9
   vite-dts: ^1.0.4
@@ -206,7 +205,7 @@ dependencies:
   '@rush-temp/coya-vite-proj': file:projects/coya-vite-proj.tgz_015021533355cec3bd5578dd118f13ee
   '@rush-temp/coya-vue-component': file:projects/coya-vue-component.tgz_84004a9b53f9313ee1eb4f4f9c28ee1f
   '@rush-temp/demo': file:projects/demo.tgz_015021533355cec3bd5578dd118f13ee
-  '@rush-temp/mental-project': file:projects/mental-project.tgz_1d6a9fdc8d10ea25f907bd29ef509230
+  '@rush-temp/mental-project': file:projects/mental-project.tgz_ff6bd0b102a61f373140abc9605da336
   '@rush-temp/neo4j-coya-generator': file:projects/neo4j-coya-generator.tgz_1d6a9fdc8d10ea25f907bd29ef509230
   '@rush-temp/vitestTsAnalyzer': file:projects/vitestTsAnalyzer.tgz_b07ec12bf4c649ecd903c0fa25fae265
   '@size-limit/preset-small-lib': 7.0.8_size-limit@7.0.8
@@ -262,7 +261,7 @@ dependencies:
   find-free-port: 2.0.0
   fs: 0.0.1-security
   glob: 7.2.0
-  gsap: 3.11.0
+  gsap: 3.11.1
   hex-to-rgba: 2.0.1
   https-localhost: 4.7.1
   husky: 7.0.4
@@ -275,13 +274,12 @@ dependencies:
   markdown-it-prism: 2.2.2
   markdown-it-shiki: 0.5.1
   mocha: 8.4.0
-  monaco-editor: 0.30.1
+  monaco-editor: 0.34.0
   neo4j-driver: 4.4.7
   nprogress: 0.2.0
   os: 0.1.2
   path-browserify: 1.0.1
   picocolors: 1.0.0
-  pinia: 2.0.21_typescript@4.7.4+vue@3.2.37
   playwright: 1.25.0
   pnpm: 7.9.5
   postcss-nested-import: 0.1.0
@@ -309,7 +307,7 @@ dependencies:
   typescript: 4.7.4
   unocss: 0.45.14_vite@3.0.9
   unplugin-auto-import: 0.11.2_@vueuse+core@9.1.0+vite@3.0.9
-  unplugin-icons: 0.13.0_8b32067008b59ef85cb84da288344704
+  unplugin-icons: 0.14.9_8b32067008b59ef85cb84da288344704
   unplugin-vue-components: 0.22.4_vite@3.0.9+vue@3.2.37
   vite: 3.0.9_sass@1.53.0
   vite-dts: 1.0.4_vite@3.0.9
@@ -2224,19 +2222,6 @@ packages:
 
   /@iconify/types/1.1.0:
     resolution: {integrity: sha512-Jh0llaK2LRXQoYsorIH8maClebsnzTcve+7U3rQUSnC11X4jtPnFuyatqFLvMxZ8MLG8dB4zfHsbPfuvxluONw==}
-    dev: false
-
-  /@iconify/utils/1.0.21:
-    resolution: {integrity: sha512-Rf8vfOH7MI30xyc9rbLFdxnfsfdcrIiIxsoZyEWkUK8P65QsS9PrQXunOc9Wt7uZfJTiX25WMED3WqLKXrRx1Q==}
-    dependencies:
-      '@antfu/install-pkg': 0.1.0
-      '@antfu/utils': 0.3.0
-      '@iconify/types': 1.0.12
-      debug: 4.3.3
-      kolorist: 1.5.1
-      local-pkg: 0.4.1
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   /@iconify/utils/1.0.33:
@@ -9098,8 +9083,8 @@ packages:
     dev: false
     optional: true
 
-  /gsap/3.11.0:
-    resolution: {integrity: sha512-TV5aFGqXht+0o/CelnhCikSe3QGeG+q1XA/fyFFsMzesILHgWgFWIz0NuXIgcMaL5h7MG2l+j0BTupS5YyYkrw==}
+  /gsap/3.11.1:
+    resolution: {integrity: sha512-UKuJ0UPhntFHMwT6URFQ4cTQv88xc7Kd9Dhxt7qX9IPhC+d+/a5wKW5E5Vn33hZ53nBI1JfApcEbzKgXkcuPZw==}
     dev: false
 
   /gzip-size/6.0.0:
@@ -11496,11 +11481,6 @@ packages:
     engines: {node: '>= 12.13.0'}
     dev: false
 
-  /local-pkg/0.4.1:
-    resolution: {integrity: sha512-lL87ytIGP2FU5PWwNDo0w3WhIo2gopIAxPg9RxDYF7m4rr5ahuZxP22xnJHIvaLTe4Z9P6uKKY2UHiwyB4pcrw==}
-    engines: {node: '>=14'}
-    dev: false
-
   /local-pkg/0.4.2:
     resolution: {integrity: sha512-mlERgSPrbxU3BP4qBqAvvwlgW4MTg78iwJdGGnv7kibKjWcJksrG3t6LB5lXI93wXRDvG4NpUgJFmTG4T6rdrg==}
     engines: {node: '>=14'}
@@ -12077,10 +12057,6 @@ packages:
 
   /moment/2.29.4:
     resolution: {integrity: sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==}
-    dev: false
-
-  /monaco-editor/0.30.1:
-    resolution: {integrity: sha512-B/y4+b2O5G2gjuxIFtCE2EkM17R2NM7/3F8x0qcPsqy4V83bitJTIO4TIeZpYlzu/xy6INiY/+84BEm6+7Cmzg==}
     dev: false
 
   /monaco-editor/0.34.0:
@@ -15735,10 +15711,10 @@ packages:
       - webpack
     dev: false
 
-  /unplugin-icons/0.13.0_8b32067008b59ef85cb84da288344704:
-    resolution: {integrity: sha512-CyAl0HV3bZUGT7ut9agpPRhEYXCvufr80Fh72yrkD57BVCTZ7ze10Rt63ZrvPXiJQpd+aI/Bizm2aqOf3WPSfg==}
+  /unplugin-icons/0.14.9_8b32067008b59ef85cb84da288344704:
+    resolution: {integrity: sha512-vPyVfNREH88dP6gszdaoGkAEFPpiScXj1A8eWN905jQgT53A3tsiPEiqJjCHOUVcsUaREt2JSudzumFOsCA78A==}
     peerDependencies:
-      '@svgr/core': ^5.5.0
+      '@svgr/core': '>=5.5.0'
       '@vue/compiler-sfc': ^3.0.2
       vue-template-compiler: ^2.6.12
       vue-template-es2015-compiler: ^1.9.0
@@ -15753,15 +15729,16 @@ packages:
         optional: true
     dependencies:
       '@antfu/install-pkg': 0.1.0
-      '@antfu/utils': 0.4.0
-      '@iconify/utils': 1.0.21
+      '@antfu/utils': 0.5.2
+      '@iconify/utils': 1.0.33
       '@vue/compiler-sfc': 3.2.37
-      debug: 4.3.3
+      debug: 4.3.4
       kolorist: 1.5.1
-      local-pkg: 0.4.1
-      unplugin: 0.2.21_vite@3.0.9
+      local-pkg: 0.4.2
+      unplugin: 0.9.5_vite@3.0.9
       vue-template-compiler: 2.7.10
     transitivePeerDependencies:
+      - esbuild
       - rollup
       - supports-color
       - vite
@@ -15795,24 +15772,6 @@ packages:
       - supports-color
       - vite
       - webpack
-    dev: false
-
-  /unplugin/0.2.21_vite@3.0.9:
-    resolution: {integrity: sha512-IJ15/L5XbhnV7J09Zjk0FT5HEkBjkXucWAXQWRsmEtUxmmxwh23yavrmDbCF6ZPxWiVB28+wnKIHePTRRpQPbQ==}
-    peerDependencies:
-      rollup: ^2.50.0
-      vite: ^2.3.0
-      webpack: 4 || 5
-    peerDependenciesMeta:
-      rollup:
-        optional: true
-      vite:
-        optional: true
-      webpack:
-        optional: true
-    dependencies:
-      vite: 3.0.9_sass@1.53.0
-      webpack-virtual-modules: 0.4.3
     dev: false
 
   /unplugin/0.9.5_vite@3.0.9:
@@ -16475,6 +16434,14 @@ packages:
       - supports-color
     dev: false
 
+  /vue-final-modal/2.4.1_vue@3.2.37:
+    resolution: {integrity: sha512-tvkPaf94wzoANjNFNP8b40bXuCAk28jg0OkhRKL3oQ9VTTwhlX25gnWG5d2qyxLfnE2237E8ngwF3KNPf/bhrw==}
+    peerDependencies:
+      vue: ^2.6.14
+    dependencies:
+      vue: 3.2.37
+    dev: false
+
   /vue-i18n/9.2.2_vue@3.2.37:
     resolution: {integrity: sha512-yswpwtj89rTBhegUAv9Mu37LNznyu3NpyLQmozF3i1hYOhwpG8RjcjIFIIfnu+2MDZJGSZPXaKWvnQA71Yv9TQ==}
     engines: {node: '>= 14'}
@@ -16694,10 +16661,6 @@ packages:
   /webpack-sources/3.2.3:
     resolution: {integrity: sha512-/DyMEOrDgLKKIG0fmvtz+4dUX/3Ghozwgm6iPp8KRhvn+eQf9+Q7GWxVNMk3+uCPWfdXYC4ExGBckIXdFEfH1w==}
     engines: {node: '>=10.13.0'}
-    dev: false
-
-  /webpack-virtual-modules/0.4.3:
-    resolution: {integrity: sha512-5NUqC2JquIL2pBAAo/VfBP6KuGkHIZQXW/lNKupLPfhViwh8wNsu0BObtl09yuKZszeEUfbXz8xhrHvSG16Nqw==}
     dev: false
 
   /webpack-virtual-modules/0.4.4:
@@ -17230,7 +17193,7 @@ packages:
     dev: false
 
   file:projects/coya-arrow.tgz_015021533355cec3bd5578dd118f13ee:
-    resolution: {integrity: sha512-ReE4Z+g/hSZmRV3Kxpk59oPIxq42a91+hUpdJcUNS3oqNrxvNC26ffLsuihsgJjyO1y0f07HLRXhOMgg1e3wuw==, tarball: file:projects/coya-arrow.tgz}
+    resolution: {integrity: sha512-VHsf6u1gP8ef9TjTnxpXvQVOlRLq+7/7af0kTFrII+WJ8yv9ZOR58np5KpeZkZxjvmewc+kQRDMcxuM6FlMXwQ==, tarball: file:projects/coya-arrow.tgz}
     id: file:projects/coya-arrow.tgz
     name: '@rush-temp/coya-arrow'
     version: 0.0.0
@@ -17261,7 +17224,7 @@ packages:
       typescript: 4.7.4
       unocss: 0.45.14_vite@3.0.9
       unplugin-auto-import: 0.11.2_@vueuse+core@9.1.0+vite@3.0.9
-      unplugin-icons: 0.13.0_8b32067008b59ef85cb84da288344704
+      unplugin-icons: 0.14.9_8b32067008b59ef85cb84da288344704
       unplugin-vue-components: 0.22.4_vite@3.0.9+vue@3.2.37
       vite: 3.0.9_sass@1.53.0
       vite-plugin-dts: 1.2.1_vite@3.0.9
@@ -17308,7 +17271,7 @@ packages:
     dev: false
 
   file:projects/coya-core.tgz_19af9fff874ebe5c32a4a7719987d63b:
-    resolution: {integrity: sha512-86gAMEA7163tJIEQE8mQP3DlPZw/4xps+EgR+YoB1dV4L/1XuCd0MkNkSDtun8TQk4jQ+4s/6qJd1lF0/G+ZKQ==, tarball: file:projects/coya-core.tgz}
+    resolution: {integrity: sha512-t1jRuUHE3F2VBcpUbPQd4X14ZV/lbTm7rARpHuRv5t7sYbPZQO6wMwpRVMX/ITQstb+QU3Rk1gmZ9AIKAx7Aew==, tarball: file:projects/coya-core.tgz}
     id: file:projects/coya-core.tgz
     name: '@rush-temp/coya-core'
     version: 0.0.0
@@ -17389,7 +17352,7 @@ packages:
     dev: false
 
   file:projects/coya-editor-new.tgz_51188feab57a3ebb023f0a75228215ce:
-    resolution: {integrity: sha512-dYFaO5/w1tkZ9GLoCBWNElLd8ecch7FGdLw2iIWQAugz0vnUIRGZEonm3c4e4RUer357sxliNBPr+K+rYDa/2Q==, tarball: file:projects/coya-editor-new.tgz}
+    resolution: {integrity: sha512-g2V46gSOche0TRSC2f9v6ofunV8QJZyRJqlM0ama0ceJ3HB6zTguwHUFtY/yPIgBVZxldvxa50cJwi9exFMeJQ==, tarball: file:projects/coya-editor-new.tgz}
     id: file:projects/coya-editor-new.tgz
     name: '@rush-temp/coya-editor-new'
     version: 0.0.0
@@ -17412,7 +17375,7 @@ packages:
       typescript: 4.7.4
       unocss: 0.45.14_vite@3.0.9
       unplugin-auto-import: 0.11.2_@vueuse+core@9.1.0+vite@3.0.9
-      unplugin-icons: 0.13.0_8b32067008b59ef85cb84da288344704
+      unplugin-icons: 0.14.9_8b32067008b59ef85cb84da288344704
       unplugin-vue-components: 0.22.4_vite@3.0.9+vue@3.2.37
       vite: 3.0.9_sass@1.53.0
       vite-dts: 1.0.4_vite@3.0.9
@@ -17459,7 +17422,7 @@ packages:
     dev: false
 
   file:projects/coya-json-editor.tgz_015021533355cec3bd5578dd118f13ee:
-    resolution: {integrity: sha512-od2YUdnTdY8UKhyBtTNn002Wsv/RFKmlN/0sogdY2Qj4tfiC4Avrk1WwuDopZ1aXMxu0hxzPto4f5eFJb/IRww==, tarball: file:projects/coya-json-editor.tgz}
+    resolution: {integrity: sha512-Ik0SNpjHb2qmH2fk5HT87GC+h10SOrzgksW7ysN1XpzwZecKj/9Nnv/JaP1mxM0MCo1a3s23Yz/dXNxvA9OCSA==, tarball: file:projects/coya-json-editor.tgz}
     id: file:projects/coya-json-editor.tgz
     name: '@rush-temp/coya-json-editor'
     version: 0.0.0
@@ -17498,7 +17461,7 @@ packages:
       typescript: 4.7.4
       unocss: 0.45.14_vite@3.0.9
       unplugin-auto-import: 0.11.2_@vueuse+core@9.1.0+vite@3.0.9
-      unplugin-icons: 0.13.0_8b32067008b59ef85cb84da288344704
+      unplugin-icons: 0.14.9_8b32067008b59ef85cb84da288344704
       unplugin-vue-components: 0.22.4_vite@3.0.9+vue@3.2.37
       vite: 3.0.9_sass@1.53.0
       vite-plugin-inspect: 0.6.1_vite@3.0.9
@@ -17546,7 +17509,7 @@ packages:
     dev: false
 
   file:projects/coya-rnd-blog.tgz_976bb48aefd1c9a0f0901b96002ca40b:
-    resolution: {integrity: sha512-Z9/bJgRBMme1/nbyFmmf9+80SN6qAgEK7kIOYeAqJHLrtS455DhDQOpYp4A2KXd6Kacph/MABCOZa0+5I7DGqA==, tarball: file:projects/coya-rnd-blog.tgz}
+    resolution: {integrity: sha512-I+z71LsCWGGUTIs9pZI+05/nul49ZjPn3xH5BcW9DogpO8+rfljKWMRKXztOWv8DK/vKa578YhiUhNkulxXC8Q==, tarball: file:projects/coya-rnd-blog.tgz}
     id: file:projects/coya-rnd-blog.tgz
     name: '@rush-temp/coya-rnd-blog'
     version: 0.0.0
@@ -17614,7 +17577,7 @@ packages:
     dev: false
 
   file:projects/coya-store.tgz_015021533355cec3bd5578dd118f13ee:
-    resolution: {integrity: sha512-InjQj5G3yTpgtZx3M2EnRUaOOab3znL34veq+An/YKwBuZ7PEzguIEwkYETHpfH+Diw4iRFUhRvenvtf+pe72w==, tarball: file:projects/coya-store.tgz}
+    resolution: {integrity: sha512-HuhX8m/VUfk5BFhjb28LEIQh4GqOOgEqS/bEoqZspv1kqr6m3z/AMI/mzdfb5UcBKCKe/gW8e5612pfqsVxsgA==, tarball: file:projects/coya-store.tgz}
     id: file:projects/coya-store.tgz
     name: '@rush-temp/coya-store'
     version: 0.0.0
@@ -17649,7 +17612,7 @@ packages:
       typescript: 4.7.4
       unocss: 0.45.14_vite@3.0.9
       unplugin-auto-import: 0.11.2_@vueuse+core@9.1.0+vite@3.0.9
-      unplugin-icons: 0.13.0_8b32067008b59ef85cb84da288344704
+      unplugin-icons: 0.14.9_8b32067008b59ef85cb84da288344704
       unplugin-vue-components: 0.22.4_vite@3.0.9+vue@3.2.37
       vite: 3.0.9_sass@1.53.0
       vite-dts: 1.0.4_vite@3.0.9
@@ -17697,7 +17660,7 @@ packages:
     dev: false
 
   file:projects/coya-ts-analizer.tgz_a9d8a3aa636771e246bae2448bee3644:
-    resolution: {integrity: sha512-6LFvP6kfWgtDcRjXACwi1GjUm6iwh137lH2+Xu/fgwTDEANWKzuD18i4Fyvzb3XxrlfcvGrGjr3awfaWTWArWg==, tarball: file:projects/coya-ts-analizer.tgz}
+    resolution: {integrity: sha512-KLnl6eimCQ2WHQOwsvfr5Oj7C9ftJM13wjSVEe0nWrGuH58qQonx1g9e7RbbQyytsCIEZPuEKsPvKi1omrb0BQ==, tarball: file:projects/coya-ts-analizer.tgz}
     id: file:projects/coya-ts-analizer.tgz
     name: '@rush-temp/coya-ts-analizer'
     version: 0.0.0
@@ -17767,7 +17730,7 @@ packages:
     dev: false
 
   file:projects/coya-ts-analyzer.tgz_critters@0.0.16:
-    resolution: {integrity: sha512-vYtrZjtNekPpz/XXr0sL+P48ln43bfnkHwDaDE1t5hxlYDXtUJUfrrtfjrMp5VBCGdrXPAapUmKLowlP0SKMCA==, tarball: file:projects/coya-ts-analyzer.tgz}
+    resolution: {integrity: sha512-ZEbDm/wknfqhIeeZcArNAaCktw2OU0IPFRfnKzfw7qHA0CluUfEsgGw8eTODiN2boUQE7icWg8sH9ykx0Zv3bA==, tarball: file:projects/coya-ts-analyzer.tgz}
     id: file:projects/coya-ts-analyzer.tgz
     name: '@rush-temp/coya-ts-analyzer'
     version: 0.0.0
@@ -17850,7 +17813,7 @@ packages:
     dev: false
 
   file:projects/coya-ts-cli.tgz_a9d8a3aa636771e246bae2448bee3644:
-    resolution: {integrity: sha512-GlAUQvkmBbGSGVmIzHYBJvlsN+COht8if9O023ohB0QCXNy/pZXaoQBT0IzpjPXwbF7ZydEJ/TvImvTd9t7N/A==, tarball: file:projects/coya-ts-cli.tgz}
+    resolution: {integrity: sha512-wBeVYNFYbq5ckx0rSP7zXEAlWt8idq0WpAEXQrotOcPUu/9Gu5niyvq2nEljSU0bKv99ueF1lmUUV6H8l/puQw==, tarball: file:projects/coya-ts-cli.tgz}
     id: file:projects/coya-ts-cli.tgz
     name: '@rush-temp/coya-ts-cli'
     version: 0.0.0
@@ -17921,7 +17884,7 @@ packages:
     dev: false
 
   file:projects/coya-util.tgz_eeb420fb86937f8c61d3f1d5d61d4a54:
-    resolution: {integrity: sha512-fWKPvT6+pxFqYQ/sHZWgpY26r2JSrZkQJGzcXodsK4puMnC7S3W3CNemnso4ENEnbpST8Q53wXjHa4OHoQBzCg==, tarball: file:projects/coya-util.tgz}
+    resolution: {integrity: sha512-BLcDsLMj7NbHKAHFTg1dMtV/fJrw9Yb6qbtPRIeA0BZFOaDp1O05ndA4DPkj5sFkO97tBXo3D1dVn2kKBsRD/Q==, tarball: file:projects/coya-util.tgz}
     id: file:projects/coya-util.tgz
     name: '@rush-temp/coya-util'
     version: 0.0.0
@@ -17995,7 +17958,7 @@ packages:
     dev: false
 
   file:projects/coya-vite-proj.tgz_015021533355cec3bd5578dd118f13ee:
-    resolution: {integrity: sha512-NvDq4LrTeKTkKUQNOHNMBgGtColAdhLm+hEDE3Z5XQEdTHUB1cCrj28GSMHGOWV3fCvPwrfZtvjp//qQI/pxVw==, tarball: file:projects/coya-vite-proj.tgz}
+    resolution: {integrity: sha512-gLBjDKVEdAunL/ZD7CVnvc1YOu3EIgkNcE5Axzt26YvWxgPeqMZ2gBEVUIzJxYxHP5QsxeCp23fSlgHBD5zGiw==, tarball: file:projects/coya-vite-proj.tgz}
     id: file:projects/coya-vite-proj.tgz
     name: '@rush-temp/coya-vite-proj'
     version: 0.0.0
@@ -18026,7 +17989,7 @@ packages:
       typescript: 4.7.4
       unocss: 0.45.14_vite@3.0.9
       unplugin-auto-import: 0.11.2_@vueuse+core@9.1.0+vite@3.0.9
-      unplugin-icons: 0.13.0_8b32067008b59ef85cb84da288344704
+      unplugin-icons: 0.14.9_8b32067008b59ef85cb84da288344704
       unplugin-vue-components: 0.22.4_vite@3.0.9+vue@3.2.37
       vite: 3.0.9_sass@1.53.0
       vite-plugin-inspect: 0.6.1_vite@3.0.9
@@ -18072,7 +18035,7 @@ packages:
     dev: false
 
   file:projects/coya-vue-component.tgz_84004a9b53f9313ee1eb4f4f9c28ee1f:
-    resolution: {integrity: sha512-mD1f0N6s0AmP8jwko0TaytIBMUH6SbA7jPcmLnsO2Xq8aDhd4ay3BGEP6EX/yIXNdSE3NjukAnpGABckc1xpXA==, tarball: file:projects/coya-vue-component.tgz}
+    resolution: {integrity: sha512-zjnmkyc9i4i38BOT3ExeoUUT5YUTwLFMiDpkq4KuXvFATr2lNxlqUXH5IToWKtbIub2/kdN1VnnSYdmD797Kjw==, tarball: file:projects/coya-vue-component.tgz}
     id: file:projects/coya-vue-component.tgz
     name: '@rush-temp/coya-vue-component'
     version: 0.0.0
@@ -18095,7 +18058,7 @@ packages:
       drauu: 0.1.2
       eslint: 8.21.0
       eslint-plugin-react: 7.30.1_eslint@8.21.0
-      gsap: 3.11.0
+      gsap: 3.11.1
       https-localhost: 4.7.1
       pinia: 2.0.21_typescript@4.7.4+vue@3.2.37
       pnpm: 7.9.5
@@ -18161,7 +18124,7 @@ packages:
     dev: false
 
   file:projects/coya.tgz_a9d8a3aa636771e246bae2448bee3644:
-    resolution: {integrity: sha512-Gmzz8ptW52uPtEYztyxidIuP6CB1OQMw1qLN8ORYkfpAAjVtxW9fk36IpV98Qqm1sEQ3aAt+rMGiqCmcL+WPEg==, tarball: file:projects/coya.tgz}
+    resolution: {integrity: sha512-WqMEUCEJCDioYRJCaVCYy609smBFoC317c0XH2wpFDh0F4oP5G6ZRAwLnKAm45LkRBpwgkDjBBu0sLYsWp5DGQ==, tarball: file:projects/coya.tgz}
     id: file:projects/coya.tgz
     name: '@rush-temp/coya'
     version: 0.0.0
@@ -18243,7 +18206,7 @@ packages:
     dev: false
 
   file:projects/demo.tgz_015021533355cec3bd5578dd118f13ee:
-    resolution: {integrity: sha512-RduhHTwq9cE2E4SnKjed2d8p7R0gPLSGN8b9B9+FKsNhZ8nIY+Z0c42QNhEqlK67OQSkBRWnVSBWSCM+c3mfuQ==, tarball: file:projects/demo.tgz}
+    resolution: {integrity: sha512-IurZzumDaaeYMivk538PvP3qZzChR2UJ09utmkf7+B5LELSIiVela+UYCyPKECQ4rb+3SwXYQkVdUzGDz1l8Pg==, tarball: file:projects/demo.tgz}
     id: file:projects/demo.tgz
     name: '@rush-temp/demo'
     version: 0.0.0
@@ -18276,7 +18239,7 @@ packages:
       typescript: 4.7.4
       unocss: 0.45.14_vite@3.0.9
       unplugin-auto-import: 0.11.2_@vueuse+core@9.1.0+vite@3.0.9
-      unplugin-icons: 0.13.0_8b32067008b59ef85cb84da288344704
+      unplugin-icons: 0.14.9_8b32067008b59ef85cb84da288344704
       unplugin-vue-components: 0.22.4_vite@3.0.9+vue@3.2.37
       vite: 3.0.9_sass@1.53.0
       vite-plugin-dts: 1.2.1_vite@3.0.9
@@ -18324,8 +18287,8 @@ packages:
       - webpack
     dev: false
 
-  file:projects/mental-project.tgz_1d6a9fdc8d10ea25f907bd29ef509230:
-    resolution: {integrity: sha512-kRc3As/8AihhV31gbJDTbN0s5eQ19DRYOiof0D2cQtdx+scYMfC419QSVdlAoF0NEtEdNAUVNtEH6sXdugDy9Q==, tarball: file:projects/mental-project.tgz}
+  file:projects/mental-project.tgz_ff6bd0b102a61f373140abc9605da336:
+    resolution: {integrity: sha512-o2z+crlyNYxy6+vce8kD16oNEA3x89ABtdaEvvZe0AiPU8NqNiugmW7CVr9zfDqzseHpf8ZXwms6FKF+Lns3Lg==, tarball: file:projects/mental-project.tgz}
     id: file:projects/mental-project.tgz
     name: '@rush-temp/mental-project'
     version: 0.0.0
@@ -18352,6 +18315,7 @@ packages:
       typescript: 4.7.4
       unocss: 0.45.14_vite@3.0.9
       unplugin-auto-import: 0.11.2_@vueuse+core@9.1.0+vite@3.0.9
+      unplugin-icons: 0.14.9_8b32067008b59ef85cb84da288344704
       unplugin-vue-components: 0.22.4_vite@3.0.9+vue@3.2.37
       vite: 3.0.9_sass@1.53.0
       vite-plugin-inspect: 0.6.1_vite@3.0.9
@@ -18362,12 +18326,14 @@ packages:
       vitest: 0.21.1_bfc2954148db448f3e299b47788b1cc7
       vue: 3.2.37
       vue-demi: 0.13.11_vue@3.2.37
+      vue-final-modal: 2.4.1_vue@3.2.37
       vue-i18n: 9.2.2_vue@3.2.37
       vue-router: 4.1.3_vue@3.2.37
       vue-tsc: 0.39.5_typescript@4.7.4
     transitivePeerDependencies:
       - '@babel/parser'
       - '@edge-runtime/vm'
+      - '@svgr/core'
       - '@types/babel__core'
       - '@unocss/webpack'
       - '@vitest/browser'
@@ -18388,11 +18354,13 @@ packages:
       - supports-color
       - terser
       - utf-8-validate
+      - vue-template-compiler
+      - vue-template-es2015-compiler
       - webpack
     dev: false
 
   file:projects/neo4j-coya-generator.tgz_1d6a9fdc8d10ea25f907bd29ef509230:
-    resolution: {integrity: sha512-Exhr50RU0Fq0CTd354dTki7L9h4ApYdT6mPhLHszv+xQCeiqsrCV8YH4Z4S4czgh7ljC2raQin6XLTxPxj7Ucg==, tarball: file:projects/neo4j-coya-generator.tgz}
+    resolution: {integrity: sha512-25tHpxjFeBrs7VhfSVFRl5egDQNS045yF8U+l2XsEProEOMiMhaT3/8tA+awQ5f401CwAxZieCh5LRmaYrClVg==, tarball: file:projects/neo4j-coya-generator.tgz}
     id: file:projects/neo4j-coya-generator.tgz
     name: '@rush-temp/neo4j-coya-generator'
     version: 0.0.0
@@ -18458,7 +18426,7 @@ packages:
     dev: false
 
   file:projects/vitestTsAnalyzer.tgz_b07ec12bf4c649ecd903c0fa25fae265:
-    resolution: {integrity: sha512-L14zL2JgOzzMkn+cztyWhgRIwHGCsA2c9taee2taM0sRKulfgDspv7FvtjZvZAwrgZXRug1k5lZJTKGPUY9a5w==, tarball: file:projects/vitestTsAnalyzer.tgz}
+    resolution: {integrity: sha512-Mgh2hoM7067GWnkLkUOSE/fR/0B4Boya783M8wdauV4AuP1y6QUzN/gKufdQYh3slb77juZfpHZuGqSKskwdXw==, tarball: file:projects/vitestTsAnalyzer.tgz}
     id: file:projects/vitestTsAnalyzer.tgz
     name: '@rush-temp/vitestTsAnalyzer'
     version: 0.0.0

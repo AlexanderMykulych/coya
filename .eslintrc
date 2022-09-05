@@ -20,6 +20,7 @@
     "eslint-comments/no-unlimited-disable": "off",
     "curly": "off",
     "@typescript-eslint/brace-style": "off",
-    "space-before-function-parent": "off"
+    "space-before-function-parent": "off",
+    "quotes": ["error", "double"]
   }
 }

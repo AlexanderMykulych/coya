@@ -68,7 +68,7 @@
     "@vueuse/head": "^0.7.9",
     "cypress": "^10.4.0",
     "https-localhost": "^4.7.1",
-    "pinia": "^2.0.17",
+    "pinia": "2.0.21",
     "vite": "~3.0.9",
     "vite-plugin-inspect": "^0.6.0",
     "vite-plugin-pwa": "^0.12.3",

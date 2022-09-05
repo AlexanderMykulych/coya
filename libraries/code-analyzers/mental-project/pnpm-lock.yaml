@@ -6,6 +6,7 @@ specifiers:
   '@types/node': ^18.6.1
   '@unocss/reset': ^0.44.7
   '@vitejs/plugin-vue': ^3.0.1
+  '@vue/compiler-sfc': ^3.2.31
   '@vue/test-utils': ^2.0.2
   '@vueuse/core': ^9.0.0
   eslint: ^8.20.0
@@ -25,7 +26,6 @@ specifiers:
 
 dependencies:
   '@vueuse/core': 9.0.0_vue@3.2.37
-  vue: 3.2.37
   vue-router: 4.1.2_vue@3.2.37
 
 devDependencies:
@@ -34,6 +34,7 @@ devDependencies:
   '@types/node': 18.6.1
   '@unocss/reset': 0.44.7
   '@vitejs/plugin-vue': 3.0.1_vite@3.0.3+vue@3.2.37
+  '@vue/compiler-sfc': 3.2.38
   '@vue/test-utils': 2.0.2_vue@3.2.37
   eslint: 8.20.0
   jsdom: 20.0.0
@@ -46,6 +47,7 @@ devDependencies:
   vite: 3.0.3
   vite-plugin-pages: 0.25.0_vite@3.0.3
   vitest: 0.19.1_jsdom@20.0.0
+  vue: 3.2.37
   vue-tsc: 0.39.0_typescript@4.7.4
 
 packages:
@@ -776,11 +778,27 @@ packages:
       estree-walker: 2.0.2
       source-map: 0.6.1
 
+  /@vue/compiler-core/3.2.38:
+    resolution: {integrity: sha512-/FsvnSu7Z+lkd/8KXMa4yYNUiqQrI22135gfsQYVGuh5tqEgOB0XqrUdb/KnCLa5+TmQLPwvyUnKMyCpu+SX3Q==}
+    dependencies:
+      '@babel/parser': 7.18.9
+      '@vue/shared': 3.2.38
+      estree-walker: 2.0.2
+      source-map: 0.6.1
+    dev: true
+
   /@vue/compiler-dom/3.2.37:
     resolution: {integrity: sha512-yxJLH167fucHKxaqXpYk7x8z7mMEnXOw3G2q62FTkmsvNxu4FQSu5+3UMb+L7fjKa26DEzhrmCxAgFLLIzVfqQ==}
     dependencies:
       '@vue/compiler-core': 3.2.37
       '@vue/shared': 3.2.37
+
+  /@vue/compiler-dom/3.2.38:
+    resolution: {integrity: sha512-zqX4FgUbw56kzHlgYuEEJR8mefFiiyR3u96498+zWPsLeh1WKvgIReoNE+U7gG8bCUdvsrJ0JRmev0Ky6n2O0g==}
+    dependencies:
+      '@vue/compiler-core': 3.2.38
+      '@vue/shared': 3.2.38
+    dev: true
 
   /@vue/compiler-sfc/3.2.37:
     resolution: {integrity: sha512-+7i/2+9LYlpqDv+KTtWhOZH+pa8/HnX/905MdVmAcI/mPQOBwkHHIzrsEsucyOIZQYMkXUiTkmZq5am/NyXKkg==}
@@ -796,11 +814,33 @@ packages:
       postcss: 8.4.14
       source-map: 0.6.1
 
+  /@vue/compiler-sfc/3.2.38:
+    resolution: {integrity: sha512-KZjrW32KloMYtTcHAFuw3CqsyWc5X6seb8KbkANSWt3Cz9p2qA8c1GJpSkksFP9ABb6an0FLCFl46ZFXx3kKpg==}
+    dependencies:
+      '@babel/parser': 7.18.9
+      '@vue/compiler-core': 3.2.38
+      '@vue/compiler-dom': 3.2.38
+      '@vue/compiler-ssr': 3.2.38
+      '@vue/reactivity-transform': 3.2.38
+      '@vue/shared': 3.2.38
+      estree-walker: 2.0.2
+      magic-string: 0.25.9
+      postcss: 8.4.14
+      source-map: 0.6.1
+    dev: true
+
   /@vue/compiler-ssr/3.2.37:
     resolution: {integrity: sha512-7mQJD7HdXxQjktmsWp/J67lThEIcxLemz1Vb5I6rYJHR5vI+lON3nPGOH3ubmbvYGt8xEUaAr1j7/tIFWiEOqw==}
     dependencies:
       '@vue/compiler-dom': 3.2.37
       '@vue/shared': 3.2.37
+
+  /@vue/compiler-ssr/3.2.38:
+    resolution: {integrity: sha512-bm9jOeyv1H3UskNm4S6IfueKjUNFmi2kRweFIGnqaGkkRePjwEcfCVqyS3roe7HvF4ugsEkhf4+kIvDhip6XzQ==}
+    dependencies:
+      '@vue/compiler-dom': 3.2.38
+      '@vue/shared': 3.2.38
+    dev: true
 
   /@vue/devtools-api/6.2.1:
     resolution: {integrity: sha512-OEgAMeQXvCoJ+1x8WyQuVZzFo0wcyCmUR3baRVLmKBo1LmYZWMlRiXlux5jd0fqVJu6PfDbOrZItVqUEzLobeQ==}
@@ -814,6 +854,16 @@ packages:
       '@vue/shared': 3.2.37
       estree-walker: 2.0.2
       magic-string: 0.25.9
+
+  /@vue/reactivity-transform/3.2.38:
+    resolution: {integrity: sha512-3SD3Jmi1yXrDwiNJqQ6fs1x61WsDLqVk4NyKVz78mkaIRh6d3IqtRnptgRfXn+Fzf+m6B1KxBYWq1APj6h4qeA==}
+    dependencies:
+      '@babel/parser': 7.18.9
+      '@vue/compiler-core': 3.2.38
+      '@vue/shared': 3.2.38
+      estree-walker: 2.0.2
+      magic-string: 0.25.9
+    dev: true
 
   /@vue/reactivity/3.2.37:
     resolution: {integrity: sha512-/7WRafBOshOc6m3F7plwzPeCu/RCVv9uMpOwa/5PiY1Zz+WLVRWiy0MYKwmg19KBdGtFWsmZ4cD+LOdVPcs52A==}
@@ -844,6 +894,10 @@ packages:
 
   /@vue/shared/3.2.37:
     resolution: {integrity: sha512-4rSJemR2NQIo9Klm1vabqWjD8rs/ZaJSzMxkMNeJS6lHiUjjUeYFbooN19NgFjztubEKh3WlZUeOLVdbbUWHsw==}
+
+  /@vue/shared/3.2.38:
+    resolution: {integrity: sha512-dTyhTIRmGXBjxJE+skC8tTWCGLCVc4wQgRRLt8+O9p5ewBAjoBwtCAkLPrtToSr1xltoe3st21Pv953aOZ7alg==}
+    dev: true
 
   /@vue/test-utils/2.0.2_vue@3.2.37:
     resolution: {integrity: sha512-E2P4oXSaWDqTZNbmKZFVLrNN/siVN78YkEqs7pHryWerrlZR9bBFLWdJwRoguX45Ru6HxIflzKl4vQvwRMwm5g==}

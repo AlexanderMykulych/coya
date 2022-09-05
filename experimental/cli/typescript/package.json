@@ -75,7 +75,7 @@
     "cypress": "^10.4.0",
     "eslint": "^8.21.0",
     "https-localhost": "^4.7.1",
-    "pinia": "^2.0.17",
+    "pinia": "2.0.21",
     "pnpm": "^7.8.0",
     "unocss": "^0.45.5",
     "vite-plugin-inspect": "^0.6.0",

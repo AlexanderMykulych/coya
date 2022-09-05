@@ -3,7 +3,13 @@ import { useNeo4j, QueryResult, generateCoyaFromGraphResult } from 'coya-ts-anal
 import Coya from 'coya-vue-component'
 import 'coya-vue-component/dist/style.css'
 
-const query = ref('')
+const props = defineProps<{query: string}>()
+const emits = defineEmits(['update:query'])
+const query = computed({
+  get: () => props.query,
+  set: (val) => emits('update:query', val),
+})
+
 const queryResult = ref<QueryResult | null>(null)
 
 const db = useNeo4j()
@@ -17,7 +23,7 @@ const coya = computedAsync(() => queryResult.value ? generateCoyaFromGraphResult
 </script>
 
 <template>
-  <div class="h-full flex">
+  <div class="h-full flex" pb-5>
     <div class="w-full h-full flex-col">
       <div class="flex justify-start mb-2 pb-2" b="b-0.5 coolGray">
         <button
@@ -26,14 +32,16 @@ const coya = computedAsync(() => queryResult.value ? generateCoyaFromGraphResult
           @click="executeQuery"
         >Execute</button>
       </div>
-      <Query
-        v-model="query"
-      />
+      <div class="h-95%">
+        <Query
+          v-model="query"
+        />
+      </div>
     </div>
     <div class="w-full">
       <Coya
         v-if="coya"
-        class="w-full h-full"
+        class="w-full h-90"
         id="diagram"
         :config="coya"
       >

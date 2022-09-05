@@ -7,6 +7,8 @@ import Pages from 'vite-plugin-pages'
 import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import Unocss from 'unocss/vite'
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
 // import { vitestAnalyzerPlugin } from 'coya-ts-analyzer'
 
 export default defineConfig({
@@ -41,11 +43,18 @@ export default defineConfig({
     // https://github.com/antfu/vite-plugin-components
     Components({
       dts: true,
+      resolvers: [
+        IconsResolver(),
+      ],
     }),
 
     // https://github.com/antfu/unocss
     // see unocss.config.ts for config
     Unocss(),
+    Icons({
+      autoInstall: true,
+      
+    }),
     // vitestAnalyzerPlugin(),
   ],
 

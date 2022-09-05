@@ -5,6 +5,9 @@
 		},
     {
       "path": "../libraries/code-analyzers/ts-analyzer"
+    },
+    {
+      "path": "../libraries/code-analyzers/mental-project"
     }
   ],
   "settings": {}
