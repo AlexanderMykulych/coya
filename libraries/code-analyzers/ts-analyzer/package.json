@@ -41,7 +41,9 @@
     "find-free-port": "~2.0.0",
     "types-package-json": "~2.0.39",
     "vue-template-compiler": "~2.7.10",
-    "vite-plugin-commonjs-externals": "~0.1.1"
+    "vite-plugin-commonjs-externals": "~0.1.1",
+    "nodegit": "0.28.0-alpha.11",
+    "@types/nodegit": "~0.27.10"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.25.2",
