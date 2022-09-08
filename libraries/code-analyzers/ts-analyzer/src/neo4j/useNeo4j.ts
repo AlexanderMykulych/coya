@@ -1,4 +1,4 @@
-import neo4j from 'neo4j-driver'
+import neo4j, { ServerInfo } from 'neo4j-driver'
 import type { Driver } from 'neo4j-driver'
 import { getVerifyConnectionFn } from './verifyConnection'
 import { getInsertCodeInfosFn } from './insertCodeInfos'
@@ -9,6 +9,7 @@ export { QueryResult } from 'neo4j-driver'
 let driver: Driver
 const database = 'neo4j'
 export type useNeo4jResult = ReturnType<typeof useNeo4j>
+export type Neo4jStatus = ServerInfo
 
 export function useNeo4j() {
 

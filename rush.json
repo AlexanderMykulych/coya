@@ -544,6 +544,17 @@
       "packageName": "mental-project",
       "projectFolder": "libraries/code-analyzers/mental-project",
       "reviewCategory": "code-analyzers"
+    },
+    {
+      "packageName": "coya-analyzer-terminal",
+      "projectFolder": "libraries/code-analyzers/terminal",
+      "reviewCategory": "code-analyzers"
+    },
+    {
+      "packageName": "coya-ts-analyzer-worker",
+      "projectFolder": "libraries/code-analyzers/worker",
+      "reviewCategory": "code-analyzers"
     }
+    
   ]
 }
