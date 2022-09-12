@@ -1,7 +1,10 @@
 {
   "name": "coya-ts-analyzer-worker",
-  "private": true,
+  "version": "0.9.20",
   "packageManager": "pnpm@7.4.0",
+  "type": "module",
+  "main": "./dist/coya-ts-analyzer-worker.es.js",
+  "typings": "./src/worker/index.ts",
   "scripts": {
     "build": "vite build",
     "dev": "vite --port 3333 --open",
@@ -14,7 +17,10 @@
   "dependencies": {
     "@vueuse/core": "~9.2.0",
     "vue": "^3.2.38",
-    "vue-router": "~4.1.5"
+    "vue-router": "~4.1.5",
+    "vite-node": "~0.23.1",
+    "coya-util": "~0.9.20",
+    "birpc": "~0.2.3"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.26.3",

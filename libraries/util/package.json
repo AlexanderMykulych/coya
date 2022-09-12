@@ -8,6 +8,13 @@
     "dist",
     "src"
   ],
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "require": "./dist/coya-util.cjs.js",
+      "import": "./dist/coya-util.es.js"
+    }
+  },
   "engines": {
     "node": ">=10"
   },

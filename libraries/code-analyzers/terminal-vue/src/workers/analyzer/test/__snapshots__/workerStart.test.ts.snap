@@ -1,0 +1,7 @@
+// Vitest Snapshot v1
+
+exports[`should run local file 1`] = `
+{
+  "default": "Hello from test.ts",
+}
+`;

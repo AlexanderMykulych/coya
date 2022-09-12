@@ -7,6 +7,7 @@ import Pages from 'vite-plugin-pages'
 import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import Unocss from 'unocss/vite'
+import { nodeCoreModuleList } from 'coya-util'
 
 export default defineConfig({
   resolve: {
@@ -46,6 +47,18 @@ export default defineConfig({
     // see unocss.config.ts for config
     Unocss(),
   ],
+  build: {
+    lib: {
+      entry: path.resolve(__dirname, './src/worker/index.ts'),
+      name: 'coya-ts-analyzer-worker',
+      fileName: format => `coya-ts-analyzer-worker.${format}.js`,
+      formats: ['es']
+    },
+    minify: false,
+    rollupOptions: {
+      external: [...nodeCoreModuleList, 'vite', 'vite-node/server', 'vite-node/client'],
+    }
+  },
 
   // https://github.com/vitest-dev/vitest
   test: {

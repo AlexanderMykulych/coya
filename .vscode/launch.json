@@ -72,7 +72,8 @@
           "runtimeArgs": ["--preserve-symlinks-main"],
           "smartStep": true,
           "console": "integratedTerminal",
-          "cwd": "${workspaceFolder}/libraries/code-analyzers/ts-analyzer"
+          // "cwd": "${workspaceFolder}/libraries/code-analyzers/ts-analyzer"
+          "cwd": "${workspaceFolder}/libraries/code-analyzers/worker"
         }
     ],
     "compounds": []
