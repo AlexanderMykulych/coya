@@ -18,7 +18,8 @@
     "tinypool": "~0.3.0",
     "birpc": "~0.2.3",
     "coya-ts-analyzer": "~0.9.20",
-    "@vueuse/core": "~9.2.0"
+    "@vueuse/core": "~9.2.0",
+    "@antfu/eslint-config": "~0.26.3"
   },
   "devDependencies": {
     "@types/node": "^18.7.15",

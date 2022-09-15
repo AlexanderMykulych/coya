@@ -36,7 +36,7 @@
     "ws": "^8.2.3"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.26.3",
+    "@antfu/eslint-config": "~0.26.3",
     "@iconify/json": "^1.1.406",
     "@types/node": "^18.7.15",
     "@types/prismjs": "^1.16.6",

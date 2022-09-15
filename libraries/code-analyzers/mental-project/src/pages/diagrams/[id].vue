@@ -8,7 +8,6 @@ const { diagram } = useDiagram(props.id)
 
 <template>
   <div h-full v-if="diagram">
-    {{ diagram.id }} - {{ diagram.name }}
     <QueryExecutor
       v-model:query="diagram.query"
     />

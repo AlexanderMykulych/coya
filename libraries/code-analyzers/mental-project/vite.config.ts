@@ -1,6 +1,6 @@
 /// <reference types="vitest" />
 
-import path from 'path'
+import path, { resolve } from 'path'
 import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import Pages from 'vite-plugin-pages'
@@ -19,7 +19,7 @@ export default defineConfig({
   },
   plugins: [
     Vue({
-      reactivityTransform: true,
+      reactivityTransform: resolve(__dirname, './src'),
     }),
 
     // https://github.com/hannoeru/vite-plugin-pages

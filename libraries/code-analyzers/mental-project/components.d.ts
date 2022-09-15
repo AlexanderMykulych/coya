@@ -17,6 +17,7 @@ declare module '@vue/runtime-core' {
     NewDiagram: typeof import('./src/components/diagrams/NewDiagram.vue')['default']
     Query: typeof import('./src/components/Query.vue')['default']
     QueryExecutor: typeof import('./src/components/QueryExecutor.vue')['default']
+    QueryResultType: typeof import('./src/components/QueryResultType.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

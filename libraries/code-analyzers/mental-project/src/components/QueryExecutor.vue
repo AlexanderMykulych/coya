@@ -35,6 +35,8 @@ const coya = computedAsync(
           :disabled="!query"
           @click="queryResult.execute()"
         >Execute</button>
+
+        <QueryResultType class="ml-6"/>
       </div>
       <div class="h-95%">
         <Query

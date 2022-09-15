@@ -81,7 +81,7 @@
     "@antv/layout": "^0.1.24",
     "@types/node": "^18.7.15",
     "fs": "^0.0.1-security",
-    "@antfu/eslint-config": "^0.26.3",
+    "@antfu/eslint-config": "~0.26.3",
     "@unocss/reset": "^0.45.15",
     "@vitejs/plugin-vue": "^3.1.0",
     "@vue/test-utils": "2.0.2",
