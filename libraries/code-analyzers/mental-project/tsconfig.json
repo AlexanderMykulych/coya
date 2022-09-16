@@ -15,6 +15,7 @@
     "isolatedModules": true,
     "allowJs": true,
     "forceConsistentCasingInFileNames": true,
+    "importsNotUsedAsValues": "error",
     "types": [
       "vite/client",
       "vite-plugin-pages/client"

@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import Coya from 'coya-vue-component'
-import 'coya-vue-component/dist/style.css'
 import type { Diagram } from '../store/useDiagrams'
 
 const props = defineProps<Diagram>()
@@ -11,10 +9,6 @@ const query = useVModel(props, 'query', emits)
 const type = useVModel(props, 'type', emits)
 
 const queryResult = useQueryResult(query)
-
-
-const coyaProcessing = ref(false)
-const coya = useCoyaFromQueryResult(queryResult, coyaProcessing)
 
 </script>
 
@@ -37,20 +31,7 @@ const coya = useCoyaFromQueryResult(queryResult, coyaProcessing)
       </div>
     </div>
     <div class="w-full flex justify-center align-center">
-      <QueryResult :type="type" />
-      <template v-if="queryResult.isLoading.value || coyaProcessing">
-        <div self-center flex="~ col">
-          <span class="loader ml-4 mb-3"></span>
-          ...{{ coyaProcessing ? 'Processing result' : 'Loading'}}
-        </div>
-      </template>
-      <Coya
-        v-else-if="coya"
-        class="w-full h-90"
-        id="diagram"
-        :config="coya"
-      >
-      </Coya>
+      <QueryResult :key="id" :type="type" :queryResult="queryResult" />
     </div>
   </div>
 </template>

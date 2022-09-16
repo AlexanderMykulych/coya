@@ -9,6 +9,7 @@ const { diagram } = useDiagram(props.id)
 <template>
   <div h-full v-if="diagram">
     <QueryExecutor
+      :id="id"
       v-model:name="diagram.name"
       v-model:type="diagram.type"
       v-model:parameters="diagram.parameters"

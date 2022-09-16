@@ -1,11 +1,10 @@
 import { generateCoyaFromGraphResult } from 'coya-ts-analyzer/browser'
-import type { UseAsyncStateReturn } from "@vueuse/core";
 import type { QueryResult } from 'coya-ts-analyzer/browser'
 import type { Ref } from "vue";
 
-export function useCoyaFromQueryResult(queryResult: UseAsyncStateReturn<QueryResult | null, true>, processing: Ref<boolean>) {
+export function useCoyaFromQueryResult(queryResult: Ref<QueryResult | null>, processing: Ref<boolean>) {
   return computedAsync(
-    () => queryResult.isReady && queryResult.state?.value ? generateCoyaFromGraphResult(queryResult.state.value) : null,
+    () => queryResult.value ? generateCoyaFromGraphResult(queryResult.value) : null,
     null,
     processing,
   )
