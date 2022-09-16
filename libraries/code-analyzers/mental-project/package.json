@@ -23,7 +23,8 @@
     "vue-final-modal": "~3.4.4",
     "vue-router": "~4.1.5",
     "vuetify": "3.0.0-beta.10",
-    "vite-plugin-vue-type-imports": "~0.2.2"
+    "vite-plugin-vue-type-imports": "~0.2.2",
+    "echarts": "5.3.3"
   },
   "devDependencies": {
     "@antfu/eslint-config": "~0.26.3",

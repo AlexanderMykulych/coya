@@ -14,6 +14,7 @@ const { diagram } = useDiagram(props.id)
       v-model:type="diagram.type"
       v-model:parameters="diagram.parameters"
       v-model:query="diagram.query"
+      v-model:settings="diagram.settings"
     />
   </div>
 </template>

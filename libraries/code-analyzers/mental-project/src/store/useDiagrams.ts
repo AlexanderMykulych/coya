@@ -7,12 +7,13 @@ export type DiagramParameter = {
 }
 
 
-export interface Diagram {
+export interface Diagram<TSettings = any> {
   query: string
   parameters: DiagramParameter[]
   id: string
   name: string
   type: QueryResultType
+  settings?: TSettings
 }
 
 export type DiagramState = {
@@ -41,6 +42,7 @@ return apoc.agg.graph(p) as graph
       id: name.replaceAll(' ', '_').toLowerCase(),
       name: name,
       type: QueryResultType.Graph,
+      settings: null,
     })
   }
 

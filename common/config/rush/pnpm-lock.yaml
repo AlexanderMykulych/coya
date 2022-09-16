@@ -162,6 +162,7 @@ specifiers:
   vite-plugin-vue-layouts: ^0.7.0
   vite-plugin-vue-markdown: ^0.21.1
   vite-plugin-vue-termui: '*'
+  vite-plugin-vue-type-imports: ~0.2.2
   vite-plugin-vuetify: ~1.0.0-alpha.17
   vite-plugin-windicss: ^1.6.3
   vite-ssg: ^0.20.2
@@ -349,6 +350,7 @@ dependencies:
   vite-plugin-vue-layouts: 0.7.0_ba15f3f210ddba002de209c352ed41a5
   vite-plugin-vue-markdown: 0.21.1_vite@3.1.0
   vite-plugin-vue-termui: 0.0.9_e706e26361275f71ad8f8cc664398561
+  vite-plugin-vue-type-imports: 0.2.2_da9107b15bba8cebbad1f1cef94aa3c6
   vite-plugin-vuetify: 1.0.0-alpha.17_3fb213a6074728251a07c7a4a0dd2d56
   vite-plugin-windicss: 1.8.7_vite@3.1.0
   vite-ssg: 0.20.2_60d79ed49a93ea5481ed3e67f0acdd0d
@@ -18472,7 +18474,7 @@ packages:
     dev: false
 
   file:projects/mental-project.tgz_42e01380fa74dacda92fce891bfb8d87:
-    resolution: {integrity: sha512-dv/ADziGnXkP+lNUUYyWI8YKPgd5esDyOTPEeJZvWE55jjHsxb6QvMBm9GIFaoNJG2qVPktuWLNfm9Q9yCBbrg==, tarball: file:projects/mental-project.tgz}
+    resolution: {integrity: sha512-k1WSYx+QUqClI6MspOzCwBX7rt9BKzNuXy+OkzvJrcfj/3AJ5f495E9jFke0ogWv68kCkD76ghI3kkAvlXVdPA==, tarball: file:projects/mental-project.tgz}
     id: file:projects/mental-project.tgz
     name: '@rush-temp/mental-project'
     version: 0.0.0
@@ -18488,6 +18490,7 @@ packages:
       '@vueuse/core': 9.2.0_vue@3.2.39
       '@vueuse/head': 0.7.9_vue@3.2.39
       cypress: 10.7.0
+      echarts: 5.3.3
       eslint: 8.23.0
       https-localhost: 4.7.1
       jsdom: 20.0.0

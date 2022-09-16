@@ -10,16 +10,19 @@ export const queryResultComponents = [
   },
   {
     type: QueryResultType.Indicator,
-    component: defineAsyncComponent(() => import('./IndicatorQueryResult.vue')),
+    component: defineAsyncComponent(() => import('./Indicator/IndicatorQueryResult.vue')),
+    settingComponent: defineAsyncComponent(() => import('./Indicator/IndicatorQueryResultSettings.vue')),
   },
 ]
 
-export type QueryResultProps = {
+export type QueryResultProps<TSettings = any> = {
   type: QueryResultType
   queryResult: UseAsyncStateReturn<QueryResult | null, true>
+  settings: TSettings
 }
 
-export type QueryResultResolvedProps = {
+export type QueryResultResolvedProps<TSettings = any> = {
   type: QueryResultType
   queryResult: Ref<QueryResult>
+  settings: TSettings
 }

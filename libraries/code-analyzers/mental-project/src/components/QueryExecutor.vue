@@ -3,10 +3,11 @@ import type { Diagram } from '../store/useDiagrams'
 
 const props = defineProps<Diagram>()
 
-const emits = defineEmits(['update:query'])
+const emits = defineEmits(['update:query', 'update:type', 'update:settings'])
 
 const query = useVModel(props, 'query', emits)
 const type = useVModel(props, 'type', emits)
+const settings = useVModel(props, 'settings', emits)
 
 const queryResult = useQueryResult(query)
 
@@ -31,7 +32,12 @@ const queryResult = useQueryResult(query)
       </div>
     </div>
     <div class="w-full flex justify-center align-center">
-      <QueryResult :key="id" :type="type" :queryResult="queryResult" />
+      <QueryResult
+        :key="id"
+        :type="type"
+        :queryResult="queryResult"
+        v-model:settings="settings"
+      />
     </div>
   </div>
 </template>
