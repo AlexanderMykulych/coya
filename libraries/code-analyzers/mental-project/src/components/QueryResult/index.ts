@@ -13,6 +13,11 @@ export const queryResultComponents = [
     component: defineAsyncComponent(() => import('./Indicator/IndicatorQueryResult.vue')),
     settingComponent: defineAsyncComponent(() => import('./Indicator/IndicatorQueryResultSettings.vue')),
   },
+  {
+    type: QueryResultType.Bar,
+    component: defineAsyncComponent(() => import('./Bar/BarQueryResult.vue')),
+    settingComponent: defineAsyncComponent(() => import('./Bar/BarQueryResultSettings.vue')),
+  },
 ]
 
 export type QueryResultProps<TSettings = any> = {

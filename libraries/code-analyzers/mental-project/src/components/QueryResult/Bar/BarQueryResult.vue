@@ -1,9 +1,10 @@
 <script lang="ts" setup>
 import type { QueryResultResolvedProps } from '..';
-import type { IndicatorSettings } from './types';
+import type { BarSettings } from './types';
+
 import { useOptions } from './useOptions';
 
-const props = defineProps<QueryResultResolvedProps<IndicatorSettings>>()
+const props = defineProps<QueryResultResolvedProps<BarSettings>>()
 
 const options = useOptions(props)
 </script>

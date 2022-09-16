@@ -2,8 +2,9 @@
 import { queryResultComponents, QueryResultProps } from './QueryResult';
 
 const props = defineProps<QueryResultProps>()
+const emits = defineEmits(['update:settings'])
 
-const settings = useVModel(props, 'settings')
+const settings = useVModel(props, 'settings', emits)
 
 const typeConfig = computed(() => queryResultComponents.find(x => x.type === props.type))
 const cmp = computed(() => typeConfig.value?.component)
@@ -52,7 +53,8 @@ watch(() => props.queryResult.isReady.value, (val) => {
           v-if="!!settingCmp"
           :is="settingCmp"
           :type="type"
-          v-model="settings"
+          :modelValue="settings ?? {}"
+          @update:modelValue="settings = $event"
         />
       </v-window-item>
     </v-window>

@@ -7,9 +7,12 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    BarQueryResult: typeof import('./src/components/QueryResult/Bar/BarQueryResult.vue')['default']
+    BarQueryResultSettings: typeof import('./src/components/QueryResult/Bar/BarQueryResultSettings.vue')['default']
     BaseModal: typeof import('./src/components/BaseModal.vue')['default']
     Counter: typeof import('./src/components/Counter.vue')['default']
     CoyaQueryResult: typeof import('./src/components/QueryResult/CoyaQueryResult.vue')['default']
+    EChartQueryResult: typeof import('./src/components/QueryResult/EChartQueryResult.vue')['default']
     Footer: typeof import('./src/components/Footer.vue')['default']
     IFluentDelete24Filled: typeof import('~icons/fluent/delete24-filled')['default']
     'IMaterialSymbols:deleteRounded': typeof import('~icons/material-symbols/delete-rounded')['default']

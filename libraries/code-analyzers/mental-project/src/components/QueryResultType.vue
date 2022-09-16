@@ -1,18 +1,17 @@
 <script lang="ts" setup>
-import { QueryResultType } from '../types';
+import { capitalize } from 'vue';
+import type { QueryResultType } from '../types';
+import { queryResultComponents } from './QueryResult';
 
 const props = defineProps<{ modelValue: QueryResultType }>()
 const emit = defineEmits(['update:modelValue'])
 
 const value = useVModel(props, 'modelValue', emit)
 
-const items = ref([{
-  label: 'Graph',
-  value: QueryResultType.Graph,
-}, {
-  label: 'Indicator',
-  value: QueryResultType.Indicator,
-}])
+const items = ref(queryResultComponents.map(x => ({
+  label: capitalize(x.type),
+  value: x.type,
+})))
 </script>
 
 <template>

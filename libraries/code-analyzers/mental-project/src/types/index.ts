@@ -1,4 +1,5 @@
 export enum QueryResultType {
   Graph = 'graph',
-  Indicator = 'indicator'
+  Indicator = 'indicator',
+  Bar = 'bar',
 }
