@@ -1,15 +1,18 @@
 import { defineStore } from 'pinia'
 import { $vfm } from 'vue-final-modal'
+import { QueryResultType } from '../types'
 
 export type DiagramParameter = {
   name: string
 }
 
-export type Diagram = {
+
+export interface Diagram {
   query: string
   parameters: DiagramParameter[]
   id: string
   name: string
+  type: QueryResultType
 }
 
 export type DiagramState = {
@@ -37,6 +40,7 @@ return apoc.agg.graph(p) as graph
       parameters: [],
       id: name.replaceAll(' ', '_').toLowerCase(),
       name: name,
+      type: QueryResultType.Graph,
     })
   }
 
@@ -55,7 +59,6 @@ return apoc.agg.graph(p) as graph
     open,
   }
 })
-
 
 export function useDiagram(id: string) {
   const { diagrams } = useDiagrams()

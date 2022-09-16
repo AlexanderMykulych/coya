@@ -18,9 +18,12 @@
     "coya-vue-component": "~0.9.20",
     "monaco-editor": "~0.34.0",
     "neo4j-driver": "~4.4.7",
-    "vue-router": "~4.1.5",
     "unplugin-icons": "~0.14.9",
-    "vue-final-modal": "next"
+    "vite-plugin-vuetify": "~1.0.0-alpha.17",
+    "vue-final-modal": "~3.4.4",
+    "vue-router": "~4.1.5",
+    "vuetify": "3.0.0-beta.10",
+    "vite-plugin-vue-type-imports": "~0.2.2"
   },
   "devDependencies": {
     "@antfu/eslint-config": "~0.26.3",
@@ -53,8 +56,8 @@
     "vue": "^3.2.38",
     "vue-demi": "^0.13.6",
     "vue-i18n": "^9.2.2",
-    "vue-tsc": "^0.40.8",
-    "vue-termui": "*"
+    "vue-termui": "*",
+    "vue-tsc": "^0.40.8"
   },
   "eslintConfig": {
     "extends": "@antfu"

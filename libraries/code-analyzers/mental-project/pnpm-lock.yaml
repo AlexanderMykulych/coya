@@ -21,11 +21,13 @@ specifiers:
   vite-plugin-pages: ^0.25.0
   vitest: ^0.19.1
   vue: ^3.2.37
+  vue-final-modal: ~3.4.4
   vue-router: ^4.1.2
   vue-tsc: ^0.39.0
 
 dependencies:
   '@vueuse/core': 9.0.0_vue@3.2.37
+  vue-final-modal: 3.4.4
   vue-router: 4.1.2_vue@3.2.37
 
 devDependencies:
@@ -4744,6 +4746,10 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /vue-final-modal/3.4.4:
+    resolution: {integrity: sha512-4nOLU+cMcUqAT0kg+64+Hi96kkQPOph2LOJa7Fl58BXlTyhfRxaMuz3M91wi2ooMIL4poWA8428P5GIAXSpuZg==}
+    dev: false
 
   /vue-router/4.1.2_vue@3.2.37:
     resolution: {integrity: sha512-5BP1qXFncVRwgV/XnqzsKApdMjQPqWIpoUBdL1ynz8HyLxIX/UDAx7Ql2BjmA5CXT/p61JfZvkpiFWFpaqcfag==}

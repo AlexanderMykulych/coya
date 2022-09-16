@@ -1,14 +1,28 @@
 <script lang="ts" setup>
-defineProps<{modelValue: 'graph' | 'indicator'}>()
+import { QueryResultType } from '../types';
+
+const props = defineProps<{ modelValue: QueryResultType }>()
+const emit = defineEmits(['update:modelValue'])
+
+const value = useVModel(props, 'modelValue', emit)
+
+const items = ref([{
+  label: 'Graph',
+  value: QueryResultType.Graph,
+}, {
+  label: 'Indicator',
+  value: QueryResultType.Indicator,
+}])
 </script>
 
 <template>
-  <div>
-    <button class="btn">
-      Graph
-    </button>
-    <button class="btn ml-3">
-      Indicator
-    </button>
+  <div class="w-full">
+    <v-autocomplete
+      v-model="value"
+      :items="items"
+      item-value="value"
+      item-title="label"
+      label="Result"
+    />
   </div>
 </template>

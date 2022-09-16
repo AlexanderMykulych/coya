@@ -1,29 +1,21 @@
 <script lang="ts" setup>
-import { useNeo4j, generateCoyaFromGraphResult } from 'coya-ts-analyzer/browser'
 import Coya from 'coya-vue-component'
 import 'coya-vue-component/dist/style.css'
+import type { Diagram } from '../store/useDiagrams'
 
-const props = defineProps<{query: string}>()
+const props = defineProps<Diagram>()
+
 const emits = defineEmits(['update:query'])
-const query = computed({
-  get: () => props.query,
-  set: (val) => emits('update:query', val),
-})
 
-const db = useNeo4j()
+const query = useVModel(props, 'query', emits)
+const type = useVModel(props, 'type', emits)
 
-const queryResult = useAsyncState(() => db.read(query.value), null, {
-  immediate: false,
-  resetOnExecute: true,
-})
+const queryResult = useQueryResult(query)
 
 
 const coyaProcessing = ref(false)
-const coya = computedAsync(
-  () => queryResult.isReady && queryResult.state?.value ? generateCoyaFromGraphResult(queryResult.state.value) : null,
-  null,
-  coyaProcessing,
-)
+const coya = useCoyaFromQueryResult(queryResult, coyaProcessing)
+
 </script>
 
 <template>
@@ -36,7 +28,7 @@ const coya = computedAsync(
           @click="queryResult.execute()"
         >Execute</button>
 
-        <QueryResultType class="ml-6"/>
+        <QueryResultType class="ml-6" v-model="type" />
       </div>
       <div class="h-95%">
         <Query
@@ -45,6 +37,7 @@ const coya = computedAsync(
       </div>
     </div>
     <div class="w-full flex justify-center align-center">
+      <QueryResult :type="type" />
       <template v-if="queryResult.isLoading.value || coyaProcessing">
         <div self-center flex="~ col">
           <span class="loader ml-4 mb-3"></span>

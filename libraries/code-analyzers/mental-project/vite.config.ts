@@ -9,6 +9,9 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Unocss from 'unocss/vite'
 import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
+import vuetify from 'vite-plugin-vuetify'
+import VueTypeImports from 'vite-plugin-vue-type-imports'
+import Inspect from 'vite-plugin-inspect'
 // import { vitestAnalyzerPlugin } from 'coya-ts-analyzer'
 
 export default defineConfig({
@@ -31,7 +34,7 @@ export default defineConfig({
         'vue',
         'vue/macros',
         'vue-router',
-        '@vueuse/core',
+        '@vueuse/core'
       ],
       dts: true,
       dirs: [
@@ -55,7 +58,15 @@ export default defineConfig({
       autoInstall: true,
       
     }),
+    vuetify({
+      autoImport: true,
+    }),
+    VueTypeImports(),
     // vitestAnalyzerPlugin(),
+    Inspect({
+      // change this to enable inspect for debugging
+      enabled: true,
+    }),
   ],
 
   // https://github.com/vitest-dev/vitest

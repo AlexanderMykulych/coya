@@ -3,7 +3,11 @@ import { createRouter, createWebHistory } from 'vue-router'
 import routes from 'virtual:generated-pages'
 import App from './App.vue'
 import { createPinia } from 'pinia'
+
 import { vfmPlugin } from 'vue-final-modal'
+
+import { createVuetify } from 'vuetify'
+import 'vuetify/styles'
 
 import '@unocss/reset/tailwind.css'
 import './styles/main.css'
@@ -20,5 +24,7 @@ const pinia = createPinia()
 app.use(pinia)
 
 app.use(vfmPlugin)
+
+app.use(createVuetify())
 
 app.mount('#app')
