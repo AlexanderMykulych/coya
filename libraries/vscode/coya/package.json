@@ -75,7 +75,7 @@
         "@types/node": "^18.7.15",
         "@types/ws": "^8.2.0",
         "@vue-reactivity/watch": "^0.1.6",
-        "@vue/reactivity": "^3.2.12",
+        "@vue/reactivity": "^3.2.38",
         "child_process": "^1.0.2",
         "coya-core": "~0.9.20",
         "coya-util": "~0.9.20",

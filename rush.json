@@ -559,6 +559,11 @@
       "packageName": "coya-terminal-vue-v2",
       "projectFolder": "libraries/code-analyzers/terminal-vue-v2",
       "reviewCategory": "code-analyzers"
+    },
+    {
+      "packageName": "coya-analyzer-cli",
+      "projectFolder": "libraries/code-analyzers/analyzer-cli",
+      "reviewCategory": "code-analyzers"
     }
   ]
 }
