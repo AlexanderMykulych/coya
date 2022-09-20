@@ -1,8 +1,16 @@
 {
   // see https://www.typescriptlang.org/tsconfig to better understand tsconfigs
-  "exclude": ["./node_modules"],
   "compilerOptions": {
-    "module": "ESNext",
-    "rootDir": "."
+    // "module": "esnext",
+    "rootDir": "./src",
+    // "moduleResolution": "node",
+    // "noEmit": true,
+    // "esModuleInterop": true
+    "target": "ES2020",
+    "module": "ES2020",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "types": ["node"]
   }
 }

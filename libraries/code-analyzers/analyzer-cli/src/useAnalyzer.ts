@@ -1,6 +1,5 @@
 import { resolve } from 'path'
 import { Tinypool } from 'tinypool'
-import _url, { fileURLToPath } from 'url'
 import { ref } from "@vue/reactivity"
 
 export type RunData = {
@@ -12,8 +11,8 @@ export interface WorkerFunctions {
   run: (data: { methodName: string }) => Promise<any>
 }
 
-const currentPath = fileURLToPath(new URL('.', import.meta.url))
-const workerRunnerPath = fileURLToPath(new URL('../node_modules/coya-ts-analyzer-worker/dist/coya-ts-analyzer-worker.es.js', import.meta.url))
+const currentPath = __dirname
+const workerRunnerPath = resolve(__dirname, '../node_modules/coya-ts-analyzer-worker/dist/coya-ts-analyzer-worker.es.js')
 const pool = new Tinypool({
   filename: workerRunnerPath,
 })
@@ -28,10 +27,10 @@ export function useAnalyzer() {
         method: 'verifyConnection',
       })
     },
-    insertProjectInfoToDb() {
+    insertProjectInfoToDb(path?: string) {
       return run({
         method: 'insertProjectInfoToDb',
-        methodParameter: workingDir.value,
+        methodParameter: path ?? workingDir.value,
         voidResult: true,
       })
     },
