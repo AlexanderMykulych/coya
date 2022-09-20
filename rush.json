@@ -546,18 +546,8 @@
       "reviewCategory": "code-analyzers"
     },
     {
-      "packageName": "coya-analyzer-terminal",
-      "projectFolder": "libraries/code-analyzers/terminal-vue",
-      "reviewCategory": "code-analyzers"
-    },
-    {
       "packageName": "coya-ts-analyzer-worker",
       "projectFolder": "libraries/code-analyzers/worker",
-      "reviewCategory": "code-analyzers"
-    },
-    {
-      "packageName": "coya-terminal-vue-v2",
-      "projectFolder": "libraries/code-analyzers/terminal-vue-v2",
       "reviewCategory": "code-analyzers"
     },
     {

@@ -18,8 +18,6 @@ export function getInsertCodeInfosFn(driver: Driver, database: string) {
       ).map(([type, entities]) =>
         tx.run(`CALL apoc.create.nodes(["${type}"], $entities)`, { entities })
       )
-
-
     })
     await session.writeTransaction(tx => {
       codeInfos
