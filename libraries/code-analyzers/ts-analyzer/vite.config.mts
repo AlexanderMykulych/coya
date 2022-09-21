@@ -24,7 +24,7 @@ export default defineConfig((<UserConfigExport & VitestUserConfig>{
     // }),
     // viteCommonjs(),
     Vue({
-      reactivityTransform: true,
+      reactivityTransform: resolve(__dirname, './src'),
     }),
 
     // https://github.com/hannoeru/vite-plugin-pages

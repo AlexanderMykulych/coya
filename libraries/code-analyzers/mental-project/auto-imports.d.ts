@@ -8,7 +8,10 @@ declare global {
   const $ref: typeof import('vue/macros')['$ref']
   const $shallowRef: typeof import('vue/macros')['$shallowRef']
   const $toRef: typeof import('vue/macros')['$toRef']
+  const ENTRY_URL: typeof import('./src/composables/connectWebSocket')['ENTRY_URL']
   const EffectScope: typeof import('vue')['EffectScope']
+  const HOST: typeof import('./src/composables/connectWebSocket')['HOST']
+  const PORT: typeof import('./src/composables/connectWebSocket')['PORT']
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef']
   const computed: typeof import('vue')['computed']
@@ -16,6 +19,7 @@ declare global {
   const computedEager: typeof import('@vueuse/core')['computedEager']
   const computedInject: typeof import('@vueuse/core')['computedInject']
   const computedWithControl: typeof import('@vueuse/core')['computedWithControl']
+  const connectWebSocket: typeof import('./src/composables/connectWebSocket')['connectWebSocket']
   const controlledComputed: typeof import('@vueuse/core')['controlledComputed']
   const controlledRef: typeof import('@vueuse/core')['controlledRef']
   const createApp: typeof import('vue')['createApp']
@@ -281,7 +285,10 @@ declare module '@vue/runtime-core' {
     readonly $ref: UnwrapRef<typeof import('vue/macros')['$ref']>
     readonly $shallowRef: UnwrapRef<typeof import('vue/macros')['$shallowRef']>
     readonly $toRef: UnwrapRef<typeof import('vue/macros')['$toRef']>
+    readonly ENTRY_URL: UnwrapRef<typeof import('./src/composables/connectWebSocket')['ENTRY_URL']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly HOST: UnwrapRef<typeof import('./src/composables/connectWebSocket')['HOST']>
+    readonly PORT: UnwrapRef<typeof import('./src/composables/connectWebSocket')['PORT']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
@@ -289,6 +296,7 @@ declare module '@vue/runtime-core' {
     readonly computedEager: UnwrapRef<typeof import('@vueuse/core')['computedEager']>
     readonly computedInject: UnwrapRef<typeof import('@vueuse/core')['computedInject']>
     readonly computedWithControl: UnwrapRef<typeof import('@vueuse/core')['computedWithControl']>
+    readonly connectWebSocket: UnwrapRef<typeof import('./src/composables/connectWebSocket')['connectWebSocket']>
     readonly controlledComputed: UnwrapRef<typeof import('@vueuse/core')['controlledComputed']>
     readonly controlledRef: UnwrapRef<typeof import('@vueuse/core')['controlledRef']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>

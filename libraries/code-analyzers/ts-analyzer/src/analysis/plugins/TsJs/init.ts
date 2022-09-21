@@ -13,7 +13,11 @@ async function _init(context: TsJsAnalysisContext): Promise<void> {
 }
 
 function subscribesOnHooks(context: TsJsAnalysisContext) {
-  const normalizeId = (id: string) => {
+  const normalizeId = (id: string | undefined) => {
+    if (!id) {
+      return `<empty id>`
+    }
+
     const files = context.store.get('files', [])
     const fileMap = files.find(x => id.startsWith(x.resultFile))
 

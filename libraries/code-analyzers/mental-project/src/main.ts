@@ -12,6 +12,7 @@ import 'vuetify/styles'
 import '@unocss/reset/tailwind.css'
 import './styles/main.css'
 import 'uno.css'
+import { connectWebSocket } from './composables/connectWebSocket'
 
 const app = createApp(App)
 const router = createRouter({
@@ -28,3 +29,6 @@ app.use(vfmPlugin)
 app.use(createVuetify())
 
 app.mount('#app')
+
+const rpc = connectWebSocket()
+window.rpc = rpc

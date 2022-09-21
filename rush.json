@@ -554,6 +554,11 @@
       "packageName": "coya-analyzer-cli",
       "projectFolder": "libraries/code-analyzers/analyzer-cli",
       "reviewCategory": "code-analyzers"
+    },
+    {
+      "packageName": "coya-analyzer-shared-types",
+      "projectFolder": "libraries/code-analyzers/shared-types",
+      "reviewCategory": "code-analyzers"
     }
   ]
 }

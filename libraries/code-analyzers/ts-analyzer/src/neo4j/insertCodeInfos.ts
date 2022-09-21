@@ -20,23 +20,21 @@ export function getInsertCodeInfosFn(driver: Driver, database: string) {
       )
     })
     await session.writeTransaction(tx => {
-      codeInfos
+      const rows = codeInfos
         .filter((x): x is Relationship => x.type === CodeInfoType.Relationship)
-        .map(r => ({
-          query: `
-            MATCH (e1 { id: $from})
-            MATCH (e2 { id: $to})
-            CALL apoc.create.relationship(e1, "Relation", $relation, e2)
-            YIELD rel
-            RETURN rel
-            `,
-          params: {
-            relation: r,
-            from: r.from,
-            to: r.to,
-          },
-        }))
-        .map(x => tx.run(x.query, x.params))
+
+      tx.run(`
+          UNWIND $batch as row
+          MATCH (from { id: row.from})
+          MATCH (to { id: row.to})
+          CALL apoc.create.relationship(from, "Relation", row, to)
+          YIELD rel
+          RETURN count(*)
+          `,
+        {
+          batch: rows,
+        },
+      )
     })
     await session.close()
   }

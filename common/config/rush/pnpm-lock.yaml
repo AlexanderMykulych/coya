@@ -21,14 +21,13 @@ specifiers:
   '@rollup/plugin-typescript': ^8.3.0
   '@rush-temp/coya': file:./projects/coya.tgz
   '@rush-temp/coya-analyzer-cli': file:./projects/coya-analyzer-cli.tgz
-  '@rush-temp/coya-analyzer-terminal': file:./projects/coya-analyzer-terminal.tgz
+  '@rush-temp/coya-analyzer-shared-types': file:./projects/coya-analyzer-shared-types.tgz
   '@rush-temp/coya-arrow': file:./projects/coya-arrow.tgz
   '@rush-temp/coya-core': file:./projects/coya-core.tgz
   '@rush-temp/coya-editor-new': file:./projects/coya-editor-new.tgz
   '@rush-temp/coya-json-editor': file:./projects/coya-json-editor.tgz
   '@rush-temp/coya-rnd-blog': file:./projects/coya-rnd-blog.tgz
   '@rush-temp/coya-store': file:./projects/coya-store.tgz
-  '@rush-temp/coya-terminal-vue-v2': file:./projects/coya-terminal-vue-v2.tgz
   '@rush-temp/coya-ts-analizer': file:./projects/coya-ts-analizer.tgz
   '@rush-temp/coya-ts-analyzer': file:./projects/coya-ts-analyzer.tgz
   '@rush-temp/coya-ts-analyzer-worker': file:./projects/coya-ts-analyzer-worker.tgz
@@ -56,17 +55,15 @@ specifiers:
   '@types/prismjs': ^1.16.6
   '@types/vscode': ^1.60.0
   '@types/wicg-file-system-access': ^2020.9.4
-  '@types/ws': ^8.2.0
+  '@types/ws': ~8.5.3
   '@typescript-eslint/eslint-plugin': ^5.10.2
   '@typescript-eslint/parser': ^4.29.3
   '@unocss/reset': ^0.45.15
   '@vitejs/plugin-vue': ^3.1.0
   '@vitest/ui': ~0.18.1
   '@vue-reactivity/watch': ^0.1.6
-  '@vue-termui/cli': '*'
   '@vue/compiler-sfc': ^3.2.31
   '@vue/reactivity': ^3.2.38
-  '@vue/runtime-core': ^3.2.31
   '@vue/server-renderer': ^3.2.26
   '@vue/test-utils': 2.0.2
   '@vueform/slider': ^2.0.8
@@ -118,7 +115,6 @@ specifiers:
   path-browserify: ^1.0.1
   picocolors: ^1.0.0
   pinia: 2.0.21
-  piscina: ~3.2.0
   playwright: ~1.25.0
   pnpm: ^7.11.0
   postcss-nested-import: ^0.1.0
@@ -139,7 +135,6 @@ specifiers:
   taze: ^0.8.0
   tinypool: ~0.3.0
   ts-morph: ^15.1.0
-  ts-node: 10.9.1
   tsdx: ^0.14.1
   tslib: ~2.4.0
   tsup: ^5.11.10
@@ -164,7 +159,6 @@ specifiers:
   vite-plugin-restart: ^0.1.1
   vite-plugin-vue-layouts: ^0.7.0
   vite-plugin-vue-markdown: ^0.21.1
-  vite-plugin-vue-termui: '*'
   vite-plugin-vue-type-imports: ~0.2.2
   vite-plugin-vuetify: ~1.0.0-alpha.17
   vite-plugin-windicss: ^1.6.3
@@ -189,7 +183,7 @@ specifiers:
   vue3-slider: ^1.6.8
   vuetify: 3.0.0-beta.10
   windicss: ^3.4.3
-  ws: ^8.2.3
+  ws: ~8.8.1
 
 dependencies:
   '@antfu/eslint-config': 0.26.3_eslint@8.23.0+typescript@4.8.3
@@ -210,27 +204,26 @@ dependencies:
   '@rollup/plugin-commonjs': 21.1.0
   '@rollup/plugin-node-resolve': 13.3.0
   '@rollup/plugin-typescript': 8.5.0_tslib@2.4.0+typescript@4.8.3
-  '@rush-temp/coya': file:projects/coya.tgz_973cd9116995be1a0c8c6e7ce3a7509c
+  '@rush-temp/coya': file:projects/coya.tgz_ba8003bd21b95db5662c4c2bcbd5323b
   '@rush-temp/coya-analyzer-cli': file:projects/coya-analyzer-cli.tgz_sass@1.53.0+vue@3.2.39
-  '@rush-temp/coya-analyzer-terminal': file:projects/coya-analyzer-terminal.tgz_@vitest+ui@0.18.1+sass@1.53.0
-  '@rush-temp/coya-arrow': file:projects/coya-arrow.tgz_3e2973ec8606be9e68e16ea865609670
-  '@rush-temp/coya-core': file:projects/coya-core.tgz_dda6246fec0262066aac743ed04eddc5
-  '@rush-temp/coya-editor-new': file:projects/coya-editor-new.tgz_42e01380fa74dacda92fce891bfb8d87
-  '@rush-temp/coya-json-editor': file:projects/coya-json-editor.tgz_3e2973ec8606be9e68e16ea865609670
-  '@rush-temp/coya-rnd-blog': file:projects/coya-rnd-blog.tgz_e48119e83e7935216a3910ba22e8c6d6
-  '@rush-temp/coya-store': file:projects/coya-store.tgz_3e2973ec8606be9e68e16ea865609670
-  '@rush-temp/coya-terminal-vue-v2': file:projects/coya-terminal-vue-v2.tgz_eslint@8.23.0+sass@1.53.0
-  '@rush-temp/coya-ts-analizer': file:projects/coya-ts-analizer.tgz_e48119e83e7935216a3910ba22e8c6d6
-  '@rush-temp/coya-ts-analyzer': file:projects/coya-ts-analyzer.tgz_d36e713b5b7352dd646f5eb5db66e618
-  '@rush-temp/coya-ts-analyzer-worker': file:projects/coya-ts-analyzer-worker.tgz_c125dc2918f97166ea7513ca2c3800e6
-  '@rush-temp/coya-ts-cli': file:projects/coya-ts-cli.tgz_e48119e83e7935216a3910ba22e8c6d6
-  '@rush-temp/coya-util': file:projects/coya-util.tgz_e48119e83e7935216a3910ba22e8c6d6
-  '@rush-temp/coya-vite-proj': file:projects/coya-vite-proj.tgz_3e2973ec8606be9e68e16ea865609670
-  '@rush-temp/coya-vue-component': file:projects/coya-vue-component.tgz_e39a9651f3814f525b1943c297855a46
-  '@rush-temp/demo': file:projects/demo.tgz_3e2973ec8606be9e68e16ea865609670
-  '@rush-temp/mental-project': file:projects/mental-project.tgz_42e01380fa74dacda92fce891bfb8d87
-  '@rush-temp/neo4j-coya-generator': file:projects/neo4j-coya-generator.tgz_e48119e83e7935216a3910ba22e8c6d6
-  '@rush-temp/vitestTsAnalyzer': file:projects/vitestTsAnalyzer.tgz_c125dc2918f97166ea7513ca2c3800e6
+  '@rush-temp/coya-analyzer-shared-types': file:projects/coya-analyzer-shared-types.tgz
+  '@rush-temp/coya-arrow': file:projects/coya-arrow.tgz_50da271f4cbe708f929d5160fa46c1bf
+  '@rush-temp/coya-core': file:projects/coya-core.tgz_66b6dfa6ff6296500a877d3f65a8dd8b
+  '@rush-temp/coya-editor-new': file:projects/coya-editor-new.tgz_95eac16fb9147165e172a076a01398a8
+  '@rush-temp/coya-json-editor': file:projects/coya-json-editor.tgz_50da271f4cbe708f929d5160fa46c1bf
+  '@rush-temp/coya-rnd-blog': file:projects/coya-rnd-blog.tgz_ba8003bd21b95db5662c4c2bcbd5323b
+  '@rush-temp/coya-store': file:projects/coya-store.tgz_50da271f4cbe708f929d5160fa46c1bf
+  '@rush-temp/coya-ts-analizer': file:projects/coya-ts-analizer.tgz_ba8003bd21b95db5662c4c2bcbd5323b
+  '@rush-temp/coya-ts-analyzer': file:projects/coya-ts-analyzer.tgz_critters@0.0.16
+  '@rush-temp/coya-ts-analyzer-worker': file:projects/coya-ts-analyzer-worker.tgz_034c7ebf49901f81324243cb27cff09b
+  '@rush-temp/coya-ts-cli': file:projects/coya-ts-cli.tgz_ba8003bd21b95db5662c4c2bcbd5323b
+  '@rush-temp/coya-util': file:projects/coya-util.tgz_ba8003bd21b95db5662c4c2bcbd5323b
+  '@rush-temp/coya-vite-proj': file:projects/coya-vite-proj.tgz_50da271f4cbe708f929d5160fa46c1bf
+  '@rush-temp/coya-vue-component': file:projects/coya-vue-component.tgz_b089404d074a984217aed0bbee46adcc
+  '@rush-temp/demo': file:projects/demo.tgz_50da271f4cbe708f929d5160fa46c1bf
+  '@rush-temp/mental-project': file:projects/mental-project.tgz_95eac16fb9147165e172a076a01398a8
+  '@rush-temp/neo4j-coya-generator': file:projects/neo4j-coya-generator.tgz_ba8003bd21b95db5662c4c2bcbd5323b
+  '@rush-temp/vitestTsAnalyzer': file:projects/vitestTsAnalyzer.tgz_034c7ebf49901f81324243cb27cff09b
   '@size-limit/preset-small-lib': 7.0.8_size-limit@7.0.8
   '@types/deasync': 0.1.2
   '@types/debounce': 1.2.1
@@ -254,10 +247,8 @@ dependencies:
   '@vitejs/plugin-vue': 3.1.0_vite@3.1.0+vue@3.2.39
   '@vitest/ui': 0.18.1
   '@vue-reactivity/watch': 0.1.6_@vue+reactivity@3.2.39
-  '@vue-termui/cli': 0.0.14_4f4c39d69156aa6c2764ab871982a769
   '@vue/compiler-sfc': 3.2.39
   '@vue/reactivity': 3.2.39
-  '@vue/runtime-core': 3.2.39
   '@vue/server-renderer': 3.2.39_vue@3.2.39
   '@vue/test-utils': 2.0.2_vue@3.2.39
   '@vueform/slider': 2.1.2
@@ -265,7 +256,7 @@ dependencies:
   '@vueuse/head': 0.7.9_vue@3.2.39
   '@windicss/plugin-scrollbar': 1.2.3
   birpc: 0.2.3
-  browser-vite: 2.7.0-browser.11_1761dc9aa1f5d52fa752351f0fbb87ab
+  browser-vite: 2.7.0-browser.11_sass@1.53.0+typescript@4.8.3
   c8: 7.12.0
   cac: 6.7.14
   child_process: 1.0.2
@@ -294,7 +285,7 @@ dependencies:
   https-localhost: 4.7.1
   husky: 7.0.4
   idb-keyval: 6.2.0
-  jest: 27.5.1_ts-node@10.9.1
+  jest: 27.5.1
   jsdom: 20.0.0
   json-to-ast: 2.1.0
   lodash: 4.17.21
@@ -309,7 +300,6 @@ dependencies:
   path-browserify: 1.0.1
   picocolors: 1.0.0
   pinia: 2.0.21_typescript@4.8.3+vue@3.2.39
-  piscina: 3.2.0
   playwright: 1.25.2
   pnpm: 7.11.0
   postcss-nested-import: 0.1.0
@@ -330,10 +320,9 @@ dependencies:
   taze: 0.8.0
   tinypool: 0.3.0
   ts-morph: 15.1.0
-  ts-node: 10.9.1_4c36eae616da7e9e013aaeff973409ed
   tsdx: 0.14.1_@types+node@18.7.16
   tslib: 2.4.0
-  tsup: 5.12.9_ts-node@10.9.1+typescript@4.8.3
+  tsup: 5.12.9_typescript@4.8.3
   tsutils: 3.21.0_typescript@4.8.3
   types-package-json: 2.0.39
   typescript: 4.8.3
@@ -355,7 +344,6 @@ dependencies:
   vite-plugin-restart: 0.1.1_vite@3.1.0
   vite-plugin-vue-layouts: 0.7.0_ba15f3f210ddba002de209c352ed41a5
   vite-plugin-vue-markdown: 0.21.1_vite@3.1.0
-  vite-plugin-vue-termui: 0.0.9_e706e26361275f71ad8f8cc664398561
   vite-plugin-vue-type-imports: 0.2.2_da9107b15bba8cebbad1f1cef94aa3c6
   vite-plugin-vuetify: 1.0.0-alpha.17_3fb213a6074728251a07c7a4a0dd2d56
   vite-plugin-windicss: 1.8.7_vite@3.1.0
@@ -373,7 +361,7 @@ dependencies:
   vue-prism-editor: 2.0.0-alpha.2_vue@3.2.39
   vue-router: 4.1.5_vue@3.2.39
   vue-template-compiler: 2.7.10
-  vue-termui: 0.0.12_@vue+runtime-core@3.2.39
+  vue-termui: 0.0.12
   vue-tsc: 0.40.13_typescript@4.8.3
   vue3-colorpicker: 2.0.4_da9107b15bba8cebbad1f1cef94aa3c6
   vue3-json-viewer: 2.2.2_vue@3.2.39
@@ -882,10 +870,6 @@ packages:
       json-schema: 0.4.0
       jsonpointer: 5.0.1
       leven: 3.1.0
-    dev: false
-
-  /@assemblyscript/loader/0.10.1:
-    resolution: {integrity: sha512-H71nDOOL8Y7kWRLqf6Sums+01Q5msqBW2KhDUTemh1tvY04eSkSXrK0uj/4mmY0Xr16/3zyZmsrxN7CKuRbNRg==}
     dev: false
 
   /@babel/code-frame/7.18.6:
@@ -2516,7 +2500,7 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@jest/core/27.5.1_ts-node@10.9.1:
+  /@jest/core/27.5.1:
     resolution: {integrity: sha512-AK6/UTrvQD0Cd24NSqmIA6rKsu0tKIxfiCducZvqxYdmMisOYAsdItspT+fQDQYARPf8XgjAFZi0ogW2agH5nQ==}
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     peerDependencies:
@@ -2537,7 +2521,7 @@ packages:
       exit: 0.1.2
       graceful-fs: 4.2.10
       jest-changed-files: 27.5.1
-      jest-config: 27.5.1_ts-node@10.9.1
+      jest-config: 27.5.1
       jest-haste-map: 27.5.1
       jest-message-util: 27.5.1
       jest-regex-util: 27.5.1
@@ -4328,29 +4312,6 @@ packages:
       '@vue/reactivity': 3.2.39
     dev: false
 
-  /@vue-termui/cli/0.0.14_4f4c39d69156aa6c2764ab871982a769:
-    resolution: {integrity: sha512-2KbFxJSQU4/7gKfMuJlz6VVU+gAsjADayxYEIxPqrgkr1fn3SFZsI+JUGghsq8Hm59fYN3+DhEDuW+zsi/YRig==}
-    engines: {node: '>=14.0.0'}
-    hasBin: true
-    peerDependencies:
-      vite: ^2.8.6
-      vite-plugin-vue-termui: '>=0.0.8'
-      vue-termui: '>=0.0.10'
-    dependencies:
-      picocolors: 1.0.0
-      vite: 3.1.0_sass@1.53.0
-      vite-node: 0.5.9_sass@1.53.0
-      vite-plugin-vue-termui: 0.0.9_e706e26361275f71ad8f8cc664398561
-      vue-termui: 0.0.12_@vue+runtime-core@3.2.39
-      ws: 8.8.1
-    transitivePeerDependencies:
-      - bufferutil
-      - less
-      - sass
-      - stylus
-      - utf-8-validate
-    dev: false
-
   /@vue/compiler-core/3.2.39:
     resolution: {integrity: sha512-mf/36OWXqWn0wsC40nwRRGheR/qoID+lZXbIuLnr4/AngM0ov8Xvv8GHunC0rKRIkh60bTqydlqTeBo49rlbqw==}
     dependencies:
@@ -5407,7 +5368,7 @@ packages:
     resolution: {integrity: sha512-qhAVI1+Av2X7qelOfAIYwXONood6XlZE/fXaBSmW/T5SzLAmCgzi+eiWE7fUvbHaeNBQH13UftjpXxsfLkMpgw==}
     dev: false
 
-  /browser-vite/2.7.0-browser.11_1761dc9aa1f5d52fa752351f0fbb87ab:
+  /browser-vite/2.7.0-browser.11_sass@1.53.0+typescript@4.8.3:
     resolution: {integrity: sha512-OsDwkTi60O1bW/BqChKoB/LIrwAL+reYZxLEpvEPfGo8jHPcpDw09j9yXOBdfzgifHfXeGkGTuzSf1KBr3vBjQ==}
     engines: {node: '>=12.2.0'}
     hasBin: true
@@ -5467,7 +5428,7 @@ packages:
       periscopic: 2.0.3
       postcss: 8.4.16
       postcss-import: 14.1.0_postcss@8.4.16
-      postcss-load-config: 3.1.4_postcss@8.4.16+ts-node@10.9.1
+      postcss-load-config: 3.1.4_postcss@8.4.16
       postcss-modules: 4.3.1_postcss@8.4.16
       resolve: 1.22.1
       resolve.exports: 1.1.0
@@ -8241,10 +8202,6 @@ packages:
     engines: {node: '>= 0.6'}
     dev: false
 
-  /eventemitter-asyncresource/1.0.0:
-    resolution: {integrity: sha512-39F7TBIV0G7gTelxwbEqnwhp90eqCPON1k0NwNfwhgKn4Co4ybUbj2pECcXT0B3ztRKZ7Pw1JujUUgmQJHcVAQ==}
-    dev: false
-
   /eventemitter2/6.4.8:
     resolution: {integrity: sha512-pAJurPyD+Nj/pfz8m0usKF1RW0E9gfY4Dfdem2l6jZbqcZlK8SP93qUMCv9V9FgOn+GSZEW6qeaglpf/vQ9D5A==}
     dev: false
@@ -9211,18 +9168,6 @@ packages:
       function-bind: 1.1.1
     dev: false
 
-  /hdr-histogram-js/2.0.3:
-    resolution: {integrity: sha512-Hkn78wwzWHNCp2uarhzQ2SGFLU3JY8SBDDd3TAABK4fc30wm+MuPOrg5QVFVfkKOQd6Bfz3ukJEI+q9sXEkK1g==}
-    dependencies:
-      '@assemblyscript/loader': 0.10.1
-      base64-js: 1.5.1
-      pako: 1.0.11
-    dev: false
-
-  /hdr-histogram-percentiles-obj/3.0.0:
-    resolution: {integrity: sha512-7kIufnBqdsBGcSZLPJwqHT3yhk1QTsSlFsVD3kx5ixH/AlgBs9yM1q6DPhXZ8f8gtdqgh7N7/5btRLpQsS2gHw==}
-    dev: false
-
   /he/1.2.0:
     resolution: {integrity: sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==}
     hasBin: true
@@ -10166,7 +10111,7 @@ packages:
       - utf-8-validate
     dev: false
 
-  /jest-cli/27.5.1_ts-node@10.9.1:
+  /jest-cli/27.5.1:
     resolution: {integrity: sha512-Hc6HOOwYq4/74/c62dEE3r5elx8wjYqxY0r0G/nFrLDPMFRu6RA/u8qINOIkvhxG7mMQ5EJsOGfRpI8L6eFUVw==}
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     hasBin: true
@@ -10176,14 +10121,14 @@ packages:
       node-notifier:
         optional: true
     dependencies:
-      '@jest/core': 27.5.1_ts-node@10.9.1
+      '@jest/core': 27.5.1
       '@jest/test-result': 27.5.1
       '@jest/types': 27.5.1
       chalk: 4.1.2
       exit: 0.1.2
       graceful-fs: 4.2.10
       import-local: 3.1.0
-      jest-config: 27.5.1_ts-node@10.9.1
+      jest-config: 27.5.1
       jest-util: 27.5.1
       jest-validate: 27.5.1
       prompts: 2.4.2
@@ -10226,7 +10171,7 @@ packages:
       - utf-8-validate
     dev: false
 
-  /jest-config/27.5.1_ts-node@10.9.1:
+  /jest-config/27.5.1:
     resolution: {integrity: sha512-5sAsjm6tGdsVbW9ahcChPAFCk4IlkQUknH5AvKjuLTSlcO/wCZKyFdn7Rg0EkC+OGgWODEy2hDpWB1PgzH0JNA==}
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     peerDependencies:
@@ -10259,7 +10204,6 @@ packages:
       pretty-format: 27.5.1
       slash: 3.0.0
       strip-json-comments: 3.1.1
-      ts-node: 10.9.1_4c36eae616da7e9e013aaeff973409ed
     transitivePeerDependencies:
       - bufferutil
       - canvas
@@ -10978,7 +10922,7 @@ packages:
       - utf-8-validate
     dev: false
 
-  /jest/27.5.1_ts-node@10.9.1:
+  /jest/27.5.1:
     resolution: {integrity: sha512-Yn0mADZB89zTtjkPJEXwrac3LHudkQMR+Paqa8uxJHCBr9agxztUifWCyiYrjhMPBoUVBjyny0I7XH6ozDr7QQ==}
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     hasBin: true
@@ -10988,9 +10932,9 @@ packages:
       node-notifier:
         optional: true
     dependencies:
-      '@jest/core': 27.5.1_ts-node@10.9.1
+      '@jest/core': 27.5.1
       import-local: 3.1.0
-      jest-cli: 27.5.1_ts-node@10.9.1
+      jest-cli: 27.5.1
     transitivePeerDependencies:
       - bufferutil
       - canvas
@@ -11980,10 +11924,6 @@ packages:
       ml-array-rescale: 1.3.7
     dev: false
 
-  /mlly/0.4.3:
-    resolution: {integrity: sha512-xezyv7hnfFPuiDS3AiJuWs0OxlvooS++3L2lURvmh/1n7UG4O2Ehz9UkwWgg3wyLEPKGVfJLlr2DjjTCl9UJTg==}
-    dev: false
-
   /mlly/0.5.14:
     resolution: {integrity: sha512-DgRgNUSX9NIxxCxygX4Xeg9C7GX7OUx1wuQ8cXx9o9LE0e9wrH+OZ9fcnrlEedsC/rtqry3ZhUddC759XD/L0w==}
     dependencies:
@@ -12132,16 +12072,6 @@ packages:
       rxjs: 6.6.7
     dev: false
 
-  /nice-napi/1.0.2:
-    resolution: {integrity: sha512-px/KnJAJZf5RuBGcfD+Sp2pAKq0ytz8j+1NehvgIGFkvtvFrDM3T8E4x/JJODXK9WZow8RRGrbA9QQ3hs+pDhA==}
-    os: ['!win32']
-    requiresBuild: true
-    dependencies:
-      node-addon-api: 3.2.1
-      node-gyp-build: 4.5.0
-    dev: false
-    optional: true
-
   /nice-try/1.0.5:
     resolution: {integrity: sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==}
     dev: false
@@ -12159,11 +12089,6 @@ packages:
       tslib: 2.4.0
     dev: false
 
-  /node-addon-api/3.2.1:
-    resolution: {integrity: sha512-mmcei9JghVNDYydghQmeDX8KoAm0FAiYyIcUt/N4nhyAipB17pllZQDOJD2fotxABnt4Mdz+dKTO7eftLg4d0A==}
-    dev: false
-    optional: true
-
   /node-fetch-native/0.1.4:
     resolution: {integrity: sha512-10EKpOCQPXwZVFh3U1ptOMWBgKTbsN7Vvo6WVKt5pw4hp8zbv6ZVBZPlXw+5M6Tyi1oc1iD4/sNPd71KYA16tQ==}
     dev: false
@@ -12172,12 +12097,6 @@ packages:
     resolution: {integrity: sha512-PPmu8eEeG9saEUvI97fm4OYxXVB6bFvyNTyiUOBichBpFG8A1Ljw3bY62+5oOjDEMHRnd0Y7HQ+x7uzxOzC6JA==}
     engines: {node: '>= 6.0.0'}
     dev: false
-
-  /node-gyp-build/4.5.0:
-    resolution: {integrity: sha512-2iGbaQBV+ITgCz76ZEjmhUKAKVf7xfY1sRl4UiKQspfZMH2h06SyhNsnSVy50cwkFQDGLyif6m/6uFXHkOZ6rg==}
-    hasBin: true
-    dev: false
-    optional: true
 
   /node-gyp/9.1.0:
     resolution: {integrity: sha512-HkmN0ZpQJU7FLbJauJTHkHlSVAXlNGDAzH/VYFZGDOnFyn/Na3GlNJfkudmufOdS6/jNFhy88ObzL7ERz9es1g==}
@@ -12692,10 +12611,6 @@ packages:
       - supports-color
     dev: false
 
-  /pako/1.0.11:
-    resolution: {integrity: sha512-4hLB8Py4zZce5s4yd9XzopqwVv/yGNhV1Bl8NTmCq1763HeK2+EwVTv+leGeL13Dnh2wfbqowVPXCIO0z4taYw==}
-    dev: false
-
   /param-case/2.1.1:
     resolution: {integrity: sha512-eQE845L6ot89sk2N8liD8HAuH4ca6Vvr7VWAWwt7+kvvG5aBcPmmphQ68JsEG2qa9n1TykS2DLeMt363AAH8/w==}
     dependencies:
@@ -12908,16 +12823,6 @@ packages:
     engines: {node: '>= 6'}
     dev: false
 
-  /piscina/3.2.0:
-    resolution: {integrity: sha512-yn/jMdHRw+q2ZJhFhyqsmANcbF6V2QwmD84c6xRau+QpQOmtrBCoRGdvTfeuFDYXB5W2m6MfLkjkvQa9lUSmIA==}
-    dependencies:
-      eventemitter-asyncresource: 1.0.0
-      hdr-histogram-js: 2.0.3
-      hdr-histogram-percentiles-obj: 3.0.0
-    optionalDependencies:
-      nice-napi: 1.0.2
-    dev: false
-
   /pkg-dir/4.2.0:
     resolution: {integrity: sha512-HRDzbaKjC+AOWVXxAU/x54COGeIv9eb+6CkDSQoNTt4XyWoIJvuPsXizxu/Fr23EiekbtZwmh1IcIG/l/a10GQ==}
     engines: {node: '>=8'}
@@ -13020,7 +12925,23 @@ packages:
       resolve: 1.22.1
     dev: false
 
-  /postcss-load-config/3.1.4_postcss@8.4.16+ts-node@10.9.1:
+  /postcss-load-config/3.1.4:
+    resolution: {integrity: sha512-6DiM4E7v4coTE4uzA8U//WhtPwyhiim3eyjEMFCnUpzbrkK9wJHgKDT2mR+HbtSrd/NubVaYTOpSpjUl8NQeRg==}
+    engines: {node: '>= 10'}
+    peerDependencies:
+      postcss: '>=8.0.9'
+      ts-node: '>=9.0.0'
+    peerDependenciesMeta:
+      postcss:
+        optional: true
+      ts-node:
+        optional: true
+    dependencies:
+      lilconfig: 2.0.6
+      yaml: 1.10.2
+    dev: false
+
+  /postcss-load-config/3.1.4_postcss@8.4.16:
     resolution: {integrity: sha512-6DiM4E7v4coTE4uzA8U//WhtPwyhiim3eyjEMFCnUpzbrkK9wJHgKDT2mR+HbtSrd/NubVaYTOpSpjUl8NQeRg==}
     engines: {node: '>= 10'}
     peerDependencies:
@@ -13034,24 +12955,6 @@ packages:
     dependencies:
       lilconfig: 2.0.6
       postcss: 8.4.16
-      ts-node: 10.9.1_4c36eae616da7e9e013aaeff973409ed
-      yaml: 1.10.2
-    dev: false
-
-  /postcss-load-config/3.1.4_ts-node@10.9.1:
-    resolution: {integrity: sha512-6DiM4E7v4coTE4uzA8U//WhtPwyhiim3eyjEMFCnUpzbrkK9wJHgKDT2mR+HbtSrd/NubVaYTOpSpjUl8NQeRg==}
-    engines: {node: '>= 10'}
-    peerDependencies:
-      postcss: '>=8.0.9'
-      ts-node: '>=9.0.0'
-    peerDependenciesMeta:
-      postcss:
-        optional: true
-      ts-node:
-        optional: true
-    dependencies:
-      lilconfig: 2.0.6
-      ts-node: 10.9.1_4c36eae616da7e9e013aaeff973409ed
       yaml: 1.10.2
     dev: false
 
@@ -15374,7 +15277,7 @@ packages:
     resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==}
     dev: false
 
-  /tsup/5.12.9_ts-node@10.9.1+typescript@4.8.3:
+  /tsup/5.12.9_typescript@4.8.3:
     resolution: {integrity: sha512-dUpuouWZYe40lLufo64qEhDpIDsWhRbr2expv5dHEMjwqeKJS2aXA/FPqs1dxO4T6mBojo7rvo3jP9NNzaKyDg==}
     hasBin: true
     peerDependencies:
@@ -15397,7 +15300,7 @@ packages:
       execa: 5.1.1
       globby: 11.1.0
       joycon: 3.1.1
-      postcss-load-config: 3.1.4_ts-node@10.9.1
+      postcss-load-config: 3.1.4
       resolve-from: 5.0.0
       rollup: 2.79.0
       source-map: 0.8.0-beta.0
@@ -16005,22 +15908,6 @@ packages:
       - terser
     dev: false
 
-  /vite-node/0.5.9_sass@1.53.0:
-    resolution: {integrity: sha512-H1G9HjhxiYx4f3b5AgT1uFdS4FYgG8IoJGNzwBM+jVwmu0SItbX27HLvvw75N8DiwWokVUW7GCTf2Hnz8Hrjyg==}
-    engines: {node: '>=14.14.0'}
-    hasBin: true
-    dependencies:
-      kolorist: 1.5.1
-      minimist: 1.2.6
-      mlly: 0.4.3
-      pathe: 0.2.0
-      vite: 2.9.15_sass@1.53.0
-    transitivePeerDependencies:
-      - less
-      - sass
-      - stylus
-    dev: false
-
   /vite-plugin-commonjs-externals/0.1.1:
     resolution: {integrity: sha512-XRFsdFos/D1Dam0t40qBM+8b1Mrn5vH6aOwaTt8CW5myGx9uKivFXPukP2CsEo6cSukbPlBImsL1voiV6e3o5w==}
     dependencies:
@@ -16191,24 +16078,6 @@ packages:
       '@types/markdown-it': 12.2.3
       markdown-it: 13.0.1
       vite: 3.1.0_sass@1.53.0
-    dev: false
-
-  /vite-plugin-vue-termui/0.0.9_e706e26361275f71ad8f8cc664398561:
-    resolution: {integrity: sha512-93KpJNgMEs2X/kSvPJmrPnljk8NWZv6au+CW+d5k8RbMCtIe0hIYJvbBcvsW+sLLjiwdoR/aJSWQrfnDJLiLzw==}
-    peerDependencies:
-      '@vitejs/plugin-vue': ^2.2.0
-      '@vue/compiler-sfc': ^3.2.25
-      unplugin-auto-import: ^0.6.1
-      unplugin-vue-components: ^0.18.0
-      vue: ^3.2.25
-      vue-termui: '>=0.0.11'
-    dependencies:
-      '@vitejs/plugin-vue': 3.1.0_vite@3.1.0+vue@3.2.39
-      '@vue/compiler-sfc': 3.2.39
-      unplugin-auto-import: 0.11.2_@vueuse+core@9.2.0+vite@3.1.0
-      unplugin-vue-components: 0.22.4_vite@3.1.0+vue@3.2.39
-      vue: 3.2.39
-      vue-termui: 0.0.12_@vue+runtime-core@3.2.39
     dev: false
 
   /vite-plugin-vue-type-imports/0.2.2_da9107b15bba8cebbad1f1cef94aa3c6:
@@ -16539,13 +16408,12 @@ packages:
     resolution: {integrity: sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==}
     dev: false
 
-  /vue-termui/0.0.12_@vue+runtime-core@3.2.39:
+  /vue-termui/0.0.12:
     resolution: {integrity: sha512-rt/yYvHFZYDtCjr0zZshPKJnPs1tDWvhQlhsR7yx1FCHc+S7XeLz0qRVc8XWeyvRcNjWS+G1lNJBL7IdaZIZXA==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       '@vue/runtime-core': ^3.2.31
     dependencies:
-      '@vue/runtime-core': 3.2.39
       ansi-escapes: 5.0.0
       chalk: 5.0.1
       cli-boxes: 3.0.0
@@ -17288,14 +17156,16 @@ packages:
     dev: false
 
   file:projects/coya-analyzer-cli.tgz_sass@1.53.0+vue@3.2.39:
-    resolution: {integrity: sha512-FMSxWJAVepajqkzU15MqgN2NRpkLvig7ry+wezNE+hzuKlqHOWtvNXxTXu2dPy68+OIqoOke5pfq+5MXAwoDog==, tarball: file:projects/coya-analyzer-cli.tgz}
+    resolution: {integrity: sha512-lP8SVpdzQFiYwGBxGQWSutYi9B/2V5ta7NF26GXT895g8vHrqWuypGUMCfE2dVFsO1j1Y2868cPX3gKHz/w6cA==, tarball: file:projects/coya-analyzer-cli.tgz}
     id: file:projects/coya-analyzer-cli.tgz
     name: '@rush-temp/coya-analyzer-cli'
     version: 0.0.0
     dependencies:
       '@types/node': 18.7.16
+      '@types/ws': 8.5.3
       '@vue/reactivity': 3.2.39
       '@vueuse/core': 9.2.0_vue@3.2.39
+      birpc: 0.2.3
       cac: 6.7.14
       tinypool: 0.3.0
       ts-node: 10.9.1_4c36eae616da7e9e013aaeff973409ed
@@ -17303,73 +17173,26 @@ packages:
       typescript: 4.8.3
       vite: 3.1.0_sass@1.53.0
       vite-node: 0.23.1_sass@1.53.0
+      ws: 8.8.1
     transitivePeerDependencies:
-      - '@swc/core'
-      - '@swc/wasm'
-      - '@vue/composition-api'
-      - less
-      - sass
-      - stylus
-      - supports-color
-      - terser
-      - vue
-    dev: false
-
-  file:projects/coya-analyzer-terminal.tgz_@vitest+ui@0.18.1+sass@1.53.0:
-    resolution: {integrity: sha512-YzVpJmPrrAhWVcbP3emz/r+6S8C6MkeZUgG7J000MzRbehTaTO6obFIkiez/IiBi/Bv5c+aW9BEkwcChBLUDJA==, tarball: file:projects/coya-analyzer-terminal.tgz}
-    id: file:projects/coya-analyzer-terminal.tgz
-    name: '@rush-temp/coya-analyzer-terminal'
-    version: 0.0.0
-    dependencies:
-      '@antfu/eslint-config': 0.26.3_eslint@8.23.0+typescript@4.8.3
-      '@types/node': 18.7.16
-      '@unocss/reset': 0.45.18
-      '@vitejs/plugin-vue': 3.1.0_vite@3.1.0+vue@3.2.39
-      '@vue-termui/cli': 0.0.14_4f4c39d69156aa6c2764ab871982a769
-      '@vue/compiler-sfc': 3.2.39
-      '@vue/runtime-core': 3.2.39
-      '@vue/test-utils': 2.0.2_vue@3.2.39
-      '@vueuse/core': 9.2.0_vue@3.2.39
-      eslint: 8.23.0
-      jsdom: 20.0.0
-      piscina: 3.2.0
-      pnpm: 7.11.0
-      taze: 0.8.0
-      typescript: 4.8.3
-      unocss: 0.45.18_vite@3.1.0
-      unplugin-auto-import: 0.11.2_@vueuse+core@9.2.0+vite@3.1.0
-      unplugin-vue-components: 0.22.4_vite@3.1.0+vue@3.2.39
-      vite: 3.1.0_sass@1.53.0
-      vite-node: 0.23.1_sass@1.53.0
-      vite-plugin-pages: 0.26.0_f20c116f911e0c51799ce05cc1dbb8c5
-      vite-plugin-vue-termui: 0.0.9_e706e26361275f71ad8f8cc664398561
-      vitest: 0.23.1_e7d1e6f344c990c3ed5b8da97c6ad6f5
-      vue: 3.2.39
-      vue-router: 4.1.5_vue@3.2.39
-      vue-termui: 0.0.12_@vue+runtime-core@3.2.39
-      vue-tsc: 0.40.13_typescript@4.8.3
-    transitivePeerDependencies:
-      - '@babel/parser'
-      - '@edge-runtime/vm'
-      - '@unocss/webpack'
-      - '@vitest/browser'
-      - '@vitest/ui'
       - '@vue/composition-api'
       - bufferutil
-      - canvas
-      - esbuild
-      - happy-dom
       - less
-      - rollup
       - sass
       - stylus
       - supports-color
       - terser
       - utf-8-validate
-      - webpack
+      - vue
     dev: false
 
-  file:projects/coya-arrow.tgz_3e2973ec8606be9e68e16ea865609670:
+  file:projects/coya-analyzer-shared-types.tgz:
+    resolution: {integrity: sha512-4OFiPbavvw1AIE+kqq2CjzLNRtIqXHAgv5J81rEdjzrpTf4ObSRH16fJVgO8ZK01foARw5t7/I7uW2ZBUYOisA==, tarball: file:projects/coya-analyzer-shared-types.tgz}
+    name: '@rush-temp/coya-analyzer-shared-types'
+    version: 0.0.0
+    dev: false
+
+  file:projects/coya-arrow.tgz_50da271f4cbe708f929d5160fa46c1bf:
     resolution: {integrity: sha512-eE/Ot6brd4vIFXxQvoGMJTlE25x3npOwLNhm21XrXSDQeLl0wm75L0/Trpf9GDYA45Qbqg6hQa7cLzzcCDXEdQ==, tarball: file:projects/coya-arrow.tgz}
     id: file:projects/coya-arrow.tgz
     name: '@rush-temp/coya-arrow'
@@ -17421,7 +17244,7 @@ packages:
       vue-demi: 0.13.11_vue@3.2.39
       vue-i18n: 9.2.2_vue@3.2.39
       vue-router: 4.1.5_vue@3.2.39
-      vue-termui: 0.0.12_@vue+runtime-core@3.2.39
+      vue-termui: 0.0.12
       vue-tsc: 0.40.13_typescript@4.8.3
     transitivePeerDependencies:
       - '@babel/parser'
@@ -17450,7 +17273,7 @@ packages:
       - webpack
     dev: false
 
-  file:projects/coya-core.tgz_dda6246fec0262066aac743ed04eddc5:
+  file:projects/coya-core.tgz_66b6dfa6ff6296500a877d3f65a8dd8b:
     resolution: {integrity: sha512-v2w7e8yrDBGuNQ6xwYShNYf7EQyLU/0uJLONdt5ilsHxo1BRN34/Ykn0uIVhbrVgYVvJm7kqG8eluVdRe7+/Xg==, tarball: file:projects/coya-core.tgz}
     id: file:projects/coya-core.tgz
     name: '@rush-temp/coya-core'
@@ -17478,7 +17301,7 @@ packages:
       eslint: 8.23.0
       https-localhost: 4.7.1
       husky: 7.0.4
-      jest: 27.5.1_ts-node@10.9.1
+      jest: 27.5.1
       jsdom: 20.0.0
       lodash: 4.17.21
       pinia: 2.0.21_typescript@4.8.3+vue@3.2.39
@@ -17504,7 +17327,7 @@ packages:
       vue-demi: 0.13.11_vue@3.2.39
       vue-i18n: 9.2.2_vue@3.2.39
       vue-router: 4.1.5_vue@3.2.39
-      vue-termui: 0.0.12_@vue+runtime-core@3.2.39
+      vue-termui: 0.0.12
       vue-tsc: 0.40.13_typescript@4.8.3
     transitivePeerDependencies:
       - '@babel/parser'
@@ -17534,7 +17357,7 @@ packages:
       - webpack
     dev: false
 
-  file:projects/coya-editor-new.tgz_42e01380fa74dacda92fce891bfb8d87:
+  file:projects/coya-editor-new.tgz_95eac16fb9147165e172a076a01398a8:
     resolution: {integrity: sha512-7Jmnf3oGWuXNUcl+Kb47+IVtqdBwYhOEsrttYogYdlGmdzZMDwqRHEWWRPTqIOyiGaJMORecpgCHu15Spn0vnA==, tarball: file:projects/coya-editor-new.tgz}
     id: file:projects/coya-editor-new.tgz
     name: '@rush-temp/coya-editor-new'
@@ -17578,7 +17401,7 @@ packages:
       vue-demi: 0.13.11_vue@3.2.39
       vue-i18n: 9.2.2_vue@3.2.39
       vue-router: 4.1.5_vue@3.2.39
-      vue-termui: 0.0.12_@vue+runtime-core@3.2.39
+      vue-termui: 0.0.12
       vue-tsc: 0.40.13_typescript@4.8.3
     transitivePeerDependencies:
       - '@babel/parser'
@@ -17608,7 +17431,7 @@ packages:
       - webpack
     dev: false
 
-  file:projects/coya-json-editor.tgz_3e2973ec8606be9e68e16ea865609670:
+  file:projects/coya-json-editor.tgz_50da271f4cbe708f929d5160fa46c1bf:
     resolution: {integrity: sha512-UnDmcbNQ3S5rhH/NC9IWQop8H1xjvuyR7HS/iPxzrFShvr65kg28qJU3kxxOuGBwDJdGMUJkgCJJHaJj3bw9Vg==, tarball: file:projects/coya-json-editor.tgz}
     id: file:projects/coya-json-editor.tgz
     name: '@rush-temp/coya-json-editor'
@@ -17668,7 +17491,7 @@ packages:
       vue-demi: 0.13.11_vue@3.2.39
       vue-i18n: 9.2.2_vue@3.2.39
       vue-router: 4.1.5_vue@3.2.39
-      vue-termui: 0.0.12_@vue+runtime-core@3.2.39
+      vue-termui: 0.0.12
       vue-tsc: 0.40.13_typescript@4.8.3
       vue3-colorpicker: 2.0.4_da9107b15bba8cebbad1f1cef94aa3c6
     transitivePeerDependencies:
@@ -17698,7 +17521,7 @@ packages:
       - webpack
     dev: false
 
-  file:projects/coya-rnd-blog.tgz_e48119e83e7935216a3910ba22e8c6d6:
+  file:projects/coya-rnd-blog.tgz_ba8003bd21b95db5662c4c2bcbd5323b:
     resolution: {integrity: sha512-Rf0YuzLqaPCtknJuEdOoLpOzT38Xpuk0QcY459Yz4M4Vmt1PB5eP/Ypn9tXbTUCuMEFogQcZ9Zv1fF06cydCaQ==, tarball: file:projects/coya-rnd-blog.tgz}
     id: file:projects/coya-rnd-blog.tgz
     name: '@rush-temp/coya-rnd-blog'
@@ -17738,7 +17561,7 @@ packages:
       vue-demi: 0.13.11_vue@3.2.39
       vue-i18n: 9.2.2_vue@3.2.39
       vue-router: 4.1.5_vue@3.2.39
-      vue-termui: 0.0.12_@vue+runtime-core@3.2.39
+      vue-termui: 0.0.12
       vue-tsc: 0.40.13_typescript@4.8.3
       windicss: 3.5.6
     transitivePeerDependencies:
@@ -17770,7 +17593,7 @@ packages:
       - webpack
     dev: false
 
-  file:projects/coya-store.tgz_3e2973ec8606be9e68e16ea865609670:
+  file:projects/coya-store.tgz_50da271f4cbe708f929d5160fa46c1bf:
     resolution: {integrity: sha512-eAEv4WK6elHmCFB4cxYr7jRnH+zH4vTzso6tF8Np1lO96+QmVVbjz4fk6VBFEzgQTtQwsTfzbripo+mTkWDgqg==, tarball: file:projects/coya-store.tgz}
     id: file:projects/coya-store.tgz
     name: '@rush-temp/coya-store'
@@ -17827,7 +17650,7 @@ packages:
       vue-demi: 0.13.11_vue@3.2.39
       vue-i18n: 9.2.2_vue@3.2.39
       vue-router: 4.1.5_vue@3.2.39
-      vue-termui: 0.0.12_@vue+runtime-core@3.2.39
+      vue-termui: 0.0.12
       vue-tsc: 0.40.13_typescript@4.8.3
     transitivePeerDependencies:
       - '@babel/parser'
@@ -17856,45 +17679,7 @@ packages:
       - webpack
     dev: false
 
-  file:projects/coya-terminal-vue-v2.tgz_eslint@8.23.0+sass@1.53.0:
-    resolution: {integrity: sha512-1muguacxT3938l6w7ZI3odKhaoHk+SpsfNljuwUEMHCmMwq3DGnJFvv9qvQwoToS3PwoalrmMOH98KtvO+tL+A==, tarball: file:projects/coya-terminal-vue-v2.tgz}
-    id: file:projects/coya-terminal-vue-v2.tgz
-    name: '@rush-temp/coya-terminal-vue-v2'
-    version: 0.0.0
-    dependencies:
-      '@antfu/eslint-config': 0.26.3_eslint@8.23.0+typescript@4.8.3
-      '@types/node': 18.7.16
-      '@vitejs/plugin-vue': 3.1.0_vite@3.1.0+vue@3.2.39
-      '@vue-termui/cli': 0.0.14_4f4c39d69156aa6c2764ab871982a769
-      '@vue/compiler-sfc': 3.2.39
-      '@vue/runtime-core': 3.2.39
-      '@vueuse/core': 9.2.0_vue@3.2.39
-      birpc: 0.2.3
-      tinypool: 0.3.0
-      typescript: 4.8.3
-      unplugin-auto-import: 0.11.2_@vueuse+core@9.2.0+vite@3.1.0
-      unplugin-vue-components: 0.22.4_vite@3.1.0+vue@3.2.39
-      vite: 3.1.0_sass@1.53.0
-      vite-plugin-vue-termui: 0.0.9_e706e26361275f71ad8f8cc664398561
-      vue: 3.2.39
-      vue-termui: 0.0.12_@vue+runtime-core@3.2.39
-    transitivePeerDependencies:
-      - '@babel/parser'
-      - '@vue/composition-api'
-      - bufferutil
-      - esbuild
-      - eslint
-      - less
-      - rollup
-      - sass
-      - stylus
-      - supports-color
-      - terser
-      - utf-8-validate
-      - webpack
-    dev: false
-
-  file:projects/coya-ts-analizer.tgz_e48119e83e7935216a3910ba22e8c6d6:
+  file:projects/coya-ts-analizer.tgz_ba8003bd21b95db5662c4c2bcbd5323b:
     resolution: {integrity: sha512-zbDWbjVBkrJlFuzpLljxWy9wrsW5FOh/q8RKVyJhotzjgGyOMZBoHaZSQeFv2lF41TqJxl/dwTuZ8JWYgQjkow==, tarball: file:projects/coya-ts-analizer.tgz}
     id: file:projects/coya-ts-analizer.tgz
     name: '@rush-temp/coya-ts-analizer'
@@ -17940,7 +17725,7 @@ packages:
       vue-demi: 0.13.11_vue@3.2.39
       vue-i18n: 9.2.2_vue@3.2.39
       vue-router: 4.1.5_vue@3.2.39
-      vue-termui: 0.0.12_@vue+runtime-core@3.2.39
+      vue-termui: 0.0.12
       vue-tsc: 0.40.13_typescript@4.8.3
     transitivePeerDependencies:
       - '@babel/parser'
@@ -17967,7 +17752,7 @@ packages:
       - webpack
     dev: false
 
-  file:projects/coya-ts-analyzer-worker.tgz_c125dc2918f97166ea7513ca2c3800e6:
+  file:projects/coya-ts-analyzer-worker.tgz_034c7ebf49901f81324243cb27cff09b:
     resolution: {integrity: sha512-EpiiyAbwRfgOs22hGA4zLnSGwplFQfDI77DOyPbl2NFeTuMLWq3etqdc8kRU0f7zLaw9EwB2Hwuqy/rU2Ymgsw==, tarball: file:projects/coya-ts-analyzer-worker.tgz}
     id: file:projects/coya-ts-analyzer-worker.tgz
     name: '@rush-temp/coya-ts-analyzer-worker'
@@ -17995,7 +17780,7 @@ packages:
       vitest: 0.23.1_e7d1e6f344c990c3ed5b8da97c6ad6f5
       vue: 3.2.39
       vue-router: 4.1.5_vue@3.2.39
-      vue-termui: 0.0.12_@vue+runtime-core@3.2.39
+      vue-termui: 0.0.12
       vue-tsc: 0.40.13_typescript@4.8.3
     transitivePeerDependencies:
       - '@babel/parser'
@@ -18020,7 +17805,7 @@ packages:
       - webpack
     dev: false
 
-  file:projects/coya-ts-analyzer.tgz_d36e713b5b7352dd646f5eb5db66e618:
+  file:projects/coya-ts-analyzer.tgz_critters@0.0.16:
     resolution: {integrity: sha512-H9iAV3FpLNsvF+WPJ3xpVgyzndiSRx1BuWzaYjrpLoRlfDwd949rV7umtRdB9p0BGId07ZJqOQ6KaABVYy5LlA==, tarball: file:projects/coya-ts-analyzer.tgz}
     id: file:projects/coya-ts-analyzer.tgz
     name: '@rush-temp/coya-ts-analyzer'
@@ -18041,7 +17826,7 @@ packages:
       '@vue/test-utils': 2.0.2_vue@3.2.39
       '@vueuse/core': 9.2.0_vue@3.2.39
       '@vueuse/head': 0.7.9_vue@3.2.39
-      browser-vite: 2.7.0-browser.11_1761dc9aa1f5d52fa752351f0fbb87ab
+      browser-vite: 2.7.0-browser.11_sass@1.53.0+typescript@4.8.3
       c8: 7.12.0
       chokidar: 3.5.3
       clipboard: 2.0.11
@@ -18079,7 +17864,7 @@ packages:
       vue-prism-editor: 2.0.0-alpha.2_vue@3.2.39
       vue-router: 4.1.5_vue@3.2.39
       vue-template-compiler: 2.7.10
-      vue-termui: 0.0.12_@vue+runtime-core@3.2.39
+      vue-termui: 0.0.12
       vue-tsc: 0.40.13_typescript@4.8.3
       vue3-json-viewer: 2.2.2_vue@3.2.39
     transitivePeerDependencies:
@@ -18106,7 +17891,7 @@ packages:
       - webpack
     dev: false
 
-  file:projects/coya-ts-cli.tgz_e48119e83e7935216a3910ba22e8c6d6:
+  file:projects/coya-ts-cli.tgz_ba8003bd21b95db5662c4c2bcbd5323b:
     resolution: {integrity: sha512-KlpOy6TtNrwo+oWjpFiFXcVvQ1yp/M8mYI9vuQ3t2GkOVFHk68wi+agfuUdcExbCuD2ouSNbD0R0Hb7uoCbMEg==, tarball: file:projects/coya-ts-cli.tgz}
     id: file:projects/coya-ts-cli.tgz
     name: '@rush-temp/coya-ts-cli'
@@ -18153,7 +17938,7 @@ packages:
       vue-demi: 0.13.11_vue@3.2.39
       vue-i18n: 9.2.2_vue@3.2.39
       vue-router: 4.1.5_vue@3.2.39
-      vue-termui: 0.0.12_@vue+runtime-core@3.2.39
+      vue-termui: 0.0.12
       vue-tsc: 0.40.13_typescript@4.8.3
     transitivePeerDependencies:
       - '@babel/parser'
@@ -18180,7 +17965,7 @@ packages:
       - webpack
     dev: false
 
-  file:projects/coya-util.tgz_e48119e83e7935216a3910ba22e8c6d6:
+  file:projects/coya-util.tgz_ba8003bd21b95db5662c4c2bcbd5323b:
     resolution: {integrity: sha512-PvOy/u6/tknbM0P4XW/mZUKEDHwuGuhYOJraGfIu2S6Bb2aPEE18/669V93lKwlw+jp7ntRKn+zuTE3+IJlsTg==, tarball: file:projects/coya-util.tgz}
     id: file:projects/coya-util.tgz
     name: '@rush-temp/coya-util'
@@ -18228,7 +18013,7 @@ packages:
       vue-demi: 0.13.11_vue@3.2.39
       vue-i18n: 9.2.2_vue@3.2.39
       vue-router: 4.1.5_vue@3.2.39
-      vue-termui: 0.0.12_@vue+runtime-core@3.2.39
+      vue-termui: 0.0.12
       vue-tsc: 0.40.13_typescript@4.8.3
     transitivePeerDependencies:
       - '@babel/parser'
@@ -18255,7 +18040,7 @@ packages:
       - webpack
     dev: false
 
-  file:projects/coya-vite-proj.tgz_3e2973ec8606be9e68e16ea865609670:
+  file:projects/coya-vite-proj.tgz_50da271f4cbe708f929d5160fa46c1bf:
     resolution: {integrity: sha512-YnWZsjyHtuaV4Y3QSqnCe8/SCk3oqK0UzEwDsgxOyyOTV6xxKDkFOvmMIbfNdcb+84btIH1lV097mEmBhhSr+g==, tarball: file:projects/coya-vite-proj.tgz}
     id: file:projects/coya-vite-proj.tgz
     name: '@rush-temp/coya-vite-proj'
@@ -18306,7 +18091,7 @@ packages:
       vue-demi: 0.13.11_vue@3.2.39
       vue-i18n: 9.2.2_vue@3.2.39
       vue-router: 4.1.5_vue@3.2.39
-      vue-termui: 0.0.12_@vue+runtime-core@3.2.39
+      vue-termui: 0.0.12
       vue-tsc: 0.40.13_typescript@4.8.3
     transitivePeerDependencies:
       - '@babel/parser'
@@ -18335,8 +18120,8 @@ packages:
       - webpack
     dev: false
 
-  file:projects/coya-vue-component.tgz_e39a9651f3814f525b1943c297855a46:
-    resolution: {integrity: sha512-S6n0Xf93tPSW7XYQYuIoYhrBgVOGxRvzUXvEtP6J1y6QGYY/wIQW+lN8ChyIxFHTw0HnRbV1IYqvGxTELh5dWA==, tarball: file:projects/coya-vue-component.tgz}
+  file:projects/coya-vue-component.tgz_b089404d074a984217aed0bbee46adcc:
+    resolution: {integrity: sha512-KAv3j0F9+5IwEjISPyiVpI65IvzXAG257rR20NoGolsxcV+iPTQrLb7J0aoNI/2lXdBYo97uHWVeZ7v6o0RlFg==, tarball: file:projects/coya-vue-component.tgz}
     id: file:projects/coya-vue-component.tgz
     name: '@rush-temp/coya-vue-component'
     version: 0.0.0
@@ -18393,7 +18178,7 @@ packages:
       vue-demi: 0.13.11_vue@3.2.39
       vue-i18n: 9.2.2_vue@3.2.39
       vue-router: 4.1.5_vue@3.2.39
-      vue-termui: 0.0.12_@vue+runtime-core@3.2.39
+      vue-termui: 0.0.12
       vue-tsc: 0.40.13_typescript@4.8.3
       ws: 8.8.1
     transitivePeerDependencies:
@@ -18426,8 +18211,8 @@ packages:
       - webpack
     dev: false
 
-  file:projects/coya.tgz_973cd9116995be1a0c8c6e7ce3a7509c:
-    resolution: {integrity: sha512-MuutG1erVbOt0ACmlEcaFGDGvK6X/zioGjm0wnPxFYlQ/3EzWbU1i0xONFSbYkEBzEJSHU/XFLolv5M8yC/Uzg==, tarball: file:projects/coya.tgz}
+  file:projects/coya.tgz_ba8003bd21b95db5662c4c2bcbd5323b:
+    resolution: {integrity: sha512-KiybdEigPFYASBHZdWu+tUBkq1y1AQgw0Z06YU7TXsLw9Y3yqmk7RXMx+OCgsjm+UnCN1Q+VKTXinnKrC1m+2g==, tarball: file:projects/coya.tgz}
     id: file:projects/coya.tgz
     name: '@rush-temp/coya'
     version: 0.0.0
@@ -18463,7 +18248,7 @@ packages:
       pnpm: 7.11.0
       rollup-plugin-polyfill-node: 0.8.0
       taze: 0.8.0
-      tsup: 5.12.9_ts-node@10.9.1+typescript@4.8.3
+      tsup: 5.12.9_typescript@4.8.3
       tsutils: 3.21.0_typescript@4.8.3
       typescript: 4.8.3
       unocss: 0.45.18_vite@3.1.0
@@ -18481,7 +18266,7 @@ packages:
       vue-demi: 0.13.11_vue@3.2.39
       vue-i18n: 9.2.2_vue@3.2.39
       vue-router: 4.1.5_vue@3.2.39
-      vue-termui: 0.0.12_@vue+runtime-core@3.2.39
+      vue-termui: 0.0.12
       vue-tsc: 0.40.13_typescript@4.8.3
       ws: 8.8.1
     transitivePeerDependencies:
@@ -18513,7 +18298,7 @@ packages:
       - webpack
     dev: false
 
-  file:projects/demo.tgz_3e2973ec8606be9e68e16ea865609670:
+  file:projects/demo.tgz_50da271f4cbe708f929d5160fa46c1bf:
     resolution: {integrity: sha512-u6nmeNcd65bsn1qWpTSLwcIbMM+8ztPb1wgKvImJ8mpy+XH8sNneAB/yslbEPoifnVCaSJI4czFniAGwXZ4f/w==, tarball: file:projects/demo.tgz}
     id: file:projects/demo.tgz
     name: '@rush-temp/demo'
@@ -18568,7 +18353,7 @@ packages:
       vue-echarts: 6.2.3_echarts@5.3.3+vue@3.2.39
       vue-i18n: 9.2.2_vue@3.2.39
       vue-router: 4.1.5_vue@3.2.39
-      vue-termui: 0.0.12_@vue+runtime-core@3.2.39
+      vue-termui: 0.0.12
       vue-tsc: 0.40.13_typescript@4.8.3
       vue3-slider: 1.8.0_vue@3.2.39
     transitivePeerDependencies:
@@ -18598,8 +18383,8 @@ packages:
       - webpack
     dev: false
 
-  file:projects/mental-project.tgz_42e01380fa74dacda92fce891bfb8d87:
-    resolution: {integrity: sha512-k1WSYx+QUqClI6MspOzCwBX7rt9BKzNuXy+OkzvJrcfj/3AJ5f495E9jFke0ogWv68kCkD76ghI3kkAvlXVdPA==, tarball: file:projects/mental-project.tgz}
+  file:projects/mental-project.tgz_95eac16fb9147165e172a076a01398a8:
+    resolution: {integrity: sha512-CkNvk8SnLqwTdlq52RREGBGnyxiRkNXIXVZyQjn5BzmXHwkeOx6aZKzdX0Zbiavofsr0/e5cfoO6ST9o/Zizqw==, tarball: file:projects/mental-project.tgz}
     id: file:projects/mental-project.tgz
     name: '@rush-temp/mental-project'
     version: 0.0.0
@@ -18614,6 +18399,7 @@ packages:
       '@vue/test-utils': 2.0.2_vue@3.2.39
       '@vueuse/core': 9.2.0_vue@3.2.39
       '@vueuse/head': 0.7.9_vue@3.2.39
+      birpc: 0.2.3
       cypress: 10.7.0
       echarts: 5.3.3
       eslint: 8.23.0
@@ -18643,7 +18429,7 @@ packages:
       vue-final-modal: 3.4.4
       vue-i18n: 9.2.2_vue@3.2.39
       vue-router: 4.1.5_vue@3.2.39
-      vue-termui: 0.0.12_@vue+runtime-core@3.2.39
+      vue-termui: 0.0.12
       vue-tsc: 0.40.13_typescript@4.8.3
       vuetify: 3.0.0-beta.10_c7501cf724c92774fd82a013f9cd86fe
     transitivePeerDependencies:
@@ -18676,7 +18462,7 @@ packages:
       - webpack-plugin-vuetify
     dev: false
 
-  file:projects/neo4j-coya-generator.tgz_e48119e83e7935216a3910ba22e8c6d6:
+  file:projects/neo4j-coya-generator.tgz_ba8003bd21b95db5662c4c2bcbd5323b:
     resolution: {integrity: sha512-mh164s5DZXTdzPyEhc8lYMT/5iR49/O2650II+lDleaEqZ9/pm/u649W+VDTn0wFtV7JzyYpMBDK5Y3aISv95A==, tarball: file:projects/neo4j-coya-generator.tgz}
     id: file:projects/neo4j-coya-generator.tgz
     name: '@rush-temp/neo4j-coya-generator'
@@ -18716,7 +18502,7 @@ packages:
       vue-demi: 0.13.11_vue@3.2.39
       vue-i18n: 9.2.2_vue@3.2.39
       vue-router: 4.1.5_vue@3.2.39
-      vue-termui: 0.0.12_@vue+runtime-core@3.2.39
+      vue-termui: 0.0.12
       vue-tsc: 0.40.13_typescript@4.8.3
     transitivePeerDependencies:
       - '@babel/parser'
@@ -18743,7 +18529,7 @@ packages:
       - webpack
     dev: false
 
-  file:projects/vitestTsAnalyzer.tgz_c125dc2918f97166ea7513ca2c3800e6:
+  file:projects/vitestTsAnalyzer.tgz_034c7ebf49901f81324243cb27cff09b:
     resolution: {integrity: sha512-bz6IlGA+4+Zfsxmn6VtaJSeyrzzauUrvijjOtvIvKNB70AzFFlvm0LCRbLzjniOvk4JUC6yPDNZRxSR+lBJjdA==, tarball: file:projects/vitestTsAnalyzer.tgz}
     id: file:projects/vitestTsAnalyzer.tgz
     name: '@rush-temp/vitestTsAnalyzer'
@@ -18791,7 +18577,7 @@ packages:
       vue-demi: 0.13.11_vue@3.2.39
       vue-i18n: 9.2.2_vue@3.2.39
       vue-router: 4.1.5_vue@3.2.39
-      vue-termui: 0.0.12_@vue+runtime-core@3.2.39
+      vue-termui: 0.0.12
       vue-tsc: 0.40.13_typescript@4.8.3
     transitivePeerDependencies:
       - '@babel/parser'
