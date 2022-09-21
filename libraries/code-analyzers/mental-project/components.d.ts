@@ -29,5 +29,6 @@ declare module '@vue/runtime-core' {
     QueryResultType: typeof import('./src/components/QueryResultType.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Status: typeof import('./src/components/Status.vue')['default']
   }
 }

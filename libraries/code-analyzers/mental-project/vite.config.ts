@@ -12,6 +12,7 @@ import IconsResolver from 'unplugin-icons/resolver'
 import vuetify from 'vite-plugin-vuetify'
 import VueTypeImports from 'vite-plugin-vue-type-imports'
 import Inspect from 'vite-plugin-inspect'
+import Layouts from 'vite-plugin-vue-layouts'
 // import { vitestAnalyzerPlugin } from 'coya-ts-analyzer'
 
 export default defineConfig({
@@ -27,6 +28,8 @@ export default defineConfig({
 
     // https://github.com/hannoeru/vite-plugin-pages
     Pages(),
+
+    Layouts(),
 
     // https://github.com/antfu/unplugin-auto-import
     AutoImport({
