@@ -1,19 +1,7 @@
-<script setup lang="ts">
-
-const { rpc } = useCliRpc()
-
-const connectionStatus = useAsyncState(async () => {
-  await rpc.ping('message from webapp')
-  return 'connected'
-}, 'connecting...')
-
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="w-full h-full">
-    <div class="text-left">
-      Status: {{ connectionStatus.state.value }}
-    </div>
-    
+    main page
   </div>
 </template>

@@ -1,19 +1,10 @@
-<script lang="ts" setup>
-  
-</script>
 <template>
-  <nav text-xl mt-6 inline-flex gap-2 b-t-1 pt-2>
+  <nav text-xl mt-6 inline-flex gap-2 b-t-1 pt-2 flex justify-between>
     <Status />
-    <button icon-btn @click="toggleDark()">
-      <div dark:i-carbon-moon i-carbon-sun />
-    </button>
-
-    <a
-      icon-btn i-carbon-logo-github
-      rel="noreferrer"
-      href="https://github.com/antfu/vitesse-lite"
-      target="_blank"
-      title="GitHub"
-    />
+    <div>
+      <button icon-btn @click="toggleDark()">
+        <div dark:i-carbon-moon i-carbon-sun />
+      </button>
+    </div>
   </nav>
 </template>
