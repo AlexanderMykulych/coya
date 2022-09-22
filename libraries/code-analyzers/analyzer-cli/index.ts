@@ -6,6 +6,7 @@ import { resolve } from 'path'
 import { WebSocket, WebSocketServer } from 'ws'
 import { createBirpc } from 'birpc'
 import type { CliServerApi, MentalWebApi } from 'coya-analyzer-shared-types'
+import { readFile } from 'fs/promises'
 
 const cli = cac('coya')
 
@@ -75,6 +76,17 @@ function setupClient(ws: WebSocket) {
     ping(msg: string) {
       return `pong from cli (${msg})`
     },
+    async getFileById(id: string): Promise<string> {
+      const path = resolve(__dirname, `.${id}`)
+      console.log(path);
+
+      const textBuff = await readFile(path, {
+        flag: 'r',
+        encoding: 'utf-8',
+      })
+
+      return textBuff.toString()
+    }
   }, {
     post: msg => ws.send(msg),
     on: fn => ws.on('message', fn),

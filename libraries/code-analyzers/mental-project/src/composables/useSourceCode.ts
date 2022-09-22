@@ -29,7 +29,7 @@ function groupFiles(fs: string[][]) {
   const resultObj = {}
   fs.forEach(x => filesSegmentsToObject(resultObj, x))
 
-  return resultObj
+  return fsObjectToArray(resultObj)
 }
 
 function filesSegmentsToObject(resultObj: any, segments: string[]) {
@@ -48,4 +48,16 @@ function filesSegmentsToObject(resultObj: any, segments: string[]) {
   })
 
   return resultObj
+}
+
+type Item = {
+  name: string
+  children?: Item[]
+}
+function fsObjectToArray(obj: any): Item[] {
+  return Object.entries(obj)
+    .map(([name, value]) => ({
+      name,
+      children: value === true ? undefined : fsObjectToArray(value),
+    }))
 }

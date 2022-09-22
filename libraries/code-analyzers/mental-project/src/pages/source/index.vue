@@ -1,17 +1,13 @@
 <script lang="ts" setup>
-const { files, fsTree } = useSourceCode()
 
+const selectedFile = ref()
 </script>
 
 <template>
-  <div class="h-full">
-    <template v-if="files.isReady">
-      <div v-for="file in files.state.value">
-        {{file.id}}
-      </div>
-      <pre text-left>
-      {{JSON.stringify(fsTree, null, '\t')}}
-      </pre>
-    </template>
+  <div class="h-full" flex="~">
+    <SourceFSExplorer class="w-20%" @select="selectedFile = $event"/>
+    <div class="w-80%">
+      <SourcePreview :fileId="selectedFile" />
+    </div>
   </div>
 </template>

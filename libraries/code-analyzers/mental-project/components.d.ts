@@ -30,6 +30,9 @@ declare module '@vue/runtime-core' {
     QueryResultType: typeof import('./src/components/QueryResultType.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SourceFSExplorer: typeof import('./src/components/Source/SourceFSExplorer.vue')['default']
+    SourcePreview: typeof import('./src/components/Source/SourcePreview.vue')['default']
+    SourceSourcePreview: typeof import('./src/components/Source/SourceSourcePreview.vue')['default']
     Status: typeof import('./src/components/Status.vue')['default']
   }
 }
