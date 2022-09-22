@@ -20,6 +20,7 @@ declare module '@vue/runtime-core' {
     IndicatorIntervals: typeof import('./src/components/QueryResult/Indicator/Settings/IndicatorIntervals.vue')['default']
     IndicatorQueryResult: typeof import('./src/components/QueryResult/Indicator/IndicatorQueryResult.vue')['default']
     IndicatorQueryResultSettings: typeof import('./src/components/QueryResult/Indicator/IndicatorQueryResultSettings.vue')['default']
+    MainMenu: typeof import('./src/components/MainMenu.vue')['default']
     Modals: typeof import('./src/components/Modals.vue')['default']
     NewDiagram: typeof import('./src/components/diagrams/NewDiagram.vue')['default']
     Query: typeof import('./src/components/Query.vue')['default']
