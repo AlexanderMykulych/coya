@@ -1,19 +1,36 @@
 <script lang="ts" setup>
 import { useSourcePanel } from '../../store/useSourcePanel';
 
-const { fileEntities, activeFileId, highlightEntity } = useSourcePanel()
+const { fileEntities, highlightEntity } = useSourcePanel()
 
 const listItems = computed(() => fileEntities.value.map(x => ({
-  title: `${x.id.replace(activeFileId.value ?? '', '')}`,
+  title: prepareTitle(x.id),
   value: x.id,
+  subtitle: x.entityType,
 })))
+
+const prepareTitle = (id: string) => id.substring(id.lastIndexOf('/'))
 </script>
 
 <template>
-  <v-list
+  <div
     text-left
     b
-    :items="listItems"
-    @click:select="highlightEntity($event.id)"
-  ></v-list>
+    h-full
+  >
+    <v-list
+      @click:select="highlightEntity($event.id)"
+    >
+      <template v-for="item in listItems" :key="item.title">
+        <v-list-item
+          :title="item.title"
+          :subtitle="item.subtitle"
+          :value="item.value"
+          active-color="primary"
+        >
+        </v-list-item>
+        <v-divider />
+      </template>
+    </v-list>
+  </div>
 </template>

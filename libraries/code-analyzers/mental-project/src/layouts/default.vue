@@ -6,7 +6,7 @@
     flex="~ col"
     justify-between
   >
-    <div h-full flex="~ col">
+    <div h="90%" flex="~ col">
       <MainMenu />
       <router-view />
     </div>
