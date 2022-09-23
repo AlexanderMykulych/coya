@@ -18,7 +18,9 @@ export interface EntityLocation extends Partial<EntityLogLocation>{
   start: number
   end: number
   lineStart: number
+  columnStart: number
   lineEnd: number
+  columnEnd: number
   kind: string
 }
 
@@ -56,6 +58,9 @@ export type Entity =
   | UnknownEntity
   | BaseEntity
   | ActionEntity
+
+export type LocatedType<T> = T extends EntityLocation ? T : never
+export type LocatedEntity = LocatedType<Entity>
 
 export enum ActionEntityType {
   Call = 'call'

@@ -8,7 +8,7 @@ export function getImportDeclarationId(importDec: ImportDeclaration): BaseEntity
   return {
     id: importDec.getModuleSpecifierValue() ?? importDec.getText(),
     entityType: EntityType.ImportDeclaration,
-    filePath: sourceFile?.getFilePath() ?? '<unknow>',
+    filePath: importDec.getSourceFile()?.getFilePath() ?? '<unknow>',
     type: CodeInfoType.Entity,
     source: sourceFile
       ? getParentsInfo(sourceFile)

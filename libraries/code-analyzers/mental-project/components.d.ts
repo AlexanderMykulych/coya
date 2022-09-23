@@ -7,6 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    Analyze: typeof import('./src/components/Analyze/Analyze.vue')['default']
     BarQueryResult: typeof import('./src/components/QueryResult/Bar/BarQueryResult.vue')['default']
     BarQueryResultSettings: typeof import('./src/components/QueryResult/Bar/BarQueryResultSettings.vue')['default']
     BaseModal: typeof import('./src/components/BaseModal.vue')['default']
@@ -20,8 +21,10 @@ declare module '@vue/runtime-core' {
     IndicatorIntervals: typeof import('./src/components/QueryResult/Indicator/Settings/IndicatorIntervals.vue')['default']
     IndicatorQueryResult: typeof import('./src/components/QueryResult/Indicator/IndicatorQueryResult.vue')['default']
     IndicatorQueryResultSettings: typeof import('./src/components/QueryResult/Indicator/IndicatorQueryResultSettings.vue')['default']
+    'IUim:process': typeof import('~icons/uim/process')['default']
     MainMenu: typeof import('./src/components/MainMenu.vue')['default']
     Modals: typeof import('./src/components/Modals.vue')['default']
+    MonacoSourcePreview: typeof import('./src/components/Source/MonacoSourcePreview.vue')['default']
     NewDiagram: typeof import('./src/components/diagrams/NewDiagram.vue')['default']
     Query: typeof import('./src/components/Query.vue')['default']
     QueryExecutor: typeof import('./src/components/QueryExecutor.vue')['default']
@@ -30,8 +33,11 @@ declare module '@vue/runtime-core' {
     QueryResultType: typeof import('./src/components/QueryResultType.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SourceEntities: typeof import('./src/components/Source/SourceEntities.vue')['default']
     SourceFSExplorer: typeof import('./src/components/Source/SourceFSExplorer.vue')['default']
+    SourceLeftPanel: typeof import('./src/components/Source/SourceLeftPanel.vue')['default']
     SourcePreview: typeof import('./src/components/Source/SourcePreview.vue')['default']
+    SourceRightPanel: typeof import('./src/components/Source/SourceRightPanel.vue')['default']
     SourceSourcePreview: typeof import('./src/components/Source/SourceSourcePreview.vue')['default']
     Status: typeof import('./src/components/Status.vue')['default']
   }

@@ -11285,6 +11285,10 @@ packages:
     resolution: {integrity: sha512-lxpCM3HTvquGxKGzHeknB/sUjuVoUElLlfYnXZT73K8geR9jQbroGlSCFBax9/0mpGoD3kzcMLnOlGQPJJNyqQ==}
     dev: false
 
+  /language-map/1.5.0:
+    resolution: {integrity: sha512-n7gFZpe+DwEAX9cXVTw43i3wiudWDDtSn28RmdnS/HCPr284dQI/SztsamWanRr75oSlKSaGbV2nmWCTzGCoVg==}
+    dev: false
+
   /language-subtag-registry/0.3.22:
     resolution: {integrity: sha512-tN0MCzyWnoz/4nHS6uxdlFWoUZT7ABptwKPQ52Ea7URk6vll88bWBVhodtnlfEuCcKWNGoc+uGbw1cwa9IKh/w==}
     dev: false
@@ -17156,7 +17160,7 @@ packages:
     dev: false
 
   file:projects/coya-analyzer-cli.tgz_sass@1.53.0+vue@3.2.39:
-    resolution: {integrity: sha512-lP8SVpdzQFiYwGBxGQWSutYi9B/2V5ta7NF26GXT895g8vHrqWuypGUMCfE2dVFsO1j1Y2868cPX3gKHz/w6cA==, tarball: file:projects/coya-analyzer-cli.tgz}
+    resolution: {integrity: sha512-upEV00/0gfA7nwZ868gpXWej1sz0uIO3HVVm/XwUxeKPFMFBaW66A7/ZJHEqE21+EC4QTmcQZG4FPpVa1gFOew==, tarball: file:projects/coya-analyzer-cli.tgz}
     id: file:projects/coya-analyzer-cli.tgz
     name: '@rush-temp/coya-analyzer-cli'
     version: 0.0.0
@@ -18384,7 +18388,7 @@ packages:
     dev: false
 
   file:projects/mental-project.tgz_95eac16fb9147165e172a076a01398a8:
-    resolution: {integrity: sha512-CkNvk8SnLqwTdlq52RREGBGnyxiRkNXIXVZyQjn5BzmXHwkeOx6aZKzdX0Zbiavofsr0/e5cfoO6ST9o/Zizqw==, tarball: file:projects/mental-project.tgz}
+    resolution: {integrity: sha512-nCup7XwYultVGezPzS7bJcokwvo6rf2+j7o9whyjMsZTxn/MYwX5Ht77tnOAscQn91kXVKEh82qo1xoHGvKqiA==, tarball: file:projects/mental-project.tgz}
     id: file:projects/mental-project.tgz
     name: '@rush-temp/mental-project'
     version: 0.0.0
@@ -18405,6 +18409,7 @@ packages:
       eslint: 8.23.0
       https-localhost: 4.7.1
       jsdom: 20.0.0
+      language-map: 1.5.0
       monaco-editor: 0.34.0
       neo4j-driver: 4.4.8
       pinia: 2.0.21_typescript@4.8.3+vue@3.2.39

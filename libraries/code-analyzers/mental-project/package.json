@@ -26,7 +26,8 @@
     "vite-plugin-vue-type-imports": "~0.2.2",
     "echarts": "5.3.3",
     "birpc": "~0.2.3",
-    "coya-analyzer-shared-types": "~1.0.0"
+    "coya-analyzer-shared-types": "~1.0.0",
+    "language-map": "~1.5.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "~0.26.3",

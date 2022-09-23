@@ -86,6 +86,21 @@ function setupClient(ws: WebSocket) {
       })
 
       return textBuff.toString()
+    },
+    async runAnalyze() {
+      const path = process.cwd()
+      console.log('run analyzation: ', path);
+
+      try {
+        await insertProjectInfoToDb(path)
+      }
+      catch (e) {
+        console.log(e);
+      }
+      finally {
+
+        console.log('end analyzation');
+      }
     }
   }, {
     post: msg => ws.send(msg),

@@ -1,6 +1,7 @@
 export interface CliServerApi {
   ping: (msg: string) => string
   getFileById: (id: string) => Promise<string>
+  runAnalyze: () => Promise<void>
 }
 
 export interface MentalWebApi {

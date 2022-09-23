@@ -1,4 +1,6 @@
 import { useNeo4j } from 'coya-ts-analyzer/browser'
+import type { LocatedEntity } from 'coya-ts-analyzer/browser'
+import { isNotNullOrUndefined } from 'coya-util'
 
 export function useSourceCode() {
   const db = useNeo4j()
@@ -19,9 +21,21 @@ export function useSourceCode() {
     }
   })
 
+  const getSourceFileEntities = async (id: string): Promise<LocatedEntity[]> => {
+    const query = `match(node) where node.filePath = $id return node order by node.start`
+
+    const result = await db.read(query, { id })
+    return result
+      ?.records
+      .map(x => x.get('node').properties)
+      .filter((x): x is LocatedEntity => isNotNullOrUndefined(x.start) && isNotNullOrUndefined(x.end))
+      ?? []
+  }
+
   return {
     files,
     fsTree,
+    getSourceFileEntities,
   }
 }
 
