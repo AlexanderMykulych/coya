@@ -5,8 +5,9 @@ import { getParentsInfo } from "./getParentId";
 
 export function getImportDeclarationId(importDec: ImportDeclaration): BaseEntity {
   const sourceFile = importDec?.getModuleSpecifierSourceFile();
+  const id = importDec.getModuleSpecifierSourceFile()?.getFilePath()?.toString() ?? importDec.getText()
   return {
-    id: importDec.getModuleSpecifierValue() ?? importDec.getText(),
+    id,
     entityType: EntityType.ImportDeclaration,
     filePath: importDec.getSourceFile()?.getFilePath() ?? '<unknow>',
     type: CodeInfoType.Entity,

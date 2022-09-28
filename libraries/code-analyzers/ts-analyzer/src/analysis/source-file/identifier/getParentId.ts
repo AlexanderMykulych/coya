@@ -1,6 +1,7 @@
 import { Node, SyntaxKind } from 'ts-morph'
-import type { BaseEntity, CodeInfo, Entity } from '../../types'
+import { CodeInfo, Entity, isEntityCodeInfo, isSoursableEntity } from '../../types'
 import { getNodeInfo } from './getNodeId'
+import type { NodeCodeInfos } from './types'
 
 const importantKinds = [
   SyntaxKind.VariableDeclaration,
@@ -20,15 +21,30 @@ export function getParentId(node: Node): string {
   })
 
   return [
-    getNodeInfo(node.getSourceFile()).id,
+    getNodeInfo(node.getSourceFile())[0].id,
     ...result,
   ].join('/')
+}
+
+export function getParentNode(node: Node): Entity {
+  let result: Node | null = null;
+
+  node.getParentWhile((parent) => {
+    if (importantKinds.some(x => parent.isKind(x)) && Node.hasName(parent)) {
+      result = parent
+      return false
+    }
+
+    return true
+  })
+
+  return getNodeInfo(result ?? node.getSourceFile())[0]
 }
 
 export function getParentsInfo(node: Node): Entity[] {
   const firstParent = node.getFirstAncestor(x => importantKinds.some(kind => x.isKind(kind)))
   if (firstParent) {
-    const firstParentCodeInfo = getNodeInfo(firstParent)
+    const firstParentCodeInfo = getNodeInfo(firstParent)[0]
     const parents = unwrapSources(firstParentCodeInfo)
     return [
       ...parents,
@@ -36,18 +52,18 @@ export function getParentsInfo(node: Node): Entity[] {
     ]
   }
 
-  return [
-    getNodeInfo(node.getSourceFile()),
-  ]
+  return getNodeInfo(node.getSourceFile())
+    .filter(isEntityCodeInfo)
 }
 
 export function unwrapSources(entity: Entity): Entity[] {
-  return [
+  return isSoursableEntity(entity) ? [
     ...(entity?.source ?? []),
-    ...(entity
-      ?.source
-      ?.flatMap<Entity, Entity>(x => unwrapSources(x))
-      ?? []
+    ...(
+      entity
+        ?.source
+        ?.flatMap(x => unwrapSources(x))
+        ?? []
     )
-  ]
+  ] : []
 }

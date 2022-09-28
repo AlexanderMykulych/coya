@@ -1,6 +1,7 @@
 import type { Node, Symbol } from 'typescript'
 import type { Project, SourceFile, TypeChecker } from 'ts-morph'
 import type { getProgramAndChecker } from './getProgramAndChecker'
+import { isNotNullOrUndefined } from 'coya-util'
 
 export type ProgramContainer = ReturnType<typeof getProgramAndChecker>
 export interface SourceContainer {
@@ -40,6 +41,10 @@ export interface FunctionEntity extends BaseEntity {
   typeString: string
 }
 
+export interface IdentifierEntity extends BaseEntity {
+  entityType: EntityType.Identifier
+}
+
 export interface UnknownEntity extends BaseEntity {
   code: string
   [k: `meta_${string}`]: any
@@ -55,12 +60,28 @@ export interface ActionEntity {
 export type Entity =
   | FileEntity
   | FunctionEntity
+  | IdentifierEntity
   | UnknownEntity
   | BaseEntity
   | ActionEntity
 
 export type LocatedType<T> = T extends EntityLocation ? T : never
-export type LocatedEntity = LocatedType<Entity>
+export type LocatedEntity = LocatedType<Entity> | LocatedType<Relationship>
+
+export function isLocatedEntity(codeInfo: CodeInfo): codeInfo is LocatedEntity {
+  const entity = codeInfo as any
+  return isNotNullOrUndefined(entity.start) && isNotNullOrUndefined(entity.end)
+}
+export function isLocatedCodeInfo(codeInfo: CodeInfo): codeInfo is LocatedEntity {
+  const entity = codeInfo as any
+  return isNotNullOrUndefined(entity.start) && isNotNullOrUndefined(entity.end)
+}
+export function isSoursableEntity(codeInfo: CodeInfo): codeInfo is BaseEntity {
+  return !!(codeInfo as BaseEntity).source
+}
+export function isEntityCodeInfo(codeInfo: CodeInfo): codeInfo is Entity {
+  return codeInfo.type === CodeInfoType.Entity
+}
 
 export enum ActionEntityType {
   Call = 'call'
@@ -70,6 +91,7 @@ export enum EntityType {
   File = 'file',
   Folder = 'folder',
   Function = 'function',
+  Identifier = 'identifier',
   Variable = 'variable',
   Property = 'property',
   ImportDeclaration = 'import_declaration',
@@ -83,12 +105,17 @@ export enum RelationType {
 
 }
 
-export interface Relationship {
+export interface SimpleRelationship {
   type: CodeInfoType.Relationship
   relationType: RelationType
   from: EntityId
   to: EntityId
+  id: string
 }
+
+export type LocatedRelationship = SimpleRelationship & EntityLocation
+
+export type Relationship = SimpleRelationship | LocatedRelationship
 
 export enum CodeInfoType {
   Entity = 'entity',

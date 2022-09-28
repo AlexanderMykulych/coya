@@ -45,7 +45,7 @@ export interface AnalysisContext<TStore = any> {
 export async function createContext(rootDir: string): Promise<AnalysisContext> {
   const fsUnits = await getAllFSUnitsFlat(rootDir)
 
-  let resultCodeInfos: CodeInfo[] = []
+  const resultCodeInfoIndex: Record<string, CodeInfo> = {}
 
   const hooks = createHookManager()
 
@@ -71,15 +71,16 @@ export async function createContext(rootDir: string): Promise<AnalysisContext> {
     addCodeInfos(codeInfos: CodeInfo[]) {
       codeInfos = codeInfos.map(x => hooks.beforeAdd(x))
 
-      resultCodeInfos = deduplicate([
-        ...resultCodeInfos,
-        ...codeInfos,
-      ])
+      codeInfos.forEach(x => {
+        if (!resultCodeInfoIndex[x.id]) {
+          resultCodeInfoIndex[x.id] = x
+        }
+      })
 
       return Promise.resolve()
     },
     get result() {
-      return resultCodeInfos
+      return Object.values(resultCodeInfoIndex)
     },
     fsUnits,
     hooks,
@@ -104,7 +105,7 @@ function createFolderItem(folder: FolderFsUnit): FolderItem {
 }
 
 export async function createContextForOneFile({ code, fileName }: { code: string, fileName: string }): Promise<AnalysisContext> {
-  let resultCodeInfos: CodeInfo[] = []
+  const resultCodeInfoIndex: Record<string, CodeInfo> = {}
 
   const hooks = createHookManager()
 
@@ -141,15 +142,17 @@ export async function createContextForOneFile({ code, fileName }: { code: string
     addCodeInfos(codeInfos: CodeInfo[]) {
       codeInfos = codeInfos.map(x => hooks.beforeAdd(x))
 
-      resultCodeInfos = deduplicate([
-        ...resultCodeInfos,
-        ...codeInfos,
-      ])
+
+      codeInfos.forEach(x => {
+        if (!resultCodeInfoIndex[x.id]) {
+          resultCodeInfoIndex[x.id] = x
+        }
+      })
 
       return Promise.resolve()
     },
     get result() {
-      return resultCodeInfos
+      return Object.values(resultCodeInfoIndex)
     },
     fsUnits: [],
     hooks,

@@ -3,5 +3,5 @@
   "version": "1.0.0",
   "main": "./types.ts",
   "typings": "./types.ts",
-  "dependencies": {}
+  "dependencies": {"coya-ts-analyzer":"~0.9.20"}
 }

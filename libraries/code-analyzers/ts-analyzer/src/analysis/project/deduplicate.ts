@@ -1,6 +1,7 @@
 import { CodeInfo, CodeInfoType } from "../types";
 
 export function deduplicate(codeInfos: CodeInfo[]): CodeInfo[] {
+  // return codeInfos
   const uniqCodeInfos: CodeInfo[] = []
 
   codeInfos.forEach((item) => {

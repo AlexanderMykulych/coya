@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { useSourcePanel } from '../../store/useSourcePanel';
-
 const { activeFileId } = useSourcePanel()
 </script>
 

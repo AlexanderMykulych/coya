@@ -44,11 +44,21 @@ async function _run(context: TsJsAnalysisContext): Promise<void> {
     }
   }
 
-  const codeInfos = project
-    .getSourceFiles()
-    .flatMap(x => analyzeSourceFile(x))
+  
 
-  await context.addCodeInfos(codeInfos)
+  project
+    .getSourceFiles()
+    .flatMap(x => analyzeSourceFile(x, {
+      context: {
+        async addCodeInfo(codeInfo) {
+          if (!Array.isArray(codeInfo)) {
+            codeInfo = [codeInfo]
+          }
+
+          await context.addCodeInfos(codeInfo)
+        }
+      }
+    }))
 }
 
 export const run = progress('ts-js. run', _run)

@@ -1,5 +1,6 @@
 import { Node, SyntaxKind } from 'ts-morph'
 import type { Entity } from '../../types'
+import type { AnalyzerOptions } from '../types'
 import { getArrowFunctionId } from './getArrowFunctionId'
 import { getFunctionDeclarationId } from './getFunctionDeclarationId'
 import { getIdentifierInfo } from './getIdentifierInfo'
@@ -11,8 +12,9 @@ import { getMethodSignatureIndo } from './getMethodSignatureIndo'
 import { getPropertyAssignment } from './getPropertyAssignment'
 import { getSourceFileId } from './getSourceFileId'
 import { getVariableDeclarationId } from './getVariableDeclarationId'
+import { isNodeCodeInfos, NodeCodeInfos } from './types'
 
-export function getNodeInfo(node: Node): Entity {
+function _getNodeInfo(node: Node): Entity | NodeCodeInfos {
   if (!node) {
     throw '<unknow node>'
   }
@@ -47,4 +49,17 @@ export function getNodeInfo(node: Node): Entity {
     return getMethodSignatureIndo(node)
   }
   return getIgnoredNode(node)
+}
+
+
+export function getNodeInfo(node: Node, options?: AnalyzerOptions): NodeCodeInfos {
+  let result = _getNodeInfo(node)
+
+  if (!isNodeCodeInfos(result)) {
+    result = [result]
+  }
+
+  options?.context?.addCodeInfo?.(result)
+
+  return result
 }

@@ -1,4 +1,4 @@
-import { resolve } from 'path'
+import { relative, resolve } from 'path'
 import { Tinypool } from 'tinypool'
 import { ref } from "@vue/reactivity"
 
@@ -17,7 +17,8 @@ const pool = new Tinypool({
   filename: workerRunnerPath,
 })
 
-const workingDir = ref(resolve(process.cwd(), '.'))
+const workingDir = ref(resolve(__dirname, '../examples/project1'))
+// const workingDir = ref(resolve(process.cwd(), '.'))
 
 export function useAnalyzer() {
   return {

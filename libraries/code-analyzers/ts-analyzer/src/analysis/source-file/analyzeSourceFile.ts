@@ -3,17 +3,30 @@ import { progress } from '../../progress/progress'
 import { CodeInfo, CodeInfoType, Entity, Relationship, RelationType } from '../types'
 import { functionAnalizer } from './functionAnalizer'
 import { getNodeInfo } from './identifier/getNodeId'
+import { identifierAnalyzer } from './identifierAnalyzer'
 import { importAnalizer } from './importAnalizer'
+import type { AnalyzeSourceOptions } from './types'
 
-function _analyzeSourceFile(sourceFile: SourceFile): CodeInfo[] {
+
+
+function _analyzeSourceFile(sourceFile: SourceFile, options?: AnalyzeSourceOptions): CodeInfo[] {
   const analizers = [
     importAnalizer,
-    functionAnalizer,
+    // functionAnalizer,
+    identifierAnalyzer,
   ]
 
   const codeInfos = [
-    ...analizers.flatMap(analizer => analizer(sourceFile)),
-    getNodeInfo(sourceFile),
+    ...analizers
+      .flatMap(analizer =>
+        analizer(
+          sourceFile,
+          {
+            context: options?.context,
+          },
+        )
+      ),
+    ...getNodeInfo(sourceFile),
   ]
 
   const sourceCodeInfos = codeInfos
@@ -28,6 +41,7 @@ function _analyzeSourceFile(sourceFile: SourceFile): CodeInfo[] {
           relationType: RelationType.Parent,
           from: source.id,
           to: node.id,
+          id: `${source.id}->${node.id}`,
         }))
     ])
     .filter((x): x is CodeInfo => !!x)

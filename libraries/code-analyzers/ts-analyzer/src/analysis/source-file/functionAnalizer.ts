@@ -1,53 +1,61 @@
-import type { Identifier, Node } from 'ts-morph'
+import type { Node } from 'ts-morph'
 import { SyntaxKind } from 'ts-morph'
-import { CodeInfo, RelationType } from '../types'
+import { CodeInfo, EntityLocation, isLocatedEntity, RelationType } from '../types'
 import { CodeInfoType } from '../types'
 import { getNodeInfo } from './identifier/getNodeId'
+import type { AnalyzerOptions } from './types'
 
-export function functionAnalizer(node: Node): CodeInfo[] {
+export function functionAnalizer(node: Node, options?: AnalyzerOptions): CodeInfo[] {
   return [
     SyntaxKind.FunctionDeclaration,
     SyntaxKind.ArrowFunction,
     SyntaxKind.MethodDeclaration,
   ]
-    .flatMap(kind => node.getDescendantsOfKind(kind)
-      .map(x => ({ node: x, entity: getNodeInfo(x) }))
-      .flatMap<CodeInfo>(({ node, entity }) =>
-        [
-          entity,
-          ...getNestedRelations(node, entity.id),
-        ])
+    .flatMap(kind =>
+      node
+        .getDescendantsOfKind(kind)
+        .map(x => ({ node: x, entity: getNodeInfo(x, options)[0] }))
+        .flatMap<CodeInfo>(({ node, entity }) =>
+          [
+            entity,
+            ...getNestedRelations(node, entity.id, options),
+          ])
   )
 }
 
-function getNestedImportedIdentifiers(node: Node): Identifier[] {
-  return node.getDescendantsOfKind(SyntaxKind.Identifier)
-    .filter(child => {
-      const dec = child.getSymbol()?.getDeclarations()?.[0]
-      if (dec) {
-        if (dec.isKind(SyntaxKind.ImportSpecifier)) {
-          return true
-        }
-        if (dec.getSourceFile() !== node.getSourceFile()) {
-          return true
-        }
-      }
-      return false
-    })
-}
+function getNestedRelations(node: Node, nodeId: string, options?: AnalyzerOptions): CodeInfo[] {
+  const entities = node
+    .getDescendantsOfKind(SyntaxKind.Identifier)
+    .map(x => getNodeInfo(x, options)[0])
 
-function getNestedRelations(node: Node, nodeId: string): CodeInfo[] {
-  const entities = getNestedImportedIdentifiers(node)
-    .map(x => getNodeInfo(x))
   const relations = entities
     .map<CodeInfo>(x => ({
+      id: `${nodeId}->${x.id}`,
       to: x.id,
       from: nodeId,
       type: CodeInfoType.Relationship,
       relationType: RelationType.Use,
+      ...getLocationFromCodeInfo(x),
     }))
+  options?.context?.addCodeInfo?.(relations)
   return [
     ...entities,
     ...relations,
   ]
+}
+
+function getLocationFromCodeInfo(codeInfo: CodeInfo): EntityLocation | null {
+  if (isLocatedEntity(codeInfo)) {
+    return {
+      start: codeInfo.start,
+      end: codeInfo.end,
+      lineStart: codeInfo.lineStart,
+      lineEnd: codeInfo.lineEnd,
+      columnStart: codeInfo.columnStart,
+      columnEnd: codeInfo.columnEnd,
+      kind: codeInfo.kind,
+    }
+  }
+
+  return null
 }

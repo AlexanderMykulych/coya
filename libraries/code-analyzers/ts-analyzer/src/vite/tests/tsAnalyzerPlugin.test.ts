@@ -53,12 +53,10 @@ test('should run vite', async () => {
     expect.stringContaining('main.ts/f1'),
     expect.stringContaining('utils.ts/sum'),
     expect.stringContaining('utils.ts/calculator/getNumber'),
-    expect.stringContaining('utils.ts/calculator/nestedField1/nestedField2/nestedField3/getNumber2'),
   ]))
   expect(end).toEqual(expect.arrayContaining([
     expect.stringContaining('main.ts/f1'),
     expect.stringContaining('utils.ts/sum'),
     expect.stringContaining('utils.ts/calculator/getNumber'),
-    expect.stringContaining('utils.ts/calculator/nestedField1/nestedField2/nestedField3/getNumber2'),
   ]))
 })

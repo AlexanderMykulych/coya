@@ -1,14 +1,11 @@
 <script lang="ts" setup>
-import { useSourcePanel } from '../../store/useSourcePanel';
-
-
 const props = defineProps<{fileId: string}>()
 const { rpc } = useCliRpc()
-const { activeEntity } = useSourcePanel()
+const { highlightItem } = useSourcePanel()
 
 const file = asyncComputed(() => rpc.getFileById(props.fileId), "")
 
-const fileEntities = asyncComputed(() => activeEntity.value ? [activeEntity.value] : [], [])
+const fileEntities = asyncComputed(() => highlightItem.value ? [highlightItem.value] : [], [])
 </script>
 
 <template>

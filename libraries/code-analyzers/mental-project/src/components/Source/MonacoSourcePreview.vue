@@ -22,7 +22,7 @@ const language = computed(() => Object.values(map).find(x => x.extensions?.inclu
 
 const decorators = computed(() =>
   props.ranges.map<monaco.editor.IModelDeltaDecoration>(x => ({
-    range: new monaco.Range(x.lineStart, x.columnStart, x.lineEnd, 0),
+    range: new monaco.Range(x.lineStart, x.columnStart, x.lineEnd, x.columnEnd),
     options: {
       className: 'myInlineDecoration',
     }
