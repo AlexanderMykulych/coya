@@ -6,7 +6,7 @@ export default {
     const { descriptor } = parse(code)
 
     const compiled = descriptor.script || descriptor.scriptSetup ? compileScript(descriptor, {
-      id: `1`
+      id: `1`,
     }) : null
 
     const template = descriptor.template?.content ? compileTemplate({

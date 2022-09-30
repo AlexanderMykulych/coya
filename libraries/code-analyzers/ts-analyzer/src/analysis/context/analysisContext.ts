@@ -2,7 +2,6 @@ import { stat } from "fs/promises";
 import { resolve } from "path";
 import { getAllFSUnitsFlat } from "../fs/fs";
 import type { FileFsUnit, FileOrFolderFsUnit, FolderFsUnit } from "../fs/types";
-import { deduplicate } from "../project/deduplicate";
 import type { CodeInfo, FileText } from "../types";
 import { createHookManager } from "./hook/createHookManager";
 import { createStore } from "./store/createStore";

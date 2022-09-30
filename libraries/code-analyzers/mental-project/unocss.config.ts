@@ -4,6 +4,7 @@ import {
   presetIcons,
   presetUno,
   presetWebFonts,
+  presetTypography,
   // transformerDirectives,
   // transformerVariantGroup,
 } from 'unocss'
@@ -27,6 +28,7 @@ export default defineConfig({
         mono: 'DM Mono',
       },
     }),
+    presetTypography(),
   ],
   // transformers: [
   //   transformerDirectives(),

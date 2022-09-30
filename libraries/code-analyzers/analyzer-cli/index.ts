@@ -3,15 +3,16 @@ import cac from 'cac'
 import { createServer, ViteDevServer } from 'vite'
 import { useAnalyzer } from './src/useAnalyzer'
 import { resolve } from 'path'
-import { WebSocket, WebSocketServer } from 'ws'
-import { createBirpc } from 'birpc'
-import type { CliServerApi, MentalWebApi } from 'coya-analyzer-shared-types'
-import { readFile } from 'fs/promises'
+import { WebSocketServer } from 'ws'
 import { createRpc } from './src/rpc'
+import { cliLogger } from './src/logger'
+import { setLoggerRpc } from './src/loggerTransport'
 
 const cli = cac('coya')
 
-const { verifyConnection, insertProjectInfoToDb } = useAnalyzer()
+const { verifyConnection, insertProjectInfoToDb } = useAnalyzer({
+  logger: cliLogger,
+})
 
 cli
   .command('dev', 'Start dev server')
@@ -33,7 +34,7 @@ cli
 
 const args = cli.parse()
 
-console.log('run with params', args)
+cliLogger.info(args, 'run with params')
 async function runMentalModelWebApp() {
   try {
     const server = await createServer({
@@ -67,7 +68,11 @@ function createWebSocket(server: ViteDevServer) {
 
     wss.handleUpgrade(request, socket, head, (ws) => {
       wss.emit('connection', ws, request)
-      createRpc(ws)
+      const rpc = createRpc(ws, {
+        logger: cliLogger,
+      })
+
+      setLoggerRpc(rpc)
     })
   })
 }

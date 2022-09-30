@@ -9,6 +9,7 @@ export interface CliServerApi {
 
 export interface MentalWebApi {
   ping: (msg: string) => string
+  log: (line: any) => void
 }
 
 export enum CliConnectionStatus {

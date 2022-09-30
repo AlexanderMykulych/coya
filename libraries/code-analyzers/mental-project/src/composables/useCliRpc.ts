@@ -1,10 +1,13 @@
 import { BirpcOptions, createBirpc } from "birpc"
 import { CliConnectionStatus, CliServerApi, MentalWebApi } from "coya-analyzer-shared-types"
+import { useLogging } from "./useLogging"
 
 const API_PATH = '/__coya_api__'
 export const PORT = import.meta.hot ? '5173' : location.port
 export const HOST = [location.hostname, PORT].filter(Boolean).join(':')
 export const ENTRY_URL = `${location.protocol === 'https:' ? 'wss:' : 'ws:'}//${HOST}${API_PATH}`
+
+const { log } = useLogging()
 
 const ws = new globalThis.WebSocket(ENTRY_URL)
 
@@ -20,6 +23,7 @@ const rpc = createBirpc<CliServerApi, MentalWebApi>(
     ping(msg: string) {
       return `pong from mental web (${msg})`
     },
+    log: (line) => log(line),
   },
   birpcHandlers,
 )

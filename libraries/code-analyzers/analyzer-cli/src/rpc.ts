@@ -5,18 +5,26 @@ import { readFile } from 'fs/promises'
 import { useAnalyzer } from './useAnalyzer'
 import { resolve } from 'path'
 import { analyzeCode, CodeInfo } from 'coya-ts-analyzer'
+import type { Logger } from 'pino'
 
-const { verifyConnection, insertProjectInfoToDb, workingDir } = useAnalyzer()
+type CreateRpcOptions = {
+  logger: Logger
+}
 
-export function createRpc(ws: WebSocket) {
+export function createRpc(ws: WebSocket, options: CreateRpcOptions) {
+  const { logger: log } = options
+  const { insertProjectInfoToDb, workingDir } = useAnalyzer({
+    logger: log,
+  })
+
   const ping = (msg: string) => {
     return `pong from cli (${msg})`
   }
 
   const getFileById = async (id: string): Promise<string> => {
     const path = resolve(workingDir.value, `./${id}`)
-    console.log('workingDir:', workingDir.value, id);
-    console.log(path);
+
+    log.info({workingDir: workingDir.value, id, path}, 'run getFileById')
 
     const textBuff = await readFile(path, {
       flag: 'r',
@@ -27,26 +35,33 @@ export function createRpc(ws: WebSocket) {
   }
 
   const runAnalyze = async () => {
-    console.log('run analyzation: ', workingDir.value);
+    log.info({ workingDir: workingDir.value }, 'runAnalyze start')
 
     try {
       await insertProjectInfoToDb(workingDir.value)
     }
     catch (e) {
-      console.log(e);
+      log.error({ error: e }, 'runAnalyzer error')
     }
     finally {
-
-      console.log('end analyzation');
+      log.info('runAnalyzer end')
     }
   }
 
   const runTestAnalyze = async (fileName: string): Promise<CodeInfo[]> => {
-    const code = await getFileById(fileName)
-    return await analyzeCode({
-      code,
-      fileName,
-    })
+    log.info({ fileName }, 'runTestAnalyze start')
+
+    try {
+      const code = await getFileById(fileName)
+      return await analyzeCode({
+        code,
+        fileName,
+      })
+    } catch(e) {
+      log.error({ error: e }, 'runTestAnalyze error')
+    } finally {
+      log.info('runTestAnalyze end')
+    }
   }
 
   const rpc = createBirpc<MentalWebApi, CliServerApi>({

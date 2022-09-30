@@ -19,6 +19,10 @@
     "ws": "~8.8.1",
     "@types/ws": "~8.5.3",
     "birpc": "~0.2.3",
-    "coya-analyzer-shared-types": "~1.0.0"
+    "coya-analyzer-shared-types": "~1.0.0",
+    "pino": "~8.6.1",
+    "pino-pretty": "~9.1.0",
+    "pino-abstract-transport": "~1.0.0",
+    "@unocss/preset-typography": "~0.45.26"
   }
 }
