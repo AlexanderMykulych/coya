@@ -4,10 +4,15 @@ const { logs, names, getLogsByName } = useLogging()
 const isEmpty = computed(() => !(logs.value?.length > 0))
 
 const tab = ref(null)
+
+const prepareMessage = (line: Record<string, string>) =>
+  Object.entries(line)
+  .map(([key, val]) => `${key}: ${val}`)
+  .join(', ')
 </script>
 
 <template>
-  <div text-left>
+  <div text-left h-full overflow-y-hidden>
     <div v-if="isEmpty" text-center mt-5>
       empty logs
     </div>
@@ -20,17 +25,17 @@ const tab = ref(null)
           {{ name }}
         </v-tab>
       </v-tabs>
-      <v-window v-model="tab" class="h-full">
+      <v-window v-model="tab" h="95%" b-1 overflow-y-auto>
         <v-window-item
           :value="null"
           class="h-full"
         >
           <v-list>
             <v-list-item v-for="(item, index) in logs"
-              :title="item.msg"
               :subtitle="item.name"
               :value="index"
             >
+            {{prepareMessage(item)}}
             </v-list-item>
           </v-list>
         </v-window-item>
@@ -41,10 +46,9 @@ const tab = ref(null)
         >
           <v-list>
             <v-list-item v-for="(item, index) in getLogsByName(name)"
-              :title="item.msg"
-              :subtitle="item.name"
               :value="index"
             >
+            {{prepareMessage(item)}}
             </v-list-item>
           </v-list>
         </v-window-item>
