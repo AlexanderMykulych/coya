@@ -4,7 +4,7 @@ import type { CliServerApi, MentalWebApi } from 'coya-analyzer-shared-types'
 import { readFile } from 'fs/promises'
 import { useAnalyzer } from './useAnalyzer'
 import { resolve } from 'path'
-import { analyzeCode, CodeInfo } from 'coya-ts-analyzer'
+import { analyzeCode, CodeInfo, CodeInfoType } from 'coya-ts-analyzer'
 import type { Logger } from 'pino'
 
 type CreateRpcOptions = {
@@ -41,6 +41,8 @@ export function createRpc(ws: WebSocket, options: CreateRpcOptions) {
       await insertProjectInfoToDb(workingDir.value)
     }
     catch (e) {
+      console.log(e);
+      
       log.error({ error: e }, 'runAnalyzer error')
     }
     finally {
@@ -53,10 +55,18 @@ export function createRpc(ws: WebSocket, options: CreateRpcOptions) {
 
     try {
       const code = await getFileById(fileName)
-      return await analyzeCode({
+      const res = await analyzeCode({
         code,
         fileName,
       })
+
+      log.info({
+        allCount: res.length,
+        entitiesCount: res.filter(x => x.type === CodeInfoType.Entity).length,
+        relationsCount: res.filter(x => x.type === CodeInfoType.Relationship).length,
+      }, 'runTestAnalyze result')
+
+      return res
     } catch(e) {
       log.error({ error: e }, 'runTestAnalyze error')
     } finally {

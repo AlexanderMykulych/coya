@@ -1,0 +1,36 @@
+// Vitest Snapshot v1
+
+exports[`should 1`] = `
+[
+  {
+    "code": " { return a + b }",
+    "columnEnd": 59,
+    "columnStart": 1,
+    "end": 58,
+    "entityType": "function",
+    "filePath": "/utils.ts",
+    "id": "/utils.ts/sum",
+    "kind": "FunctionDeclaration",
+    "lineEnd": 1,
+    "lineStart": 1,
+    "logEnd": 58,
+    "logStart": 42,
+    "start": 0,
+    "type": "entity",
+    "typeString": "typeof import(\\"/utils\\").sum",
+  },
+  {
+    "entityType": "file",
+    "filePath": "/main.ts",
+    "id": "/main.ts",
+    "type": "entity",
+  },
+  {
+    "from": "/main.ts",
+    "id": "/main.ts->/utils.ts/sum",
+    "relationType": "use",
+    "to": "/utils.ts/sum",
+    "type": "relationship",
+  },
+]
+`;

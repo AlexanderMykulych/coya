@@ -23,7 +23,7 @@ export default definePlugin({
         entityType: x.type === 'file' ? EntityType.File : EntityType.Folder,
         filePath: x.id,
         id: x.id,
-        source: [],
+        // source: [],
       }))
 
     const relations = units

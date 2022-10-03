@@ -36,7 +36,7 @@ const obj = {
 }
 `
 )
-project.createSourceFile(
+const dep1SourceFile = project.createSourceFile(
   'dep1.ts',
 `
 export function fn1(a: number) { return a + 1 }
@@ -59,7 +59,10 @@ test('should get all imports', () => {
 
 test('should get entities', () => {
 
-  const entities = analyzeSourceFile(sourceFile)
+  const entities = [
+    ...analyzeSourceFile(sourceFile),
+    ...analyzeSourceFile(dep1SourceFile),
+  ]
 
   expect(entities).toEqual(expect.arrayContaining<CodeInfo>([
     objectExpect<Entity>({
@@ -118,14 +121,14 @@ test('should find function -> function relation', () => {
   const sourceFile = project.createSourceFile(
     'main.ts',
     `
-import { fn1 } from './dep1'
+import { fn1, fn2 } from './dep1'
 export function mainFn() {
   return fn1(1)
 }
 const mainFn2 = () => fn1(1)
 const obj = {
   mainFn3() {
-    return fn1(1)
+    return fn2(1)
   },
   chl1: {
     chl2: {
@@ -142,6 +145,7 @@ function mainFn5() {
     'dep1.ts',
   `
 export function fn1(a: number) { return a + 1 }
+export function fn2(a: number) { return a + 1 }
 `)
 
   const entities = analyzeSourceFile(sourceFile)
@@ -149,6 +153,15 @@ export function fn1(a: number) { return a + 1 }
   expect(entities).toEqual(
     expect.arrayContaining(
       [
+        objectExpect<Entity>({
+          id: '/main.ts/mainFn',
+        }),
+        objectExpect<Entity>({
+          id: '/dep1.ts/fn1',
+        }),
+        objectExpect<Entity>({
+          id: '/main.ts/obj/mainFn3',
+        }),
         objectExpect<Relationship>({
           type: CodeInfoType.Relationship,
           from: '/main.ts/mainFn',
@@ -162,7 +175,7 @@ export function fn1(a: number) { return a + 1 }
         objectExpect<Relationship>({
           type: CodeInfoType.Relationship,
           from: '/main.ts/obj/mainFn3',
-          to: '/dep1.ts/fn1',
+          to: '/dep1.ts/fn2',
         }),
         objectExpect<Relationship>({
           type: CodeInfoType.Relationship,
@@ -177,7 +190,7 @@ export function fn1(a: number) { return a + 1 }
         objectExpect<Relationship>({
           type: CodeInfoType.Relationship,
           from: '/main.ts/mainFn5',
-          to: '/dep1.ts/fn1',
+          to: '/main.ts/mainFn5/mainFn6',
         }),
       ]
     )
@@ -233,7 +246,7 @@ export function fn1(a: number) {
 }
 
 `)
-  project.createSourceFile(
+  const serviceSourceFile = project.createSourceFile(
     'service.ts',
     `
 export function getService() {
@@ -247,7 +260,10 @@ export function getService() {
 }
 `)
 
-  const entities = analyzeSourceFile(sourceFile)
+  const entities = [
+    ...analyzeSourceFile(sourceFile),
+    ...analyzeSourceFile(serviceSourceFile),
+  ]
 
   expect(entities).toEqual(
     expect.arrayContaining(
@@ -264,12 +280,12 @@ export function getService() {
           type: CodeInfoType.Relationship,
           relationType: RelationType.Parent,
           from: '/service.ts/getService',
-          to: '/service.ts/getService/prop1/method1',
+          to: '/service.ts/getService/prop1',
         }),
         objectExpect<Relationship>({
           type: CodeInfoType.Relationship,
           relationType: RelationType.Parent,
-          from: '/service.ts',
+          from: '/service.ts/getService/prop1',
           to: '/service.ts/getService/prop1/method1',
         }),
         objectExpect<Relationship>({

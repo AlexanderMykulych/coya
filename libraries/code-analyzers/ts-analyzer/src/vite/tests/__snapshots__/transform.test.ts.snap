@@ -24,24 +24,10 @@ try {
 }
 },
   fn2: () => 3,
-  fn3: () => {
-try {
-/* \\"/index.ts/obj/fn3\\" */
- return 4 
-} finally {
-  /* \\"/index.ts/obj/fn3\\" */
-}
-},
+  fn3: () => { return 4 },
   fn4: () =>
     {
-try {
-/* \\"/index.ts/obj/fn4\\" */
-
-      return 4 
-} finally {
-  /* \\"/index.ts/obj/fn4\\" */
-}
-},
+      return 4 },
 }
 class A {
   method() {
@@ -55,18 +41,8 @@ try {
 }
 }
 }
-const fn5 = () => {
-try {
-/* \\"/index.ts/fn5\\" */
- return 6 
-} finally {
-  /* \\"/index.ts/fn5\\" */
-}
-}
+const fn5 = () => { return 6 }
   
-
-
-
 
 
 "

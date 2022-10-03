@@ -5,7 +5,7 @@ import fp from 'find-free-port'
 import { resolve } from 'path'
 import { chromium } from 'playwright'
 
-test('should run vite', async () => {
+test.skip('should run vite', async () => {
 
   const [port] = await fp(3000, 5000)
   const server = await createServer({

@@ -9,7 +9,7 @@ export function getPropertyAssignment(node: PropertyAssignment): BaseEntity {
     type: CodeInfoType.Entity,
     entityType: EntityType.Property,
     filePath: node.getSourceFile().getFilePath(),
-    source: getParentsInfo(node) ?? [],
+    // source: getParentsInfo(node) ?? [],
     ...getLocation(node),
   }
 }

@@ -30,7 +30,7 @@ export interface BaseEntity<TSource = Entity> extends EntityLocation {
   filePath: string
   id: EntityId
   entityType: EntityType
-  source: TSource[]
+  // source: TSource[]
 }
 export interface FileEntity extends BaseEntity {
   entityType: EntityType.File

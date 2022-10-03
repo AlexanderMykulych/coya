@@ -1,5 +1,5 @@
 import { progress } from '../progress/progress'
-import { createContext } from './context/analysisContext'
+import { AnalysisContext, createContext } from './context/analysisContext'
 import { getAnalysisPlugins } from './plugins/getAnalysisPlugins'
 import { preparePlugins } from './preparePlugins'
 import type { CodeInfo } from './types'
@@ -7,6 +7,10 @@ import type { CodeInfo } from './types'
 async function _analyze(basePath: string): Promise<CodeInfo[]> {
   const context = await createContext(basePath)
 
+  return await analyzeByContext(context)
+}
+
+export async function analyzeByContext(context: AnalysisContext): Promise<CodeInfo[]> {
   const plugins = getAnalysisPlugins()
 
   const preparedPluginsWithContext = await preparePlugins(plugins, context)

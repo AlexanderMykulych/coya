@@ -11,9 +11,9 @@ export function getArrowFunctionId(arrowFn: ArrowFunction): FunctionEntity {
     typeString: arrowFn.getType().getText(),
     type: CodeInfoType.Entity,
     filePath: sourceFile.getFilePath(),
-    source: sourceFile
-      ? getParentsInfo(sourceFile)
-      : [],
+    // source: sourceFile
+    //   ? getParentsInfo(sourceFile)
+    //   : [],
     ...getLocation(arrowFn),
   }
 }

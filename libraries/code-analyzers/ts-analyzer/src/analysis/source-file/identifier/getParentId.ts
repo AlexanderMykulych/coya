@@ -1,11 +1,11 @@
 import { Node, SyntaxKind } from 'ts-morph'
-import { CodeInfo, Entity, isEntityCodeInfo, isSoursableEntity } from '../../types'
+import { Entity, isEntityCodeInfo, isSoursableEntity } from '../../types'
 import { getNodeInfo } from './getNodeId'
-import type { NodeCodeInfos } from './types'
 
 const importantKinds = [
   SyntaxKind.VariableDeclaration,
   SyntaxKind.FunctionDeclaration,
+  SyntaxKind.MethodDeclaration,
   SyntaxKind.PropertyAssignment,
   SyntaxKind.ImportDeclaration,
 ] as const
@@ -26,7 +26,11 @@ export function getParentId(node: Node): string {
   ].join('/')
 }
 
-export function getParentNode(node: Node): Entity {
+export function getParentEntity(node: Node): Entity {
+  return getNodeInfo(getParentNode(node))[0]
+}
+
+export function getParentNode(node: Node): Node {
   let result: Node | null = null;
 
   node.getParentWhile((parent) => {
@@ -38,16 +42,16 @@ export function getParentNode(node: Node): Entity {
     return true
   })
 
-  return getNodeInfo(result ?? node.getSourceFile())[0]
+  return result ?? node.getSourceFile()
 }
 
 export function getParentsInfo(node: Node): Entity[] {
   const firstParent = node.getFirstAncestor(x => importantKinds.some(kind => x.isKind(kind)))
   if (firstParent) {
     const firstParentCodeInfo = getNodeInfo(firstParent)[0]
-    const parents = unwrapSources(firstParentCodeInfo)
+    // const parents = unwrapSources(firstParentCodeInfo)
     return [
-      ...parents,
+      // ...parents,
       firstParentCodeInfo,
     ]
   }
@@ -56,14 +60,14 @@ export function getParentsInfo(node: Node): Entity[] {
     .filter(isEntityCodeInfo)
 }
 
-export function unwrapSources(entity: Entity): Entity[] {
-  return isSoursableEntity(entity) ? [
-    ...(entity?.source ?? []),
-    ...(
-      entity
-        ?.source
-        ?.flatMap(x => unwrapSources(x))
-        ?? []
-    )
-  ] : []
-}
+// export function unwrapSources(entity: Entity): Entity[] {
+//   return isSoursableEntity(entity) ? [
+//     ...(entity?.source ?? []),
+//     ...(
+//       entity
+//         ?.source
+//         ?.flatMap(x => unwrapSources(x))
+//         ?? []
+//     )
+//   ] : []
+// }

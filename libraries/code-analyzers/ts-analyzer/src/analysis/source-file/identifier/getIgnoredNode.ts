@@ -7,15 +7,16 @@ let unknowId = 1
 export function getIgnoredNode(node: Node): UnknownEntity {
   const sourceFile = node.getSourceFile()
   return {
-    id: `<unknown> (${unknowId++})`,
+    // id: `<unknown> (${unknowId++})`,
+    id: '<unknown>',
     entityType: EntityType.Unknown,
     filePath: sourceFile.getFilePath(),
     type: CodeInfoType.Entity,
     code: node.getFullText(),
     meta_kind: node.getKindName(),
-    source: sourceFile
-      ? getParentsInfo(sourceFile)
-      : [],
+    // source: sourceFile
+    //   ? getParentsInfo(sourceFile)
+    //   : [],
     ...getLocation(node),
   }
 }

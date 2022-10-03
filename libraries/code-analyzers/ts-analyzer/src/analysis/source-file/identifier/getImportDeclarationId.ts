@@ -11,9 +11,9 @@ export function getImportDeclarationId(importDec: ImportDeclaration): BaseEntity
     entityType: EntityType.ImportDeclaration,
     filePath: importDec.getSourceFile()?.getFilePath() ?? '<unknow>',
     type: CodeInfoType.Entity,
-    source: sourceFile
-      ? getParentsInfo(sourceFile)
-      : [],
+    // source: sourceFile
+    //   ? getParentsInfo(sourceFile)
+    //   : [],
     ...getLocation(importDec),
   }
 }

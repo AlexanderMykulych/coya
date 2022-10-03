@@ -1,41 +1,107 @@
-import type { Identifier } from "ts-morph";
-import { CodeInfoType, EntityType, IdentifierEntity, RelationType } from "../../types";
+import { Identifier, Node, SyntaxKind } from "ts-morph";
+import { CodeInfoType, Entity, EntityType, RelationType } from "../../types";
 import { getRelationBeetwenNodes } from "../relations/getRelationBeetwenNodes";
 import { getLocation } from "./getLocation";
-import { getParentId, getParentNode, getParentsInfo } from "./getParentId";
+import { getNodeInfo } from "./getNodeId";
+import { getParentId, getParentEntity, getParentsInfo, getParentNode } from "./getParentId";
 import type { NodeCodeInfos } from "./types";
 
 export function getIdentifierInfo(node: Identifier): NodeCodeInfos {
-  const identifier = getIdentifierEntity(node)
-  const parentEntity = getParentNode(node)
+  const parentNode = getParentNode(node)
+  const declarationNode = getDeclarationNode(node)
+  
+  const isParentNode = parentNode === declarationNode
 
-  // const implementations = node.getImplementations()
-  // const implementationNode = implementations?.at(-1)?.getNode()
-  // if (implementationNode) {
-  //   const parent = implementationNode.getParent()
-  //   parentEntity = parent ? getNodeInfo(parent)[0] : getNodeInfo(implementationNode)[0]
-  // }
-  // const declarations = node.getSymbol()?.getDeclarations()
-  // if (declarations && declarations.length > 0) {
-  //   parentEntity = getNodeInfo(declarations[0])[0]
-  // }
+  if (isParentNode) {
+    return getNodeInfo(parentNode)
+  }
 
-  // parentEntity = getIgnoredNode(node)
+  return getIdentifierEntity(node)
+}
+
+function getIdentifierEntity(node: Identifier): NodeCodeInfos {
+  const implementations = node.getImplementations()
+
+  let codeInfos: Entity[] = []
+  if (implementations.length > 0) {
+    codeInfos = implementations
+      .map(x => x.getNode())
+      .filter(x => x !== node)
+      .flatMap(x => getNodeInfo(x)[0])
+  }
+
+  const parentEntity = getParentEntity(node)
+
+  if (codeInfos.length > 0) {
+
+    // @ts-ignore
+    return [
+      ...codeInfos,
+      parentEntity,
+      ...codeInfos
+        .map(codeInfo => getRelationBeetwenNodes({
+            from: parentEntity,
+            to: codeInfo,
+            type: RelationType.Use,
+          })
+        )
+    ]
+  }
+
+  const declarationNode = node.getSymbol()?.getValueDeclaration() ?? node
+
+  if (!declarationNode.isKind(SyntaxKind.Identifier)) {
+    const declarationEntity = getNodeInfo(declarationNode)[0]
+
+    const relations = codeInfos.map(x =>
+      getRelationBeetwenNodes({
+        to: x,
+        from: declarationEntity,
+        type: RelationType.Use,
+        location: getLocation(declarationNode),
+      })
+    )
+
+    return [
+      declarationEntity,
+      ...codeInfos,
+      ...relations,
+      getRelationBeetwenNodes({
+        from: parentEntity,
+        to: declarationEntity,
+        type: RelationType.Parent,
+        location: getLocation(node),
+      }),
+    ]
+  }
+
+  const location = getLocation(node)
+
+  const identifierEntity: Entity = {
+    type: CodeInfoType.Entity,
+    entityType: EntityType.Identifier,
+    // source: getParentsInfo(node) ?? [],
+    id: `${getParentId(node)}/${node.getText()}`,
+    filePath: node.getSourceFile().getFilePath(),
+    ...location,
+  }
+
+  const relations = codeInfos.map(x =>
+      getRelationBeetwenNodes({
+        to: x,
+        from: identifierEntity,
+        type: RelationType.Use,
+        location,
+      })
+    )
 
   return [
-    identifier,
-    parentEntity,
-    getRelationBeetwenNodes(parentEntity, identifier, RelationType.Parent),
+    identifierEntity,
+    ...codeInfos,
+    ...relations,
   ]
 }
 
-function getIdentifierEntity(node: Identifier): IdentifierEntity {
-  return {
-    type: CodeInfoType.Entity,
-    entityType: EntityType.Identifier,
-    source: getParentsInfo(node) ?? [],
-    id: `${getParentId(node)}/${node.getText()}`,
-    filePath: node.getSourceFile().getFilePath(),
-    ...getLocation(node),
-  }
+function getDeclarationNode(node: Identifier): Node | undefined {
+  return node.getSymbol()?.getValueDeclaration()
 }

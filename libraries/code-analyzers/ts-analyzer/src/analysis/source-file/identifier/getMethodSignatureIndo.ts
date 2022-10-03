@@ -11,7 +11,7 @@ export function getMethodSignatureIndo(method: MethodSignature): FunctionEntity 
     typeString: method.getType().getText(),
     type: CodeInfoType.Entity,
     filePath: sourceFile.getFilePath(),
-    source: getParentsInfo(method) ?? [],
+    // source: getParentsInfo(method) ?? [],
     ...getLocation(method),
   }
 }

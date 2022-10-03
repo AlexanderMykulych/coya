@@ -12,9 +12,9 @@ export function getFunctionDeclarationId(fnDec: FunctionDeclaration): FunctionEn
     filePath: sourceFile.getFilePath(),
     type: CodeInfoType.Entity,
     typeString: fnDec.getType().getText(),
-    source: sourceFile
-      ? getParentsInfo(sourceFile)
-      : [],
+    // source: sourceFile
+    //   ? getParentsInfo(sourceFile)
+    //   : [],
     ...getLocation(fnDec),
   }
 }

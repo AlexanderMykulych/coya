@@ -1,6 +1,7 @@
 import type { SourceFile } from "ts-morph"
 import { CodeInfo, CodeInfoType, RelationType } from "../types"
 import { getNodeInfo } from "./identifier/getNodeId"
+import { getRelationBeetwenNodes } from "./relations/getRelationBeetwenNodes"
 import type { AnalyzerOptions } from "./types"
 
 export function importAnalizer(sourceFile: SourceFile, options?: AnalyzerOptions): CodeInfo[] {
@@ -12,18 +13,16 @@ export function importAnalizer(sourceFile: SourceFile, options?: AnalyzerOptions
     }))
     .flatMap<CodeInfo>(({ entityFrom, entityTo }) =>
       [
-        {
-          from: entityFrom.id,
-          to: entityTo.id,
-          type: CodeInfoType.Relationship,
-          relationType: RelationType.Import,
-          id: `${entityFrom.id}->${entityTo.id}`,
-        },
+        getRelationBeetwenNodes({
+          from: entityFrom,
+          to: entityTo,
+          type: RelationType.Import,
+        }),
         entityFrom,
         entityTo,
       ])
 
-  options?.context?.addCodeInfo?.(result.filter(x => x.type === CodeInfoType.Relationship))
+  options?.context?.addCodeInfo?.(result)
 
   return result
 }

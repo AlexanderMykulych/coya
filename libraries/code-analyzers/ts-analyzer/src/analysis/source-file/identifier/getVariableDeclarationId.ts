@@ -10,9 +10,9 @@ export function getVariableDeclarationId(v: VariableDeclaration): BaseEntity {
     entityType: EntityType.Variable,
     filePath: sourceFile.getFilePath(),
     type: CodeInfoType.Entity,
-    source: sourceFile
-      ? getParentsInfo(sourceFile)
-      : [],
+    // source: sourceFile
+    //   ? getParentsInfo(sourceFile)
+    //   : [],
     ...getLocation(v),
   }
 }

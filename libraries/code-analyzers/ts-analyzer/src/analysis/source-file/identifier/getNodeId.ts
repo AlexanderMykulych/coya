@@ -1,5 +1,6 @@
 import { Node, SyntaxKind } from 'ts-morph'
-import type { Entity } from '../../types'
+import { Entity, RelationType } from '../../types'
+import { getRelationBeetwenNodes } from '../relations/getRelationBeetwenNodes'
 import type { AnalyzerOptions } from '../types'
 import { getArrowFunctionId } from './getArrowFunctionId'
 import { getFunctionDeclarationId } from './getFunctionDeclarationId'
@@ -7,8 +8,10 @@ import { getIdentifierInfo } from './getIdentifierInfo'
 import { getIgnoredNode } from './getIgnoredNode'
 import { getImportDeclarationId } from './getImportDeclarationId'
 import { getImportSpecifierId } from './getImportSpecifierId'
+import { getLocation } from './getLocation'
 import { getMethodDeclarationId } from './getMethodDeclarationId'
 import { getMethodSignatureIndo } from './getMethodSignatureIndo'
+import { getParentEntity } from './getParentId'
 import { getPropertyAssignment } from './getPropertyAssignment'
 import { getSourceFileId } from './getSourceFileId'
 import { getVariableDeclarationId } from './getVariableDeclarationId'
@@ -48,6 +51,7 @@ function _getNodeInfo(node: Node): Entity | NodeCodeInfos {
   if (node.isKind(SyntaxKind.MethodSignature)) {
     return getMethodSignatureIndo(node)
   }
+
   return getIgnoredNode(node)
 }
 
@@ -56,7 +60,22 @@ export function getNodeInfo(node: Node, options?: AnalyzerOptions): NodeCodeInfo
   let result = _getNodeInfo(node)
 
   if (!isNodeCodeInfos(result)) {
-    result = [result]
+    if (node.isKind(SyntaxKind.SourceFile)) {
+      result = [result]
+    } else {
+      const parent = getParentEntity(node)
+      
+      result = [
+        result,
+        parent,
+        getRelationBeetwenNodes({
+          from: parent,
+          to: result,
+          type: RelationType.Parent,
+          location: getLocation(node),
+        }),
+      ]
+    }
   }
 
   options?.context?.addCodeInfo?.(result)

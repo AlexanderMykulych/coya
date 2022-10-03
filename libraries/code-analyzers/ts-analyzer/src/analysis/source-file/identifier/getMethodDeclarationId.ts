@@ -11,7 +11,7 @@ export function getMethodDeclarationId(method: MethodDeclaration): FunctionEntit
     typeString: method.getType().getText(),
     type: CodeInfoType.Entity,
     filePath: sourceFile.getFilePath(),
-    source: getParentsInfo(method) ?? [],
+    // source: getParentsInfo(method) ?? [],
     ...getLocation(method),
   }
 }

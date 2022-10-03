@@ -38,9 +38,9 @@ export default defineConfig((<UserConfigExport & VitestUserConfig>{
     // https://github.com/antfu/unocss
     // see unocss.config.ts for config
     Unocss(),
-    vitestAnalyzerPlugin({
-      basePath: __dirname,
-    }),
+    // vitestAnalyzerPlugin({
+    //   basePath: __dirname,
+    // }),
     Inspect(),
   ],
   build: {

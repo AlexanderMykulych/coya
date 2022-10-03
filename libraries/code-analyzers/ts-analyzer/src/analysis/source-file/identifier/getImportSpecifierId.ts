@@ -10,9 +10,9 @@ export function getImportSpecifierId(node: ImportSpecifier): BaseEntity {
     entityType: EntityType.Variable,
     filePath: moduleSourceFile?.getFilePath() ?? '<unknown>',
     type: CodeInfoType.Entity,
-    source: moduleSourceFile
-      ? getParentsInfo(moduleSourceFile)
-      : [],
+    // source: moduleSourceFile
+    //   ? getParentsInfo(moduleSourceFile)
+    //   : [],
     ...getLocation(node),
   }
 }
