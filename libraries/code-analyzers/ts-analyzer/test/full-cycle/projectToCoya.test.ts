@@ -2,7 +2,7 @@ import path from 'path'
 import { test, expect } from 'vitest'
 import { generateCoyaDiagram } from '../../src/diagramGenerator/generateCoyaDiagram'
 
-test.skip.each([
+test.each([
   {
     projectPath: '/cases/01_simple',
   },
