@@ -1,5 +1,5 @@
 import { Node, SyntaxKind } from 'ts-morph'
-import { Entity, isEntityCodeInfo, isSoursableEntity } from '../../types'
+import { Entity, isEntityCodeInfo } from '../../types'
 import { getNodeInfo } from './getNodeId'
 
 const importantKinds = [
@@ -8,6 +8,7 @@ const importantKinds = [
   SyntaxKind.MethodDeclaration,
   SyntaxKind.PropertyAssignment,
   SyntaxKind.ImportDeclaration,
+  SyntaxKind.ClassDeclaration,
 ] as const
 
 export function getParentId(node: Node): string {
@@ -49,9 +50,7 @@ export function getParentsInfo(node: Node): Entity[] {
   const firstParent = node.getFirstAncestor(x => importantKinds.some(kind => x.isKind(kind)))
   if (firstParent) {
     const firstParentCodeInfo = getNodeInfo(firstParent)[0]
-    // const parents = unwrapSources(firstParentCodeInfo)
     return [
-      // ...parents,
       firstParentCodeInfo,
     ]
   }
@@ -59,15 +58,3 @@ export function getParentsInfo(node: Node): Entity[] {
   return getNodeInfo(node.getSourceFile())
     .filter(isEntityCodeInfo)
 }
-
-// export function unwrapSources(entity: Entity): Entity[] {
-//   return isSoursableEntity(entity) ? [
-//     ...(entity?.source ?? []),
-//     ...(
-//       entity
-//         ?.source
-//         ?.flatMap(x => unwrapSources(x))
-//         ?? []
-//     )
-//   ] : []
-// }

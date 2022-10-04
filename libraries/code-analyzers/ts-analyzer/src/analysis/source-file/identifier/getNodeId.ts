@@ -3,6 +3,7 @@ import { Entity, RelationType } from '../../types'
 import { getRelationBeetwenNodes } from '../relations/getRelationBeetwenNodes'
 import type { AnalyzerOptions } from '../types'
 import { getArrowFunctionId } from './getArrowFunctionId'
+import { getClassDeclarationInfo } from './getClassDeclarationInfo'
 import { getFunctionDeclarationId } from './getFunctionDeclarationId'
 import { getIdentifierInfo } from './getIdentifierInfo'
 import { getIgnoredNode } from './getIgnoredNode'
@@ -63,6 +64,10 @@ const nodeInfoExtractors: NodeExtractor[] = [
     kind: SyntaxKind.MethodSignature,
     fn: getMethodSignatureIndo,
   },
+  {
+    kind: SyntaxKind.ClassDeclaration,
+    fn: getClassDeclarationInfo,
+  },
 ]
 
 function _getNodeInfo(node: Node): Entity | NodeCodeInfos {
@@ -89,7 +94,7 @@ export function getNodeInfo(node: Node, options?: AnalyzerOptions): NodeCodeInfo
       result = [result]
     } else {
       const parent = getParentEntity(node)
-      
+
       result = [
         result,
         getRelationBeetwenNodes({

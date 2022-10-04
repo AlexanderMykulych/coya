@@ -1,7 +1,7 @@
 import { dirname } from "path";
 import type { AnalysisContext } from "../../context/analysisContext";
 import type { FileFsUnit, FolderFsUnit } from "../../fs/types";
-import { CodeInfo, CodeInfoType, EntityType, Relationship, RelationType } from "../../types";
+import { CodeInfoType, EntityType, FSEntity, Relationship, RelationType } from "../../types";
 import { definePlugin } from "../definePlugin";
 
 export default definePlugin({
@@ -18,20 +18,21 @@ export default definePlugin({
       }))
 
     const entities = units
-      .map<CodeInfo>(x => ({
+      .map<FSEntity>(x => ({
         type: CodeInfoType.Entity,
         entityType: x.type === 'file' ? EntityType.File : EntityType.Folder,
         filePath: x.id,
         id: x.id,
-        // source: [],
       }))
 
     const relations = units
       .map<Relationship>(x => ({
+        id: `${dirname(x.id)}->${x.id}`,
+        type: CodeInfoType.Relationship,
         relationType: RelationType.Parent,
         from: dirname(x.id),
         to: x.id,
-        type: CodeInfoType.Relationship,
+        meta_source: 'fs-coya',
       }))
 
     context.addCodeInfos(entities)

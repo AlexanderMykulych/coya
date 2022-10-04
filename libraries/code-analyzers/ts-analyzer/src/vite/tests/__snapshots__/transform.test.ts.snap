@@ -32,12 +32,12 @@ try {
 class A {
   method() {
 try {
-/* \\"/index.ts/method\\" */
+/* \\"/index.ts/A/method\\" */
 
     return 5
   
 } finally {
-  /* \\"/index.ts/method\\" */
+  /* \\"/index.ts/A/method\\" */
 }
 }
 }

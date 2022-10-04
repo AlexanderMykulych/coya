@@ -1,19 +1,28 @@
 import type { ImportDeclaration } from "ts-morph";
-import { BaseEntity, CodeInfoType, EntityType } from "../../types";
+import { BaseEntity, CodeInfoType, EntityType, RelationType } from "../../types";
+import { getRelationBeetwenNodes } from "../relations/getRelationBeetwenNodes";
 import { getLocation } from "./getLocation";
-import { getParentsInfo } from "./getParentId";
+import { getParentEntity, getParentsInfo } from "./getParentId";
+import type { NodeCodeInfos } from "./types";
 
-export function getImportDeclarationId(importDec: ImportDeclaration): BaseEntity {
-  const sourceFile = importDec?.getModuleSpecifierSourceFile();
+export function getImportDeclarationId(importDec: ImportDeclaration): NodeCodeInfos {
   const id = importDec.getModuleSpecifierSourceFile()?.getFilePath()?.toString() ?? importDec.getText()
-  return {
+  const location = getLocation(importDec)
+  const entity: BaseEntity = {
     id,
     entityType: EntityType.ImportDeclaration,
     filePath: importDec.getSourceFile()?.getFilePath() ?? '<unknow>',
     type: CodeInfoType.Entity,
-    // source: sourceFile
-    //   ? getParentsInfo(sourceFile)
-    //   : [],
-    ...getLocation(importDec),
+    ...location,
   }
+  const parentEntity = getParentEntity(importDec)
+  return [
+    entity,
+    getRelationBeetwenNodes({
+      from: parentEntity,
+      to: entity,
+      type: RelationType.Import,
+      location,
+    }),
+]
 }

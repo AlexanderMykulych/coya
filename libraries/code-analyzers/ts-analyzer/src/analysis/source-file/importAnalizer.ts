@@ -1,5 +1,5 @@
 import type { SourceFile } from "ts-morph"
-import { CodeInfo, CodeInfoType, RelationType } from "../types"
+import { CodeInfo, RelationType } from "../types"
 import { getNodeInfo } from "./identifier/getNodeId"
 import { getRelationBeetwenNodes } from "./relations/getRelationBeetwenNodes"
 import type { AnalyzerOptions } from "./types"

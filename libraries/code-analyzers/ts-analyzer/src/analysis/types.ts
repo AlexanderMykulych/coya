@@ -25,15 +25,24 @@ export interface EntityLocation extends Partial<EntityLogLocation>{
   kind: string
 }
 
-export interface BaseEntity<TSource = Entity> extends EntityLocation {
+export interface BaseEntity extends EntityLocation {
   type: CodeInfoType.Entity
   filePath: string
   id: EntityId
   entityType: EntityType
-  // source: TSource[]
 }
-export interface FileEntity extends BaseEntity {
+export interface NonLocationalBaseEntity {
+  type: CodeInfoType.Entity
+  filePath: string
+  id: EntityId
+  entityType: EntityType
+}
+
+export interface FileEntity extends NonLocationalBaseEntity {
   entityType: EntityType.File
+}
+export interface FolderEntity extends NonLocationalBaseEntity {
+  entityType: EntityType.Folder
 }
 
 export interface FunctionEntity extends BaseEntity {
@@ -59,11 +68,14 @@ export interface ActionEntity {
 
 export type Entity =
   | FileEntity
+  | FolderEntity
   | FunctionEntity
   | IdentifierEntity
   | UnknownEntity
   | BaseEntity
   | ActionEntity
+
+export type FSEntity = Extract<Entity, FileEntity | FolderEntity>
 
 export type LocatedType<T> = T extends EntityLocation ? T : never
 export type LocatedEntity = LocatedType<Entity> | LocatedType<Relationship>
@@ -72,13 +84,12 @@ export function isLocatedEntity(codeInfo: CodeInfo): codeInfo is LocatedEntity {
   const entity = codeInfo as any
   return isNotNullOrUndefined(entity.start) && isNotNullOrUndefined(entity.end)
 }
+
 export function isLocatedCodeInfo(codeInfo: CodeInfo): codeInfo is LocatedEntity {
   const entity = codeInfo as any
   return isNotNullOrUndefined(entity.start) && isNotNullOrUndefined(entity.end)
 }
-export function isSoursableEntity(codeInfo: CodeInfo): codeInfo is BaseEntity {
-  return !!(codeInfo as BaseEntity).source
-}
+
 export function isEntityCodeInfo(codeInfo: CodeInfo): codeInfo is Entity {
   return codeInfo.type === CodeInfoType.Entity
 }
@@ -91,6 +102,7 @@ export enum EntityType {
   File = 'file',
   Folder = 'folder',
   Function = 'function',
+  Class = 'class',
   Identifier = 'identifier',
   Variable = 'variable',
   Property = 'property',
