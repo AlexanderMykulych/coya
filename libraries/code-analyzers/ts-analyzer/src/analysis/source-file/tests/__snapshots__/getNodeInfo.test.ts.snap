@@ -20,12 +20,6 @@ exports[`should analyze 1`] = `
     "typeString": "typeof import(\\"/utils\\").sum",
   },
   {
-    "entityType": "file",
-    "filePath": "/utils.ts",
-    "id": "/utils.ts",
-    "type": "entity",
-  },
-  {
     "code": " { return a + b }",
     "columnEnd": 59,
     "columnStart": 1,

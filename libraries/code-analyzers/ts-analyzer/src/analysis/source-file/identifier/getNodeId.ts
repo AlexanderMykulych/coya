@@ -17,39 +17,64 @@ import { getSourceFileId } from './getSourceFileId'
 import { getVariableDeclarationId } from './getVariableDeclarationId'
 import { isNodeCodeInfos, NodeCodeInfos } from './types'
 
+type NodeExtractor = {
+  kind: SyntaxKind
+  fn: (node: any) => Entity | NodeCodeInfos
+}
+
+const nodeInfoExtractors: NodeExtractor[] = [
+  {
+    kind: SyntaxKind.ImportSpecifier,
+    fn: getImportSpecifierId,
+  },
+  {
+    kind: SyntaxKind.FunctionDeclaration,
+    fn: getFunctionDeclarationId,
+  },
+  {
+    kind: SyntaxKind.Identifier,
+    fn: getIdentifierInfo,
+  },
+  {
+    kind: SyntaxKind.VariableDeclaration,
+    fn: getVariableDeclarationId,
+  },
+  {
+    kind: SyntaxKind.ArrowFunction,
+    fn: getArrowFunctionId,
+  },
+  {
+    kind: SyntaxKind.MethodDeclaration,
+    fn: getMethodDeclarationId,
+  },
+  {
+    kind: SyntaxKind.SourceFile,
+    fn: getSourceFileId,
+  },
+  {
+    kind: SyntaxKind.ImportDeclaration,
+    fn: getImportDeclarationId,
+  },
+  {
+    kind: SyntaxKind.PropertyAssignment,
+    fn: getPropertyAssignment,
+  },
+  {
+    kind: SyntaxKind.MethodSignature,
+    fn: getMethodSignatureIndo,
+  },
+]
+
 function _getNodeInfo(node: Node): Entity | NodeCodeInfos {
   if (!node) {
     throw '<unknow node>'
   }
-  if (node.isKind(SyntaxKind.ImportSpecifier)) {
-    return getImportSpecifierId(node)
-  }
-  if (node.isKind(SyntaxKind.FunctionDeclaration)) {
-    return getFunctionDeclarationId(node)
-  }
-  if (node.isKind(SyntaxKind.Identifier)) {
-    return getIdentifierInfo(node)
-  }
-  if (node.isKind(SyntaxKind.VariableDeclaration)) {
-    return getVariableDeclarationId(node)
-  }
-  if (node.isKind(SyntaxKind.ArrowFunction)) {
-    return getArrowFunctionId(node)
-  }
-  if (node.isKind(SyntaxKind.MethodDeclaration)) {
-    return getMethodDeclarationId(node)
-  }
-  if (node.isKind(SyntaxKind.SourceFile)) {
-    return getSourceFileId(node)
-  }
-  if (node.isKind(SyntaxKind.ImportDeclaration)) {
-    return getImportDeclarationId(node)
-  }
-  if (node.isKind(SyntaxKind.PropertyAssignment)) {
-    return getPropertyAssignment(node)
-  }
-  if (node.isKind(SyntaxKind.MethodSignature)) {
-    return getMethodSignatureIndo(node)
+  const extractor = nodeInfoExtractors.find(x => node.isKind(x.kind))
+  if (extractor) {
+    if (!extractor.fn) {
+      throw new Error(`${node.getText()}, ${node.getKindName()} ${JSON.stringify(extractor)}`)
+    }
+    return extractor.fn(node)
   }
 
   return getIgnoredNode(node)
@@ -67,7 +92,6 @@ export function getNodeInfo(node: Node, options?: AnalyzerOptions): NodeCodeInfo
       
       result = [
         result,
-        parent,
         getRelationBeetwenNodes({
           from: parent,
           to: result,
@@ -81,4 +105,8 @@ export function getNodeInfo(node: Node, options?: AnalyzerOptions): NodeCodeInfo
   options?.context?.addCodeInfo?.(result)
 
   return result
+}
+
+export function canAnalyzeNode(node: Node): boolean {
+  return nodeInfoExtractors.some(x => node.isKind(x.kind))
 }

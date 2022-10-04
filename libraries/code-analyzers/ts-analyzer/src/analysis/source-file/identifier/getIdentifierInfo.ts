@@ -3,7 +3,7 @@ import { CodeInfoType, Entity, EntityType, RelationType } from "../../types";
 import { getRelationBeetwenNodes } from "../relations/getRelationBeetwenNodes";
 import { getLocation } from "./getLocation";
 import { getNodeInfo } from "./getNodeId";
-import { getParentId, getParentEntity, getParentsInfo, getParentNode } from "./getParentId";
+import { getParentId, getParentEntity, getParentNode } from "./getParentId";
 import type { NodeCodeInfos } from "./types";
 
 export function getIdentifierInfo(node: Identifier): NodeCodeInfos {
@@ -37,7 +37,6 @@ function getIdentifierEntity(node: Identifier): NodeCodeInfos {
     // @ts-ignore
     return [
       ...codeInfos,
-      parentEntity,
       ...codeInfos
         .map(codeInfo => getRelationBeetwenNodes({
             from: parentEntity,
@@ -53,19 +52,9 @@ function getIdentifierEntity(node: Identifier): NodeCodeInfos {
   if (!declarationNode.isKind(SyntaxKind.Identifier)) {
     const declarationEntity = getNodeInfo(declarationNode)[0]
 
-    const relations = codeInfos.map(x =>
-      getRelationBeetwenNodes({
-        to: x,
-        from: declarationEntity,
-        type: RelationType.Use,
-        location: getLocation(declarationNode),
-      })
-    )
-
     return [
       declarationEntity,
       ...codeInfos,
-      ...relations,
       getRelationBeetwenNodes({
         from: parentEntity,
         to: declarationEntity,
@@ -80,25 +69,13 @@ function getIdentifierEntity(node: Identifier): NodeCodeInfos {
   const identifierEntity: Entity = {
     type: CodeInfoType.Entity,
     entityType: EntityType.Identifier,
-    // source: getParentsInfo(node) ?? [],
     id: `${getParentId(node)}/${node.getText()}`,
     filePath: node.getSourceFile().getFilePath(),
     ...location,
   }
 
-  const relations = codeInfos.map(x =>
-      getRelationBeetwenNodes({
-        to: x,
-        from: identifierEntity,
-        type: RelationType.Use,
-        location,
-      })
-    )
-
   return [
-    identifierEntity,
-    ...codeInfos,
-    ...relations,
+    identifierEntity
   ]
 }
 

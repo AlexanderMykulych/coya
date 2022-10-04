@@ -6,6 +6,9 @@ export function getLocation(node: Node): EntityLocation {
   const sourceFile = node.getSourceFile()
   const start = sourceFile.getLineAndColumnAtPos(node.getStart())
   const end = sourceFile.getLineAndColumnAtPos(node.getEnd())
+  if (node.getKindName() === 'ColonToken') {
+    throw new Error()
+  }
   return {
     start: node.getStart(),
     end: node.getEnd(),
