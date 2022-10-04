@@ -93,7 +93,7 @@ const highlightItem = computed(() =>
 
 const secondFileId = computed(() => {
   const activeRelation = activeEntityRelation.value
-  if (activeRelation && activeFileId.value) {
+  if (activeRelation && activeFileId.value && highlightType.value === 'relation') {
     return activeRelation.fromNode.filePath === activeFileId.value
       ? activeRelation.toNode.filePath
       : activeRelation.fromNode.filePath
@@ -131,7 +131,7 @@ type HighlightItem =
   | LocatedType<Relationship>
   | BaseEntity
   | Partial<TwoItems>
-  
+
 type TwoItems = {
   from: LocatedEntity
   to: LocatedEntity

@@ -4,6 +4,7 @@ const { fileRelations, highlightEntityRelation } = useSourcePanel()
 const listItems = computed(() => fileRelations.value.map(x => ({
   title: x.id,
   value: x.id,
+  subtitle: x.relationType,
 })))
 
 const entityId = ref<string>()
@@ -30,6 +31,7 @@ const entity = computed(() => entityId.value ? fileRelations.value.find(x => x.i
           <v-list-item
             :title="item.title"
             :value="item.value"
+            :subtitle="item.subtitle"
             active-color="primary"
           >
           </v-list-item>

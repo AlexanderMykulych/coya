@@ -10,6 +10,7 @@ const file = asyncComputed(() => rpc.getFileById(props.fileId), "")
 
 <template>
   <div w-full h-full flex="~ col">
+    <span text-left color-gray mb-5 ml-5>{{ fileId }}</span>
     <MonacoSourcePreview
       v-if="!!file"
       :model-value="file"
