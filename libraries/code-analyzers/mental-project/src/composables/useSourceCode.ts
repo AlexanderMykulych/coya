@@ -1,4 +1,4 @@
-import { useNeo4j } from 'coya-ts-analyzer/browser'
+import { Relationship, useNeo4j } from 'coya-ts-analyzer/browser'
 import type { LocatedEntity } from 'coya-ts-analyzer/browser'
 import { isNotNullOrUndefined } from 'coya-util'
 
@@ -32,10 +32,27 @@ export function useSourceCode() {
       ?? []
   }
 
+  const getSourceFileRelations = async (id: string): Promise<FullRelation[]> => {
+    const query = `
+    match (n1)-[r]->(n2)
+    where r.from starts with $id or r.to starts with $id
+    return r,n1,n2`
+
+    const result = await db.read(query, { id })
+    return result
+      ?.records
+        .map<FullRelation>(x => ({
+          ...x.get('r').properties,
+          toNode: x.get('n2').properties,
+          fromNode: x.get('n1').properties,
+        })) ?? []
+  }
+
   return {
     files,
     fsTree,
     getSourceFileEntities,
+    getSourceFileRelations,
   }
 }
 
@@ -68,6 +85,12 @@ type Item = {
   name: string
   children?: Item[]
 }
+
+type FullRelation = Relationship & {
+  toNode: LocatedEntity
+  fromNode: LocatedEntity
+}
+
 function fsObjectToArray(obj: any): Item[] {
   return Object.entries(obj)
     .map(([name, value]) => ({

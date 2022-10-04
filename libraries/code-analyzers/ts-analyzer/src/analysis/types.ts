@@ -78,14 +78,15 @@ export type Entity =
 export type FSEntity = Extract<Entity, FileEntity | FolderEntity>
 
 export type LocatedType<T> = T extends EntityLocation ? T : never
-export type LocatedEntity = LocatedType<Entity> | LocatedType<Relationship>
+export type LocatedEntity = LocatedType<Entity>
+export type LocatedEntityOrRelation = LocatedType<Entity> | LocatedType<Relationship>
 
 export function isLocatedEntity(codeInfo: CodeInfo): codeInfo is LocatedEntity {
   const entity = codeInfo as any
   return isNotNullOrUndefined(entity.start) && isNotNullOrUndefined(entity.end)
 }
 
-export function isLocatedCodeInfo(codeInfo: CodeInfo): codeInfo is LocatedEntity {
+export function isLocatedCodeInfo(codeInfo: CodeInfo): codeInfo is LocatedEntityOrRelation {
   const entity = codeInfo as any
   return isNotNullOrUndefined(entity.start) && isNotNullOrUndefined(entity.end)
 }

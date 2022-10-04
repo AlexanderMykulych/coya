@@ -22,6 +22,9 @@ const setActiveFile = (id: string) => {
       <v-tab value="entities">
         Entities
       </v-tab>
+      <v-tab value="relations">
+        Relations
+      </v-tab>
       <v-tab value="codeinfo">
         Code Info
       </v-tab>
@@ -40,6 +43,9 @@ const setActiveFile = (id: string) => {
       
       <v-window-item value="entities" h="95%" overflow-x-auto>
         <SourceEntities />
+      </v-window-item>
+      <v-window-item value="relations" h="95%" overflow-x-auto>
+        <SourceRelations />
       </v-window-item>
       <v-window-item value="codeinfo" h="95%" overflow-x-auto>
         <SourceCodeInfo />

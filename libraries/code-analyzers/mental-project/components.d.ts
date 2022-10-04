@@ -43,6 +43,7 @@ declare module '@vue/runtime-core' {
     SourceFSExplorer: typeof import('./src/components/Source/SourceFSExplorer.vue')['default']
     SourceLeftPanel: typeof import('./src/components/Source/SourceLeftPanel.vue')['default']
     SourcePreview: typeof import('./src/components/Source/SourcePreview.vue')['default']
+    SourceRelations: typeof import('./src/components/Source/SourceRelations.vue')['default']
     SourceRightPanel: typeof import('./src/components/Source/SourceRightPanel.vue')['default']
     SourceSourcePreview: typeof import('./src/components/Source/SourceSourcePreview.vue')['default']
     Status: typeof import('./src/components/Status.vue')['default']

@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-const props = defineProps<{fileId: string}>()
+import type { EntityLocation } from 'coya-ts-analyzer';
+
+const props = defineProps<{fileId: string, ranges: EntityLocation[]}>()
 const { rpc } = useCliRpc()
-const { highlightItem } = useSourcePanel()
 
 const file = asyncComputed(() => rpc.getFileById(props.fileId), "")
 
-const fileEntities = asyncComputed(() => highlightItem.value ? [highlightItem.value] : [], [])
 </script>
 
 <template>
@@ -14,7 +14,7 @@ const fileEntities = asyncComputed(() => highlightItem.value ? [highlightItem.va
       v-if="!!file"
       :model-value="file"
       :name="fileId"
-      :ranges="fileEntities"
+      :ranges="ranges"
     />
   </div>
 </template>
