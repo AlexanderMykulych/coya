@@ -1,9 +1,9 @@
-import { readFile } from "../../project/getEntryPoint"
-import { CodeInfo, CodeInfoType } from "../../types"
-import type { FileMap, TsJsAnalysisContext } from "./types"
-import type { PackageJson } from 'types-package-json'
-import { onAnalyzePackageJson } from "./plugins/plugins"
+import type { CodeInfo } from "../../types"
+import type { TsJsAnalysisContext } from "./types"
+import { updateSourceMapLocation } from "./plugins/plugins"
 import { progress } from "../../../progress/progress"
+import { normalizeCodeInfoIds } from "./normalizeCodeInfoIds"
+import { analyzePackageJson } from "./analyzePackageJson"
 
 async function _init(context: TsJsAnalysisContext): Promise<void> {
 
@@ -13,44 +13,9 @@ async function _init(context: TsJsAnalysisContext): Promise<void> {
 }
 
 function subscribesOnHooks(context: TsJsAnalysisContext) {
-  const normalizeId = (id: string | undefined) => {
-    if (!id) {
-      return `<empty id>`
-    }
-
-    const files = context.store.get('files', [])
-    const fileMap = files.find(x => id.startsWith(x.resultFile))
-
-    return fileMap ? id.replace(fileMap.resultFile, fileMap.originFile) : id
-  }
-
   context.hooks.onBeforeAdd((codeInfo: CodeInfo) => {
-    if (codeInfo.type === CodeInfoType.Entity) {
-      codeInfo.id = normalizeId(codeInfo.id)
-      codeInfo.filePath = normalizeId(codeInfo.filePath)
-    } else {
-      codeInfo.to = normalizeId(codeInfo.to)
-      codeInfo.from = normalizeId(codeInfo.from)
-    }
-  })
-}
-
-async function analyzePackageJson(context: TsJsAnalysisContext) {
-  const packageFile = context.files.find(x => x.filename === 'package.json')
-  if (packageFile) {
-    const file = await readFile(packageFile.filepath)
-
-    setDependencyInfos(file?.text, context)
-  }
-  setDependencyInfos(undefined, context)
-}
-
-function setDependencyInfos(packageJsonText: string | undefined, context: TsJsAnalysisContext) {
-  const packageJson: PackageJson = packageJsonText ? JSON.parse(packageJsonText) : {}
-
-  onAnalyzePackageJson({
-    context,
-    packageJson,
+    normalizeCodeInfoIds(codeInfo, context.store)
+    updateSourceMapLocation(codeInfo, context.store)
   })
 }
 

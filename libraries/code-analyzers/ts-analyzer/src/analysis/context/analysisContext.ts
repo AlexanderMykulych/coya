@@ -12,8 +12,10 @@ export interface FolderItem {
   folder: FolderFsUnit
 }
 
+export type OnBeforeAddCallback = (codeInfo: CodeInfo) => CodeInfo | void
+
 export interface AnalysisContextHooks {
-  onBeforeAdd(calback: (codeInfo: CodeInfo) => CodeInfo | void): AnalysisContextHooks
+  onBeforeAdd(calback: OnBeforeAddCallback): AnalysisContextHooks
 
   beforeAdd(codeInfo: CodeInfo): CodeInfo
 }
@@ -34,11 +36,11 @@ export interface AnalysisContext<TStore = any> {
   fsUnits: FileOrFolderFsUnit[]
   hooks: AnalysisContextHooks
   store: AnalysisContextStore<Partial<TStore>>
+  readFile: (filePath: string, basePath?: string) => Promise<FileText | null>
 
   getFolders: (predicate: (folderItem: FolderItem) => boolean | Promise<boolean>) => Promise<FolderFsUnit[]>
 
   addCodeInfos: (codeInfos: CodeInfo[]) => Promise<void>
-  readFile(filePath: string): Promise<FileText | null>
 }
 
 export async function createContext(rootDir: string): Promise<AnalysisContext> {
@@ -48,6 +50,8 @@ export async function createContext(rootDir: string): Promise<AnalysisContext> {
 
   const hooks = createHookManager()
 
+  let readyResolve = null
+  const readyTask = new Promise<void>(resolve => readyResolve = resolve)
   return {
     rootDir,
     files: fsUnits.filter((x): x is FileFsUnit => x.type === 'file'),
@@ -67,7 +71,7 @@ export async function createContext(rootDir: string): Promise<AnalysisContext> {
         .filter(x => x.isMatch)
         .map(x => x.folder)
     },
-    addCodeInfos(codeInfos: CodeInfo[]) {
+    async addCodeInfos(codeInfos: CodeInfo[]) {
       codeInfos = codeInfos.map(x => hooks.beforeAdd(x))
 
       codeInfos.forEach(x => {
@@ -76,7 +80,7 @@ export async function createContext(rootDir: string): Promise<AnalysisContext> {
         }
       })
 
-      return Promise.resolve()
+      
     },
     get result() {
       return Object.values(resultCodeInfoIndex)
@@ -138,17 +142,14 @@ export async function createContextForOneFile({ code, fileName }: { code: string
         .filter(x => x.isMatch)
         .map(x => x.folder)
     },
-    addCodeInfos(codeInfos: CodeInfo[]) {
+    async addCodeInfos(codeInfos: CodeInfo[]) {
       codeInfos = codeInfos.map(x => hooks.beforeAdd(x))
-
 
       codeInfos.forEach(x => {
         if (!resultCodeInfoIndex[x.id]) {
           resultCodeInfoIndex[x.id] = x
         }
       })
-
-      return Promise.resolve()
     },
     get result() {
       return Object.values(resultCodeInfoIndex)

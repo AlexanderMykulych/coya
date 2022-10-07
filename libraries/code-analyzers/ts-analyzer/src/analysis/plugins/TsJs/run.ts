@@ -35,6 +35,7 @@ async function _run(context: TsJsAnalysisContext): Promise<void> {
             context.store.addToCollection('files', {
               originFile: `/${relativeOldFile}`,
               resultFile: `/${relativeNewFile}`,
+              sourceMap: processedFile.maps,
             })
           }
 

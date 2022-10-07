@@ -24,7 +24,7 @@ export async function analyzeByContext(context: AnalysisContext): Promise<CodeIn
     .map(({ plugin, context }) => plugin.run(context))
 
   await Promise.all(runTasks)
-
+  
   return context.result
 }
 

@@ -1,5 +1,5 @@
 import vue3Traspiler from "../transpilers/vue3/vue3Traspiler";
-import { FileProcessor } from "../types";
+import type { FileProcessor } from "../types";
 
 export default <FileProcessor>{
   isMatch(file) {
@@ -11,7 +11,7 @@ export default <FileProcessor>{
 
       return {
         file: `${file.file}.ts`,
-        text: code,
+        text: code.code,
       }
     } catch (e) {
       throw new Error(`file: ${file.file}, ${e}`, { cause: e as Error});

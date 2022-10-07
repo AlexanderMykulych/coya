@@ -95,6 +95,10 @@ export function isEntityCodeInfo(codeInfo: CodeInfo): codeInfo is Entity {
   return codeInfo.type === CodeInfoType.Entity
 }
 
+export function isEntityWithFilePath(codeInfo: CodeInfo): codeInfo is (Entity & { filePath: string }) {
+  return codeInfo.type === CodeInfoType.Entity && isNotNullOrUndefined((codeInfo as any).filePath)
+}
+
 export enum ActionEntityType {
   Call = 'call'
 }
@@ -154,6 +158,21 @@ export interface NodeAnalyzeParams extends SourceFileAnalyzeParams {
 export interface FileText {
   file: string
   text: string
+  maps?: RawSourceMap
+}
+
+
+export interface RawSourceMap extends StartOfSourceMap {
+  version: string;
+  sources: string[];
+  names: string[];
+  sourcesContent?: string[];
+  mappings: string;
+}
+
+export interface StartOfSourceMap {
+  file?: string;
+  sourceRoot?: string;
 }
 
 export interface FileProcessor {

@@ -1,3 +1,4 @@
+import { SourceMapConsumer } from "source-map";
 import { Project } from "ts-morph";
 import { expect, test } from "vitest";
 import vue3Traspiler from "../vue3Traspiler";
@@ -23,13 +24,14 @@ test('should transpile vue file to ts with default export and render fn export',
     useInMemoryFileSystem: true,
     skipFileDependencyResolution: true,
   })
-  const sourceFile = project.createSourceFile('component.vue.ts', tsCode)
+  const sourceFile = project.createSourceFile('component.vue.ts', tsCode.code)
 
   const exportDeclarations = sourceFile.getExportedDeclarations()
 
   expect(exportDeclarations).toHaveLength(2)
   expect(exportDeclarations.get('render')).not.empty
   expect(exportDeclarations.get('default')).not.empty
+  expect(tsCode).toMatchSnapshot()
 })
 
 test('should transpile vue code to correct TS code', async () => {
@@ -50,11 +52,27 @@ test('should transpile vue code to correct TS code', async () => {
   export const createElementBlock: any
   `)
   project.createSourceFile('utils.ts', `export const utilFn = (a, b) => {}`)
-  const sourceFile = project.createSourceFile('component.vue.ts', tsCode)
+  const sourceFile = project.createSourceFile('component.vue.ts', tsCode.code)
 
   const diagnostincs = sourceFile.getPreEmitDiagnostics()
 
 
   console.log(diagnostincs.map(x => x.getMessageText()))
   expect(diagnostincs).is.empty
+})
+
+
+test('should generate source-map', async () => {
+  const tsCode = await vue3Traspiler.traspile(vueCode)
+
+  expect(tsCode.sourceMaps).not.empty
+
+  const result = await SourceMapConsumer.with(tsCode.sourceMaps!, null, consumer => {
+    return consumer.originalPositionFor({
+      line: 2,
+      column: 10
+    })
+  })
+
+  expect(result).toMatchSnapshot()
 })

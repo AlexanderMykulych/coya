@@ -8,11 +8,12 @@ export default definePlugin<AnalysisContextStore>({
     context.store.get('isVue3', false) && file.file.endsWith('.vue'),
   
   async processFile({ file }) {
-    const code = await vue3Traspiler.traspile(file.text)
+    const result = await vue3Traspiler.traspile(file.text)
 
     return {
       file: `${file.file}.ts`,
-      text: code,
+      text: result.code,
+      maps: result.sourceMaps,
     }
   },
 
@@ -20,6 +21,6 @@ export default definePlugin<AnalysisContextStore>({
     analyzePackageJson({ packageJson, context }) {
       const vueVersion = packageJson?.dependencies?.['vue']
       context.store.set('isVue3', !vueVersion || vueVersion.startsWith('3.'))
-    }
+    },
   }
 })

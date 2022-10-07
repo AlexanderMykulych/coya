@@ -58,6 +58,7 @@ specifiers:
   '@types/ws': ~8.5.3
   '@typescript-eslint/eslint-plugin': ^5.10.2
   '@typescript-eslint/parser': ^4.29.3
+  '@unocss/preset-typography': ~0.45.26
   '@unocss/reset': ^0.45.15
   '@vitejs/plugin-vue': ^3.1.0
   '@vitest/ui': ~0.18.1
@@ -134,6 +135,7 @@ specifiers:
   sass: 1.53.0
   shiki: ^0.10.1
   size-limit: ^7.0.5
+  source-map: ~0.7.4
   stylis: ^4.0.10
   svg-path-commander: ^0.1.25
   taze: ^0.8.0
@@ -247,6 +249,7 @@ dependencies:
   '@types/ws': 8.5.3
   '@typescript-eslint/eslint-plugin': 5.36.2_5c7b48da451215ce04a4c49e9501888a
   '@typescript-eslint/parser': 4.33.0_eslint@8.23.0+typescript@4.8.3
+  '@unocss/preset-typography': 0.45.26
   '@unocss/reset': 0.45.18
   '@vitejs/plugin-vue': 3.1.0_vite@3.1.0+vue@3.2.39
   '@vitest/ui': 0.18.1
@@ -284,7 +287,7 @@ dependencies:
   find-free-port: 2.0.0
   fs: 0.0.1-security
   glob: 7.2.3
-  gsap: 3.11.2
+  gsap: 3.11.3
   hex-to-rgba: 2.0.1
   https-localhost: 4.7.1
   husky: 7.0.4
@@ -323,6 +326,7 @@ dependencies:
   sass: 1.53.0
   shiki: 0.10.1
   size-limit: 7.0.8
+  source-map: 0.7.4
   stylis: 4.1.1
   svg-path-commander: 0.1.25
   taze: 0.8.0
@@ -9105,8 +9109,8 @@ packages:
     dev: false
     optional: true
 
-  /gsap/3.11.2:
-    resolution: {integrity: sha512-y1NSjM2i2yCjLtoNuoyIhhh9kmYOpFEU9su1EbHuZGN3OWr8M6NIjNHBurSWu/blbHAPQqGm7mUIokSxqTTp2Q==}
+  /gsap/3.11.3:
+    resolution: {integrity: sha512-xc/iIJy+LWiMbRa4IdMtdnnKa/7PXEK6NNzV71gdOYUVeTZN7UWnLU0fB7Hi1iwiz4ZZoYkBZPPYGg+2+zzFHA==}
     dev: false
 
   /gzip-size/6.0.0:
@@ -17984,7 +17988,7 @@ packages:
     dev: false
 
   file:projects/coya-ts-analyzer.tgz_critters@0.0.16:
-    resolution: {integrity: sha512-H9iAV3FpLNsvF+WPJ3xpVgyzndiSRx1BuWzaYjrpLoRlfDwd949rV7umtRdB9p0BGId07ZJqOQ6KaABVYy5LlA==, tarball: file:projects/coya-ts-analyzer.tgz}
+    resolution: {integrity: sha512-E4+2TS3thZxp02jSD51+9Hr8LeckZtIpb/KcSAVg23R0Kn9896whJZjeEAv/+da/rTrj2dW9Og4xyqVAWhCI3A==, tarball: file:projects/coya-ts-analyzer.tgz}
     id: file:projects/coya-ts-analyzer.tgz
     name: '@rush-temp/coya-ts-analyzer'
     version: 0.0.0
@@ -18019,6 +18023,8 @@ packages:
       pnpm: 7.11.0
       prismjs: 1.28.0
       sass: 1.53.0
+      source-map: 0.7.4
+      source-map-js: 1.0.2
       taze: 0.8.0
       ts-morph: 15.1.0
       types-package-json: 2.0.39
@@ -18323,7 +18329,7 @@ packages:
       drauu: 0.1.2
       eslint: 8.23.0
       eslint-plugin-react: 7.31.7_eslint@8.23.0
-      gsap: 3.11.2
+      gsap: 3.11.3
       https-localhost: 4.7.1
       jsdom: 20.0.0
       pinia: 2.0.21_typescript@4.8.3+vue@3.2.39

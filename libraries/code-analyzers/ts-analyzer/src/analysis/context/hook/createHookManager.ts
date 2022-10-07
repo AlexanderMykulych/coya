@@ -1,9 +1,9 @@
-import { CodeInfo } from "../../types";
-import { AnalysisContextHooks } from "../analysisContext";
+import type { CodeInfo } from "../../types";
+import type { AnalysisContextHooks, OnBeforeAddCallback } from "../analysisContext";
 
 
 export function createHookManager(): AnalysisContextHooks {
-  const onBeforeAdd: Parameters<AnalysisContextHooks["onBeforeAdd"]>[0][] = [];
+  const onBeforeAdd: OnBeforeAddCallback[] = [];
 
   return {
     onBeforeAdd(callback) {
@@ -13,7 +13,9 @@ export function createHookManager(): AnalysisContextHooks {
     },
 
     beforeAdd(codeInfo: CodeInfo) {
-      onBeforeAdd.forEach(x => codeInfo = x(codeInfo) ?? codeInfo);
+      for(const callback of onBeforeAdd) {
+        codeInfo = callback(codeInfo) ?? codeInfo
+      }
 
       return codeInfo;
     }

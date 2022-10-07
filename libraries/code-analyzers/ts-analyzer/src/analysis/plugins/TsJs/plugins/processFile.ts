@@ -1,4 +1,4 @@
-import { AnalysisContext } from "../../../context/analysisContext";
+import type { AnalysisContext } from "../../../context/analysisContext";
 import type { FileText } from "../../../types";
 import { plugins } from "./plugins";
 

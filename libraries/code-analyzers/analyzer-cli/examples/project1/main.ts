@@ -1,5 +1,6 @@
 import { dec, sum } from "./utils"
 import { Service } from './Service'
+import cmp from './cmp.vue'
 
 const service = new Service()
 

@@ -35,7 +35,7 @@ export default definePlugin({
         meta_source: 'fs-coya',
       }))
 
-    context.addCodeInfos(entities)
-    context.addCodeInfos(relations)
+    await context.addCodeInfos(entities)
+    await context.addCodeInfos(relations)
   },
 })

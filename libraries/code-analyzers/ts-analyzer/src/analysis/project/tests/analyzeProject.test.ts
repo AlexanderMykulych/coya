@@ -2,7 +2,7 @@ import path from 'path'
 import { expect, test } from 'vitest'
 import { analyze } from '../../analyze'
 
-test('should analyze simple ts project', async () => {
+test.only('should analyze simple ts project', async () => {
   const result = await analyze(path.resolve(__dirname, './cases/project4'))
 
   expect(result).toMatchSnapshot()

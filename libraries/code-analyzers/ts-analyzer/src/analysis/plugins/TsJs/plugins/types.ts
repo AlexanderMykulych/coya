@@ -1,6 +1,6 @@
 import type { PackageJson } from "types-package-json"
 import type { AnalysisContext } from "../../../context/analysisContext"
-import type { FileText } from "../../../types"
+import type { CodeInfo, FileText } from "../../../types"
 
 export interface ContextualType<TStore> {
   context: AnalysisContext<TStore>
@@ -20,5 +20,6 @@ export interface TsJsPlugin<TStore = any> {
 
   on?: {
     analyzePackageJson?: (options: AnalyzePackageJsonOptions<TStore>) => Promise<void> | void
+    beforeCodeInfoAdd?: (codeInfo: CodeInfo, options: AnalyzePackageJsonOptions<TStore>) => Promise<void> | void
   }
 }
