@@ -1,10 +1,12 @@
 import type { SourceFile } from "ts-morph"
+import { trackFn } from "../../progress/track"
+import { TrackType } from "../../progress/trackTypes"
 import { CodeInfo, RelationType } from "../types"
 import { getNodeInfo } from "./identifier/getNodeId"
 import { getRelationBeetwenNodes } from "./relations/getRelationBeetwenNodes"
 import type { AnalyzerOptions } from "./types"
 
-export function importAnalizer(sourceFile: SourceFile, options?: AnalyzerOptions): CodeInfo[] {
+function _importAnalizer(sourceFile: SourceFile, options?: AnalyzerOptions): CodeInfo[] {
   const result = sourceFile
     .getImportDeclarations()
     .map(x => ({
@@ -26,3 +28,14 @@ export function importAnalizer(sourceFile: SourceFile, options?: AnalyzerOptions
 
   return result
 }
+
+export const importAnalizer = trackFn(
+  _importAnalizer,
+  {
+    name: 'importAnalizer',
+    type: TrackType.Analyzer,
+    objectExtractor: () => ({
+      msg: 'import',
+    }),
+  },
+)

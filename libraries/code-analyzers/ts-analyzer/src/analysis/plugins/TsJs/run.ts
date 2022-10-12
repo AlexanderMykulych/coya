@@ -1,6 +1,8 @@
 import { relative } from "path"
 import { Project } from "ts-morph"
 import { progress } from "../../../progress/progress"
+import { trackFn } from "../../../progress/track"
+import { TrackType } from "../../../progress/trackTypes"
 import { analyzeSourceFile } from "../../source-file/analyzeSourceFile"
 import { addSourceFileToProject } from "./addSourceFileToProject"
 import { processFile } from "./plugins/processFile"
@@ -62,4 +64,14 @@ async function _run(context: TsJsAnalysisContext): Promise<void> {
     }))
 }
 
-export const run = progress('ts-js. run', _run)
+// export const run = progress('ts-js. run', _run)
+export const run = trackFn(
+  _run,
+  {
+    name: 'run ts-js',
+    type: TrackType.Analyzer,
+    objectExtractor: () => ({
+      msg: 'TS-JS',
+    }),
+  },
+)

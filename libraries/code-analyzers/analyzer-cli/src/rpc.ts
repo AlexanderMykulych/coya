@@ -79,6 +79,7 @@ export function createRpc(ws: WebSocket, options: CreateRpcOptions) {
     getFileById,
     runAnalyze,
     runTestAnalyze,
+    workingDir: () => workingDir.value,
   }, {
     post: msg => ws.send(msg),
     on: fn => ws.on('message', fn),

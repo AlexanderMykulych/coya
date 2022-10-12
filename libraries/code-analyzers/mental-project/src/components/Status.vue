@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 import { CliConnectionStatus } from 'coya-analyzer-shared-types';
 
-const {status} = useCliRpc()
+const { status, workingDir } = useCliRpc()
 </script>
 
 <template>
   <div>
-    Status:
+    status:
     <span v-if="status.state.value === CliConnectionStatus.Connected" color-green>
       {{status.state.value}}
     </span>
@@ -15,6 +15,8 @@ const {status} = useCliRpc()
     </span>
     <span v-if="status.state.value === CliConnectionStatus.Failed" color-red>
       {{status.state.value}}
-    </span>
+    </span>;
+
+    dir: {{workingDir.state}}
   </div>
 </template>

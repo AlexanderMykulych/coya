@@ -39,5 +39,8 @@ export function useCliRpc() {
         return CliConnectionStatus.Failed
       }
     }, CliConnectionStatus.Connecting),
+    workingDir: useAsyncState(async () => {
+      return await rpc.workingDir()
+    }, ''),
   }
 }

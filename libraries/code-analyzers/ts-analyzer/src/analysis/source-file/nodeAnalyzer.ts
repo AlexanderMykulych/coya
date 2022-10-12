@@ -1,9 +1,11 @@
 import type { Node } from "ts-morph";
+import { trackFn } from "../../progress/track";
+import { TrackType } from "../../progress/trackTypes";
 import { CodeInfo, CodeInfoType, EntityType } from "../types";
 import { canAnalyzeNode, getNodeInfo } from "./identifier/getNodeId";
 import type { AnalyzerOptions } from "./types";
 
-export function nodeAnalyzer(node: Node, options?: AnalyzerOptions): CodeInfo[] {
+function _nodeAnalyzer(node: Node, options?: AnalyzerOptions): CodeInfo[] {
 
   const identifier = node.getDescendants()
     .filter(x => canAnalyzeNode(x))
@@ -22,3 +24,14 @@ export function nodeAnalyzer(node: Node, options?: AnalyzerOptions): CodeInfo[] 
 
   return codeInfos
 }
+
+export const nodeAnalyzer = trackFn(
+  _nodeAnalyzer,
+  {
+    name: 'nodeAnalyzer',
+    type: TrackType.AnalyzeSourceFileNodeAnalyze,
+    objectExtractor: (node) => ({
+      msg: node.getKindName(),
+    }),
+  },
+)

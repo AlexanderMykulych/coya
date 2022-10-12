@@ -5,6 +5,7 @@ export interface CliServerApi {
   getFileById: (id: string) => Promise<string>
   runAnalyze: () => Promise<void>
   runTestAnalyze: (id: string) => Promise<CodeInfo[]>
+  workingDir: () => string
 }
 
 export interface MentalWebApi {

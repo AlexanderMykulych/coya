@@ -1,3 +1,6 @@
+export { addTracker } from './src/progress/track'
+export * from './src/progress/trackTypes'
+
 export { analyzeCode } from './src/analysis/analyzeCode'
 
 export { insertProjectInfoToDb } from './src/diagramGenerator/insertProjectInfoToDb'

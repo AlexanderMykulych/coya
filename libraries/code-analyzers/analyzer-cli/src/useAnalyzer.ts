@@ -2,6 +2,8 @@ import { relative, resolve } from 'path'
 import { Tinypool } from 'tinypool'
 import { ref } from "@vue/reactivity"
 import type { Logger } from 'pino'
+import { createWorkerRpc } from './workerRpc'
+import type { LoggerOptions } from 'vite'
 
 export type RunData = {
   methodName: string
@@ -19,6 +21,7 @@ const pool = new Tinypool({
 })
 
 const workingDir = ref(resolve(__dirname, '../examples/project1'))
+// const workingDir = ref('/Users/alexandermykulych/repo/plich/user-web-test')
 // const workingDir = ref(resolve(process.cwd(), '.'))
 
 type UseAnalyzerOptions = {
@@ -33,35 +36,46 @@ export function useAnalyzer(analyzerOptions: UseAnalyzerOptions) {
       log.info('run verifyConnection')
       return run({
         method: 'verifyConnection',
+        log,
       })
     },
     insertProjectInfoToDb(path?: string) {
       log.info('run insertProjectInfoToDb')
       return run({
         method: 'insertProjectInfoToDb',
-        methodParameter: path ?? workingDir.value,
+        methodParameter: {
+          path: path ?? workingDir.value,
+        },
         voidResult: true,
-      })
-    },
-    runServer() {
-      log.info('run runServer')
-      return run({
-        method: 'runServer',
-        methodParameter: workingDir.value,
-        voidResult: true,
+        log,
       })
     },
   }
 }
 
-export function run({ method, methodParameter, voidResult }: { method: string, methodParameter?: any, voidResult?: boolean }) {
+type RunOptions =  {
+  method: string
+  methodParameter?: any
+  voidResult?: boolean
+  log: Logger
+}
+
+export function run({ method, methodParameter, voidResult, log }: RunOptions) {
+  const { port } = createWorkerRpc({
+    log,
+  })
+
   return pool.run({
     fileName: './worker.ts',
     basePath: currentPath,
     method,
-    methodParameter,
+    methodParameter: {
+      ...methodParameter,
+      port,
+    },
     voidResult,
   }, {
     name: 'run',
+    transferList: [port],
   })
 }

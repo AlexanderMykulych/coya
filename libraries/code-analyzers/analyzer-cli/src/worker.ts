@@ -1,15 +1,20 @@
-import { useNeo4j, insertProjectInfoToDb as analyze } from 'coya-ts-analyzer'
+import { useNeo4j, insertProjectInfoToDb as analyze, addTracker } from 'coya-ts-analyzer'
+import { createMainRpc } from './workerRpc'
 
 const db = useNeo4j()
 export function verifyConnection() {
   return db.verifyConnection()
 }
 
-export function insertProjectInfoToDb(path: string) {
-  return analyze(path)
+export type WorkerInsertContext = {
+  port: MessagePort
+  path: string
 }
 
+export function insertProjectInfoToDb({ path, port }: WorkerInsertContext) {
+  const { rpc } = createMainRpc({ port })
 
-export function runServer() {
+  addTracker(rpc.track)
 
+  return analyze(path)
 }

@@ -1,58 +1,43 @@
 <script lang="ts" setup>
-const { logs, names, getLogsByName } = useLogging()
+const props = defineProps<{ name?: string}>()
 
-const isEmpty = computed(() => !(logs.value?.length > 0))
+const { getLogsByName, logs } = useLogging()
 
-const tab = ref(null)
+const items = computed(() => props.name ? getLogsByName(props.name) : logs.value)
 
-const prepareMessage = (line: Record<string, string>) =>
-  Object.entries(line)
-  .map(([key, val]) => `${key}: ${val}`)
-  .join(', ')
+const el = ref<HTMLElement>()
+const listEl = ref<HTMLElement>()
+
+watchThrottled(
+  items.value,
+  () => {
+    if (el.value && listEl.value) {
+      console.log('scroll', el.value.scrollHeight);
+      
+      el.value.scroll(0, el.value.scrollHeight)
+    }
+  },
+  { throttle: 300 },
+)
 </script>
 
 <template>
-  <div text-left h-full overflow-y-hidden>
-    <div v-if="isEmpty" text-center mt-5>
-      empty logs
-    </div>
-    <template v-else>
-      <v-tabs v-model="tab">
-        <v-tab :value="null">
-          All
-        </v-tab>
-        <v-tab v-for="name in names" :value="name">
-          {{ name }}
-        </v-tab>
-      </v-tabs>
-      <v-window v-model="tab" h="95%" b-1 overflow-y-auto>
-        <v-window-item
-          :value="null"
-          class="h-full"
-        >
-          <v-list>
-            <v-list-item v-for="(item, index) in logs"
-              :subtitle="item.name"
-              :value="index"
-            >
-            {{prepareMessage(item)}}
-            </v-list-item>
-          </v-list>
-        </v-window-item>
-        <v-window-item
-          v-for="name in names"
-          :value="name"
-          class="h-full"
-        >
-          <v-list>
-            <v-list-item v-for="(item, index) in getLogsByName(name)"
-              :value="index"
-            >
-            {{prepareMessage(item)}}
-            </v-list-item>
-          </v-list>
-        </v-window-item>
-      </v-window>
-    </template>
+  <div ref="el" h-full overflow-y-auto>
+    <v-expansion-panels variant="accordion" class="pb-5" ref="listEl">
+      <v-expansion-panel
+        v-for="(item, index) in items"
+        :value="index"
+      >
+        <v-expansion-panel-title h="2em" p="t-0 b-0" text-xs>
+          {{ item.msg }}
+          <template v-if="!!item.data?.stage" #actions>
+            <LogItemStage :modelValue="item.data.stage"/>
+          </template>
+        </v-expansion-panel-title>
+        <v-expansion-panel-text>
+          <LogItem :modelValue="item" />
+        </v-expansion-panel-text>
+      </v-expansion-panel>
+    </v-expansion-panels>
   </div>
 </template>
