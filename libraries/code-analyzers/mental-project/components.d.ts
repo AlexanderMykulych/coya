@@ -7,6 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    ActiveSessionFSTreeMap: typeof import('./src/components/ActiveSession/ActiveSessionFSTreeMap.vue')['default']
     Analyze: typeof import('./src/components/Analyze/Analyze.vue')['default']
     BarQueryResult: typeof import('./src/components/QueryResult/Bar/BarQueryResult.vue')['default']
     BarQueryResultSettings: typeof import('./src/components/QueryResult/Bar/BarQueryResultSettings.vue')['default']
@@ -15,6 +16,7 @@ declare module '@vue/runtime-core' {
     CoyaQueryResult: typeof import('./src/components/QueryResult/CoyaQueryResult.vue')['default']
     EChartQueryResult: typeof import('./src/components/QueryResult/EChartQueryResult.vue')['default']
     Footer: typeof import('./src/components/Footer.vue')['default']
+    FSTreeMap: typeof import('./src/components/ActiveSession/FSTreeMap.vue')['default']
     GlobalDialogs: typeof import('./src/components/GlobalDialogs.vue')['default']
     IFluentDelete24Filled: typeof import('~icons/fluent/delete24-filled')['default']
     'IMaterialSymbols:deleteRounded': typeof import('~icons/material-symbols/delete-rounded')['default']
