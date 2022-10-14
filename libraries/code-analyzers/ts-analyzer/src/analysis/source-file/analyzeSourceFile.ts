@@ -1,11 +1,10 @@
 import type { SourceFile } from 'ts-morph'
-import { progress } from '../../progress/progress'
 import type { CodeInfo } from '../types'
 import { getNodeInfo } from './identifier/getNodeId'
 import { nodeAnalyzer } from './nodeAnalyzer'
 import { importAnalizer } from './importAnalizer'
 import type { AnalyzeSourceOptions } from './types'
-import { trackFn } from '../../progress/track'
+import { trackFn } from '../../progress/trackFn'
 import { TrackType } from '../../progress/trackTypes'
 
 function _analyzeSourceFile(sourceFile: SourceFile, options?: AnalyzeSourceOptions): CodeInfo[] {

@@ -1,12 +1,14 @@
-import { AnalysisContextStore } from "../analysisContext";
+import type { AnalysisContextStore } from "../analysisContext";
 
 
-export function createStore(): AnalysisContextStore {
-  const store: Record<string, any> = {};
+export function createStore(parentStore?: AnalysisContextStore): AnalysisContextStore {
+  const store: Record<string | number | symbol, any> = {
+    ...parentStore?.data,
+  };
 
   return {
-    get<T>(key: string, defValue: T) {
-      return store[key] as unknown as T ?? defValue;
+    get(key, defValue?) {
+      return store[key] as unknown as any ?? defValue;
     },
     set(key, val) {
       store[key] = val;
@@ -17,6 +19,7 @@ export function createStore(): AnalysisContextStore {
       }
 
       store[key].push(value);
-    }
+    },
+    data: store,
   };
 }

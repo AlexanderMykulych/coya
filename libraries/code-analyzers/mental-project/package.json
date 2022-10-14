@@ -13,21 +13,22 @@
   },
   "dependencies": {
     "@vueuse/core": "~9.2.0",
+    "birpc": "~0.2.3",
+    "coya-analyzer-shared-types": "~1.0.0",
     "coya-ts-analyzer": "~0.9.20",
     "coya-util": "~0.9.20",
     "coya-vue-component": "~0.9.20",
+    "echarts": "5.4.0",
+    "language-map": "~1.5.0",
     "monaco-editor": "~0.34.0",
     "neo4j-driver": "~4.4.7",
     "unplugin-icons": "~0.14.9",
+    "vite-plugin-vue-type-imports": "~0.2.2",
     "vite-plugin-vuetify": "~1.0.0-alpha.17",
     "vue-final-modal": "~3.4.4",
     "vue-router": "~4.1.5",
     "vuetify": "3.0.0-beta.10",
-    "vite-plugin-vue-type-imports": "~0.2.2",
-    "echarts": "5.3.3",
-    "birpc": "~0.2.3",
-    "coya-analyzer-shared-types": "~1.0.0",
-    "language-map": "~1.5.0"
+    "vue-echarts": "~6.2.3"
   },
   "devDependencies": {
     "@antfu/eslint-config": "~0.26.3",

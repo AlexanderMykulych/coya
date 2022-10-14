@@ -1,5 +1,5 @@
 import { dirname } from "path";
-import { trackFn } from "../../../progress/track";
+import { trackFn } from "../../../progress/trackFn";
 import { TrackType } from "../../../progress/trackTypes";
 import type { AnalysisContext } from "../../context/analysisContext";
 import type { FileFsUnit, FolderFsUnit } from "../../fs/types";

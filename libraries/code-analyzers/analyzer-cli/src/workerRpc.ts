@@ -4,7 +4,7 @@ import type { Logger } from "pino"
 import type { MessagePort } from 'worker_threads'
 
 export type MainRpc = {
-  track(options: TrackOption): void
+  track(options: TrackOption[]): void
 }
 
 export type WorkerRpc = {
@@ -25,8 +25,8 @@ export function createWorkerRpc({ log: parentLog }: CreateWorkerRpcOptions) {
 
   const rpc = createBirpc<WorkerRpc, MainRpc>(
     {
-      track(options: TrackOption) {
-        log.info({data: options}, `${options.type}. ${options.details?.msg ?? ''}`)
+      track(options: TrackOption[]) {
+        options.map(x => log.info({data: x}, `${x.type}. ${x.details?.msg ?? ''}`))
       },
     },
     {

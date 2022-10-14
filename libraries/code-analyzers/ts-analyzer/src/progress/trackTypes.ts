@@ -2,10 +2,17 @@ export type FuncParameters<TFunc extends Function> = TFunc extends (...args: any
   ? Parameters<TFunc>
   : unknown[]
 
+export type FuncReturnType<TFunc extends Function> = TFunc extends (...args: any[]) => any
+  ? ReturnType<TFunc>
+  : unknown[]
+
 export type TrackFnOption<TFunc extends Function> = {
   name: string
   type: TrackType
+  disableRethrow?: boolean
+  defaultValue?: FuncReturnType<TFunc>
   objectExtractor?: (...args: FuncParameters<TFunc>) => Object
+  errorExtractor?: (...args: FuncParameters<TFunc>) => Object
 }
 
 export enum TrackStage {
@@ -18,7 +25,8 @@ export enum TrackStage {
 export enum TrackType {
   Analyzer = 'Analyzer',
   AnalyzeSourceFile = 'AnalyzeSourceFile',
-  AnalyzeSourceFileNodeAnalyze = "AnalyzeSourceFileNodeAnalyze"
+  AnalyzeSourceFileNodeAnalyze = "AnalyzeSourceFileNodeAnalyze",
+  AnalyzeSourceFileIdentifierAnalyze = "AnalyzeSourceFileIdentifierAnalyze",
 }
 
 export type TrackOption = {
@@ -27,5 +35,6 @@ export type TrackOption = {
   type: TrackType
   level: number
   details?: any
+  errorDetails?: any
 }
-export type Tracker = (options: TrackOption) => void
+export type Tracker = (options: TrackOption[]) => void

@@ -1,9 +1,8 @@
-import { relative, resolve } from 'path'
+import { resolve } from 'path'
 import { Tinypool } from 'tinypool'
 import { ref } from "@vue/reactivity"
 import type { Logger } from 'pino'
 import { createWorkerRpc } from './workerRpc'
-import type { LoggerOptions } from 'vite'
 
 export type RunData = {
   methodName: string
@@ -20,8 +19,8 @@ const pool = new Tinypool({
   filename: workerRunnerPath,
 })
 
-const workingDir = ref(resolve(__dirname, '../examples/project1'))
-// const workingDir = ref('/Users/alexandermykulych/repo/plich/user-web-test')
+// const workingDir = ref(resolve(__dirname, '../examples/project1'))
+const workingDir = ref('/Users/alexandermykulych/repo/plich/user-web-test')
 // const workingDir = ref(resolve(process.cwd(), '.'))
 
 type UseAnalyzerOptions = {

@@ -1,5 +1,5 @@
 import type { Node } from "ts-morph";
-import { trackFn } from "../../progress/track";
+import { trackFn } from "../../progress/trackFn";
 import { TrackType } from "../../progress/trackTypes";
 import { CodeInfo, CodeInfoType, EntityType } from "../types";
 import { canAnalyzeNode, getNodeInfo } from "./identifier/getNodeId";

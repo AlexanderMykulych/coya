@@ -13,5 +13,8 @@ const route = useRoute()
     <v-tab value="diagrams">
       <router-link to="/diagrams">Diagrams</router-link>
     </v-tab>
+    <v-tab value="active-session">
+      <router-link to="/active-session">Active Session</router-link>
+    </v-tab>
   </v-tabs>
 </template>

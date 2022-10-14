@@ -1,6 +1,7 @@
 import { Node, SyntaxKind } from 'ts-morph'
-import { Entity, isEntityCodeInfo } from '../../types'
+import { CodeInfo, Entity, isEntityCodeInfo } from '../../types'
 import { getNodeInfo } from './getNodeId'
+import { isNodeCodeInfos } from './types'
 
 const importantKinds = [
   SyntaxKind.VariableDeclaration,
@@ -21,14 +22,23 @@ export function getParentId(node: Node): string {
     return true
   })
 
-  return [
-    getNodeInfo(node.getSourceFile())[0].id,
-    ...result,
-  ].join('/')
+  const nodeInfo = getNodeInfo(node.getSourceFile())
+  if (isNodeCodeInfos(nodeInfo)) {
+    return [
+      nodeInfo[0].id,
+      ...result,
+    ].join('/')
+  }
+
+  throw 'Not implemented logic here!'
 }
 
 export function getParentEntity(node: Node): Entity {
-  return getNodeInfo(getParentNode(node))[0]
+  const nodeInfo = getNodeInfo(getParentNode(node))
+  if (isNodeCodeInfos(nodeInfo)) {
+    return nodeInfo[0]
+  }
+  throw 'Not implemented logic here!'
 }
 
 export function getParentNode(node: Node): Node {
@@ -49,12 +59,15 @@ export function getParentNode(node: Node): Node {
 export function getParentsInfo(node: Node): Entity[] {
   const firstParent = node.getFirstAncestor(x => importantKinds.some(kind => x.isKind(kind)))
   if (firstParent) {
-    const firstParentCodeInfo = getNodeInfo(firstParent)[0]
-    return [
-      firstParentCodeInfo,
-    ]
+    const firstParentCodeInfo = getNodeInfo(firstParent)
+    if (isNodeCodeInfos(firstParentCodeInfo)) {
+      return [
+        firstParentCodeInfo[0],
+      ]
+    }
   }
 
-  return getNodeInfo(node.getSourceFile())
-    .filter(isEntityCodeInfo)
+  const info = getNodeInfo(node.getSourceFile()) as CodeInfo[]
+
+  return info.filter(isEntityCodeInfo)
 }

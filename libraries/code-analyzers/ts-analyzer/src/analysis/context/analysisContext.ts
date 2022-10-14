@@ -22,11 +22,20 @@ export interface AnalysisContextHooks {
 
 export type ArrayElementType<T> = T extends (infer E)[] ? E : T;
 
-export interface AnalysisContextStore<TStore = any> {
+export type AnalysisConfig = {
+  filesToAnalyze?: string[]
+}
+
+export type BaseStoreData = {
+  _config?: AnalysisConfig
+}
+
+export interface AnalysisContextStore<TStore extends BaseStoreData = BaseStoreData> {
   get<Key extends keyof TStore>(key: Key): TStore[Key] | undefined
   get<Key extends keyof TStore>(key: Key, defValue: NonNullable<TStore[Key]>): NonNullable<TStore[Key]>
   set<Key extends keyof TStore>(key: Key, value: NonNullable<TStore[Key]>): void
   addToCollection<Key extends keyof TStore>(key: Key, value: NonNullable<ArrayElementType<TStore[Key]>>): void
+  data: Record<string | number | symbol, any>
 }
 
 export interface AnalysisContext<TStore = any> {
@@ -35,7 +44,7 @@ export interface AnalysisContext<TStore = any> {
   files: FileFsUnit[]
   fsUnits: FileOrFolderFsUnit[]
   hooks: AnalysisContextHooks
-  store: AnalysisContextStore<Partial<TStore>>
+  store: AnalysisContextStore<Partial<TStore> & BaseStoreData>
   readFile: (filePath: string, basePath?: string) => Promise<FileText | null>
 
   getFolders: (predicate: (folderItem: FolderItem) => boolean | Promise<boolean>) => Promise<FolderFsUnit[]>
@@ -50,8 +59,6 @@ export async function createContext(rootDir: string): Promise<AnalysisContext> {
 
   const hooks = createHookManager()
 
-  let readyResolve = null
-  const readyTask = new Promise<void>(resolve => readyResolve = resolve)
   return {
     rootDir,
     files: fsUnits.filter((x): x is FileFsUnit => x.type === 'file'),

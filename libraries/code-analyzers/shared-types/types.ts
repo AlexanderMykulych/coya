@@ -1,4 +1,4 @@
-import type { CodeInfo } from 'coya-ts-analyzer'
+import type { CodeInfo, FsTree } from 'coya-ts-analyzer'
 
 export interface CliServerApi {
   ping: (msg: string) => string
@@ -6,6 +6,7 @@ export interface CliServerApi {
   runAnalyze: () => Promise<void>
   runTestAnalyze: (id: string) => Promise<CodeInfo[]>
   workingDir: () => string
+  getFSTree: () => Promise<FsTree>
 }
 
 export interface MentalWebApi {

@@ -1,7 +1,6 @@
 import { relative } from "path"
 import { Project } from "ts-morph"
-import { progress } from "../../../progress/progress"
-import { trackFn } from "../../../progress/track"
+import { trackFnAsync } from "../../../progress/trackFn"
 import { TrackType } from "../../../progress/trackTypes"
 import { analyzeSourceFile } from "../../source-file/analyzeSourceFile"
 import { addSourceFileToProject } from "./addSourceFileToProject"
@@ -15,7 +14,7 @@ async function _run(context: TsJsAnalysisContext): Promise<void> {
       allowJs: true,
       rootDir: context.rootDir,
     },
-    skipLoadingLibFiles: false,
+    skipLoadingLibFiles: true,
   })
 
   for(const fileUnit of context.files) {
@@ -47,25 +46,31 @@ async function _run(context: TsJsAnalysisContext): Promise<void> {
     }
   }
 
-  
+  const config = context.store.get('_config', {})
 
   project
     .getSourceFiles()
-    .flatMap(x => analyzeSourceFile(x, {
-      context: {
-        async addCodeInfo(codeInfo) {
-          if (!Array.isArray(codeInfo)) {
-            codeInfo = [codeInfo]
-          }
-
-          await context.addCodeInfos(codeInfo)
+    .flatMap(x => {
+        if (config?.filesToAnalyze && !config.filesToAnalyze.includes(x.getFilePath())) {
+          return []
         }
+        return analyzeSourceFile(x, {
+          context: {
+            async addCodeInfo(codeInfo) {
+              if (!Array.isArray(codeInfo)) {
+                codeInfo = [codeInfo]
+              }
+
+              await context.addCodeInfos(codeInfo)
+            }
+          }
+        })
       }
-    }))
+    )
 }
 
 // export const run = progress('ts-js. run', _run)
-export const run = trackFn(
+export const run = trackFnAsync(
   _run,
   {
     name: 'run ts-js',

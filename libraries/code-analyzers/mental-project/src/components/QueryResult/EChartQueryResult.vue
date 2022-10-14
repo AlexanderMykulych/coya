@@ -1,29 +1,35 @@
 <script lang="ts" setup>
-import { echarts } from './echart'
-import type { EChartsType } from 'echarts';
+import './echart'
+import ECharts from 'vue-echarts'
 
 const props = defineProps<{options: any}>()
 
-const chart = ref<EChartsType | undefined>()
-  
-onMounted(() => {
-  const el = useCurrentElement<HTMLElement>()
-  chart.value = echarts.init(el.value)
+// const chart = ref<EChartsType | undefined>()
 
-  if (props.options) {
-    chart.value.setOption(props.options)
-  }
-})
+// onMounted(() => {
+//   const el = useCurrentElement<HTMLElement>()
+//   chart.value = echarts.init(el.value!, null, { useDirtyRect: false, })
 
-watchDebounced(
-  () => props.options,
-  (val) => { val && chart && chart.value?.setOption(val) },
-  { debounce: 500, deep: true, immediate: true, },
-)
+//   if (props.options) {
+//     chart.value.setOption(props.options)
+//   }
+
+//   chart.value.on('click', function(params) {
+//     // Print name in console
+//     console.log(params.name);
+//   });
+// })
+
+// watchDebounced(
+//   () => props.options,
+//   (val) => { val && chart && chart.value?.setOption(val) },
+//   { debounce: 500, deep: true, immediate: true, },
+// )
+
+// const resetOptions = () => chart.value?.setOption(props.options) 
 
 </script>
 
 <template>
-  <div class="w-full h-full">
-  </div>
+  <ECharts :option="options" />
 </template>

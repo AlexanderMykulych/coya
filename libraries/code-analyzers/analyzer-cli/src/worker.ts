@@ -1,5 +1,6 @@
 import { useNeo4j, insertProjectInfoToDb as analyze, addTracker } from 'coya-ts-analyzer'
 import { createMainRpc } from './workerRpc'
+import type { MessagePort } from 'worker_threads'
 
 const db = useNeo4j()
 export function verifyConnection() {

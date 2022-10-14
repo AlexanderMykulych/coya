@@ -1,4 +1,8 @@
-export { addTracker } from './src/progress/track'
+export * from './src/analysis/fs/types'
+
+export * from './src/analysis/fs/fs'
+
+export { addTracker } from './src/progress/trackers'
 export * from './src/progress/trackTypes'
 
 export { analyzeCode } from './src/analysis/analyzeCode'

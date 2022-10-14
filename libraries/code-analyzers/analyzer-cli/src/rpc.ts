@@ -4,7 +4,7 @@ import type { CliServerApi, MentalWebApi } from 'coya-analyzer-shared-types'
 import { readFile } from 'fs/promises'
 import { useAnalyzer } from './useAnalyzer'
 import { resolve } from 'path'
-import { analyzeCode, CodeInfo, CodeInfoType } from 'coya-ts-analyzer'
+import { analyzeCode, CodeInfo, CodeInfoType, FsTree, getAllFSUnitsTree } from 'coya-ts-analyzer'
 import type { Logger } from 'pino'
 
 type CreateRpcOptions = {
@@ -74,12 +74,17 @@ export function createRpc(ws: WebSocket, options: CreateRpcOptions) {
     }
   }
 
+  const getFSTree = async (): Promise<FsTree> => {
+    return await getAllFSUnitsTree(workingDir.value)
+  }
+
   const rpc = createBirpc<MentalWebApi, CliServerApi>({
     ping,
     getFileById,
     runAnalyze,
     runTestAnalyze,
     workingDir: () => workingDir.value,
+    getFSTree,
   }, {
     post: msg => ws.send(msg),
     on: fn => ws.on('message', fn),

@@ -24,5 +24,5 @@ export function getImportDeclarationId(importDec: ImportDeclaration): NodeCodeIn
       type: RelationType.Import,
       location,
     }),
-]
+  ]
 }

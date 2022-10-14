@@ -1,4 +1,7 @@
 import { Node, SyntaxKind } from 'ts-morph'
+import { trackFn } from '../../../progress/trackFn'
+import { TrackType } from '../../../progress/trackTypes'
+import { isAnalyzeIgnoredPath } from '../../plugins/ignore'
 import { Entity, RelationType } from '../../types'
 import { getRelationBeetwenNodes } from '../relations/getRelationBeetwenNodes'
 import type { AnalyzerOptions } from '../types'
@@ -70,7 +73,7 @@ const nodeInfoExtractors: NodeExtractor[] = [
   },
 ]
 
-function _getNodeInfo(node: Node): Entity | NodeCodeInfos {
+function getNodeInfoPure(node: Node): Entity | NodeCodeInfos {
   if (!node) {
     throw '<unknow node>'
   }
@@ -85,9 +88,9 @@ function _getNodeInfo(node: Node): Entity | NodeCodeInfos {
   return getIgnoredNode(node)
 }
 
+function _getNodeInfo(node: Node, options?: AnalyzerOptions): NodeCodeInfos {
 
-export function getNodeInfo(node: Node, options?: AnalyzerOptions): NodeCodeInfos {
-  let result = _getNodeInfo(node)
+  let result = getNodeInfoPure(node)
 
   if (!isNodeCodeInfos(result)) {
     if (node.isKind(SyntaxKind.SourceFile)) {
@@ -112,6 +115,41 @@ export function getNodeInfo(node: Node, options?: AnalyzerOptions): NodeCodeInfo
   return result
 }
 
+const recursiveStorage = new Map<Node, boolean>()
+function _getNodeInfoRecursiveSafe(node: Node, options?: AnalyzerOptions): NodeCodeInfos | [] {
+  if (recursiveStorage.has(node) || isAnalyzeIgnoredPath(node.getSourceFile().getFilePath())) {
+    return []
+  }
+
+  try {
+    recursiveStorage.set(node, true)
+    return _getNodeInfo(node, options)
+  }
+  finally {
+    recursiveStorage.delete(node)
+  }
+}
+
 export function canAnalyzeNode(node: Node): boolean {
   return nodeInfoExtractors.some(x => node.isKind(x.kind))
 }
+
+export const getNodeInfo = trackFn(
+  _getNodeInfoRecursiveSafe,
+  {
+    name: 'getNodeInfo',
+    type: TrackType.AnalyzeSourceFileNodeAnalyze,
+    disableRethrow: true,
+    defaultValue: [],
+    objectExtractor: (node) => ({
+      msg: node.getKindName(),
+    }),
+    errorExtractor: node => ({
+      filePath: node.getSourceFile().getFilePath(),
+      kind: node.getKindName(),
+      trace: (new Error()).stack,
+      code: node.getText(),
+    }),
+  }
+)
+

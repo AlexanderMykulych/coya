@@ -28,7 +28,7 @@ watchThrottled(
         v-for="(item, index) in items"
         :value="index"
       >
-        <v-expansion-panel-title h="2em" p="t-0 b-0" text-xs>
+        <v-expansion-panel-title h="2em" p="t-0 b-0" text-xs :style="{'margin-left': `${item.data?.level * 5 ?? 0}px`}">
           {{ item.msg }}
           <template v-if="!!item.data?.stage" #actions>
             <LogItemStage :modelValue="item.data.stage"/>

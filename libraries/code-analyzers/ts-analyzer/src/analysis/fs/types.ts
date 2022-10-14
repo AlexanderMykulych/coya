@@ -15,7 +15,15 @@ export interface ErrorFsUnitResult {
   error: Error
 }
 
+export type FsTree = {
+  name: string
+  path: string
+  children: FsTree[]
+  value?: number
+}
+
 export type FileOrFolderFsUnit = FileFsUnit | FolderFsUnit
 export type FsUnit = FileOrFolderFsUnit | ErrorFsUnitResult
 
-export type FsUnitsCallback = (unit: FsUnit) => void
+export type FsUnitsCallback = (unit: FsUnit, parent?: string) => void
+
