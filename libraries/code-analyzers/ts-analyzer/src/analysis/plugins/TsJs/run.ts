@@ -54,6 +54,12 @@ async function _run(context: TsJsAnalysisContext): Promise<void> {
         if (config?.filesToAnalyze && !config.filesToAnalyze.includes(x.getFilePath())) {
           return []
         }
+
+        const originalSourceName = context.store
+          .get('files', [])
+          .find(y => y.resultFile === x.getFilePath())
+          ?.originFile
+
         return analyzeSourceFile(x, {
           context: {
             async addCodeInfo(codeInfo) {
@@ -62,8 +68,9 @@ async function _run(context: TsJsAnalysisContext): Promise<void> {
               }
 
               await context.addCodeInfos(codeInfo)
-            }
-          }
+            },
+            originalSourceName,
+          },
         })
       }
     )

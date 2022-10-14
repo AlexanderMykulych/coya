@@ -86,7 +86,7 @@ export async function getAllFSUnitsTree(basePath: string): Promise<FsTree> {
   const getItem = (path: string) => {
     let item = result[path]
     if (!item) {
-      item = result[path] = { name: getName(path), path, children: [] }
+      item = result[path] = { name: getName(path), path: `/${path}`, children: [] }
     }
     return item
   }

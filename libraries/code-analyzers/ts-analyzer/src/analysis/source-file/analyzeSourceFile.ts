@@ -33,9 +33,11 @@ export const analyzeSourceFile = trackFn(
   {
     name: 'analyzeSourceFile',
     type: TrackType.AnalyzeSourceFile,
-    objectExtractor(sourceFile) {
+    disableRethrow: true,
+    defaultValue: [],
+    objectExtractor(sourceFile, opt) {
       return {
-        filePath: sourceFile.getFilePath(),
+        filePath: opt?.context?.originalSourceName ?? sourceFile.getFilePath(),
         msg: `file: ${sourceFile.getFilePath()}`,
       }
     },

@@ -3,6 +3,7 @@ import { Tinypool } from 'tinypool'
 import { ref } from "@vue/reactivity"
 import type { Logger } from 'pino'
 import { createWorkerRpc } from './workerRpc'
+import type { Tracker, TrackOption } from 'coya-ts-analyzer'
 
 export type RunData = {
   methodName: string
@@ -25,10 +26,11 @@ const workingDir = ref('/Users/alexandermykulych/repo/plich/user-web-test')
 
 type UseAnalyzerOptions = {
   logger: Logger
+  onTrack?: Tracker
 }
 
 export function useAnalyzer(analyzerOptions: UseAnalyzerOptions) {
-  const { logger: log } = analyzerOptions
+  const { logger: log, onTrack } = analyzerOptions
   return {
     workingDir,
     verifyConnection() {
@@ -36,6 +38,7 @@ export function useAnalyzer(analyzerOptions: UseAnalyzerOptions) {
       return run({
         method: 'verifyConnection',
         log,
+        onTrack,
       })
     },
     insertProjectInfoToDb(path?: string) {
@@ -47,6 +50,7 @@ export function useAnalyzer(analyzerOptions: UseAnalyzerOptions) {
         },
         voidResult: true,
         log,
+        onTrack,
       })
     },
   }
@@ -57,11 +61,13 @@ type RunOptions =  {
   methodParameter?: any
   voidResult?: boolean
   log: Logger
+  onTrack: Tracker
 }
 
-export function run({ method, methodParameter, voidResult, log }: RunOptions) {
+export function run({ method, methodParameter, voidResult, log, onTrack }: RunOptions) {
   const { port } = createWorkerRpc({
     log,
+    onTrack,
   })
 
   return pool.run({

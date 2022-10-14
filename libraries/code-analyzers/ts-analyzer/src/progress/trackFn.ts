@@ -10,16 +10,16 @@ export function trackFn<TFunc extends Function>(
   { name, type, objectExtractor, errorExtractor, disableRethrow, defaultValue }: TrackFnOption<TFunc>
 ) {
   return function (...args: FuncParameters<TFunc>): FuncReturnType<TFunc> {
+    // @ts-ignore
+    const self: any = this
+    const details = objectExtractor?.apply(null, args) ?? undefined
+    const errorDetails = level >= warnLevel ? errorExtractor?.apply(null, args) ?? undefined : undefined
     try {
-      // @ts-ignore
-      const self: any = this
-      const details = objectExtractor?.apply(null, args) ?? undefined
-      const errorDetails = level >= warnLevel ? errorExtractor?.apply(null, args) ?? undefined : undefined
       track({
         name,
         stage: !errorDetails ? TrackStage.Start : TrackStage.Error,
         type,
-        level: level,
+        level,
         details,
         errorDetails,
       })
@@ -35,6 +35,8 @@ export function trackFn<TFunc extends Function>(
         stage: TrackStage.Finish,
         type,
         level,
+        details,
+        errorDetails,
       })
       return result
     } catch(error) {
@@ -44,6 +46,7 @@ export function trackFn<TFunc extends Function>(
         stage: TrackStage.Error,
         type,
         level,
+        details,
         errorDetails: {
           error: JSON.stringify(error),
           ...errorDetails,

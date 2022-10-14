@@ -1,4 +1,4 @@
-import type { CodeInfo, FsTree } from 'coya-ts-analyzer'
+import type { CodeInfo, FsTree, TrackOption } from 'coya-ts-analyzer'
 
 export interface CliServerApi {
   ping: (msg: string) => string
@@ -12,6 +12,7 @@ export interface CliServerApi {
 export interface MentalWebApi {
   ping: (msg: string) => string
   log: (line: any) => void
+  onTrack: (items: TrackOption[]) => void
 }
 
 export enum CliConnectionStatus {

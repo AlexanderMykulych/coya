@@ -1,4 +1,6 @@
-const { rpc } = useCliRpc()
+import { TrackType } from "coya-ts-analyzer/browser"
+
+const { rpc, clearTrackOptions, trackOptions } = useCliRpc()
 
 const activeStepName = ref<string>()
 
@@ -10,13 +12,30 @@ const fsTree = useAsyncState(
   }
 )
 
+const trackedFiles = computed(
+  () => trackOptions
+    .value
+    .filter(x => x.type === TrackType.AnalyzeSourceFile && x.details?.filePath)
+    .map(x => ({
+      file: x.details.filePath,
+      stage: x.stage,
+    }))
+)
+
 const sessionSteps = [
   {
     name: 'get fs tree',
     async action() {
       await fsTree.execute()
     },
-  }
+  },
+  {
+    name: 'analyse',
+    async action() {
+      clearTrackOptions()
+      await rpc.runAnalyze()
+    },
+  },
 ]
 
 export function useActiveSession() {
@@ -36,11 +55,11 @@ export function useActiveSession() {
     }
   }
 
-
   return {
     runSession,
     fsTree,
     activeStepName,
+    trackedFiles,
   }
 }
 

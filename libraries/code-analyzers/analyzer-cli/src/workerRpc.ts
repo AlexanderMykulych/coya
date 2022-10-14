@@ -1,5 +1,5 @@
 import { createBirpc } from "birpc"
-import type { TrackOption } from "coya-ts-analyzer"
+import type { Tracker, TrackOption } from "coya-ts-analyzer"
 import type { Logger } from "pino"
 import type { MessagePort } from 'worker_threads'
 
@@ -12,9 +12,10 @@ export type WorkerRpc = {
 }
 export type CreateWorkerRpcOptions = {
   log: Logger
+  onTrack: Tracker
 }
 
-export function createWorkerRpc({ log: parentLog }: CreateWorkerRpcOptions) {
+export function createWorkerRpc({ log: parentLog, onTrack }: CreateWorkerRpcOptions) {
   const channel = new MessageChannel()
 
   const port = channel.port2 as unknown as MessagePort
@@ -27,6 +28,7 @@ export function createWorkerRpc({ log: parentLog }: CreateWorkerRpcOptions) {
     {
       track(options: TrackOption[]) {
         options.map(x => log.info({data: x}, `${x.type}. ${x.details?.msg ?? ''}`))
+        onTrack?.(options)
       },
     },
     {

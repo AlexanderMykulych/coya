@@ -15,4 +15,5 @@ export type AnalyzeSourceOptions = {
 
 export type AnalyzerContext = {
   addCodeInfo(codeInfo: CodeInfo | CodeInfo[]): Promise<void>
+  originalSourceName: string
 }

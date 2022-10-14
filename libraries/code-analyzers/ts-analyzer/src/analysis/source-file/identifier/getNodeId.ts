@@ -139,7 +139,6 @@ export const getNodeInfo = trackFn(
   {
     name: 'getNodeInfo',
     type: TrackType.AnalyzeSourceFileNodeAnalyze,
-    disableRethrow: true,
     defaultValue: [],
     objectExtractor: (node) => ({
       msg: node.getKindName(),

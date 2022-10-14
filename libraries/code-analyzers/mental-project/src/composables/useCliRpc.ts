@@ -1,5 +1,6 @@
 import { BirpcOptions, createBirpc } from "birpc"
 import { CliConnectionStatus, CliServerApi, MentalWebApi } from "coya-analyzer-shared-types"
+import type { TrackOption } from "coya-ts-analyzer"
 import { useLogging } from "./useLogging"
 
 const API_PATH = '/__coya_api__'
@@ -17,13 +18,14 @@ const birpcHandlers: BirpcOptions<CliServerApi> = {
   serialize: v => JSON.stringify(v),
   deserialize: v => JSON.parse(v.data),
 }
-
+const trackOptions = ref<TrackOption[]>([])
 const rpc = createBirpc<CliServerApi, MentalWebApi>(
   {
     ping(msg: string) {
       return `pong from mental web (${msg})`
     },
     log: (line) => log(line),
+    onTrack: (items) => trackOptions.value.push(...items),
   },
   birpcHandlers,
 )
@@ -42,5 +44,7 @@ export function useCliRpc() {
     workingDir: useAsyncState(async () => {
       return await rpc.workingDir()
     }, ''),
+    trackOptions,
+    clearTrackOptions: () => trackOptions.value = [],
   }
 }

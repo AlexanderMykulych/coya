@@ -15,6 +15,7 @@ export function createRpc(ws: WebSocket, options: CreateRpcOptions) {
   const { logger: log } = options
   const { insertProjectInfoToDb, workingDir } = useAnalyzer({
     logger: log,
+    onTrack: (items) => rpc.onTrack(items),
   })
 
   const ping = (msg: string) => {
