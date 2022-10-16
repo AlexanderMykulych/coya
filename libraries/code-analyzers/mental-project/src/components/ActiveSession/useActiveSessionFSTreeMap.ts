@@ -31,7 +31,7 @@ export function useActiveSessionFSTreeMap() {
         <TreemapSeriesOption>{
           name: '/',
           type: 'treemap',
-          leafDepth: 3,
+          leafDepth: 4,
           visibleMin: 100,
           label: {
             show: true,

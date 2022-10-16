@@ -29,13 +29,13 @@ const sessionSteps = [
       await fsTree.execute()
     },
   },
-  {
-    name: 'analyse',
-    async action() {
-      clearTrackOptions()
-      await rpc.runAnalyze()
-    },
-  },
+  // {
+  //   name: 'analyse',
+  //   async action() {
+  //     clearTrackOptions()
+  //     await rpc.runAnalyze()
+  //   },
+  // },
 ]
 
 export function useActiveSession() {
