@@ -6,9 +6,9 @@ export type TrackerItem = {
 }
 
 export const trackers: TrackerItem[] = [
-  {
-    tracker: trackConsole,
-  },
+  // {
+  //   tracker: trackConsole,
+  // },
 ];
 
 export type TrackingFilter = {

@@ -97,6 +97,7 @@ specifiers:
   figlet: ^1.5.2
   find-free-port: ~2.0.0
   fs: ^0.0.1-security
+  fuse.js: 6.6.2
   glob: ^7.1.7
   gsap: latest
   hex-to-rgba: ^2.0.1
@@ -181,7 +182,7 @@ specifiers:
   vue: ^3.2.38
   vue-color-kit: ^1.0.5
   vue-demi: ^0.13.6
-  vue-echarts: ^6.0.2
+  vue-echarts: ~6.2.3
   vue-final-modal: ~3.4.4
   vue-i18n: ^9.2.2
   vue-prism-editor: 2.0.0-alpha.2
@@ -293,6 +294,7 @@ dependencies:
   figlet: 1.5.2
   find-free-port: 2.0.0
   fs: 0.0.1-security
+  fuse.js: 6.6.2
   glob: 7.2.3
   gsap: 3.11.3
   hex-to-rgba: 2.0.1
@@ -8894,6 +8896,11 @@ packages:
 
   /functions-have-names/1.2.3:
     resolution: {integrity: sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==}
+    dev: false
+
+  /fuse.js/6.6.2:
+    resolution: {integrity: sha512-cJaJkxCCxC8qIIcPBF9yGxY0W/tVZS3uEISDxhYIdtk8OL93pe+6Zj7LjCqVV4dzbqcriOZ+kQ/NE4RXZHsIGA==}
+    engines: {node: '>=10'}
     dev: false
 
   /gauge/4.0.4:
@@ -18640,7 +18647,7 @@ packages:
     dev: false
 
   file:projects/mental-project.tgz_95eac16fb9147165e172a076a01398a8:
-    resolution: {integrity: sha512-KUYLVtkmbduGqzeWwbhKdmNHWG8SZIiS6popHETOExUlpWRzd+LOXntL5GO+n6nmzARfSSbAnMo3vpK3LKLOnQ==, tarball: file:projects/mental-project.tgz}
+    resolution: {integrity: sha512-/jd0tPr1vPab7frYpgWPC0p1YXmtv+0kUrshecaIffBjavOKp6AJJE9b+KMla198nII0ydJcmVYLSju6d1nAMw==, tarball: file:projects/mental-project.tgz}
     id: file:projects/mental-project.tgz
     name: '@rush-temp/mental-project'
     version: 0.0.0
@@ -18659,6 +18666,7 @@ packages:
       cypress: 10.7.0
       echarts: 5.4.0
       eslint: 8.23.0
+      fuse.js: 6.6.2
       https-localhost: 4.7.1
       jsdom: 20.0.0
       language-map: 1.5.0

@@ -1,3 +1,5 @@
+export * from './src/analysis/context/analysisContextType'
+
 export * from './src/analysis/fs/types'
 
 export * from './src/analysis/fs/fs'

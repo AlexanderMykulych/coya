@@ -1,4 +1,4 @@
-import type { AnalysisContext } from "../context/analysisContext"
+import { AnalysisContext } from "../context/AnalysisContext.1"
 import type { FolderFsUnit } from "../fs/types"
 
 export interface AnalysisPlugin {

@@ -19,16 +19,17 @@
     "coya-util": "~0.9.20",
     "coya-vue-component": "~0.9.20",
     "echarts": "5.4.0",
+    "fuse.js": "~6.6.2",
     "language-map": "~1.5.0",
     "monaco-editor": "~0.34.0",
     "neo4j-driver": "~4.4.7",
     "unplugin-icons": "~0.14.9",
     "vite-plugin-vue-type-imports": "~0.2.2",
     "vite-plugin-vuetify": "~1.0.0-alpha.17",
+    "vue-echarts": "~6.2.3",
     "vue-final-modal": "~3.4.4",
     "vue-router": "~4.1.5",
-    "vuetify": "3.0.0-beta.10",
-    "vue-echarts": "~6.2.3"
+    "vuetify": "3.0.0-beta.10"
   },
   "devDependencies": {
     "@antfu/eslint-config": "~0.26.3",

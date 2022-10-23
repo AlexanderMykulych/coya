@@ -5,9 +5,9 @@ import { loggerTransport } from './loggerTransport'
 export const cliLogger = pino({
   name: 'cli',
 }, pino.multistream([
-  {
-    stream: pretty(),
-  },
+  // {
+  //   stream: pretty(),
+  // },
   {
     stream: loggerTransport(),
   },

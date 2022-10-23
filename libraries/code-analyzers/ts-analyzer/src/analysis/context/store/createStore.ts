@@ -1,9 +1,9 @@
-import type { AnalysisContextStore } from "../analysisContext";
+import type { AnalysisContextStore } from "../analysisContextType";
 
 
-export function createStore(parentStore?: AnalysisContextStore): AnalysisContextStore {
+export function createStore(initData?: Record<string, any>): AnalysisContextStore {
   const store: Record<string | number | symbol, any> = {
-    ...parentStore?.data,
+    ...initData,
   };
 
   return {

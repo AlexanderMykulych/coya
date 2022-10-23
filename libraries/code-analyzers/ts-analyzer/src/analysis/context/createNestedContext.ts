@@ -1,6 +1,6 @@
 import { createStore } from "./store/createStore";
 import type { FolderFsUnit } from "../fs/types";
-import type { AnalysisContext } from "./analysisContext";
+import type { AnalysisContext } from "./analysisContextType";
 
 export function createNestedContext(path: FolderFsUnit, context: AnalysisContext): AnalysisContext {
   return {
@@ -17,7 +17,7 @@ export function createNestedContext(path: FolderFsUnit, context: AnalysisContext
     },
     fsUnits: context.fsUnits.filter(x => x.filepath.startsWith(path.filepath)),
     hooks: context.hooks,
-    store: createStore(context.store),
+    store: createStore(context.store.data),
     readFile: context.readFile,
   };
 }

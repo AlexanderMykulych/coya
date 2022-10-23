@@ -1,4 +1,4 @@
-import type { AnalysisContext } from "../../context/analysisContext"
+import type { AnalysisContext, BaseStoreData } from "../../context/analysisContextType"
 import type { RawSourceMap } from "../../types"
 
 export type FileMap = {
@@ -7,7 +7,7 @@ export type FileMap = {
   sourceMap?: RawSourceMap
 }
 
-export type ContextStore = {
+export type ContextStore = BaseStoreData & {
   vueVersion: 2 | 3
   files: FileMap[]
 }

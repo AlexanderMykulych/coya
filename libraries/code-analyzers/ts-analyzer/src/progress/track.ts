@@ -23,7 +23,7 @@ const _flushBuffer = () => {
   buffer = []
 }
 
-const flushBuffer = throttle(_flushBuffer, 500)
+const flushBuffer = throttle(_flushBuffer, 2000)
 
 
 function filterItems(items: TrackOption[], filter?: Partial<TrackingFilter>): TrackOption[] {

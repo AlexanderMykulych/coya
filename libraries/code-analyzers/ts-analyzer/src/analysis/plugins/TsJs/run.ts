@@ -5,6 +5,7 @@ import { TrackType } from "../../../progress/trackTypes"
 import { analyzeSourceFile } from "../../source-file/analyzeSourceFile"
 import { addSourceFileToProject } from "./addSourceFileToProject"
 import { processFile } from "./plugins/processFile"
+import mm from 'micromatch'
 import type { TsJsAnalysisContext } from "./types"
 
 async function _run(context: TsJsAnalysisContext): Promise<void> {
@@ -18,11 +19,13 @@ async function _run(context: TsJsAnalysisContext): Promise<void> {
   })
 
   for(const fileUnit of context.files) {
-    if (project.getSourceFile(relative(context.rootDir, fileUnit.filepath))) {
+    const path = relative(context.rootDir, fileUnit.filepath)
+    if (!!project.getSourceFile(sf => sf.getFilePath() === path)) {
       continue
     }
 
     if (fileUnit.filepath.endsWith('.ts') || fileUnit.filepath.endsWith('.vue')) {
+      
       const file = await context.readFile(fileUnit.filepath)
       if (file) {
         const processedFile = await processFile(file, context)
@@ -50,30 +53,31 @@ async function _run(context: TsJsAnalysisContext): Promise<void> {
 
   project
     .getSourceFiles()
+    .sort((s1, s2) => s1.getFilePath() > s2.getFilePath() ? -1 : 1)
     .flatMap(x => {
-        if (config?.filesToAnalyze && !config.filesToAnalyze.includes(x.getFilePath())) {
-          return []
-        }
-
-        const originalSourceName = context.store
-          .get('files', [])
-          .find(y => y.resultFile === x.getFilePath())
-          ?.originFile
-
-        return analyzeSourceFile(x, {
-          context: {
-            async addCodeInfo(codeInfo) {
-              if (!Array.isArray(codeInfo)) {
-                codeInfo = [codeInfo]
-              }
-
-              await context.addCodeInfos(codeInfo)
-            },
-            originalSourceName,
-          },
-        })
+      const sourceFilePath = x.getFilePath()
+      if (config?.filesToAnalyze && !mm.isMatch(sourceFilePath, config.filesToAnalyze)) {
+        return []
       }
-    )
+
+      const originalSourceName = context.store
+        .get('files', [])
+        .find(y => y.resultFile === sourceFilePath)
+        ?.originFile
+
+      return analyzeSourceFile(x, {
+        context: {
+          async addCodeInfo(codeInfo) {
+            if (!Array.isArray(codeInfo)) {
+              codeInfo = [codeInfo]
+            }
+
+            await context.addCodeInfos(codeInfo)
+          },
+          originalSourceName,
+        },
+      })
+    })
 }
 
 // export const run = progress('ts-js. run', _run)

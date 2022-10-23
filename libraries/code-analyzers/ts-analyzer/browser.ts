@@ -7,3 +7,5 @@ export * from './src/analysis/types'
 export * from './src/progress/trackTypes'
 
 export * from './src/analysis/fs/types'
+
+export * from './src/analysis/context/analysisContextType'

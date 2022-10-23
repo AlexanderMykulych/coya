@@ -70,6 +70,7 @@ async function _getAllFSUnitsFlat(basePath: string, withErrors?: true): Promise<
     ? results
     : results
       .filter((x): x is FileOrFolderFsUnit => x.type === 'file' || x.type === 'folder')
+      .sort((a, b) => a.filepath > b.filepath ? 1 : -1)
 }
 
 export async function getAllFSUnitsTree(basePath: string): Promise<FsTree> {

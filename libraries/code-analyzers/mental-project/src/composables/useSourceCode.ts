@@ -1,6 +1,7 @@
 import { Relationship, useNeo4j } from 'coya-ts-analyzer/browser'
 import type { LocatedEntity } from 'coya-ts-analyzer/browser'
 import { isNotNullOrUndefined } from 'coya-util'
+import Fuse from 'fuse.js'
 
 export function useSourceCode() {
   const db = useNeo4j()
@@ -12,6 +13,12 @@ export function useSourceCode() {
     immediate: true,
     resetOnExecute: true,
   },)
+
+  const fuzzyFiles = computed(() =>
+    files.isReady && files.state.value
+      ? new Fuse(files.state.value, { keys: ['id'] })
+      : null
+  )
 
   const fsTree = computed(() => {
     if (files.isReady && files.state.value) {
@@ -50,6 +57,7 @@ export function useSourceCode() {
 
   return {
     files,
+    fuzzyFiles,
     fsTree,
     getSourceFileEntities,
     getSourceFileRelations,

@@ -1,7 +1,7 @@
 import { dirname } from "path";
 import { trackFn } from "../../../progress/trackFn";
 import { TrackType } from "../../../progress/trackTypes";
-import type { AnalysisContext } from "../../context/analysisContext";
+import { AnalysisContext } from "../../context/AnalysisContext.1";
 import type { FileFsUnit, FolderFsUnit } from "../../fs/types";
 import { CodeInfoType, EntityType, FSEntity, Relationship, RelationType } from "../../types";
 

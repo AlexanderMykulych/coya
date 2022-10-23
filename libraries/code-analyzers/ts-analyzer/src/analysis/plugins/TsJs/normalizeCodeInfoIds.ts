@@ -1,6 +1,6 @@
 import { CodeInfo, CodeInfoType, isEntityWithFilePath } from "../../types";
 import type { ContextStore } from "./types";
-import type { AnalysisContextStore } from "../../context/analysisContext";
+import type { AnalysisContextStore } from "../../context/analysisContextType";
 
 export function normalizeCodeInfoIds(codeInfo: CodeInfo, store: AnalysisContextStore<Partial<ContextStore>>) {
   const normalizeId = (id: string | undefined) => {

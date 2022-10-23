@@ -3,7 +3,8 @@ import { Tinypool } from 'tinypool'
 import { ref } from "@vue/reactivity"
 import type { Logger } from 'pino'
 import { createWorkerRpc } from './workerRpc'
-import type { Tracker, TrackOption } from 'coya-ts-analyzer'
+import type { Tracker } from 'coya-ts-analyzer'
+import type { WorkerInsertContext } from './worker'
 
 export type RunData = {
   methodName: string
@@ -21,6 +22,7 @@ const pool = new Tinypool({
 })
 
 // const workingDir = ref(resolve(__dirname, '../examples/project1'))
+// const workingDir = ref(resolve(__dirname, '../../ts-analyzer'))
 const workingDir = ref('/Users/alexandermykulych/repo/plich/user-web-test')
 // const workingDir = ref(resolve(process.cwd(), '.'))
 
@@ -45,8 +47,11 @@ export function useAnalyzer(analyzerOptions: UseAnalyzerOptions) {
       log.info('run insertProjectInfoToDb')
       return run({
         method: 'insertProjectInfoToDb',
-        methodParameter: {
+        methodParameter: <WorkerInsertContext>{
           path: path ?? workingDir.value,
+          config: {
+            // filesToAnalyze: ['/src/**'],
+          },
         },
         voidResult: true,
         log,

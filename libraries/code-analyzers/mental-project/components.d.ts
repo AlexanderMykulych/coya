@@ -8,6 +8,7 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     ActiveSessionFSTreeMap: typeof import('./src/components/ActiveSession/ActiveSessionFSTreeMap.vue')['default']
+    ActiveSessionSelectedElement: typeof import('./src/components/ActiveSession/ActiveSessionSelectedElement.vue')['default']
     Analyze: typeof import('./src/components/Analyze/Analyze.vue')['default']
     BarQueryResult: typeof import('./src/components/QueryResult/Bar/BarQueryResult.vue')['default']
     BarQueryResultSettings: typeof import('./src/components/QueryResult/Bar/BarQueryResultSettings.vue')['default']
@@ -19,6 +20,8 @@ declare module '@vue/runtime-core' {
     FSTreeMap: typeof import('./src/components/ActiveSession/FSTreeMap.vue')['default']
     GlobalDialogs: typeof import('./src/components/GlobalDialogs.vue')['default']
     IFluentDelete24Filled: typeof import('~icons/fluent/delete24-filled')['default']
+    'IIon:closeSharp': typeof import('~icons/ion/close-sharp')['default']
+    'IMaterialSymbols:close': typeof import('~icons/material-symbols/close')['default']
     'IMaterialSymbols:deleteRounded': typeof import('~icons/material-symbols/delete-rounded')['default']
     IMaterialSymbolsDeleteRounded: typeof import('~icons/material-symbols/delete-rounded')['default']
     IndicatorIntervals: typeof import('./src/components/QueryResult/Indicator/Settings/IndicatorIntervals.vue')['default']

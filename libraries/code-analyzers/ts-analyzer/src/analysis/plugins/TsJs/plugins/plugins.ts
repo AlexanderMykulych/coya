@@ -1,13 +1,13 @@
 import { isNotNullOrUndefined } from "coya-util";
 import { SourceMapConsumer } from "source-map-js";
-import type { AnalysisContextStore } from "../../../context/analysisContext";
+import type { AnalysisContextStore } from "../../../context/analysisContextType";
 import { CodeInfo, isEntityWithFilePath, isLocatedEntity } from "../../../types";
 import type { ContextStore } from "../types";
-import type { AnalyzePackageJsonOptions } from "./types";
+import type { AnalyzePackageJsonOptions, TsJsPlugin } from "./types";
 import vue2Plugin from "./vue2/vue2Plugin";
 import vue3Plugin from "./vue3/vue3Plugin";
 
-export const plugins = [
+export const plugins: TsJsPlugin[] = [
   vue3Plugin,
   vue2Plugin,
 ]

@@ -1,4 +1,4 @@
-import { useNeo4j, insertProjectInfoToDb as analyze, addTracker, TrackType } from 'coya-ts-analyzer'
+import { useNeo4j, insertProjectInfoToDb as analyze, addTracker, TrackType, AnalysisConfig } from 'coya-ts-analyzer'
 import { createMainRpc } from './workerRpc'
 import type { MessagePort } from 'worker_threads'
 
@@ -8,11 +8,12 @@ export function verifyConnection() {
 }
 
 export type WorkerInsertContext = {
-  port: MessagePort
+  port?: MessagePort
   path: string
+  config?: AnalysisConfig
 }
 
-export function insertProjectInfoToDb({ path, port }: WorkerInsertContext) {
+export function insertProjectInfoToDb({ path, port, config }: WorkerInsertContext) {
   const { rpc } = createMainRpc({ port })
 
   addTracker(rpc.track, {
@@ -21,5 +22,5 @@ export function insertProjectInfoToDb({ path, port }: WorkerInsertContext) {
     },
   })
 
-  return analyze(path)
+  return analyze(path, { config })
 }

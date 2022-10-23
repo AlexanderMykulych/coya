@@ -1,5 +1,5 @@
 import type { PackageJson } from "types-package-json"
-import type { AnalysisContext } from "../../../context/analysisContext"
+import type { AnalysisContext } from "../../../context/analysisContextType"
 import type { CodeInfo, FileText } from "../../../types"
 
 export interface ContextualType<TStore> {
