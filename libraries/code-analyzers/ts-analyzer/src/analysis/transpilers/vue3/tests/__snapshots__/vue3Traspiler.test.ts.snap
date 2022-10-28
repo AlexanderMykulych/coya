@@ -1,14 +1,5 @@
 // Vitest Snapshot v1
 
-exports[`should generate source-map 1`] = `
-{
-  "column": 10,
-  "line": 3,
-  "name": null,
-  "source": "anonymous.vue",
-}
-`;
-
 exports[`should transpile vue file to ts with default export and render fn export 1`] = `
 {
   "code": "import { defineComponent as _defineComponent } from 'vue'
@@ -33,30 +24,6 @@ import { toDisplayString as _toDisplayString, openBlock as _openBlock, createEle
 export function render(_ctx, _cache) {
   return (_openBlock(), _createElementBlock(\\"div\\", null, _toDisplayString(_ctx.count), 1 /* TEXT */))
 }",
-  "sourceMaps": SourceMap {
-    "file": null,
-    "mappings": ";AAEA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACzB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAChC;;;;;AAHwB;AAIxB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;;;;;;;",
-    "names": [],
-    "sources": [
-      "anonymous.vue",
-    ],
-    "sourcesContent": [
-      "
-<script lang=\\"ts\\" setup>
-import { ref } from 'vue'
-import { utilFn } from './utils'
-
-const count = ref(utilFn(1, 2))
-</script>
-
-<template>
-<div>
-  {{ count }}
-</div>
-</template>
-",
-    ],
-    "version": 3,
-  },
+  "sourceMaps": undefined,
 }
 `;

@@ -9,6 +9,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     ActiveSessionFSTreeMap: typeof import('./src/components/ActiveSession/ActiveSessionFSTreeMap.vue')['default']
     ActiveSessionSelectedElement: typeof import('./src/components/ActiveSession/ActiveSessionSelectedElement.vue')['default']
+    ActiveSessionSelectedItemLeftPanel: typeof import('./src/components/ActiveSession/ActiveSessionSelectedItemLeftPanel.vue')['default']
     Analyze: typeof import('./src/components/Analyze/Analyze.vue')['default']
     BarQueryResult: typeof import('./src/components/QueryResult/Bar/BarQueryResult.vue')['default']
     BarQueryResultSettings: typeof import('./src/components/QueryResult/Bar/BarQueryResultSettings.vue')['default']
@@ -22,7 +23,9 @@ declare module '@vue/runtime-core' {
     IFluentDelete24Filled: typeof import('~icons/fluent/delete24-filled')['default']
     'IIon:closeSharp': typeof import('~icons/ion/close-sharp')['default']
     'IMaterialSymbols:close': typeof import('~icons/material-symbols/close')['default']
+    'IMaterialSymbols:closeFullscreen': typeof import('~icons/material-symbols/close-fullscreen')['default']
     'IMaterialSymbols:deleteRounded': typeof import('~icons/material-symbols/delete-rounded')['default']
+    'IMaterialSymbols:openInFull': typeof import('~icons/material-symbols/open-in-full')['default']
     IMaterialSymbolsDeleteRounded: typeof import('~icons/material-symbols/delete-rounded')['default']
     IndicatorIntervals: typeof import('./src/components/QueryResult/Indicator/Settings/IndicatorIntervals.vue')['default']
     IndicatorQueryResult: typeof import('./src/components/QueryResult/Indicator/IndicatorQueryResult.vue')['default']

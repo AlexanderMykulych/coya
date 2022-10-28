@@ -59,7 +59,6 @@ export default defineConfig({
     Unocss(),
     Icons({
       autoInstall: true,
-      
     }),
     vuetify({
       autoImport: true,

@@ -1,4 +1,4 @@
-import { AnalysisContext } from "./context/AnalysisContext.1";
+import type { AnalysisContext } from "./context/analysisContextType";
 import { createNestedContext } from "./context/createNestedContext";
 import type { AnalysisPlugin } from './plugins/types';
 

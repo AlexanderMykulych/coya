@@ -5,6 +5,8 @@ import type { TreemapSeriesOption } from 'echarts';
 const { fsTree, trackedFiles } = useActiveSession()
 export function useActiveSessionFSTreeMap() {
 
+  onMounted(() => fsTree.execute())
+
   const options = computed(() => {
     return fsTree.isReady.value ? {
       title: {

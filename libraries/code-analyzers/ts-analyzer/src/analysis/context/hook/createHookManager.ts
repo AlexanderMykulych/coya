@@ -1,5 +1,5 @@
 import type { CodeInfo } from "../../types";
-import { AnalysisContextHooks, OnBeforeAddCallback } from "../AnalysisContext.1";
+import type { AnalysisContextHooks, OnBeforeAddCallback } from "../analysisContextType";
 
 
 export function createHookManager(): AnalysisContextHooks {

@@ -29,7 +29,8 @@
     "vue-echarts": "~6.2.3",
     "vue-final-modal": "~3.4.4",
     "vue-router": "~4.1.5",
-    "vuetify": "3.0.0-beta.10"
+    "vuetify": "3.0.0-beta.10",
+    "@iconify-json/material-symbols": "~1.1.21"
   },
   "devDependencies": {
     "@antfu/eslint-config": "~0.26.3",

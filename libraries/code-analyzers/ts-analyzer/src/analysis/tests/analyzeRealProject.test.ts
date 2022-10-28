@@ -7,7 +7,7 @@ test('should analyze real file', async () => {
   const context = await createContext(path)
 
   context.store.set('_config', {
-    filesToAnalyze: ['/playwright.config.ts']
+    filesToAnalyze: ['/src/modules/Wizard/shared/components/steps/HeaderBase.ts']
   })
 
   const result = await analyzeByContext(context)

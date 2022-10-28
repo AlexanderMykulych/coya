@@ -4,11 +4,11 @@ import type { TranspilerResult } from '../types'
 export default {
   name: 'vue3-traspiler',
   async traspile(code: string): Promise<TranspilerResult> {
-    const { descriptor } = parse(code, { sourceMap: true })
+    const { descriptor } = parse(code, { sourceMap: false })
 
     const compiled = descriptor.script || descriptor.scriptSetup ? compileScript(descriptor, {
       id: `1`,
-      sourceMap: true,
+      sourceMap: false,
     }) : null
 
     const template = descriptor.template?.content ? compileTemplate({
@@ -16,7 +16,7 @@ export default {
       filename: 'test.vue',
       id: 'test.vue',
       compilerOptions: {
-        sourceMap: true,
+        sourceMap: false,
       }
     }) : null
     

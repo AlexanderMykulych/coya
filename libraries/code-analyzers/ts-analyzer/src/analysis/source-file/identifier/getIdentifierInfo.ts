@@ -29,12 +29,12 @@ function getIdentifierEntity(node: Identifier): NodeCodeInfos {
 
   let codeInfos: Entity[] = []
   if (implementations.length > 0) {
-    codeInfos = implementations
-      .map(x => x.getNode())
-      .filter(x => x !== node)
-      .map(x => getNodeInfo(x))
-      .filter(isNodeCodeInfos)
-      .flatMap(x => x[0])
+    // codeInfos = implementations
+    //   .map(x => x.getNode())
+    //   .filter(x => x !== node)
+    //   .map(x => getNodeInfo(x))
+    //   .filter(isNodeCodeInfos)
+    //   .flatMap(x => x[0])
   }
 
   const parentEntity = getParentEntity(node)

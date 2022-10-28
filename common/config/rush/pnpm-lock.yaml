@@ -97,7 +97,7 @@ specifiers:
   figlet: ^1.5.2
   find-free-port: ~2.0.0
   fs: ^0.0.1-security
-  fuse.js: 6.6.2
+  fuse.js: ~6.6.2
   glob: ^7.1.7
   gsap: latest
   hex-to-rgba: ^2.0.1
@@ -2297,6 +2297,12 @@ packages:
 
   /@iconify-json/ic/1.1.9:
     resolution: {integrity: sha512-yRHx4AnNNf5kpWVnNMaeXGYnLmaR2tkGsjSc//FaI7LhljUaDkiawUvmnYbjh6M61O78EeEoNk8HgYJVqb+y8A==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: false
+
+  /@iconify-json/material-symbols/1.1.21:
+    resolution: {integrity: sha512-mWG7AA/O6MHK4R4uUdUG1+bXmusSfkh+66mOJ387QSMJtQWsH0l+TtlAdK3FhLvXCPnFXQ8yi1J8M2CUTo6VPg==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: false
@@ -18647,13 +18653,14 @@ packages:
     dev: false
 
   file:projects/mental-project.tgz_95eac16fb9147165e172a076a01398a8:
-    resolution: {integrity: sha512-/jd0tPr1vPab7frYpgWPC0p1YXmtv+0kUrshecaIffBjavOKp6AJJE9b+KMla198nII0ydJcmVYLSju6d1nAMw==, tarball: file:projects/mental-project.tgz}
+    resolution: {integrity: sha512-gLs4Hl8lqosaGz8XQpRihrzMo2VmbpMwSuijlfFjeQHDfN10/is5GOusM6lLLQgXzCtCA3Uao214agUUlfHAvg==, tarball: file:projects/mental-project.tgz}
     id: file:projects/mental-project.tgz
     name: '@rush-temp/mental-project'
     version: 0.0.0
     dependencies:
       '@antfu/eslint-config': 0.26.3_eslint@8.23.0+typescript@4.8.3
       '@iconify-json/carbon': 1.1.7
+      '@iconify-json/material-symbols': 1.1.21
       '@intlify/vite-plugin-vue-i18n': 6.0.1_vite@3.1.0+vue-i18n@9.2.2
       '@types/node': 18.7.16
       '@unocss/reset': 0.45.18
