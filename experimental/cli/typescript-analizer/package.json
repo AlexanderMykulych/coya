@@ -86,7 +86,7 @@
     "@vue/test-utils": "2.0.2",
     "@vueuse/core": "~9.2.0",
     "eslint": "^8.23.0",
-    "jsdom": "20.0.0",
+    "jsdom": "16.5.0",
     "pnpm": "^7.11.0",
     "taze": "^0.8.0",
     "typescript": "^4.8.2",
