@@ -1,3 +1,5 @@
+import type { Node } from 'coya-connectors-shared'
+
 export enum LinkTypeName {
   Subtask = 'Subtask',
   Duplicate = 'Duplicate',
@@ -14,6 +16,10 @@ export type IssueLink = {
   }[]
 }
 
+export type IssueTag = {
+  name: string
+}
+
 export type Issue = {
   id: string
   idReadable: string
@@ -24,8 +30,9 @@ export type Issue = {
   }
 }
 
-export type IssueWithLinks = Issue & {
+export type LoadedIssue = Issue & {
   links: IssueLink[]
+  tags: IssueTag[]
 }
 
 export type IssueRelation = {
@@ -33,6 +40,7 @@ export type IssueRelation = {
   from: string
   toNode: string
   to: string
+  type?: LinkTypeName
 }
 
 export type AgileBoard = {
@@ -52,4 +60,5 @@ export type AgileBoard = {
 export type GetIssuesResponse = {
   issues: Issue[]
   relations: IssueRelation[]
+  nodes: Array<[string, Node[]]>
 }

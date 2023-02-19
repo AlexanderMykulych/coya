@@ -8,8 +8,17 @@ export async function connect({ addNodes, addRelations, config }: ConnectParams<
   http.defaults.baseURL = config.url
   http.defaults.headers.Authorization = `Bearer ${config.token}`
 
-  const { issues, relations } = await getIssues()
+  for await (const query of config.issueQueries) {
+    const { issues, relations, nodes } = await getIssues({
+      query,
+    })
 
-  await addNodes('issue', issues.map(x => flatten(x)))
-  await addRelations(relations)
+    await addNodes('issue', issues.map(x => flatten(x)))
+
+    for await (const [label, values] of nodes) {
+      await addNodes(label, values)
+    }
+
+    await addRelations(relations)
+  }
 }

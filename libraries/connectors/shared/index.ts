@@ -5,6 +5,10 @@ export type Relation = {
   to: string
 }
 
+export type Node<T = Record<string, any>> = {
+  id: string
+} & T
+
 export type ConnectParams<T> = {
   addNodes: (label: string, items: any[]) => Promise<void>
   addRelations: (items: Relation[]) => Promise<void>

@@ -1,17 +1,17 @@
-import a from "neo4j-driver";
-function r() {
-  const s = a.driver("neo4j+s://aa84864b.databases.neo4j.io", a.auth.basic("neo4j", "BHK4W_phDl5-U9TVZ7iFic3Io4pm-CrPYB4cWoAnWhc"));
+import i from "neo4j-driver";
+function u() {
+  const s = i.driver("neo4j+s://aa84864b.databases.neo4j.io", i.auth.basic("neo4j", "BHK4W_phDl5-U9TVZ7iFic3Io4pm-CrPYB4cWoAnWhc"));
   return {
-    async insert(n, e) {
-      const o = s.session(), i = `UNWIND $items AS node CREATE (n:${n}) SET n = node`;
+    async insert(e, o) {
+      const n = s.session(), t = `UNWIND $items AS node CREATE (n:${e}) SET n = node`;
       try {
-        await o.run(i, { items: e });
+        await n.run(t, { items: o });
       } finally {
-        await o.close();
+        await n.close();
       }
     },
-    async insertRelations(n) {
-      const e = s.session(), o = `
+    async insertRelations(e) {
+      const o = s.session(), n = `
       UNWIND $items AS relation
       CALL apoc.merge.node([relation.fromNode], { id: relation.from }) YIELD node as n1
       CALL apoc.merge.node([relation.toNode], { id: relation.to }) YIELD node as n2
@@ -19,9 +19,12 @@ function r() {
       RETURN n1, n2, rel
       `;
       try {
-        await e.run(o, { items: n });
+        const t = c(e, 200);
+        let a = 0;
+        for await (const r of t)
+          await o.run(n, { items: r }), console.log(`chunk ${a++} inserted`);
       } finally {
-        await e.close();
+        await o.close();
       }
     },
     async clearDb() {
@@ -29,6 +32,12 @@ function r() {
     }
   };
 }
+function c(s, e) {
+  const o = [];
+  for (let n = 0; n < s.length; n += e)
+    o.push(s.slice(n, n + e));
+  return o;
+}
 export {
-  r as getNeo4j
+  u as getNeo4j
 };

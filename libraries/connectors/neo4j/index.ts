@@ -25,9 +25,15 @@ export function getNeo4j() {
       CALL apoc.merge.relationship(n1, 'relation', relation, {}, n2) YIELD rel
       RETURN n1, n2, rel
       `
-
       try {
-        await session.run(query, { items })
+        const chunks = chunkArray(items, 200)
+
+        let chunkIndex = 0
+
+        for await (const chunk of chunks) {
+          await session.run(query, { items: chunk })
+          console.log(`chunk ${chunkIndex++} inserted`)
+        }
       }
       finally {
         await session.close()
@@ -39,4 +45,12 @@ export function getNeo4j() {
       await session.run('MATCH (n) DETACH DELETE n')
     },
   }
+}
+
+function chunkArray<T>(array: T[], chunkSize: number) {
+  const result = []
+  for (let i = 0; i < array.length; i += chunkSize) {
+    result.push(array.slice(i, i + chunkSize))
+  }
+  return result
 }

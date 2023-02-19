@@ -8,6 +8,9 @@ const connectors: ConnectorSetting[] = [
     config: {
       url: 'https://socialtech.myjetbrains.com/api/',
       token: 'perm:YWxla3NhbmRyLm15a3VseWNo.NjEtMzY=.3YAXZtLSVD7SLVpr9C4MfcIQXDkjFM',
+      issueQueries: [
+        'tag:BigTeam and tag:frontend and Sprint:{Sprint 3_2023}&$top=200',
+      ],
     },
   },
 ]
