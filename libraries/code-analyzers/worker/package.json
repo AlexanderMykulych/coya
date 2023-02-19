@@ -23,7 +23,7 @@
     "birpc": "~0.2.3"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "~0.26.3",
+    "@antfu/eslint-config": "~0.35.2",
     "@iconify-json/carbon": "^1.1.7",
     "@types/node": "^18.7.15",
     "@unocss/reset": "^0.45.15",
@@ -42,7 +42,9 @@
     "vitest": "^0.23.1",
     "vue-tsc": "^0.40.8",
     "vue": "^3.2.38",
-    "vue-termui": "*"
+    "vue-termui": "*",
+    "neo4j-driver": "~5.5.0",
+    "ws": "~8.12.0"
   },
   "eslintConfig": {
     "extends": "@antfu"

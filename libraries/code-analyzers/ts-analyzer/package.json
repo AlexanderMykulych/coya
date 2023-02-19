@@ -28,7 +28,7 @@
     "coya-core": "~0.9.20",
     "coya-util": "~0.9.20",
     "find-free-port": "~2.0.0",
-    "neo4j-driver": "~4.4.7",
+    "neo4j-driver": "~5.5.0",
     "playwright": "~1.25.0",
     "prismjs": "1.28.0",
     "sass": "1.53.0",
@@ -50,7 +50,7 @@
     "@types/micromatch": "~4.0.2"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "~0.26.3",
+    "@antfu/eslint-config": "~0.35.2",
     "@iconify-json/carbon": "^1.1.7",
     "@intlify/vite-plugin-vue-i18n": "^6.0.0",
     "@types/node": "^18.7.15",
@@ -82,7 +82,9 @@
     "vue-demi": "^0.13.6",
     "vue-i18n": "^9.2.2",
     "vue-termui": "*",
-    "vue-tsc": "^0.40.8"
+    "vue-tsc": "^0.40.8",
+    "neo4j-driver": "~5.5.0",
+    "ws": "~8.12.0"
   },
   "eslintConfig": {
     "extends": "@antfu"

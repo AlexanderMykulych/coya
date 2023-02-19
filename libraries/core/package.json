@@ -25,7 +25,6 @@
         "build:watch": "tsdx build",
         "test": "vitest",
         "lint": "tsdx lint",
-        "prepare": "tsdx build --transpileOnly",
         "version2": "tsdx --version",
         "size": "size-limit",
         "analyze": "size-limit --why"
@@ -90,12 +89,14 @@
         "vue-i18n": "^9.2.2",
         "vue-router": "~4.1.5",
         "vue-tsc": "^0.40.8",
-        "@antfu/eslint-config": "~0.26.3",
+        "@antfu/eslint-config": "~0.35.2",
         "@unocss/reset": "^0.45.15",
         "jsdom": "20.0.0",
         "taze": "^0.8.0",
         "typescript": "^4.8.2",
-        "vue-termui": "*"
+        "vue-termui": "*",
+        "neo4j-driver": "~5.5.0",
+        "ws": "~8.12.0"
     },
     "devDependencies": {
         "@size-limit/preset-small-lib": "^7.0.5",

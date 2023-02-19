@@ -33,10 +33,10 @@
     "vue-color-kit": "^1.0.5",
     "vue-demi": "^0.13.6",
     "vue-router": "~4.1.5",
-    "ws": "~8.8.1"
+    "ws": "~8.12.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "~0.26.3",
+    "@antfu/eslint-config": "~0.35.2",
     "@iconify/json": "^1.1.406",
     "@types/node": "^18.7.15",
     "@types/prismjs": "^1.16.6",
@@ -76,6 +76,8 @@
     "@unocss/reset": "^0.45.15",
     "jsdom": "20.0.0",
     "taze": "^0.8.0",
-    "vue-termui": "*"
+    "vue-termui": "*",
+    "neo4j-driver": "~5.5.0",
+    "ws": "~8.12.0"
   }
 }

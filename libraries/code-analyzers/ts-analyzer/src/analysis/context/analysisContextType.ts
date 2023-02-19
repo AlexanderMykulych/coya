@@ -19,10 +19,11 @@ export type ArrayElementType<T> = T extends (infer E)[] ? E : T;
 
 export type AnalysisConfig = {
   filesToAnalyze?: string[];
+  doNotSaveResultInMemory?: boolean
 };
 
 export type BaseStoreData = {
-  _config?: AnalysisConfig;
+  _config?: AnalysisConfig
 };
 
 export interface AnalysisContextStore<TStore extends BaseStoreData = BaseStoreData> {

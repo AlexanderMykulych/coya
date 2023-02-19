@@ -74,6 +74,35 @@
           "console": "integratedTerminal",
           "cwd": "${workspaceFolder}/libraries/code-analyzers/ts-analyzer"
           // "cwd": "${workspaceFolder}/libraries/code-analyzers/worker"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Vite: youtrack",
+            "autoAttachChildProcesses": true,
+            "smartStep": true,
+            "console": "integratedTerminal",
+            "program": "${workspaceFolder}/libraries/connectors/youtrack/node_modules/vite-node/vite-node.mjs",
+            "args": [
+                "./index.dev.ts",
+                "--watch",
+            ],
+            "cwd": "${workspaceFolder}/libraries/connectors/youtrack"
+            // "runtimeArgs": ["--preserve-symlinks-main"],
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Vite: connector runner",
+            "autoAttachChildProcesses": true,
+            "smartStep": true,
+            "console": "integratedTerminal",
+            "program": "${workspaceFolder}/libraries/connectors/connectors-runner/node_modules/vite-node/vite-node.mjs",
+            "args": [
+                "./index.ts",
+            ],
+            "cwd": "${workspaceFolder}/libraries/connectors/connectors-runner"
+            // "runtimeArgs": ["--preserve-symlinks-main"],
         }
     ],
     "compounds": []

@@ -4,10 +4,12 @@ import { updateSourceMapLocation } from "./plugins/plugins"
 import { progress } from "../../../progress/progress"
 import { normalizeCodeInfoIds } from "./normalizeCodeInfoIds"
 import { analyzePackageJson } from "./analyzePackageJson"
+import { readTsConfig } from "./readTsConfig"
 
 async function _init(context: TsJsAnalysisContext): Promise<void> {
 
   await analyzePackageJson(context)
+  await readTsConfig(context)
 
   subscribesOnHooks(context)
 }

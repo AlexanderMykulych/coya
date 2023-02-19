@@ -1,11 +1,21 @@
 <script lang="ts" setup>
 const { fileEntities, highlightEntity } = useSourcePanel()
 
-const listItems = computed(() => fileEntities.value.map(x => ({
-  title: prepareTitle(x.id),
-  value: x.id,
-  subtitle: x.entityType,
-})))
+const listItems = computed(() => {
+  const items = fileEntities
+    .value
+    .map(x => ({
+      title: prepareTitle(x.id),
+      value: x.id,
+      subtitle: x.entityType,
+    }))
+
+  if (searchVal.value) {
+    return items.filter(x => x.title.indexOf(searchVal.value) > -1)
+  }
+
+  return items
+})
 
 const prepareTitle = (id: string) => id.substring(id.lastIndexOf('/'))
 
@@ -16,6 +26,9 @@ const select = (id: string, isSelected: boolean) => {
   entityId.value = selectedId
 }
 const entity = computed(() => entityId.value ? fileEntities.value.find(x => x.id === entityId.value) : null)
+
+const search = ref('')
+const searchVal = debouncedRef(search, 300)
 </script>
 
 <template>
@@ -25,6 +38,9 @@ const entity = computed(() => entityId.value ? fileEntities.value.find(x => x.id
     h-full
     flex="~ col"
   >
+    <div>
+      <v-text-field label="search" v-model="search" />
+    </div>
     <div h="50%" overflow-y-auto>
       <v-list
         @click:select="select($event.id, $event.value)"

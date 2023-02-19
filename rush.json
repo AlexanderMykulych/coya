@@ -559,6 +559,26 @@
       "packageName": "coya-analyzer-shared-types",
       "projectFolder": "libraries/code-analyzers/shared-types",
       "reviewCategory": "code-analyzers"
+    },
+    {
+      "packageName": "coya-youtrack-connector",
+      "projectFolder": "libraries/connectors/youtrack",
+      "reviewCategory": "code-connectors"
+    },
+    {
+      "packageName": "coya-neo4j",
+      "projectFolder": "libraries/connectors/neo4j",
+      "reviewCategory": "code-connectors"
+    },
+    {
+      "packageName": "coya-connectors-runner",
+      "projectFolder": "libraries/connectors/connectors-runner",
+      "reviewCategory": "code-connectors"
+    },
+    {
+      "packageName": "coya-connectors-shared",
+      "projectFolder": "libraries/connectors/shared",
+      "reviewCategory": "code-connectors"
     }
   ]
 }

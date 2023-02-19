@@ -86,7 +86,7 @@
         "typescript": "^4.8.2",
         "vite": "^3.1.0",
         "vue": "^3.2.38",
-        "ws": "~8.8.1",
+        "ws": "~8.12.0",
         "@vitejs/plugin-vue": "^3.1.0",
         "@vue/compiler-sfc": "^3.2.31",
         "unplugin-auto-import": "^0.11.2",
@@ -111,10 +111,11 @@
         "vue-i18n": "^9.2.2",
         "vue-router": "~4.1.5",
         "vue-tsc": "^0.40.8",
-        "@antfu/eslint-config": "~0.26.3",
+        "@antfu/eslint-config": "~0.35.2",
         "@unocss/reset": "^0.45.15",
         "jsdom": "20.0.0",
         "taze": "^0.8.0",
-        "vue-termui": "*"
+        "vue-termui": "*",
+        "neo4j-driver": "~5.5.0"
     }
 }

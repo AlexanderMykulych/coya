@@ -1,0 +1,24 @@
+{
+  "name": "coya-neo4j",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/index.js",
+  "types": "./index.ts",
+  "scripts": {
+    "build": "vite build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "vite": "^3.1.0",
+    "vite-node": "~0.23.1",
+    "axios": "~1.3.2",
+    "flatted": "~3.2.7",
+    "neo4j-driver": "~5.5.0",
+    "coya-connectors-shared": "~1.0.0",
+    "@antfu/eslint-config": "~0.35.2",
+    "ws": "~8.12.0"
+  }
+}

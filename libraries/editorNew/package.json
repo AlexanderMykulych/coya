@@ -24,7 +24,7 @@
     "unplugin-icons": "~0.14.9",
     "vite-dts": "^1.0.4",
     "vite-plugin-windicss": "^1.6.3",
-    "@antfu/eslint-config": "~0.26.3",
+    "@antfu/eslint-config": "~0.35.2",
     "@types/node": "^18.7.15",
     "@unocss/reset": "^0.45.15",
     "@vitejs/plugin-vue": "^3.1.0",
@@ -42,7 +42,9 @@
     "vue": "^3.2.38",
     "vue-router": "~4.1.5",
     "vue-termui": "*",
-    "vue-tsc": "^0.40.8"
+    "vue-tsc": "^0.40.8",
+    "neo4j-driver": "~5.5.0",
+    "ws": "~8.12.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.1.0",

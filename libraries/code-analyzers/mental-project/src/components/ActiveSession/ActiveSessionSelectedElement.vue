@@ -1,10 +1,10 @@
 <script setup lang="ts">
-defineProps<{modelValue: any}>()
+defineProps<{ modelValue: any }>()
 const emit = defineEmits(['close', 'open-full', 'fold-full'])
 </script>
 
 <template>
-  <v-card height="70vh" width="70vw" overflow-y="hidden">
+  <v-card height="70vh" width="70vw" style="overflow-y:hidden;">
     <v-card-title>
       <div flex justify-between>
         Item
@@ -14,7 +14,7 @@ const emit = defineEmits(['close', 'open-full', 'fold-full'])
         </div>
       </div>
     </v-card-title>
-    <v-card-text h-full w-full flex>
+    <v-card-text h="80%" w-full flex>
       <ActiveSessionSelectedItemLeftPanel class="w-20%"/>
       <div class="w-80%">
         <SourceRightPanel />

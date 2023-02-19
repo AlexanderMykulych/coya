@@ -15,7 +15,6 @@
     "build": "tsdx build",
     "test": "vitest",
     "lint": "tsdx lint",
-    "prepare": "tsdx build",
     "size": "size-limit",
     "analyze": "size-limit --why"
   },
@@ -81,7 +80,7 @@
     "@antv/layout": "^0.1.24",
     "@types/node": "^18.7.15",
     "fs": "^0.0.1-security",
-    "@antfu/eslint-config": "~0.26.3",
+    "@antfu/eslint-config": "~0.35.2",
     "@unocss/reset": "^0.45.15",
     "@vitejs/plugin-vue": "^3.1.0",
     "@vue/test-utils": "2.0.2",
@@ -99,6 +98,8 @@
     "vue": "^3.2.38",
     "vue-router": "~4.1.5",
     "vue-termui": "*",
-    "vue-tsc": "^0.40.8"
+    "vue-tsc": "^0.40.8",
+    "neo4j-driver": "~5.5.0",
+    "ws": "~8.12.0"
   }
 }

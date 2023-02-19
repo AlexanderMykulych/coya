@@ -1,5 +1,3 @@
-import type { CodeInfo } from "../types"
-
 export type AnalyzerOptions = {
   context?: Partial<AnalyzerContext>
 }
@@ -14,6 +12,5 @@ export type AnalyzeSourceOptions = {
 }
 
 export type AnalyzerContext = {
-  addCodeInfo(codeInfo: CodeInfo | CodeInfo[]): Promise<void>
   originalSourceName: string
 }

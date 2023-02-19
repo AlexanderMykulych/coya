@@ -1,7 +1,7 @@
 <template>
   <div h-full flex="~">
-    <SourceLeftPanel class="w-20%"/>
-    <div class="w-80%">
+    <SourceLeftPanel w="20%"/>
+    <div w="80%">
       <SourceRightPanel />
     </div>
   </div>

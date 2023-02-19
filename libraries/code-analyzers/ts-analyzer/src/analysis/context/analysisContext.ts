@@ -15,6 +15,8 @@ export async function createContext(rootDir: string, initStoreData?: Record<stri
 
   const hooks = createHookManager()
 
+  const store = createStore(initStoreData)
+
   return {
     rootDir,
     files: fsUnits.filter((x): x is FileFsUnit => x.type === 'file'),
@@ -37,20 +39,23 @@ export async function createContext(rootDir: string, initStoreData?: Record<stri
     async addCodeInfos(codeInfos: CodeInfo[]) {
       codeInfos = codeInfos.map(x => hooks.beforeAdd(x))
 
+      if (store.get('_config')?.doNotSaveResultInMemory) {
+        // TODO: add to db
+        return
+      }
+
       codeInfos.forEach(x => {
         if (!resultCodeInfoIndex[x.id]) {
           resultCodeInfoIndex[x.id] = x
         }
       })
-
-      
     },
     get result() {
       return Object.values(resultCodeInfoIndex)
     },
     fsUnits,
     hooks,
-    store: createStore(initStoreData),
+    store,
     readFile,
   }
 }

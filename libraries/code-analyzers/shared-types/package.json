@@ -3,5 +3,5 @@
   "version": "1.0.0",
   "main": "./types.ts",
   "typings": "./types.ts",
-  "dependencies": {"coya-ts-analyzer":"~0.9.20"}
+  "dependencies": {"coya-ts-analyzer":"~0.9.20","@antfu/eslint-config":"~0.35.2","neo4j-driver":"~5.5.0","ws":"~8.12.0"}
 }

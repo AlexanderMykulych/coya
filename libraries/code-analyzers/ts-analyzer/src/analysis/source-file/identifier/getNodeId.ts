@@ -110,8 +110,6 @@ function _getNodeInfo(node: Node, options?: AnalyzerOptions): NodeCodeInfos {
     }
   }
 
-  options?.context?.addCodeInfo?.(result)
-
   return result
 }
 

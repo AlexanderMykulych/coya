@@ -26,8 +26,6 @@ function _importAnalizer(sourceFile: SourceFile, options?: AnalyzerOptions): Cod
         entityTo,
       ])
 
-  options?.context?.addCodeInfo?.(result)
-
   return result
 }
 
