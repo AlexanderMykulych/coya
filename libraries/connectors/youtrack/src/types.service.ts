@@ -8,4 +8,5 @@ export type YoutrackConfig = {
   url: string
   token: string
   issueQueries: IssueQuery[]
+  issueLoadingMaxDepthLevel?: number
 }

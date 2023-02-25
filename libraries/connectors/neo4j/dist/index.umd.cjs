@@ -2,6 +2,6 @@
       UNWIND $items AS relation
       CALL apoc.merge.node([relation.fromNode], { id: relation.from }) YIELD node as n1
       CALL apoc.merge.node([relation.toNode], { id: relation.to }) YIELD node as n2
-      CALL apoc.merge.relationship(n1, 'relation', relation, {}, n2) YIELD rel
+      CALL apoc.merge.relationship(n1, relation.type, relation, {}, n2) YIELD rel
       RETURN n1, n2, rel
       `;try{const a=l(t,200);let u=0;for await(const d of a)await s.run(n,{items:d}),console.log(`chunk ${u++} inserted`)}finally{await s.close()}},async clearDb(){await e.session().run("MATCH (n) DETACH DELETE n")}}}function l(e,t){const s=[];for(let n=0;n<e.length;n+=t)s.push(e.slice(n,n+t));return s}o.getNeo4j=c,Object.defineProperties(o,{__esModule:{value:!0},[Symbol.toStringTag]:{value:"Module"}})});

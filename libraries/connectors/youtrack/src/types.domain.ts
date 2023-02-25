@@ -8,12 +8,20 @@ export enum LinkTypeName {
 }
 
 export type IssueLink = {
+  direction: 'INWARD' | 'OUTWARD' | 'BOTH'
   linkType: {
     name: LinkTypeName
   }
   issues: {
     id: string
   }[]
+}
+
+export type IssueCustomField = {
+  $type: string
+  id: string
+  name: string
+  value: any
 }
 
 export type IssueTag = {
@@ -33,6 +41,7 @@ export type Issue = {
 export type LoadedIssue = Issue & {
   links: IssueLink[]
   tags: IssueTag[]
+  customFields: IssueCustomField[]
 }
 
 export type IssueRelation = {
@@ -40,7 +49,7 @@ export type IssueRelation = {
   from: string
   toNode: string
   to: string
-  type?: LinkTypeName
+  type: LinkTypeName | string
 }
 
 export type AgileBoard = {

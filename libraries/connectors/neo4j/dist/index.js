@@ -15,7 +15,7 @@ function u() {
       UNWIND $items AS relation
       CALL apoc.merge.node([relation.fromNode], { id: relation.from }) YIELD node as n1
       CALL apoc.merge.node([relation.toNode], { id: relation.to }) YIELD node as n2
-      CALL apoc.merge.relationship(n1, 'relation', relation, {}, n2) YIELD rel
+      CALL apoc.merge.relationship(n1, relation.type, relation, {}, n2) YIELD rel
       RETURN n1, n2, rel
       `;
       try {

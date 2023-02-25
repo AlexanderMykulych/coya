@@ -11,6 +11,7 @@ export async function connect({ addNodes, addRelations, config }: ConnectParams<
   for await (const query of config.issueQueries) {
     const { issues, relations, nodes } = await getIssues({
       query,
+      maxDepthLevel: config.issueLoadingMaxDepthLevel,
     })
 
     await addNodes('issue', issues.map(x => flatten(x)))

@@ -1,32 +1,34 @@
-import type { LoadedIssue } from '../../types.domain'
-import type { LoadIssueParam } from './types'
-import { issueFields } from './issueFields'
 import { getLinkedIssuesIds } from './getLinkedIssuesIds'
+import { loadIssuesByIds } from './loadIssuesByIds'
+import { issueFields } from './issueFields'
+import { createLoadedContext } from './createLoadedContext'
+import type { GetIssuesParam } from './types'
 import { http } from '@/axios'
+import type { GetIssuesResponse, LoadedIssue } from '@/types.domain'
 
-export async function loadIssues({ ids, addIssue, isLoaded, addRelation }: LoadIssueParam) {
-  let issuesQueue: string[] = ids
+export async function loadIssues({ query, maxDepthLevel }: GetIssuesParam): Promise<GetIssuesResponse> {
+  const context = createLoadedContext()
 
-  const loadIssuesRec = async () => {
-    const response = await http.post<LoadedIssue[]>(
-      `issuesGetter?${issueFields}`,
-      issuesQueue.map(id => ({ id })),
-    )
+  const response = await http.get<LoadedIssue[]>(
+    `issues?${issueFields}&query=${encodeURI(query)}`,
+  )
 
-    const issues = response.data
+  response.data.forEach(issue => context.addIssue(issue))
 
-    issues.forEach(issue => addIssue(issue))
+  await loadIssuesByIds({
+    ids: getLinkedIssuesIds({
+      issues: response.data,
+      addRelation: context.addIssueRelation,
+    }),
+    isAlreadyLoaded: context.isAlreadyLoaded,
+    onLoadedIssue: context.addIssue,
+    addRelation: context.addIssueRelation,
+    maxDepthLevel,
+  })
 
-    const linkedIds = getLinkedIssuesIds({
-      issues,
-      isLoaded,
-      addRelation,
-    })
-
-    issuesQueue = linkedIds
-  }
-
-  while (issuesQueue.length > 0) {
-    await loadIssuesRec()
+  return {
+    issues: context.getIssues(),
+    relations: context.getRelations(),
+    nodes: context.getNodes(),
   }
 }

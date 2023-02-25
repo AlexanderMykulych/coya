@@ -1,5 +1,6 @@
 import type { Node } from 'coya-connectors-shared'
-import type { LinkTypeName, LoadedIssue } from '../../types.domain'
+import type { IssueRelation, LinkTypeName, LoadedIssue } from '../../types.domain'
+import type { IssueQuery } from '../../types.service'
 
 export type AddRelationParam = {
   from: string
@@ -9,17 +10,23 @@ export type AddRelationParam = {
 
 export type LoadIssueParam = {
   ids: string[]
-  isLoaded: (id: string) => boolean
-  addIssue: (issue: LoadedIssue) => void
+  maxDepthLevel?: number
+  isAlreadyLoaded: (id: string) => boolean
+  onLoadedIssue: (issue: LoadedIssue) => void
   addRelation: (param: AddRelationParam) => void
 }
 
 export type GetLinkedIssuesParam = {
   issues: LoadedIssue[]
-  isLoaded?: LoadIssueParam['isLoaded']
+  isAlreadyLoaded?: LoadIssueParam['isAlreadyLoaded']
   addRelation: LoadIssueParam['addRelation']
 }
 
 export type addNodeFunc = (label: string, node: Node) => void
 
 export type addRelationFunc = (relation: IssueRelation) => void
+
+export type GetIssuesParam = {
+  query: IssueQuery
+  maxDepthLevel?: number
+}
