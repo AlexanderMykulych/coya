@@ -28,14 +28,24 @@ export type IssueTag = {
   name: string
 }
 
+export type TrackerUser = {
+  id: string
+  login: string
+  name: string
+  fullName: string
+  avatarUrl: string
+}
+
 export type Issue = {
   id: string
   idReadable: string
   summary: string
   description: string
-  reporter: {
-    login: string
-  }
+  reporter: TrackerUser
+  created: number
+  updater: TrackerUser
+  updated: number
+  usesMarkdown: boolean
 }
 
 export type LoadedIssue = Issue & {

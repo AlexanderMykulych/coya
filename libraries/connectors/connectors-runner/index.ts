@@ -11,7 +11,7 @@ const connectors: ConnectorSetting[] = [
       issueQueries: [
         'tag:BigTeam and tag:frontend and Sprint:{Sprint 3_2023}&$top=200',
       ],
-      issueLoadingMaxDepthLevel: 1,
+      issueLoadingMaxDepthLevel: 5,
     },
   },
 ]

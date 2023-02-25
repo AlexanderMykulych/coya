@@ -22,7 +22,7 @@ export type GetLinkedIssuesParam = {
   addRelation: LoadIssueParam['addRelation']
 }
 
-export type addNodeFunc = (label: string, node: Node) => void
+export type addNodeFunc<T = any> = (label: string, node: Node<T>) => void
 
 export type addRelationFunc = (relation: IssueRelation) => void
 
