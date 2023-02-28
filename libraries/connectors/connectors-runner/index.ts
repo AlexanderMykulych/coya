@@ -9,9 +9,9 @@ const connectors: ConnectorSetting[] = [
       url: 'https://socialtech.myjetbrains.com/api/',
       token: 'perm:YWxla3NhbmRyLm15a3VseWNo.NjEtMzY=.3YAXZtLSVD7SLVpr9C4MfcIQXDkjFM',
       issueQueries: [
-        'tag:BigTeam and tag:frontend and Sprint:{Sprint 3_2023}&$top=200',
+        'tag:BigTeam and (Sprint:{Sprint 1_2023} or Sprint:{Sprint 2_2023} or Sprint:{Sprint 3_2023} or Sprint:{Sprint 4_2023})',
       ],
-      issueLoadingMaxDepthLevel: 5,
+      issueLoadingMaxDepthLevel: 10,
     },
   },
 ]
