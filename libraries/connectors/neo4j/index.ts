@@ -44,6 +44,11 @@ export function getNeo4j() {
 
       await session.run('MATCH (n) DETACH DELETE n')
     },
+    async query(query: string, params?: any) {
+      const session = database.session()
+
+      return await session.run(query, params)
+    },
   }
 }
 

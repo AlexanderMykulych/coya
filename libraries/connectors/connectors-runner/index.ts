@@ -1,6 +1,5 @@
 import type { ConnectorSetting, Relation } from 'coya-connectors-shared'
 import youtrack from 'coya-youtrack-connector'
-import gitlab from 'coya-gitlab-connector'
 import { getNeo4j } from 'coya-neo4j'
 import { flatten } from 'flat'
 
@@ -9,20 +8,20 @@ const connectors: ConnectorSetting[] = [
     connector: youtrack,
     config: {
       url: 'https://socialtech.myjetbrains.com/api/',
-      token: 'perm:YWxla3NhbmRyLm15a3VseWNo.NjEtMzY=.3YAXZtLSVD7SLVpr9C4MfcIQXDkjFM',
+      token: '<token>',
       issueQueries: [
-        'tag:BigTeam and (Sprint:{Sprint 1_2023} or Sprint:{Sprint 2_2023} or Sprint:{Sprint 3_2023} or Sprint:{Sprint 4_2023})',
+        'tag:BigTeam and (Sprint:{Sprint 1_2023} or Sprint:{Sprint 2_2023} or Sprint:{Sprint 3_2023} or Sprint:{Sprint 4_2023} or Sprint:{Sprint 5_2023})',
       ],
       issueLoadingMaxDepthLevel: 10,
     },
   },
-  {
-    connector: gitlab,
-    config: {
-      url: 'https://gitlab.com/api/v4/',
-      token: 'glpat-BmwEo5wgWvYLmukAPxHq',
-    },
-  },
+  // {
+  //   connector: gitlab,
+  //   config: {
+  //     url: 'https://gitlab.com/api/v4/',
+  //     token: '<token>',
+  //   },
+  // },
 ]
 
 function runConnectors() {
