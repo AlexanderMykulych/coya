@@ -584,6 +584,11 @@
       "packageName": "coya-gitlab-connector",
       "projectFolder": "libraries/connectors/gitlab",
       "reviewCategory": "code-connectors"
+    },
+    {
+      "packageName": "coya-dashboard-lib",
+      "projectFolder": "libraries/connectors/dashboard-lib",
+      "reviewCategory": "code-connectors"
     }
   ]
 }
