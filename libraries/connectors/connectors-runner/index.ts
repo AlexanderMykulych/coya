@@ -7,8 +7,8 @@ const connectors: ConnectorSetting[] = [
   {
     connector: youtrack,
     config: {
-      url: '<url>',
-      token: '<token>',
+      url: process.env.YOUTRACK_URL,
+      token: process.env.YOUTRACK_TOKEN,
       issueQueries: [
         'tag:BigTeam and (Sprint:{Sprint 1_2023} or Sprint:{Sprint 2_2023} or Sprint:{Sprint 3_2023} or Sprint:{Sprint 4_2023} or Sprint:{Sprint 5_2023})',
       ],
@@ -18,8 +18,8 @@ const connectors: ConnectorSetting[] = [
   // {
   //   connector: gitlab,
   //   config: {
-  //     url: 'https://gitlab.com/api/v4/',
-  //     token: '<token>',
+  //     url: process.env.GITLAB_URL,
+  //     token: process.env.GITLAB_TOKEN,
   //   },
   // },
 ]

@@ -15,7 +15,7 @@
         "changeProcessCWD": true
       }
     ],
-    "unocss.root": "libraries/code-analyzers/mental-project",
+    "unocss.root": "libraries/connectors/dashboard-lib",
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "[javascript]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode"
