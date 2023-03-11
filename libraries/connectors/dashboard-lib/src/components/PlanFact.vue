@@ -71,7 +71,7 @@ const statesSp = computed(() => statesPrep
     </template>
     <template #content>
       <div pr-4>
-        <span text-6 font-extrabold underline>Plan</span><br>
+        <span text-6 font-extrabold underline>Planned</span><br>
         {{ sp }}
       </div>
       <div v-for="item in statesSp" :key="item.name" pr-4>
