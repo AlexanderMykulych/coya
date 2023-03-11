@@ -7,7 +7,7 @@ const connectors: ConnectorSetting[] = [
   {
     connector: youtrack,
     config: {
-      url: 'https://socialtech.myjetbrains.com/api/',
+      url: '<url>',
       token: '<token>',
       issueQueries: [
         'tag:BigTeam and (Sprint:{Sprint 1_2023} or Sprint:{Sprint 2_2023} or Sprint:{Sprint 3_2023} or Sprint:{Sprint 4_2023} or Sprint:{Sprint 5_2023})',
