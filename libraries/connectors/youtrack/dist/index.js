@@ -1,19 +1,19 @@
 import O from "axios";
 var w = v;
 v.flatten = v;
-v.unflatten = A;
-function j(e) {
+v.unflatten = g;
+function I(e) {
   return e && e.constructor && typeof e.constructor.isBuffer == "function" && e.constructor.isBuffer(e);
 }
-function I(e) {
+function A(e) {
   return e;
 }
 function v(e, t) {
   t = t || {};
-  const r = t.delimiter || ".", n = t.maxDepth, i = t.transformKey || I, o = {};
+  const r = t.delimiter || ".", n = t.maxDepth, i = t.transformKey || A, o = {};
   function s(c, l, p) {
     p = p || 1, Object.keys(c).forEach(function(d) {
-      const a = c[d], u = t.safe && Array.isArray(a), f = Object.prototype.toString.call(a), m = j(a), h = f === "[object Object]" || f === "[object Array]", b = l ? l + r + i(d) : i(d);
+      const a = c[d], u = t.safe && Array.isArray(a), f = Object.prototype.toString.call(a), m = I(a), h = f === "[object Object]" || f === "[object Array]", b = l ? l + r + i(d) : i(d);
       if (!u && !m && h && Object.keys(a).length && (!t.maxDepth || p < n))
         return s(a, b, p + 1);
       o[b] = a;
@@ -21,10 +21,10 @@ function v(e, t) {
   }
   return s(e), o;
 }
-function A(e, t) {
+function g(e, t) {
   t = t || {};
-  const r = t.delimiter || ".", n = t.overwrite || !1, i = t.transformKey || I, o = {};
-  if (j(e) || Object.prototype.toString.call(e) !== "[object Object]")
+  const r = t.delimiter || ".", n = t.overwrite || !1, i = t.transformKey || A, o = {};
+  if (I(e) || Object.prototype.toString.call(e) !== "[object Object]")
     return e;
   function c(d) {
     const a = Number(d);
@@ -63,7 +63,7 @@ function A(e, t) {
         return;
       (n && !b || !n && m[u] == null) && (m[u] = typeof f == "number" && !t.object ? [] : {}), m = m[u], a.length > 0 && (u = c(a.shift()), f = c(a[0]));
     }
-    m[u] = A(e[d], t);
+    m[u] = g(e[d], t);
   }), o;
 }
 const N = O.create({
@@ -72,7 +72,7 @@ const N = O.create({
     Authorization: "Bearer perm:YWxla3NhbmRyLm15a3VseWNo.NjEtMzY=.3YAXZtLSVD7SLVpr9C4MfcIQXDkjFM"
   }
 });
-var g = /* @__PURE__ */ ((e) => (e.Subtask = "Subtask", e.Duplicate = "Duplicate", e.Depend = "Depend", e.Relates = "Relates", e))(g || {});
+var j = /* @__PURE__ */ ((e) => (e.Subtask = "Subtask", e.Duplicate = "Duplicate", e.Depend = "Depend", e.Relates = "Relates", e))(j || {});
 function k({ issues: e, isAlreadyLoaded: t, addRelation: r }) {
   const n = t != null ? t : (o) => !1;
   return e.flatMap((o) => {
@@ -80,14 +80,14 @@ function k({ issues: e, isAlreadyLoaded: t, addRelation: r }) {
     return s && s.length > 0 ? (s.forEach((c) => r({
       from: o.id,
       to: c,
-      type: g.Subtask
+      type: j.Subtask
     })), s.filter((c) => !n(c))) : [];
   });
 }
 function R(e) {
-  return e.links.filter((t) => t.linkType.name === g.Subtask && t.direction === "OUTWARD").flatMap((t) => t.issues).map((t) => t.id);
+  return e.links.filter((t) => t.linkType.name === j.Subtask && t.direction === "OUTWARD").flatMap((t) => t.issues).map((t) => t.id);
 }
-const S = "customFields($type,name,value($type,archived,avatarUrl,buildIntegration,buildLink,color(background,id),description,fullName,id,isResolved,localizedName,login,markdownText,minutes,name,presentation,ringId,text))", U = "id,login,name,fullName,avatarUrl", L = `reporter(${U})`, E = `updater(${U})`, x = `fields=id,idReadable,summary,description,updated,created,usesMarkdown,${L},${E},links(id,direction,linkType(name),issues(id)),tags(name),${S}`;
+const S = "customFields($type,name,value($type,archived,avatarUrl,buildIntegration,buildLink,color(background,id),description,fullName,id,isResolved,localizedName,login,markdownText,minutes,name,presentation,ringId,text))", U = "id,login,name,fullName,avatarUrl,email", L = `reporter(${U})`, E = `updater(${U})`, x = `fields=id,idReadable,summary,description,updated,created,usesMarkdown,${L},${E},links(id,direction,linkType(name),issues(id)),tags(name),${S}`;
 async function D(e) {
   let t = e.ids;
   const { maxDepthLevel: r } = e;
@@ -176,7 +176,8 @@ function Q({ issue: e, addNode: t, addRelation: r }) {
       name: s.name,
       fullName: s.fullName,
       login: s.login,
-      avatarUrl: s.avatarUrl
+      avatarUrl: s.avatarUrl,
+      email: s.email
     }), r({
       fromNode: "issue",
       from: e.id,
@@ -195,7 +196,8 @@ function z({ issue: e, addNode: t, addRelation: r }) {
       name: s.name,
       fullName: s.fullName,
       login: s.login,
-      avatarUrl: s.avatarUrl
+      avatarUrl: s.avatarUrl,
+      email: s.email
     }), r({
       fromNode: "issue",
       from: e.id,
@@ -212,7 +214,8 @@ function C({ issue: e, addNode: t, addRelation: r }) {
     name: n.name,
     fullName: n.fullName,
     login: n.login,
-    avatarUrl: n.avatarUrl
+    avatarUrl: n.avatarUrl,
+    email: n.email
   }), r({
     fromNode: "issue",
     from: e.id,
@@ -228,7 +231,8 @@ function T({ issue: e, addNode: t, addRelation: r }) {
     name: n.name,
     fullName: n.fullName,
     login: n.login,
-    avatarUrl: n.avatarUrl
+    avatarUrl: n.avatarUrl,
+    email: n.email
   }), r({
     fromNode: "issue",
     from: e.id,

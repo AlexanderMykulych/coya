@@ -93,3 +93,5 @@ libraries/vscode/coya/vite-proj/coya/examples/**
 libraries/vscode/coya/vite-proj/coya/examples/test
 
 apps/demo/dist/**
+
+**/dist/**

@@ -23,6 +23,7 @@
     "coya-neo4j": "~1.0.0",
     "ws": "~8.12.0",
     "neo4j-driver": "~5.5.0",
-    "@antfu/eslint-config": "~0.35.2"
+    "@antfu/eslint-config": "~0.35.2",
+    "coya-gitlab-connector": "~1.0.0"
   }
 }

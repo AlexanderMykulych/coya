@@ -91,6 +91,7 @@ function extractAssignee({ issue, addNode, addRelation }: ExtractAdditionalInfoP
         fullName: assignee.fullName,
         login: assignee.login,
         avatarUrl: assignee.avatarUrl,
+        email: assignee.email,
       })
 
       addRelation({
@@ -115,6 +116,7 @@ function extractAssigneeQA({ issue, addNode, addRelation }: ExtractAdditionalInf
         fullName: assignee.fullName,
         login: assignee.login,
         avatarUrl: assignee.avatarUrl,
+        email: assignee.email,
       })
 
       addRelation({
@@ -138,6 +140,7 @@ function extractReporter({ issue, addNode, addRelation }: ExtractAdditionalInfoP
       fullName: reporter.fullName,
       login: reporter.login,
       avatarUrl: reporter.avatarUrl,
+      email: reporter.email,
     })
 
     addRelation({
@@ -160,6 +163,7 @@ function extractUpdater({ issue, addNode, addRelation }: ExtractAdditionalInfoPa
       fullName: updater.fullName,
       login: updater.login,
       avatarUrl: updater.avatarUrl,
+      email: updater.email,
     })
 
     addRelation({

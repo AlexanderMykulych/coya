@@ -34,6 +34,7 @@ export type TrackerUser = {
   name: string
   fullName: string
   avatarUrl: string
+  email: string
 }
 
 export type Issue = {
