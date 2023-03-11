@@ -95,3 +95,4 @@ libraries/vscode/coya/vite-proj/coya/examples/test
 apps/demo/dist/**
 
 **/dist/**
+*.local
