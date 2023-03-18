@@ -21,7 +21,7 @@
     "coya-util": "~0.9.20",
     "debounce": "^1.2.1",
     "dom-to-image": "^2.6.0",
-    "unplugin-icons": "~0.14.9",
+    "unplugin-icons": "~0.15.3",
     "vite-dts": "^1.0.4",
     "vite-plugin-windicss": "^1.6.3",
     "@antfu/eslint-config": "^0.36.0",

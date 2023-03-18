@@ -23,7 +23,7 @@
     "language-map": "~1.5.0",
     "monaco-editor": "~0.34.0",
     "neo4j-driver": "~5.5.0",
-    "unplugin-icons": "~0.14.9",
+    "unplugin-icons": "~0.15.3",
     "vite-plugin-vue-type-imports": "~0.2.2",
     "vite-plugin-vuetify": "~1.0.0-alpha.17",
     "vue-echarts": "~6.2.3",

@@ -3,16 +3,16 @@ const { name } = defineProps<{ name: string }>()
 
 const states = [
   'Resolved',
-  // 'Backlog',
-  // 'Pending',
-  // 'In progress',
-  // 'Code review',
+  'Backlog',
+  'Pending',
+  'In progress',
+  'Code review',
 ]
 </script>
 
 <template>
   <main font-sans p="x-4 y-10" text="center gray-700 dark:gray-200">
-    <div flex flex-wrap>
+    <div flex flex-col>
       <PlanFact
         :sprint-name="name"
         team="BigTeam"

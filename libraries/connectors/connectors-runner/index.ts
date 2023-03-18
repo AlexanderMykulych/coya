@@ -10,7 +10,7 @@ const connectors: ConnectorSetting[] = [
       url: import.meta.env.VITE_YOUTRACK_URL,
       token: import.meta.env.VITE_YOUTRACK_TOKEN,
       issueQueries: [
-        'tag:BigTeam and (Sprint:{Sprint 1_2023} or Sprint:{Sprint 2_2023} or Sprint:{Sprint 3_2023} or Sprint:{Sprint 4_2023} or Sprint:{Sprint 5_2023})',
+        'tag:BigTeam and (Sprint:{Sprint 5_2023} or Sprint:{Sprint 6_2023})',
       ],
       issueLoadingMaxDepthLevel: 10,
     },

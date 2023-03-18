@@ -16,7 +16,11 @@
     "@vueuse/core": "^9.13.0",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6",
-    "coya-neo4j": "~1.0.0"
+    "coya-neo4j": "~1.0.0",
+    "unplugin-icons": "~0.15.3",
+    "flat": "~5.0.2",
+    "@types/flat": "~5.0.2",
+    "coya-youtrack-connector": "~1.0.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.36.0",
