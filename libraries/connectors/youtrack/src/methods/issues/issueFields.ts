@@ -5,3 +5,5 @@ const reporterField = `reporter(${userFields})`
 const updaterField = `updater(${userFields})`
 
 export const issueFields = `fields=id,idReadable,summary,description,updated,created,usesMarkdown,${reporterField},${updaterField},links(id,direction,linkType(name),issues(id)),tags(name),${customFields}`
+
+export const commentFields = `fields=text,id,created,updated,author(${userFields}),attachments(id,url,name)`

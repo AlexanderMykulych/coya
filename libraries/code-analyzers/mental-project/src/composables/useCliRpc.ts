@@ -17,6 +17,7 @@ const birpcHandlers: BirpcOptions<CliServerApi> = {
   on: data => ws.addEventListener('message', data),
   serialize: v => JSON.stringify(v),
   deserialize: v => JSON.parse(v.data),
+  timeout: 20 * 60 * 60 * 1000,
 }
 const trackOptions = ref<TrackOption[]>([])
 const rpc = createBirpc<CliServerApi, MentalWebApi>(

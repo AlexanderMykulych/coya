@@ -34,6 +34,7 @@ export function createWorkerRpc({ log: parentLog, onTrack }: CreateWorkerRpcOpti
     {
       post(v) { port.postMessage(v) },
       on(fn) { port.addListener('message', fn) },
+      timeout: 20 * 60 * 60 * 1000,
     },
   )
 
@@ -53,6 +54,7 @@ export function createMainRpc({port}: {port: MessagePort}) {
     {
       post(v) { port.postMessage(v) },
       on(fn) { port.addListener('message', fn) },
+      timeout: 20 * 60 * 60 * 1000,
     },
   )
 

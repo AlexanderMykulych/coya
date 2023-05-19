@@ -14,7 +14,7 @@ export type Neo4jStatus = ServerInfo
 export function useNeo4j() {
 
   // driver ??= neo4j.driver('bolt://localhost:7687', neo4j.auth.basic('neo4j', 'test'))
-  driver ??= neo4j.driver('neo4j://localhost:7687', neo4j.auth.basic('neo4j', 'test'))
+  driver ??= neo4j.driver('neo4j+s://cfa19696.databases.neo4j.io', neo4j.auth.basic('neo4j', 'tY1HmNeSn1AkfrBvmTm1jGn2u34Y305azQAMX6lRhdk'))
 
   return {
     verifyConnection: getVerifyConnectionFn(driver),

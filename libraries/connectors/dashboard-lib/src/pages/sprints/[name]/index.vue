@@ -8,6 +8,11 @@ const states = [
   'In progress',
   'Code review',
 ]
+
+const router = useRouter()
+
+const onStateClick = (state: string, tag?: string) =>
+  router.push(`/sprints/${name}/issues/state/${state}/${tag ?? ''}`)
 </script>
 
 <template>
@@ -15,8 +20,9 @@ const states = [
     <div flex flex-col>
       <PlanFact
         :sprint-name="name"
-        team="BigTeam"
         :states="states"
+        team="BigTeam"
+        @clickState="onStateClick($event)"
       >
         <template #label>
           All
@@ -24,9 +30,10 @@ const states = [
       </PlanFact>
       <PlanFact
         :sprint-name="name"
+        :states="states"
         tag="frontend"
         team="BigTeam"
-        :states="states"
+        @clickState="onStateClick($event, 'frontend')"
       >
         <template #label>
           Frontend
@@ -34,9 +41,10 @@ const states = [
       </PlanFact>
       <PlanFact
         :sprint-name="name"
+        :states="states"
         tag="backend"
         team="BigTeam"
-        :states="states"
+        @clickState="onStateClick($event, 'backend')"
       >
         <template #label>
           Backend

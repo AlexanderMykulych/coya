@@ -47,7 +47,8 @@
     "lodash.throttle": "~4.1.1",
     "@types/lodash.throttle": "~4.1.7",
     "micromatch": "~4.0.5",
-    "@types/micromatch": "~4.0.2"
+    "@types/micromatch": "~4.0.2",
+    "comment-json": "~4.2.3"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.36.0",

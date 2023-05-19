@@ -4,6 +4,8 @@ import type { AddRelationParam } from './types'
 import { extractAdditionalFieldsFromIssue } from './extractAdditionalFieldsFromIssue'
 import type { Issue, IssueRelation, LoadedIssue } from '@/types.domain'
 
+export type IssueLoadContext = ReturnType<typeof createLoadedContext>
+
 export function createLoadedContext() {
   const issues = new Map<string, Issue>()
   const nodes = new Map<string, Map<string, Node>>()

@@ -10,10 +10,12 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     BaseBox: typeof import('./src/components/base/BaseBox.vue')['default']
+    ComponentTestCount: typeof import('./src/components/Tests/ComponentTestCount.vue')['default']
     copy: typeof import('./src/components/IssueList copy.vue')['default']
     IssueCount: typeof import('./src/components/IssueCount.vue')['default']
     IssueList: typeof import('./src/components/IssueList.vue')['default']
     IssueListItem: typeof import('./src/components/IssueListItem.vue')['default']
+    ModulesCount: typeof import('./src/components/Modules/ModulesCount.vue')['default']
     PlanFact: typeof import('./src/components/PlanFact.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
@@ -22,5 +24,6 @@ declare module '@vue/runtime-core' {
     TheCounter: typeof import('./src/components/TheCounter.vue')['default']
     TheFooter: typeof import('./src/components/TheFooter.vue')['default']
     TheInput: typeof import('./src/components/TheInput.vue')['default']
+    UnitTestCount: typeof import('./src/components/Tests/UnitTestCount.vue')['default']
   }
 }

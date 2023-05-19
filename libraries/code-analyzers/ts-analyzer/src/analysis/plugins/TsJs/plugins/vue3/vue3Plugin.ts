@@ -5,7 +5,7 @@ import type { AnalysisContextStore } from "./types";
 export default definePlugin<AnalysisContextStore>({
   name: 'vue3-sfc-processor',
   isMatch: ({ file, context }) =>
-    context.store.get('isVue3', false) && file.file.endsWith('.vue'),
+    context.store.get('isVue3', false) && file.file.endsWith('.vue') && false,
   
   async processFile({ file }) {
     const result = await vue3Traspiler.traspile(file.text)

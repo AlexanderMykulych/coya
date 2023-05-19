@@ -91,6 +91,7 @@ export function createRpc(ws: WebSocket, options: CreateRpcOptions) {
     on: fn => ws.on('message', fn),
     serialize: v => JSON.stringify(v),
     deserialize: v => JSON.parse(v),
+    timeout: 20 * 60 * 60 * 1000,
   },)
 
   return rpc

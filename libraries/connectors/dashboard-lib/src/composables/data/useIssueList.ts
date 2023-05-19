@@ -6,23 +6,37 @@ export type UseIssueListParam = {
   sprintName: string
   team: string
   tag?: string
+  state?: string
 }
 
-export function useIssueList({ sprintName, team, tag }: UseIssueListParam) {
+export function useIssueList({ sprintName, team, tag, state }: UseIssueListParam) {
   const neo4j = getNeo4j()
+
+  if (state === 'Planned') {
+    state = ''
+  }
 
   const issuesResult = computedAsync(async () => await neo4j.query(`
     match(i:issue)-->(:tag { name: $team })
-    ${tag ? 'match(i:issue)-->(:tag { name: $tag })' : ''}
     match(i:issue)-->(:sprint {name: $sprintName })
-    return i as issue
-  `,
-  { sprintName, tag, team }),
+    match(i:issue)-[:assignee]->(u:trackerUser)
+    ${tag ? 'match(i:issue)-->(:tag { name: $tag })' : ''}
+    ${state ? 'where i.state = $state' : ''}
+    return i as issue, collect(u) as assignees
+    `,
+    { sprintName, tag, team, state }),
   )
 
   const issues = computed(() => issuesResult.value
     ?.records
-    .map(item => unflatten(item.get('issue').properties) as Issue),
+    .map((item) => {
+      const issue = unflatten(item.get('issue').properties) as Issue
+      const assignees = item.get('assignees').map((x: any) => unflatten(x.properties))
+      return {
+        ...issue,
+        assignees,
+      }
+    }),
   )
 
   return {

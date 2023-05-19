@@ -1,184 +1,101 @@
-import F from "axios";
-var w = v;
-v.flatten = v;
-v.unflatten = N;
-function g(e) {
-  return e && e.constructor && typeof e.constructor.isBuffer == "function" && e.constructor.isBuffer(e);
-}
-function j(e) {
-  return e;
-}
-function v(e, n) {
-  n = n || {};
-  const r = n.delimiter || ".", t = n.maxDepth, i = n.transformKey || j, o = {};
-  function s(c, l, y) {
-    y = y || 1, Object.keys(c).forEach(function(d) {
-      const a = c[d], u = n.safe && Array.isArray(a), f = Object.prototype.toString.call(a), m = g(a), h = f === "[object Object]" || f === "[object Array]", b = l ? l + r + i(d) : i(d);
-      if (!u && !m && h && Object.keys(a).length && (!n.maxDepth || y < t))
-        return s(a, b, y + 1);
-      o[b] = a;
-    });
-  }
-  return s(e), o;
-}
-function N(e, n) {
-  n = n || {};
-  const r = n.delimiter || ".", t = n.overwrite || !1, i = n.transformKey || j, o = {};
-  if (g(e) || Object.prototype.toString.call(e) !== "[object Object]")
-    return e;
-  function c(d) {
-    const a = Number(d);
-    return isNaN(a) || d.indexOf(".") !== -1 || n.object ? d : a;
-  }
-  function l(d, a, u) {
-    return Object.keys(u).reduce(function(f, m) {
-      return f[d + r + m] = u[m], f;
-    }, a);
-  }
-  function y(d) {
-    const a = Object.prototype.toString.call(d), u = a === "[object Array]", f = a === "[object Object]";
-    if (d) {
-      if (u)
-        return !d.length;
-      if (f)
-        return !Object.keys(d).length;
-    } else
-      return !0;
-  }
-  return e = Object.keys(e).reduce(function(d, a) {
-    const u = Object.prototype.toString.call(e[a]);
-    return !(u === "[object Object]" || u === "[object Array]") || y(e[a]) ? (d[a] = e[a], d) : l(
-      a,
-      d,
-      v(e[a], n)
-    );
-  }, {}), Object.keys(e).forEach(function(d) {
-    const a = d.split(r).map(i);
-    let u = c(a.shift()), f = c(a[0]), m = o;
-    for (; f !== void 0; ) {
-      if (u === "__proto__")
-        return;
-      const h = Object.prototype.toString.call(m[u]), b = h === "[object Object]" || h === "[object Array]";
-      if (!t && !b && typeof m[u] < "u")
-        return;
-      (t && !b || !t && m[u] == null) && (m[u] = typeof f == "number" && !n.object ? [] : {}), m = m[u], a.length > 0 && (u = c(a.shift()), f = c(a[0]));
-    }
-    m[u] = N(e[d], n);
-  }), o;
-}
-const A = F.create({
+import v from "axios";
+const u = v.create({
   baseURL: "https://socialtech.myjetbrains.com/api/",
   headers: {
     Authorization: "Bearer <token>"
   }
 });
-var I = /* @__PURE__ */ ((e) => (e.Subtask = "Subtask", e.Duplicate = "Duplicate", e.Depend = "Depend", e.Relates = "Relates", e))(I || {});
-function k({ issues: e, isAlreadyLoaded: n, addRelation: r }) {
-  const t = n ?? ((o) => !1);
-  return e.flatMap((o) => {
-    const s = R(o);
-    return s && s.length > 0 ? (s.forEach((c) => r({
-      from: o.id,
-      to: c,
-      type: I.Subtask
-    })), s.filter((c) => !t(c))) : [];
+var m = /* @__PURE__ */ ((e) => (e.Subtask = "Subtask", e.Duplicate = "Duplicate", e.Depend = "Depend", e.Relates = "Relates", e))(m || {});
+function w({ issues: e, isAlreadyLoaded: t, addRelation: n }) {
+  const r = t ?? ((a) => !1);
+  return e.flatMap((a) => {
+    const s = x(a);
+    return s && s.length > 0 ? (s.forEach((i) => n({
+      from: a.id,
+      to: i,
+      type: m.Subtask
+    })), s.filter((i) => !r(i))) : [];
   });
 }
-function R(e) {
-  return e.links.filter((n) => n.linkType.name === I.Subtask && n.direction === "OUTWARD").flatMap((n) => n.issues).map((n) => n.id);
+function x(e) {
+  return e.links.filter((t) => t.linkType.name === m.Subtask && t.direction === "OUTWARD").flatMap((t) => t.issues).map((t) => t.id);
 }
-const L = "customFields($type,name,value($type,archived,avatarUrl,buildIntegration,buildLink,color(background,id),description,fullName,id,isResolved,localizedName,login,markdownText,minutes,name,presentation,ringId,text))", U = "id,login,name,fullName,avatarUrl,email", S = `reporter(${U})`, E = `updater(${U})`, O = `fields=id,idReadable,summary,description,updated,created,usesMarkdown,${S},${E},links(id,direction,linkType(name),issues(id)),tags(name),${L}`;
-async function $(e) {
-  let n = e.ids;
-  const { maxDepthLevel: r } = e;
-  let t = 0;
-  for (; n.length > 0 && (!r || t++ < r); )
-    n = await D({
+const E = "customFields($type,name,value($type,archived,avatarUrl,buildIntegration,buildLink,color(background,id),description,fullName,id,isResolved,localizedName,login,markdownText,minutes,name,presentation,ringId,text))", p = "id,login,name,fullName,avatarUrl,email", S = `reporter(${p})`, M = `updater(${p})`, R = `fields=id,idReadable,summary,description,updated,created,usesMarkdown,${S},${M},links(id,direction,linkType(name),issues(id)),tags(name),${E}`, T = `fields=text,id,created,updated,author(${p}),attachments(id,url,name)`;
+async function D(e) {
+  let t = e.ids;
+  const { maxDepthLevel: n } = e;
+  let r = 0;
+  for (; t.length > 0 && (!n || r++ < n); )
+    t = await j({
       ...e,
-      ids: n
+      ids: t
     });
 }
-async function D({
+async function j({
   ids: e,
-  onLoadedIssue: n,
-  isAlreadyLoaded: r,
-  addRelation: t
+  onLoadedIssue: t,
+  isAlreadyLoaded: n,
+  addRelation: r
 }) {
-  const o = (await A.post(
-    `issuesGetter?${O}`,
+  const a = (await u.post(
+    `issuesGetter?${R}`,
     e.map((s) => ({ id: s }))
   )).data;
-  return o.forEach((s) => n(s)), k({
-    issues: o,
-    isAlreadyLoaded: r,
-    addRelation: t
+  return a.forEach((s) => t(s)), w({
+    issues: a,
+    isAlreadyLoaded: n,
+    addRelation: r
   });
 }
-function M(e) {
-  B(e), K(e), _(e), Q(e), T(e), q(e), z(e);
+function O(e) {
+  B(e), _(e), C(e), G(e), P(e), Q(e);
 }
-function B({ issue: e, addNode: n, addRelation: r }) {
-  var t;
-  (t = e.tags) == null || t.forEach((i) => {
-    n("tag", {
-      id: i.name,
-      ...i
-    }), r({
+function B({ issue: e, addNode: t, addRelation: n }) {
+  var r;
+  (r = e.tags) == null || r.forEach((o) => {
+    t("tag", {
+      id: o.name,
+      ...o
+    }), n({
       toNode: "tag",
-      to: i.name,
+      to: o.name,
       fromNode: "issue",
       from: e.id,
       type: "tag"
     });
   });
 }
-function K({ issue: e, addNode: n, addRelation: r }) {
-  var i;
-  const t = (i = e.customFields) == null ? void 0 : i.find((o) => o.name === "Sprint");
-  t && Array.isArray(t.value) && t.value.forEach((o) => {
-    n("sprint", {
-      id: o.id,
-      name: o.name
-    }), r({
-      toNode: "sprint",
-      to: o.id,
-      fromNode: "issue",
-      from: e.id,
-      type: "sprint"
-    });
-  });
-}
-function _({ issue: e, addNode: n, addRelation: r }) {
-  var o, s;
-  const t = (s = (o = e.customFields) == null ? void 0 : o.find((c) => c.name === "GitLab PR link")) == null ? void 0 : s.value, i = t == null ? void 0 : t.matchAll(/merge_requests\/(?<mrNumber>\d*)/gm);
-  i && Array.from(i).map((l) => {
-    var y;
-    return ((y = l.groups) == null ? void 0 : y.mrNumber) || "";
-  }).forEach((l) => {
-    n("mr", {
-      id: l,
-      number: l
-    }), r({
+function _({ issue: e, addNode: t, addRelation: n }) {
+  var a, s;
+  const r = (s = (a = e.customFields) == null ? void 0 : a.find((i) => i.name === "GitLab PR link")) == null ? void 0 : s.value, o = r == null ? void 0 : r.matchAll(/merge_requests\/(?<mrNumber>\d*)/gm);
+  o && Array.from(o).map((c) => {
+    var l;
+    return ((l = c.groups) == null ? void 0 : l.mrNumber) || "";
+  }).forEach((c) => {
+    t("mr", {
+      id: c,
+      number: c
+    }), n({
       toNode: "mr",
-      to: l,
+      to: c,
       fromNode: "issue",
       from: e.id,
       type: "mr"
     });
   });
 }
-function Q({ issue: e, addNode: n, addRelation: r }) {
-  var i, o;
-  const t = (o = (i = e.customFields) == null ? void 0 : i.find((s) => s.name === "Assignee")) == null ? void 0 : o.value;
-  t && Array.isArray(t) && t.forEach((s) => {
-    n("trackerUser", {
+function C({ issue: e, addNode: t, addRelation: n }) {
+  var o, a;
+  const r = (a = (o = e.customFields) == null ? void 0 : o.find((s) => s.name === "Assignee")) == null ? void 0 : a.value;
+  r && Array.isArray(r) && r.forEach((s) => {
+    t("trackerUser", {
       id: s.id,
       name: s.name,
       fullName: s.fullName,
       login: s.login,
       avatarUrl: s.avatarUrl,
       email: s.email
-    }), r({
+    }), n({
       fromNode: "issue",
       from: e.id,
       toNode: "trackerUser",
@@ -187,18 +104,18 @@ function Q({ issue: e, addNode: n, addRelation: r }) {
     });
   });
 }
-function T({ issue: e, addNode: n, addRelation: r }) {
-  var i, o;
-  const t = (o = (i = e.customFields) == null ? void 0 : i.find((s) => s.name === "Assignee QA")) == null ? void 0 : o.value;
-  t && Array.isArray(t) && t.forEach((s) => {
-    n("trackerUser", {
+function G({ issue: e, addNode: t, addRelation: n }) {
+  var o, a;
+  const r = (a = (o = e.customFields) == null ? void 0 : o.find((s) => s.name === "Assignee QA")) == null ? void 0 : a.value;
+  r && Array.isArray(r) && r.forEach((s) => {
+    t("trackerUser", {
       id: s.id,
       name: s.name,
       fullName: s.fullName,
       login: s.login,
       avatarUrl: s.avatarUrl,
       email: s.email
-    }), r({
+    }), n({
       fromNode: "issue",
       from: e.id,
       toNode: "trackerUser",
@@ -207,144 +124,271 @@ function T({ issue: e, addNode: n, addRelation: r }) {
     });
   });
 }
-function q({ issue: e, addNode: n, addRelation: r }) {
-  const t = e.reporter;
-  t && t.id && (n("trackerUser", {
-    id: t.id,
-    name: t.name,
-    fullName: t.fullName,
-    login: t.login,
-    avatarUrl: t.avatarUrl,
-    email: t.email
-  }), r({
+function P({ issue: e, addNode: t, addRelation: n }) {
+  const r = e.reporter;
+  r && r.id && (t("trackerUser", {
+    id: r.id,
+    name: r.name,
+    fullName: r.fullName,
+    login: r.login,
+    avatarUrl: r.avatarUrl,
+    email: r.email
+  }), n({
     fromNode: "issue",
     from: e.id,
     toNode: "trackerUser",
-    to: t.id,
+    to: r.id,
     type: "reporter"
   }));
 }
-function z({ issue: e, addNode: n, addRelation: r }) {
-  const t = e.updater;
-  t && t.id && (n("trackerUser", {
-    id: t.id,
-    name: t.name,
-    fullName: t.fullName,
-    login: t.login,
-    avatarUrl: t.avatarUrl,
-    email: t.email
-  }), r({
+function Q({ issue: e, addNode: t, addRelation: n }) {
+  const r = e.updater;
+  r && r.id && (t("trackerUser", {
+    id: r.id,
+    name: r.name,
+    fullName: r.fullName,
+    login: r.login,
+    avatarUrl: r.avatarUrl,
+    email: r.email
+  }), n({
     fromNode: "issue",
     from: e.id,
     toNode: "trackerUser",
-    to: t.id,
+    to: r.id,
     type: "updater"
   }));
 }
-function C(e) {
-  var n, r, t, i, o, s, c, l, y, d, a, u, f, m, h, b;
+function q(e) {
+  var t, n, r, o, a, s, i, c, l, y, g, I, h, N, b, k;
   return {
-    storyPoints: (r = (n = e.customFields) == null ? void 0 : n.find((p) => p.name === "Story points")) == null ? void 0 : r.value,
-    state: (o = (i = (t = e.customFields) == null ? void 0 : t.find((p) => p.name === "State")) == null ? void 0 : i.value) == null ? void 0 : o.name,
-    source: (l = (c = (s = e.customFields) == null ? void 0 : s.find((p) => p.name === "Source")) == null ? void 0 : c.value) == null ? void 0 : l.name,
-    priority: (a = (d = (y = e.customFields) == null ? void 0 : y.find((p) => p.name === "Priority")) == null ? void 0 : d.value) == null ? void 0 : a.name,
-    severity: (m = (f = (u = e.customFields) == null ? void 0 : u.find((p) => p.name === "Severity")) == null ? void 0 : f.value) == null ? void 0 : m.name,
-    tags: (b = (h = e.tags) == null ? void 0 : h.map((p) => p.name)) == null ? void 0 : b.join(",")
+    storyPoints: (n = (t = e.customFields) == null ? void 0 : t.find((d) => d.name === "Story points")) == null ? void 0 : n.value,
+    state: (a = (o = (r = e.customFields) == null ? void 0 : r.find((d) => d.name === "State")) == null ? void 0 : o.value) == null ? void 0 : a.name,
+    source: (c = (i = (s = e.customFields) == null ? void 0 : s.find((d) => d.name === "Source")) == null ? void 0 : i.value) == null ? void 0 : c.name,
+    priority: (g = (y = (l = e.customFields) == null ? void 0 : l.find((d) => d.name === "Priority")) == null ? void 0 : y.value) == null ? void 0 : g.name,
+    severity: (N = (h = (I = e.customFields) == null ? void 0 : I.find((d) => d.name === "Severity")) == null ? void 0 : h.value) == null ? void 0 : N.name,
+    tags: (k = (b = e.tags) == null ? void 0 : b.map((d) => d.name)) == null ? void 0 : k.join(",")
   };
 }
-function G() {
-  const e = /* @__PURE__ */ new Map(), n = /* @__PURE__ */ new Map(), r = [], t = (o) => r.push(o), i = (o, s) => {
-    n.has(o) || n.set(o, /* @__PURE__ */ new Map());
-    const c = n.get(o);
-    c && !c.has(s.id) && c.set(s.id, s);
+function X() {
+  const e = /* @__PURE__ */ new Map(), t = /* @__PURE__ */ new Map(), n = [], r = (a) => n.push(a), o = (a, s) => {
+    t.has(a) || t.set(a, /* @__PURE__ */ new Map());
+    const i = t.get(a);
+    i && !i.has(s.id) && i.set(s.id, s);
   };
   return {
-    addNode: i,
-    addRelation: t,
-    isAlreadyLoaded(o) {
-      return e.has(o);
+    addNode: o,
+    addRelation: r,
+    isAlreadyLoaded(a) {
+      return e.has(a);
     },
-    addIssue(o) {
-      if (!e.has(o.id)) {
+    addIssue(a) {
+      if (!e.has(a.id)) {
         const s = {
-          ...o,
+          ...a,
           links: void 0,
           tags: void 0,
           customFields: void 0,
-          ...C(o)
+          ...q(a)
         };
-        e.set(o.id, s), M({
-          issue: o,
-          addNode: i,
-          addRelation: t
+        e.set(a.id, s), O({
+          issue: a,
+          addNode: o,
+          addRelation: r
         });
       }
     },
-    addIssueRelation({ from: o, to: s, type: c }) {
-      return t({
+    addIssueRelation({ from: a, to: s, type: i }) {
+      return r({
         fromNode: "issue",
-        from: o,
+        from: a,
         toNode: "issue",
         to: s,
-        type: c
+        type: i
       });
     },
     getIssues() {
-      return x(e);
+      return U(e);
     },
     getRelations() {
-      return r;
+      return n;
     },
     getNodes() {
-      return P(n);
+      return H(t);
     }
   };
 }
-function P(e) {
-  return Array.from(e).map(([n, r]) => [n, x(r)]);
+function H(e) {
+  return Array.from(e).map(([t, n]) => [t, U(n)]);
 }
-function x(e) {
-  return Array.from(e, ([n, r]) => r);
+function U(e) {
+  return Array.from(e, ([t, n]) => n);
 }
-async function W({ query: e, maxDepthLevel: n }) {
-  const r = G(), t = await A.get(
-    `issues?${O}&query=${encodeURI(e)}`
-  );
-  return t.data.forEach((i) => r.addIssue(i)), await $({
-    ids: k({
-      issues: t.data,
-      addRelation: r.addIssueRelation
-    }),
-    isAlreadyLoaded: r.isAlreadyLoaded,
-    onLoadedIssue: r.addIssue,
-    addRelation: r.addIssueRelation,
-    maxDepthLevel: n
-  }), {
-    issues: r.getIssues(),
-    relations: r.getRelations(),
-    nodes: r.getNodes()
-  };
+var A = 1 / 0, $ = 9007199254740991, W = 17976931348623157e292, F = 0 / 0, Y = "[object Function]", J = "[object GeneratorFunction]", K = "[object Symbol]", V = /^\s+|\s+$/g, Z = /^[-+]0x[0-9a-f]+$/i, z = /^0b[01]+$/i, ee = /^0o[0-7]+$/i, te = /^(?:0|[1-9]\d*)$/, ne = parseInt, re = Object.prototype, L = re.toString, oe = Math.ceil, se = Math.max;
+function ae(e, t, n) {
+  var r = -1, o = e.length;
+  t < 0 && (t = -t > o ? 0 : o + t), n = n > o ? o : n, n < 0 && (n += o), o = t > n ? 0 : n - t >>> 0, t >>>= 0;
+  for (var a = Array(o); ++r < o; )
+    a[r] = e[r + t];
+  return a;
 }
-async function H(e) {
-  return W(e);
+function ie(e, t) {
+  return t = t ?? $, !!t && (typeof e == "number" || te.test(e)) && e > -1 && e % 1 == 0 && e < t;
 }
-async function J({ addNodes: e, addRelations: n, config: r }) {
-  A.defaults.baseURL = r.url, A.defaults.headers.Authorization = `Bearer ${r.token}`;
-  for await (const t of r.issueQueries) {
-    const { issues: i, relations: o, nodes: s } = await H({
-      query: t,
-      maxDepthLevel: r.issueLoadingMaxDepthLevel
+function de(e, t, n) {
+  if (!f(n))
+    return !1;
+  var r = typeof t;
+  return (r == "number" ? le(n) && ie(t, n.length) : r == "string" && t in n) ? ue(n[t], e) : !1;
+}
+function ce(e, t, n) {
+  (n ? de(e, t, n) : t === void 0) ? t = 1 : t = se(Ie(t), 0);
+  var r = e ? e.length : 0;
+  if (!r || t < 1)
+    return [];
+  for (var o = 0, a = 0, s = Array(oe(r / t)); o < r; )
+    s[a++] = ae(e, o, o += t);
+  return s;
+}
+function ue(e, t) {
+  return e === t || e !== e && t !== t;
+}
+function le(e) {
+  return e != null && me(e.length) && !fe(e);
+}
+function fe(e) {
+  var t = f(e) ? L.call(e) : "";
+  return t == Y || t == J;
+}
+function me(e) {
+  return typeof e == "number" && e > -1 && e % 1 == 0 && e <= $;
+}
+function f(e) {
+  var t = typeof e;
+  return !!e && (t == "object" || t == "function");
+}
+function pe(e) {
+  return !!e && typeof e == "object";
+}
+function ye(e) {
+  return typeof e == "symbol" || pe(e) && L.call(e) == K;
+}
+function ge(e) {
+  if (!e)
+    return e === 0 ? e : 0;
+  if (e = he(e), e === A || e === -A) {
+    var t = e < 0 ? -1 : 1;
+    return t * W;
+  }
+  return e === e ? e : 0;
+}
+function Ie(e) {
+  var t = ge(e), n = t % 1;
+  return t === t ? n ? t - n : t : 0;
+}
+function he(e) {
+  if (typeof e == "number")
+    return e;
+  if (ye(e))
+    return F;
+  if (f(e)) {
+    var t = typeof e.valueOf == "function" ? e.valueOf() : e;
+    e = f(t) ? t + "" : t;
+  }
+  if (typeof e != "string")
+    return e === 0 ? e : +e;
+  e = e.replace(V, "");
+  var n = z.test(e);
+  return n || ee.test(e) ? ne(e.slice(2), n ? 2 : 8) : Z.test(e) ? F : +e;
+}
+var Ne = ce;
+async function be(e, t) {
+  await ke(e, t), await Ae(e, t);
+}
+async function ke({ id: e }, t) {
+  (await u.get(
+    `issues/${e}/sprints?fields=name,id,agile(name,id),goal`
+  )).data.forEach((o) => {
+    t.addNode("sprint", o), t.addRelation({
+      fromNode: "issue",
+      from: e,
+      toNode: "sprint",
+      to: o.id,
+      type: "in"
+    }), o.agile && (t.addNode("board", o.agile), t.addRelation({
+      fromNode: "issue",
+      from: e,
+      toNode: "board",
+      to: o.agile.id,
+      type: "in"
+    }), t.addRelation({
+      fromNode: "sprint",
+      from: o.id,
+      toNode: "board",
+      to: o.agile.id,
+      type: "in"
+    }));
+  });
+}
+async function Ae({ id: e }, t) {
+  (await u.get(
+    `issues/${e}/comments?${T}`
+  )).data.forEach((o) => {
+    t.addNode("comment", o), t.addRelation({
+      fromNode: "issue",
+      from: e,
+      toNode: "comment",
+      to: o.id,
+      type: "in"
     });
-    await e("issue", i.map((c) => w.flatten(c)));
-    for await (const [c, l] of s)
-      await e(c, l);
-    await n(o);
+  });
+}
+async function Fe(e) {
+  const t = e.getIssues(), n = Ne(t, 50);
+  for await (const r of n) {
+    const o = r.map((a) => be(a, e));
+    await Promise.all(o);
   }
 }
-const Y = {
+async function we({ query: e, maxDepthLevel: t }) {
+  const n = X(), r = await u.get(
+    `issues?${R}&query=${encodeURI(e)}`
+  );
+  return r.data.forEach((o) => n.addIssue(o)), await D({
+    ids: w({
+      issues: r.data,
+      addRelation: n.addIssueRelation
+    }),
+    isAlreadyLoaded: n.isAlreadyLoaded,
+    onLoadedIssue: n.addIssue,
+    addRelation: n.addIssueRelation,
+    maxDepthLevel: t
+  }), await Fe(n), {
+    issues: n.getIssues(),
+    relations: n.getRelations(),
+    nodes: n.getNodes()
+  };
+}
+async function Re(e) {
+  return we(e);
+}
+async function Ue({ addNodes: e, addRelations: t, config: n }) {
+  u.defaults.baseURL = n.url, u.defaults.headers.Authorization = `Bearer ${n.token}`;
+  for await (const r of n.issueQueries) {
+    const { issues: o, relations: a, nodes: s } = await Re({
+      query: r,
+      maxDepthLevel: n.issueLoadingMaxDepthLevel
+    });
+    await e("issue", o);
+    for await (const [i, c] of s)
+      await e(i, c);
+    await t(a);
+  }
+}
+const Le = {
   name: "youtrack-connector",
-  connect: J
+  connect: Ue
 };
 export {
-  Y as default
+  m as LinkTypeName,
+  Le as default
 };

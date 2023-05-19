@@ -36,6 +36,7 @@ async function _readFile(filePath: string, basePath?: string): Promise<FileText 
       text: textBuff.toString(),
     }
   } catch (e) {
+    console.log(`error in file: ${filePath}`)
     console.error(e)
   }
 

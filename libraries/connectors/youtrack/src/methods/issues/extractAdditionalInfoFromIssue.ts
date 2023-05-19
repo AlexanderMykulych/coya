@@ -9,7 +9,7 @@ type ExtractAdditionalInfoParam = {
 
 export function extractAdditionalInfoFromIssue(param: ExtractAdditionalInfoParam) {
   extractTags(param)
-  extractSprints(param)
+  // extractSprints(param)
   extractGitLabMR(param)
   extractAssignee(param)
   extractAssigneeQA(param)

@@ -23,8 +23,8 @@ const pool = new Tinypool({
 
 // const workingDir = ref(resolve(__dirname, '../examples/project1'))
 // const workingDir = ref(resolve(__dirname, '../../ts-analyzer'))
-// const workingDir = ref('/Users/alexandermykulych/repo/plich/user-web-test')
-const workingDir = ref('/Users/alexandermykulych/Dev/my-vitesse')
+const workingDir = ref('/Users/alexandermykulych/repo/plich/user-web-test')
+// const workingDir = ref('/Users/alexandermykulych/Dev/my-vitesse')
 // const workingDir = ref(resolve(process.cwd(), '.'))
 
 type UseAnalyzerOptions = {

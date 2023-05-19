@@ -1,4 +1,4 @@
-import type { Node } from 'coya-connectors-shared'
+import type { Node, Relation } from 'coya-connectors-shared'
 
 export enum LinkTypeName {
   Subtask = 'Subtask',
@@ -55,22 +55,21 @@ export type LoadedIssue = Issue & {
   customFields: IssueCustomField[]
 }
 
-export type IssueRelation = {
-  fromNode: string
-  from: string
-  toNode: string
-  to: string
+export type IssueRelation = Relation & {
   type: LinkTypeName | string
+}
+
+export type Sprint = {
+  id: string
+  name: string
+  goal?: string
+  agile?: AgileBoard
 }
 
 export type AgileBoard = {
   id: string
   name: string
   favorite: boolean
-  sprints: {
-    id: string
-    name: string
-  }
   owner: {
     id: string
     fullName: string

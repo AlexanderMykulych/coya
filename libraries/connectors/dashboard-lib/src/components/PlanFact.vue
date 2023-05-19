@@ -10,6 +10,7 @@ const { sprintName, tag, team, states } = withDefaults(
     states: () => ['Resolved'],
   },
 )
+const emits = defineEmits(['clickState'])
 
 const { statesSp, sp } = usePlanFact({
   sprintName,
@@ -21,6 +22,8 @@ const { statesSp, sp } = usePlanFact({
 const showAll = ref(false)
 
 const preparedStatesSp = computed(() => showAll.value ? statesSp.value : statesSp.value?.slice(0, 3))
+
+const onStateClick = (state: string) => emits('clickState', state)
 </script>
 
 <template>
@@ -32,11 +35,17 @@ const preparedStatesSp = computed(() => showAll.value ? statesSp.value : statesS
     </template>
     <template #content>
       <div pr-4>
-        <span text-6 font-extrabold underline>Planned</span><br>
+        <span
+          text-6 font-extrabold underline hover-cursor-pointer
+          @click="onStateClick('Planned')"
+        >Planned</span><br>
         {{ sp }}
       </div>
       <div v-for="item in preparedStatesSp" :key="item.name" pr-4>
-        <span text-6 font-extrabold underline>{{ item.name }}</span> <br>
+        <span text-6 font-extrabold underline hover-cursor-pointer @click="onStateClick(item.name)">
+          {{ item.name }}
+        </span>
+        <br>
         {{ item.value }} ({{ item.percent }}%)
       </div>
       <tabler-layout-sidebar-left-expand v-if="!showAll" @click="showAll = true" />

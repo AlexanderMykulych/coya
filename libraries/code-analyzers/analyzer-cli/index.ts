@@ -27,7 +27,7 @@ cli
     const state = await verifyConnection()
     console.log(state);
     // await insertProjectInfoToDb(options.path)
-    console.log('analyzed')
+    console.log('connection verified!')
 
     await runMentalModelWebApp()
   })

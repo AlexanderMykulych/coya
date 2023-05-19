@@ -3,6 +3,7 @@ import { loadIssuesByIds } from './loadIssuesByIds'
 import { issueFields } from './issueFields'
 import { createLoadedContext } from './createLoadedContext'
 import type { GetIssuesParam } from './types'
+import { loadIssuesDetails } from './loadIssuesDetails'
 import { http } from '@/axios'
 import type { GetIssuesResponse, LoadedIssue } from '@/types.domain'
 
@@ -25,6 +26,8 @@ export async function loadIssues({ query, maxDepthLevel }: GetIssuesParam): Prom
     addRelation: context.addIssueRelation,
     maxDepthLevel,
   })
+
+  await loadIssuesDetails(context)
 
   return {
     issues: context.getIssues(),

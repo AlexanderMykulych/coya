@@ -1,17 +1,17 @@
-import i from "neo4j-driver";
+import a from "neo4j-driver";
 function u() {
-  const o = i.driver("neo4j+s://aa84864b.databases.neo4j.io", i.auth.basic("neo4j", "BHK4W_phDl5-U9TVZ7iFic3Io4pm-CrPYB4cWoAnWhc"));
+  const s = a.driver("neo4j+s://cfa19696.databases.neo4j.io", a.auth.basic("neo4j", "tY1HmNeSn1AkfrBvmTm1jGn2u34Y305azQAMX6lRhdk"));
   return {
-    async insert(e, s) {
-      const n = o.session(), t = `UNWIND $items AS node CREATE (n:${e}) SET n = node`;
+    async insert(n, o) {
+      const e = s.session(), t = `UNWIND $items AS node CREATE (n:${n}) SET n = node`;
       try {
-        await n.run(t, { items: s });
+        await e.run(t, { items: o });
       } finally {
-        await n.close();
+        await e.close();
       }
     },
-    async insertRelations(e) {
-      const s = o.session(), n = `
+    async insertRelations(n) {
+      const o = s.session(), e = `
       UNWIND $items AS relation
       CALL apoc.merge.node([relation.fromNode], { id: relation.from }) YIELD node as n1
       CALL apoc.merge.node([relation.toNode], { id: relation.to }) YIELD node as n2
@@ -19,27 +19,29 @@ function u() {
       RETURN n1, n2, rel
       `;
       try {
-        const t = c(e, 200);
-        let a = 0;
+        const t = c(n, 200);
+        let i = 0;
         for await (const r of t)
-          await s.run(n, { items: r }), console.log(`chunk ${a++} inserted`);
+          await o.run(e, { items: r }), console.log(`chunk ${i++} inserted`);
+      } catch (t) {
+        console.log(n[0], t);
       } finally {
-        await s.close();
+        await o.close();
       }
     },
     async clearDb() {
-      await o.session().run("MATCH (n) DETACH DELETE n");
+      await s.session().run("MATCH (n) DETACH DELETE n");
     },
-    async query(e, s) {
-      return await o.session().run(e, s);
+    async query(n, o) {
+      return await s.session().run(n, o);
     }
   };
 }
-function c(o, e) {
-  const s = [];
-  for (let n = 0; n < o.length; n += e)
-    s.push(o.slice(n, n + e));
-  return s;
+function c(s, n) {
+  const o = [];
+  for (let e = 0; e < s.length; e += n)
+    o.push(s.slice(e, e + n));
+  return o;
 }
 export {
   u as getNeo4j

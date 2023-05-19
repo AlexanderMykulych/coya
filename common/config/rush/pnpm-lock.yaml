@@ -55,6 +55,7 @@ specifiers:
   '@types/jest': ^27.0.1
   '@types/json-to-ast': ^2.1.2
   '@types/lodash': ^4.14.172
+  '@types/lodash.chunk': ~4.2.7
   '@types/lodash.throttle': ~4.1.7
   '@types/markdown-it-link-attributes': ^3.0.1
   '@types/micromatch': ~4.0.2
@@ -122,6 +123,7 @@ specifiers:
   language-map: ~1.5.0
   lint-staged: ^13.1.2
   lodash: ^4.17.21
+  lodash.chunk: ~4.2.0
   lodash.throttle: ~4.1.1
   markdown-it-link-attributes: ^4.0.0
   markdown-it-prism: ^2.2.2
@@ -267,6 +269,7 @@ dependencies:
   '@types/jest': 27.5.2
   '@types/json-to-ast': 2.1.2
   '@types/lodash': 4.14.184
+  '@types/lodash.chunk': 4.2.7
   '@types/lodash.throttle': 4.1.7
   '@types/markdown-it-link-attributes': 3.0.1
   '@types/micromatch': 4.0.2
@@ -334,6 +337,7 @@ dependencies:
   language-map: 1.5.0
   lint-staged: 13.2.0
   lodash: 4.17.21
+  lodash.chunk: 4.2.0
   lodash.throttle: 4.1.1
   markdown-it-link-attributes: 4.0.1
   markdown-it-prism: 2.3.0
@@ -2590,9 +2594,9 @@ packages:
       - supports-color
     dev: false
 
-  /@intlify/bundle-utils/5.2.0_vue-i18n@9.2.2:
-    resolution: {integrity: sha512-rIfoNUTBoZK6IfaEeuoYMQZSuAXhPyZoy+UsdZj+V4eM632ynN1bGt5ttkpGO8xe0c+esfYslgJxBz//bdu4qg==}
-    engines: {node: '>= 12'}
+  /@intlify/bundle-utils/6.0.0_vue-i18n@9.2.2:
+    resolution: {integrity: sha512-c8nTDgsTrBqVk3LPoF/YEarqeqcW0XAY5Y0UmFl5VKWKRNQh47jzvHRDmeRWhos5bUw1zIdiTixrs99FMJ9j5g==}
+    engines: {node: '>= 14.16'}
     peerDependencies:
       petite-vue-i18n: '*'
       vue-i18n: '*'
@@ -2602,11 +2606,14 @@ packages:
       vue-i18n:
         optional: true
     dependencies:
-      '@intlify/message-compiler': 9.3.0-beta.16
-      '@intlify/shared': 9.3.0-beta.16
+      '@intlify/message-compiler': 9.3.0-beta.17
+      '@intlify/shared': 9.3.0-beta.17
       acorn: 8.8.2
+      escodegen: 2.0.0
       estree-walker: 2.0.2
       jsonc-eslint-parser: 1.4.1
+      magic-string: 0.30.0
+      mlly: 1.2.0
       source-map: 0.6.1
       vue-i18n: 9.2.2_vue@3.2.47
       yaml-eslint-parser: 0.3.2
@@ -2637,11 +2644,11 @@ packages:
       source-map: 0.6.1
     dev: false
 
-  /@intlify/message-compiler/9.3.0-beta.16:
-    resolution: {integrity: sha512-CGQI3xRcs1ET75eDQ0DUy3MRYOqTauRIIgaMoISKiF83gqRWg93FqN8lGMKcpBqaF4tI0JhsfosCaGiBL9+dnw==}
+  /@intlify/message-compiler/9.3.0-beta.17:
+    resolution: {integrity: sha512-i7hvVIRk1Ax2uKa9xLRJCT57to08OhFMhFXXjWN07rmx5pWQYQ23MfX1xgggv9drnWTNhqEiD+u4EJeHoS5+Ww==}
     engines: {node: '>= 14'}
     dependencies:
-      '@intlify/shared': 9.3.0-beta.16
+      '@intlify/shared': 9.3.0-beta.17
       source-map: 0.6.1
     dev: false
 
@@ -2650,8 +2657,8 @@ packages:
     engines: {node: '>= 14'}
     dev: false
 
-  /@intlify/shared/9.3.0-beta.16:
-    resolution: {integrity: sha512-kXbm4svALe3lX+EjdJxfnabOphqS4yQ1Ge/iIlR8tvUiYRCoNz3hig1M4336iY++Dfx5ytEQJPNjIcknNIuvig==}
+  /@intlify/shared/9.3.0-beta.17:
+    resolution: {integrity: sha512-mscf7RQsUTOil35jTij4KGW1RC9SWQjYScwLxP53Ns6g24iEd5HN7ksbt9O6FvTmlQuX77u+MXpBdfJsGqizLQ==}
     engines: {node: '>= 14'}
     dev: false
 
@@ -2670,8 +2677,8 @@ packages:
       vue-i18n:
         optional: true
     dependencies:
-      '@intlify/bundle-utils': 5.2.0_vue-i18n@9.2.2
-      '@intlify/shared': 9.3.0-beta.16
+      '@intlify/bundle-utils': 6.0.0_vue-i18n@9.2.2
+      '@intlify/shared': 9.3.0-beta.17
       '@rollup/pluginutils': 4.2.1
       debug: 4.3.4
       fast-glob: 3.2.11
@@ -3924,6 +3931,12 @@ packages:
 
   /@types/linkify-it/3.0.2:
     resolution: {integrity: sha512-HZQYqbiFVWufzCwexrvh694SOim8z2d+xJl5UNamcvQFejLY/2YUtzXHYi3cHdI7PMlS8ejH2slRAOJQ32aNbA==}
+    dev: false
+
+  /@types/lodash.chunk/4.2.7:
+    resolution: {integrity: sha512-//tmaWHiANgToom/YYYKKqiCtlNz11fwYtMUUbaemNSbWTI+2zHtYW5nt1PHNCRWHPAJHHhn4UVFD9LKUFvatA==}
+    dependencies:
+      '@types/lodash': 4.14.184
     dev: false
 
   /@types/lodash.throttle/4.1.7:
@@ -5817,6 +5830,10 @@ packages:
       is-string: 1.0.7
     dev: false
 
+  /array-timsort/1.0.3:
+    resolution: {integrity: sha512-/+3GRL7dDAGEfM6TseQk/U+mi18TU2Ms9I3UlLdUMhz2hbvGNTKdj9xniwXfUqgYhHxRx0+8UnKkvlNwVU+cWQ==}
+    dev: false
+
   /array-union/2.1.0:
     resolution: {integrity: sha512-HGyxoOTYUyCM6stUe6EJgnd4EoewAI7zMdfqO+kGjnlZmBDz/cR5pf8r/cR4Wq60sL/p0IkcjUEEPwS3GFrIyw==}
     engines: {node: '>=8'}
@@ -7029,6 +7046,17 @@ packages:
   /commander/8.3.0:
     resolution: {integrity: sha512-OkTL9umf+He2DZkUq8f8J9of7yL6RJKI24dVITBmNfZBmri9zYZQrKkuXiKhyfPSu8tUhnVBB1iKXevvnlR4Ww==}
     engines: {node: '>= 12'}
+    dev: false
+
+  /comment-json/4.2.3:
+    resolution: {integrity: sha512-SsxdiOf064DWoZLH799Ata6u7iV658A11PlWtZATDlXPpKGJnbJZ5Z24ybixAi+LUUqJ/GKowAejtC5GFUG7Tw==}
+    engines: {node: '>= 6'}
+    dependencies:
+      array-timsort: 1.0.3
+      core-util-is: 1.0.3
+      esprima: 4.0.1
+      has-own-prop: 2.0.0
+      repeat-string: 1.6.1
     dev: false
 
   /commenting/1.1.0:
@@ -10326,6 +10354,11 @@ packages:
     engines: {node: '>=8'}
     dev: false
 
+  /has-own-prop/2.0.0:
+    resolution: {integrity: sha512-Pq0h+hvsVm6dDEa8x82GnLSYHOzNDt7f0ddFa3FqcQlgzEiptPqL+XrOJNavjOzSYiYWIrgeVYYgGlLmnxwilQ==}
+    engines: {node: '>=8'}
+    dev: false
+
   /has-property-descriptors/1.0.0:
     resolution: {integrity: sha512-62DVLZGoiEBDHQyqG4w9xCuZ7eJEwNmJRWw2VY84Oedb7WFcA27fiEVe8oUQx9hAUJ4ekurquucTGwsyO1XGdQ==}
     dependencies:
@@ -12834,6 +12867,10 @@ packages:
 
   /lodash.camelcase/4.3.0:
     resolution: {integrity: sha512-TwuEnCnxbc3rAvhf/LbG7tJUDzhqXyFnv3dtzLOPgCG/hODL7WFnsbwktkD7yUV0RrreP/l1PALq/YSg6VvjlA==}
+    dev: false
+
+  /lodash.chunk/4.2.0:
+    resolution: {integrity: sha512-ZzydJKfUHJwHa+hF5X66zLFCBrWn5GeF28OHEr4WVWtNDXlQ/IjWKPBiikqKo2ne0+v6JgCgJ0GzJp8k8bHC7w==}
     dev: false
 
   /lodash.debounce/4.0.8:
@@ -19589,7 +19626,7 @@ packages:
     dev: false
 
   file:projects/coya-dashboard-lib.tgz_d5d905911074504cbd78602acb5ad30d:
-    resolution: {integrity: sha512-bJ89R/6Bdy6lgfYEwKTsBROhh8XTKdhBRoQcYkWPpM09/VEAf3cbHUYqcjL5oqFNnWQP3BQOr1w53wEFI4OqCw==, tarball: file:projects/coya-dashboard-lib.tgz}
+    resolution: {integrity: sha512-qEF7Bw528qDt03vP/mw0EJnl5ZiGY9zuhbW0N3idCa4of/J6jqD/zwBfbJ96WbtChKs9IIF823kEztMlCEX4DA==, tarball: file:projects/coya-dashboard-lib.tgz}
     id: file:projects/coya-dashboard-lib.tgz
     name: '@rush-temp/coya-dashboard-lib'
     version: 0.0.0
@@ -20236,7 +20273,7 @@ packages:
     dev: false
 
   file:projects/coya-ts-analyzer.tgz_critters@0.0.16+jest@27.5.1:
-    resolution: {integrity: sha512-VWNJaFL6yFu0MmFcQQBaUXRWo86DJL/KiyDlXYjA3/LFAVKt7Gbplnz83ottgqiiBPRAv3lI+ndsvdvysZdi9A==, tarball: file:projects/coya-ts-analyzer.tgz}
+    resolution: {integrity: sha512-y2NyjhVV9Lf79T5s9JSq34cdj/Jtf7K9B9/QFTLfOJBozbt/7MknUpSBkmqRjTj4PEMYMzBRN87h3z2eWT4kmg==, tarball: file:projects/coya-ts-analyzer.tgz}
     id: file:projects/coya-ts-analyzer.tgz
     name: '@rush-temp/coya-ts-analyzer'
     version: 0.0.0
@@ -20262,6 +20299,7 @@ packages:
       c8: 7.12.0
       chokidar: 3.5.3
       clipboard: 2.0.11
+      comment-json: 4.2.3
       cypress: 10.7.0
       eslint: 8.36.0
       find-free-port: 2.0.0
@@ -20665,7 +20703,7 @@ packages:
     dev: false
 
   file:projects/coya-youtrack-connector.tgz_69d3c7bb54adb4ddc86fd4d1129df2e9:
-    resolution: {integrity: sha512-coahfHpr+6yR27xWaY2V/DRbPU0IsFRE0LLmIoZYzR0IdEl3wno8K3zDKQniQ0moZQDQd66wLeVrZ2Stk575uQ==, tarball: file:projects/coya-youtrack-connector.tgz}
+    resolution: {integrity: sha512-WOaNRn0OQZmi8P6FkEUmC12jSp3PcRrT9Et0/+GJ4SfN8DoixTBndqaDI0/WsToEEwLdVmavSIatTayyJLHjCA==, tarball: file:projects/coya-youtrack-connector.tgz}
     id: file:projects/coya-youtrack-connector.tgz
     name: '@rush-temp/coya-youtrack-connector'
     version: 0.0.0
@@ -20673,6 +20711,7 @@ packages:
       '@antfu/eslint-config': 0.36.0_bdd070fe65bfbf1ed21359f2a881ed44
       '@iconify-json/carbon': 1.1.16
       '@types/flat': 5.0.2
+      '@types/lodash.chunk': 4.2.7
       '@types/node': 18.15.0
       '@unocss/reset': 0.50.4
       '@vitejs/plugin-vue': 4.0.0_vite@4.1.4+vue@3.2.47
@@ -20683,6 +20722,7 @@ packages:
       flat: 5.0.2
       flatted: 3.2.7
       jsdom: 21.1.0
+      lodash.chunk: 4.2.0
       neo4j-driver: 5.5.0
       pnpm: 7.29.1
       taze: 0.9.0

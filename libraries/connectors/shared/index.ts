@@ -3,6 +3,7 @@ export type Relation = {
   from: string
   toNode: string
   to: string
+  type: string
 }
 
 export type Node<T = Record<string, any>> = {
