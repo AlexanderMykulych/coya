@@ -1,5 +1,0 @@
----
-useCoya: false
----
-
-## upSWOT Architecture

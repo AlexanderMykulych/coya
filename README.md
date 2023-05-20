@@ -42,7 +42,7 @@ Here is an example of how to use it:
 # Run locally
 First time:
 ```bash
-rush update
+pnpm i
 ```
 Run project:
 ```bash
