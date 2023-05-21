@@ -11,6 +11,103 @@ importers:
         specifier: latest
         version: 16.0.5
 
+  packages/collectors/apps/dashboard-lib:
+    dependencies:
+      '@types/flat':
+        specifier: ~5.0.2
+        version: 5.0.2
+      '@vueuse/core':
+        specifier: ^9.13.0
+        version: 9.13.0(vue@3.2.47)
+      coya-neo4j:
+        specifier: ~1.0.0
+        version: link:../../../neo4j
+      coya-youtrack-connector:
+        specifier: ~1.0.0
+        version: link:../../connectors/youtrack
+      flat:
+        specifier: ~5.0.2
+        version: 5.0.2
+      unplugin-icons:
+        specifier: ~0.15.3
+        version: 0.15.3(@vue/compiler-sfc@3.2.31)
+      vue:
+        specifier: ^3.2.47
+        version: 3.2.47
+      vue-router:
+        specifier: ^4.1.6
+        version: 4.1.6(vue@3.2.47)
+      vuetify:
+        specifier: 3.3.0
+        version: 3.3.0(typescript@4.9.5)(vue@3.2.47)
+    devDependencies:
+      '@antfu/eslint-config':
+        specifier: ^0.36.0
+        version: 0.36.0(eslint@8.35.0)(jest@25.5.4)(typescript@4.9.5)
+      '@iconify-json/carbon':
+        specifier: ^1.1.16
+        version: 1.1.16
+      '@types/node':
+        specifier: ^18.14.6
+        version: 18.14.6
+      '@unocss/reset':
+        specifier: ^0.50.3
+        version: 0.50.3
+      '@vitejs/plugin-vue':
+        specifier: ^4.0.0
+        version: 4.0.0(vite@4.1.4)(vue@3.2.47)
+      '@vue-macros/volar':
+        specifier: ^0.8.4
+        version: 0.8.4(@vue-macros/reactivity-transform@0.2.5)(vue-tsc@1.2.0)(vue@3.2.47)
+      '@vue/test-utils':
+        specifier: ^2.3.0
+        version: 2.3.0(vue@3.2.47)
+      eslint:
+        specifier: ^8.35.0
+        version: 8.35.0
+      jsdom:
+        specifier: ^21.1.0
+        version: 21.1.0
+      lint-staged:
+        specifier: ^13.1.2
+        version: 13.1.2
+      pnpm:
+        specifier: ^7.28.0
+        version: 7.28.0
+      simple-git-hooks:
+        specifier: ^2.8.1
+        version: 2.8.1
+      taze:
+        specifier: ^0.9.0
+        version: 0.9.0
+      typescript:
+        specifier: ^4.9.5
+        version: 4.9.5
+      unocss:
+        specifier: ^0.50.3
+        version: 0.50.3(postcss@8.4.23)(rollup@3.22.0)(vite@4.1.4)
+      unplugin-auto-import:
+        specifier: ^0.15.0
+        version: 0.15.0(@vueuse/core@9.13.0)(rollup@3.22.0)
+      unplugin-vue-components:
+        specifier: ^0.24.0
+        version: 0.24.0(rollup@3.22.0)(vue@3.2.47)
+      unplugin-vue-macros:
+        specifier: ^1.9.1
+        version: 1.9.1(@vueuse/core@9.13.0)(vite@4.1.4)(vue@3.2.47)
+      vite:
+        specifier: ^4.1.4
+        version: 4.1.4(@types/node@18.14.6)(sass@1.53.0)
+      vite-plugin-pages:
+        specifier: ^0.28.0
+        version: 0.28.0(@vue/compiler-sfc@3.2.31)(vite@4.1.4)
+      vitest:
+        specifier: ^0.29.2
+        version: 0.29.2(@vitest/ui@0.18.1)(jsdom@21.1.0)(sass@1.53.0)
+      vue-tsc:
+        specifier: ^1.2.0
+        version: 1.2.0(typescript@4.9.5)
+
   packages/collectors/code/analyzer-cli:
     dependencies:
       '@antfu/eslint-config':
@@ -93,13 +190,13 @@ importers:
         version: 4.9.5
       unocss:
         specifier: ^0.50.3
-        version: 0.50.3(postcss@8.4.23)(rollup@2.79.1)(vite@4.1.4)
+        version: 0.50.3(postcss@8.4.23)(rollup@3.22.0)(vite@4.1.4)
       unplugin-auto-import:
         specifier: ^0.15.0
-        version: 0.15.0(@vueuse/core@9.13.0)(rollup@2.79.1)
+        version: 0.15.0(@vueuse/core@9.13.0)(rollup@3.22.0)
       unplugin-vue-components:
         specifier: ^0.24.0
-        version: 0.24.0(rollup@2.79.1)(vue@3.2.47)
+        version: 0.24.0(rollup@3.22.0)(vue@3.2.47)
       vite:
         specifier: ^4.1.4
         version: 4.1.4(@types/node@18.14.6)(sass@1.53.0)
@@ -328,13 +425,13 @@ importers:
         version: 4.9.5
       unocss:
         specifier: ^0.50.3
-        version: 0.50.3(postcss@8.4.23)(rollup@2.79.1)(vite@4.1.4)
+        version: 0.50.3(postcss@8.4.23)(rollup@3.22.0)(vite@4.1.4)
       unplugin-auto-import:
         specifier: ^0.15.0
-        version: 0.15.0(@vueuse/core@9.13.0)(rollup@2.79.1)
+        version: 0.15.0(@vueuse/core@9.13.0)(rollup@3.22.0)
       unplugin-vue-components:
         specifier: ^0.24.0
-        version: 0.24.0(rollup@2.79.1)(vue@3.2.47)
+        version: 0.24.0(rollup@3.22.0)(vue@3.2.47)
       vite:
         specifier: ^4.1.4
         version: 4.1.4(@types/node@18.14.6)(sass@1.53.0)
@@ -618,13 +715,13 @@ importers:
         version: 4.9.5
       unocss:
         specifier: ^0.50.3
-        version: 0.50.3(postcss@8.4.23)(rollup@2.79.1)(vite@4.1.4)
+        version: 0.50.3(postcss@8.4.23)(rollup@3.22.0)(vite@4.1.4)
       unplugin-auto-import:
         specifier: ^0.15.0
-        version: 0.15.0(@vueuse/core@9.13.0)(rollup@2.79.1)
+        version: 0.15.0(@vueuse/core@9.13.0)(rollup@3.22.0)
       unplugin-vue-components:
         specifier: ^0.24.0
-        version: 0.24.0(rollup@2.79.1)(vue@3.2.47)
+        version: 0.24.0(rollup@3.22.0)(vue@3.2.47)
       vite:
         specifier: ^4.1.4
         version: 4.1.4(@types/node@18.14.6)(sass@1.53.0)
@@ -711,13 +808,13 @@ importers:
         version: 4.9.5
       unocss:
         specifier: ^0.50.3
-        version: 0.50.3(postcss@8.4.23)(rollup@2.79.1)(vite@4.1.4)
+        version: 0.50.3(postcss@8.4.23)(rollup@3.22.0)(vite@4.1.4)
       unplugin-auto-import:
         specifier: ^0.15.0
-        version: 0.15.0(@vueuse/core@9.13.0)(rollup@2.79.1)
+        version: 0.15.0(@vueuse/core@9.13.0)(rollup@3.22.0)
       unplugin-vue-components:
         specifier: ^0.24.0
-        version: 0.24.0(rollup@2.79.1)(vue@3.2.47)
+        version: 0.24.0(rollup@3.22.0)(vue@3.2.47)
       vite:
         specifier: ^4.1.4
         version: 4.1.4(@types/node@18.14.6)(sass@1.53.0)
@@ -742,100 +839,6 @@ importers:
       ws:
         specifier: ~8.12.0
         version: 8.12.0
-
-  packages/collectors/connectors/dashboard-lib:
-    dependencies:
-      '@types/flat':
-        specifier: ~5.0.2
-        version: 5.0.2
-      '@vueuse/core':
-        specifier: ^9.13.0
-        version: 9.13.0(vue@3.2.47)
-      coya-neo4j:
-        specifier: ~1.0.0
-        version: link:../../../neo4j
-      coya-youtrack-connector:
-        specifier: ~1.0.0
-        version: link:../youtrack
-      flat:
-        specifier: ~5.0.2
-        version: 5.0.2
-      unplugin-icons:
-        specifier: ~0.15.3
-        version: 0.15.3(@vue/compiler-sfc@3.2.31)
-      vue:
-        specifier: ^3.2.47
-        version: 3.2.47
-      vue-router:
-        specifier: ^4.1.6
-        version: 4.1.6(vue@3.2.47)
-    devDependencies:
-      '@antfu/eslint-config':
-        specifier: ^0.36.0
-        version: 0.36.0(eslint@8.35.0)(jest@25.5.4)(typescript@4.9.5)
-      '@iconify-json/carbon':
-        specifier: ^1.1.16
-        version: 1.1.16
-      '@types/node':
-        specifier: ^18.14.6
-        version: 18.14.6
-      '@unocss/reset':
-        specifier: ^0.50.3
-        version: 0.50.3
-      '@vitejs/plugin-vue':
-        specifier: ^4.0.0
-        version: 4.0.0(vite@4.1.4)(vue@3.2.47)
-      '@vue-macros/volar':
-        specifier: ^0.8.4
-        version: 0.8.4(@vue-macros/reactivity-transform@0.2.5)(vue-tsc@1.2.0)(vue@3.2.47)
-      '@vue/test-utils':
-        specifier: ^2.3.0
-        version: 2.3.0(vue@3.2.47)
-      eslint:
-        specifier: ^8.35.0
-        version: 8.35.0
-      jsdom:
-        specifier: ^21.1.0
-        version: 21.1.0
-      lint-staged:
-        specifier: ^13.1.2
-        version: 13.1.2
-      pnpm:
-        specifier: ^7.28.0
-        version: 7.28.0
-      simple-git-hooks:
-        specifier: ^2.8.1
-        version: 2.8.1
-      taze:
-        specifier: ^0.9.0
-        version: 0.9.0
-      typescript:
-        specifier: ^4.9.5
-        version: 4.9.5
-      unocss:
-        specifier: ^0.50.3
-        version: 0.50.3(postcss@8.4.23)(rollup@2.79.1)(vite@4.1.4)
-      unplugin-auto-import:
-        specifier: ^0.15.0
-        version: 0.15.0(@vueuse/core@9.13.0)(rollup@2.79.1)
-      unplugin-vue-components:
-        specifier: ^0.24.0
-        version: 0.24.0(rollup@2.79.1)(vue@3.2.47)
-      unplugin-vue-macros:
-        specifier: ^1.9.1
-        version: 1.9.1(@vueuse/core@9.13.0)(vite@4.1.4)(vue@3.2.47)
-      vite:
-        specifier: ^4.1.4
-        version: 4.1.4(@types/node@18.14.6)(sass@1.53.0)
-      vite-plugin-pages:
-        specifier: ^0.28.0
-        version: 0.28.0(@vue/compiler-sfc@3.2.31)(vite@4.1.4)
-      vitest:
-        specifier: ^0.29.2
-        version: 0.29.2(@vitest/ui@0.18.1)(jsdom@21.1.0)(sass@1.53.0)
-      vue-tsc:
-        specifier: ^1.2.0
-        version: 1.2.0(typescript@4.9.5)
 
   packages/collectors/connectors/gitlab:
     dependencies:
@@ -895,13 +898,13 @@ importers:
         version: 4.9.5
       unocss:
         specifier: ^0.50.3
-        version: 0.50.3(postcss@8.4.23)(rollup@2.79.1)(vite@4.1.4)
+        version: 0.50.3(postcss@8.4.23)(rollup@3.22.0)(vite@4.1.4)
       unplugin-auto-import:
         specifier: ^0.15.0
-        version: 0.15.0(@vueuse/core@9.13.0)(rollup@2.79.1)
+        version: 0.15.0(@vueuse/core@9.13.0)(rollup@3.22.0)
       unplugin-vue-components:
         specifier: ^0.24.0
-        version: 0.24.0(rollup@2.79.1)(vue@3.2.47)
+        version: 0.24.0(rollup@3.22.0)(vue@3.2.47)
       vite:
         specifier: ^4.1.4
         version: 4.1.4(@types/node@18.14.6)(sass@1.53.0)
@@ -982,13 +985,13 @@ importers:
         version: 4.9.5
       unocss:
         specifier: ^0.50.3
-        version: 0.50.3(postcss@8.4.23)(rollup@2.79.1)(vite@4.1.4)
+        version: 0.50.3(postcss@8.4.23)(rollup@3.22.0)(vite@4.1.4)
       unplugin-auto-import:
         specifier: ^0.15.0
-        version: 0.15.0(@vueuse/core@9.13.0)(rollup@2.79.1)
+        version: 0.15.0(@vueuse/core@9.13.0)(rollup@3.22.0)
       unplugin-vue-components:
         specifier: ^0.24.0
-        version: 0.24.0(rollup@2.79.1)(vue@3.2.47)
+        version: 0.24.0(rollup@3.22.0)(vue@3.2.47)
       vite:
         specifier: ^4.1.4
         version: 4.1.4(@types/node@18.14.6)(sass@1.53.0)
@@ -1078,13 +1081,13 @@ importers:
         version: 4.9.5
       unocss:
         specifier: ^0.50.3
-        version: 0.50.3(postcss@8.4.23)(rollup@2.79.1)(vite@4.1.4)
+        version: 0.50.3(postcss@8.4.23)(rollup@3.22.0)(vite@4.1.4)
       unplugin-auto-import:
         specifier: ^0.15.0
-        version: 0.15.0(@vueuse/core@9.13.0)(rollup@2.79.1)
+        version: 0.15.0(@vueuse/core@9.13.0)(rollup@3.22.0)
       unplugin-vue-components:
         specifier: ^0.24.0
-        version: 0.24.0(rollup@2.79.1)(vue@3.2.47)
+        version: 0.24.0(rollup@3.22.0)(vue@3.2.47)
       vite:
         specifier: ^4.1.4
         version: 4.1.4(@types/node@18.14.6)(sass@1.53.0)
@@ -2152,13 +2155,13 @@ importers:
         version: 4.9.5
       unocss:
         specifier: ^0.50.3
-        version: 0.50.3(postcss@8.4.23)(rollup@2.79.1)(vite@4.1.4)
+        version: 0.50.3(postcss@8.4.23)(rollup@3.22.0)(vite@4.1.4)
       unplugin-auto-import:
         specifier: ^0.15.0
-        version: 0.15.0(@vueuse/core@9.13.0)(rollup@2.79.1)
+        version: 0.15.0(@vueuse/core@9.13.0)(rollup@3.22.0)
       unplugin-vue-components:
         specifier: ^0.24.0
-        version: 0.24.0(rollup@2.79.1)(vue@3.2.47)
+        version: 0.24.0(rollup@3.22.0)(vue@3.2.47)
       vite:
         specifier: ^4.1.4
         version: 4.1.4(@types/node@18.14.6)(sass@1.53.0)
@@ -4797,7 +4800,6 @@ packages:
     transitivePeerDependencies:
       - rollup
       - supports-color
-    dev: false
 
   /@nuxt/schema@3.5.0(rollup@2.79.1):
     resolution: {integrity: sha512-zz7S5RTCTGSCAyfNxO0R+TYvgk7WQdHUWJiAiTFQ+iFtqQkb/re1I86Ba9VKTJjZmm3fUI5kT5Y62emJcOLlXw==}
@@ -4832,7 +4834,6 @@ packages:
     transitivePeerDependencies:
       - rollup
       - supports-color
-    dev: false
 
   /@nx/nx-darwin-arm64@16.2.1:
     resolution: {integrity: sha512-xK/dL5T2R8zrcD8/13PeaYH/LBcYeaELIZkXGdGbtQ8WeFHjPJLBfuWo/7Se7KSWIXLIJEeYrVZwyxuei1dOTA==}
@@ -5212,7 +5213,6 @@ packages:
       estree-walker: 2.0.2
       picomatch: 2.3.1
       rollup: 3.22.0
-    dev: false
 
   /@rushstack/node-core-library@3.59.0(@types/node@18.14.6):
     resolution: {integrity: sha512-f8ilzooAu8vj60dDe7weqHvR1NujOaKfe3TaNgAoT22rk+daUTmDtY3TlVGJ3HayVPmw3ffWToDatITi7Ic4ag==}
@@ -5896,7 +5896,6 @@ packages:
     transitivePeerDependencies:
       - rollup
       - vite
-    dev: false
 
   /@unocss/cli@0.50.3(rollup@2.79.1):
     resolution: {integrity: sha512-eIDFy2VZtTsfZ5ZpVf8YckS27UjdLuO7A6eJDv0ZZCKF6ITXTtfSkB9+N6bNNVkY/gAbb1ctvzytvCn6aUhyGg==}
@@ -5939,7 +5938,6 @@ packages:
       perfect-debounce: 0.1.3
     transitivePeerDependencies:
       - rollup
-    dev: false
 
   /@unocss/config@0.50.3:
     resolution: {integrity: sha512-H1Sua3qP0cvHI4g7DzQw1QTgUPz31ffciWpl5xi3WSx+n8Lj9kA94SV5D2r3NRYpTQKc4VjFY+mJLOMofg5w6A==}
@@ -6093,7 +6091,6 @@ packages:
       vite: 4.1.4(@types/node@18.14.6)(sass@1.53.0)
     transitivePeerDependencies:
       - rollup
-    dev: false
 
   /@vitejs/plugin-vue@4.0.0(vite@4.1.4)(vue@3.2.47):
     resolution: {integrity: sha512-e0X4jErIxAB5oLtDqbHvHpJe/uWNkdpYV83AOG2xo2tEVSzCzewgJMtREZM30wXnM5ls90hxiOtAuVU6H5JgbA==}
@@ -6200,7 +6197,7 @@ packages:
     resolution: {integrity: sha512-ooFpF1J3Cuwryjt1bwpp/aevWwQZg4bTyD7hfIdYoL6SP4Mp+ewp+zI/pbxmCZOcIPy04degUhcMo0PQA9bLnw==}
     engines: {node: '>=14.19.0'}
     dependencies:
-      '@rollup/pluginutils': 5.0.2(rollup@2.79.1)
+      '@rollup/pluginutils': 5.0.2(rollup@3.22.0)
       '@vue-macros/api': 0.4.10(vue@3.2.47)
       '@vue-macros/common': 1.1.4(vue@3.2.47)
       unplugin: 1.3.1
@@ -6235,7 +6232,7 @@ packages:
         optional: true
     dependencies:
       '@babel/types': 7.21.5
-      '@rollup/pluginutils': 5.0.2(rollup@2.79.1)
+      '@rollup/pluginutils': 5.0.2(rollup@3.22.0)
       '@vue/compiler-sfc': 3.2.47
       local-pkg: 0.4.3
       magic-string-ast: 0.1.2
@@ -6254,7 +6251,7 @@ packages:
       '@vueuse/core':
         optional: true
     dependencies:
-      '@rollup/pluginutils': 5.0.2(rollup@2.79.1)
+      '@rollup/pluginutils': 5.0.2(rollup@3.22.0)
       '@vue-macros/common': 1.1.4(vue@3.2.47)
       '@vueuse/core': 9.13.0(vue@3.2.47)
       ast-walker-scope: 0.4.1
@@ -6270,7 +6267,7 @@ packages:
     peerDependencies:
       vue: ^2.7.0 || ^3.2.25
     dependencies:
-      '@rollup/pluginutils': 5.0.2(rollup@2.79.1)
+      '@rollup/pluginutils': 5.0.2(rollup@3.22.0)
       '@vue-macros/common': 1.1.4(vue@3.2.47)
       unplugin: 1.3.1
       vue: 3.2.47
@@ -6285,7 +6282,7 @@ packages:
       '@vue-macros/reactivity-transform': ^0.2.4
       vue: ^2.7.0 || ^3.2.25
     dependencies:
-      '@rollup/pluginutils': 5.0.2(rollup@2.79.1)
+      '@rollup/pluginutils': 5.0.2(rollup@3.22.0)
       '@vue-macros/common': 1.1.4(vue@3.2.47)
       '@vue-macros/reactivity-transform': 0.2.4(vue@3.2.47)
       unplugin: 1.3.1
@@ -6301,7 +6298,7 @@ packages:
       '@vue-macros/reactivity-transform': ^0.2.5
       vue: ^2.7.0 || ^3.2.25
     dependencies:
-      '@rollup/pluginutils': 5.0.2(rollup@2.79.1)
+      '@rollup/pluginutils': 5.0.2(rollup@3.22.0)
       '@vue-macros/common': 1.1.4(vue@3.2.47)
       '@vue-macros/reactivity-transform': 0.2.5(vue@3.2.47)
       unplugin: 1.3.1
@@ -6316,7 +6313,7 @@ packages:
     peerDependencies:
       vue: ^2.7.0 || ^3.0.0
     dependencies:
-      '@rollup/pluginutils': 5.0.2(rollup@2.79.1)
+      '@rollup/pluginutils': 5.0.2(rollup@3.22.0)
       '@vue-macros/common': 1.1.4(vue@3.2.47)
       unplugin: 1.3.1
       vue: 3.2.47
@@ -6330,7 +6327,7 @@ packages:
     peerDependencies:
       vue: ^2.7.0 || ^3.0.0
     dependencies:
-      '@rollup/pluginutils': 5.0.2(rollup@2.79.1)
+      '@rollup/pluginutils': 5.0.2(rollup@3.22.0)
       '@vue-macros/common': 1.1.4(vue@3.2.47)
       unplugin: 1.3.1
       vue: 3.2.47
@@ -6358,7 +6355,7 @@ packages:
     peerDependencies:
       vue: ^2.7.0 || ^3.2.25
     dependencies:
-      '@rollup/pluginutils': 5.0.2(rollup@2.79.1)
+      '@rollup/pluginutils': 5.0.2(rollup@3.22.0)
       '@vue-macros/common': 1.1.4(vue@3.2.47)
       unplugin: 1.3.1
       vue: 3.2.47
@@ -6370,7 +6367,7 @@ packages:
     resolution: {integrity: sha512-TJP1QY/3ILahmhgVKbBaxUZDwjSToZIkoB3BNY7+tCl46ikU6kfEi4Z7MxRxXegHEvcYctlfTKUziQRoDh1OCA==}
     engines: {node: '>=14.19.0'}
     dependencies:
-      '@rollup/pluginutils': 5.0.2(rollup@2.79.1)
+      '@rollup/pluginutils': 5.0.2(rollup@3.22.0)
       '@vue-macros/common': 1.1.4(vue@3.2.47)
       unplugin: 1.3.1
     transitivePeerDependencies:
@@ -6382,7 +6379,7 @@ packages:
     resolution: {integrity: sha512-zl8wZU87eN/V9hdYnzqD6cI85Kc3B7nysYGG1AAJlxdfIUeM06WOWVDSMzc49Bg7avw/42RiIKaknxeFdi0N0Q==}
     engines: {node: '>=14.19.0'}
     dependencies:
-      '@rollup/pluginutils': 5.0.2(rollup@2.79.1)
+      '@rollup/pluginutils': 5.0.2(rollup@3.22.0)
       '@vue-macros/common': 1.1.4(vue@3.2.47)
       '@vue/compiler-dom': 3.3.4
       unplugin: 1.3.1
@@ -6398,7 +6395,7 @@ packages:
       vue: ^2.7.0 || ^3.2.25
     dependencies:
       '@babel/parser': 7.21.8
-      '@rollup/pluginutils': 5.0.2(rollup@2.79.1)
+      '@rollup/pluginutils': 5.0.2(rollup@3.22.0)
       '@vue-macros/common': 1.1.4(vue@3.2.47)
       '@vue/compiler-core': 3.3.4
       '@vue/shared': 3.3.4
@@ -6416,7 +6413,7 @@ packages:
       vue: ^2.7.0 || ^3.2.25
     dependencies:
       '@babel/parser': 7.21.8
-      '@rollup/pluginutils': 5.0.2(rollup@2.79.1)
+      '@rollup/pluginutils': 5.0.2(rollup@3.22.0)
       '@vue-macros/common': 1.1.4(vue@3.2.47)
       '@vue/compiler-core': 3.3.4
       '@vue/shared': 3.3.4
@@ -6431,7 +6428,7 @@ packages:
     resolution: {integrity: sha512-P0p8VH7okOZ79jdx5081jpygoa4NsarTX2iIwjKDTtBSioCzCKgbMNN41XYlIOt6Q8PtNP/rScUzo7efKtgBqA==}
     engines: {node: '>=14.19.0'}
     dependencies:
-      '@rollup/pluginutils': 5.0.2(rollup@2.79.1)
+      '@rollup/pluginutils': 5.0.2(rollup@3.22.0)
       '@vue-macros/common': 1.1.4(vue@3.2.47)
       '@vue/compiler-dom': 3.3.4
       unplugin: 1.3.1
@@ -6444,7 +6441,7 @@ packages:
     resolution: {integrity: sha512-4gNzkeiLx5nKux72yeGs3CgRrlbeJzfbqPjGFxOmQYwpwtxPkBxEE/W0u8IJVwAGB/DttELMnHJP7i0bul05hQ==}
     engines: {node: '>=14.19.0'}
     dependencies:
-      '@rollup/pluginutils': 5.0.2(rollup@2.79.1)
+      '@rollup/pluginutils': 5.0.2(rollup@3.22.0)
       '@vue-macros/common': 1.1.4(vue@3.2.47)
       unplugin: 1.3.1
     transitivePeerDependencies:
@@ -6456,7 +6453,7 @@ packages:
     resolution: {integrity: sha512-C26NKGDpnN0Dn7wR0Gc69Rrzc9NdAlXwi3x2FC88KNJ6o8kq/2VKnqaI1W2DZMYmtIUkUFT1PxNFZ6d5AYQAMw==}
     engines: {node: '>=14.19.0'}
     dependencies:
-      '@rollup/pluginutils': 5.0.2(rollup@2.79.1)
+      '@rollup/pluginutils': 5.0.2(rollup@3.22.0)
       '@vue-macros/common': 1.1.4(vue@3.2.47)
       unplugin: 1.3.1
     transitivePeerDependencies:
@@ -6468,7 +6465,7 @@ packages:
     resolution: {integrity: sha512-S3zPFCsFiAzEI2D0HMjOYyaNjzYU1jeJC/k/Bx5nB+/UaGsAnr4HLNo9SjH5HgUjtvKLGPJIER7Zg/LgDfj3ow==}
     engines: {node: '>=14.19.0'}
     dependencies:
-      '@rollup/pluginutils': 5.0.2(rollup@2.79.1)
+      '@rollup/pluginutils': 5.0.2(rollup@3.22.0)
       '@vue-macros/common': 1.1.4(vue@3.2.47)
       unplugin: 1.3.1
     transitivePeerDependencies:
@@ -17206,7 +17203,6 @@ packages:
       unplugin: 1.3.1
     transitivePeerDependencies:
       - rollup
-    dev: false
 
   /union-value@1.0.1:
     resolution: {integrity: sha512-tJfXmxMeWYnczCVs7XAEvIV7ieppALdyepWMkHkwciRpZraG/xwT+s2JN8+pr1+8jCRf80FFzvr+MpQeeoF4Xg==}
@@ -17317,7 +17313,6 @@ packages:
       - rollup
       - supports-color
       - vite
-    dev: false
 
   /unpipe@1.0.0:
     resolution: {integrity: sha512-pjy2bYhSsufwWlKwPc+l3cN7+wuJlK6uz0YdJEOlQDbl6jo/YlPi4mb8agUkVC8BF7V8NuzeyPNqRksA3hztKQ==}
@@ -17366,7 +17361,6 @@ packages:
     transitivePeerDependencies:
       - rollup
       - supports-color
-    dev: false
 
   /unplugin-combine@0.6.0(vite@4.1.4):
     resolution: {integrity: sha512-cZkTg2Z3CcScyRi6QtpVxBZoCMsPaEHyKNh7HyqMkfWV7sKNwHllYezVOFINOGNzqSS1+xWLY3iDCiTVoH3oaA==}
@@ -17470,13 +17464,12 @@ packages:
     transitivePeerDependencies:
       - rollup
       - supports-color
-    dev: false
 
   /unplugin-vue-define-options@1.2.3(vue@3.2.47):
     resolution: {integrity: sha512-ku2Z5uD8uWE2vvQ2FeUlPKPcsHhDH2crL9up1nWXDAg15dfa2ap05e3T3dYmRvBpCsYhOqrt/Mi8JDVfo8EVDw==}
     engines: {node: '>=14.19.0'}
     dependencies:
-      '@rollup/pluginutils': 5.0.2(rollup@2.79.1)
+      '@rollup/pluginutils': 5.0.2(rollup@3.22.0)
       '@vue-macros/common': 1.1.4(vue@3.2.47)
       ast-walker-scope: 0.4.1
       unplugin: 1.3.1
@@ -17491,7 +17484,7 @@ packages:
     peerDependencies:
       vue: ^2.7.0 || ^3.2.25
     dependencies:
-      '@rollup/pluginutils': 5.0.2(rollup@2.79.1)
+      '@rollup/pluginutils': 5.0.2(rollup@3.22.0)
       '@vue-macros/better-define': 1.3.5(vue@3.2.47)
       '@vue-macros/common': 1.1.0(vue@3.2.47)
       '@vue-macros/define-model': 1.3.3(@vueuse/core@9.13.0)(vue@3.2.47)
@@ -18282,6 +18275,29 @@ packages:
       vite-plugin-vuetify: 1.0.0-alpha.17(vite@4.1.4)(vue@3.2.47)(vuetify@3.0.0-beta.10)
       vue: 3.2.47
       vue-i18n: 9.2.2(vue@3.2.47)
+    dev: false
+
+  /vuetify@3.3.0(typescript@4.9.5)(vue@3.2.47):
+    resolution: {integrity: sha512-4jQRZ6O4vUDlu3+/NZbbrv8dyVtvB5BnLc+NEusYjdj7+27GJSRJoDkkzJMmuM9XkZYFiTgq1vizK/vMSkB+2Q==}
+    engines: {node: ^12.20 || >=14.13}
+    peerDependencies:
+      typescript: '>=4.7'
+      vite-plugin-vuetify: ^1.0.0-alpha.12
+      vue: ^3.2.0
+      vue-i18n: ^9.0.0
+      webpack-plugin-vuetify: ^2.0.0-alpha.11
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+      vite-plugin-vuetify:
+        optional: true
+      vue-i18n:
+        optional: true
+      webpack-plugin-vuetify:
+        optional: true
+    dependencies:
+      typescript: 4.9.5
+      vue: 3.2.47
     dev: false
 
   /w3c-hr-time@1.0.2:
