@@ -8,8 +8,16 @@ match (fModules:folder)-->(f:folder)
 where fModules.filePath = '/src/modules'
 return f
 `))
+
+const test = () => neo4j.query(`
+match (fModules:folder)-->(f:folder)
+where fModules.filePath = '/src/modules'
+return f
+`)
 </script>
 
 <template>
   <div>modules: {{ modulesResult?.records?.length }}</div>
+
+  <button @click="test">test</button>
 </template>

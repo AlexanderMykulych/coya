@@ -2,10 +2,16 @@ import type { Relation } from 'coya-connectors-shared'
 import neo4j from 'neo4j-driver'
 
 export function getNeo4j() {
-  const database = neo4j.driver('neo4j+s://cfa19696.databases.neo4j.io', neo4j.auth.basic('neo4j', 'tY1HmNeSn1AkfrBvmTm1jGn2u34Y305azQAMX6lRhdk'))
+  const database = neo4j.driver(
+    'bolt://cfa19696.databases.neo4j.io',
+    neo4j.auth.basic('neo4j', 'tY1HmNeSn1AkfrBvmTm1jGn2u34Y305azQAMX6lRhdk'),
+  )
+
   return {
     async insert<T extends Object>(label: string, items: T[]) {
-      const session = database.session()
+      const session = database.session({
+        database: 'neo4j',
+      })
 
       const query = `UNWIND $items AS node CREATE (n:${label}) SET n = node`
       try {

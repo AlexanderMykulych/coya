@@ -11,6 +11,10 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     BaseBox: typeof import('./src/components/base/BaseBox.vue')['default']
     ComponentTestCount: typeof import('./src/components/Tests/ComponentTestCount.vue')['default']
+    'Ep:menu': typeof import('~icons/ep/menu')['default']
+    'IMaterialSymbols:openInFull': typeof import('~icons/material-symbols/open-in-full')['default']
+    'IMingcute:menuFill': typeof import('~icons/mingcute/menu-fill')['default']
+    'IPh:hamburgerFill': typeof import('~icons/ph/hamburger-fill')['default']
     IssueList: typeof import('./src/components/IssueList.vue')['default']
     IssueListItem: typeof import('./src/components/IssueListItem.vue')['default']
     ModulesCount: typeof import('./src/components/Modules/ModulesCount.vue')['default']
